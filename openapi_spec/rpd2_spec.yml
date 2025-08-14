@@ -1,0 +1,2654 @@
+openapi: 3.0.3
+info:
+  title: Payments Direct API
+  version: 0.0.1
+  license:
+    name: Apache 2.0
+    url: http://apache.org
+  description: 'Use the Payments Direct API to get quotes, create and manage payments,
+    and manage originator and beneficiary identities.
+
+
+    ## API environments
+
+
+    The Payments Direct API offers the following environments:
+
+
+    | <div style="width:90px">Environment</div>  | Base URL                      |
+    Description                               |
+
+    | ------------------------------------------ | ----------------------------- |
+    ----------------------------------------- |
+
+    | Test                                       | `https://api.test.ripple.com` |
+    Test environment with simulated currency. |
+
+    | Production                                 | `https://api.ripple.com`      |
+    Production environment                    |
+
+
+    ## API authentication
+
+
+    All {{process.env.VAR_RPD}} API operations require a Bearer access token specific
+    to the environment you''re using. Ripple provides a secure model for authentication
+    and authorization by providing access tokens scoped for a set of credentials.
+
+
+    ### Generate client ID and client secret
+
+
+    You will need your _client ID_ and _client secret_ to obtain an access token.
+
+
+    If you do not already have your client ID and client secret, do the following:
+
+
+    1. Log into the Ripple Payments UI.
+
+    2. In the left navigation menu, click **Settings**.
+
+    3. Under **Administration**, click **API Credentials**.
+
+    4. In the dropdown list next to the page title, select the access environment.
+    For example, to provision credentials for the test environment, select **Test**
+    from the dropdown list.
+
+    5. In the upper right corner of the page, click **New Credential**.
+
+    6. Click **Save and Generate Key**.
+
+
+    **Caution:** The *client secret* is displayed only once when you are creating
+    new credentials. You cannot retrieve the secret after exiting this page. Copy
+    and store the client secret securely and share it with authorized individuals
+    in accordance with your organization''s security policy.
+
+
+    You can now use the client ID and client secret to generate access tokens using
+    the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate)
+    operation.
+
+
+    ### Request an access token
+
+
+    To get an access token, use the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate)
+    operation with your `client_id` and `client_secret`. The response contains a token
+    in the `access_token` field.
+
+
+    We recommend rotating your API credentials at regular intervals according to your
+    organization''s security policy.
+
+
+    **Note**: Authentication tokens are not a fixed length and can vary, avoid validating
+    tokens based on character length.
+
+    '
+servers:
+- url: https://api.test.ripple.com
+  description: Test environment with simulated currency
+- url: https://api.ripple.com
+  description: Production environment
+tags:
+- name: Authentication
+  description: 'Use these API operations to manage your authentication tokens.
+
+
+    | Operation | Method | Description |
+
+    | --- | --- | --- |
+
+    | [Request an access token](#operation/authenticate) | POST | Request an access
+    token for authentication with Ripple APIs. |
+
+    | [Test access token](#operation/testAuthToken) | GET | Test if an access token
+    can be used for authentication. |
+
+    '
+  x-displayName: Authentication
+- name: IdentitiesV2
+  x-displayName: Identities
+  description: 'Use these API operations to manage your identities.
+
+
+    | Operation | Method | Description |
+
+    | --- | --- | --- |
+
+    | [Create an identity](./#operation/createIdentityV2) | POST | Create a new identity.
+    |
+
+    | [List identities](./#operation/getIdentitiesV2) | GET | Get a list of existing
+    identities. |
+
+    | [Get an identity by ID](./#operation/getIdentityByIdV2) | GET | Get an identity
+    by its unique ID. |
+
+    | [Deactivate an identity](./#operation/deactivateIdentityV2) | DELETE | Deactivate
+    an identity. |
+
+    '
+- name: Payments
+  description: 'Use these API operations to manage your payments.
+
+
+    | Operation | Method | Description |
+
+    | --- | --- | --- |
+
+    | [Search payments](./#operation/searchPayments) | POST | Search for payments
+    based on filtering criteria. |
+
+    | [Create a payment](./#operation/createPayment) | POST | Create a payment by
+    accepting a quote. |
+
+    | [Get payment by payment ID](./#operation/getPaymentById) | GET | Get a specific
+    payment by payment ID.  |
+
+    '
+  x-displayName: Payments
+- name: Quote
+  x-displayName: Quotes
+  description: 'Use these API operations to manage your quotes.
+
+
+    | Operation | Method | Description |
+
+    | --- | --- | --- |
+
+    | [Create quote collection](./#operation/createQuoteCollection) | POST | Create
+    a collection of quotes.  |
+
+    | [Get quote collection](./#operation/getQuoteCollection) | GET | Get a quote
+    collection by ID. |
+
+    | [Get a quote](./#operation/getQuote) | GET | Get a specific quote by ID.  |
+
+    '
+- name: ledger-public
+  x-displayName: Balances
+  description: 'Use this API operation to view your balances.
+
+
+    | Operation | Method | Description |
+
+    | --- | --- | --- |
+
+    | [Get balances](./#operation/getBalances) | GET | View your existing
+
+    balances  |
+
+    '
+paths:
+  /v2/oauth/token:
+    post:
+      tags:
+      - Authentication
+      operationId: authenticate
+      summary: Request an access token
+      parameters:
+      - in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+          description: Optional [base64-encoded](https://datatracker.ietf.org/doc/html/rfc7617)
+            `client_id:client_secret`. If provided here they aren't required in the
+            request body.
+          example: Basic ZGVtbzpwQDU1dzByZA==
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthenticationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthenticationRequest'
+      responses:
+        '200':
+          description: Returns the authentication response object that includes the
+            token, type, scopes, and expiry.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error_description: 'Missing required parameter: grant_type'
+                error: invalid_request
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error_description: Unauthorized
+                error: access_denied
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error_description: 'Service not enabled within domain: <wrong:domain>'
+                error: access_denied
+      description: 'Request an access token for authentication with Ripple APIs.
+
+
+        You need to request a token for the environment you want to authenticate with.
+
+
+        **Note**: The length of the access token isn''t fixed, hence it can vary.
+        Avoid validating tokens based on character length.
+
+
+        **Tutorials**
+
+
+        * Learn how to [Request an access token](../../tutorials/request-an-access-token/).
+
+
+        #### Environments
+
+
+        | Environment | Domain | Description |
+
+        | --- | --- | --- |
+
+        | Test | `api.test.ripple.com` | Test environment with simulated currency.
+        |
+
+        | Production | `api.ripple.com` | Production environment for Ripple Payments
+        Direct |
+
+        '
+      security:
+      - BasicAuth: []
+  /v2/oauth/token/test:
+    get:
+      tags:
+      - Authentication
+      operationId: testAuthToken
+      security:
+      - Bearer: []
+      summary: Test access token
+      description: Test if an access token can be used for authentication with Ripple
+        APIs and how much time remains on it.
+      responses:
+        '200':
+          description: If a valid bearer token is supplied, the time remaining before
+            the token expires is returned.
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidateTokenResponse'
+                type: array
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: Invalid Request parameters [Invalid bearer authentication token]
+        '401':
+          description: Unauthorized
+  /v2/payments/filter:
+    post:
+      tags:
+      - Payments
+      security:
+      - Bearer: []
+      operationId: searchPayments
+      summary: Search payments
+      description: Search for payments based on filtering criteria.
+      requestBody:
+        description: Search payments request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchPaymentsRequest'
+      responses:
+        '200':
+          description: Payments matching the specified filtering criteria.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentsResponse'
+        '400':
+          description: Invalid input variables for the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+              example:
+                status: 400
+                errors:
+                  code: USR_001
+                  type: USER_VALIDATION_ERROR
+                  title: Bad Request
+                  description: Invalid request. Check your request parameters and
+                    try again.
+                  timestamp: '2024-12-01T12:00:00Z'
+        '500':
+          description: Internal processing error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+              example:
+                status: 500
+                errors:
+                  code: SYS_001
+                  type: SYSTEM_ERROR
+                  title: Internal Server Error
+                  description: Unable to process the request due to an internal server
+                    error.
+                  timestamp: '2024-12-01T12:00:00Z'
+  /v2/payments:
+    post:
+      tags:
+      - Payments
+      security:
+      - Bearer: []
+      operationId: createPayment
+      summary: Create payment
+      description: 'Create a payment
+
+
+        **Tutorials**
+
+
+        * Learn how to [Create a payment](../../tutorials/create-a-payment/).
+
+        * Learn how to [Create a third-party payment](../../tutorials/create-a-third-party-payment/).
+
+        '
+      requestBody:
+        description: create payment request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '200':
+          description: Valid payment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: Invalid input variables for the payment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+              example:
+                status: 400
+                errors:
+                  code: USR_001
+                  type: USER_VALIDATION_ERROR
+                  title: Bad Request
+                  description: Invalid request. Check your request parameters and
+                    try again.
+                  timestamp: '2024-12-01T12:00:00Z'
+        '402':
+          description: Problems related to payment limits.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+              example:
+                status: 402
+                errors:
+                  code: USR_067
+                  type: INSUFFICIENT_BALANCE_ERROR
+                  title: Insufficient balance
+                  description: 'Payment failed due to insufficient balance. Required
+                    amount: 10, Available balance: 0. Add funds to your account and
+                    try again.'
+                  timestamp: '2024-12-01T12:00:00Z'
+        '500':
+          description: Internal processing error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+              example:
+                status: 500
+                errors:
+                  code: SYS_001
+                  type: SYSTEM_ERROR
+                  title: Internal Server Error
+                  description: Unable to process the request due to an internal server
+                    error.
+                  timestamp: '2024-12-01T12:00:00Z'
+  /v2/payments/{paymentId}:
+    get:
+      tags:
+      - Payments
+      security:
+      - Bearer: []
+      operationId: getPaymentById
+      description: Gets a payment by ID.
+      summary: Get a payment by ID
+      parameters:
+      - in: path
+        name: paymentId
+        description: Unique identifier of the payment to get.
+        example: 7ea3399c-1234-5678-8d8f-d320ea406630
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Successfully fetched payment details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentWithDetails'
+        '400':
+          description: Invalid input variables for the payment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+              example:
+                status: 400
+                errors:
+                  code: USR_001
+                  type: USER_VALIDATION_ERROR
+                  title: Bad Request
+                  description: Invalid request. Check your request parameters and
+                    try again.
+                  timestamp: '2024-12-01T12:00:00Z'
+        '404':
+          description: Payment not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+              example:
+                status: 404
+                errors:
+                  code: USR_002
+                  type: NOT_FOUND
+                  title: Resource Not Found
+                  description: The requested resource could not be found.
+                  timestamp: '2024-12-01T12:00:00Z'
+        '500':
+          description: Internal processing error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+              example:
+                status: 500
+                errors:
+                  code: SYS_001
+                  type: SYSTEM_ERROR
+                  title: Internal Server Error
+                  description: Unable to process the request due to an internal server
+                    error.
+                  timestamp: '2024-12-01T12:00:00Z'
+  /v2/payments/{paymentId}/states:
+    get:
+      tags:
+      - Payments
+      security:
+      - Bearer: []
+      operationId: getPaymentStateTransitionsById
+      description: Gets the state transitions for a payment by ID.
+      summary: Get state transitions by payment ID
+      parameters:
+      - in: path
+        name: paymentId
+        description: Unique identifier of the payment for which you want to get state
+          transition information.
+        example: 7ea3399c-1234-5678-8d8f-d320ea406630
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Successfully fetched payment state transitions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateTransitionsResponse'
+        '400':
+          description: Invalid input variables for the payment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+              example:
+                status: 400
+                errors:
+                  code: USR_001
+                  type: USER_VALIDATION_ERROR
+                  title: Bad Request
+                  description: Invalid request. Check your request parameters and
+                    try again.
+                  timestamp: '2024-12-01T12:00:00Z'
+        '404':
+          description: Payment not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+              example:
+                status: 404
+                errors:
+                  code: USR_002
+                  type: NOT_FOUND
+                  title: Resource Not Found
+                  description: The requested resource could not be found.
+                  timestamp: '2024-12-01T12:00:00Z'
+        '500':
+          description: Internal processing error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+              example:
+                status: 500
+                errors:
+                  code: SYS_001
+                  type: SYSTEM_ERROR
+                  title: Internal Server Error
+                  description: Unable to process the request due to an internal server
+                    error.
+                  timestamp: '2024-12-01T12:00:00Z'
+  /v2/payments/{paymentId}/labels:
+    patch:
+      tags:
+      - Payments
+      security:
+      - Bearer: []
+      operationId: updatePaymentLabels
+      summary: Update payment labels
+      description: Add or remove labels for a payment.
+      parameters:
+      - in: path
+        name: paymentId
+        description: The unique ID that identifies the payment for which you want
+          to update labels.
+        example: 7ea3399c-1234-5678-8d8f-d320ea406630
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: Labels to add to or remove from the payment.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePaymentLabelsRequest'
+      responses:
+        '200':
+          description: Successfully updated the payment labels.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePaymentLabelsResponse'
+        '400':
+          description: Invalid input variables for the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+              example:
+                status: 400
+                errors:
+                  code: USR_001
+                  type: USER_VALIDATION_ERROR
+                  title: Bad Request
+                  description: Invalid request. Check your request parameters and
+                    try again.
+                  timestamp: '2024-12-01T12:00:00Z'
+        '404':
+          description: Payment not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+              example:
+                status: 404
+                errors:
+                  code: USR_002
+                  type: NOT_FOUND
+                  title: Resource Not Found
+                  description: The requested resource could not be found.
+                  timestamp: '2024-12-01T12:00:00Z'
+        '500':
+          description: Internal processing error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+              example:
+                status: 500
+                errors:
+                  code: SYS_001
+                  type: SYSTEM_ERROR
+                  title: Internal Server Error
+                  description: Unable to process the request due to an internal server
+                    error.
+                  timestamp: '2024-12-01T12:00:00Z'
+  /v2/identities:
+    post:
+      tags:
+      - IdentitiesV2
+      security:
+      - Bearer: []
+      operationId: createIdentityV2
+      summary: Create a new identity
+      description: 'Create a new identity.
+
+
+        <!-- **Tutorials**
+
+
+        * Learn how to [Create an identity](../../tutorials/create-an-identity/).
+        -->
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create-identity-request-v2'
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/create-identity-response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 400
+                errors:
+                - code: USR_101
+                  title: Bad Request
+                  type: USER_ERROR
+                  description: Invalid request. Check your request body and try again.
+                  timestamp: '2025-05-23T15:02:56.516Z'
+        '500':
+          description: Internal Processing Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 500
+                errors:
+                - code: SYS_001
+                  title: Internal server error
+                  type: SYSTEM_ERROR
+                  description: Unable to process the request due to an internal server
+                    error.
+                  timestamp: '2025-05-23T15:02:56.516Z'
+    get:
+      tags:
+      - IdentitiesV2
+      security:
+      - Bearer: []
+      operationId: getIdentitiesV2
+      summary: Get a list of identities
+      description: 'Get a list of identities that match the query parameters.
+
+
+        **Note**: Depending on the number of identities in your account, not all of
+        them may be returned even if they match your query parameters.
+
+        '
+      parameters:
+      - in: query
+        name: identityType
+        required: false
+        schema:
+          $ref: '#/components/schemas/identity-type-v2'
+        example: BENEFICIARY
+        description: The type of identities you want to retrieve
+      - in: query
+        name: nickName
+        required: false
+        schema:
+          type: string
+        example: Successful Beneficiary
+        description: The nickname for the identity provided at the time of identity
+          creation
+      responses:
+        '200':
+          description: Requested identity info in JSON format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/list-identities-response-v2'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 400
+                errors:
+                - code: USR_102
+                  title: Bad request
+                  type: USER_ERROR
+                  description: Unable to get identity. Identity ID should be in UUID
+                    format.
+                  timestamp: '2025-05-23T15:02:56.516Z'
+        '404':
+          description: No identities found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 404
+                errors:
+                - code: USR_103
+                  title: Identities not found
+                  type: NOT_FOUND
+                  description: No identities exist
+                  timestamp: '2025-05-23T15:02:56.516Z'
+        '500':
+          description: Internal Processing Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 500
+                errors:
+                - code: SYS_001
+                  title: Internal server error
+                  type: SYSTEM_ERROR
+                  description: Unable to process the request due to an internal server
+                    error.
+                  timestamp: '2025-05-23T15:02:56.516Z'
+  /v2/identities/{identity-id}:
+    get:
+      tags:
+      - IdentitiesV2
+      security:
+      - Bearer: []
+      operationId: getIdentityByIdV2
+      summary: Get an identity by ID
+      description: Get an identity by its unique ID
+      parameters:
+      - name: identity-id
+        in: path
+        required: true
+        description: The ID of the identity to get.
+        example: 146f3c51-c313-47ce-b6f2-691c5a238b3e
+        schema:
+          type: string
+      - in: query
+        name: version
+        description: 'Version of the identity you want to retrieve.
+
+
+          **Note**: If you don''t specify a version, the latest version of the identity
+          is returned.
+
+          '
+        example: 2
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+      responses:
+        '200':
+          description: Requested identity info in JSON format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/identity-response-v2'
+        '400':
+          description: Identity ID is not in UUID format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 400
+                errors:
+                - code: USR_102
+                  title: Bad request
+                  type: USER_ERROR
+                  description: Unable to get identity. Identity ID should be in UUID
+                    format.
+                  timestamp: '2025-05-23T15:02:56.516Z'
+        '404':
+          description: Invalid - identity ID does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 404
+                errors:
+                - code: USR_103
+                  title: Identity not found
+                  type: NOT_FOUND
+                  description: No identity exists for identityId
+                  timestamp: '2025-05-23T15:02:56.516Z'
+    delete:
+      tags:
+      - IdentitiesV2
+      security:
+      - Bearer: []
+      operationId: deactivateIdentityV2
+      summary: Delete an identity
+      description: Delete an identity
+      parameters:
+      - in: path
+        name: identity-id
+        required: true
+        description: Unique UUID string that maps to the identity to be deleted.
+        example: 146f3c51-c313-47ce-b6f2-691c5a238b3e
+        schema:
+          type: string
+      responses:
+        '204':
+          description: The identity was deleted successfully
+        '400':
+          description: Identity id is not of UUID format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 400
+                errors:
+                - code: USR_102
+                  title: Bad request
+                  type: USER_ERROR
+                  description: Unable to get identity. Identity ID should be in UUID
+                    format.
+                  timestamp: '2025-05-23T15:02:56.516Z'
+        '404':
+          description: Invalid Identity id does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 404
+                errors:
+                - code: USR_103
+                  title: Identity not found
+                  type: NOT_FOUND
+                  description: No identity exists for identityId
+                  timestamp: '2025-05-23T15:02:56.516Z'
+        '422':
+          description: Unprocessable Identity Id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 422
+                errors:
+                - code: USR_104
+                  title: Invalid request
+                  type: USER_ERROR
+                  description: The identity has already been deactivated.
+                  timestamp: '2025-05-23T15:02:56.516Z'
+        '500':
+          description: Internal Processing Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 500
+                errors:
+                - code: SYS_001
+                  title: Internal server error
+                  type: SYSTEM_ERROR
+                  description: Unable to process the request due to an internal server
+                    error.
+                  timestamp: '2025-05-23T15:02:56.516Z'
+  /v2/quotes/quote-collection:
+    post:
+      tags:
+      - Quote
+      security:
+      - Bearer: []
+      operationId: createQuoteCollection
+      summary: Create quote collection
+      description: 'Creates a collection of quotes for a proposed payment.
+
+
+        **Tutorials**
+
+
+        * Learn how to [Create a quote](../../tutorials/create-a-payment/#create-a-quote-collection).
+
+        '
+      requestBody:
+        description: Create quote collection request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuoteCollectionRequest'
+      responses:
+        '201':
+          description: Creates a collection of quotes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteCollection'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+        '401':
+          description: Unauthorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+        '403':
+          description: The principal identified by the authorization header doesn't
+            have enough scopes to perform this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+  /v2/quotes/quote-collection/{quote-collection-id}:
+    get:
+      tags:
+      - Quote
+      security:
+      - Bearer: []
+      operationId: getQuoteCollection
+      summary: Get quote collection
+      parameters:
+      - in: path
+        name: quote-collection-id
+        description: The unique identifier of the quote collection you want to retrieve
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 11111111-aaaa-2222-bbbb-222222222222
+      responses:
+        '200':
+          description: Valid quote collection found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteCollection'
+        '401':
+          description: Unauthorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+        '403':
+          description: The principal identified by the authorization header doesn't
+            have enough scopes to perform this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+        '404':
+          description: Quote collection not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+  /v2/quotes/{quote-id}:
+    get:
+      tags:
+      - Quote
+      security:
+      - Bearer: []
+      operationId: getQuote
+      summary: Get quote
+      parameters:
+      - in: path
+        name: quote-id
+        description: The unique identifier of the quote to retrieve
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 22222222-aaaa-2222-bbbb-222222222222
+      responses:
+        '200':
+          description: Valid quote found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '401':
+          description: Unauthorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+        '403':
+          description: The principal identified by the authorization header doesn't
+            have enough scopes to perform this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+        '404':
+          description: Quote not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+  /v2/balances:
+    get:
+      summary: Get available balances
+      operationId: getBalances
+      tags:
+      - ledger-public
+      parameters:
+      - in: query
+        name: currency
+        required: false
+        schema:
+          type: string
+        description: The currency for which you want to get the balance.
+      responses:
+        '200':
+          description: Successful response containing balance details.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Customer available prefund balance details.
+                properties:
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: '2025-01-10T00:00:00.000000Z'
+                    description: Timestamp of the balance response.
+                  balances:
+                    type: array
+                    items:
+                      type: object
+                      description: Customer available prefund balance for specific
+                        currency
+                      properties:
+                        fundingType:
+                          enum:
+                          - FUNDED
+                          x-enumDescriptions:
+                            FUNDED: Indicates that you initiate payments using the
+                              funds you added to your account.
+                          description: The funding method associated with your account.
+                        currency:
+                          type: string
+                          example: USD
+                          description: Currency code.
+                        availableBalance:
+                          type: number
+                          example: 1000
+                          description: Available funded balance that you can use to
+                            initiate payments.
+                        reservedBalance:
+                          type: number
+                          example: 100
+                          description: Amount reserved to complete in-progress transactions.
+                            You can't use this amount to initiate new payments.
+                      required:
+                      - fundingType
+                      - currency
+                      - availableBalance
+                      - reservedBalance
+                    description: List of available prefund balances.
+                required:
+                - timestamp
+                - balances
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - errors
+                properties:
+                  status:
+                    type: integer
+                    description: The HTTP status code representing the error response
+                    example: 400
+                  errors:
+                    type: array
+                    description: An array containing details about the errors encountered
+                    items:
+                      type: object
+                      required:
+                      - code
+                      - title
+                      - type
+                      - description
+                      - timestamp
+                      properties:
+                        code:
+                          type: string
+                          description: A unique error code that identifies the specific
+                            error
+                          example: SYS_003
+                        type:
+                          type: string
+                          description: A high-level categorization of the error, indicating
+                            the type of issue that occurred
+                          example: SYSTEM_ERROR
+                        title:
+                          type: string
+                          description: A brief, user-friendly description of the error
+                          example: Internal Server Error
+                        description:
+                          type: string
+                          description: A more detailed explanation of the error, including
+                            potential causes and next steps
+                          example: The payout category value must be one of BANK,
+                            EWALLET, CASH_PICKUP, or ATM.
+                        timestamp:
+                          type: string
+                          format: date-time
+                          description: The timestamp of the error occurrence
+                          example: '2024-01-02T14:16:00Z'
+        '401':
+          description: Unauthorized access
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - errors
+                properties:
+                  status:
+                    type: integer
+                    description: The HTTP status code representing the error response
+                    example: 400
+                  errors:
+                    type: array
+                    description: An array containing details about the errors encountered
+                    items:
+                      type: object
+                      required:
+                      - code
+                      - title
+                      - type
+                      - description
+                      - timestamp
+                      properties:
+                        code:
+                          type: string
+                          description: A unique error code that identifies the specific
+                            error
+                          example: SYS_003
+                        type:
+                          type: string
+                          description: A high-level categorization of the error, indicating
+                            the type of issue that occurred
+                          example: SYSTEM_ERROR
+                        title:
+                          type: string
+                          description: A brief, user-friendly description of the error
+                          example: Internal Server Error
+                        description:
+                          type: string
+                          description: A more detailed explanation of the error, including
+                            potential causes and next steps
+                          example: The payout category value must be one of BANK,
+                            EWALLET, CASH_PICKUP, or ATM.
+                        timestamp:
+                          type: string
+                          format: date-time
+                          description: The timestamp of the error occurrence
+                          example: '2024-01-02T14:16:00Z'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - errors
+                properties:
+                  status:
+                    type: integer
+                    description: The HTTP status code representing the error response
+                    example: 400
+                  errors:
+                    type: array
+                    description: An array containing details about the errors encountered
+                    items:
+                      type: object
+                      required:
+                      - code
+                      - title
+                      - type
+                      - description
+                      - timestamp
+                      properties:
+                        code:
+                          type: string
+                          description: A unique error code that identifies the specific
+                            error
+                          example: SYS_003
+                        type:
+                          type: string
+                          description: A high-level categorization of the error, indicating
+                            the type of issue that occurred
+                          example: SYSTEM_ERROR
+                        title:
+                          type: string
+                          description: A brief, user-friendly description of the error
+                          example: Internal Server Error
+                        description:
+                          type: string
+                          description: A more detailed explanation of the error, including
+                            potential causes and next steps
+                          example: The payout category value must be one of BANK,
+                            EWALLET, CASH_PICKUP, or ATM.
+                        timestamp:
+                          type: string
+                          format: date-time
+                          description: The timestamp of the error occurrence
+                          example: '2024-01-02T14:16:00Z'
+      security:
+      - Bearer: []
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    BasicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    AuthenticationRequest:
+      description: The authentication request.
+      properties:
+        client_id:
+          type: string
+          description: The client ID associated with a specific set of API credentials.
+          example: '{YOUR_CLIENT_ID}'
+        client_secret:
+          type: string
+          description: The client secret associated with a specific set of API credentials.
+          example: '{YOUR_CLIENT_SECRET}'
+        audience:
+          type: string
+          description: 'The value of the `audience` field is based on [URN](https://en.wikipedia.org/wiki/Uniform_Resource_Name)
+            syntax.
+
+
+            **Format**: `urn:ripplexcurrent-{ENVIRONMENT_STRING}:{YOUR_TENANT_ID}`
+
+
+            * The first component is `urn:ripplenetxcurrent-`.
+
+            * The second component refers to the environment you want to access.
+
+            * The third component is your tenant ID. Ripple integration engineers
+            provide this component during training.
+
+
+            | Environment | Environment string | Description |
+
+            | --- | --- | --- |
+
+            | Test | `test` | Test environment with simulated partners and simulated
+            currency. |
+
+            | Production | `prod` | Production environment for Ripple''s internal
+            services. |
+
+
+            **Example**: `urn:ripplexcurrent-test:{YOUR_TENANT_ID}`
+
+            '
+          example: urn:ripplexcurrent-test:{YOUR_TENANT_ID}
+        grant_type:
+          type: string
+          description: Set the grant-type for this client credentials request. This
+            must be set to `client_credentials`.
+          enum:
+          - client_credentials
+          example: client_credentials
+      required:
+      - client_id
+      - client_secret
+      - audience
+      - grant_type
+      type: object
+    AuthenticationResponse:
+      description: The authentication response object that includes the token, type,
+        scopes, and expiry.
+      properties:
+        access_token:
+          type: string
+          description: The bearer token you use when authenticating with a Ripple
+            API.
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ
+        scope:
+          type: string
+          description: List of scopes applied to your `access_token`.
+          example: pos:payments:create quote_collection:quote:create quote:quote:read
+            pos:payments:read pcs_config:external_read data_requirements:read identities:create
+            identities:read identities:write ledger:balance:read ledger:read
+        expires_in:
+          type: integer
+          format: int64
+          description: How long your `access_token` is valid. You need to request
+            a new token when it expires.
+          example: 3600
+        token_type:
+          type: string
+          description: The type of token. Ripple APIs use `Bearer` auth tokens.
+          example: Bearer
+      type: object
+    ErrorResponse:
+      description: The response object containing the error and its description if
+        the authentication call fails.
+      properties:
+        error_description:
+          type: string
+          description: Summary of the returned problem.
+          example: Unauthorized
+        error:
+          type: string
+          description: Error status.
+          example: access_denied
+    ValidateTokenResponse:
+      description: The response object indicating a token's validity and the time
+        remaining on it
+      properties:
+        message:
+          type: string
+          example: token_ok
+        seconds_to_expiry:
+          type: integer
+          format: int64
+          description: Remaining time in seconds before the tested token expires.
+          example: 3600
+    PaymentErrorResponse:
+      type: object
+      required:
+      - status
+      - errors
+      properties:
+        errors:
+          $ref: '#/components/schemas/PaymentError'
+        status:
+          type: string
+          description: Error Response Status
+          example: 400
+    PaymentError:
+      type: object
+      required:
+      - code
+      - title
+      - type
+      - description
+      - timestamp
+      properties:
+        code:
+          type: string
+          description: A unique identifier for  the error
+          example: SYS_003
+        type:
+          type: string
+          description: A high-level categorization of the error, indicating the type
+            of issue that occurred
+          example: SYSTEM_ERROR
+        title:
+          type: string
+          description: A brief, user-friendly description of the error
+          example: Internal Server Error
+        description:
+          type: string
+          description: A more detailed explanation of the error, potentially including
+            information about what caused the error and the next steps
+          example: The payout category value must be one of BANK, EWALLET, CASH_PICKUP,
+            or ATM.
+        timestamp:
+          type: string
+          format: date-time
+          example: '2024-11-21T14:15:22Z'
+    Payment:
+      type: object
+      required:
+      - paymentId
+      - paymentState
+      properties:
+        paymentId:
+          description: The unique ID that identifies this payment. This value is the
+            same as the quote ID.
+          type: string
+          format: uuid
+          maxLength: 36
+          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+        cryptoTransactionHash:
+          description: Transaction hash of the crypto payment on the destination blockchain
+            network
+          type: string
+          example: '0x2b1f8b57dd6008143ff926ea9d9cd2365774cd0c5e6f379558a88c61c52071eb'
+        initiatedAt:
+          description: The time at which the payment was initiated, specified in UTC.
+          type: string
+          format: date-time
+          example: '2019-08-24T14:15:22Z'
+        expiresAt:
+          description: The time at which this payment expires, specified in UTC.
+          type: string
+          format: date-time
+          example: '2019-08-24T14:15:22Z'
+        lastStateUpdatedAt:
+          description: The time at which the payment state was last updated for this
+            payment, specified in UTC.
+          type: string
+          format: date-time
+          example: '2019-08-24T14:15:22Z'
+        paymentState:
+          $ref: '#/components/schemas/PaymentState'
+        originator:
+          $ref: '#/components/schemas/Originator'
+        destination:
+          $ref: '#/components/schemas/Destination'
+        adjustedExchangeRate:
+          $ref: '#/components/schemas/AdjustedExchangeRate'
+        fees:
+          type: array
+          description: A summary of fees included in payment quote.
+          items:
+            $ref: '#/components/schemas/FeeSummary'
+        sourceOfCash:
+          description: Indicates the source of funds
+          type: string
+          x-enumDescriptions:
+            ALMY: Alimony
+            CASH: Cash Proceeds
+            COMP: Compensation
+            EMIN: Employee Income
+            GIFT: Gift
+            INHE: Inheritance
+            INLQ: Insurance Premium Liquidation
+            PACA: Paid Up Capital
+            REDM: Redemption
+            REPY: Retirement Policy
+            REST: Real Estate Sale
+            RETA: Retained Earnings
+            SALE: Sale Of Goods
+            SEAQ: Sale Aquisition Corporation
+            SELF: Self Employment Income
+            SVGS: Savings
+            WINS: Winnings
+          example: EMIN
+        purposeCode:
+          description: 'Indicates the purpose of the payment
+
+
+            For more information about the `purposeCode` options, see  [purposeCode](../../building-payment-request-body/#purposecode).
+
+            '
+          type: string
+          example: PAYR
+        transactionDetails:
+          $ref: '#/components/schemas/TransactionDetails'
+        paymentLabels:
+          $ref: '#/components/schemas/PaymentLabels'
+    PaymentWithDetails:
+      type: object
+      required:
+      - paymentId
+      - paymentState
+      properties:
+        paymentId:
+          description: The unique ID that identifies this payment. This value is the
+            same as the quote ID.
+          type: string
+          format: uuid
+          maxLength: 36
+          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+        cryptoTransactionHash:
+          description: Transaction hash of the crypto payment on the destination blockchain
+            network
+          type: string
+          example: '0x2b1f8b57dd6008143ff926ea9d9cd2365774cd0c5e6f379558a88c61c52071eb'
+        initiatedAt:
+          description: The time at which the payment was initiated, specified in UTC.
+          type: string
+          format: date-time
+          example: '2019-08-24T14:15:22Z'
+        expiresAt:
+          description: The time at which this payment expires, specified in UTC.
+          type: string
+          format: date-time
+          example: '2019-08-24T14:15:22Z'
+        lastStateUpdatedAt:
+          description: The time at which the payment state was last updated for this
+            payment, specified in UTC.
+          type: string
+          format: date-time
+          example: '2019-08-24T14:15:22Z'
+        paymentState:
+          $ref: '#/components/schemas/PaymentState'
+        originator:
+          $ref: '#/components/schemas/Originator'
+        destination:
+          $ref: '#/components/schemas/Destination'
+        adjustedExchangeRate:
+          $ref: '#/components/schemas/AdjustedExchangeRate'
+        fees:
+          type: array
+          description: A summary of fees included in payment quote.
+          items:
+            $ref: '#/components/schemas/FeeSummary'
+        sourceOfCash:
+          description: Indicates the source of funds
+          type: string
+          x-enumDescriptions:
+            ALMY: Alimony
+            CASH: Cash Proceeds
+            COMP: Compensation
+            EMIN: Employee Income
+            GIFT: Gift
+            INHE: Inheritance
+            INLQ: Insurance Premium Liquidation
+            PACA: Paid Up Capital
+            REDM: Redemption
+            REPY: Retirement Policy
+            REST: Real Estate Sale
+            RETA: Retained Earnings
+            SALE: Sale Of Goods
+            SEAQ: Sale Aquisition Corporation
+            SELF: Self Employment Income
+            SVGS: Savings
+            WINS: Winnings
+          example: EMIN
+        purposeCode:
+          description: purposeCode for RPD payments
+          type: string
+        transactionDetails:
+          $ref: '#/components/schemas/TransactionDetails'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentError'
+        paymentLabels:
+          $ref: '#/components/schemas/PaymentLabels'
+    StateTransitionsResponse:
+      type: object
+      properties:
+        stateTransitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/StateTransition'
+      required:
+      - stateTransitions
+    StateTransition:
+      type: object
+      properties:
+        updatedFrom:
+          $ref: '#/components/schemas/PaymentState'
+          description: The initial payment state before it was updated.
+          example: INITIATED
+        updatedTo:
+          $ref: '#/components/schemas/PaymentState'
+          description: The payment state after it was updated.
+          example: VALIDATING
+        updatedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the payment state was updated.
+          example: '2024-08-13T20:15:50.990995Z'
+      required:
+      - updatedFrom
+      - updatedTo
+      - updatedAt
+    PaymentsResponse:
+      type: object
+      properties:
+        data:
+          description: Array of Payment objects
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+        filter:
+          $ref: '#/components/schemas/PaymentFilter'
+        sort:
+          $ref: '#/components/schemas/Sort'
+        page:
+          $ref: '#/components/schemas/Page'
+    PaymentRequest:
+      type: object
+      description: Information required to initiate a payment.
+      required:
+      - quoteId
+      - beneficiaryIdentityId
+      properties:
+        quoteId:
+          description: ID of the quote you want to accept to initiate this payment.
+            Must be in UUID format. This will be used as paymentId.
+          type: string
+          format: uuid
+          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+        originatorIdentityId:
+          description: The identity ID of the payment originator in UUID format. You
+            can find the identity ID using the `GET /identities` operation.
+          type: string
+          format: uuid
+          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+        beneficiaryIdentityId:
+          description: The identity ID of the payment beneficiary in UUID format.
+            You can find the identity ID using the `GET /identities` operation.
+          type: string
+          format: uuid
+          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+        internalId:
+          maxLength: 36
+          description: Customer defined value, such as an invoice number.
+          type: string
+          example: Invoice-123
+        purposeCode:
+          description: 'Indicates the purpose of the payment
+
+
+            For more information about the `purposeCode` options, see [purposeCode](../../building-payment-request-body/#purposecode).
+
+            '
+          type: string
+          example: PAYR
+        sourceOfCash:
+          description: Source of cash for payout.
+          type: string
+          x-enumDescriptions:
+            ALMY: Alimony
+            CASH: Cash Proceeds
+            COMP: Compensation
+            EMIN: Employee Income
+            GIFT: Gift
+            INHE: Inheritance
+            INLQ: Insurance Premium Liquidation
+            PACA: Paid Up Capital
+            REDM: Redemption
+            REPY: Retirement Policy
+            REST: Real Estate Sale
+            RETA: Retained Earnings
+            SALE: Sale Of Goods
+            SEAQ: Sale Aquisition Corporation
+            SELF: Self Employment Income
+            SVGS: Savings
+            WINS: Winnings
+          example: EMIN
+        paymentLabels:
+          $ref: '#/components/schemas/PaymentLabels'
+    PaymentState:
+      type: string
+      example: INITIATED
+      enum:
+      - INITIATED
+      - VALIDATING
+      - TRANSFERRING
+      - COMPLETED
+      - FAILED
+      - QUOTED
+      x-enumDescriptions:
+        INITIATED: You, the payment originator, have initiated a payment. The payment
+          now has a unique `paymentId` that's the same as the `quoteId` of the quote
+          you accepted.
+        VALIDATING: Ripple validates the payment details and reserves funds from your
+          available balance to complete the payment.
+        TRANSFERRING: The payment is moving through the network to the ultimate beneficiary.
+          The payment amount is debited from your available balance.
+        COMPLETED: The payment is complete and the beneficiary has received the funds.
+        FAILED: The payment failed. The failure reason, if available, is listed in
+          the response. Funds that were previously reserved to complete the payment
+          are released and added back to the available balance.
+        QUOTED: 'A quote has been created, but you haven''t accepted it yet to initiate
+          a payment. Note: This state is not shown as part of the payment detail as
+          the payment doesn''t exist yet.'
+    PaymentSortField:
+      type: string
+      description: The field based on which you want to sort the payments in the specified
+        sort order.
+      default: initiatedAt
+      example: initiatedAt
+      enum:
+      - internalId
+      - paymentState
+      - sourceCurrency
+      - sourceCountry
+      - sourceAmount
+      - destinationCurrency
+      - destinationCountry
+      - destinationAmount
+      - initiatedAt
+      - expiresAt
+      - lastStateUpdatedAt
+      - paymentLabel
+      x-enum-varnames:
+      - INTERNAL_ID
+      - PAYMENT_STATE
+      - SOURCE_CURRENCY
+      - SOURCE_COUNTRY
+      - SOURCE_AMOUNT
+      - DESTINATION_CURRENCY
+      - DESTINATION_COUNTRY
+      - DESTINATION_AMOUNT
+      - INITIATED_AT
+      - EXPIRES_AT
+      - LAST_STATE_UPDATED_AT
+      - PAYMENT_LABEL
+      x-enumDescriptions:
+        internalId: Sort by an internalId of payment
+        paymentState: Sort by payment state
+        sourceCurrency: Sort by source currency of payment
+        sourceCountry: Sort by source country of payment
+        sourceAmount: Sort by source amount of payment
+        destinationCurrency: Sort by destination currency of payment
+        destinationCountry: Sort by destination currency of payment
+        destinationAmount: Sort by destination amount of payment
+        initiatedAt: Sort by payment initiated timestamp
+        expiresAt: Sort by payment expiry timestamp
+        lastStateUpdatedAt: Sort by last updated timestamp of payment
+        paymentLabel: Sort by labels attached to the payment
+    Originator:
+      type: object
+      description: Payment originator and source details.
+      properties:
+        originatorIdentityId:
+          description: The unique ID associated with the payment originator's identity
+            record.
+          type: string
+          format: uuid
+          maxLength: 36
+          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+        originatorIdentityIdVersion:
+          description: The current version of the originator's identity record.
+          type: integer
+          example: 1
+        originatorIdentityNickName:
+          description: Nickname associated with the originator's identity record.
+          type: string
+          maxLength: 100
+          example: Successful Business Sender
+        internalId:
+          description: An ID associated with this payment, if provided by the customer
+            during payment initiation.
+          type: string
+          maxLength: 35
+          example: Invoice-123
+        sourceCountry:
+          description: The country where the payment originator is located or incorporated,
+            specified in Alpha-2 Code format as defined in the ISO CountryCode ISO
+            3166-1 list.
+          type: string
+          pattern: ^[A-Z]{2}$
+          maxLength: 2
+          example: US
+        sourceCurrency:
+          description: originator's currency
+          type: string
+          pattern: ^[A-Z]{3,5}$
+          maxLength: 5
+          example: USD
+        sourceAmount:
+          description: The amount sent by the originator in this payment. This field
+            can hold a value with up to 6 decimal places.
+          type: number
+          format: double
+          example: 100
+        payin:
+          description: Details about how this payment is funded.
+          type: string
+          example: FUNDED
+    Destination:
+      type: object
+      description: Payment beneficiary and destination details.
+      properties:
+        destinationAmount:
+          description: The amount received by the payment beneficiary. This field
+            can hold a value with up to 6 decimal places.
+          type: number
+          format: double
+          example: 1234.111223
+        destinationCountry:
+          description: The country where the beneficiary is located specified in Alpha-2
+            Code format as defined in the ISO CountryCode ISO 3166-1 list. If the
+            beneficiary is an individual, then this value is their country of residence.
+            If the beneficiary is an institution, then this value is their the country
+            of incorporation.
+          type: string
+          pattern: ^[A-Z]{2}$
+          maxLength: 2
+          example: US
+        destinationCurrency:
+          description: The currency code of the currency in which the beneficiary
+            will receive this payment.
+          type: string
+          pattern: ^[A-Z]{3,5}$
+          maxLength: 5
+          example: USD
+        destinationBlockchainNetwork:
+          description: The name of the blockchain network on which the beneficiary
+            will receive this payment.
+          type: string
+          minLength: 1
+          maxLength: 20
+          example: Ethereum, TRON
+        beneficiaryIdentityId:
+          description: The unique ID associated with the payment beneficiary's identity
+            record.
+          type: string
+          format: uuid
+          maxLength: 36
+          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+        beneficiaryIdentityVersion:
+          description: The current version of the beneficiary's identity record.
+          type: integer
+          example: 1
+        beneficiaryIdentityNickName:
+          description: Nickname associated with the beneficiary's identity record.
+          type: string
+          maxLength: 100
+          example: Successful business beneficiary
+        payout:
+          description: The payout category for this payment.
+          type: string
+          example: BANK
+    TransactionDetails:
+      type: object
+      description: A summary of the payment category.
+      properties:
+        paymentProduct:
+          description: The Ripple payments product used to make this payment.
+          type: string
+          nullable: true
+          x-enumDescriptions:
+            LICENSED: Identifies a transaction using Ripple Payments Direct.
+        flowType:
+          description: Specifies the type of payment you're making as categorized
+            by the identity type of the payment originator and beneficiary.
+          type: string
+          nullable: true
+          enum:
+          - B2B
+          - B2C
+          - C2B
+          - C2C
+          x-enumDescriptions:
+            B2B: "Specifies that this payment is made by a business originator to\
+              \ a business beneficiary.\n</br></br>\n**Identification of third-party\
+              \ payment**:\n  * If the `thirdPartyPayment` property is `true`, it\
+              \ indicates that you're making this payment on behalf of a business\
+              \ originator.\n  * If the `thirdPartyPayment` property is `false`, it\
+              \ indicates that you are the business originator making this payment.\n"
+            B2C: "Specifies that this payment is made by a business originator to\
+              \ an individual beneficiary.\n</br></br>\n**Identification of third-party\
+              \ payment**:\n  * If the `thirdPartyPayment` property is `true`, it\
+              \ indicates that you're making this payment on behalf of a business\
+              \ originator.\n  * If the `thirdPartyPayment` property is `false`, it\
+              \ indicates that you are the business originator making this payment.\n"
+        thirdPartyPayment:
+          description: Flag to indicate if this payment is initiated on behalf of
+            a third-party originator.
+          nullable: true
+          type: boolean
+          example: false
+        businessUseCase:
+          description: Indicates the type of payment you're making.
+          type: string
+          nullable: true
+          enum:
+          - ON_RAMP
+          - OFF_RAMP
+          - FIAT_TRANSFER
+          - CRYPTO_TRANSFER
+          x-enumDescriptions:
+            FIAT_TRANSFER: Indicates fiat source currency to fiat destination.
+    Page:
+      type: object
+      description: Specify page size and the ID of the last fetched result.
+      properties:
+        size:
+          type: integer
+          description: Size of the page
+          default: 20
+          minimum: 1
+          maximum: 100
+          example: 20
+        lastPageToken:
+          type: string
+          description: The unique reference ID of the last fetched item. To retrieve
+            subsequent item(s) if any, specify this value as the value of the `Page.list`
+            field in the  `POST /payments/filter` operation request body.
+    SearchPaymentsRequest:
+      type: object
+      description: Request body containing search criteria for payments.
+      properties:
+        filter:
+          $ref: '#/components/schemas/PaymentFilter'
+        sort:
+          $ref: '#/components/schemas/Sort'
+        page:
+          $ref: '#/components/schemas/Page'
+    Sort:
+      type: object
+      description: Specify sorting direction and the filtering criterion to sort by.
+      properties:
+        sortField:
+          $ref: '#/components/schemas/PaymentSortField'
+        sortDirection:
+          description: Sort results in ascending or descending order.
+          type: string
+          default: DESC
+          example: DESC
+          enum:
+          - ASC
+          - DESC
+          x-enumDescriptions:
+            ASC: Sort results in ascending order.
+            DESC: Sort results in descending order.
+    PaymentFilter:
+      type: object
+      description: Filter criteria to return desired payment search results.
+      properties:
+        paymentIds:
+          description: Specify a list of uuids to search for payment with payment
+            ids equals one from the list
+          type: array
+          items:
+            type: string
+            format: uuid
+            example: aaaaaaaa-1111-bbbb-abab-123412341234
+            maxLength: 36
+        paymentStates:
+          description: Array of payment states like `EXECUTING` or `COMPLETED`.
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentState'
+        filterRangeType:
+          description: Specify a type to filter on. For example, PAYMENT_CREATION,
+            PAYMENT_EXPIRY, or PAYMENT_STATUS_LAST_UPDATED
+          $ref: '#/components/schemas/PaymentFilterRangeType'
+        beforeTimestamp:
+          description: Depending on the value of the `filterRangeType` field, this
+            timestamp returns a list of payments that were created/modified/expired
+            at or before the specified time.
+          type: string
+          format: date-time
+          example: '2024-04-24T14:15:22Z'
+        afterTimestamp:
+          description: Depending on the value of the `filterRangeType` field, this
+            timestamp returns a list of payments that were created/modified/expired
+            at or after the specified time.
+          type: string
+          format: date-time
+          example: '2024-03-24T13:15:22Z'
+        beneficiaryIdentityIds:
+          description: To get all payments made to one or more beneficiaries, specify
+            the identity ID(s) of those beneficiaries in this field. You can find
+            the identity ID using the `GET /identities` operation.
+          type: array
+          items:
+            type: string
+            format: uuid
+            example: aaaaaaaa-1111-bbbb-abab-123412341234
+            maxLength: 36
+        internalId:
+          description: Specify an `internalId` to get payments associated with them.
+            A prefix match will be executed.
+          type: string
+        beneficiaryIdentityNickname:
+          description: To get all payments made to a beneficiary, specify the nickname
+            of that beneficiary in this field. You can find the nickname using the
+            `GET /identities` operation.
+          type: string
+          example: Successful business beneficiary
+          maxLength: 100
+        destinationCurrencies:
+          description: Specify one or more currency codes to get payments where the
+            beneficiary received funds in these currencies.
+          type: array
+          items:
+            type: string
+          pattern: ^[A-Z]{3,5}$
+        paymentLabels:
+          $ref: '#/components/schemas/PaymentLabels'
+    PaymentFilterRangeType:
+      description: The range type to filter payments on.
+      type: string
+      example: PAYMENT_CREATION
+      enum:
+      - PAYMENT_CREATION
+      - PAYMENT_EXPIRY
+      - PAYMENT_STATUS_LAST_UPDATED
+      x-enum-varnames:
+      - PAYMENT_CREATION
+      - PAYMENT_EXPIRY
+      - PAYMENT_STATUS_LAST_UPDATED
+      x-enumDescriptions:
+        PAYMENT_CREATION: Filter results to show payments that were created within
+          the specified time period.
+        PAYMENT_EXPIRY: Filter results to show payments that expired or are set to
+          expire within the specified time period.
+        PAYMENT_STATUS_LAST_UPDATED: Filter results to show payments whose status
+          was last updated within the specified time period.
+    PaymentLabels:
+      description: List of labels associated with the payment. A label typically contains
+        a UUID of your choice, designated as the batchId.
+      type: array
+      maxItems: 10
+      items:
+        type: string
+        example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
+        maxLength: 100
+    UpdatePaymentLabelsResponse:
+      type: object
+      description: Response body for modifying payment labels
+      required:
+      - labels
+      properties:
+        labels:
+          $ref: '#/components/schemas/PaymentLabels'
+    UpdatePaymentLabelsRequest:
+      type: object
+      description: Request body containing the list of labels you want to add to or
+        remove from the payment.
+      properties:
+        labelsToAdd:
+          $ref: '#/components/schemas/PaymentLabels'
+        labelsToRemove:
+          $ref: '#/components/schemas/PaymentLabels'
+    AdjustedExchangeRate:
+      description: Foreign Exchange (FX) rate used to calculate the quote.
+      type: object
+      properties:
+        adjustedRate:
+          description: Value of the Foreign Exchange (FX) rate.
+          type: number
+          format: double
+          example: 2
+      additionalProperties: false
+    TotalFeeBreakdown:
+      description: A breakdown of the total fees included in this quote.
+      type: object
+      properties:
+        calculatedFee:
+          description: Value of the fee when the configured fee unit is applied against
+            the `value`.
+          type: number
+          format: double
+          example: 2.43
+        feeName:
+          description: The name of the fee.
+          type: string
+          minLength: 1
+          maxLength: 128
+          example: Service fee
+        feeDescription:
+          description: Description of the fee.
+          type: string
+          minLength: 1
+          maxLength: 256
+          example: The service fee charged for this transaction.
+      additionalProperties: false
+    FeeSummary:
+      type: object
+      description: A summary of fees included in this quote.
+      properties:
+        totalFee:
+          description: The value of the total fee included in this quote.
+          type: number
+          format: double
+          example: 12.23
+        feeCurrency:
+          description: The currency in which fees are charged.
+          type: string
+          pattern: ^[a-zA-Z]{3,5}$
+          example: USD
+        feeBreakdown:
+          description: An array of fees that provides a breakdown of how the total
+            fees is calculated for this quote.
+          type: array
+          items:
+            $ref: '#/components/schemas/TotalFeeBreakdown'
+    state-type:
+      type: string
+      enum:
+      - ACTIVE
+      - BLOCKED
+      - DEACTIVATED
+      description: The state of the identity
+      x-enumDescriptions:
+        ACTIVE: The identity requested exists and is active.
+        BLOCKED: The identity requested exists, but is blocked.
+        DEACTIVATED: The identity requested has been deactivated.
+      example: ACTIVE
+    create-identity-response:
+      type: object
+      required:
+      - identityId
+      - version
+      properties:
+        identityId:
+          type: string
+          description: The unique ID of the identity
+          example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
+        version:
+          type: integer
+          description: The version number of the identity
+          example: 2
+    error:
+      type: object
+      required:
+      - code
+      - title
+      - type
+      - description
+      - timestamp
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Unique identifier of an error
+          example: SYS_100
+        title:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Error message providing a brief summary of the error
+          example: No identity exists for identityId
+        type:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Identifies the problem type
+          example: USER_VALIDATION_ERROR
+        description:
+          type: string
+          minLength: 1
+          maxLength: 1024
+          description: Provides more technical information
+          example: Unable to get identity. Identity ID should be in UUID format
+        timestamp:
+          type: string
+          minLength: 1
+          maxLength: 128
+          format: date-time
+          description: The time when this error occurred, specified in UTC.
+          example: '2023-11-02T18:26:00.000123Z'
+    error-response:
+      type: object
+      required:
+      - status
+      - errors
+      properties:
+        status:
+          type: integer
+          description: The HTTP status code of the error
+          example: 404
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/error'
+        timestamp:
+          type: string
+          description: The timestamp of the error
+          example: '2023-11-02T18:26:00.000Z'
+    identity-v2:
+      type: object
+      required:
+      - identityId
+      - nickName
+      - createdAt
+      - identityType
+      - useCaseType
+      properties:
+        identityId:
+          type: string
+          description: The unique ID of the identity
+          example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
+        nickName:
+          type: string
+          description: The nickname of the identity provided at the time of identity
+            creation.
+          example: MyCompany
+        createdAt:
+          type: string
+          format: date-time
+          description: The time at which the identity was created
+          example: '2023-11-02T18:26:00.000Z'
+        identityType:
+          $ref: '#/components/schemas/identity-type-v2'
+        useCaseType:
+          $ref: '#/components/schemas/useCaseType'
+    useCaseType:
+      type: string
+      enum:
+      - INDIVIDUAL
+      - BUSINESS
+      x-enumDescriptions:
+        INDIVIDUAL: Identity associated with an individual
+        BUSINESS: Identity associated with an institution or business
+      description: The use case type for the identity
+      example: BUSINESS
+    create-identity-request-v2:
+      type: object
+      required:
+      - identityType
+      - piiData
+      - useCaseType
+      properties:
+        piiData:
+          type: object
+          description: 'PII data in JSON format.
+
+
+            You must use the correct `piiData` schema for the type of identity you
+            want to create.
+
+
+            **Note**: Reach out to your Ripple liaison to get this schema.
+
+            '
+          additionalProperties: true
+        identityType:
+          $ref: '#/components/schemas/identity-type-v2'
+        nickName:
+          type: string
+          description: The nickname for the identity provided at the time of identity
+            creation
+          example: MyCompany
+        useCaseType:
+          $ref: '#/components/schemas/useCaseType'
+    identity-type-v2:
+      type: string
+      enum:
+      - SENDER
+      - BENEFICIARY
+      - ORIGINATOR
+      x-enumDescriptions:
+        BENEFICIARY: Identity associated with the beneficiary.
+        ORIGINATOR: Identity associated with the party originating the payment.
+      description: The type of the identity
+      example: BENEFICIARY
+    list-identities-response-v2:
+      type: object
+      format: application/json
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/identity-v2'
+          description: The list of the identities that match the query parameters
+    identity-response-v2:
+      type: object
+      required:
+      - identityId
+      - identityType
+      - createdAt
+      - identityState
+      - piiData
+      - version
+      - useCaseType
+      properties:
+        identityId:
+          type: string
+          description: The unique ID of the identity
+          example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
+        identityType:
+          $ref: '#/components/schemas/identity-type-v2'
+        createdAt:
+          type: string
+          format: date-time
+          description: The time at which the identity was created
+          example: '2023-11-02T18:26:00.000Z'
+        identityState:
+          $ref: '#/components/schemas/state-type'
+        nickName:
+          type: string
+          description: The nickname for the identity provided at the time of identity
+            creation
+          example: MyCompany
+        piiData:
+          type: object
+          description: PII data in JSON format
+          additionalProperties: true
+        version:
+          type: integer
+          description: The version number of the identity
+          example: 2
+        useCaseType:
+          $ref: '#/components/schemas/useCaseType'
+    QuoteErrorResponse:
+      type: object
+      required:
+      - errors
+      - status
+      properties:
+        errors:
+          description: List of quote errors
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteError'
+        status:
+          type: integer
+          description: Response status code
+      additionalProperties: false
+    QuoteError:
+      type: object
+      required:
+      - code
+      - title
+      - type
+      - description
+      - timestamp
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Unique identifier of an error
+          example: SYS_100
+        title:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Error message providing a brief summary of the error
+          example: Unable to process the request due to an internal server error.
+        type:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Identifies the problem type
+          example: USER_VALIDATION_ERROR
+        description:
+          type: string
+          minLength: 1
+          maxLength: 1024
+          description: Provides more technical information
+          example: Customer not found
+        timestamp:
+          type: string
+          minLength: 1
+          maxLength: 128
+          format: date-time
+          description: The time when this error occurred, specified in UTC.
+          example: '2023-11-02T18:26:00.000123Z'
+      additionalProperties: false
+    QuoteStatus:
+      type: string
+      enum:
+      - EXPIRED
+      - ACTIVE
+      x-enumDescriptions:
+        EXPIRED: Expired quote
+        ACTIVE: Quote that you can accept to create a payment.
+      example: ACTIVE
+    QuoteAmountType:
+      type: string
+      description: The type of amount for which you want to get a quote.
+      default: SOURCE_AMOUNT
+      enum:
+      - SOURCE_AMOUNT
+      - DESTINATION_AMOUNT
+      x-enumDescriptions:
+        SOURCE_AMOUNT: Specify this value to get a quote for the amount that you want
+          to send.
+        DESTINATION_AMOUNT: Specify this value to get a quote for the amount that
+          the beneficiary should receive.
+    QuoteCollectionRequest:
+      type: object
+      description: Request to create a quote collection
+      required:
+      - quoteAmountType
+      - quoteAmount
+      - sourceCurrency
+      - destinationCurrency
+      - payoutCategory
+      - payinCategory
+      properties:
+        quoteAmount:
+          description: The amount for which you wish to receive a collection of quotes.
+          type: number
+          format: double
+          minimum: 1
+          maximum: 100000000
+          example: 123.45
+        quoteAmountType:
+          $ref: '#/components/schemas/QuoteAmountType'
+        sourceCurrency:
+          description: The currency code of the currency that you are sending.
+          type: string
+          pattern: ^[a-zA-Z]{3,5}$
+          example: USD
+        destinationCurrency:
+          description: The currency code of the currency in which your beneficiary
+            will receive this payment.
+          type: string
+          pattern: ^[a-zA-Z]{3,5}$
+          example: MXN
+        sourceCountry:
+          description: The country code of the country from where you are sending
+            the funds. This is an ISO 3166-1 alpha-2 code.
+          type: string
+          pattern: ^[a-zA-Z]{2}$
+          example: US
+        destinationCountry:
+          description: The country where the beneficiary is located specified in Alpha-2
+            Code format as defined in the ISO CountryCode ISO 3166-1 list. If the
+            beneficiary is an individual, then this value is their country of residence.
+            If the beneficiary is an institution, then this value is their the country
+            of incorporation.
+          type: string
+          pattern: ^[a-zA-Z]{2}$
+          example: PH
+        payoutCategory:
+          description: The name of the payout category.
+          type: string
+          minLength: 1
+          maxLength: 128
+          x-enumDescriptions:
+            BANK: "Indicates that the payout will be made in fiat currency to a recipient\u2019\
+              s bank account through local banking rails."
+            CRYPTO: "Indicates that the payout will be made in stablecoin to a recipient\u2019\
+              s crypto wallet address."
+          example: BANK
+        payinCategory:
+          description: The name of the pay in category indicating how this payment
+            will be funded.
+          type: string
+          minLength: 1
+          maxLength: 128
+          x-enumDescriptions:
+            FUNDED: Indicates that the payment is being made from funds you've deposited
+              with Ripple.
+            T_PLUS_ONE: Indicates the payment is being made and you will pay the outstanding
+              invoice.
+          example: FUNDED
+        destinationBlockchainNetwork:
+          description: The name of the blockchain network on which the beneficiary
+            will receive this payment.
+          type: string
+          minLength: 1
+          maxLength: 20
+          example: Ethereum
+      additionalProperties: false
+    Quote:
+      type: object
+      required:
+      - quoteId
+      - quoteStatus
+      - sourceCurrency
+      - destinationCurrency
+      - payoutCategory
+      - payinCategory
+      properties:
+        quoteId:
+          description: Unique ID that represents this quote.
+          type: string
+          format: uuid
+          minLength: 1
+          maxLength: 36
+          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+        quoteStatus:
+          $ref: '#/components/schemas/QuoteStatus'
+        quoteAmountType:
+          $ref: '#/components/schemas/QuoteAmountType'
+        sourceAmount:
+          description: Amount to be sent by the originator.
+          type: number
+          format: double
+          minimum: 1
+          maximum: 100000000
+          example: 123.45
+        destinationAmount:
+          description: Amount to be received by destination
+          type: number
+          minimum: 1
+          maximum: 100000000
+          format: double
+          example: 2438.19
+        sourceCurrency:
+          description: The currency code of the currency that you are sending.
+          type: string
+          pattern: ^[a-zA-Z]{3,5}$
+          example: USD
+        destinationCurrency:
+          description: The currency code of the currency in which your beneficiary
+            will receive this payment.
+          type: string
+          pattern: ^[a-zA-Z]{3,5}$
+          example: MXN
+        sourceCountry:
+          description: The country where the payment originator is located or incorporated,
+            specified in Alpha-2 Code format as defined in the ISO CountryCode ISO
+            3166-1 list.
+          type: string
+          pattern: ^[a-zA-Z]{2}$
+          example: US
+        destinationCountry:
+          description: The country code to which you wish to send the funds. It follows
+            ISO 3166-1 alpha-2 code
+          type: string
+          pattern: ^[a-zA-Z]{2}$
+          example: MX
+        payoutCategory:
+          description: Name of the payout category specified in the quote request.
+          type: string
+          minLength: 1
+          maxLength: 128
+          example: BANK
+        payinCategory:
+          description: The name of payin category specified in the quote request.
+          type: string
+          minLength: 1
+          maxLength: 128
+          example: FUNDED
+        adjustedExchangeRate:
+          $ref: '#/components/schemas/AdjustedExchangeRate'
+        fees:
+          type: array
+          description: A summary of fees included in this quote.
+          items:
+            $ref: '#/components/schemas/FeeSummary'
+        createdAt:
+          type: string
+          minLength: 1
+          maxLength: 128
+          format: date-time
+          example: '2023-11-02T18:26:00.000123Z'
+          description: The time when this quote was created, specified in UTC.
+        expiresAt:
+          type: string
+          minLength: 1
+          maxLength: 128
+          format: date-time
+          example: '2023-11-02T18:26:00.000123Z'
+          description: The time when this quote expires, specified in UTC.
+        destinationBlockchainNetwork:
+          description: The name of the blockchain network on which the beneficiary
+            will receive this payment.
+          type: string
+          minLength: 1
+          maxLength: 20
+          example: Ethereum
+      additionalProperties: false
+    QuoteCollection:
+      type: object
+      required:
+      - quoteCollectionId
+      - quotes
+      properties:
+        quoteCollectionId:
+          description: Unique ID that represents this quote collection.
+          type: string
+          minLength: 1
+          maxLength: 36
+          format: uuid
+          example: 11111111-aaaa-2222-bbbb-222222222222
+        quotes:
+          description: List of quotes
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/Quote'
+      additionalProperties: false
