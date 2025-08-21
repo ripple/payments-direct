@@ -1,0 +1,3 @@
+<manifest package="com.ripple.payments.direct" xmlns:android="http://schemas.android.com/apk/res/android">
+    <application />
+</manifest>
