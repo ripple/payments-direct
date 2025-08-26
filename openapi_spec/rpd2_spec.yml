@@ -384,7 +384,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PaymentRequest'
       responses:
-        '200':
+        '201':
           description: Valid payment
           content:
             application/json:

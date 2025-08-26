@@ -27,7 +27,7 @@ class Sort(BaseModel):
     """
     Specify sorting direction and the filtering criterion to sort by.
     """ # noqa: E501
-    sort_field: Optional[PaymentSortField] = Field(default=PaymentSortField.INITIATED_AT, alias="sortField")
+    sort_field: Optional[PaymentSortField] = Field(default=PaymentSortField.NUMBER_INITIATED_AT, alias="sortField")
     sort_direction: Optional[StrictStr] = Field(default='DESC', description="Sort results in ascending or descending order.", alias="sortDirection")
     __properties: ClassVar[List[str]] = ["sortField", "sortDirection"]
 
@@ -92,7 +92,7 @@ class Sort(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "sortField": obj.get("sortField") if obj.get("sortField") is not None else PaymentSortField.INITIATED_AT,
+            "sortField": obj.get("sortField") if obj.get("sortField") is not None else PaymentSortField.NUMBER_INITIATED_AT,
             "sortDirection": obj.get("sortDirection") if obj.get("sortDirection") is not None else 'DESC'
         })
         return _obj

@@ -283,7 +283,7 @@ paths:
         description: create payment request
         required: true
       responses:
-        "200":
+        "201":
           content:
             application/json:
               schema:

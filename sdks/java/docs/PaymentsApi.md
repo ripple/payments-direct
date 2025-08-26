@@ -80,7 +80,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Valid payment |  -  |
+| **201** | Valid payment |  -  |
 | **400** | Invalid input variables for the payment. |  -  |
 | **402** | Problems related to payment limits. |  -  |
 | **500** | Internal processing error |  -  |

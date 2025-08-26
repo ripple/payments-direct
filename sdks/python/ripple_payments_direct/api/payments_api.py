@@ -99,7 +99,7 @@ class PaymentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Payment",
+            '201': "Payment",
             '400': "PaymentErrorResponse",
             '402': "PaymentErrorResponse",
             '500': "PaymentErrorResponse",
@@ -169,7 +169,7 @@ class PaymentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Payment",
+            '201': "Payment",
             '400': "PaymentErrorResponse",
             '402': "PaymentErrorResponse",
             '500': "PaymentErrorResponse",
@@ -239,7 +239,7 @@ class PaymentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Payment",
+            '201': "Payment",
             '400': "PaymentErrorResponse",
             '402': "PaymentErrorResponse",
             '500': "PaymentErrorResponse",
