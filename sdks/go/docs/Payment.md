@@ -14,10 +14,10 @@ Name | Type | Description | Notes
 **Destination** | Pointer to [**Destination**](Destination.md) |  | [optional] 
 **AdjustedExchangeRate** | Pointer to [**AdjustedExchangeRate**](AdjustedExchangeRate.md) |  | [optional] 
 **Fees** | Pointer to [**[]FeeSummary**](FeeSummary.md) | A summary of fees included in payment quote. | [optional] 
-**SourceOfCash** | Pointer to **string** | Indicates the source of funds | [optional] 
-**PurposeCode** | Pointer to **string** | Indicates the purpose of the payment  For more information about the &#x60;purposeCode&#x60; options, see  [purposeCode](../../building-payment-request-body/#purposecode).  | [optional] 
+**SourceOfCash** | Pointer to **string** | Source of Cash may be required depending on corridor and payout partner. Valid Source of Cash values vary by corridor. | [optional] 
+**PurposeCode** | Pointer to **string** | Purpose Code may be required depending on corridor and payout partner. Valid Purpose Code values vary by corridor. | [optional] 
 **TransactionDetails** | Pointer to [**TransactionDetails**](TransactionDetails.md) |  | [optional] 
-**PaymentLabels** | Pointer to **[]string** | List of labels associated with the payment. A label typically contains a UUID of your choice, designated as the batchId. | [optional] 
+**PaymentLabels** | Pointer to **[]string** | Application-defined labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment’s lifetime. | [optional] 
 
 ## Methods
 

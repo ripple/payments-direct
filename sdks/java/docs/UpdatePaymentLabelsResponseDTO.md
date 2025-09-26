@@ -8,7 +8,7 @@ Response body for modifying payment labels
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**labels** | **List&lt;String&gt;** | List of labels associated with the payment. A label typically contains a UUID of your choice, designated as the batchId. |  |
+|**labels** | **List&lt;String&gt;** | Application-defined labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment’s lifetime. |  |
 
 
 

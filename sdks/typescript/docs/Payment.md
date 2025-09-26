@@ -15,10 +15,10 @@ Name | Type | Description | Notes
 **destination** | [**Destination**](Destination.md) |  | [optional] [default to undefined]
 **adjustedExchangeRate** | [**AdjustedExchangeRate**](AdjustedExchangeRate.md) |  | [optional] [default to undefined]
 **fees** | [**Array&lt;FeeSummary&gt;**](FeeSummary.md) | A summary of fees included in payment quote. | [optional] [default to undefined]
-**sourceOfCash** | **string** | Indicates the source of funds | [optional] [default to undefined]
-**purposeCode** | **string** | Indicates the purpose of the payment  For more information about the &#x60;purposeCode&#x60; options, see  [purposeCode](../../building-payment-request-body/#purposecode).  | [optional] [default to undefined]
+**sourceOfCash** | **string** | Source of Cash may be required depending on corridor and payout partner. Valid Source of Cash values vary by corridor. | [optional] [default to undefined]
+**purposeCode** | **string** | Purpose Code may be required depending on corridor and payout partner. Valid Purpose Code values vary by corridor. | [optional] [default to undefined]
 **transactionDetails** | [**TransactionDetails**](TransactionDetails.md) |  | [optional] [default to undefined]
-**paymentLabels** | **Array&lt;string&gt;** | List of labels associated with the payment. A label typically contains a UUID of your choice, designated as the batchId. | [optional] [default to undefined]
+**paymentLabels** | **Array&lt;string&gt;** | Application-defined labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment’s lifetime. | [optional] [default to undefined]
 
 ## Example
 

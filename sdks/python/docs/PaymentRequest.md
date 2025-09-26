@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **originator_identity_id** | **str** | The identity ID of the payment originator in UUID format. You can find the identity ID using the &#x60;GET /identities&#x60; operation. | [optional] 
 **beneficiary_identity_id** | **str** | The identity ID of the payment beneficiary in UUID format. You can find the identity ID using the &#x60;GET /identities&#x60; operation. | 
 **internal_id** | **str** | Customer defined value, such as an invoice number. | [optional] 
-**purpose_code** | **str** | Indicates the purpose of the payment  For more information about the &#x60;purposeCode&#x60; options, see [purposeCode](../../building-payment-request-body/#purposecode).  | [optional] 
-**source_of_cash** | **str** | Source of cash for payout. | [optional] 
-**payment_labels** | **List[str]** | List of labels associated with the payment. A label typically contains a UUID of your choice, designated as the batchId. | [optional] 
+**purpose_code** | **str** | Purpose Code may be required depending on corridor and payout partner. Valid Purpose Code values vary by corridor. | [optional] 
+**source_of_cash** | **str** | Source of Cash may be required depending on corridor and payout partner. Valid Source of Cash values vary by corridor. | [optional] 
+**payment_labels** | **List[str]** | Application-defined labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment’s lifetime. | [optional] 
 
 ## Example
 

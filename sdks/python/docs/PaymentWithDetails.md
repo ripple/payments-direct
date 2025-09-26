@@ -15,11 +15,11 @@ Name | Type | Description | Notes
 **destination** | [**Destination**](Destination.md) |  | [optional] 
 **adjusted_exchange_rate** | [**AdjustedExchangeRate**](AdjustedExchangeRate.md) |  | [optional] 
 **fees** | [**List[FeeSummary]**](FeeSummary.md) | A summary of fees included in payment quote. | [optional] 
-**source_of_cash** | **str** | Indicates the source of funds | [optional] 
-**purpose_code** | **str** | purposeCode for RPD payments | [optional] 
+**source_of_cash** | **str** | Source of Cash may be required depending on corridor and payout partner. Valid Source of Cash values vary by corridor. | [optional] 
+**purpose_code** | **str** | Purpose Code may be required depending on corridor and payout partner. Valid Purpose Code values vary by corridor. | [optional] 
 **transaction_details** | [**TransactionDetails**](TransactionDetails.md) |  | [optional] 
 **errors** | [**List[PaymentError]**](PaymentError.md) |  | [optional] 
-**payment_labels** | **List[str]** | List of labels associated with the payment. A label typically contains a UUID of your choice, designated as the batchId. | [optional] 
+**payment_labels** | **List[str]** | Application-defined labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment’s lifetime. | [optional] 
 
 ## Example
 

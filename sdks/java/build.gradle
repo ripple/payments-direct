@@ -2,7 +2,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 
 group = 'com.ripple.payments'
-version = '0.0.1'
+version = '0.0.2'
 
 buildscript {
     repositories {
@@ -97,12 +97,12 @@ if(hasProperty('target') && target == 'android') {
     }
 
     task sourcesJar(type: Jar, dependsOn: classes) {
-        archiveClassifier = 'sources'
+        classifier = 'sources'
         from sourceSets.main.allSource
     }
 
     task javadocJar(type: Jar, dependsOn: javadoc) {
-        archiveClassifier = 'javadoc'
+        classifier = 'javadoc'
         from javadoc.destinationDir
     }
 

@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Payments Direct API
-  version: 0.0.1
+  version: 0.0.2
   license:
     name: Apache 2.0
     url: http://apache.org
@@ -88,13 +88,13 @@ info:
 
     '
 servers:
-- url: https://api.test.ripple.com
-  description: Test environment with simulated currency
-- url: https://api.ripple.com
-  description: Production environment
+  - url: https://api.test.ripple.com
+    description: Test environment with simulated currency
+  - url: https://api.ripple.com
+    description: Production environment
 tags:
-- name: Authentication
-  description: 'Use these API operations to manage your authentication tokens.
+  - name: Authentication
+    description: 'Use these API operations to manage your authentication tokens.
 
 
     | Operation | Method | Description |
@@ -108,10 +108,10 @@ tags:
     can be used for authentication. |
 
     '
-  x-displayName: Authentication
-- name: IdentitiesV2
-  x-displayName: Identities
-  description: 'Use these API operations to manage your identities.
+    x-displayName: Authentication
+  - name: IdentitiesV2
+    x-displayName: Identities
+    description: 'Use these API operations to manage your identities.
 
 
     | Operation | Method | Description |
@@ -131,8 +131,8 @@ tags:
     an identity. |
 
     '
-- name: Payments
-  description: 'Use these API operations to manage your payments.
+  - name: Payments
+    description: 'Use these API operations to manage your payments.
 
 
     | Operation | Method | Description |
@@ -149,10 +149,10 @@ tags:
     payment by payment ID.  |
 
     '
-  x-displayName: Payments
-- name: Quote
-  x-displayName: Quotes
-  description: 'Use these API operations to manage your quotes.
+    x-displayName: Payments
+  - name: Quote
+    x-displayName: Quotes
+    description: 'Use these API operations to manage your quotes.
 
 
     | Operation | Method | Description |
@@ -168,9 +168,9 @@ tags:
     | [Get a quote](./#operation/getQuote) | GET | Get a specific quote by ID.  |
 
     '
-- name: ledger-public
-  x-displayName: Balances
-  description: 'Use this API operation to view your balances.
+  - name: ledger-public
+    x-displayName: Balances
+    description: 'Use this API operation to view your balances.
 
 
     | Operation | Method | Description |
@@ -182,23 +182,24 @@ tags:
     balances  |
 
     '
+
 paths:
   /v2/oauth/token:
     post:
       tags:
-      - Authentication
+        - Authentication
       operationId: authenticate
       summary: Request an access token
       parameters:
-      - in: header
-        name: Authorization
-        required: false
-        schema:
-          type: string
-          description: Optional [base64-encoded](https://datatracker.ietf.org/doc/html/rfc7617)
-            `client_id:client_secret`. If provided here they aren't required in the
-            request body.
-          example: Basic ZGVtbzpwQDU1dzByZA==
+        - in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+            description: Optional [base64-encoded](https://datatracker.ietf.org/doc/html/rfc7617)
+              `client_id:client_secret`. If provided here they aren't required in the
+              request body.
+            example: Basic ZGVtbzpwQDU1dzByZA==
       requestBody:
         required: true
         content:
@@ -274,14 +275,14 @@ paths:
 
         '
       security:
-      - BasicAuth: []
+        - BasicAuth: []
   /v2/oauth/token/test:
     get:
       tags:
-      - Authentication
+        - Authentication
       operationId: testAuthToken
       security:
-      - Bearer: []
+        - Bearer: []
       summary: Test access token
       description: Test if an access token can be used for authentication with Ripple
         APIs and how much time remains on it.
@@ -307,9 +308,9 @@ paths:
   /v2/payments/filter:
     post:
       tags:
-      - Payments
+        - Payments
       security:
-      - Bearer: []
+        - Bearer: []
       operationId: searchPayments
       summary: Search payments
       description: Search for payments based on filtering criteria.
@@ -360,9 +361,9 @@ paths:
   /v2/payments:
     post:
       tags:
-      - Payments
+        - Payments
       security:
-      - Bearer: []
+        - Bearer: []
       operationId: createPayment
       summary: Create payment
       description: 'Create a payment
@@ -439,21 +440,21 @@ paths:
   /v2/payments/{paymentId}:
     get:
       tags:
-      - Payments
+        - Payments
       security:
-      - Bearer: []
+        - Bearer: []
       operationId: getPaymentById
       description: Gets a payment by ID.
       summary: Get a payment by ID
       parameters:
-      - in: path
-        name: paymentId
-        description: Unique identifier of the payment to get.
-        example: 7ea3399c-1234-5678-8d8f-d320ea406630
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - in: path
+          name: paymentId
+          description: Unique identifier of the payment to get.
+          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
         '200':
           description: Successfully fetched payment details.
@@ -508,22 +509,22 @@ paths:
   /v2/payments/{paymentId}/states:
     get:
       tags:
-      - Payments
+        - Payments
       security:
-      - Bearer: []
+        - Bearer: []
       operationId: getPaymentStateTransitionsById
       description: Gets the state transitions for a payment by ID.
       summary: Get state transitions by payment ID
       parameters:
-      - in: path
-        name: paymentId
-        description: Unique identifier of the payment for which you want to get state
-          transition information.
-        example: 7ea3399c-1234-5678-8d8f-d320ea406630
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - in: path
+          name: paymentId
+          description: Unique identifier of the payment for which you want to get state
+            transition information.
+          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
         '200':
           description: Successfully fetched payment state transitions.
@@ -578,22 +579,22 @@ paths:
   /v2/payments/{paymentId}/labels:
     patch:
       tags:
-      - Payments
+        - Payments
       security:
-      - Bearer: []
+        - Bearer: []
       operationId: updatePaymentLabels
       summary: Update payment labels
       description: Add or remove labels for a payment.
       parameters:
-      - in: path
-        name: paymentId
-        description: The unique ID that identifies the payment for which you want
-          to update labels.
-        example: 7ea3399c-1234-5678-8d8f-d320ea406630
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - in: path
+          name: paymentId
+          description: The unique ID that identifies the payment for which you want
+            to update labels.
+          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+          required: true
+          schema:
+            type: string
+            format: uuid
       requestBody:
         description: Labels to add to or remove from the payment.
         required: true
@@ -655,9 +656,9 @@ paths:
   /v2/identities:
     post:
       tags:
-      - IdentitiesV2
+        - IdentitiesV2
       security:
-      - Bearer: []
+        - Bearer: []
       operationId: createIdentityV2
       summary: Create a new identity
       description: 'Create a new identity.
@@ -692,11 +693,11 @@ paths:
               example:
                 status: 400
                 errors:
-                - code: USR_101
-                  title: Bad Request
-                  type: USER_ERROR
-                  description: Invalid request. Check your request body and try again.
-                  timestamp: '2025-05-23T15:02:56.516Z'
+                  - code: USR_101
+                    title: Bad Request
+                    type: USER_ERROR
+                    description: Invalid request. Check your request body and try again.
+                    timestamp: '2025-05-23T15:02:56.516Z'
         '500':
           description: Internal Processing Error
           content:
@@ -706,17 +707,17 @@ paths:
               example:
                 status: 500
                 errors:
-                - code: SYS_001
-                  title: Internal server error
-                  type: SYSTEM_ERROR
-                  description: Unable to process the request due to an internal server
-                    error.
-                  timestamp: '2025-05-23T15:02:56.516Z'
+                  - code: SYS_001
+                    title: Internal server error
+                    type: SYSTEM_ERROR
+                    description: Unable to process the request due to an internal server
+                      error.
+                    timestamp: '2025-05-23T15:02:56.516Z'
     get:
       tags:
-      - IdentitiesV2
+        - IdentitiesV2
       security:
-      - Bearer: []
+        - Bearer: []
       operationId: getIdentitiesV2
       summary: Get a list of identities
       description: 'Get a list of identities that match the query parameters.
@@ -727,21 +728,21 @@ paths:
 
         '
       parameters:
-      - in: query
-        name: identityType
-        required: false
-        schema:
-          $ref: '#/components/schemas/identity-type-v2'
-        example: BENEFICIARY
-        description: The type of identities you want to retrieve
-      - in: query
-        name: nickName
-        required: false
-        schema:
-          type: string
-        example: Successful Beneficiary
-        description: The nickname for the identity provided at the time of identity
-          creation
+        - in: query
+          name: identityType
+          required: false
+          schema:
+            $ref: '#/components/schemas/identity-type-v2'
+          example: BENEFICIARY
+          description: The type of identities you want to retrieve
+        - in: query
+          name: nickName
+          required: false
+          schema:
+            type: string
+          example: Successful Beneficiary
+          description: The nickname for the identity provided at the time of identity
+            creation
       responses:
         '200':
           description: Requested identity info in JSON format
@@ -758,12 +759,12 @@ paths:
               example:
                 status: 400
                 errors:
-                - code: USR_102
-                  title: Bad request
-                  type: USER_ERROR
-                  description: Unable to get identity. Identity ID should be in UUID
-                    format.
-                  timestamp: '2025-05-23T15:02:56.516Z'
+                  - code: USR_102
+                    title: Bad request
+                    type: USER_ERROR
+                    description: Unable to get identity. Identity ID should be in UUID
+                      format.
+                    timestamp: '2025-05-23T15:02:56.516Z'
         '404':
           description: No identities found
           content:
@@ -773,11 +774,11 @@ paths:
               example:
                 status: 404
                 errors:
-                - code: USR_103
-                  title: Identities not found
-                  type: NOT_FOUND
-                  description: No identities exist
-                  timestamp: '2025-05-23T15:02:56.516Z'
+                  - code: USR_103
+                    title: Identities not found
+                    type: NOT_FOUND
+                    description: No identities exist
+                    timestamp: '2025-05-23T15:02:56.516Z'
         '500':
           description: Internal Processing Error
           content:
@@ -787,43 +788,43 @@ paths:
               example:
                 status: 500
                 errors:
-                - code: SYS_001
-                  title: Internal server error
-                  type: SYSTEM_ERROR
-                  description: Unable to process the request due to an internal server
-                    error.
-                  timestamp: '2025-05-23T15:02:56.516Z'
+                  - code: SYS_001
+                    title: Internal server error
+                    type: SYSTEM_ERROR
+                    description: Unable to process the request due to an internal server
+                      error.
+                    timestamp: '2025-05-23T15:02:56.516Z'
   /v2/identities/{identity-id}:
     get:
       tags:
-      - IdentitiesV2
+        - IdentitiesV2
       security:
-      - Bearer: []
+        - Bearer: []
       operationId: getIdentityByIdV2
       summary: Get an identity by ID
       description: Get an identity by its unique ID
       parameters:
-      - name: identity-id
-        in: path
-        required: true
-        description: The ID of the identity to get.
-        example: 146f3c51-c313-47ce-b6f2-691c5a238b3e
-        schema:
-          type: string
-      - in: query
-        name: version
-        description: 'Version of the identity you want to retrieve.
+        - name: identity-id
+          in: path
+          required: true
+          description: The ID of the identity to get.
+          example: 146f3c51-c313-47ce-b6f2-691c5a238b3e
+          schema:
+            type: string
+        - in: query
+          name: version
+          description: 'Version of the identity you want to retrieve.
 
 
           **Note**: If you don''t specify a version, the latest version of the identity
           is returned.
 
           '
-        example: 2
-        required: false
-        schema:
-          type: integer
-          minimum: 1
+          example: 2
+          required: false
+          schema:
+            type: integer
+            minimum: 1
       responses:
         '200':
           description: Requested identity info in JSON format
@@ -840,12 +841,12 @@ paths:
               example:
                 status: 400
                 errors:
-                - code: USR_102
-                  title: Bad request
-                  type: USER_ERROR
-                  description: Unable to get identity. Identity ID should be in UUID
-                    format.
-                  timestamp: '2025-05-23T15:02:56.516Z'
+                  - code: USR_102
+                    title: Bad request
+                    type: USER_ERROR
+                    description: Unable to get identity. Identity ID should be in UUID
+                      format.
+                    timestamp: '2025-05-23T15:02:56.516Z'
         '404':
           description: Invalid - identity ID does not exist
           content:
@@ -855,27 +856,27 @@ paths:
               example:
                 status: 404
                 errors:
-                - code: USR_103
-                  title: Identity not found
-                  type: NOT_FOUND
-                  description: No identity exists for identityId
-                  timestamp: '2025-05-23T15:02:56.516Z'
+                  - code: USR_103
+                    title: Identity not found
+                    type: NOT_FOUND
+                    description: No identity exists for identityId
+                    timestamp: '2025-05-23T15:02:56.516Z'
     delete:
       tags:
-      - IdentitiesV2
+        - IdentitiesV2
       security:
-      - Bearer: []
+        - Bearer: []
       operationId: deactivateIdentityV2
       summary: Delete an identity
       description: Delete an identity
       parameters:
-      - in: path
-        name: identity-id
-        required: true
-        description: Unique UUID string that maps to the identity to be deleted.
-        example: 146f3c51-c313-47ce-b6f2-691c5a238b3e
-        schema:
-          type: string
+        - in: path
+          name: identity-id
+          required: true
+          description: Unique UUID string that maps to the identity to be deleted.
+          example: 146f3c51-c313-47ce-b6f2-691c5a238b3e
+          schema:
+            type: string
       responses:
         '204':
           description: The identity was deleted successfully
@@ -888,12 +889,12 @@ paths:
               example:
                 status: 400
                 errors:
-                - code: USR_102
-                  title: Bad request
-                  type: USER_ERROR
-                  description: Unable to get identity. Identity ID should be in UUID
-                    format.
-                  timestamp: '2025-05-23T15:02:56.516Z'
+                  - code: USR_102
+                    title: Bad request
+                    type: USER_ERROR
+                    description: Unable to get identity. Identity ID should be in UUID
+                      format.
+                    timestamp: '2025-05-23T15:02:56.516Z'
         '404':
           description: Invalid Identity id does not exist
           content:
@@ -903,11 +904,11 @@ paths:
               example:
                 status: 404
                 errors:
-                - code: USR_103
-                  title: Identity not found
-                  type: NOT_FOUND
-                  description: No identity exists for identityId
-                  timestamp: '2025-05-23T15:02:56.516Z'
+                  - code: USR_103
+                    title: Identity not found
+                    type: NOT_FOUND
+                    description: No identity exists for identityId
+                    timestamp: '2025-05-23T15:02:56.516Z'
         '422':
           description: Unprocessable Identity Id
           content:
@@ -917,11 +918,11 @@ paths:
               example:
                 status: 422
                 errors:
-                - code: USR_104
-                  title: Invalid request
-                  type: USER_ERROR
-                  description: The identity has already been deactivated.
-                  timestamp: '2025-05-23T15:02:56.516Z'
+                  - code: USR_104
+                    title: Invalid request
+                    type: USER_ERROR
+                    description: The identity has already been deactivated.
+                    timestamp: '2025-05-23T15:02:56.516Z'
         '500':
           description: Internal Processing Error
           content:
@@ -931,18 +932,19 @@ paths:
               example:
                 status: 500
                 errors:
-                - code: SYS_001
-                  title: Internal server error
-                  type: SYSTEM_ERROR
-                  description: Unable to process the request due to an internal server
-                    error.
-                  timestamp: '2025-05-23T15:02:56.516Z'
+                  - code: SYS_001
+                    title: Internal server error
+                    type: SYSTEM_ERROR
+                    description: Unable to process the request due to an internal server
+                      error.
+                    timestamp: '2025-05-23T15:02:56.516Z'
+
   /v2/quotes/quote-collection:
     post:
       tags:
-      - Quote
+        - Quote
       security:
-      - Bearer: []
+        - Bearer: []
       operationId: createQuoteCollection
       summary: Create quote collection
       description: 'Creates a collection of quotes for a proposed payment.
@@ -996,20 +998,20 @@ paths:
   /v2/quotes/quote-collection/{quote-collection-id}:
     get:
       tags:
-      - Quote
+        - Quote
       security:
-      - Bearer: []
+        - Bearer: []
       operationId: getQuoteCollection
       summary: Get quote collection
       parameters:
-      - in: path
-        name: quote-collection-id
-        description: The unique identifier of the quote collection you want to retrieve
-        required: true
-        schema:
-          type: string
-          format: uuid
-          example: 11111111-aaaa-2222-bbbb-222222222222
+        - in: path
+          name: quote-collection-id
+          description: The unique identifier of the quote collection you want to retrieve
+          required: true
+          schema:
+            type: string
+            format: uuid
+            example: 11111111-aaaa-2222-bbbb-222222222222
       responses:
         '200':
           description: Valid quote collection found
@@ -1045,20 +1047,20 @@ paths:
   /v2/quotes/{quote-id}:
     get:
       tags:
-      - Quote
+        - Quote
       security:
-      - Bearer: []
+        - Bearer: []
       operationId: getQuote
       summary: Get quote
       parameters:
-      - in: path
-        name: quote-id
-        description: The unique identifier of the quote to retrieve
-        required: true
-        schema:
-          type: string
-          format: uuid
-          example: 22222222-aaaa-2222-bbbb-222222222222
+        - in: path
+          name: quote-id
+          description: The unique identifier of the quote to retrieve
+          required: true
+          schema:
+            type: string
+            format: uuid
+            example: 22222222-aaaa-2222-bbbb-222222222222
       responses:
         '200':
           description: Valid quote found
@@ -1096,14 +1098,14 @@ paths:
       summary: Get available balances
       operationId: getBalances
       tags:
-      - ledger-public
+        - ledger-public
       parameters:
-      - in: query
-        name: currency
-        required: false
-        schema:
-          type: string
-        description: The currency for which you want to get the balance.
+        - in: query
+          name: currency
+          required: false
+          schema:
+            type: string
+          description: The currency for which you want to get the balance.
       responses:
         '200':
           description: Successful response containing balance details.
@@ -1127,7 +1129,7 @@ paths:
                       properties:
                         fundingType:
                           enum:
-                          - FUNDED
+                            - FUNDED
                           x-enumDescriptions:
                             FUNDED: Indicates that you initiate payments using the
                               funds you added to your account.
@@ -1147,14 +1149,14 @@ paths:
                           description: Amount reserved to complete in-progress transactions.
                             You can't use this amount to initiate new payments.
                       required:
-                      - fundingType
-                      - currency
-                      - availableBalance
-                      - reservedBalance
+                        - fundingType
+                        - currency
+                        - availableBalance
+                        - reservedBalance
                     description: List of available prefund balances.
                 required:
-                - timestamp
-                - balances
+                  - timestamp
+                  - balances
         '400':
           description: Bad request
           content:
@@ -1162,8 +1164,8 @@ paths:
               schema:
                 type: object
                 required:
-                - status
-                - errors
+                  - status
+                  - errors
                 properties:
                   status:
                     type: integer
@@ -1175,11 +1177,11 @@ paths:
                     items:
                       type: object
                       required:
-                      - code
-                      - title
-                      - type
-                      - description
-                      - timestamp
+                        - code
+                        - title
+                        - type
+                        - description
+                        - timestamp
                       properties:
                         code:
                           type: string
@@ -1213,8 +1215,8 @@ paths:
               schema:
                 type: object
                 required:
-                - status
-                - errors
+                  - status
+                  - errors
                 properties:
                   status:
                     type: integer
@@ -1226,11 +1228,11 @@ paths:
                     items:
                       type: object
                       required:
-                      - code
-                      - title
-                      - type
-                      - description
-                      - timestamp
+                        - code
+                        - title
+                        - type
+                        - description
+                        - timestamp
                       properties:
                         code:
                           type: string
@@ -1264,8 +1266,8 @@ paths:
               schema:
                 type: object
                 required:
-                - status
-                - errors
+                  - status
+                  - errors
                 properties:
                   status:
                     type: integer
@@ -1277,11 +1279,11 @@ paths:
                     items:
                       type: object
                       required:
-                      - code
-                      - title
-                      - type
-                      - description
-                      - timestamp
+                        - code
+                        - title
+                        - type
+                        - description
+                        - timestamp
                       properties:
                         code:
                           type: string
@@ -1309,7 +1311,7 @@ paths:
                           description: The timestamp of the error occurrence
                           example: '2024-01-02T14:16:00Z'
       security:
-      - Bearer: []
+        - Bearer: []
 components:
   securitySchemes:
     Bearer:
@@ -1368,13 +1370,13 @@ components:
           description: Set the grant-type for this client credentials request. This
             must be set to `client_credentials`.
           enum:
-          - client_credentials
+            - client_credentials
           example: client_credentials
       required:
-      - client_id
-      - client_secret
-      - audience
-      - grant_type
+        - client_id
+        - client_secret
+        - audience
+        - grant_type
       type: object
     AuthenticationResponse:
       description: The authentication response object that includes the token, type,
@@ -1429,8 +1431,8 @@ components:
     PaymentErrorResponse:
       type: object
       required:
-      - status
-      - errors
+        - status
+        - errors
       properties:
         errors:
           $ref: '#/components/schemas/PaymentError'
@@ -1441,11 +1443,11 @@ components:
     PaymentError:
       type: object
       required:
-      - code
-      - title
-      - type
-      - description
-      - timestamp
+        - code
+        - title
+        - type
+        - description
+        - timestamp
       properties:
         code:
           type: string
@@ -1473,8 +1475,8 @@ components:
     Payment:
       type: object
       required:
-      - paymentId
-      - paymentState
+        - paymentId
+        - paymentState
       properties:
         paymentId:
           description: The unique ID that identifies this payment. This value is the
@@ -1518,34 +1520,13 @@ components:
           items:
             $ref: '#/components/schemas/FeeSummary'
         sourceOfCash:
-          description: Indicates the source of funds
+          description: Source of Cash may be required depending on corridor and payout
+            partner. Valid Source of Cash values vary by corridor.
           type: string
-          x-enumDescriptions:
-            ALMY: Alimony
-            CASH: Cash Proceeds
-            COMP: Compensation
-            EMIN: Employee Income
-            GIFT: Gift
-            INHE: Inheritance
-            INLQ: Insurance Premium Liquidation
-            PACA: Paid Up Capital
-            REDM: Redemption
-            REPY: Retirement Policy
-            REST: Real Estate Sale
-            RETA: Retained Earnings
-            SALE: Sale Of Goods
-            SEAQ: Sale Aquisition Corporation
-            SELF: Self Employment Income
-            SVGS: Savings
-            WINS: Winnings
           example: EMIN
         purposeCode:
-          description: 'Indicates the purpose of the payment
-
-
-            For more information about the `purposeCode` options, see  [purposeCode](../../building-payment-request-body/#purposecode).
-
-            '
+          description: Purpose Code may be required depending on corridor and payout
+            partner. Valid Purpose Code values vary by corridor.
           type: string
           example: PAYR
         transactionDetails:
@@ -1555,8 +1536,8 @@ components:
     PaymentWithDetails:
       type: object
       required:
-      - paymentId
-      - paymentState
+        - paymentId
+        - paymentState
       properties:
         paymentId:
           description: The unique ID that identifies this payment. This value is the
@@ -1600,30 +1581,15 @@ components:
           items:
             $ref: '#/components/schemas/FeeSummary'
         sourceOfCash:
-          description: Indicates the source of funds
+          description: Source of Cash may be required depending on corridor and payout
+            partner. Valid Source of Cash values vary by corridor.
           type: string
-          x-enumDescriptions:
-            ALMY: Alimony
-            CASH: Cash Proceeds
-            COMP: Compensation
-            EMIN: Employee Income
-            GIFT: Gift
-            INHE: Inheritance
-            INLQ: Insurance Premium Liquidation
-            PACA: Paid Up Capital
-            REDM: Redemption
-            REPY: Retirement Policy
-            REST: Real Estate Sale
-            RETA: Retained Earnings
-            SALE: Sale Of Goods
-            SEAQ: Sale Aquisition Corporation
-            SELF: Self Employment Income
-            SVGS: Savings
-            WINS: Winnings
           example: EMIN
         purposeCode:
-          description: purposeCode for RPD payments
+          description: Purpose Code may be required depending on corridor and payout
+            partner. Valid Purpose Code values vary by corridor.
           type: string
+          example: PAYR
         transactionDetails:
           $ref: '#/components/schemas/TransactionDetails'
         errors:
@@ -1640,7 +1606,7 @@ components:
           items:
             $ref: '#/components/schemas/StateTransition'
       required:
-      - stateTransitions
+        - stateTransitions
     StateTransition:
       type: object
       properties:
@@ -1658,9 +1624,9 @@ components:
           description: The timestamp when the payment state was updated.
           example: '2024-08-13T20:15:50.990995Z'
       required:
-      - updatedFrom
-      - updatedTo
-      - updatedAt
+        - updatedFrom
+        - updatedTo
+        - updatedAt
     PaymentsResponse:
       type: object
       properties:
@@ -1679,8 +1645,8 @@ components:
       type: object
       description: Information required to initiate a payment.
       required:
-      - quoteId
-      - beneficiaryIdentityId
+        - quoteId
+        - beneficiaryIdentityId
       properties:
         quoteId:
           description: ID of the quote you want to accept to initiate this payment.
@@ -1706,35 +1672,14 @@ components:
           type: string
           example: Invoice-123
         purposeCode:
-          description: 'Indicates the purpose of the payment
-
-
-            For more information about the `purposeCode` options, see [purposeCode](../../building-payment-request-body/#purposecode).
-
-            '
+          description: Purpose Code may be required depending on corridor and payout
+            partner. Valid Purpose Code values vary by corridor.
           type: string
           example: PAYR
         sourceOfCash:
-          description: Source of cash for payout.
+          description: Source of Cash may be required depending on corridor and payout
+            partner. Valid Source of Cash values vary by corridor.
           type: string
-          x-enumDescriptions:
-            ALMY: Alimony
-            CASH: Cash Proceeds
-            COMP: Compensation
-            EMIN: Employee Income
-            GIFT: Gift
-            INHE: Inheritance
-            INLQ: Insurance Premium Liquidation
-            PACA: Paid Up Capital
-            REDM: Redemption
-            REPY: Retirement Policy
-            REST: Real Estate Sale
-            RETA: Retained Earnings
-            SALE: Sale Of Goods
-            SEAQ: Sale Aquisition Corporation
-            SELF: Self Employment Income
-            SVGS: Savings
-            WINS: Winnings
           example: EMIN
         paymentLabels:
           $ref: '#/components/schemas/PaymentLabels'
@@ -1742,12 +1687,12 @@ components:
       type: string
       example: INITIATED
       enum:
-      - INITIATED
-      - VALIDATING
-      - TRANSFERRING
-      - COMPLETED
-      - FAILED
-      - QUOTED
+        - INITIATED
+        - VALIDATING
+        - TRANSFERRING
+        - COMPLETED
+        - FAILED
+        - QUOTED
       x-enumDescriptions:
         INITIATED: You, the payment originator, have initiated a payment. The payment
           now has a unique `paymentId` that's the same as the `quoteId` of the quote
@@ -1770,31 +1715,31 @@ components:
       default: initiatedAt
       example: initiatedAt
       enum:
-      - internalId
-      - paymentState
-      - sourceCurrency
-      - sourceCountry
-      - sourceAmount
-      - destinationCurrency
-      - destinationCountry
-      - destinationAmount
-      - initiatedAt
-      - expiresAt
-      - lastStateUpdatedAt
-      - paymentLabel
+        - internalId
+        - paymentState
+        - sourceCurrency
+        - sourceCountry
+        - sourceAmount
+        - destinationCurrency
+        - destinationCountry
+        - destinationAmount
+        - initiatedAt
+        - expiresAt
+        - lastStateUpdatedAt
+        - paymentLabel
       x-enum-varnames:
-      - INTERNAL_ID
-      - PAYMENT_STATE
-      - SOURCE_CURRENCY
-      - SOURCE_COUNTRY
-      - SOURCE_AMOUNT
-      - DESTINATION_CURRENCY
-      - DESTINATION_COUNTRY
-      - DESTINATION_AMOUNT
-      - INITIATED_AT
-      - EXPIRES_AT
-      - LAST_STATE_UPDATED_AT
-      - PAYMENT_LABEL
+        - INTERNAL_ID
+        - PAYMENT_STATE
+        - SOURCE_CURRENCY
+        - SOURCE_COUNTRY
+        - SOURCE_AMOUNT
+        - DESTINATION_CURRENCY
+        - DESTINATION_COUNTRY
+        - DESTINATION_AMOUNT
+        - INITIATED_AT
+        - EXPIRES_AT
+        - LAST_STATE_UPDATED_AT
+        - PAYMENT_LABEL
       x-enumDescriptions:
         internalId: Sort by an internalId of payment
         paymentState: Sort by payment state
@@ -1928,10 +1873,10 @@ components:
           type: string
           nullable: true
           enum:
-          - B2B
-          - B2C
-          - C2B
-          - C2C
+            - B2B
+            - B2C
+            - C2B
+            - C2C
           x-enumDescriptions:
             B2B: "Specifies that this payment is made by a business originator to\
               \ a business beneficiary.\n</br></br>\n**Identification of third-party\
@@ -1956,10 +1901,10 @@ components:
           type: string
           nullable: true
           enum:
-          - ON_RAMP
-          - OFF_RAMP
-          - FIAT_TRANSFER
-          - CRYPTO_TRANSFER
+            - ON_RAMP
+            - OFF_RAMP
+            - FIAT_TRANSFER
+            - CRYPTO_TRANSFER
           x-enumDescriptions:
             FIAT_TRANSFER: Indicates fiat source currency to fiat destination.
     Page:
@@ -2000,8 +1945,8 @@ components:
           default: DESC
           example: DESC
           enum:
-          - ASC
-          - DESC
+            - ASC
+            - DESC
           x-enumDescriptions:
             ASC: Sort results in ascending order.
             DESC: Sort results in descending order.
@@ -2076,13 +2021,13 @@ components:
       type: string
       example: PAYMENT_CREATION
       enum:
-      - PAYMENT_CREATION
-      - PAYMENT_EXPIRY
-      - PAYMENT_STATUS_LAST_UPDATED
+        - PAYMENT_CREATION
+        - PAYMENT_EXPIRY
+        - PAYMENT_STATUS_LAST_UPDATED
       x-enum-varnames:
-      - PAYMENT_CREATION
-      - PAYMENT_EXPIRY
-      - PAYMENT_STATUS_LAST_UPDATED
+        - PAYMENT_CREATION
+        - PAYMENT_EXPIRY
+        - PAYMENT_STATUS_LAST_UPDATED
       x-enumDescriptions:
         PAYMENT_CREATION: Filter results to show payments that were created within
           the specified time period.
@@ -2091,8 +2036,9 @@ components:
         PAYMENT_STATUS_LAST_UPDATED: Filter results to show payments whose status
           was last updated within the specified time period.
     PaymentLabels:
-      description: List of labels associated with the payment. A label typically contains
-        a UUID of your choice, designated as the batchId.
+      description: "Application-defined labels for grouping and categorizing payments\
+        \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional\
+        \ and mutable; they can be added or removed over the payment\u2019s lifetime."
       type: array
       maxItems: 10
       items:
@@ -2103,7 +2049,7 @@ components:
       type: object
       description: Response body for modifying payment labels
       required:
-      - labels
+        - labels
       properties:
         labels:
           $ref: '#/components/schemas/PaymentLabels'
@@ -2172,9 +2118,9 @@ components:
     state-type:
       type: string
       enum:
-      - ACTIVE
-      - BLOCKED
-      - DEACTIVATED
+        - ACTIVE
+        - BLOCKED
+        - DEACTIVATED
       description: The state of the identity
       x-enumDescriptions:
         ACTIVE: The identity requested exists and is active.
@@ -2184,8 +2130,8 @@ components:
     create-identity-response:
       type: object
       required:
-      - identityId
-      - version
+        - identityId
+        - version
       properties:
         identityId:
           type: string
@@ -2198,11 +2144,11 @@ components:
     error:
       type: object
       required:
-      - code
-      - title
-      - type
-      - description
-      - timestamp
+        - code
+        - title
+        - type
+        - description
+        - timestamp
       properties:
         code:
           type: string
@@ -2238,8 +2184,8 @@ components:
     error-response:
       type: object
       required:
-      - status
-      - errors
+        - status
+        - errors
       properties:
         status:
           type: integer
@@ -2256,11 +2202,11 @@ components:
     identity-v2:
       type: object
       required:
-      - identityId
-      - nickName
-      - createdAt
-      - identityType
-      - useCaseType
+        - identityId
+        - nickName
+        - createdAt
+        - identityType
+        - useCaseType
       properties:
         identityId:
           type: string
@@ -2283,8 +2229,8 @@ components:
     useCaseType:
       type: string
       enum:
-      - INDIVIDUAL
-      - BUSINESS
+        - INDIVIDUAL
+        - BUSINESS
       x-enumDescriptions:
         INDIVIDUAL: Identity associated with an individual
         BUSINESS: Identity associated with an institution or business
@@ -2293,9 +2239,9 @@ components:
     create-identity-request-v2:
       type: object
       required:
-      - identityType
-      - piiData
-      - useCaseType
+        - identityType
+        - piiData
+        - useCaseType
       properties:
         piiData:
           type: object
@@ -2322,9 +2268,9 @@ components:
     identity-type-v2:
       type: string
       enum:
-      - SENDER
-      - BENEFICIARY
-      - ORIGINATOR
+        - SENDER
+        - BENEFICIARY
+        - ORIGINATOR
       x-enumDescriptions:
         BENEFICIARY: Identity associated with the beneficiary.
         ORIGINATOR: Identity associated with the party originating the payment.
@@ -2342,13 +2288,13 @@ components:
     identity-response-v2:
       type: object
       required:
-      - identityId
-      - identityType
-      - createdAt
-      - identityState
-      - piiData
-      - version
-      - useCaseType
+        - identityId
+        - identityType
+        - createdAt
+        - identityState
+        - piiData
+        - version
+        - useCaseType
       properties:
         identityId:
           type: string
@@ -2381,8 +2327,8 @@ components:
     QuoteErrorResponse:
       type: object
       required:
-      - errors
-      - status
+        - errors
+        - status
       properties:
         errors:
           description: List of quote errors
@@ -2396,11 +2342,11 @@ components:
     QuoteError:
       type: object
       required:
-      - code
-      - title
-      - type
-      - description
-      - timestamp
+        - code
+        - title
+        - type
+        - description
+        - timestamp
       properties:
         code:
           type: string
@@ -2437,8 +2383,8 @@ components:
     QuoteStatus:
       type: string
       enum:
-      - EXPIRED
-      - ACTIVE
+        - EXPIRED
+        - ACTIVE
       x-enumDescriptions:
         EXPIRED: Expired quote
         ACTIVE: Quote that you can accept to create a payment.
@@ -2448,8 +2394,8 @@ components:
       description: The type of amount for which you want to get a quote.
       default: SOURCE_AMOUNT
       enum:
-      - SOURCE_AMOUNT
-      - DESTINATION_AMOUNT
+        - SOURCE_AMOUNT
+        - DESTINATION_AMOUNT
       x-enumDescriptions:
         SOURCE_AMOUNT: Specify this value to get a quote for the amount that you want
           to send.
@@ -2459,12 +2405,12 @@ components:
       type: object
       description: Request to create a quote collection
       required:
-      - quoteAmountType
-      - quoteAmount
-      - sourceCurrency
-      - destinationCurrency
-      - payoutCategory
-      - payinCategory
+        - quoteAmountType
+        - quoteAmount
+        - sourceCurrency
+        - destinationCurrency
+        - payoutCategory
+        - payinCategory
       properties:
         quoteAmount:
           description: The amount for which you wish to receive a collection of quotes.
@@ -2535,12 +2481,12 @@ components:
     Quote:
       type: object
       required:
-      - quoteId
-      - quoteStatus
-      - sourceCurrency
-      - destinationCurrency
-      - payoutCategory
-      - payinCategory
+        - quoteId
+        - quoteStatus
+        - sourceCurrency
+        - destinationCurrency
+        - payoutCategory
+        - payinCategory
       properties:
         quoteId:
           description: Unique ID that represents this quote.
@@ -2635,8 +2581,8 @@ components:
     QuoteCollection:
       type: object
       required:
-      - quoteCollectionId
-      - quotes
+        - quoteCollectionId
+        - quotes
       properties:
         quoteCollectionId:
           description: Unique ID that represents this quote collection.

@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **internalId** | **string** | Specify an &#x60;internalId&#x60; to get payments associated with them. A prefix match will be executed. | [optional] [default to undefined]
 **beneficiaryIdentityNickname** | **string** | To get all payments made to a beneficiary, specify the nickname of that beneficiary in this field. You can find the nickname using the &#x60;GET /identities&#x60; operation. | [optional] [default to undefined]
 **destinationCurrencies** | **Array&lt;string&gt;** | Specify one or more currency codes to get payments where the beneficiary received funds in these currencies. | [optional] [default to undefined]
-**paymentLabels** | **Array&lt;string&gt;** | List of labels associated with the payment. A label typically contains a UUID of your choice, designated as the batchId. | [optional] [default to undefined]
+**paymentLabels** | **Array&lt;string&gt;** | Application-defined labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment’s lifetime. | [optional] [default to undefined]
 
 ## Example
 

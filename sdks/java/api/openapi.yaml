@@ -44,7 +44,7 @@ info:
     name: Apache 2.0
     url: http://apache.org
   title: Payments Direct API
-  version: 0.0.1
+  version: 0.0.2
 servers:
 - description: Test environment with simulated currency
   url: https://api.test.ripple.com
@@ -137,17 +137,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AuthenticationRequest"
+              $ref: '#/components/schemas/AuthenticationRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: "#/components/schemas/AuthenticationRequest"
+              $ref: '#/components/schemas/AuthenticationRequest'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AuthenticationResponse"
+                $ref: '#/components/schemas/AuthenticationResponse'
           description: "Returns the authentication response object that includes the\
             \ token, type, scopes, and expiry."
         "400":
@@ -157,7 +157,7 @@ paths:
                 error_description: "Missing required parameter: grant_type"
                 error: invalid_request
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad Request
         "401":
           content:
@@ -166,7 +166,7 @@ paths:
                 error_description: Unauthorized
                 error: access_denied
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         "403":
           content:
@@ -175,7 +175,7 @@ paths:
                 error_description: "Service not enabled within domain: <wrong:domain>"
                 error: access_denied
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Forbidden
       security:
       - BasicAuth: []
@@ -196,7 +196,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: "#/components/schemas/ValidateTokenResponse"
+                  $ref: '#/components/schemas/ValidateTokenResponse'
                 type: array
           description: "If a valid bearer token is supplied, the time remaining before\
             \ the token expires is returned."
@@ -226,7 +226,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SearchPaymentsRequest"
+              $ref: '#/components/schemas/SearchPaymentsRequest'
         description: Search payments request
         required: true
       responses:
@@ -234,7 +234,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PaymentsResponse"
+                $ref: '#/components/schemas/PaymentsResponse'
           description: Payments matching the specified filtering criteria.
         "400":
           content:
@@ -249,7 +249,7 @@ paths:
                     try again.
                   timestamp: 2024-12-01T12:00:00Z
               schema:
-                $ref: "#/components/schemas/PaymentErrorResponse"
+                $ref: '#/components/schemas/PaymentErrorResponse'
           description: Invalid input variables for the request.
         "500":
           content:
@@ -264,7 +264,7 @@ paths:
                     error.
                   timestamp: 2024-12-01T12:00:00Z
               schema:
-                $ref: "#/components/schemas/PaymentErrorResponse"
+                $ref: '#/components/schemas/PaymentErrorResponse'
           description: Internal processing error
       security:
       - Bearer: []
@@ -288,7 +288,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PaymentRequest"
+              $ref: '#/components/schemas/PaymentRequest'
         description: create payment request
         required: true
       responses:
@@ -296,7 +296,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Payment"
+                $ref: '#/components/schemas/Payment'
           description: Valid payment
         "400":
           content:
@@ -311,7 +311,7 @@ paths:
                     try again.
                   timestamp: 2024-12-01T12:00:00Z
               schema:
-                $ref: "#/components/schemas/PaymentErrorResponse"
+                $ref: '#/components/schemas/PaymentErrorResponse'
           description: Invalid input variables for the payment.
         "402":
           content:
@@ -327,7 +327,7 @@ paths:
                     \ and try again."
                   timestamp: 2024-12-01T12:00:00Z
               schema:
-                $ref: "#/components/schemas/PaymentErrorResponse"
+                $ref: '#/components/schemas/PaymentErrorResponse'
           description: Problems related to payment limits.
         "500":
           content:
@@ -342,7 +342,7 @@ paths:
                     error.
                   timestamp: 2024-12-01T12:00:00Z
               schema:
-                $ref: "#/components/schemas/PaymentErrorResponse"
+                $ref: '#/components/schemas/PaymentErrorResponse'
           description: Internal processing error
       security:
       - Bearer: []
@@ -372,7 +372,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PaymentWithDetails"
+                $ref: '#/components/schemas/PaymentWithDetails'
           description: Successfully fetched payment details.
         "400":
           content:
@@ -387,7 +387,7 @@ paths:
                     try again.
                   timestamp: 2024-12-01T12:00:00Z
               schema:
-                $ref: "#/components/schemas/PaymentErrorResponse"
+                $ref: '#/components/schemas/PaymentErrorResponse'
           description: Invalid input variables for the payment.
         "404":
           content:
@@ -401,7 +401,7 @@ paths:
                   description: The requested resource could not be found.
                   timestamp: 2024-12-01T12:00:00Z
               schema:
-                $ref: "#/components/schemas/PaymentErrorResponse"
+                $ref: '#/components/schemas/PaymentErrorResponse'
           description: Payment not found.
         "500":
           content:
@@ -416,7 +416,7 @@ paths:
                     error.
                   timestamp: 2024-12-01T12:00:00Z
               schema:
-                $ref: "#/components/schemas/PaymentErrorResponse"
+                $ref: '#/components/schemas/PaymentErrorResponse'
           description: Internal processing error
       security:
       - Bearer: []
@@ -446,7 +446,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StateTransitionsResponse"
+                $ref: '#/components/schemas/StateTransitionsResponse'
           description: Successfully fetched payment state transitions.
         "400":
           content:
@@ -461,7 +461,7 @@ paths:
                     try again.
                   timestamp: 2024-12-01T12:00:00Z
               schema:
-                $ref: "#/components/schemas/PaymentErrorResponse"
+                $ref: '#/components/schemas/PaymentErrorResponse'
           description: Invalid input variables for the payment.
         "404":
           content:
@@ -475,7 +475,7 @@ paths:
                   description: The requested resource could not be found.
                   timestamp: 2024-12-01T12:00:00Z
               schema:
-                $ref: "#/components/schemas/PaymentErrorResponse"
+                $ref: '#/components/schemas/PaymentErrorResponse'
           description: Payment not found.
         "500":
           content:
@@ -490,7 +490,7 @@ paths:
                     error.
                   timestamp: 2024-12-01T12:00:00Z
               schema:
-                $ref: "#/components/schemas/PaymentErrorResponse"
+                $ref: '#/components/schemas/PaymentErrorResponse'
           description: Internal processing error
       security:
       - Bearer: []
@@ -519,7 +519,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdatePaymentLabelsRequest"
+              $ref: '#/components/schemas/UpdatePaymentLabelsRequest'
         description: Labels to add to or remove from the payment.
         required: true
       responses:
@@ -527,7 +527,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UpdatePaymentLabelsResponse"
+                $ref: '#/components/schemas/UpdatePaymentLabelsResponse'
           description: Successfully updated the payment labels.
         "400":
           content:
@@ -542,7 +542,7 @@ paths:
                     try again.
                   timestamp: 2024-12-01T12:00:00Z
               schema:
-                $ref: "#/components/schemas/PaymentErrorResponse"
+                $ref: '#/components/schemas/PaymentErrorResponse'
           description: Invalid input variables for the request.
         "404":
           content:
@@ -556,7 +556,7 @@ paths:
                   description: The requested resource could not be found.
                   timestamp: 2024-12-01T12:00:00Z
               schema:
-                $ref: "#/components/schemas/PaymentErrorResponse"
+                $ref: '#/components/schemas/PaymentErrorResponse'
           description: Payment not found.
         "500":
           content:
@@ -571,7 +571,7 @@ paths:
                     error.
                   timestamp: 2024-12-01T12:00:00Z
               schema:
-                $ref: "#/components/schemas/PaymentErrorResponse"
+                $ref: '#/components/schemas/PaymentErrorResponse'
           description: Internal processing error
       security:
       - Bearer: []
@@ -596,7 +596,7 @@ paths:
         name: identityType
         required: false
         schema:
-          $ref: "#/components/schemas/identity-type-v2"
+          $ref: '#/components/schemas/identity-type-v2'
         style: form
       - description: The nickname for the identity provided at the time of identity
           creation
@@ -613,7 +613,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/list-identities-response-v2"
+                $ref: '#/components/schemas/list-identities-response-v2'
           description: Requested identity info in JSON format
         "400":
           content:
@@ -628,7 +628,7 @@ paths:
                     format.
                   timestamp: 2025-05-23T15:02:56.516Z
               schema:
-                $ref: "#/components/schemas/error-response"
+                $ref: '#/components/schemas/error-response'
           description: Invalid request
         "404":
           content:
@@ -642,7 +642,7 @@ paths:
                   description: No identities exist
                   timestamp: 2025-05-23T15:02:56.516Z
               schema:
-                $ref: "#/components/schemas/error-response"
+                $ref: '#/components/schemas/error-response'
           description: No identities found
         "500":
           content:
@@ -657,7 +657,7 @@ paths:
                     error.
                   timestamp: 2025-05-23T15:02:56.516Z
               schema:
-                $ref: "#/components/schemas/error-response"
+                $ref: '#/components/schemas/error-response'
           description: Internal Processing Error
       security:
       - Bearer: []
@@ -678,14 +678,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/create-identity-request-v2"
+              $ref: '#/components/schemas/create-identity-request-v2'
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/create-identity-response"
+                $ref: '#/components/schemas/create-identity-response'
           description: successful operation
         "400":
           content:
@@ -699,7 +699,7 @@ paths:
                   description: Invalid request. Check your request body and try again.
                   timestamp: 2025-05-23T15:02:56.516Z
               schema:
-                $ref: "#/components/schemas/error-response"
+                $ref: '#/components/schemas/error-response'
           description: Invalid Request
         "500":
           content:
@@ -714,7 +714,7 @@ paths:
                     error.
                   timestamp: 2025-05-23T15:02:56.516Z
               schema:
-                $ref: "#/components/schemas/error-response"
+                $ref: '#/components/schemas/error-response'
           description: Internal Processing Error
       security:
       - Bearer: []
@@ -754,7 +754,7 @@ paths:
                     format.
                   timestamp: 2025-05-23T15:02:56.516Z
               schema:
-                $ref: "#/components/schemas/error-response"
+                $ref: '#/components/schemas/error-response'
           description: Identity id is not of UUID format
         "404":
           content:
@@ -768,7 +768,7 @@ paths:
                   description: No identity exists for identityId
                   timestamp: 2025-05-23T15:02:56.516Z
               schema:
-                $ref: "#/components/schemas/error-response"
+                $ref: '#/components/schemas/error-response'
           description: Invalid Identity id does not exist
         "422":
           content:
@@ -782,7 +782,7 @@ paths:
                   description: The identity has already been deactivated.
                   timestamp: 2025-05-23T15:02:56.516Z
               schema:
-                $ref: "#/components/schemas/error-response"
+                $ref: '#/components/schemas/error-response'
           description: Unprocessable Identity Id
         "500":
           content:
@@ -797,7 +797,7 @@ paths:
                     error.
                   timestamp: 2025-05-23T15:02:56.516Z
               schema:
-                $ref: "#/components/schemas/error-response"
+                $ref: '#/components/schemas/error-response'
           description: Internal Processing Error
       security:
       - Bearer: []
@@ -837,7 +837,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/identity-response-v2"
+                $ref: '#/components/schemas/identity-response-v2'
           description: Requested identity info in JSON format
         "400":
           content:
@@ -852,7 +852,7 @@ paths:
                     format.
                   timestamp: 2025-05-23T15:02:56.516Z
               schema:
-                $ref: "#/components/schemas/error-response"
+                $ref: '#/components/schemas/error-response'
           description: Identity ID is not in UUID format
         "404":
           content:
@@ -866,7 +866,7 @@ paths:
                   description: No identity exists for identityId
                   timestamp: 2025-05-23T15:02:56.516Z
               schema:
-                $ref: "#/components/schemas/error-response"
+                $ref: '#/components/schemas/error-response'
           description: Invalid - identity ID does not exist
       security:
       - Bearer: []
@@ -888,7 +888,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/QuoteCollectionRequest"
+              $ref: '#/components/schemas/QuoteCollectionRequest'
         description: Create quote collection request
         required: true
       responses:
@@ -896,32 +896,32 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuoteCollection"
+                $ref: '#/components/schemas/QuoteCollection'
           description: Creates a collection of quotes
         "400":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuoteErrorResponse"
+                $ref: '#/components/schemas/QuoteErrorResponse'
           description: Bad request
         "401":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuoteErrorResponse"
+                $ref: '#/components/schemas/QuoteErrorResponse'
           description: Unauthorized request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuoteErrorResponse"
+                $ref: '#/components/schemas/QuoteErrorResponse'
           description: The principal identified by the authorization header doesn't
             have enough scopes to perform this operation
         "500":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuoteErrorResponse"
+                $ref: '#/components/schemas/QuoteErrorResponse'
           description: Internal server error
       security:
       - Bearer: []
@@ -950,32 +950,32 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuoteCollection"
+                $ref: '#/components/schemas/QuoteCollection'
           description: Valid quote collection found
         "401":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuoteErrorResponse"
+                $ref: '#/components/schemas/QuoteErrorResponse'
           description: Unauthorized request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuoteErrorResponse"
+                $ref: '#/components/schemas/QuoteErrorResponse'
           description: The principal identified by the authorization header doesn't
             have enough scopes to perform this operation
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuoteErrorResponse"
+                $ref: '#/components/schemas/QuoteErrorResponse'
           description: Quote collection not found
         "500":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuoteErrorResponse"
+                $ref: '#/components/schemas/QuoteErrorResponse'
           description: Internal server error
       security:
       - Bearer: []
@@ -1003,32 +1003,32 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Quote"
+                $ref: '#/components/schemas/Quote'
           description: Valid quote found
         "401":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuoteErrorResponse"
+                $ref: '#/components/schemas/QuoteErrorResponse'
           description: Unauthorized request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuoteErrorResponse"
+                $ref: '#/components/schemas/QuoteErrorResponse'
           description: The principal identified by the authorization header doesn't
             have enough scopes to perform this operation
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuoteErrorResponse"
+                $ref: '#/components/schemas/QuoteErrorResponse'
           description: Quote not found
         "500":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuoteErrorResponse"
+                $ref: '#/components/schemas/QuoteErrorResponse'
           description: Internal server error
       security:
       - Bearer: []
@@ -1054,25 +1054,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getBalances_200_response"
+                $ref: '#/components/schemas/getBalances_200_response'
           description: Successful response containing balance details.
         "400":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getBalances_400_response"
+                $ref: '#/components/schemas/getBalances_400_response'
           description: Bad request
         "401":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getBalances_400_response"
+                $ref: '#/components/schemas/getBalances_400_response'
           description: Unauthorized access
         "500":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getBalances_400_response"
+                $ref: '#/components/schemas/getBalances_400_response'
           description: Internal server error
       security:
       - Bearer: []
@@ -1200,7 +1200,7 @@ components:
         status: "400"
       properties:
         errors:
-          $ref: "#/components/schemas/PaymentError"
+          $ref: '#/components/schemas/PaymentError'
         status:
           description: Error Response Status
           example: "400"
@@ -1339,52 +1339,35 @@ components:
           format: date-time
           type: string
         paymentState:
-          $ref: "#/components/schemas/PaymentState"
+          $ref: '#/components/schemas/PaymentState'
         originator:
-          $ref: "#/components/schemas/Originator"
+          $ref: '#/components/schemas/Originator'
         destination:
-          $ref: "#/components/schemas/Destination"
+          $ref: '#/components/schemas/Destination'
         adjustedExchangeRate:
-          $ref: "#/components/schemas/AdjustedExchangeRate"
+          $ref: '#/components/schemas/AdjustedExchangeRate'
         fees:
           description: A summary of fees included in payment quote.
           items:
-            $ref: "#/components/schemas/FeeSummary"
+            $ref: '#/components/schemas/FeeSummary'
           type: array
         sourceOfCash:
-          description: Indicates the source of funds
+          description: Source of Cash may be required depending on corridor and payout
+            partner. Valid Source of Cash values vary by corridor.
           example: EMIN
           type: string
-          x-enumDescriptions:
-            ALMY: Alimony
-            CASH: Cash Proceeds
-            COMP: Compensation
-            EMIN: Employee Income
-            GIFT: Gift
-            INHE: Inheritance
-            INLQ: Insurance Premium Liquidation
-            PACA: Paid Up Capital
-            REDM: Redemption
-            REPY: Retirement Policy
-            REST: Real Estate Sale
-            RETA: Retained Earnings
-            SALE: Sale Of Goods
-            SEAQ: Sale Aquisition Corporation
-            SELF: Self Employment Income
-            SVGS: Savings
-            WINS: Winnings
         purposeCode:
-          description: |
-            Indicates the purpose of the payment
-
-            For more information about the `purposeCode` options, see  [purposeCode](../../building-payment-request-body/#purposecode).
+          description: Purpose Code may be required depending on corridor and payout
+            partner. Valid Purpose Code values vary by corridor.
           example: PAYR
           type: string
         transactionDetails:
-          $ref: "#/components/schemas/TransactionDetails"
+          $ref: '#/components/schemas/TransactionDetails'
         paymentLabels:
-          description: "List of labels associated with the payment. A label typically\
-            \ contains a UUID of your choice, designated as the batchId."
+          description: "Application-defined labels for grouping and categorizing payments\
+            \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
+            \ optional and mutable; they can be added or removed over the payment’\
+            s lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -1451,7 +1434,7 @@ components:
         expiresAt: 2019-08-24T14:15:22Z
         sourceOfCash: EMIN
         paymentId: 7ea3399c-1234-5678-8d8f-d320ea406630
-        purposeCode: purposeCode
+        purposeCode: PAYR
         paymentState: INITIATED
         errors:
         - code: SYS_003
@@ -1499,52 +1482,39 @@ components:
           format: date-time
           type: string
         paymentState:
-          $ref: "#/components/schemas/PaymentState"
+          $ref: '#/components/schemas/PaymentState'
         originator:
-          $ref: "#/components/schemas/Originator"
+          $ref: '#/components/schemas/Originator'
         destination:
-          $ref: "#/components/schemas/Destination"
+          $ref: '#/components/schemas/Destination'
         adjustedExchangeRate:
-          $ref: "#/components/schemas/AdjustedExchangeRate"
+          $ref: '#/components/schemas/AdjustedExchangeRate'
         fees:
           description: A summary of fees included in payment quote.
           items:
-            $ref: "#/components/schemas/FeeSummary"
+            $ref: '#/components/schemas/FeeSummary'
           type: array
         sourceOfCash:
-          description: Indicates the source of funds
+          description: Source of Cash may be required depending on corridor and payout
+            partner. Valid Source of Cash values vary by corridor.
           example: EMIN
           type: string
-          x-enumDescriptions:
-            ALMY: Alimony
-            CASH: Cash Proceeds
-            COMP: Compensation
-            EMIN: Employee Income
-            GIFT: Gift
-            INHE: Inheritance
-            INLQ: Insurance Premium Liquidation
-            PACA: Paid Up Capital
-            REDM: Redemption
-            REPY: Retirement Policy
-            REST: Real Estate Sale
-            RETA: Retained Earnings
-            SALE: Sale Of Goods
-            SEAQ: Sale Aquisition Corporation
-            SELF: Self Employment Income
-            SVGS: Savings
-            WINS: Winnings
         purposeCode:
-          description: purposeCode for RPD payments
+          description: Purpose Code may be required depending on corridor and payout
+            partner. Valid Purpose Code values vary by corridor.
+          example: PAYR
           type: string
         transactionDetails:
-          $ref: "#/components/schemas/TransactionDetails"
+          $ref: '#/components/schemas/TransactionDetails'
         errors:
           items:
-            $ref: "#/components/schemas/PaymentError"
+            $ref: '#/components/schemas/PaymentError'
           type: array
         paymentLabels:
-          description: "List of labels associated with the payment. A label typically\
-            \ contains a UUID of your choice, designated as the batchId."
+          description: "Application-defined labels for grouping and categorizing payments\
+            \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
+            \ optional and mutable; they can be added or removed over the payment’\
+            s lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -1567,7 +1537,7 @@ components:
       properties:
         stateTransitions:
           items:
-            $ref: "#/components/schemas/StateTransition"
+            $ref: '#/components/schemas/StateTransition'
           type: array
       required:
       - stateTransitions
@@ -1579,9 +1549,9 @@ components:
         updatedAt: 2024-08-13T20:15:50.990995Z
       properties:
         updatedFrom:
-          $ref: "#/components/schemas/PaymentState"
+          $ref: '#/components/schemas/PaymentState'
         updatedTo:
-          $ref: "#/components/schemas/PaymentState"
+          $ref: '#/components/schemas/PaymentState'
         updatedAt:
           description: The timestamp when the payment state was updated.
           example: 2024-08-13T20:15:50.990995Z
@@ -1745,14 +1715,14 @@ components:
         data:
           description: Array of Payment objects
           items:
-            $ref: "#/components/schemas/Payment"
+            $ref: '#/components/schemas/Payment'
           type: array
         filter:
-          $ref: "#/components/schemas/PaymentFilter"
+          $ref: '#/components/schemas/PaymentFilter'
         sort:
-          $ref: "#/components/schemas/Sort"
+          $ref: '#/components/schemas/Sort'
         page:
-          $ref: "#/components/schemas/Page"
+          $ref: '#/components/schemas/Page'
       type: object
     PaymentRequest:
       description: Information required to initiate a payment.
@@ -1781,37 +1751,20 @@ components:
           maxLength: 36
           type: string
         purposeCode:
-          description: |
-            Indicates the purpose of the payment
-
-            For more information about the `purposeCode` options, see [purposeCode](../../building-payment-request-body/#purposecode).
+          description: Purpose Code may be required depending on corridor and payout
+            partner. Valid Purpose Code values vary by corridor.
           example: PAYR
           type: string
         sourceOfCash:
-          description: Source of cash for payout.
+          description: Source of Cash may be required depending on corridor and payout
+            partner. Valid Source of Cash values vary by corridor.
           example: EMIN
           type: string
-          x-enumDescriptions:
-            ALMY: Alimony
-            CASH: Cash Proceeds
-            COMP: Compensation
-            EMIN: Employee Income
-            GIFT: Gift
-            INHE: Inheritance
-            INLQ: Insurance Premium Liquidation
-            PACA: Paid Up Capital
-            REDM: Redemption
-            REPY: Retirement Policy
-            REST: Real Estate Sale
-            RETA: Retained Earnings
-            SALE: Sale Of Goods
-            SEAQ: Sale Aquisition Corporation
-            SELF: Self Employment Income
-            SVGS: Savings
-            WINS: Winnings
         paymentLabels:
-          description: "List of labels associated with the payment. A label typically\
-            \ contains a UUID of your choice, designated as the batchId."
+          description: "Application-defined labels for grouping and categorizing payments\
+            \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
+            \ optional and mutable; they can be added or removed over the payment’\
+            s lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -2092,11 +2045,11 @@ components:
       description: Request body containing search criteria for payments.
       properties:
         filter:
-          $ref: "#/components/schemas/PaymentFilter"
+          $ref: '#/components/schemas/PaymentFilter'
         sort:
-          $ref: "#/components/schemas/Sort"
+          $ref: '#/components/schemas/Sort'
         page:
-          $ref: "#/components/schemas/Page"
+          $ref: '#/components/schemas/Page'
       type: object
     Sort:
       description: Specify sorting direction and the filtering criterion to sort by.
@@ -2105,7 +2058,7 @@ components:
         sortField: initiatedAt
       properties:
         sortField:
-          $ref: "#/components/schemas/PaymentSortField"
+          $ref: '#/components/schemas/PaymentSortField'
         sortDirection:
           default: DESC
           description: Sort results in ascending or descending order.
@@ -2157,10 +2110,10 @@ components:
         paymentStates:
           description: Array of payment states like `EXECUTING` or `COMPLETED`.
           items:
-            $ref: "#/components/schemas/PaymentState"
+            $ref: '#/components/schemas/PaymentState'
           type: array
         filterRangeType:
-          $ref: "#/components/schemas/PaymentFilterRangeType"
+          $ref: '#/components/schemas/PaymentFilterRangeType'
         beforeTimestamp:
           description: "Depending on the value of the `filterRangeType` field, this\
             \ timestamp returns a list of payments that were created/modified/expired\
@@ -2204,8 +2157,10 @@ components:
           pattern: "^[A-Z]{3,5}$"
           type: array
         paymentLabels:
-          description: "List of labels associated with the payment. A label typically\
-            \ contains a UUID of your choice, designated as the batchId."
+          description: "Application-defined labels for grouping and categorizing payments\
+            \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
+            \ optional and mutable; they can be added or removed over the payment’\
+            s lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -2233,8 +2188,9 @@ components:
         PAYMENT_STATUS_LAST_UPDATED: Filter results to show payments whose status
           was last updated within the specified time period.
     PaymentLabels:
-      description: "List of labels associated with the payment. A label typically\
-        \ contains a UUID of your choice, designated as the batchId."
+      description: "Application-defined labels for grouping and categorizing payments\
+        \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional\
+        \ and mutable; they can be added or removed over the payment’s lifetime."
       items:
         example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
         maxLength: 100
@@ -2252,8 +2208,10 @@ components:
         - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
       properties:
         labels:
-          description: "List of labels associated with the payment. A label typically\
-            \ contains a UUID of your choice, designated as the batchId."
+          description: "Application-defined labels for grouping and categorizing payments\
+            \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
+            \ optional and mutable; they can be added or removed over the payment’\
+            s lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -2268,8 +2226,10 @@ components:
         remove from the payment.
       properties:
         labelsToAdd:
-          description: "List of labels associated with the payment. A label typically\
-            \ contains a UUID of your choice, designated as the batchId."
+          description: "Application-defined labels for grouping and categorizing payments\
+            \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
+            \ optional and mutable; they can be added or removed over the payment’\
+            s lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -2277,8 +2237,10 @@ components:
           maxItems: 10
           type: array
         labelsToRemove:
-          description: "List of labels associated with the payment. A label typically\
-            \ contains a UUID of your choice, designated as the batchId."
+          description: "Application-defined labels for grouping and categorizing payments\
+            \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
+            \ optional and mutable; they can be added or removed over the payment’\
+            s lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -2352,7 +2314,7 @@ components:
           description: An array of fees that provides a breakdown of how the total
             fees is calculated for this quote.
           items:
-            $ref: "#/components/schemas/TotalFeeBreakdown"
+            $ref: '#/components/schemas/TotalFeeBreakdown'
           type: array
       type: object
     state-type:
@@ -2452,7 +2414,7 @@ components:
           type: integer
         errors:
           items:
-            $ref: "#/components/schemas/error"
+            $ref: '#/components/schemas/error'
           type: array
         timestamp:
           description: The timestamp of the error
@@ -2485,9 +2447,9 @@ components:
           format: date-time
           type: string
         identityType:
-          $ref: "#/components/schemas/identity-type-v2"
+          $ref: '#/components/schemas/identity-type-v2'
         useCaseType:
-          $ref: "#/components/schemas/useCaseType"
+          $ref: '#/components/schemas/useCaseType'
       required:
       - createdAt
       - identityId
@@ -2517,14 +2479,14 @@ components:
             **Note**: Reach out to your Ripple liaison to get this schema.
           type: object
         identityType:
-          $ref: "#/components/schemas/identity-type-v2"
+          $ref: '#/components/schemas/identity-type-v2'
         nickName:
           description: The nickname for the identity provided at the time of identity
             creation
           example: MyCompany
           type: string
         useCaseType:
-          $ref: "#/components/schemas/useCaseType"
+          $ref: '#/components/schemas/useCaseType'
       required:
       - identityType
       - piiData
@@ -2559,7 +2521,7 @@ components:
         data:
           description: The list of the identities that match the query parameters
           items:
-            $ref: "#/components/schemas/identity-v2"
+            $ref: '#/components/schemas/identity-v2'
           type: array
       type: object
     identity-response-v2:
@@ -2579,14 +2541,14 @@ components:
           example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
           type: string
         identityType:
-          $ref: "#/components/schemas/identity-type-v2"
+          $ref: '#/components/schemas/identity-type-v2'
         createdAt:
           description: The time at which the identity was created
           example: 2023-11-02T18:26:00Z
           format: date-time
           type: string
         identityState:
-          $ref: "#/components/schemas/state-type"
+          $ref: '#/components/schemas/state-type'
         nickName:
           description: The nickname for the identity provided at the time of identity
             creation
@@ -2601,7 +2563,7 @@ components:
           example: 2
           type: integer
         useCaseType:
-          $ref: "#/components/schemas/useCaseType"
+          $ref: '#/components/schemas/useCaseType'
       required:
       - createdAt
       - identityId
@@ -2630,7 +2592,7 @@ components:
         errors:
           description: List of quote errors
           items:
-            $ref: "#/components/schemas/QuoteError"
+            $ref: '#/components/schemas/QuoteError'
           type: array
         status:
           description: Response status code
@@ -2719,7 +2681,7 @@ components:
           minimum: 1
           type: number
         quoteAmountType:
-          $ref: "#/components/schemas/QuoteAmountType"
+          $ref: '#/components/schemas/QuoteAmountType'
         sourceCurrency:
           description: The currency code of the currency that you are sending.
           example: USD
@@ -2831,9 +2793,9 @@ components:
           minLength: 1
           type: string
         quoteStatus:
-          $ref: "#/components/schemas/QuoteStatus"
+          $ref: '#/components/schemas/QuoteStatus'
         quoteAmountType:
-          $ref: "#/components/schemas/QuoteAmountType"
+          $ref: '#/components/schemas/QuoteAmountType'
         sourceAmount:
           description: Amount to be sent by the originator.
           example: 123.45
@@ -2885,11 +2847,11 @@ components:
           minLength: 1
           type: string
         adjustedExchangeRate:
-          $ref: "#/components/schemas/AdjustedExchangeRate"
+          $ref: '#/components/schemas/AdjustedExchangeRate'
         fees:
           description: A summary of fees included in this quote.
           items:
-            $ref: "#/components/schemas/FeeSummary"
+            $ref: '#/components/schemas/FeeSummary'
           type: array
         createdAt:
           description: "The time when this quote was created, specified in UTC."
@@ -3006,7 +2968,7 @@ components:
         quotes:
           description: List of quotes
           items:
-            $ref: "#/components/schemas/Quote"
+            $ref: '#/components/schemas/Quote'
           minItems: 0
           type: array
       required:
@@ -3070,7 +3032,7 @@ components:
         balances:
           description: List of available prefund balances.
           items:
-            $ref: "#/components/schemas/getBalances_200_response_balances_inner"
+            $ref: '#/components/schemas/getBalances_200_response_balances_inner'
           type: array
       required:
       - balances
@@ -3140,7 +3102,7 @@ components:
         errors:
           description: An array containing details about the errors encountered
           items:
-            $ref: "#/components/schemas/getBalances_400_response_errors_inner"
+            $ref: '#/components/schemas/getBalances_400_response_errors_inner'
           type: array
       required:
       - errors
