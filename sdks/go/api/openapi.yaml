@@ -44,7 +44,7 @@ info:
     name: Apache 2.0
     url: http://apache.org
   title: Payments Direct API
-  version: 0.0.2
+  version: 0.0.3
 servers:
 - description: Test environment with simulated currency
   url: https://api.test.ripple.com
@@ -1269,6 +1269,7 @@ components:
         - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
         - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
         - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
+        paymentMemo: ORDER 2025-09-001 PAYMENT
         expiresAt: 2019-08-24T14:15:22Z
         sourceOfCash: EMIN
         paymentId: 7ea3399c-1234-5678-8d8f-d320ea406630
@@ -1342,6 +1343,13 @@ components:
             type: string
           maxItems: 10
           type: array
+        paymentMemo:
+          description: |
+            Optional, transaction-specific memo carried with the payment for beneficiary reconciliation. Must be UPPERCASE and may include only letters (A-Z), digits (0-9), spaces, and the following punctuation characters: comma (,), period (.), parentheses (()), forward slash (/), and hyphen (-). Not stored in PII; persisted on the payment object and forwarded to compliance and payout partners. Where possible, the memo will also be delivered to the final beneficiary's credit record, but delivery cannot be guaranteed in all cases due to payout partner or downstream constraints. If omitted, Ripple may generate a memo automatically.
+          example: ORDER 2025-09-001 PAYMENT
+          maxLength: 140
+          pattern: "^[A-Z0-9 ,.()/-]*$"
+          type: string
       required:
       - paymentId
       - paymentState
@@ -1399,6 +1407,7 @@ components:
         - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
         - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
         - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
+        paymentMemo: ORDER 2025-09-001 PAYMENT
         expiresAt: 2019-08-24T14:15:22Z
         sourceOfCash: EMIN
         paymentId: 7ea3399c-1234-5678-8d8f-d320ea406630
@@ -1489,6 +1498,13 @@ components:
             type: string
           maxItems: 10
           type: array
+        paymentMemo:
+          description: |
+            Optional, transaction-specific memo carried with the payment for beneficiary reconciliation. Must be UPPERCASE and may include only letters (A-Z), digits (0-9), spaces, and the following punctuation characters: comma (,), period (.), parentheses (()), forward slash (/), and hyphen (-). Not stored in PII; persisted on the payment object and forwarded to compliance and payout partners. Where possible, the memo will also be delivered to the final beneficiary's credit record, but delivery cannot be guaranteed in all cases due to payout partner or downstream constraints. If omitted, Ripple may generate a memo automatically.
+          example: ORDER 2025-09-001 PAYMENT
+          maxLength: 140
+          pattern: "^[A-Z0-9 ,.()/-]*$"
+          type: string
       required:
       - paymentId
       - paymentState
@@ -1608,6 +1624,7 @@ components:
           - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
           - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
           - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
+          paymentMemo: ORDER 2025-09-001 PAYMENT
           expiresAt: 2019-08-24T14:15:22Z
           sourceOfCash: EMIN
           paymentId: 7ea3399c-1234-5678-8d8f-d320ea406630
@@ -1666,6 +1683,7 @@ components:
           - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
           - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
           - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
+          paymentMemo: ORDER 2025-09-001 PAYMENT
           expiresAt: 2019-08-24T14:15:22Z
           sourceOfCash: EMIN
           paymentId: 7ea3399c-1234-5678-8d8f-d320ea406630
@@ -1706,6 +1724,7 @@ components:
         - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
         - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
         - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
+        paymentMemo: ORDER 2025-09-001 PAYMENT
         quoteId: 7ea3399c-1234-5678-8d8f-d320ea406630
       properties:
         quoteId:
@@ -1752,6 +1771,13 @@ components:
             type: string
           maxItems: 10
           type: array
+        paymentMemo:
+          description: |
+            Optional, transaction-specific memo carried with the payment for beneficiary reconciliation. Must be UPPERCASE and may include only letters (A-Z), digits (0-9), spaces, and the following punctuation characters: comma (,), period (.), parentheses (()), forward slash (/), and hyphen (-). Not stored in PII; persisted on the payment object and forwarded to compliance and payout partners. Where possible, the memo will also be delivered to the final beneficiary's credit record, but delivery cannot be guaranteed in all cases due to payout partner or downstream constraints. If omitted, Ripple may generate a memo automatically.
+          example: ORDER 2025-09-001 PAYMENT
+          maxLength: 140
+          pattern: "^[A-Z0-9 ,.()/-]*$"
+          type: string
       required:
       - beneficiaryIdentityId
       - quoteId
@@ -2273,6 +2299,13 @@ components:
           maxItems: 10
           type: array
       type: object
+    PaymentMemo:
+      description: |
+        Optional, transaction-specific memo carried with the payment for beneficiary reconciliation. Must be UPPERCASE and may include only letters (A-Z), digits (0-9), spaces, and the following punctuation characters: comma (,), period (.), parentheses (()), forward slash (/), and hyphen (-). Not stored in PII; persisted on the payment object and forwarded to compliance and payout partners. Where possible, the memo will also be delivered to the final beneficiary's credit record, but delivery cannot be guaranteed in all cases due to payout partner or downstream constraints. If omitted, Ripple may generate a memo automatically.
+      example: ORDER 2025-09-001 PAYMENT
+      maxLength: 140
+      pattern: "^[A-Z0-9 ,.()/-]*$"
+      type: string
     AdjustedExchangeRate:
       additionalProperties: false
       description: Foreign Exchange (FX) rate used to calculate the quote.

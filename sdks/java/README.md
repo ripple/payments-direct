@@ -2,7 +2,7 @@
 
 Payments Direct API
 
-- API version: 0.0.2
+- API version: 0.0.3
 
 - Generator version: 7.13.0
 
@@ -81,7 +81,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.ripple.payments</groupId>
   <artifactId>payments-direct-client</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -91,7 +91,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.ripple.payments:payments-direct-client:0.0.2"
+compile "com.ripple.payments:payments-direct-client:0.0.3"
 ```
 
 ### Others
@@ -104,7 +104,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/payments-direct-client-0.0.2.jar`
+- `target/payments-direct-client-0.0.3.jar`
 - `target/lib/*.jar`
 
 ## Getting Started

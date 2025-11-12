@@ -2,7 +2,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 
 group = 'com.ripple.payments'
-version = '0.0.2'
+version = '0.0.3'
 
 buildscript {
     repositories {

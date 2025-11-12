@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **PurposeCode** | Pointer to **string** | Purpose Code may be required depending on corridor and payout partner. Valid Purpose Code values vary by corridor. | [optional] 
 **SourceOfCash** | Pointer to **string** | Source of Cash may be required depending on corridor and payout partner. Valid Source of Cash values vary by corridor. | [optional] 
 **PaymentLabels** | Pointer to **[]string** | Application-defined labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment’s lifetime. | [optional] 
+**PaymentMemo** | Pointer to **string** | Optional, transaction-specific memo carried with the payment for beneficiary reconciliation. Must be UPPERCASE and may include only letters (A-Z), digits (0-9), spaces, and the following punctuation characters: comma (,), period (.), parentheses (()), forward slash (/), and hyphen (-). Not stored in PII; persisted on the payment object and forwarded to compliance and payout partners. Where possible, the memo will also be delivered to the final beneficiary&#39;s credit record, but delivery cannot be guaranteed in all cases due to payout partner or downstream constraints. If omitted, Ripple may generate a memo automatically.  | [optional] 
 
 ## Methods
 
@@ -195,6 +196,31 @@ SetPaymentLabels sets PaymentLabels field to given value.
 `func (o *PaymentRequest) HasPaymentLabels() bool`
 
 HasPaymentLabels returns a boolean if a field has been set.
+
+### GetPaymentMemo
+
+`func (o *PaymentRequest) GetPaymentMemo() string`
+
+GetPaymentMemo returns the PaymentMemo field if non-nil, zero value otherwise.
+
+### GetPaymentMemoOk
+
+`func (o *PaymentRequest) GetPaymentMemoOk() (*string, bool)`
+
+GetPaymentMemoOk returns a tuple with the PaymentMemo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentMemo
+
+`func (o *PaymentRequest) SetPaymentMemo(v string)`
+
+SetPaymentMemo sets PaymentMemo field to given value.
+
+### HasPaymentMemo
+
+`func (o *PaymentRequest) HasPaymentMemo() bool`
+
+HasPaymentMemo returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
