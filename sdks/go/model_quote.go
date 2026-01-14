@@ -1,9 +1,9 @@
 /*
 Payments Direct API
 
-Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | Test                                       | `https://api.test.ripple.com` | Test environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **Test** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
 
-API version: 0.0.3
+API version: 1.0.0
 */
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
@@ -45,6 +45,8 @@ type Quote struct {
 	AdjustedExchangeRate *AdjustedExchangeRate `json:"adjustedExchangeRate,omitempty"`
 	// A summary of fees included in this quote.
 	Fees []FeeSummary `json:"fees,omitempty"`
+	// A summary of taxes included in this quote.
+	Taxes []TaxSummary `json:"taxes,omitempty"`
 	// The time when this quote was created, specified in UTC.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// The time when this quote expires, specified in UTC.
@@ -450,6 +452,38 @@ func (o *Quote) SetFees(v []FeeSummary) {
 	o.Fees = v
 }
 
+// GetTaxes returns the Taxes field value if set, zero value otherwise.
+func (o *Quote) GetTaxes() []TaxSummary {
+	if o == nil || IsNil(o.Taxes) {
+		var ret []TaxSummary
+		return ret
+	}
+	return o.Taxes
+}
+
+// GetTaxesOk returns a tuple with the Taxes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Quote) GetTaxesOk() ([]TaxSummary, bool) {
+	if o == nil || IsNil(o.Taxes) {
+		return nil, false
+	}
+	return o.Taxes, true
+}
+
+// HasTaxes returns a boolean if a field has been set.
+func (o *Quote) HasTaxes() bool {
+	if o != nil && !IsNil(o.Taxes) {
+		return true
+	}
+
+	return false
+}
+
+// SetTaxes gets a reference to the given []TaxSummary and assigns it to the Taxes field.
+func (o *Quote) SetTaxes(v []TaxSummary) {
+	o.Taxes = v
+}
+
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *Quote) GetCreatedAt() time.Time {
 	if o == nil || IsNil(o.CreatedAt) {
@@ -582,6 +616,9 @@ func (o Quote) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Fees) {
 		toSerialize["fees"] = o.Fees
+	}
+	if !IsNil(o.Taxes) {
+		toSerialize["taxes"] = o.Taxes
 	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt

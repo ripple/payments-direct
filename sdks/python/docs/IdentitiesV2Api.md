@@ -4,16 +4,16 @@ All URIs are relative to *https://api.test.ripple.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_identity_v2**](IdentitiesV2Api.md#create_identity_v2) | **POST** /v2/identities | Create a new identity
-[**deactivate_identity_v2**](IdentitiesV2Api.md#deactivate_identity_v2) | **DELETE** /v2/identities/{identity-id} | Delete an identity
-[**get_identities_v2**](IdentitiesV2Api.md#get_identities_v2) | **GET** /v2/identities | Get a list of identities
-[**get_identity_by_id_v2**](IdentitiesV2Api.md#get_identity_by_id_v2) | **GET** /v2/identities/{identity-id} | Get an identity by ID
+[**create_identity_v2**](IdentitiesV2Api.md#create_identity_v2) | **POST** /v2/identities | Create a new identity (v2) - Legacy
+[**deactivate_identity_v2**](IdentitiesV2Api.md#deactivate_identity_v2) | **DELETE** /v2/identities/{identity-id} | Delete an identity (v2) - Legacy
+[**get_identities_v2**](IdentitiesV2Api.md#get_identities_v2) | **GET** /v2/identities | Get a list of identities (v2) - Legacy
+[**get_identity_by_id_v2**](IdentitiesV2Api.md#get_identity_by_id_v2) | **GET** /v2/identities/{identity-id} | Get an identity by ID (v2) - Legacy
 
 
 # **create_identity_v2**
 > CreateIdentityResponse create_identity_v2(create_identity_request_v2)
 
-Create a new identity
+Create a new identity (v2) - Legacy
 
 Create a new identity.
 
@@ -56,7 +56,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     create_identity_request_v2 = ripple_payments_direct.CreateIdentityRequestV2() # CreateIdentityRequestV2 | 
 
     try:
-        # Create a new identity
+        # Create a new identity (v2) - Legacy
         api_response = api_instance.create_identity_v2(create_identity_request_v2)
         print("The response of IdentitiesV2Api->create_identity_v2:\n")
         pprint(api_response)
@@ -99,9 +99,12 @@ Name | Type | Description  | Notes
 # **deactivate_identity_v2**
 > deactivate_identity_v2(identity_id)
 
-Delete an identity
+Delete an identity (v2) - Legacy
 
-Delete an identity
+Deactivate an identity and its financial instruments.
+Deactivation is permanent and prevents further use in payments.
+Historical versions remain available for audit.
+
 
 ### Example
 
@@ -132,10 +135,10 @@ configuration = ripple_payments_direct.Configuration(
 with ripple_payments_direct.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ripple_payments_direct.IdentitiesV2Api(api_client)
-    identity_id = '146f3c51-c313-47ce-b6f2-691c5a238b3e' # str | Unique UUID string that maps to the identity to be deleted.
+    identity_id = '146f3c51-c313-47ce-b6f2-691c5a238b3e' # str | ID of the identity to deactivate.
 
     try:
-        # Delete an identity
+        # Delete an identity (v2) - Legacy
         api_instance.deactivate_identity_v2(identity_id)
     except Exception as e:
         print("Exception when calling IdentitiesV2Api->deactivate_identity_v2: %s\n" % e)
@@ -148,7 +151,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **identity_id** | **str**| Unique UUID string that maps to the identity to be deleted. | 
+ **identity_id** | **str**| ID of the identity to deactivate. | 
 
 ### Return type
 
@@ -167,18 +170,18 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | The identity was deleted successfully |  -  |
-**400** | Identity id is not of UUID format |  -  |
-**404** | Invalid Identity id does not exist |  -  |
-**422** | Unprocessable Identity Id |  -  |
-**500** | Internal Processing Error |  -  |
+**204** | Identity deactivated. |  -  |
+**400** | Invalid request. |  -  |
+**404** | Identity not found. |  -  |
+**422** | Identity already deactivated or cannot be deactivated. |  -  |
+**500** | Internal processing error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_identities_v2**
 > ListIdentitiesResponseV2 get_identities_v2(identity_type=identity_type, nick_name=nick_name)
 
-Get a list of identities
+Get a list of identities (v2) - Legacy
 
 Get a list of identities that match the query parameters.
 
@@ -220,7 +223,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     nick_name = 'Successful Beneficiary' # str | The nickname for the identity provided at the time of identity creation (optional)
 
     try:
-        # Get a list of identities
+        # Get a list of identities (v2) - Legacy
         api_response = api_instance.get_identities_v2(identity_type=identity_type, nick_name=nick_name)
         print("The response of IdentitiesV2Api->get_identities_v2:\n")
         pprint(api_response)
@@ -265,9 +268,11 @@ Name | Type | Description  | Notes
 # **get_identity_by_id_v2**
 > IdentityResponseV2 get_identity_by_id_v2(identity_id, version=version)
 
-Get an identity by ID
+Get an identity by ID (v2) - Legacy
 
-Get an identity by its unique ID
+Retrieve a specific identity by ID.
+If `version` is not provided, the latest version is returned.
+
 
 ### Example
 
@@ -299,11 +304,11 @@ configuration = ripple_payments_direct.Configuration(
 with ripple_payments_direct.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ripple_payments_direct.IdentitiesV2Api(api_client)
-    identity_id = '146f3c51-c313-47ce-b6f2-691c5a238b3e' # str | The ID of the identity to get.
-    version = 2 # int | Version of the identity you want to retrieve.  **Note**: If you don't specify a version, the latest version of the identity is returned.  (optional)
+    identity_id = '146f3c51-c313-47ce-b6f2-691c5a238b3e' # str | The ID of the identity to retrieve.
+    version = 2 # int | Specific version to retrieve. If omitted, returns the latest version. (optional)
 
     try:
-        # Get an identity by ID
+        # Get an identity by ID (v2) - Legacy
         api_response = api_instance.get_identity_by_id_v2(identity_id, version=version)
         print("The response of IdentitiesV2Api->get_identity_by_id_v2:\n")
         pprint(api_response)
@@ -318,8 +323,8 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **identity_id** | **str**| The ID of the identity to get. | 
- **version** | **int**| Version of the identity you want to retrieve.  **Note**: If you don&#39;t specify a version, the latest version of the identity is returned.  | [optional] 
+ **identity_id** | **str**| The ID of the identity to retrieve. | 
+ **version** | **int**| Specific version to retrieve. If omitted, returns the latest version. | [optional] 
 
 ### Return type
 
@@ -338,9 +343,10 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Requested identity info in JSON format |  -  |
-**400** | Identity ID is not in UUID format |  -  |
-**404** | Invalid - identity ID does not exist |  -  |
+**200** | Identity details. |  -  |
+**400** | Invalid identity ID. |  -  |
+**404** | Identity not found. |  -  |
+**500** | Internal processing error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

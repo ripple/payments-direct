@@ -1,9 +1,9 @@
 /*
 Payments Direct API
 
-Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | Test                                       | `https://api.test.ripple.com` | Test environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **Test** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
 
-API version: 0.0.3
+API version: 1.0.0
 */
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
@@ -16,6 +16,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"time"
 )
 
 
@@ -74,6 +75,238 @@ func (a *LedgerPublicAPIService) GetBalancesExecute(r LedgerPublicAPIGetBalances
 
 	if r.currency != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "currency", r.currency, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetBalances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GetBalances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v GetBalances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type LedgerPublicAPIGetStatementsTransactionsForCustomerRequest struct {
+	ctx context.Context
+	ApiService *LedgerPublicAPIService
+	currency *string
+	startDttm *time.Time
+	endDttm *time.Time
+	pageSize *int32
+	status *string
+	txnReference *string
+	offset *int32
+	sortKey *string
+	sortDirection *string
+}
+
+// Three-letter ISO 4217 currency code for the transactions to return (for example, USD). 
+func (r LedgerPublicAPIGetStatementsTransactionsForCustomerRequest) Currency(currency string) LedgerPublicAPIGetStatementsTransactionsForCustomerRequest {
+	r.currency = &currency
+	return r
+}
+
+// Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions. 
+func (r LedgerPublicAPIGetStatementsTransactionsForCustomerRequest) StartDttm(startDttm time.Time) LedgerPublicAPIGetStatementsTransactionsForCustomerRequest {
+	r.startDttm = &startDttm
+	return r
+}
+
+// End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions. 
+func (r LedgerPublicAPIGetStatementsTransactionsForCustomerRequest) EndDttm(endDttm time.Time) LedgerPublicAPIGetStatementsTransactionsForCustomerRequest {
+	r.endDttm = &endDttm
+	return r
+}
+
+// Number of records to return in the response page. Use page-size together with offset for offset-based pagination 
+func (r LedgerPublicAPIGetStatementsTransactionsForCustomerRequest) PageSize(pageSize int32) LedgerPublicAPIGetStatementsTransactionsForCustomerRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+// Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction. 
+func (r LedgerPublicAPIGetStatementsTransactionsForCustomerRequest) Status(status string) LedgerPublicAPIGetStatementsTransactionsForCustomerRequest {
+	r.status = &status
+	return r
+}
+
+// Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference. 
+func (r LedgerPublicAPIGetStatementsTransactionsForCustomerRequest) TxnReference(txnReference string) LedgerPublicAPIGetStatementsTransactionsForCustomerRequest {
+	r.txnReference = &txnReference
+	return r
+}
+
+// Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, &#x60;offset&#x3D;25&amp;page-size&#x3D;25&#x60; returns the second page of results. 
+func (r LedgerPublicAPIGetStatementsTransactionsForCustomerRequest) Offset(offset int32) LedgerPublicAPIGetStatementsTransactionsForCustomerRequest {
+	r.offset = &offset
+	return r
+}
+
+// Field to use for sorting the results. Allowed values include:  - &#x60;CREATED_AT&#x60;: sort by transaction creation timestamp.  - &#x60;STATEMENT_OPERATION&#x60;: sort by the operation type (for example, CREDIT, DEBIT).  - &#x60;STATEMENT_SOURCE&#x60;: sort by the transaction source (for example, PAYMENTS, BANK).  - &#x60;STATEMENT_STATUS&#x60;: sort by the ledger transaction status.  - &#x60;STATEMENT_TXN_REFERENCE&#x60;: sort by the transaction reference.  - &#x60;STATEMENT_UPDATED_AT&#x60;: sort by the last update timestamp. 
+func (r LedgerPublicAPIGetStatementsTransactionsForCustomerRequest) SortKey(sortKey string) LedgerPublicAPIGetStatementsTransactionsForCustomerRequest {
+	r.sortKey = &sortKey
+	return r
+}
+
+// Sort direction. Allowed values:  - &#x60;ASC&#x60;: ascending order.  - &#x60;DESC&#x60;: descending order. 
+func (r LedgerPublicAPIGetStatementsTransactionsForCustomerRequest) SortDirection(sortDirection string) LedgerPublicAPIGetStatementsTransactionsForCustomerRequest {
+	r.sortDirection = &sortDirection
+	return r
+}
+
+func (r LedgerPublicAPIGetStatementsTransactionsForCustomerRequest) Execute() ([]GetStatementsTransactionsForCustomer200ResponseInner, *http.Response, error) {
+	return r.ApiService.GetStatementsTransactionsForCustomerExecute(r)
+}
+
+/*
+GetStatementsTransactionsForCustomer Get ledger transactions
+
+Retrieve a paginated list of ledger transactions for your tenant within a specified date and time range. This endpoint returns detailed transaction data, including amounts, references, operations, and running balances, so you can reconcile balance changes over time for a given currency.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return LedgerPublicAPIGetStatementsTransactionsForCustomerRequest
+*/
+func (a *LedgerPublicAPIService) GetStatementsTransactionsForCustomer(ctx context.Context) LedgerPublicAPIGetStatementsTransactionsForCustomerRequest {
+	return LedgerPublicAPIGetStatementsTransactionsForCustomerRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return []GetStatementsTransactionsForCustomer200ResponseInner
+func (a *LedgerPublicAPIService) GetStatementsTransactionsForCustomerExecute(r LedgerPublicAPIGetStatementsTransactionsForCustomerRequest) ([]GetStatementsTransactionsForCustomer200ResponseInner, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []GetStatementsTransactionsForCustomer200ResponseInner
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LedgerPublicAPIService.GetStatementsTransactionsForCustomer")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/ledger-transactions"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.currency == nil {
+		return localVarReturnValue, nil, reportError("currency is required and must be specified")
+	}
+	if r.startDttm == nil {
+		return localVarReturnValue, nil, reportError("startDttm is required and must be specified")
+	}
+	if r.endDttm == nil {
+		return localVarReturnValue, nil, reportError("endDttm is required and must be specified")
+	}
+	if r.pageSize == nil {
+		return localVarReturnValue, nil, reportError("pageSize is required and must be specified")
+	}
+	if *r.pageSize < 1 {
+		return localVarReturnValue, nil, reportError("pageSize must be greater than 1")
+	}
+	if *r.pageSize > 50 {
+		return localVarReturnValue, nil, reportError("pageSize must be less than 50")
+	}
+
+	parameterAddToHeaderOrQuery(localVarQueryParams, "currency", r.currency, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "start-dttm", r.startDttm, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "end-dttm", r.endDttm, "form", "")
+	if r.status != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")
+	}
+	if r.txnReference != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "txnReference", r.txnReference, "form", "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "page-size", r.pageSize, "form", "")
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	}
+	if r.sortKey != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort-key", r.sortKey, "form", "")
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort-direction", r.sortDirection, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

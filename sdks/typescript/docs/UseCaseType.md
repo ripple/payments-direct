@@ -1,6 +1,6 @@
 # UseCaseType
 
-The use case type for the identity
+Classification of the identity:   • INDIVIDUAL - A natural person.   • BUSINESS - A legal entity such as a company or institution. 
 
 ## Enum
 

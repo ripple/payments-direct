@@ -11,8 +11,6 @@
 
 * `SOURCE_CURRENCY` (value: `"sourceCurrency"`)
 
-* `SOURCE_COUNTRY` (value: `"sourceCountry"`)
-
 * `SOURCE_AMOUNT` (value: `"sourceAmount"`)
 
 * `DESTINATION_CURRENCY` (value: `"destinationCurrency"`)

@@ -1,9 +1,9 @@
 /*
 Payments Direct API
 
-Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | Test                                       | `https://api.test.ripple.com` | Test environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **Test** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
 
-API version: 0.0.3
+API version: 1.0.0
 */
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
@@ -27,8 +27,6 @@ type Originator struct {
 	OriginatorIdentityNickName *string `json:"originatorIdentityNickName,omitempty"`
 	// An ID associated with this payment, if provided by the customer during payment initiation.
 	InternalId *string `json:"internalId,omitempty"`
-	// The country where the payment originator is located or incorporated, specified in Alpha-2 Code format as defined in the ISO CountryCode ISO 3166-1 list.
-	SourceCountry *string `json:"sourceCountry,omitempty" validate:"regexp=^[A-Z]{2}$"`
 	// originator's currency
 	SourceCurrency *string `json:"sourceCurrency,omitempty" validate:"regexp=^[A-Z]{3,5}$"`
 	// The amount sent by the originator in this payment. This field can hold a value with up to 6 decimal places.
@@ -182,38 +180,6 @@ func (o *Originator) SetInternalId(v string) {
 	o.InternalId = &v
 }
 
-// GetSourceCountry returns the SourceCountry field value if set, zero value otherwise.
-func (o *Originator) GetSourceCountry() string {
-	if o == nil || IsNil(o.SourceCountry) {
-		var ret string
-		return ret
-	}
-	return *o.SourceCountry
-}
-
-// GetSourceCountryOk returns a tuple with the SourceCountry field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Originator) GetSourceCountryOk() (*string, bool) {
-	if o == nil || IsNil(o.SourceCountry) {
-		return nil, false
-	}
-	return o.SourceCountry, true
-}
-
-// HasSourceCountry returns a boolean if a field has been set.
-func (o *Originator) HasSourceCountry() bool {
-	if o != nil && !IsNil(o.SourceCountry) {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceCountry gets a reference to the given string and assigns it to the SourceCountry field.
-func (o *Originator) SetSourceCountry(v string) {
-	o.SourceCountry = &v
-}
-
 // GetSourceCurrency returns the SourceCurrency field value if set, zero value otherwise.
 func (o *Originator) GetSourceCurrency() string {
 	if o == nil || IsNil(o.SourceCurrency) {
@@ -331,9 +297,6 @@ func (o Originator) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.InternalId) {
 		toSerialize["internalId"] = o.InternalId
-	}
-	if !IsNil(o.SourceCountry) {
-		toSerialize["sourceCountry"] = o.SourceCountry
 	}
 	if !IsNil(o.SourceCurrency) {
 		toSerialize["sourceCurrency"] = o.SourceCurrency

@@ -4,11 +4,11 @@ All URIs are relative to *https://api.test.ripple.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createPayment**](PaymentsApi.md#createPayment) | **POST** /v2/payments | Create payment |
-| [**getPaymentById**](PaymentsApi.md#getPaymentById) | **GET** /v2/payments/{paymentId} | Get a payment by ID |
-| [**getPaymentStateTransitionsById**](PaymentsApi.md#getPaymentStateTransitionsById) | **GET** /v2/payments/{paymentId}/states | Get state transitions by payment ID |
+| [**createPayment**](PaymentsApi.md#createPayment) | **POST** /v2/payments | Create payment (v2) |
+| [**getPaymentById**](PaymentsApi.md#getPaymentById) | **GET** /v2/payments/{paymentId} | Get a payment by ID (v2) |
+| [**getPaymentStateTransitionsById**](PaymentsApi.md#getPaymentStateTransitionsById) | **GET** /v2/payments/{paymentId}/states | Get state transitions by payment ID (v2) |
 | [**searchPayments**](PaymentsApi.md#searchPayments) | **POST** /v2/payments/filter | Search payments |
-| [**updatePaymentLabels**](PaymentsApi.md#updatePaymentLabels) | **PATCH** /v2/payments/{paymentId}/labels | Update payment labels |
+| [**updatePaymentLabels**](PaymentsApi.md#updatePaymentLabels) | **PATCH** /v2/payments/{paymentId}/labels | Update payment labels (v2) |
 
 
 
@@ -16,9 +16,9 @@ All URIs are relative to *https://api.test.ripple.com*
 
 > PaymentDTO createPayment(paymentRequestDTO)
 
-Create payment
+Create payment (v2)
 
-Create a payment  **Tutorials**  * Learn how to [Create a payment](../../tutorials/create-a-payment/). * Learn how to [Create a third-party payment](../../tutorials/create-a-third-party-payment/). 
+Create a payment  **Tutorials**  * Learn how to [Create a payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-payment/). * Learn how to [Create a third-party payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-third-party-payment/). 
 
 ### Example
 
@@ -90,7 +90,7 @@ public class Example {
 
 > PaymentWithDetailsDTO getPaymentById(paymentId)
 
-Get a payment by ID
+Get a payment by ID (v2)
 
 Gets a payment by ID.
 
@@ -164,7 +164,7 @@ public class Example {
 
 > StateTransitionsResponseDTO getPaymentStateTransitionsById(paymentId)
 
-Get state transitions by payment ID
+Get state transitions by payment ID (v2)
 
 Gets the state transitions for a payment by ID.
 
@@ -311,7 +311,7 @@ public class Example {
 
 > UpdatePaymentLabelsResponseDTO updatePaymentLabels(paymentId, updatePaymentLabelsRequestDTO)
 
-Update payment labels
+Update payment labels (v2)
 
 Add or remove labels for a payment.
 

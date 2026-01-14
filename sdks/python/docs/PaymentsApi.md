@@ -4,24 +4,24 @@ All URIs are relative to *https://api.test.ripple.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_payment**](PaymentsApi.md#create_payment) | **POST** /v2/payments | Create payment
-[**get_payment_by_id**](PaymentsApi.md#get_payment_by_id) | **GET** /v2/payments/{paymentId} | Get a payment by ID
-[**get_payment_state_transitions_by_id**](PaymentsApi.md#get_payment_state_transitions_by_id) | **GET** /v2/payments/{paymentId}/states | Get state transitions by payment ID
+[**create_payment**](PaymentsApi.md#create_payment) | **POST** /v2/payments | Create payment (v2)
+[**get_payment_by_id**](PaymentsApi.md#get_payment_by_id) | **GET** /v2/payments/{paymentId} | Get a payment by ID (v2)
+[**get_payment_state_transitions_by_id**](PaymentsApi.md#get_payment_state_transitions_by_id) | **GET** /v2/payments/{paymentId}/states | Get state transitions by payment ID (v2)
 [**search_payments**](PaymentsApi.md#search_payments) | **POST** /v2/payments/filter | Search payments
-[**update_payment_labels**](PaymentsApi.md#update_payment_labels) | **PATCH** /v2/payments/{paymentId}/labels | Update payment labels
+[**update_payment_labels**](PaymentsApi.md#update_payment_labels) | **PATCH** /v2/payments/{paymentId}/labels | Update payment labels (v2)
 
 
 # **create_payment**
 > Payment create_payment(payment_request)
 
-Create payment
+Create payment (v2)
 
 Create a payment
 
 **Tutorials**
 
-* Learn how to [Create a payment](../../tutorials/create-a-payment/).
-* Learn how to [Create a third-party payment](../../tutorials/create-a-third-party-payment/).
+* Learn how to [Create a payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-payment/).
+* Learn how to [Create a third-party payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-third-party-payment/).
 
 
 ### Example
@@ -58,7 +58,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     payment_request = ripple_payments_direct.PaymentRequest() # PaymentRequest | create payment request
 
     try:
-        # Create payment
+        # Create payment (v2)
         api_response = api_instance.create_payment(payment_request)
         print("The response of PaymentsApi->create_payment:\n")
         pprint(api_response)
@@ -102,7 +102,7 @@ Name | Type | Description  | Notes
 # **get_payment_by_id**
 > PaymentWithDetails get_payment_by_id(payment_id)
 
-Get a payment by ID
+Get a payment by ID (v2)
 
 Gets a payment by ID.
 
@@ -139,7 +139,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     payment_id = '7ea3399c-1234-5678-8d8f-d320ea406630' # str | Unique identifier of the payment to get.
 
     try:
-        # Get a payment by ID
+        # Get a payment by ID (v2)
         api_response = api_instance.get_payment_by_id(payment_id)
         print("The response of PaymentsApi->get_payment_by_id:\n")
         pprint(api_response)
@@ -183,7 +183,7 @@ Name | Type | Description  | Notes
 # **get_payment_state_transitions_by_id**
 > StateTransitionsResponse get_payment_state_transitions_by_id(payment_id)
 
-Get state transitions by payment ID
+Get state transitions by payment ID (v2)
 
 Gets the state transitions for a payment by ID.
 
@@ -220,7 +220,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     payment_id = '7ea3399c-1234-5678-8d8f-d320ea406630' # str | Unique identifier of the payment for which you want to get state transition information.
 
     try:
-        # Get state transitions by payment ID
+        # Get state transitions by payment ID (v2)
         api_response = api_instance.get_payment_state_transitions_by_id(payment_id)
         print("The response of PaymentsApi->get_payment_state_transitions_by_id:\n")
         pprint(api_response)
@@ -345,7 +345,7 @@ Name | Type | Description  | Notes
 # **update_payment_labels**
 > UpdatePaymentLabelsResponse update_payment_labels(payment_id, update_payment_labels_request)
 
-Update payment labels
+Update payment labels (v2)
 
 Add or remove labels for a payment.
 
@@ -384,7 +384,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     update_payment_labels_request = ripple_payments_direct.UpdatePaymentLabelsRequest() # UpdatePaymentLabelsRequest | Labels to add to or remove from the payment.
 
     try:
-        # Update payment labels
+        # Update payment labels (v2)
         api_response = api_instance.update_payment_labels(payment_id, update_payment_labels_request)
         print("The response of PaymentsApi->update_payment_labels:\n")
         pprint(api_response)

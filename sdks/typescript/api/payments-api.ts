@@ -2,9 +2,9 @@
 /* eslint-disable */
 /**
  * Payments Direct API
- * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | Test                                       | `https://api.test.ripple.com` | Test environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you\'re using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **Test** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization\'s security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization\'s security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+ * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you\'re using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization\'s security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization\'s security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
  *
- * The version of the OpenAPI document: 0.0.3
+ * The version of the OpenAPI document: 1.0.0
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -46,8 +46,8 @@ import type { UpdatePaymentLabelsResponse } from '../models';
 export const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Create a payment  **Tutorials**  * Learn how to [Create a payment](../../tutorials/create-a-payment/). * Learn how to [Create a third-party payment](../../tutorials/create-a-third-party-payment/). 
-         * @summary Create payment
+         * Create a payment  **Tutorials**  * Learn how to [Create a payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-payment/). * Learn how to [Create a third-party payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-third-party-payment/). 
+         * @summary Create payment (v2)
          * @param {PaymentRequest} paymentRequest create payment request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -87,7 +87,7 @@ export const PaymentsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * Gets a payment by ID.
-         * @summary Get a payment by ID
+         * @summary Get a payment by ID (v2)
          * @param {string} paymentId Unique identifier of the payment to get.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -125,7 +125,7 @@ export const PaymentsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * Gets the state transitions for a payment by ID.
-         * @summary Get state transitions by payment ID
+         * @summary Get state transitions by payment ID (v2)
          * @param {string} paymentId Unique identifier of the payment for which you want to get state transition information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -203,7 +203,7 @@ export const PaymentsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * Add or remove labels for a payment.
-         * @summary Update payment labels
+         * @summary Update payment labels (v2)
          * @param {string} paymentId The unique ID that identifies the payment for which you want to update labels.
          * @param {UpdatePaymentLabelsRequest} updatePaymentLabelsRequest Labels to add to or remove from the payment.
          * @param {*} [options] Override http request option.
@@ -256,8 +256,8 @@ export const PaymentsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PaymentsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Create a payment  **Tutorials**  * Learn how to [Create a payment](../../tutorials/create-a-payment/). * Learn how to [Create a third-party payment](../../tutorials/create-a-third-party-payment/). 
-         * @summary Create payment
+         * Create a payment  **Tutorials**  * Learn how to [Create a payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-payment/). * Learn how to [Create a third-party payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-third-party-payment/). 
+         * @summary Create payment (v2)
          * @param {PaymentRequest} paymentRequest create payment request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -270,7 +270,7 @@ export const PaymentsApiFp = function(configuration?: Configuration) {
         },
         /**
          * Gets a payment by ID.
-         * @summary Get a payment by ID
+         * @summary Get a payment by ID (v2)
          * @param {string} paymentId Unique identifier of the payment to get.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -283,7 +283,7 @@ export const PaymentsApiFp = function(configuration?: Configuration) {
         },
         /**
          * Gets the state transitions for a payment by ID.
-         * @summary Get state transitions by payment ID
+         * @summary Get state transitions by payment ID (v2)
          * @param {string} paymentId Unique identifier of the payment for which you want to get state transition information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -309,7 +309,7 @@ export const PaymentsApiFp = function(configuration?: Configuration) {
         },
         /**
          * Add or remove labels for a payment.
-         * @summary Update payment labels
+         * @summary Update payment labels (v2)
          * @param {string} paymentId The unique ID that identifies the payment for which you want to update labels.
          * @param {UpdatePaymentLabelsRequest} updatePaymentLabelsRequest Labels to add to or remove from the payment.
          * @param {*} [options] Override http request option.
@@ -332,8 +332,8 @@ export const PaymentsApiFactory = function (configuration?: Configuration, baseP
     const localVarFp = PaymentsApiFp(configuration)
     return {
         /**
-         * Create a payment  **Tutorials**  * Learn how to [Create a payment](../../tutorials/create-a-payment/). * Learn how to [Create a third-party payment](../../tutorials/create-a-third-party-payment/). 
-         * @summary Create payment
+         * Create a payment  **Tutorials**  * Learn how to [Create a payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-payment/). * Learn how to [Create a third-party payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-third-party-payment/). 
+         * @summary Create payment (v2)
          * @param {PaymentRequest} paymentRequest create payment request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -343,7 +343,7 @@ export const PaymentsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * Gets a payment by ID.
-         * @summary Get a payment by ID
+         * @summary Get a payment by ID (v2)
          * @param {string} paymentId Unique identifier of the payment to get.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -353,7 +353,7 @@ export const PaymentsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * Gets the state transitions for a payment by ID.
-         * @summary Get state transitions by payment ID
+         * @summary Get state transitions by payment ID (v2)
          * @param {string} paymentId Unique identifier of the payment for which you want to get state transition information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -373,7 +373,7 @@ export const PaymentsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * Add or remove labels for a payment.
-         * @summary Update payment labels
+         * @summary Update payment labels (v2)
          * @param {string} paymentId The unique ID that identifies the payment for which you want to update labels.
          * @param {UpdatePaymentLabelsRequest} updatePaymentLabelsRequest Labels to add to or remove from the payment.
          * @param {*} [options] Override http request option.
@@ -393,8 +393,8 @@ export const PaymentsApiFactory = function (configuration?: Configuration, baseP
  */
 export class PaymentsApi extends BaseAPI {
     /**
-     * Create a payment  **Tutorials**  * Learn how to [Create a payment](../../tutorials/create-a-payment/). * Learn how to [Create a third-party payment](../../tutorials/create-a-third-party-payment/). 
-     * @summary Create payment
+     * Create a payment  **Tutorials**  * Learn how to [Create a payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-payment/). * Learn how to [Create a third-party payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-third-party-payment/). 
+     * @summary Create payment (v2)
      * @param {PaymentRequest} paymentRequest create payment request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -406,7 +406,7 @@ export class PaymentsApi extends BaseAPI {
 
     /**
      * Gets a payment by ID.
-     * @summary Get a payment by ID
+     * @summary Get a payment by ID (v2)
      * @param {string} paymentId Unique identifier of the payment to get.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -418,7 +418,7 @@ export class PaymentsApi extends BaseAPI {
 
     /**
      * Gets the state transitions for a payment by ID.
-     * @summary Get state transitions by payment ID
+     * @summary Get state transitions by payment ID (v2)
      * @param {string} paymentId Unique identifier of the payment for which you want to get state transition information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -442,7 +442,7 @@ export class PaymentsApi extends BaseAPI {
 
     /**
      * Add or remove labels for a payment.
-     * @summary Update payment labels
+     * @summary Update payment labels (v2)
      * @param {string} paymentId The unique ID that identifies the payment for which you want to update labels.
      * @param {UpdatePaymentLabelsRequest} updatePaymentLabelsRequest Labels to add to or remove from the payment.
      * @param {*} [options] Override http request option.

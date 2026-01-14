@@ -4,11 +4,11 @@ All URIs are relative to *https://api.test.ripple.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreatePayment**](PaymentsAPI.md#CreatePayment) | **Post** /v2/payments | Create payment
-[**GetPaymentById**](PaymentsAPI.md#GetPaymentById) | **Get** /v2/payments/{paymentId} | Get a payment by ID
-[**GetPaymentStateTransitionsById**](PaymentsAPI.md#GetPaymentStateTransitionsById) | **Get** /v2/payments/{paymentId}/states | Get state transitions by payment ID
+[**CreatePayment**](PaymentsAPI.md#CreatePayment) | **Post** /v2/payments | Create payment (v2)
+[**GetPaymentById**](PaymentsAPI.md#GetPaymentById) | **Get** /v2/payments/{paymentId} | Get a payment by ID (v2)
+[**GetPaymentStateTransitionsById**](PaymentsAPI.md#GetPaymentStateTransitionsById) | **Get** /v2/payments/{paymentId}/states | Get state transitions by payment ID (v2)
 [**SearchPayments**](PaymentsAPI.md#SearchPayments) | **Post** /v2/payments/filter | Search payments
-[**UpdatePaymentLabels**](PaymentsAPI.md#UpdatePaymentLabels) | **Patch** /v2/payments/{paymentId}/labels | Update payment labels
+[**UpdatePaymentLabels**](PaymentsAPI.md#UpdatePaymentLabels) | **Patch** /v2/payments/{paymentId}/labels | Update payment labels (v2)
 
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > Payment CreatePayment(ctx).PaymentRequest(paymentRequest).Execute()
 
-Create payment
+Create payment (v2)
 
 
 
@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 
 > PaymentWithDetails GetPaymentById(ctx, paymentId).Execute()
 
-Get a payment by ID
+Get a payment by ID (v2)
 
 
 
@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 
 > StateTransitionsResponse GetPaymentStateTransitionsById(ctx, paymentId).Execute()
 
-Get state transitions by payment ID
+Get state transitions by payment ID (v2)
 
 
 
@@ -288,7 +288,7 @@ Name | Type | Description  | Notes
 
 > UpdatePaymentLabelsResponse UpdatePaymentLabels(ctx, paymentId).UpdatePaymentLabelsRequest(updatePaymentLabelsRequest).Execute()
 
-Update payment labels
+Update payment labels (v2)
 
 
 

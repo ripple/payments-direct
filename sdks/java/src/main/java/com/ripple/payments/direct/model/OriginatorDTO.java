@@ -1,8 +1,8 @@
 /*
  * Payments Direct API
- * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | Test                                       | `https://api.test.ripple.com` | Test environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **Test** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+ * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
  *
- * The version of the OpenAPI document: 0.0.3
+ * The version of the OpenAPI document: 1.0.0
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -35,7 +35,6 @@ import java.util.StringJoiner;
   OriginatorDTO.JSON_PROPERTY_ORIGINATOR_IDENTITY_ID_VERSION,
   OriginatorDTO.JSON_PROPERTY_ORIGINATOR_IDENTITY_NICK_NAME,
   OriginatorDTO.JSON_PROPERTY_INTERNAL_ID,
-  OriginatorDTO.JSON_PROPERTY_SOURCE_COUNTRY,
   OriginatorDTO.JSON_PROPERTY_SOURCE_CURRENCY,
   OriginatorDTO.JSON_PROPERTY_SOURCE_AMOUNT,
   OriginatorDTO.JSON_PROPERTY_PAYIN
@@ -58,10 +57,6 @@ public class OriginatorDTO {
   public static final String JSON_PROPERTY_INTERNAL_ID = "internalId";
   @javax.annotation.Nullable
   private String internalId;
-
-  public static final String JSON_PROPERTY_SOURCE_COUNTRY = "sourceCountry";
-  @javax.annotation.Nullable
-  private String sourceCountry;
 
   public static final String JSON_PROPERTY_SOURCE_CURRENCY = "sourceCurrency";
   @javax.annotation.Nullable
@@ -178,31 +173,6 @@ public class OriginatorDTO {
     this.internalId = internalId;
   }
 
-  public OriginatorDTO sourceCountry(@javax.annotation.Nullable String sourceCountry) {
-    
-    this.sourceCountry = sourceCountry;
-    return this;
-  }
-
-  /**
-   * The country where the payment originator is located or incorporated, specified in Alpha-2 Code format as defined in the ISO CountryCode ISO 3166-1 list.
-   * @return sourceCountry
-   */
-  @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_SOURCE_COUNTRY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getSourceCountry() {
-    return sourceCountry;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_SOURCE_COUNTRY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSourceCountry(@javax.annotation.Nullable String sourceCountry) {
-    this.sourceCountry = sourceCountry;
-  }
-
   public OriginatorDTO sourceCurrency(@javax.annotation.Nullable String sourceCurrency) {
     
     this.sourceCurrency = sourceCurrency;
@@ -291,7 +261,6 @@ public class OriginatorDTO {
         Objects.equals(this.originatorIdentityIdVersion, originator.originatorIdentityIdVersion) &&
         Objects.equals(this.originatorIdentityNickName, originator.originatorIdentityNickName) &&
         Objects.equals(this.internalId, originator.internalId) &&
-        Objects.equals(this.sourceCountry, originator.sourceCountry) &&
         Objects.equals(this.sourceCurrency, originator.sourceCurrency) &&
         Objects.equals(this.sourceAmount, originator.sourceAmount) &&
         Objects.equals(this.payin, originator.payin);
@@ -299,7 +268,7 @@ public class OriginatorDTO {
 
   @Override
   public int hashCode() {
-    return Objects.hash(originatorIdentityId, originatorIdentityIdVersion, originatorIdentityNickName, internalId, sourceCountry, sourceCurrency, sourceAmount, payin);
+    return Objects.hash(originatorIdentityId, originatorIdentityIdVersion, originatorIdentityNickName, internalId, sourceCurrency, sourceAmount, payin);
   }
 
   @Override
@@ -310,7 +279,6 @@ public class OriginatorDTO {
     sb.append("    originatorIdentityIdVersion: ").append(toIndentedString(originatorIdentityIdVersion)).append("\n");
     sb.append("    originatorIdentityNickName: ").append(toIndentedString(originatorIdentityNickName)).append("\n");
     sb.append("    internalId: ").append(toIndentedString(internalId)).append("\n");
-    sb.append("    sourceCountry: ").append(toIndentedString(sourceCountry)).append("\n");
     sb.append("    sourceCurrency: ").append(toIndentedString(sourceCurrency)).append("\n");
     sb.append("    sourceAmount: ").append(toIndentedString(sourceAmount)).append("\n");
     sb.append("    payin: ").append(toIndentedString(payin)).append("\n");
@@ -395,16 +363,6 @@ public class OriginatorDTO {
     if (getInternalId() != null) {
       try {
         joiner.add(String.format("%sinternalId%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getInternalId()), "UTF-8").replaceAll("\\+", "%20")));
-      } catch (UnsupportedEncodingException e) {
-        // Should never happen, UTF-8 is always supported
-        throw new RuntimeException(e);
-      }
-    }
-
-    // add `sourceCountry` to the URL query string
-    if (getSourceCountry() != null) {
-      try {
-        joiner.add(String.format("%ssourceCountry%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getSourceCountry()), "UTF-8").replaceAll("\\+", "%20")));
       } catch (UnsupportedEncodingException e) {
         // Should never happen, UTF-8 is always supported
         throw new RuntimeException(e);

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **Destination** | Pointer to [**Destination**](Destination.md) |  | [optional] 
 **AdjustedExchangeRate** | Pointer to [**AdjustedExchangeRate**](AdjustedExchangeRate.md) |  | [optional] 
 **Fees** | Pointer to [**[]FeeSummary**](FeeSummary.md) | A summary of fees included in payment quote. | [optional] 
+**Taxes** | Pointer to [**[]TaxSummary**](TaxSummary.md) | A summary of taxes included in the payment quote. | [optional] 
 **SourceOfCash** | Pointer to **string** | Source of Cash may be required depending on corridor and payout partner. Valid Source of Cash values vary by corridor. | [optional] 
 **PurposeCode** | Pointer to **string** | Purpose Code may be required depending on corridor and payout partner. Valid Purpose Code values vary by corridor. | [optional] 
 **TransactionDetails** | Pointer to [**TransactionDetails**](TransactionDetails.md) |  | [optional] 
@@ -279,6 +280,31 @@ SetFees sets Fees field to given value.
 `func (o *PaymentWithDetails) HasFees() bool`
 
 HasFees returns a boolean if a field has been set.
+
+### GetTaxes
+
+`func (o *PaymentWithDetails) GetTaxes() []TaxSummary`
+
+GetTaxes returns the Taxes field if non-nil, zero value otherwise.
+
+### GetTaxesOk
+
+`func (o *PaymentWithDetails) GetTaxesOk() (*[]TaxSummary, bool)`
+
+GetTaxesOk returns a tuple with the Taxes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaxes
+
+`func (o *PaymentWithDetails) SetTaxes(v []TaxSummary)`
+
+SetTaxes sets Taxes field to given value.
+
+### HasTaxes
+
+`func (o *PaymentWithDetails) HasTaxes() bool`
+
+HasTaxes returns a boolean if a field has been set.
 
 ### GetSourceOfCash
 

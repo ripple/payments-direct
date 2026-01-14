@@ -4,10 +4,10 @@ All URIs are relative to *https://api.test.ripple.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateIdentityV2**](IdentitiesV2API.md#CreateIdentityV2) | **Post** /v2/identities | Create a new identity
-[**DeactivateIdentityV2**](IdentitiesV2API.md#DeactivateIdentityV2) | **Delete** /v2/identities/{identity-id} | Delete an identity
-[**GetIdentitiesV2**](IdentitiesV2API.md#GetIdentitiesV2) | **Get** /v2/identities | Get a list of identities
-[**GetIdentityByIdV2**](IdentitiesV2API.md#GetIdentityByIdV2) | **Get** /v2/identities/{identity-id} | Get an identity by ID
+[**CreateIdentityV2**](IdentitiesV2API.md#CreateIdentityV2) | **Post** /v2/identities | Create a new identity (v2) - Legacy
+[**DeactivateIdentityV2**](IdentitiesV2API.md#DeactivateIdentityV2) | **Delete** /v2/identities/{identity-id} | Delete an identity (v2) - Legacy
+[**GetIdentitiesV2**](IdentitiesV2API.md#GetIdentitiesV2) | **Get** /v2/identities | Get a list of identities (v2) - Legacy
+[**GetIdentityByIdV2**](IdentitiesV2API.md#GetIdentityByIdV2) | **Get** /v2/identities/{identity-id} | Get an identity by ID (v2) - Legacy
 
 
 
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 > CreateIdentityResponse CreateIdentityV2(ctx).CreateIdentityRequestV2(createIdentityRequestV2).Execute()
 
-Create a new identity
+Create a new identity (v2) - Legacy
 
 
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 > DeactivateIdentityV2(ctx, identityId).Execute()
 
-Delete an identity
+Delete an identity (v2) - Legacy
 
 
 
@@ -98,7 +98,7 @@ import (
 )
 
 func main() {
-	identityId := "146f3c51-c313-47ce-b6f2-691c5a238b3e" // string | Unique UUID string that maps to the identity to be deleted.
+	identityId := "146f3c51-c313-47ce-b6f2-691c5a238b3e" // string | ID of the identity to deactivate.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -116,7 +116,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**identityId** | **string** | Unique UUID string that maps to the identity to be deleted. | 
+**identityId** | **string** | ID of the identity to deactivate. | 
 
 ### Other Parameters
 
@@ -149,7 +149,7 @@ Name | Type | Description  | Notes
 
 > ListIdentitiesResponseV2 GetIdentitiesV2(ctx).IdentityType(identityType).NickName(nickName).Execute()
 
-Get a list of identities
+Get a list of identities (v2) - Legacy
 
 
 
@@ -217,7 +217,7 @@ Name | Type | Description  | Notes
 
 > IdentityResponseV2 GetIdentityByIdV2(ctx, identityId).Version(version).Execute()
 
-Get an identity by ID
+Get an identity by ID (v2) - Legacy
 
 
 
@@ -234,8 +234,8 @@ import (
 )
 
 func main() {
-	identityId := "146f3c51-c313-47ce-b6f2-691c5a238b3e" // string | The ID of the identity to get.
-	version := int32(2) // int32 | Version of the identity you want to retrieve.  **Note**: If you don't specify a version, the latest version of the identity is returned.  (optional)
+	identityId := "146f3c51-c313-47ce-b6f2-691c5a238b3e" // string | The ID of the identity to retrieve.
+	version := int32(2) // int32 | Specific version to retrieve. If omitted, returns the latest version. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -255,7 +255,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**identityId** | **string** | The ID of the identity to get. | 
+**identityId** | **string** | The ID of the identity to retrieve. | 
 
 ### Other Parameters
 
@@ -265,7 +265,7 @@ Other parameters are passed through a pointer to a apiGetIdentityByIdV2Request s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **version** | **int32** | Version of the identity you want to retrieve.  **Note**: If you don&#39;t specify a version, the latest version of the identity is returned.  | 
+ **version** | **int32** | Specific version to retrieve. If omitted, returns the latest version. | 
 
 ### Return type
 

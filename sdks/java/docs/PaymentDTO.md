@@ -17,7 +17,8 @@
 |**destination** | [**DestinationDTO**](DestinationDTO.md) |  |  [optional] |
 |**adjustedExchangeRate** | [**AdjustedExchangeRateDTO**](AdjustedExchangeRateDTO.md) |  |  [optional] |
 |**fees** | [**List&lt;FeeSummaryDTO&gt;**](FeeSummaryDTO.md) | A summary of fees included in payment quote. |  [optional] |
-|**sourceOfCash** | **String** | Source of Cash may be required depending on corridor and payout partner. Valid Source of Cash values vary by corridor. |  [optional] |
+|**taxes** | [**List&lt;TaxSummaryDTO&gt;**](TaxSummaryDTO.md) | A summary of taxes included in the payment quote. |  [optional] |
+|**sourceOfCash** | **String** | The source of cash may be required depending on corridor and payout partner. Valid values for the source of cash vary by corridor. |  [optional] |
 |**purposeCode** | **String** | Purpose Code may be required depending on corridor and payout partner. Valid Purpose Code values vary by corridor. |  [optional] |
 |**transactionDetails** | [**TransactionDetailsDTO**](TransactionDetailsDTO.md) |  |  [optional] |
 |**paymentLabels** | **List&lt;String&gt;** | Application-defined labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment’s lifetime. |  [optional] |

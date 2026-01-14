@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **PayinCategory** | **string** | The name of payin category specified in the quote request. | 
 **AdjustedExchangeRate** | Pointer to [**AdjustedExchangeRate**](AdjustedExchangeRate.md) |  | [optional] 
 **Fees** | Pointer to [**[]FeeSummary**](FeeSummary.md) | A summary of fees included in this quote. | [optional] 
+**Taxes** | Pointer to [**[]TaxSummary**](TaxSummary.md) | A summary of taxes included in this quote. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The time when this quote was created, specified in UTC. | [optional] 
 **ExpiresAt** | Pointer to **time.Time** | The time when this quote expires, specified in UTC. | [optional] 
 **DestinationBlockchainNetwork** | Pointer to **string** | The name of the blockchain network on which the beneficiary will receive this payment. | [optional] 
@@ -334,6 +335,31 @@ SetFees sets Fees field to given value.
 `func (o *Quote) HasFees() bool`
 
 HasFees returns a boolean if a field has been set.
+
+### GetTaxes
+
+`func (o *Quote) GetTaxes() []TaxSummary`
+
+GetTaxes returns the Taxes field if non-nil, zero value otherwise.
+
+### GetTaxesOk
+
+`func (o *Quote) GetTaxesOk() (*[]TaxSummary, bool)`
+
+GetTaxesOk returns a tuple with the Taxes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaxes
+
+`func (o *Quote) SetTaxes(v []TaxSummary)`
+
+SetTaxes sets Taxes field to given value.
+
+### HasTaxes
+
+`func (o *Quote) HasTaxes() bool`
+
+HasTaxes returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

@@ -1,8 +1,8 @@
 /*
  * Payments Direct API
- * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | Test                                       | `https://api.test.ripple.com` | Test environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **Test** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+ * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
  *
- * The version of the OpenAPI document: 0.0.3
+ * The version of the OpenAPI document: 1.0.0
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -22,6 +22,8 @@ import com.ripple.payments.direct.Pair;
 
 import com.ripple.payments.direct.model.GetBalances200ResponseDTO;
 import com.ripple.payments.direct.model.GetBalances400ResponseDTO;
+import com.ripple.payments.direct.model.GetStatementsTransactionsForCustomer200ResponseInnerDTO;
+import java.time.OffsetDateTime;
 
 
 import java.util.ArrayList;
@@ -95,6 +97,120 @@ public class LedgerPublicApi extends BaseApi {
     String[] localVarAuthNames = new String[] { "Bearer" };
 
     TypeReference<GetBalances200ResponseDTO> localVarReturnType = new TypeReference<GetBalances200ResponseDTO>() {};
+    return apiClient.invokeAPI(
+        localVarPath,
+        "GET",
+        localVarQueryParams,
+        localVarCollectionQueryParams,
+        localVarQueryStringJoiner.toString(),
+        localVarPostBody,
+        localVarHeaderParams,
+        localVarCookieParams,
+        localVarFormParams,
+        localVarAccept,
+        localVarContentType,
+        localVarAuthNames,
+        localVarReturnType
+    );
+  }
+
+  /**
+   * Get ledger transactions
+   * Retrieve a paginated list of ledger transactions for your tenant within a specified date and time range. This endpoint returns detailed transaction data, including amounts, references, operations, and running balances, so you can reconcile balance changes over time for a given currency. 
+   * @param currency Three-letter ISO 4217 currency code for the transactions to return (for example, USD).  (required)
+   * @param startDttm Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions.  (required)
+   * @param endDttm End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions.  (required)
+   * @param pageSize Number of records to return in the response page. Use page-size together with offset for offset-based pagination  (required)
+   * @param status Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  (optional)
+   * @param txnReference Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  (optional)
+   * @param offset Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, &#x60;offset&#x3D;25&amp;page-size&#x3D;25&#x60; returns the second page of results.  (optional)
+   * @param sortKey Field to use for sorting the results. Allowed values include:  - &#x60;CREATED_AT&#x60;: sort by transaction creation timestamp.  - &#x60;STATEMENT_OPERATION&#x60;: sort by the operation type (for example, CREDIT, DEBIT).  - &#x60;STATEMENT_SOURCE&#x60;: sort by the transaction source (for example, PAYMENTS, BANK).  - &#x60;STATEMENT_STATUS&#x60;: sort by the ledger transaction status.  - &#x60;STATEMENT_TXN_REFERENCE&#x60;: sort by the transaction reference.  - &#x60;STATEMENT_UPDATED_AT&#x60;: sort by the last update timestamp.  (optional)
+   * @param sortDirection Sort direction. Allowed values:  - &#x60;ASC&#x60;: ascending order.  - &#x60;DESC&#x60;: descending order.  (optional)
+   * @return List&lt;GetStatementsTransactionsForCustomer200ResponseInnerDTO&gt;
+   * @throws ApiException if fails to make API call
+   */
+  public List<GetStatementsTransactionsForCustomer200ResponseInnerDTO> getStatementsTransactionsForCustomer(@javax.annotation.Nonnull String currency, @javax.annotation.Nonnull OffsetDateTime startDttm, @javax.annotation.Nonnull OffsetDateTime endDttm, @javax.annotation.Nonnull Integer pageSize, @javax.annotation.Nullable String status, @javax.annotation.Nullable String txnReference, @javax.annotation.Nullable Integer offset, @javax.annotation.Nullable String sortKey, @javax.annotation.Nullable String sortDirection) throws ApiException {
+    return this.getStatementsTransactionsForCustomer(currency, startDttm, endDttm, pageSize, status, txnReference, offset, sortKey, sortDirection, Collections.emptyMap());
+  }
+
+
+  /**
+   * Get ledger transactions
+   * Retrieve a paginated list of ledger transactions for your tenant within a specified date and time range. This endpoint returns detailed transaction data, including amounts, references, operations, and running balances, so you can reconcile balance changes over time for a given currency. 
+   * @param currency Three-letter ISO 4217 currency code for the transactions to return (for example, USD).  (required)
+   * @param startDttm Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions.  (required)
+   * @param endDttm End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions.  (required)
+   * @param pageSize Number of records to return in the response page. Use page-size together with offset for offset-based pagination  (required)
+   * @param status Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  (optional)
+   * @param txnReference Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  (optional)
+   * @param offset Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, &#x60;offset&#x3D;25&amp;page-size&#x3D;25&#x60; returns the second page of results.  (optional)
+   * @param sortKey Field to use for sorting the results. Allowed values include:  - &#x60;CREATED_AT&#x60;: sort by transaction creation timestamp.  - &#x60;STATEMENT_OPERATION&#x60;: sort by the operation type (for example, CREDIT, DEBIT).  - &#x60;STATEMENT_SOURCE&#x60;: sort by the transaction source (for example, PAYMENTS, BANK).  - &#x60;STATEMENT_STATUS&#x60;: sort by the ledger transaction status.  - &#x60;STATEMENT_TXN_REFERENCE&#x60;: sort by the transaction reference.  - &#x60;STATEMENT_UPDATED_AT&#x60;: sort by the last update timestamp.  (optional)
+   * @param sortDirection Sort direction. Allowed values:  - &#x60;ASC&#x60;: ascending order.  - &#x60;DESC&#x60;: descending order.  (optional)
+   * @param additionalHeaders additionalHeaders for this call
+   * @return List&lt;GetStatementsTransactionsForCustomer200ResponseInnerDTO&gt;
+   * @throws ApiException if fails to make API call
+   */
+  public List<GetStatementsTransactionsForCustomer200ResponseInnerDTO> getStatementsTransactionsForCustomer(@javax.annotation.Nonnull String currency, @javax.annotation.Nonnull OffsetDateTime startDttm, @javax.annotation.Nonnull OffsetDateTime endDttm, @javax.annotation.Nonnull Integer pageSize, @javax.annotation.Nullable String status, @javax.annotation.Nullable String txnReference, @javax.annotation.Nullable Integer offset, @javax.annotation.Nullable String sortKey, @javax.annotation.Nullable String sortDirection, Map<String, String> additionalHeaders) throws ApiException {
+    Object localVarPostBody = null;
+    
+    // verify the required parameter 'currency' is set
+    if (currency == null) {
+      throw new ApiException(400, "Missing the required parameter 'currency' when calling getStatementsTransactionsForCustomer");
+    }
+    
+    // verify the required parameter 'startDttm' is set
+    if (startDttm == null) {
+      throw new ApiException(400, "Missing the required parameter 'startDttm' when calling getStatementsTransactionsForCustomer");
+    }
+    
+    // verify the required parameter 'endDttm' is set
+    if (endDttm == null) {
+      throw new ApiException(400, "Missing the required parameter 'endDttm' when calling getStatementsTransactionsForCustomer");
+    }
+    
+    // verify the required parameter 'pageSize' is set
+    if (pageSize == null) {
+      throw new ApiException(400, "Missing the required parameter 'pageSize' when calling getStatementsTransactionsForCustomer");
+    }
+    
+    // create path and map variables
+    String localVarPath = "/v2/ledger-transactions";
+
+    StringJoiner localVarQueryStringJoiner = new StringJoiner("&");
+    String localVarQueryParameterBaseName;
+    List<Pair> localVarQueryParams = new ArrayList<Pair>();
+    List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+    Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+    Map<String, String> localVarCookieParams = new HashMap<String, String>();
+    Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+    localVarQueryParams.addAll(apiClient.parameterToPair("currency", currency));
+    localVarQueryParams.addAll(apiClient.parameterToPair("start-dttm", startDttm));
+    localVarQueryParams.addAll(apiClient.parameterToPair("end-dttm", endDttm));
+    localVarQueryParams.addAll(apiClient.parameterToPair("status", status));
+    localVarQueryParams.addAll(apiClient.parameterToPair("txnReference", txnReference));
+    localVarQueryParams.addAll(apiClient.parameterToPair("page-size", pageSize));
+    localVarQueryParams.addAll(apiClient.parameterToPair("offset", offset));
+    localVarQueryParams.addAll(apiClient.parameterToPair("sort-key", sortKey));
+    localVarQueryParams.addAll(apiClient.parameterToPair("sort-direction", sortDirection));
+    
+    localVarHeaderParams.putAll(additionalHeaders);
+
+    
+    
+    final String[] localVarAccepts = {
+      "application/json"
+    };
+    final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+    final String[] localVarContentTypes = {
+      
+    };
+    final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+    String[] localVarAuthNames = new String[] { "Bearer" };
+
+    TypeReference<List<GetStatementsTransactionsForCustomer200ResponseInnerDTO>> localVarReturnType = new TypeReference<List<GetStatementsTransactionsForCustomer200ResponseInnerDTO>>() {};
     return apiClient.invokeAPI(
         localVarPath,
         "GET",

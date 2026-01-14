@@ -1,8 +1,8 @@
 /*
  * Payments Direct API
- * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | Test                                       | `https://api.test.ripple.com` | Test environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **Test** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+ * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
  *
- * The version of the OpenAPI document: 0.0.3
+ * The version of the OpenAPI document: 1.0.0
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -47,7 +47,7 @@ public class IdentitiesV2Api extends BaseApi {
   }
 
   /**
-   * Create a new identity
+   * Create a new identity (v2) - Legacy
    * Create a new identity.  &lt;!-- **Tutorials**  * Learn how to [Create an identity](../../tutorials/create-an-identity/). --&gt; 
    * @param createIdentityRequestV2DTO  (required)
    * @return CreateIdentityResponseDTO
@@ -59,7 +59,7 @@ public class IdentitiesV2Api extends BaseApi {
 
 
   /**
-   * Create a new identity
+   * Create a new identity (v2) - Legacy
    * Create a new identity.  &lt;!-- **Tutorials**  * Learn how to [Create an identity](../../tutorials/create-an-identity/). --&gt; 
    * @param createIdentityRequestV2DTO  (required)
    * @param additionalHeaders additionalHeaders for this call
@@ -121,9 +121,9 @@ public class IdentitiesV2Api extends BaseApi {
   }
 
   /**
-   * Delete an identity
-   * Delete an identity
-   * @param identityId Unique UUID string that maps to the identity to be deleted. (required)
+   * Delete an identity (v2) - Legacy
+   * Deactivate an identity and its financial instruments. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
+   * @param identityId ID of the identity to deactivate. (required)
    * @throws ApiException if fails to make API call
    */
   public void deactivateIdentityV2(@javax.annotation.Nonnull String identityId) throws ApiException {
@@ -132,9 +132,9 @@ public class IdentitiesV2Api extends BaseApi {
 
 
   /**
-   * Delete an identity
-   * Delete an identity
-   * @param identityId Unique UUID string that maps to the identity to be deleted. (required)
+   * Delete an identity (v2) - Legacy
+   * Deactivate an identity and its financial instruments. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
+   * @param identityId ID of the identity to deactivate. (required)
    * @param additionalHeaders additionalHeaders for this call
    * @throws ApiException if fails to make API call
    */
@@ -193,7 +193,7 @@ public class IdentitiesV2Api extends BaseApi {
   }
 
   /**
-   * Get a list of identities
+   * Get a list of identities (v2) - Legacy
    * Get a list of identities that match the query parameters.  **Note**: Depending on the number of identities in your account, not all of them may be returned even if they match your query parameters. 
    * @param identityType The type of identities you want to retrieve (optional)
    * @param nickName The nickname for the identity provided at the time of identity creation (optional)
@@ -206,7 +206,7 @@ public class IdentitiesV2Api extends BaseApi {
 
 
   /**
-   * Get a list of identities
+   * Get a list of identities (v2) - Legacy
    * Get a list of identities that match the query parameters.  **Note**: Depending on the number of identities in your account, not all of them may be returned even if they match your query parameters. 
    * @param identityType The type of identities you want to retrieve (optional)
    * @param nickName The nickname for the identity provided at the time of identity creation (optional)
@@ -266,10 +266,10 @@ public class IdentitiesV2Api extends BaseApi {
   }
 
   /**
-   * Get an identity by ID
-   * Get an identity by its unique ID
-   * @param identityId The ID of the identity to get. (required)
-   * @param version Version of the identity you want to retrieve.  **Note**: If you don&#39;t specify a version, the latest version of the identity is returned.  (optional)
+   * Get an identity by ID (v2) - Legacy
+   * Retrieve a specific identity by ID. If &#x60;version&#x60; is not provided, the latest version is returned. 
+   * @param identityId The ID of the identity to retrieve. (required)
+   * @param version Specific version to retrieve. If omitted, returns the latest version. (optional)
    * @return IdentityResponseV2DTO
    * @throws ApiException if fails to make API call
    */
@@ -279,10 +279,10 @@ public class IdentitiesV2Api extends BaseApi {
 
 
   /**
-   * Get an identity by ID
-   * Get an identity by its unique ID
-   * @param identityId The ID of the identity to get. (required)
-   * @param version Version of the identity you want to retrieve.  **Note**: If you don&#39;t specify a version, the latest version of the identity is returned.  (optional)
+   * Get an identity by ID (v2) - Legacy
+   * Retrieve a specific identity by ID. If &#x60;version&#x60; is not provided, the latest version is returned. 
+   * @param identityId The ID of the identity to retrieve. (required)
+   * @param version Specific version to retrieve. If omitted, returns the latest version. (optional)
    * @param additionalHeaders additionalHeaders for this call
    * @return IdentityResponseV2DTO
    * @throws ApiException if fails to make API call

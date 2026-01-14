@@ -1,8 +1,8 @@
 /*
  * Payments Direct API
- * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | Test                                       | `https://api.test.ripple.com` | Test environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **Test** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+ * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
  *
- * The version of the OpenAPI document: 0.0.3
+ * The version of the OpenAPI document: 1.0.0
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -26,6 +26,7 @@ import com.ripple.payments.direct.model.FeeSummaryDTO;
 import com.ripple.payments.direct.model.OriginatorDTO;
 import com.ripple.payments.direct.model.PaymentErrorDTO;
 import com.ripple.payments.direct.model.PaymentStateDTO;
+import com.ripple.payments.direct.model.TaxSummaryDTO;
 import com.ripple.payments.direct.model.TransactionDetailsDTO;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ import java.util.StringJoiner;
   PaymentWithDetailsDTO.JSON_PROPERTY_DESTINATION,
   PaymentWithDetailsDTO.JSON_PROPERTY_ADJUSTED_EXCHANGE_RATE,
   PaymentWithDetailsDTO.JSON_PROPERTY_FEES,
+  PaymentWithDetailsDTO.JSON_PROPERTY_TAXES,
   PaymentWithDetailsDTO.JSON_PROPERTY_SOURCE_OF_CASH,
   PaymentWithDetailsDTO.JSON_PROPERTY_PURPOSE_CODE,
   PaymentWithDetailsDTO.JSON_PROPERTY_TRANSACTION_DETAILS,
@@ -101,6 +103,10 @@ public class PaymentWithDetailsDTO {
   public static final String JSON_PROPERTY_FEES = "fees";
   @javax.annotation.Nullable
   private List<FeeSummaryDTO> fees = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_TAXES = "taxes";
+  @javax.annotation.Nullable
+  private List<TaxSummaryDTO> taxes = new ArrayList<>();
 
   public static final String JSON_PROPERTY_SOURCE_OF_CASH = "sourceOfCash";
   @javax.annotation.Nullable
@@ -387,6 +393,39 @@ public class PaymentWithDetailsDTO {
     this.fees = fees;
   }
 
+  public PaymentWithDetailsDTO taxes(@javax.annotation.Nullable List<TaxSummaryDTO> taxes) {
+    
+    this.taxes = taxes;
+    return this;
+  }
+
+  public PaymentWithDetailsDTO addTaxesItem(TaxSummaryDTO taxesItem) {
+    if (this.taxes == null) {
+      this.taxes = new ArrayList<>();
+    }
+    this.taxes.add(taxesItem);
+    return this;
+  }
+
+  /**
+   * A summary of taxes included in the payment quote.
+   * @return taxes
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TAXES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public List<TaxSummaryDTO> getTaxes() {
+    return taxes;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_TAXES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTaxes(@javax.annotation.Nullable List<TaxSummaryDTO> taxes) {
+    this.taxes = taxes;
+  }
+
   public PaymentWithDetailsDTO sourceOfCash(@javax.annotation.Nullable String sourceOfCash) {
     
     this.sourceOfCash = sourceOfCash;
@@ -572,6 +611,7 @@ public class PaymentWithDetailsDTO {
         Objects.equals(this.destination, paymentWithDetails.destination) &&
         Objects.equals(this.adjustedExchangeRate, paymentWithDetails.adjustedExchangeRate) &&
         Objects.equals(this.fees, paymentWithDetails.fees) &&
+        Objects.equals(this.taxes, paymentWithDetails.taxes) &&
         Objects.equals(this.sourceOfCash, paymentWithDetails.sourceOfCash) &&
         Objects.equals(this.purposeCode, paymentWithDetails.purposeCode) &&
         Objects.equals(this.transactionDetails, paymentWithDetails.transactionDetails) &&
@@ -582,7 +622,7 @@ public class PaymentWithDetailsDTO {
 
   @Override
   public int hashCode() {
-    return Objects.hash(paymentId, cryptoTransactionHash, initiatedAt, expiresAt, lastStateUpdatedAt, paymentState, originator, destination, adjustedExchangeRate, fees, sourceOfCash, purposeCode, transactionDetails, errors, paymentLabels, paymentMemo);
+    return Objects.hash(paymentId, cryptoTransactionHash, initiatedAt, expiresAt, lastStateUpdatedAt, paymentState, originator, destination, adjustedExchangeRate, fees, taxes, sourceOfCash, purposeCode, transactionDetails, errors, paymentLabels, paymentMemo);
   }
 
   @Override
@@ -599,6 +639,7 @@ public class PaymentWithDetailsDTO {
     sb.append("    destination: ").append(toIndentedString(destination)).append("\n");
     sb.append("    adjustedExchangeRate: ").append(toIndentedString(adjustedExchangeRate)).append("\n");
     sb.append("    fees: ").append(toIndentedString(fees)).append("\n");
+    sb.append("    taxes: ").append(toIndentedString(taxes)).append("\n");
     sb.append("    sourceOfCash: ").append(toIndentedString(sourceOfCash)).append("\n");
     sb.append("    purposeCode: ").append(toIndentedString(purposeCode)).append("\n");
     sb.append("    transactionDetails: ").append(toIndentedString(transactionDetails)).append("\n");
@@ -732,6 +773,16 @@ public class PaymentWithDetailsDTO {
       for (int i = 0; i < getFees().size(); i++) {
         if (getFees().get(i) != null) {
           joiner.add(getFees().get(i).toUrlQueryString(String.format("%sfees%s%s", prefix, suffix,
+              "".equals(suffix) ? "" : String.format("%s%d%s", containerPrefix, i, containerSuffix))));
+        }
+      }
+    }
+
+    // add `taxes` to the URL query string
+    if (getTaxes() != null) {
+      for (int i = 0; i < getTaxes().size(); i++) {
+        if (getTaxes().get(i) != null) {
+          joiner.add(getTaxes().get(i).toUrlQueryString(String.format("%staxes%s%s", prefix, suffix,
               "".equals(suffix) ? "" : String.format("%s%d%s", containerPrefix, i, containerSuffix))));
         }
       }

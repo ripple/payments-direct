@@ -1,9 +1,9 @@
 /*
 Payments Direct API
 
-Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | Test                                       | `https://api.test.ripple.com` | Test environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **Test** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
 
-API version: 0.0.3
+API version: 1.0.0
 */
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
@@ -39,7 +39,7 @@ func (r IdentitiesV2APICreateIdentityV2Request) Execute() (*CreateIdentityRespon
 }
 
 /*
-CreateIdentityV2 Create a new identity
+CreateIdentityV2 Create a new identity (v2) - Legacy
 
 Create a new identity.
 
@@ -170,12 +170,15 @@ func (r IdentitiesV2APIDeactivateIdentityV2Request) Execute() (*http.Response, e
 }
 
 /*
-DeactivateIdentityV2 Delete an identity
+DeactivateIdentityV2 Delete an identity (v2) - Legacy
 
-Delete an identity
+Deactivate an identity and its financial instruments.
+Deactivation is permanent and prevents further use in payments.
+Historical versions remain available for audit.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param identityId Unique UUID string that maps to the identity to be deleted.
+ @param identityId ID of the identity to deactivate.
  @return IdentitiesV2APIDeactivateIdentityV2Request
 */
 func (a *IdentitiesV2APIService) DeactivateIdentityV2(ctx context.Context, identityId string) IdentitiesV2APIDeactivateIdentityV2Request {
@@ -318,7 +321,7 @@ func (r IdentitiesV2APIGetIdentitiesV2Request) Execute() (*ListIdentitiesRespons
 }
 
 /*
-GetIdentitiesV2 Get a list of identities
+GetIdentitiesV2 Get a list of identities (v2) - Legacy
 
 Get a list of identities that match the query parameters.
 
@@ -455,7 +458,7 @@ type IdentitiesV2APIGetIdentityByIdV2Request struct {
 	version *int32
 }
 
-// Version of the identity you want to retrieve.  **Note**: If you don&#39;t specify a version, the latest version of the identity is returned. 
+// Specific version to retrieve. If omitted, returns the latest version.
 func (r IdentitiesV2APIGetIdentityByIdV2Request) Version(version int32) IdentitiesV2APIGetIdentityByIdV2Request {
 	r.version = &version
 	return r
@@ -466,12 +469,14 @@ func (r IdentitiesV2APIGetIdentityByIdV2Request) Execute() (*IdentityResponseV2,
 }
 
 /*
-GetIdentityByIdV2 Get an identity by ID
+GetIdentityByIdV2 Get an identity by ID (v2) - Legacy
 
-Get an identity by its unique ID
+Retrieve a specific identity by ID.
+If `version` is not provided, the latest version is returned.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param identityId The ID of the identity to get.
+ @param identityId The ID of the identity to retrieve.
  @return IdentitiesV2APIGetIdentityByIdV2Request
 */
 func (a *IdentitiesV2APIService) GetIdentityByIdV2(ctx context.Context, identityId string) IdentitiesV2APIGetIdentityByIdV2Request {
@@ -558,6 +563,17 @@ func (a *IdentitiesV2APIService) GetIdentityByIdV2Execute(r IdentitiesV2APIGetId
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

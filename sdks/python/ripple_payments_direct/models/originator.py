@@ -3,9 +3,9 @@
 """
     Payments Direct API
 
-    Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | Test                                       | `https://api.test.ripple.com` | Test environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **Test** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+    Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
 
-    The version of the OpenAPI document: 0.0.3
+    The version of the OpenAPI document: 1.0.0
     Generated by OpenAPI Generator (https://openapi-generator.tech)
 
     Do not edit the class manually.
@@ -31,21 +31,10 @@ class Originator(BaseModel):
     originator_identity_id_version: Optional[StrictInt] = Field(default=None, description="The current version of the originator's identity record.", alias="originatorIdentityIdVersion")
     originator_identity_nick_name: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, description="Nickname associated with the originator's identity record.", alias="originatorIdentityNickName")
     internal_id: Optional[Annotated[str, Field(strict=True, max_length=35)]] = Field(default=None, description="An ID associated with this payment, if provided by the customer during payment initiation.", alias="internalId")
-    source_country: Optional[Annotated[str, Field(strict=True, max_length=2)]] = Field(default=None, description="The country where the payment originator is located or incorporated, specified in Alpha-2 Code format as defined in the ISO CountryCode ISO 3166-1 list.", alias="sourceCountry")
     source_currency: Optional[Annotated[str, Field(strict=True, max_length=5)]] = Field(default=None, description="originator's currency", alias="sourceCurrency")
     source_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount sent by the originator in this payment. This field can hold a value with up to 6 decimal places.", alias="sourceAmount")
     payin: Optional[StrictStr] = Field(default=None, description="Details about how this payment is funded.")
-    __properties: ClassVar[List[str]] = ["originatorIdentityId", "originatorIdentityIdVersion", "originatorIdentityNickName", "internalId", "sourceCountry", "sourceCurrency", "sourceAmount", "payin"]
-
-    @field_validator('source_country')
-    def source_country_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[A-Z]{2}$", value):
-            raise ValueError(r"must validate the regular expression /^[A-Z]{2}$/")
-        return value
+    __properties: ClassVar[List[str]] = ["originatorIdentityId", "originatorIdentityIdVersion", "originatorIdentityNickName", "internalId", "sourceCurrency", "sourceAmount", "payin"]
 
     @field_validator('source_currency')
     def source_currency_validate_regular_expression(cls, value):
@@ -112,7 +101,6 @@ class Originator(BaseModel):
             "originatorIdentityIdVersion": obj.get("originatorIdentityIdVersion"),
             "originatorIdentityNickName": obj.get("originatorIdentityNickName"),
             "internalId": obj.get("internalId"),
-            "sourceCountry": obj.get("sourceCountry"),
             "sourceCurrency": obj.get("sourceCurrency"),
             "sourceAmount": obj.get("sourceAmount"),
             "payin": obj.get("payin")

@@ -20,6 +20,7 @@
 |**payinCategory** | **String** | The name of payin category specified in the quote request. |  |
 |**adjustedExchangeRate** | [**AdjustedExchangeRateDTO**](AdjustedExchangeRateDTO.md) |  |  [optional] |
 |**fees** | [**List&lt;FeeSummaryDTO&gt;**](FeeSummaryDTO.md) | A summary of fees included in this quote. |  [optional] |
+|**taxes** | [**List&lt;TaxSummaryDTO&gt;**](TaxSummaryDTO.md) | A summary of taxes included in this quote. |  [optional] |
 |**createdAt** | **OffsetDateTime** | The time when this quote was created, specified in UTC. |  [optional] |
 |**expiresAt** | **OffsetDateTime** | The time when this quote expires, specified in UTC. |  [optional] |
 |**destinationBlockchainNetwork** | **String** | The name of the blockchain network on which the beneficiary will receive this payment. |  [optional] |

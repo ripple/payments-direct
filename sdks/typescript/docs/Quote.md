@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **payinCategory** | **string** | The name of payin category specified in the quote request. | [default to undefined]
 **adjustedExchangeRate** | [**AdjustedExchangeRate**](AdjustedExchangeRate.md) |  | [optional] [default to undefined]
 **fees** | [**Array&lt;FeeSummary&gt;**](FeeSummary.md) | A summary of fees included in this quote. | [optional] [default to undefined]
+**taxes** | [**Array&lt;TaxSummary&gt;**](TaxSummary.md) | A summary of taxes included in this quote. | [optional] [default to undefined]
 **createdAt** | **string** | The time when this quote was created, specified in UTC. | [optional] [default to undefined]
 **expiresAt** | **string** | The time when this quote expires, specified in UTC. | [optional] [default to undefined]
 **destinationBlockchainNetwork** | **string** | The name of the blockchain network on which the beneficiary will receive this payment. | [optional] [default to undefined]
@@ -41,6 +42,7 @@ const instance: Quote = {
     payinCategory,
     adjustedExchangeRate,
     fees,
+    taxes,
     createdAt,
     expiresAt,
     destinationBlockchainNetwork,

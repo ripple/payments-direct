@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **originator_identity_id_version** | **int** | The current version of the originator&#39;s identity record. | [optional] 
 **originator_identity_nick_name** | **str** | Nickname associated with the originator&#39;s identity record. | [optional] 
 **internal_id** | **str** | An ID associated with this payment, if provided by the customer during payment initiation. | [optional] 
-**source_country** | **str** | The country where the payment originator is located or incorporated, specified in Alpha-2 Code format as defined in the ISO CountryCode ISO 3166-1 list. | [optional] 
 **source_currency** | **str** | originator&#39;s currency | [optional] 
 **source_amount** | **float** | The amount sent by the originator in this payment. This field can hold a value with up to 6 decimal places. | [optional] 
 **payin** | **str** | Details about how this payment is funded. | [optional] 

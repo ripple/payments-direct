@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **payin_category** | **str** | The name of payin category specified in the quote request. | 
 **adjusted_exchange_rate** | [**AdjustedExchangeRate**](AdjustedExchangeRate.md) |  | [optional] 
 **fees** | [**List[FeeSummary]**](FeeSummary.md) | A summary of fees included in this quote. | [optional] 
+**taxes** | [**List[TaxSummary]**](TaxSummary.md) | A summary of taxes included in this quote. | [optional] 
 **created_at** | **datetime** | The time when this quote was created, specified in UTC. | [optional] 
 **expires_at** | **datetime** | The time when this quote expires, specified in UTC. | [optional] 
 **destination_blockchain_network** | **str** | The name of the blockchain network on which the beneficiary will receive this payment. | [optional] 

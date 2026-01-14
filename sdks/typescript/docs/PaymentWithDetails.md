@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **destination** | [**Destination**](Destination.md) |  | [optional] [default to undefined]
 **adjustedExchangeRate** | [**AdjustedExchangeRate**](AdjustedExchangeRate.md) |  | [optional] [default to undefined]
 **fees** | [**Array&lt;FeeSummary&gt;**](FeeSummary.md) | A summary of fees included in payment quote. | [optional] [default to undefined]
+**taxes** | [**Array&lt;TaxSummary&gt;**](TaxSummary.md) | A summary of taxes included in the payment quote. | [optional] [default to undefined]
 **sourceOfCash** | **string** | Source of Cash may be required depending on corridor and payout partner. Valid Source of Cash values vary by corridor. | [optional] [default to undefined]
 **purposeCode** | **string** | Purpose Code may be required depending on corridor and payout partner. Valid Purpose Code values vary by corridor. | [optional] [default to undefined]
 **transactionDetails** | [**TransactionDetails**](TransactionDetails.md) |  | [optional] [default to undefined]
@@ -38,6 +39,7 @@ const instance: PaymentWithDetails = {
     destination,
     adjustedExchangeRate,
     fees,
+    taxes,
     sourceOfCash,
     purposeCode,
     transactionDetails,

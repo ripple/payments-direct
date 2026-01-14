@@ -4,10 +4,10 @@ All URIs are relative to *https://api.test.ripple.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createIdentityV2**](IdentitiesV2Api.md#createIdentityV2) | **POST** /v2/identities | Create a new identity |
-| [**deactivateIdentityV2**](IdentitiesV2Api.md#deactivateIdentityV2) | **DELETE** /v2/identities/{identity-id} | Delete an identity |
-| [**getIdentitiesV2**](IdentitiesV2Api.md#getIdentitiesV2) | **GET** /v2/identities | Get a list of identities |
-| [**getIdentityByIdV2**](IdentitiesV2Api.md#getIdentityByIdV2) | **GET** /v2/identities/{identity-id} | Get an identity by ID |
+| [**createIdentityV2**](IdentitiesV2Api.md#createIdentityV2) | **POST** /v2/identities | Create a new identity (v2) - Legacy |
+| [**deactivateIdentityV2**](IdentitiesV2Api.md#deactivateIdentityV2) | **DELETE** /v2/identities/{identity-id} | Delete an identity (v2) - Legacy |
+| [**getIdentitiesV2**](IdentitiesV2Api.md#getIdentitiesV2) | **GET** /v2/identities | Get a list of identities (v2) - Legacy |
+| [**getIdentityByIdV2**](IdentitiesV2Api.md#getIdentityByIdV2) | **GET** /v2/identities/{identity-id} | Get an identity by ID (v2) - Legacy |
 
 
 
@@ -15,7 +15,7 @@ All URIs are relative to *https://api.test.ripple.com*
 
 > CreateIdentityResponseDTO createIdentityV2(createIdentityRequestV2DTO)
 
-Create a new identity
+Create a new identity (v2) - Legacy
 
 Create a new identity.  &lt;!-- **Tutorials**  * Learn how to [Create an identity](../../tutorials/create-an-identity/). --&gt; 
 
@@ -88,9 +88,9 @@ public class Example {
 
 > deactivateIdentityV2(identityId)
 
-Delete an identity
+Delete an identity (v2) - Legacy
 
-Delete an identity
+Deactivate an identity and its financial instruments. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
 
 ### Example
 
@@ -113,7 +113,7 @@ public class Example {
         Bearer.setBearerToken("BEARER TOKEN");
 
         IdentitiesV2Api apiInstance = new IdentitiesV2Api(defaultClient);
-        String identityId = "146f3c51-c313-47ce-b6f2-691c5a238b3e"; // String | Unique UUID string that maps to the identity to be deleted.
+        String identityId = "146f3c51-c313-47ce-b6f2-691c5a238b3e"; // String | ID of the identity to deactivate.
         try {
             apiInstance.deactivateIdentityV2(identityId);
         } catch (ApiException e) {
@@ -132,7 +132,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **identityId** | **String**| Unique UUID string that maps to the identity to be deleted. | |
+| **identityId** | **String**| ID of the identity to deactivate. | |
 
 ### Return type
 
@@ -151,18 +151,18 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | The identity was deleted successfully |  -  |
-| **400** | Identity id is not of UUID format |  -  |
-| **404** | Invalid Identity id does not exist |  -  |
-| **422** | Unprocessable Identity Id |  -  |
-| **500** | Internal Processing Error |  -  |
+| **204** | Identity deactivated. |  -  |
+| **400** | Invalid request. |  -  |
+| **404** | Identity not found. |  -  |
+| **422** | Identity already deactivated or cannot be deactivated. |  -  |
+| **500** | Internal processing error |  -  |
 
 
 ## getIdentitiesV2
 
 > ListIdentitiesResponseV2DTO getIdentitiesV2(identityType, nickName)
 
-Get a list of identities
+Get a list of identities (v2) - Legacy
 
 Get a list of identities that match the query parameters.  **Note**: Depending on the number of identities in your account, not all of them may be returned even if they match your query parameters. 
 
@@ -238,9 +238,9 @@ public class Example {
 
 > IdentityResponseV2DTO getIdentityByIdV2(identityId, version)
 
-Get an identity by ID
+Get an identity by ID (v2) - Legacy
 
-Get an identity by its unique ID
+Retrieve a specific identity by ID. If &#x60;version&#x60; is not provided, the latest version is returned. 
 
 ### Example
 
@@ -263,8 +263,8 @@ public class Example {
         Bearer.setBearerToken("BEARER TOKEN");
 
         IdentitiesV2Api apiInstance = new IdentitiesV2Api(defaultClient);
-        String identityId = "146f3c51-c313-47ce-b6f2-691c5a238b3e"; // String | The ID of the identity to get.
-        Integer version = 2; // Integer | Version of the identity you want to retrieve.  **Note**: If you don't specify a version, the latest version of the identity is returned. 
+        String identityId = "146f3c51-c313-47ce-b6f2-691c5a238b3e"; // String | The ID of the identity to retrieve.
+        Integer version = 2; // Integer | Specific version to retrieve. If omitted, returns the latest version.
         try {
             IdentityResponseV2DTO result = apiInstance.getIdentityByIdV2(identityId, version);
             System.out.println(result);
@@ -284,8 +284,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **identityId** | **String**| The ID of the identity to get. | |
-| **version** | **Integer**| Version of the identity you want to retrieve.  **Note**: If you don&#39;t specify a version, the latest version of the identity is returned.  | [optional] |
+| **identityId** | **String**| The ID of the identity to retrieve. | |
+| **version** | **Integer**| Specific version to retrieve. If omitted, returns the latest version. | [optional] |
 
 ### Return type
 
@@ -304,7 +304,8 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Requested identity info in JSON format |  -  |
-| **400** | Identity ID is not in UUID format |  -  |
-| **404** | Invalid - identity ID does not exist |  -  |
+| **200** | Identity details. |  -  |
+| **400** | Invalid identity ID. |  -  |
+| **404** | Identity not found. |  -  |
+| **500** | Internal processing error. |  -  |
 

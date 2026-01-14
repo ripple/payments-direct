@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **OriginatorIdentityIdVersion** | Pointer to **int32** | The current version of the originator&#39;s identity record. | [optional] 
 **OriginatorIdentityNickName** | Pointer to **string** | Nickname associated with the originator&#39;s identity record. | [optional] 
 **InternalId** | Pointer to **string** | An ID associated with this payment, if provided by the customer during payment initiation. | [optional] 
-**SourceCountry** | Pointer to **string** | The country where the payment originator is located or incorporated, specified in Alpha-2 Code format as defined in the ISO CountryCode ISO 3166-1 list. | [optional] 
 **SourceCurrency** | Pointer to **string** | originator&#39;s currency | [optional] 
 **SourceAmount** | Pointer to **float64** | The amount sent by the originator in this payment. This field can hold a value with up to 6 decimal places. | [optional] 
 **Payin** | Pointer to **string** | Details about how this payment is funded. | [optional] 
@@ -131,31 +130,6 @@ SetInternalId sets InternalId field to given value.
 `func (o *Originator) HasInternalId() bool`
 
 HasInternalId returns a boolean if a field has been set.
-
-### GetSourceCountry
-
-`func (o *Originator) GetSourceCountry() string`
-
-GetSourceCountry returns the SourceCountry field if non-nil, zero value otherwise.
-
-### GetSourceCountryOk
-
-`func (o *Originator) GetSourceCountryOk() (*string, bool)`
-
-GetSourceCountryOk returns a tuple with the SourceCountry field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSourceCountry
-
-`func (o *Originator) SetSourceCountry(v string)`
-
-SetSourceCountry sets SourceCountry field to given value.
-
-### HasSourceCountry
-
-`func (o *Originator) HasSourceCountry() bool`
-
-HasSourceCountry returns a boolean if a field has been set.
 
 ### GetSourceCurrency
 

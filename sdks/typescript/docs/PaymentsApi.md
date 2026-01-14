@@ -4,16 +4,16 @@ All URIs are relative to *https://api.test.ripple.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createPayment**](#createpayment) | **POST** /v2/payments | Create payment|
-|[**getPaymentById**](#getpaymentbyid) | **GET** /v2/payments/{paymentId} | Get a payment by ID|
-|[**getPaymentStateTransitionsById**](#getpaymentstatetransitionsbyid) | **GET** /v2/payments/{paymentId}/states | Get state transitions by payment ID|
+|[**createPayment**](#createpayment) | **POST** /v2/payments | Create payment (v2)|
+|[**getPaymentById**](#getpaymentbyid) | **GET** /v2/payments/{paymentId} | Get a payment by ID (v2)|
+|[**getPaymentStateTransitionsById**](#getpaymentstatetransitionsbyid) | **GET** /v2/payments/{paymentId}/states | Get state transitions by payment ID (v2)|
 |[**searchPayments**](#searchpayments) | **POST** /v2/payments/filter | Search payments|
-|[**updatePaymentLabels**](#updatepaymentlabels) | **PATCH** /v2/payments/{paymentId}/labels | Update payment labels|
+|[**updatePaymentLabels**](#updatepaymentlabels) | **PATCH** /v2/payments/{paymentId}/labels | Update payment labels (v2)|
 
 # **createPayment**
 > Payment createPayment(paymentRequest)
 
-Create a payment  **Tutorials**  * Learn how to [Create a payment](../../tutorials/create-a-payment/). * Learn how to [Create a third-party payment](../../tutorials/create-a-third-party-payment/). 
+Create a payment  **Tutorials**  * Learn how to [Create a payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-payment/). * Learn how to [Create a third-party payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-third-party-payment/). 
 
 ### Example
 

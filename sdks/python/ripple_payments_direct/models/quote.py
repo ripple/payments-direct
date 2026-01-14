@@ -3,9 +3,9 @@
 """
     Payments Direct API
 
-    Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | Test                                       | `https://api.test.ripple.com` | Test environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **Test** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+    Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
 
-    The version of the OpenAPI document: 0.0.3
+    The version of the OpenAPI document: 1.0.0
     Generated by OpenAPI Generator (https://openapi-generator.tech)
 
     Do not edit the class manually.
@@ -25,6 +25,7 @@ from ripple_payments_direct.models.adjusted_exchange_rate import AdjustedExchang
 from ripple_payments_direct.models.fee_summary import FeeSummary
 from ripple_payments_direct.models.quote_amount_type import QuoteAmountType
 from ripple_payments_direct.models.quote_status import QuoteStatus
+from ripple_payments_direct.models.tax_summary import TaxSummary
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -45,10 +46,11 @@ class Quote(BaseModel):
     payin_category: Annotated[str, Field(min_length=1, strict=True, max_length=128)] = Field(description="The name of payin category specified in the quote request.", alias="payinCategory")
     adjusted_exchange_rate: Optional[AdjustedExchangeRate] = Field(default=None, alias="adjustedExchangeRate")
     fees: Optional[List[FeeSummary]] = Field(default=None, description="A summary of fees included in this quote.")
+    taxes: Optional[List[TaxSummary]] = Field(default=None, description="A summary of taxes included in this quote.")
     created_at: Optional[datetime] = Field(default=None, description="The time when this quote was created, specified in UTC.", alias="createdAt")
     expires_at: Optional[datetime] = Field(default=None, description="The time when this quote expires, specified in UTC.", alias="expiresAt")
     destination_blockchain_network: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=20)]] = Field(default=None, description="The name of the blockchain network on which the beneficiary will receive this payment.", alias="destinationBlockchainNetwork")
-    __properties: ClassVar[List[str]] = ["quoteId", "quoteStatus", "quoteAmountType", "sourceAmount", "destinationAmount", "sourceCurrency", "destinationCurrency", "sourceCountry", "destinationCountry", "payoutCategory", "payinCategory", "adjustedExchangeRate", "fees", "createdAt", "expiresAt", "destinationBlockchainNetwork"]
+    __properties: ClassVar[List[str]] = ["quoteId", "quoteStatus", "quoteAmountType", "sourceAmount", "destinationAmount", "sourceCurrency", "destinationCurrency", "sourceCountry", "destinationCountry", "payoutCategory", "payinCategory", "adjustedExchangeRate", "fees", "taxes", "createdAt", "expiresAt", "destinationBlockchainNetwork"]
 
     @field_validator('source_currency')
     def source_currency_validate_regular_expression(cls, value):
@@ -133,6 +135,13 @@ class Quote(BaseModel):
                 if _item_fees:
                     _items.append(_item_fees.to_dict())
             _dict['fees'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in taxes (list)
+        _items = []
+        if self.taxes:
+            for _item_taxes in self.taxes:
+                if _item_taxes:
+                    _items.append(_item_taxes.to_dict())
+            _dict['taxes'] = _items
         return _dict
 
     @classmethod
@@ -158,6 +167,7 @@ class Quote(BaseModel):
             "payinCategory": obj.get("payinCategory"),
             "adjustedExchangeRate": AdjustedExchangeRate.from_dict(obj["adjustedExchangeRate"]) if obj.get("adjustedExchangeRate") is not None else None,
             "fees": [FeeSummary.from_dict(_item) for _item in obj["fees"]] if obj.get("fees") is not None else None,
+            "taxes": [TaxSummary.from_dict(_item) for _item in obj["taxes"]] if obj.get("taxes") is not None else None,
             "createdAt": obj.get("createdAt"),
             "expiresAt": obj.get("expiresAt"),
             "destinationBlockchainNetwork": obj.get("destinationBlockchainNetwork")

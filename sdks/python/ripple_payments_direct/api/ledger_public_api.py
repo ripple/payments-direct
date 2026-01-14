@@ -3,9 +3,9 @@
 """
     Payments Direct API
 
-    Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | Test                                       | `https://api.test.ripple.com` | Test environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **Test** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+    Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
 
-    The version of the OpenAPI document: 0.0.3
+    The version of the OpenAPI document: 1.0.0
     Generated by OpenAPI Generator (https://openapi-generator.tech)
 
     Do not edit the class manually.
@@ -16,10 +16,12 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
-from typing import Optional
+from datetime import datetime
+from pydantic import Field, StrictInt, StrictStr
+from typing import List, Optional
 from typing_extensions import Annotated
 from ripple_payments_direct.models.get_balances200_response import GetBalances200Response
+from ripple_payments_direct.models.get_statements_transactions_for_customer200_response_inner import GetStatementsTransactionsForCustomer200ResponseInner
 
 from ripple_payments_direct.api_client import ApiClient, RequestSerialized
 from ripple_payments_direct.api_response import ApiResponse
@@ -293,6 +295,432 @@ class LedgerPublicApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/v2/balances',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_statements_transactions_for_customer(
+        self,
+        currency: Annotated[StrictStr, Field(description="Three-letter ISO 4217 currency code for the transactions to return (for example, USD). ")],
+        start_dttm: Annotated[datetime, Field(description="Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions. ")],
+        end_dttm: Annotated[datetime, Field(description="End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions. ")],
+        page_size: Annotated[int, Field(le=50, strict=True, ge=1, description="Number of records to return in the response page. Use page-size together with offset for offset-based pagination ")],
+        status: Annotated[Optional[StrictStr], Field(description="Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction. ")] = None,
+        txn_reference: Annotated[Optional[StrictStr], Field(description="Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference. ")] = None,
+        offset: Annotated[Optional[StrictInt], Field(description="Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, `offset=25&page-size=25` returns the second page of results. ")] = None,
+        sort_key: Annotated[Optional[StrictStr], Field(description="Field to use for sorting the results. Allowed values include:  - `CREATED_AT`: sort by transaction creation timestamp.  - `STATEMENT_OPERATION`: sort by the operation type (for example, CREDIT, DEBIT).  - `STATEMENT_SOURCE`: sort by the transaction source (for example, PAYMENTS, BANK).  - `STATEMENT_STATUS`: sort by the ledger transaction status.  - `STATEMENT_TXN_REFERENCE`: sort by the transaction reference.  - `STATEMENT_UPDATED_AT`: sort by the last update timestamp. ")] = None,
+        sort_direction: Annotated[Optional[StrictStr], Field(description="Sort direction. Allowed values:  - `ASC`: ascending order.  - `DESC`: descending order. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> List[GetStatementsTransactionsForCustomer200ResponseInner]:
+        """Get ledger transactions
+
+        Retrieve a paginated list of ledger transactions for your tenant within a specified date and time range. This endpoint returns detailed transaction data, including amounts, references, operations, and running balances, so you can reconcile balance changes over time for a given currency. 
+
+        :param currency: Three-letter ISO 4217 currency code for the transactions to return (for example, USD).  (required)
+        :type currency: str
+        :param start_dttm: Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions.  (required)
+        :type start_dttm: datetime
+        :param end_dttm: End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions.  (required)
+        :type end_dttm: datetime
+        :param page_size: Number of records to return in the response page. Use page-size together with offset for offset-based pagination  (required)
+        :type page_size: int
+        :param status: Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction. 
+        :type status: str
+        :param txn_reference: Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference. 
+        :type txn_reference: str
+        :param offset: Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, `offset=25&page-size=25` returns the second page of results. 
+        :type offset: int
+        :param sort_key: Field to use for sorting the results. Allowed values include:  - `CREATED_AT`: sort by transaction creation timestamp.  - `STATEMENT_OPERATION`: sort by the operation type (for example, CREDIT, DEBIT).  - `STATEMENT_SOURCE`: sort by the transaction source (for example, PAYMENTS, BANK).  - `STATEMENT_STATUS`: sort by the ledger transaction status.  - `STATEMENT_TXN_REFERENCE`: sort by the transaction reference.  - `STATEMENT_UPDATED_AT`: sort by the last update timestamp. 
+        :type sort_key: str
+        :param sort_direction: Sort direction. Allowed values:  - `ASC`: ascending order.  - `DESC`: descending order. 
+        :type sort_direction: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_statements_transactions_for_customer_serialize(
+            currency=currency,
+            start_dttm=start_dttm,
+            end_dttm=end_dttm,
+            page_size=page_size,
+            status=status,
+            txn_reference=txn_reference,
+            offset=offset,
+            sort_key=sort_key,
+            sort_direction=sort_direction,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[GetStatementsTransactionsForCustomer200ResponseInner]",
+            '400': "GetBalances400Response",
+            '401': "GetBalances400Response",
+            '500': "GetBalances400Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_statements_transactions_for_customer_with_http_info(
+        self,
+        currency: Annotated[StrictStr, Field(description="Three-letter ISO 4217 currency code for the transactions to return (for example, USD). ")],
+        start_dttm: Annotated[datetime, Field(description="Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions. ")],
+        end_dttm: Annotated[datetime, Field(description="End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions. ")],
+        page_size: Annotated[int, Field(le=50, strict=True, ge=1, description="Number of records to return in the response page. Use page-size together with offset for offset-based pagination ")],
+        status: Annotated[Optional[StrictStr], Field(description="Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction. ")] = None,
+        txn_reference: Annotated[Optional[StrictStr], Field(description="Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference. ")] = None,
+        offset: Annotated[Optional[StrictInt], Field(description="Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, `offset=25&page-size=25` returns the second page of results. ")] = None,
+        sort_key: Annotated[Optional[StrictStr], Field(description="Field to use for sorting the results. Allowed values include:  - `CREATED_AT`: sort by transaction creation timestamp.  - `STATEMENT_OPERATION`: sort by the operation type (for example, CREDIT, DEBIT).  - `STATEMENT_SOURCE`: sort by the transaction source (for example, PAYMENTS, BANK).  - `STATEMENT_STATUS`: sort by the ledger transaction status.  - `STATEMENT_TXN_REFERENCE`: sort by the transaction reference.  - `STATEMENT_UPDATED_AT`: sort by the last update timestamp. ")] = None,
+        sort_direction: Annotated[Optional[StrictStr], Field(description="Sort direction. Allowed values:  - `ASC`: ascending order.  - `DESC`: descending order. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[List[GetStatementsTransactionsForCustomer200ResponseInner]]:
+        """Get ledger transactions
+
+        Retrieve a paginated list of ledger transactions for your tenant within a specified date and time range. This endpoint returns detailed transaction data, including amounts, references, operations, and running balances, so you can reconcile balance changes over time for a given currency. 
+
+        :param currency: Three-letter ISO 4217 currency code for the transactions to return (for example, USD).  (required)
+        :type currency: str
+        :param start_dttm: Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions.  (required)
+        :type start_dttm: datetime
+        :param end_dttm: End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions.  (required)
+        :type end_dttm: datetime
+        :param page_size: Number of records to return in the response page. Use page-size together with offset for offset-based pagination  (required)
+        :type page_size: int
+        :param status: Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction. 
+        :type status: str
+        :param txn_reference: Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference. 
+        :type txn_reference: str
+        :param offset: Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, `offset=25&page-size=25` returns the second page of results. 
+        :type offset: int
+        :param sort_key: Field to use for sorting the results. Allowed values include:  - `CREATED_AT`: sort by transaction creation timestamp.  - `STATEMENT_OPERATION`: sort by the operation type (for example, CREDIT, DEBIT).  - `STATEMENT_SOURCE`: sort by the transaction source (for example, PAYMENTS, BANK).  - `STATEMENT_STATUS`: sort by the ledger transaction status.  - `STATEMENT_TXN_REFERENCE`: sort by the transaction reference.  - `STATEMENT_UPDATED_AT`: sort by the last update timestamp. 
+        :type sort_key: str
+        :param sort_direction: Sort direction. Allowed values:  - `ASC`: ascending order.  - `DESC`: descending order. 
+        :type sort_direction: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_statements_transactions_for_customer_serialize(
+            currency=currency,
+            start_dttm=start_dttm,
+            end_dttm=end_dttm,
+            page_size=page_size,
+            status=status,
+            txn_reference=txn_reference,
+            offset=offset,
+            sort_key=sort_key,
+            sort_direction=sort_direction,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[GetStatementsTransactionsForCustomer200ResponseInner]",
+            '400': "GetBalances400Response",
+            '401': "GetBalances400Response",
+            '500': "GetBalances400Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_statements_transactions_for_customer_without_preload_content(
+        self,
+        currency: Annotated[StrictStr, Field(description="Three-letter ISO 4217 currency code for the transactions to return (for example, USD). ")],
+        start_dttm: Annotated[datetime, Field(description="Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions. ")],
+        end_dttm: Annotated[datetime, Field(description="End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions. ")],
+        page_size: Annotated[int, Field(le=50, strict=True, ge=1, description="Number of records to return in the response page. Use page-size together with offset for offset-based pagination ")],
+        status: Annotated[Optional[StrictStr], Field(description="Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction. ")] = None,
+        txn_reference: Annotated[Optional[StrictStr], Field(description="Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference. ")] = None,
+        offset: Annotated[Optional[StrictInt], Field(description="Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, `offset=25&page-size=25` returns the second page of results. ")] = None,
+        sort_key: Annotated[Optional[StrictStr], Field(description="Field to use for sorting the results. Allowed values include:  - `CREATED_AT`: sort by transaction creation timestamp.  - `STATEMENT_OPERATION`: sort by the operation type (for example, CREDIT, DEBIT).  - `STATEMENT_SOURCE`: sort by the transaction source (for example, PAYMENTS, BANK).  - `STATEMENT_STATUS`: sort by the ledger transaction status.  - `STATEMENT_TXN_REFERENCE`: sort by the transaction reference.  - `STATEMENT_UPDATED_AT`: sort by the last update timestamp. ")] = None,
+        sort_direction: Annotated[Optional[StrictStr], Field(description="Sort direction. Allowed values:  - `ASC`: ascending order.  - `DESC`: descending order. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get ledger transactions
+
+        Retrieve a paginated list of ledger transactions for your tenant within a specified date and time range. This endpoint returns detailed transaction data, including amounts, references, operations, and running balances, so you can reconcile balance changes over time for a given currency. 
+
+        :param currency: Three-letter ISO 4217 currency code for the transactions to return (for example, USD).  (required)
+        :type currency: str
+        :param start_dttm: Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions.  (required)
+        :type start_dttm: datetime
+        :param end_dttm: End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions.  (required)
+        :type end_dttm: datetime
+        :param page_size: Number of records to return in the response page. Use page-size together with offset for offset-based pagination  (required)
+        :type page_size: int
+        :param status: Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction. 
+        :type status: str
+        :param txn_reference: Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference. 
+        :type txn_reference: str
+        :param offset: Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, `offset=25&page-size=25` returns the second page of results. 
+        :type offset: int
+        :param sort_key: Field to use for sorting the results. Allowed values include:  - `CREATED_AT`: sort by transaction creation timestamp.  - `STATEMENT_OPERATION`: sort by the operation type (for example, CREDIT, DEBIT).  - `STATEMENT_SOURCE`: sort by the transaction source (for example, PAYMENTS, BANK).  - `STATEMENT_STATUS`: sort by the ledger transaction status.  - `STATEMENT_TXN_REFERENCE`: sort by the transaction reference.  - `STATEMENT_UPDATED_AT`: sort by the last update timestamp. 
+        :type sort_key: str
+        :param sort_direction: Sort direction. Allowed values:  - `ASC`: ascending order.  - `DESC`: descending order. 
+        :type sort_direction: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_statements_transactions_for_customer_serialize(
+            currency=currency,
+            start_dttm=start_dttm,
+            end_dttm=end_dttm,
+            page_size=page_size,
+            status=status,
+            txn_reference=txn_reference,
+            offset=offset,
+            sort_key=sort_key,
+            sort_direction=sort_direction,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[GetStatementsTransactionsForCustomer200ResponseInner]",
+            '400': "GetBalances400Response",
+            '401': "GetBalances400Response",
+            '500': "GetBalances400Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_statements_transactions_for_customer_serialize(
+        self,
+        currency,
+        start_dttm,
+        end_dttm,
+        page_size,
+        status,
+        txn_reference,
+        offset,
+        sort_key,
+        sort_direction,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if currency is not None:
+            
+            _query_params.append(('currency', currency))
+            
+        if start_dttm is not None:
+            if isinstance(start_dttm, datetime):
+                _query_params.append(
+                    (
+                        'start-dttm',
+                        start_dttm.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('start-dttm', start_dttm))
+            
+        if end_dttm is not None:
+            if isinstance(end_dttm, datetime):
+                _query_params.append(
+                    (
+                        'end-dttm',
+                        end_dttm.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('end-dttm', end_dttm))
+            
+        if status is not None:
+            
+            _query_params.append(('status', status))
+            
+        if txn_reference is not None:
+            
+            _query_params.append(('txnReference', txn_reference))
+            
+        if page_size is not None:
+            
+            _query_params.append(('page-size', page_size))
+            
+        if offset is not None:
+            
+            _query_params.append(('offset', offset))
+            
+        if sort_key is not None:
+            
+            _query_params.append(('sort-key', sort_key))
+            
+        if sort_direction is not None:
+            
+            _query_params.append(('sort-direction', sort_direction))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/v2/ledger-transactions',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
