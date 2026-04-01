@@ -117,8 +117,8 @@ public class Example {
         String status = "status_example"; // String | Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction. 
         String txnReference = "txnReference_example"; // String | Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference. 
         Integer offset = 56; // Integer | Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, `offset=25&page-size=25` returns the second page of results. 
-        String sortKey = "sortKey_example"; // String | Field to use for sorting the results. Allowed values include:  - `CREATED_AT`: sort by transaction creation timestamp.  - `STATEMENT_OPERATION`: sort by the operation type (for example, CREDIT, DEBIT).  - `STATEMENT_SOURCE`: sort by the transaction source (for example, PAYMENTS, BANK).  - `STATEMENT_STATUS`: sort by the ledger transaction status.  - `STATEMENT_TXN_REFERENCE`: sort by the transaction reference.  - `STATEMENT_UPDATED_AT`: sort by the last update timestamp. 
-        String sortDirection = "sortDirection_example"; // String | Sort direction. Allowed values:  - `ASC`: ascending order.  - `DESC`: descending order. 
+        String sortKey = "sortKey_example"; // String | Field to use for sorting the results. Allowed values include: - CREATED_AT: sort by transaction creation timestamp. - STATEMENT_OPERATION: sort by the operation type (for example, CREDIT, DEBIT). - STATEMENT_SOURCE: sort by the transaction source (for example, PAYMENTS, BANK). - STATEMENT_STATUS: sort by the ledger transaction status. - STATEMENT_TXN_REFERENCE: sort by the transaction reference. - STATEMENT_UPDATED_AT: sort by the last update timestamp. 
+        String sortDirection = "sortDirection_example"; // String | Sort direction. Allowed values: - ASC: ascending order. - DESC: descending order. 
         try {
             List<GetStatementsTransactionsForCustomer200ResponseInnerDTO> result = apiInstance.getStatementsTransactionsForCustomer(currency, startDttm, endDttm, pageSize, status, txnReference, offset, sortKey, sortDirection);
             System.out.println(result);
@@ -145,8 +145,8 @@ public class Example {
 | **status** | **String**| Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  | [optional] |
 | **txnReference** | **String**| Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  | [optional] |
 | **offset** | **Integer**| Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, &#x60;offset&#x3D;25&amp;page-size&#x3D;25&#x60; returns the second page of results.  | [optional] |
-| **sortKey** | **String**| Field to use for sorting the results. Allowed values include:  - &#x60;CREATED_AT&#x60;: sort by transaction creation timestamp.  - &#x60;STATEMENT_OPERATION&#x60;: sort by the operation type (for example, CREDIT, DEBIT).  - &#x60;STATEMENT_SOURCE&#x60;: sort by the transaction source (for example, PAYMENTS, BANK).  - &#x60;STATEMENT_STATUS&#x60;: sort by the ledger transaction status.  - &#x60;STATEMENT_TXN_REFERENCE&#x60;: sort by the transaction reference.  - &#x60;STATEMENT_UPDATED_AT&#x60;: sort by the last update timestamp.  | [optional] |
-| **sortDirection** | **String**| Sort direction. Allowed values:  - &#x60;ASC&#x60;: ascending order.  - &#x60;DESC&#x60;: descending order.  | [optional] |
+| **sortKey** | **String**| Field to use for sorting the results. Allowed values include: - CREATED_AT: sort by transaction creation timestamp. - STATEMENT_OPERATION: sort by the operation type (for example, CREDIT, DEBIT). - STATEMENT_SOURCE: sort by the transaction source (for example, PAYMENTS, BANK). - STATEMENT_STATUS: sort by the ledger transaction status. - STATEMENT_TXN_REFERENCE: sort by the transaction reference. - STATEMENT_UPDATED_AT: sort by the last update timestamp.  | [optional] |
+| **sortDirection** | **String**| Sort direction. Allowed values: - ASC: ascending order. - DESC: descending order.  | [optional] |
 
 ### Return type
 
@@ -159,7 +159,7 @@ public class Example {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/csv
 
 
 ### HTTP response details

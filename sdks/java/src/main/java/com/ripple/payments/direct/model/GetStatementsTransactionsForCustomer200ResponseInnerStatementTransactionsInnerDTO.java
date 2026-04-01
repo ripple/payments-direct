@@ -1,8 +1,8 @@
 /*
  * Payments Direct API
- * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+ * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
  *
- * The version of the OpenAPI document: 2026.03
+ * The version of the OpenAPI document: 2025.11
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -22,6 +22,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.io.UnsupportedEncodingException;
@@ -35,6 +39,7 @@ import java.util.StringJoiner;
   GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInnerDTO.JSON_PROPERTY_TENANT,
   GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInnerDTO.JSON_PROPERTY_AMOUNT,
   GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInnerDTO.JSON_PROPERTY_CURRENCY,
+  GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInnerDTO.JSON_PROPERTY_TXN_REFERENCE,
   GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInnerDTO.JSON_PROPERTY_OPERATION,
   GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInnerDTO.JSON_PROPERTY_TXN_SOURCE,
   GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInnerDTO.JSON_PROPERTY_STATUS,
@@ -57,6 +62,10 @@ public class GetStatementsTransactionsForCustomer200ResponseInnerStatementTransa
   public static final String JSON_PROPERTY_CURRENCY = "currency";
   @javax.annotation.Nullable
   private String currency;
+
+  public static final String JSON_PROPERTY_TXN_REFERENCE = "txnReference";
+  @javax.annotation.Nullable
+  private JsonNullable<String> txnReference = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_OPERATION = "operation";
   @javax.annotation.Nullable
@@ -162,6 +171,39 @@ public class GetStatementsTransactionsForCustomer200ResponseInnerStatementTransa
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCurrency(@javax.annotation.Nullable String currency) {
     this.currency = currency;
+  }
+
+  public GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInnerDTO txnReference(@javax.annotation.Nullable String txnReference) {
+    this.txnReference = JsonNullable.<String>of(txnReference);
+    
+    return this;
+  }
+
+  /**
+   * External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types. 
+   * @return txnReference
+   */
+  @javax.annotation.Nullable
+  @JsonIgnore
+
+  public String getTxnReference() {
+        return txnReference.orElse(null);
+  }
+
+  @JsonProperty(JSON_PROPERTY_TXN_REFERENCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getTxnReference_JsonNullable() {
+    return txnReference;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_TXN_REFERENCE)
+  public void setTxnReference_JsonNullable(JsonNullable<String> txnReference) {
+    this.txnReference = txnReference;
+  }
+
+  public void setTxnReference(@javax.annotation.Nullable String txnReference) {
+    this.txnReference = JsonNullable.<String>of(txnReference);
   }
 
   public GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInnerDTO operation(@javax.annotation.Nullable String operation) {
@@ -351,6 +393,7 @@ public class GetStatementsTransactionsForCustomer200ResponseInnerStatementTransa
     return Objects.equals(this.tenant, getStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner.tenant) &&
         Objects.equals(this.amount, getStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner.amount) &&
         Objects.equals(this.currency, getStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner.currency) &&
+        equalsNullable(this.txnReference, getStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner.txnReference) &&
         Objects.equals(this.operation, getStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner.operation) &&
         Objects.equals(this.txnSource, getStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner.txnSource) &&
         Objects.equals(this.status, getStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner.status) &&
@@ -360,9 +403,20 @@ public class GetStatementsTransactionsForCustomer200ResponseInnerStatementTransa
         Objects.equals(this.availableBalanceAfter, getStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner.availableBalanceAfter);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(tenant, amount, currency, operation, txnSource, status, createdDttm, updatedDttm, availableBalanceBefore, availableBalanceAfter);
+    return Objects.hash(tenant, amount, currency, hashCodeNullable(txnReference), operation, txnSource, status, createdDttm, updatedDttm, availableBalanceBefore, availableBalanceAfter);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -372,6 +426,7 @@ public class GetStatementsTransactionsForCustomer200ResponseInnerStatementTransa
     sb.append("    tenant: ").append(toIndentedString(tenant)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
+    sb.append("    txnReference: ").append(toIndentedString(txnReference)).append("\n");
     sb.append("    operation: ").append(toIndentedString(operation)).append("\n");
     sb.append("    txnSource: ").append(toIndentedString(txnSource)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
@@ -450,6 +505,16 @@ public class GetStatementsTransactionsForCustomer200ResponseInnerStatementTransa
     if (getCurrency() != null) {
       try {
         joiner.add(String.format("%scurrency%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getCurrency()), "UTF-8").replaceAll("\\+", "%20")));
+      } catch (UnsupportedEncodingException e) {
+        // Should never happen, UTF-8 is always supported
+        throw new RuntimeException(e);
+      }
+    }
+
+    // add `txnReference` to the URL query string
+    if (getTxnReference() != null) {
+      try {
+        joiner.add(String.format("%stxnReference%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getTxnReference()), "UTF-8").replaceAll("\\+", "%20")));
       } catch (UnsupportedEncodingException e) {
         // Should never happen, UTF-8 is always supported
         throw new RuntimeException(e);

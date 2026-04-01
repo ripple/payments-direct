@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **QuoteId** | **string** | Unique ID that represents this quote. | 
 **QuoteStatus** | [**QuoteStatus**](QuoteStatus.md) |  | 
 **QuoteAmountType** | Pointer to [**QuoteAmountType**](QuoteAmountType.md) |  | [optional] [default to QUOTEAMOUNTTYPE_SOURCE_AMOUNT]
-**SourceAmount** | Pointer to **float64** | Amount to be sent by the originator. | [optional] 
-**DestinationAmount** | Pointer to **float64** | Amount to be received by destination | [optional] 
+**SourceAmount** | Pointer to **float64** | Amount to be sent by the originator. The value is rounded to the number of decimal places defined by the ISO 4217 standard for the source currency (for example, 2 for USD/EUR, 0 for JPY/KRW, 3 for BHD/KWD), using HALF_UP rounding mode.  | [optional] 
+**DestinationAmount** | Pointer to **float64** | Amount to be received by the beneficiary. The value is rounded to the number of decimal places defined by the ISO 4217 standard for the destination currency (for example, 2 for USD/EUR, 0 for JPY/KRW, 3 for BHD/KWD), using HALF_UP rounding mode.  | [optional] 
 **SourceCurrency** | **string** | The currency code of the currency that you are sending. | 
 **DestinationCurrency** | **string** | The currency code of the currency in which your beneficiary will receive this payment. | 
 **SourceCountry** | Pointer to **string** | The country where the payment originator is located or incorporated, specified in Alpha-2 Code format as defined in the ISO CountryCode ISO 3166-1 list. | [optional] 

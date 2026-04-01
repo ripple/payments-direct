@@ -83,8 +83,8 @@ let pageSize: number; //Number of records to return in the response page. Use pa
 let status: string; //Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  (optional) (default to undefined)
 let txnReference: string; //Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  (optional) (default to undefined)
 let offset: number; //Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, `offset=25&page-size=25` returns the second page of results.  (optional) (default to undefined)
-let sortKey: string; //Field to use for sorting the results. Allowed values include:  - `CREATED_AT`: sort by transaction creation timestamp.  - `STATEMENT_OPERATION`: sort by the operation type (for example, CREDIT, DEBIT).  - `STATEMENT_SOURCE`: sort by the transaction source (for example, PAYMENTS, BANK).  - `STATEMENT_STATUS`: sort by the ledger transaction status.  - `STATEMENT_TXN_REFERENCE`: sort by the transaction reference.  - `STATEMENT_UPDATED_AT`: sort by the last update timestamp.  (optional) (default to undefined)
-let sortDirection: string; //Sort direction. Allowed values:  - `ASC`: ascending order.  - `DESC`: descending order.  (optional) (default to undefined)
+let sortKey: string; //Field to use for sorting the results. Allowed values include: - CREATED_AT: sort by transaction creation timestamp. - STATEMENT_OPERATION: sort by the operation type (for example, CREDIT, DEBIT). - STATEMENT_SOURCE: sort by the transaction source (for example, PAYMENTS, BANK). - STATEMENT_STATUS: sort by the ledger transaction status. - STATEMENT_TXN_REFERENCE: sort by the transaction reference. - STATEMENT_UPDATED_AT: sort by the last update timestamp.  (optional) (default to undefined)
+let sortDirection: string; //Sort direction. Allowed values: - ASC: ascending order. - DESC: descending order.  (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getStatementsTransactionsForCustomer(
     currency,
@@ -110,8 +110,8 @@ const { status, data } = await apiInstance.getStatementsTransactionsForCustomer(
 | **status** | [**string**] | Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  | (optional) defaults to undefined|
 | **txnReference** | [**string**] | Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  | (optional) defaults to undefined|
 | **offset** | [**number**] | Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, &#x60;offset&#x3D;25&amp;page-size&#x3D;25&#x60; returns the second page of results.  | (optional) defaults to undefined|
-| **sortKey** | [**string**] | Field to use for sorting the results. Allowed values include:  - &#x60;CREATED_AT&#x60;: sort by transaction creation timestamp.  - &#x60;STATEMENT_OPERATION&#x60;: sort by the operation type (for example, CREDIT, DEBIT).  - &#x60;STATEMENT_SOURCE&#x60;: sort by the transaction source (for example, PAYMENTS, BANK).  - &#x60;STATEMENT_STATUS&#x60;: sort by the ledger transaction status.  - &#x60;STATEMENT_TXN_REFERENCE&#x60;: sort by the transaction reference.  - &#x60;STATEMENT_UPDATED_AT&#x60;: sort by the last update timestamp.  | (optional) defaults to undefined|
-| **sortDirection** | [**string**] | Sort direction. Allowed values:  - &#x60;ASC&#x60;: ascending order.  - &#x60;DESC&#x60;: descending order.  | (optional) defaults to undefined|
+| **sortKey** | [**string**] | Field to use for sorting the results. Allowed values include: - CREATED_AT: sort by transaction creation timestamp. - STATEMENT_OPERATION: sort by the operation type (for example, CREDIT, DEBIT). - STATEMENT_SOURCE: sort by the transaction source (for example, PAYMENTS, BANK). - STATEMENT_STATUS: sort by the ledger transaction status. - STATEMENT_TXN_REFERENCE: sort by the transaction reference. - STATEMENT_UPDATED_AT: sort by the last update timestamp.  | (optional) defaults to undefined|
+| **sortDirection** | [**string**] | Sort direction. Allowed values: - ASC: ascending order. - DESC: descending order.  | (optional) defaults to undefined|
 
 
 ### Return type
@@ -125,7 +125,7 @@ const { status, data } = await apiInstance.getStatementsTransactionsForCustomer(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/json, text/csv
 
 
 ### HTTP response details

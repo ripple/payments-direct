@@ -3,9 +3,9 @@
 """
     Payments Direct API
 
-    Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+    Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
 
-    The version of the OpenAPI document: 2026.03
+    The version of the OpenAPI document: 2025.11
     Generated by OpenAPI Generator (https://openapi-generator.tech)
 
     Do not edit the class manually.
@@ -30,6 +30,7 @@ class GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsI
     tenant: Optional[StrictStr] = Field(default=None, description="Identifier of the tenant that owns this ledger transaction.")
     amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount of the transaction applied to the tenant’s ledger account. ")
     currency: Optional[StrictStr] = Field(default=None, description="Three-letter ISO 4217 currency code of the transaction.")
+    txn_reference: Optional[StrictStr] = Field(default=None, description="External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types. ", alias="txnReference")
     operation: Optional[StrictStr] = Field(default=None, description="Operation performed on the tenant’s prefunded ledger account. ")
     txn_source: Optional[StrictStr] = Field(default=None, description="Source of the ledger transaction (for example, which system or flow created it). ", alias="txnSource")
     status: Optional[StrictStr] = Field(default=None, description="State of the ledger transaction.")
@@ -37,7 +38,7 @@ class GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsI
     updated_dttm: Optional[datetime] = Field(default=None, description="Timestamp (UTC) when the ledger transaction was last updated.", alias="updatedDttm")
     available_balance_before: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Available ledger account balance (in the transaction currency) immediately before this transaction was applied. ", alias="availableBalanceBefore")
     available_balance_after: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Available ledger account balance (in the transaction currency) immediately after this transaction was applied. ", alias="availableBalanceAfter")
-    __properties: ClassVar[List[str]] = ["tenant", "amount", "currency", "operation", "txnSource", "status", "createdDttm", "updatedDttm", "availableBalanceBefore", "availableBalanceAfter"]
+    __properties: ClassVar[List[str]] = ["tenant", "amount", "currency", "txnReference", "operation", "txnSource", "status", "createdDttm", "updatedDttm", "availableBalanceBefore", "availableBalanceAfter"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,6 +79,11 @@ class GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsI
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if txn_reference (nullable) is None
+        # and model_fields_set contains the field
+        if self.txn_reference is None and "txn_reference" in self.model_fields_set:
+            _dict['txnReference'] = None
+
         return _dict
 
     @classmethod
@@ -93,6 +99,7 @@ class GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsI
             "tenant": obj.get("tenant"),
             "amount": obj.get("amount"),
             "currency": obj.get("currency"),
+            "txnReference": obj.get("txnReference"),
             "operation": obj.get("operation"),
             "txnSource": obj.get("txnSource"),
             "status": obj.get("status"),

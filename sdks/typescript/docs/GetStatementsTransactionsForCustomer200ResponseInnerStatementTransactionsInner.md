@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **tenant** | **string** | Identifier of the tenant that owns this ledger transaction. | [optional] [default to undefined]
 **amount** | **number** | Amount of the transaction applied to the tenant’s ledger account.  | [optional] [default to undefined]
 **currency** | **string** | Three-letter ISO 4217 currency code of the transaction. | [optional] [default to undefined]
+**txnReference** | **string** | External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types.  | [optional] [default to undefined]
 **operation** | **string** | Operation performed on the tenant’s prefunded ledger account.  | [optional] [default to undefined]
 **txnSource** | **string** | Source of the ledger transaction (for example, which system or flow created it).  | [optional] [default to undefined]
 **status** | **string** | State of the ledger transaction. | [optional] [default to undefined]
@@ -25,6 +26,7 @@ const instance: GetStatementsTransactionsForCustomer200ResponseInnerStatementTra
     tenant,
     amount,
     currency,
+    txnReference,
     operation,
     txnSource,
     status,

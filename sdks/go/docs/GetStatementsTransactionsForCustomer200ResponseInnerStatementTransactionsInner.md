@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Tenant** | Pointer to **string** | Identifier of the tenant that owns this ledger transaction. | [optional] 
 **Amount** | Pointer to **float32** | Amount of the transaction applied to the tenant’s ledger account.  | [optional] 
 **Currency** | Pointer to **string** | Three-letter ISO 4217 currency code of the transaction. | [optional] 
+**TxnReference** | Pointer to **NullableString** | External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types.  | [optional] 
 **Operation** | Pointer to **string** | Operation performed on the tenant’s prefunded ledger account.  | [optional] 
 **TxnSource** | Pointer to **string** | Source of the ledger transaction (for example, which system or flow created it).  | [optional] 
 **Status** | Pointer to **string** | State of the ledger transaction. | [optional] 
@@ -109,6 +110,41 @@ SetCurrency sets Currency field to given value.
 
 HasCurrency returns a boolean if a field has been set.
 
+### GetTxnReference
+
+`func (o *GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner) GetTxnReference() string`
+
+GetTxnReference returns the TxnReference field if non-nil, zero value otherwise.
+
+### GetTxnReferenceOk
+
+`func (o *GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner) GetTxnReferenceOk() (*string, bool)`
+
+GetTxnReferenceOk returns a tuple with the TxnReference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTxnReference
+
+`func (o *GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner) SetTxnReference(v string)`
+
+SetTxnReference sets TxnReference field to given value.
+
+### HasTxnReference
+
+`func (o *GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner) HasTxnReference() bool`
+
+HasTxnReference returns a boolean if a field has been set.
+
+### SetTxnReferenceNil
+
+`func (o *GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner) SetTxnReferenceNil(b bool)`
+
+ SetTxnReferenceNil sets the value for TxnReference to be an explicit nil
+
+### UnsetTxnReference
+`func (o *GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner) UnsetTxnReference()`
+
+UnsetTxnReference ensures that no value is present for TxnReference, not even an explicit nil
 ### GetOperation
 
 `func (o *GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner) GetOperation() string`

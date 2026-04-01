@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **quote_id** | **str** | Unique ID that represents this quote. | 
 **quote_status** | [**QuoteStatus**](QuoteStatus.md) |  | 
 **quote_amount_type** | [**QuoteAmountType**](QuoteAmountType.md) |  | [optional] [default to QuoteAmountType.SOURCE_AMOUNT]
-**source_amount** | **float** | Amount to be sent by the originator. | [optional] 
-**destination_amount** | **float** | Amount to be received by destination | [optional] 
+**source_amount** | **float** | Amount to be sent by the originator. The value is rounded to the number of decimal places defined by the ISO 4217 standard for the source currency (for example, 2 for USD/EUR, 0 for JPY/KRW, 3 for BHD/KWD), using HALF_UP rounding mode.  | [optional] 
+**destination_amount** | **float** | Amount to be received by the beneficiary. The value is rounded to the number of decimal places defined by the ISO 4217 standard for the destination currency (for example, 2 for USD/EUR, 0 for JPY/KRW, 3 for BHD/KWD), using HALF_UP rounding mode.  | [optional] 
 **source_currency** | **str** | The currency code of the currency that you are sending. | 
 **destination_currency** | **str** | The currency code of the currency in which your beneficiary will receive this payment. | 
 **source_country** | **str** | The country where the payment originator is located or incorporated, specified in Alpha-2 Code format as defined in the ISO CountryCode ISO 3166-1 list. | [optional] 

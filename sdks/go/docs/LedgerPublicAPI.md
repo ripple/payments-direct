@@ -102,8 +102,8 @@ func main() {
 	status := "status_example" // string | Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  (optional)
 	txnReference := "txnReference_example" // string | Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  (optional)
 	offset := int32(56) // int32 | Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, `offset=25&page-size=25` returns the second page of results.  (optional)
-	sortKey := "sortKey_example" // string | Field to use for sorting the results. Allowed values include:  - `CREATED_AT`: sort by transaction creation timestamp.  - `STATEMENT_OPERATION`: sort by the operation type (for example, CREDIT, DEBIT).  - `STATEMENT_SOURCE`: sort by the transaction source (for example, PAYMENTS, BANK).  - `STATEMENT_STATUS`: sort by the ledger transaction status.  - `STATEMENT_TXN_REFERENCE`: sort by the transaction reference.  - `STATEMENT_UPDATED_AT`: sort by the last update timestamp.  (optional)
-	sortDirection := "sortDirection_example" // string | Sort direction. Allowed values:  - `ASC`: ascending order.  - `DESC`: descending order.  (optional)
+	sortKey := "sortKey_example" // string | Field to use for sorting the results. Allowed values include: - CREATED_AT: sort by transaction creation timestamp. - STATEMENT_OPERATION: sort by the operation type (for example, CREDIT, DEBIT). - STATEMENT_SOURCE: sort by the transaction source (for example, PAYMENTS, BANK). - STATEMENT_STATUS: sort by the ledger transaction status. - STATEMENT_TXN_REFERENCE: sort by the transaction reference. - STATEMENT_UPDATED_AT: sort by the last update timestamp.  (optional)
+	sortDirection := "sortDirection_example" // string | Sort direction. Allowed values: - ASC: ascending order. - DESC: descending order.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -135,8 +135,8 @@ Name | Type | Description  | Notes
  **status** | **string** | Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  | 
  **txnReference** | **string** | Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  | 
  **offset** | **int32** | Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, &#x60;offset&#x3D;25&amp;page-size&#x3D;25&#x60; returns the second page of results.  | 
- **sortKey** | **string** | Field to use for sorting the results. Allowed values include:  - &#x60;CREATED_AT&#x60;: sort by transaction creation timestamp.  - &#x60;STATEMENT_OPERATION&#x60;: sort by the operation type (for example, CREDIT, DEBIT).  - &#x60;STATEMENT_SOURCE&#x60;: sort by the transaction source (for example, PAYMENTS, BANK).  - &#x60;STATEMENT_STATUS&#x60;: sort by the ledger transaction status.  - &#x60;STATEMENT_TXN_REFERENCE&#x60;: sort by the transaction reference.  - &#x60;STATEMENT_UPDATED_AT&#x60;: sort by the last update timestamp.  | 
- **sortDirection** | **string** | Sort direction. Allowed values:  - &#x60;ASC&#x60;: ascending order.  - &#x60;DESC&#x60;: descending order.  | 
+ **sortKey** | **string** | Field to use for sorting the results. Allowed values include: - CREATED_AT: sort by transaction creation timestamp. - STATEMENT_OPERATION: sort by the operation type (for example, CREDIT, DEBIT). - STATEMENT_SOURCE: sort by the transaction source (for example, PAYMENTS, BANK). - STATEMENT_STATUS: sort by the ledger transaction status. - STATEMENT_TXN_REFERENCE: sort by the transaction reference. - STATEMENT_UPDATED_AT: sort by the last update timestamp.  | 
+ **sortDirection** | **string** | Sort direction. Allowed values: - ASC: ascending order. - DESC: descending order.  | 
 
 ### Return type
 
@@ -149,7 +149,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/csv
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

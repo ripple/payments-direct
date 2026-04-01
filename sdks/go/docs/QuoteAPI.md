@@ -31,7 +31,7 @@ import (
 )
 
 func main() {
-	quoteCollectionRequest := *openapiclient.NewQuoteCollectionRequest(float64(123.45), openapiclient.QuoteAmountType("SOURCE_AMOUNT"), "USD", "MXN", "BANK", "FUNDED") // QuoteCollectionRequest | Create quote collection request
+	quoteCollectionRequest := *openapiclient.NewQuoteCollectionRequest(float64(123.45), openapiclient.QuoteAmountType("SOURCE_AMOUNT"), "USD", "MXN", "BANK", "PRE_FUNDING") // QuoteCollectionRequest | Create quote collection request
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

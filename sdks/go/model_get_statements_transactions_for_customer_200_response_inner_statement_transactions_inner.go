@@ -1,9 +1,9 @@
 /*
 Payments Direct API
 
-Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {{process.env.VAR_RPD}} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/api-docs/payments-direct-api/reference/#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
 
-API version: 2026.03
+API version: 2025.11
 */
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
@@ -26,6 +26,8 @@ type GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsIn
 	Amount *float32 `json:"amount,omitempty"`
 	// Three-letter ISO 4217 currency code of the transaction.
 	Currency *string `json:"currency,omitempty"`
+	// External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types. 
+	TxnReference NullableString `json:"txnReference,omitempty"`
 	// Operation performed on the tenant’s prefunded ledger account. 
 	Operation *string `json:"operation,omitempty"`
 	// Source of the ledger transaction (for example, which system or flow created it). 
@@ -153,6 +155,48 @@ func (o *GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactio
 // SetCurrency gets a reference to the given string and assigns it to the Currency field.
 func (o *GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner) SetCurrency(v string) {
 	o.Currency = &v
+}
+
+// GetTxnReference returns the TxnReference field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner) GetTxnReference() string {
+	if o == nil || IsNil(o.TxnReference.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TxnReference.Get()
+}
+
+// GetTxnReferenceOk returns a tuple with the TxnReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner) GetTxnReferenceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TxnReference.Get(), o.TxnReference.IsSet()
+}
+
+// HasTxnReference returns a boolean if a field has been set.
+func (o *GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner) HasTxnReference() bool {
+	if o != nil && o.TxnReference.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTxnReference gets a reference to the given NullableString and assigns it to the TxnReference field.
+func (o *GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner) SetTxnReference(v string) {
+	o.TxnReference.Set(&v)
+}
+// SetTxnReferenceNil sets the value for TxnReference to be an explicit nil
+func (o *GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner) SetTxnReferenceNil() {
+	o.TxnReference.Set(nil)
+}
+
+// UnsetTxnReference ensures that no value is present for TxnReference, not even an explicit nil
+func (o *GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInner) UnsetTxnReference() {
+	o.TxnReference.Unset()
 }
 
 // GetOperation returns the Operation field value if set, zero value otherwise.
@@ -397,6 +441,9 @@ func (o GetStatementsTransactionsForCustomer200ResponseInnerStatementTransaction
 	}
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
+	}
+	if o.TxnReference.IsSet() {
+		toSerialize["txnReference"] = o.TxnReference.Get()
 	}
 	if !IsNil(o.Operation) {
 		toSerialize["operation"] = o.Operation
