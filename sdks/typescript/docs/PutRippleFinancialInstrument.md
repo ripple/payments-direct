@@ -17,7 +17,6 @@ Name | Type | Description | Notes
 **coPse** | [**CoPse**](CoPse.md) |  | [optional] [default to undefined]
 **brTed** | [**BrTed**](BrTed.md) |  | [optional] [default to undefined]
 **caEft** | [**CaEft**](CaEft.md) |  | [optional] [default to undefined]
-**swift** | [**Swift**](Swift.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -36,7 +35,6 @@ const instance: PutRippleFinancialInstrument = {
     coPse,
     brTed,
     caEft,
-    swift,
 };
 ```
 

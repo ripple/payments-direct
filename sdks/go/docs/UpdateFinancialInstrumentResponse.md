@@ -14,11 +14,10 @@ Name | Type | Description | Notes
 **CoPse** | Pointer to [**CoPse**](CoPse.md) |  | [optional] 
 **BrTed** | Pointer to [**BrTed**](BrTed.md) |  | [optional] 
 **CaEft** | Pointer to [**CaEft**](CaEft.md) |  | [optional] 
-**Swift** | Pointer to [**Swift**](Swift.md) |  | [optional] 
 **Currency** | **string** | The 3-letter ISO currency code of the financial instrument. | 
 **Label** | Pointer to **string** | A user-defined label for the financial instrument. | [optional] 
 **FinancialInstrumentType** | **string** | The type of financial instrument or payment rail used for executing the transaction. This determines the structure and validation of account details required for the payout.  | 
-**Country** | Pointer to **string** | The country of the financial instrument. | [optional] 
+**Country** | Pointer to **string** | The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, XRPL_WALLET, TRON_WALLET, SOL_WALLET), this field returns &#x60;ZZ&#x60;, the ISO 3166-1 user-assigned code used when no country jurisdiction applies.  | [optional] 
 **FinancialInstrumentId** | **string** | The unique identifier of the financial instrument. | 
 **CreatedAt** | Pointer to **time.Time** | The time at which the financial instrument was created | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The time at which the financial instrument was last updated | [optional] 
@@ -291,31 +290,6 @@ SetCaEft sets CaEft field to given value.
 `func (o *UpdateFinancialInstrumentResponse) HasCaEft() bool`
 
 HasCaEft returns a boolean if a field has been set.
-
-### GetSwift
-
-`func (o *UpdateFinancialInstrumentResponse) GetSwift() Swift`
-
-GetSwift returns the Swift field if non-nil, zero value otherwise.
-
-### GetSwiftOk
-
-`func (o *UpdateFinancialInstrumentResponse) GetSwiftOk() (*Swift, bool)`
-
-GetSwiftOk returns a tuple with the Swift field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSwift
-
-`func (o *UpdateFinancialInstrumentResponse) SetSwift(v Swift)`
-
-SetSwift sets Swift field to given value.
-
-### HasSwift
-
-`func (o *UpdateFinancialInstrumentResponse) HasSwift() bool`
-
-HasSwift returns a boolean if a field has been set.
 
 ### GetCurrency
 

@@ -2,7 +2,7 @@
 
 Payments Direct API
 
-- API version: 2026.03
+- API version: 2026.04
 
 - Generator version: 7.13.0
 
@@ -81,7 +81,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.ripple.payments</groupId>
   <artifactId>payments-direct-client</artifactId>
-  <version>2025.11</version>
+  <version>2026.04</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -91,7 +91,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.ripple.payments:payments-direct-client:2025.11"
+compile "com.ripple.payments:payments-direct-client:2026.04"
 ```
 
 ### Others
@@ -104,7 +104,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/payments-direct-client-2025.11.jar`
+- `target/payments-direct-client-2026.04.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -173,9 +173,9 @@ Class | Method | HTTP request | Description
 *PaymentsV2Api* | [**getPaymentStateTransitionsByIdV2**](docs/PaymentsV2Api.md#getPaymentStateTransitionsByIdV2) | **GET** /v3/payments/{paymentId}/states | Get state transitions by payment ID
 *PaymentsV2Api* | [**searchPaymentsV2**](docs/PaymentsV2Api.md#searchPaymentsV2) | **POST** /v3/payments/filter | Search payments V2
 *PaymentsV2Api* | [**updatePaymentLabelsV2**](docs/PaymentsV2Api.md#updatePaymentLabelsV2) | **PATCH** /v3/payments/{paymentId}/labels | Update payment labels
-*QuoteApi* | [**createQuoteCollection**](docs/QuoteApi.md#createQuoteCollection) | **POST** /v2/quotes/quote-collection | Create quote collection
-*QuoteApi* | [**getQuote**](docs/QuoteApi.md#getQuote) | **GET** /v2/quotes/{quote-id} | Get quote
-*QuoteApi* | [**getQuoteCollection**](docs/QuoteApi.md#getQuoteCollection) | **GET** /v2/quotes/quote-collection/{quote-collection-id} | Get quote collection
+*QuoteApi* | [**createQuoteCollectionV2**](docs/QuoteApi.md#createQuoteCollectionV2) | **POST** /v3/quotes/quote-collection | Create quote collection
+*QuoteApi* | [**getQuoteCollectionV2**](docs/QuoteApi.md#getQuoteCollectionV2) | **GET** /v3/quotes/quote-collection/{quote-collection-id} | Get quote collection
+*QuoteApi* | [**getQuoteV2**](docs/QuoteApi.md#getQuoteV2) | **GET** /v3/quotes/{quote-id} | Get a quote
 
 
 ## Documentation for Models
@@ -198,6 +198,7 @@ Class | Method | HTTP request | Description
  - [ErrorResponseDTO](docs/ErrorResponseDTO.md)
  - [EuSepaDTO](docs/EuSepaDTO.md)
  - [FeeSummaryDTO](docs/FeeSummaryDTO.md)
+ - [FeeSummaryV2DTO](docs/FeeSummaryV2DTO.md)
  - [FinancialInstrumentMetadataDTO](docs/FinancialInstrumentMetadataDTO.md)
  - [GbFpsDTO](docs/GbFpsDTO.md)
  - [GetBalances200ResponseBalancesInnerDTO](docs/GetBalances200ResponseBalancesInnerDTO.md)
@@ -231,12 +232,12 @@ Class | Method | HTTP request | Description
  - [PutRippleFinancialInstrumentDTO](docs/PutRippleFinancialInstrumentDTO.md)
  - [PutRippleIdentityDTO](docs/PutRippleIdentityDTO.md)
  - [QuoteAmountTypeDTO](docs/QuoteAmountTypeDTO.md)
- - [QuoteCollectionDTO](docs/QuoteCollectionDTO.md)
- - [QuoteCollectionRequestDTO](docs/QuoteCollectionRequestDTO.md)
- - [QuoteDTO](docs/QuoteDTO.md)
+ - [QuoteCollectionRequestV2DTO](docs/QuoteCollectionRequestV2DTO.md)
+ - [QuoteCollectionV2DTO](docs/QuoteCollectionV2DTO.md)
  - [QuoteErrorDTO](docs/QuoteErrorDTO.md)
  - [QuoteErrorResponseDTO](docs/QuoteErrorResponseDTO.md)
  - [QuoteStatusDTO](docs/QuoteStatusDTO.md)
+ - [QuoteV2DTO](docs/QuoteV2DTO.md)
  - [RippleFinancialInstrumentDTO](docs/RippleFinancialInstrumentDTO.md)
  - [RippleFinancialInstrumentEntryDTO](docs/RippleFinancialInstrumentEntryDTO.md)
  - [RippleIdentityDTO](docs/RippleIdentityDTO.md)
@@ -244,10 +245,10 @@ Class | Method | HTTP request | Description
  - [SortV2DTO](docs/SortV2DTO.md)
  - [StateTransitionV2DTO](docs/StateTransitionV2DTO.md)
  - [StateTransitionsResponseV2DTO](docs/StateTransitionsResponseV2DTO.md)
- - [SwiftDTO](docs/SwiftDTO.md)
  - [TaxBreakdownDTO](docs/TaxBreakdownDTO.md)
  - [TaxSummaryDTO](docs/TaxSummaryDTO.md)
  - [TotalFeeBreakdownDTO](docs/TotalFeeBreakdownDTO.md)
+ - [TotalFeeBreakdownV2DTO](docs/TotalFeeBreakdownV2DTO.md)
  - [TrackingReferenceDTO](docs/TrackingReferenceDTO.md)
  - [TransactionDetailsV2DTO](docs/TransactionDetailsV2DTO.md)
  - [UpdateFinancialInstrumentResponseDTO](docs/UpdateFinancialInstrumentResponseDTO.md)

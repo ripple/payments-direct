@@ -15,11 +15,10 @@ Name | Type | Description | Notes
 **coPse** | [**CoPse**](CoPse.md) |  | [optional] [default to undefined]
 **brTed** | [**BrTed**](BrTed.md) |  | [optional] [default to undefined]
 **caEft** | [**CaEft**](CaEft.md) |  | [optional] [default to undefined]
-**swift** | [**Swift**](Swift.md) |  | [optional] [default to undefined]
 **currency** | **string** | The 3-letter ISO currency code of the financial instrument. | [default to undefined]
 **label** | **string** | A user-defined label for the financial instrument. | [optional] [default to undefined]
 **financialInstrumentType** | **string** | The type of financial instrument or payment rail used for executing the transaction. This determines the structure and validation of account details required for the payout.  | [default to undefined]
-**country** | **string** | The country of the financial instrument. | [optional] [default to undefined]
+**country** | **string** | The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, XRPL_WALLET, TRON_WALLET, SOL_WALLET), this field returns &#x60;ZZ&#x60;, the ISO 3166-1 user-assigned code used when no country jurisdiction applies.  | [optional] [default to undefined]
 **financialInstrumentId** | **string** | The unique identifier of the financial instrument. | [optional] [default to undefined]
 **createdAt** | **string** | The time at which the financial instrument was created | [optional] [default to undefined]
 **updatedAt** | **string** | The time at which the financial instrument was last updated | [optional] [default to undefined]
@@ -40,7 +39,6 @@ const instance: RippleFinancialInstrumentEntry = {
     coPse,
     brTed,
     caEft,
-    swift,
     currency,
     label,
     financialInstrumentType,

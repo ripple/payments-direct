@@ -16,11 +16,10 @@ Name | Type | Description | Notes
 **co_pse** | [**CoPse**](CoPse.md) |  | [optional] 
 **br_ted** | [**BrTed**](BrTed.md) |  | [optional] 
 **ca_eft** | [**CaEft**](CaEft.md) |  | [optional] 
-**swift** | [**Swift**](Swift.md) |  | [optional] 
 **currency** | **str** | The 3-letter ISO currency code of the financial instrument. | 
 **label** | **str** | A user-defined label for the financial instrument. | [optional] 
 **financial_instrument_type** | **str** | The type of financial instrument or payment rail used for executing the transaction. This determines the structure and validation of account details required for the payout.  | 
-**country** | **str** | The country of the financial instrument. | [optional] 
+**country** | **str** | The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, XRPL_WALLET, TRON_WALLET, SOL_WALLET), this field returns &#x60;ZZ&#x60;, the ISO 3166-1 user-assigned code used when no country jurisdiction applies.  | [optional] 
 **financial_instrument_id** | **str** | The unique identifier of the financial instrument. | 
 **created_at** | **datetime** | The time at which the financial instrument was created | [optional] 
 **updated_at** | **datetime** | The time at which the financial instrument was last updated | [optional] 

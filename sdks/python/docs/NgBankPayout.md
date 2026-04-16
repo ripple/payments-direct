@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **bank_name** | **str** | The name of the identity&#39;s bank | 
 **bank_code** | **str** | The bank code of the identity&#39;s bank | 
 **account_number** | **str** | The identity&#39;s account number associated with the Account Identification Scheme | 
-**country** | **str** | The country of the identity’s bank, using the Alpha-2 code as defined in ISO 3166-1. | 
 
 ## Example
 

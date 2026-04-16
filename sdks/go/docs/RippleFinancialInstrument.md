@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **CoPse** | Pointer to [**CoPse**](CoPse.md) |  | [optional] 
 **BrTed** | Pointer to [**BrTed**](BrTed.md) |  | [optional] 
 **CaEft** | Pointer to [**CaEft**](CaEft.md) |  | [optional] 
-**Swift** | Pointer to [**Swift**](Swift.md) |  | [optional] 
 **Currency** | **string** | The 3-letter ISO currency code of the financial instrument. | 
 **Label** | Pointer to **string** | A user-defined label for the financial instrument. | [optional] 
 **FinancialInstrumentType** | **string** | The type of financial instrument or payment rail used for executing the transaction. This determines the structure and validation of account details required for the payout.  | 
@@ -287,31 +286,6 @@ SetCaEft sets CaEft field to given value.
 `func (o *RippleFinancialInstrument) HasCaEft() bool`
 
 HasCaEft returns a boolean if a field has been set.
-
-### GetSwift
-
-`func (o *RippleFinancialInstrument) GetSwift() Swift`
-
-GetSwift returns the Swift field if non-nil, zero value otherwise.
-
-### GetSwiftOk
-
-`func (o *RippleFinancialInstrument) GetSwiftOk() (*Swift, bool)`
-
-GetSwiftOk returns a tuple with the Swift field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSwift
-
-`func (o *RippleFinancialInstrument) SetSwift(v Swift)`
-
-SetSwift sets Swift field to given value.
-
-### HasSwift
-
-`func (o *RippleFinancialInstrument) HasSwift() bool`
-
-HasSwift returns a boolean if a field has been set.
 
 ### GetCurrency
 

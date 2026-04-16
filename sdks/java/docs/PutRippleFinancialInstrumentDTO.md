@@ -19,7 +19,6 @@ Request to update an existing financial instrument of an identity.
 |**coPse** | [**CoPseDTO**](CoPseDTO.md) |  |  [optional] |
 |**brTed** | [**BrTedDTO**](BrTedDTO.md) |  |  [optional] |
 |**caEft** | [**CaEftDTO**](CaEftDTO.md) |  |  [optional] |
-|**swift** | [**SwiftDTO**](SwiftDTO.md) |  |  [optional] |
 
 
 

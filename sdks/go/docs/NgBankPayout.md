@@ -7,13 +7,12 @@ Name | Type | Description | Notes
 **BankName** | **string** | The name of the identity&#39;s bank | 
 **BankCode** | **string** | The bank code of the identity&#39;s bank | 
 **AccountNumber** | **string** | The identity&#39;s account number associated with the Account Identification Scheme | 
-**Country** | **string** | The country of the identity’s bank, using the Alpha-2 code as defined in ISO 3166-1. | 
 
 ## Methods
 
 ### NewNgBankPayout
 
-`func NewNgBankPayout(bankName string, bankCode string, accountNumber string, country string, ) *NgBankPayout`
+`func NewNgBankPayout(bankName string, bankCode string, accountNumber string, ) *NgBankPayout`
 
 NewNgBankPayout instantiates a new NgBankPayout object
 This constructor will assign default values to properties that have it defined,
@@ -86,26 +85,6 @@ and a boolean to check if the value has been set.
 `func (o *NgBankPayout) SetAccountNumber(v string)`
 
 SetAccountNumber sets AccountNumber field to given value.
-
-
-### GetCountry
-
-`func (o *NgBankPayout) GetCountry() string`
-
-GetCountry returns the Country field if non-nil, zero value otherwise.
-
-### GetCountryOk
-
-`func (o *NgBankPayout) GetCountryOk() (*string, bool)`
-
-GetCountryOk returns a tuple with the Country field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCountry
-
-`func (o *NgBankPayout) SetCountry(v string)`
-
-SetCountry sets Country field to given value.
 
 
 

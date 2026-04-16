@@ -17,7 +17,6 @@ Name | Type | Description | Notes
 **co_pse** | [**CoPse**](CoPse.md) |  | [optional] 
 **br_ted** | [**BrTed**](BrTed.md) |  | [optional] 
 **ca_eft** | [**CaEft**](CaEft.md) |  | [optional] 
-**swift** | [**Swift**](Swift.md) |  | [optional] 
 
 ## Example
 

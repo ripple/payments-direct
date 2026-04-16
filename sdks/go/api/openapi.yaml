@@ -44,7 +44,7 @@ info:
     name: Apache 2.0
     url: http://apache.org
   title: Payments Direct API
-  version: "2026.03"
+  version: "2026.04"
 servers:
 - description: UAT environment with simulated currency
   url: https://api.test.ripple.com
@@ -84,11 +84,11 @@ tags:
 
     | Operation | Method | Description |
     | --- | --- | --- |
-    | [Create quote collection](./#operation/createQuoteCollection) | POST | Create a collection of quotes.  |
-    | [Get quote collection](./#operation/getQuoteCollection) | GET | Get a quote collection by ID. |
-    | [Get a quote](./#operation/getQuote) | GET | Get a specific quote by ID.  |
+    | [Create quote collection](./#operation/createQuoteCollectionV2) | POST | Create a collection of quotes.  |
+    | [Get quote collection](./#operation/getQuoteCollectionV2) | GET | Get a quote collection by ID. |
+    | [Get a quote](./#operation/getQuoteV2) | GET | Get a specific quote by ID.  |
   name: Quote
-  x-displayName: Quotes
+  x-displayName: Quotes (v3)
 - description: |
     Use these API operations to manage your payments with **Payment Management v3** (recommended for all new integrations).
 
@@ -1563,20 +1563,23 @@ paths:
       summary: Update a financial instrument (v3)
       tags:
       - IdentitiesV3
-  /v2/quotes/quote-collection:
+  /v3/quotes/quote-collection:
     post:
       description: |
-        Creates a collection of quotes for a proposed payment.
+        Create a quote collection to preview the cost and terms of a proposed payment before initiating it.
 
-        **Tutorials**
+        **What's new in v3:**
+        - `payoutCategory` and `destinationBlockchainNetwork` are no longer accepted in requests.
+        - `paymentRail` is added as an optional field in the request to allow filtering quotes by a specific payment rail. When paymentRail is not passed, quotes will be returned for all supported payment rails.
 
-        * Learn how to [Create a quote](../../tutorials/create-a-payment/#create-a-quote-collection).
-      operationId: createQuoteCollection
+         **Tutorials**
+        - `paymentRail` is added as an optional field in the request to allow filtering quotes by a specific payment rail. When paymentRail is not passed, quotes will be returned for all supported payment rails. For a list of supported values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
+      operationId: createQuoteCollectionV2
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/QuoteCollectionRequest'
+              $ref: '#/components/schemas/QuoteCollectionRequestV2'
         description: Create quote collection request
         required: true
       responses:
@@ -1584,7 +1587,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteCollection'
+                $ref: '#/components/schemas/QuoteCollectionV2'
           description: Creates a collection of quotes
         "400":
           content:
@@ -1616,9 +1619,13 @@ paths:
       summary: Create quote collection
       tags:
       - Quote
-  /v2/quotes/quote-collection/{quote-collection-id}:
+  /v3/quotes/quote-collection/{quote-collection-id}:
     get:
-      operationId: getQuoteCollection
+      description: |
+        Retrieve a previously created quote collection by its unique identifier.
+
+        Use this endpoint to check the status of quotes (ACTIVE or EXPIRED) and retrieve quote details needed for payment creation.
+      operationId: getQuoteCollectionV2
       parameters:
       - description: The unique identifier of the quote collection you want to retrieve
         explode: false
@@ -1635,7 +1642,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteCollection'
+                $ref: '#/components/schemas/QuoteCollectionV2'
           description: Valid quote collection found
         "401":
           content:
@@ -1667,9 +1674,18 @@ paths:
       summary: Get quote collection
       tags:
       - Quote
-  /v2/quotes/{quote-id}:
+  /v3/quotes/{quote-id}:
     get:
-      operationId: getQuote
+      description: |
+        Retrieve a specific quote by its unique identifier.
+
+        Use this endpoint to:
+        - Verify quote details before creating a payment
+        - Check if a quote is still active (not expired)
+        - Retrieve the `quoteId` needed for payment creation
+
+        **Note:** Quotes expire after a defined period. Check the `quoteStatus` field to confirm the quote is `ACTIVE` before using it to create a payment.
+      operationId: getQuoteV2
       parameters:
       - description: The unique identifier of the quote to retrieve
         explode: false
@@ -1686,7 +1702,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Quote'
+                $ref: '#/components/schemas/QuoteV2'
           description: Valid quote found
         "401":
           content:
@@ -1715,7 +1731,7 @@ paths:
           description: Internal server error
       security:
       - Bearer: []
-      summary: Get quote
+      summary: Get a quote
       tags:
       - Quote
   /v2/balances:
@@ -4096,15 +4112,9 @@ components:
           currency: MXN
           ngBankPayout:
             bankCode: bankCode
-            country: NG
             bankName: bankName
             accountNumber: accountNumber
           financialInstrumentType: BR_PIX
-          swift:
-            swiftCode: swiftCode
-            bankName: bankName
-            accountNumber: accountNumber
-            accountHolderName: accountHolderName
           updatedAt: 2023-11-03T18:26:00Z
       properties:
         financialInstrument:
@@ -4168,15 +4178,9 @@ components:
         currency: MXN
         ngBankPayout:
           bankCode: bankCode
-          country: NG
           bankName: bankName
           accountNumber: accountNumber
         financialInstrumentType: BR_PIX
-        swift:
-          swiftCode: swiftCode
-          bankName: bankName
-          accountNumber: accountNumber
-          accountHolderName: accountHolderName
         updatedAt: 2023-11-03T18:26:00Z
       required:
       - financialInstrumentId
@@ -4296,7 +4300,6 @@ components:
           - BR_PIX
           - BR_TED
           - EU_SEPA
-          - SWIFT
         incorporationCountry:
           description: "Information that locates and identifies the country, as defined\
             \ by postal services where the organization was incorporated. Use Alpha-2\
@@ -4313,16 +4316,11 @@ components:
           x-requiredByOriginatorFor:
           - BR_PIX
           - BR_TED
-          - SWIFT
         incorporationDate:
           description: The date when the business was incorporated.
           example: 2020-01-15
           format: date
           type: string
-          x-requiredByBeneficiaryFor:
-          - SWIFT
-          x-requiredByOriginatorFor:
-          - SWIFT
         legalEntityType:
           description: |
             Type of legal entity to distinguish between Financial Institutions and Non-Financial Institutions.
@@ -4413,7 +4411,6 @@ components:
           x-requiredByOriginatorFor:
           - BR_PIX
           - BR_TED
-          - SWIFT
         dateOfBirth:
           description: Date of Birth.
           example: 2001-01-24
@@ -4426,13 +4423,11 @@ components:
           - BR_PIX
           - BR_TED
           - CA_EFT
-          - SWIFT
           x-requiredByOriginatorFor:
           - EU_SEPA
           - GB_FPS
           - BR_PIX
           - BR_TED
-          - SWIFT
         countryOfBirth:
           description: "Country of Birth. Use Alpha-2 Code as defined in the [ISO\
             \ CountryCode ISO 3166-1](https://www.iso.org/obp/ui/#search) list."
@@ -4457,11 +4452,9 @@ components:
           - BR_PIX
           - BR_TED
           - NG_BANK_PAYOUT
-          - SWIFT
           x-requiredByOriginatorFor:
           - BR_PIX
           - BR_TED
-          - SWIFT
         gender:
           description: Gender of the identity.
           example: FEMALE
@@ -4537,7 +4530,6 @@ components:
       - CO_PSE
       - BR_TED
       - CA_EFT
-      - SWIFT
       x-enumDescriptions:
         US_ACH: Automated Clearing House - U.S. batch processing network used for
           domestic payments.
@@ -4554,8 +4546,6 @@ components:
         CO_PSE: Colombia's secure online banking payment system.
         BR_TED: Brazil's Electronic Funds Transfer system for high-value transactions.
         CA_EFT: Canada's Electronic Funds Transfer system for batch processing.
-        SWIFT: SWIFT - International wire transfers using the SWIFT/BIC network for
-          cross-border USD payments.
     put-ripple-identity:
       description: |
         Request to update an existing identity.
@@ -4629,7 +4619,6 @@ components:
           - CO_PSE
           - BR_TED
           - CA_EFT
-          - SWIFT
           x-enumDescriptions:
             US_ACH: Automated Clearing House - U.S. batch processing network used
               for domestic payments.
@@ -4646,8 +4635,6 @@ components:
             CO_PSE: Colombia's secure online banking payment system.
             BR_TED: Brazil's Electronic Funds Transfer system for high-value transactions.
             CA_EFT: Canada's Electronic Funds Transfer system for batch processing.
-            SWIFT: SWIFT - International wire transfers using the SWIFT/BIC network
-              for cross-border USD payments.
         currency:
           description: The 3-letter ISO currency code of the financial instrument.
           example: MXN
@@ -4675,7 +4662,8 @@ components:
           example: mexico bank account
           type: string
         country:
-          description: The country of the financial instrument.
+          description: |
+            The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, XRPL_WALLET, TRON_WALLET, SOL_WALLET), this field returns `ZZ`, the ISO 3166-1 user-assigned code used when no country jurisdiction applies.
           example: MX
           maxLength: 2
           minLength: 2
@@ -4926,7 +4914,6 @@ components:
         Routing Evaluation Order: Not applicable
       example:
         bankCode: bankCode
-        country: NG
         bankName: bankName
         accountNumber: accountNumber
       properties:
@@ -4950,20 +4937,10 @@ components:
           minLength: 4
           pattern: "^[a-zA-Z0-9]+$"
           type: string
-        country:
-          description: "The country of the identity’s bank, using the Alpha-2 code\
-            \ as defined in ISO 3166-1."
-          example: NG
-          type: string
-          x-extensible-enum:
-          - NG
-          x-enumDescriptions:
-            NG: Nigeria
       required:
       - accountNumber
       - bankCode
       - bankName
-      - country
       type: object
     br-pix:
       description: |
@@ -5203,57 +5180,6 @@ components:
       - institutionNumber
       - transitNumber
       type: object
-    swift:
-      description: |
-        Rails: SWIFT
-
-        Rail Definitions:
-
-        SWIFT:
-          - Availability: Business days and banking hours.
-          - Limit: No limit
-          - Settlement: 1-4 business days depending on corridor.
-          - Cut-off time: Varies by bank.
-          - Banking holidays: Applicable based on sender and receiver countries.
-
-        Routing Evaluation Order: Not applicable
-      example:
-        swiftCode: swiftCode
-        bankName: bankName
-        accountNumber: accountNumber
-        accountHolderName: accountHolderName
-      properties:
-        bankName:
-          description: The name of the identity's bank
-          maxLength: 140
-          minLength: 2
-          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
-            /()-]+(?<![ .,'&\\/-])?$"
-          type: string
-        swiftCode:
-          description: The SWIFT/BIC code of the identity's bank
-          maxLength: 11
-          minLength: 8
-          pattern: "^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$"
-          type: string
-        accountHolderName:
-          description: The name of the account holder
-          maxLength: 140
-          minLength: 1
-          pattern: "^[\\p{L}\\p{N} .,'&\\/()-]+$"
-          type: string
-        accountNumber:
-          description: The account number of the identity's bank account
-          maxLength: 34
-          minLength: 2
-          pattern: "^[A-Za-z0-9]+$"
-          type: string
-      required:
-      - accountHolderName
-      - accountNumber
-      - bankName
-      - swiftCode
-      type: object
     payment-rail-objects:
       properties:
         usAch:
@@ -5276,8 +5202,6 @@ components:
           $ref: '#/components/schemas/br-ted'
         caEft:
           $ref: '#/components/schemas/ca-eft'
-        swift:
-          $ref: '#/components/schemas/swift'
       type: object
     ripple-financial-instrument:
       allOf:
@@ -5303,7 +5227,8 @@ components:
       - $ref: '#/components/schemas/ripple-financial-instrument'
       - properties:
           country:
-            description: The country of the financial instrument.
+            description: |
+              The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, XRPL_WALLET, TRON_WALLET, SOL_WALLET), this field returns `ZZ`, the ISO 3166-1 user-assigned code used when no country jurisdiction applies.
             example: MX
             maxLength: 2
             minLength: 2
@@ -5374,15 +5299,9 @@ components:
         currency: MXN
         ngBankPayout:
           bankCode: bankCode
-          country: NG
           bankName: bankName
           accountNumber: accountNumber
         financialInstrumentType: BR_PIX
-        swift:
-          swiftCode: swiftCode
-          bankName: bankName
-          accountNumber: accountNumber
-          accountHolderName: accountHolderName
         updatedAt: 2023-11-03T18:26:00Z
     put-ripple-financial-instrument:
       allOf:
@@ -5491,19 +5410,23 @@ components:
           to send.
         DESTINATION_AMOUNT: Specify this value to get a quote for the amount that
           the beneficiary should receive.
-    QuoteCollectionRequest:
+    QuoteCollectionRequestV2:
       additionalProperties: false
-      description: Request to create a quote collection
+      description: |
+        Request to create a quote collection (v2).
+
+        **What's new in v3:**
+        - `payoutCategory` and `destinationBlockchainNetwork` are no longer accepted in requests.
+        - `paymentRail` is added as an optional field in the request to allow filtering quotes by a specific payment rail. When paymentRail is not passed, quotes will be returned for all supported payment rails. For a list of supported values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
       example:
         sourceCountry: US
         payinCategory: PRE_FUNDING
+        paymentRail: SPEI
         quoteAmount: 123.45
         destinationCurrency: MXN
         quoteAmountType: SOURCE_AMOUNT
         sourceCurrency: USD
-        payoutCategory: BANK
-        destinationCountry: PH
-        destinationBlockchainNetwork: Ethereum
+        destinationCountry: MX
       properties:
         quoteAmount:
           description: The amount for which you wish to receive a collection of quotes.
@@ -5537,24 +5460,12 @@ components:
             \ If the beneficiary is an individual, then this value is their country\
             \ of residence. If the beneficiary is an institution, then this value\
             \ is their the country of incorporation."
-          example: PH
+          example: MX
           pattern: "^[a-zA-Z]{2}$"
           type: string
-        payoutCategory:
-          description: The name of the payout category.
-          example: BANK
-          maxLength: 128
-          minLength: 1
-          type: string
-          x-enumDescriptions:
-            BANK: Indicates that the payout will be made in fiat currency to a recipient’s
-              bank account through local banking rails.
-            CRYPTO: Indicates that the payout will be made in stablecoin to a recipient’s
-              crypto wallet address.
         payinCategory:
           description: The name of the pay in category indicating how this payment
-            will be funded. The values FUNDED and T_PLUS_ONE are deprecated and will
-            be removed in a future release.
+            will be funded.
           example: PRE_FUNDING
           maxLength: 128
           minLength: 1
@@ -5566,26 +5477,30 @@ components:
               outstanding invoice.
             JIT_FUNDING: Indicates that the payment is being made and you will pay
               the outstanding amount before the payment expires.
-            FUNDED: Indicates that the payment is being made from funds you've deposited
-              with Ripple.
-            T_PLUS_ONE: Indicates the payment is being made and you will pay the outstanding
-              invoice.
-        destinationBlockchainNetwork:
-          description: The name of the blockchain network on which the beneficiary
-            will receive this payment.
-          example: Ethereum
-          maxLength: 20
+        paymentRail:
+          description: |
+            The payment rail on which the beneficiary will receive this payment. This value may be used to filter quotes to a specific subset of supported payout rails. If not provided, quotes will be returned for all supported payout rails. For a list of supported values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
+          example: SPEI
+          maxLength: 50
           minLength: 1
           type: string
+          x-enumDescriptions:
+            RTP: Indicates that the payout will be made in fiat currency to a recipient’s
+              bank account through the RTP network.
+            ACH: Indicates that the payout will be made in fiat currency to a recipient’s
+              bank account through the ACH network.
+            WIRE: Indicates that the payout will be made in fiat currency to a recipient’s
+              bank account through the wire transfer network.
+            ETHEREUM: Indicates that the payout will be made in stablecoin to a recipient's
+              Ethereum wallet address.
       required:
       - destinationCurrency
       - payinCategory
-      - payoutCategory
       - quoteAmount
       - quoteAmountType
       - sourceCurrency
       type: object
-    Quote:
+    QuoteV2:
       additionalProperties: false
       example:
         sourceCountry: US
@@ -5594,18 +5509,22 @@ components:
           feeCurrency: USD
           feeBreakdown:
           - feeDescription: The service fee charged for this transaction.
+            paymentRail: ACH/ Wire etc
             calculatedFee: 2.43
             feeName: Service fee
           - feeDescription: The service fee charged for this transaction.
+            paymentRail: ACH/ Wire etc
             calculatedFee: 2.43
             feeName: Service fee
         - totalFee: 12.23
           feeCurrency: USD
           feeBreakdown:
           - feeDescription: The service fee charged for this transaction.
+            paymentRail: ACH/ Wire etc
             calculatedFee: 2.43
             feeName: Service fee
           - feeDescription: The service fee charged for this transaction.
+            paymentRail: ACH/ Wire etc
             calculatedFee: 2.43
             feeName: Service fee
         taxes:
@@ -5634,15 +5553,14 @@ components:
         quoteAmountType: SOURCE_AMOUNT
         sourceCurrency: USD
         destinationCountry: MX
-        destinationBlockchainNetwork: Ethereum
         quoteId: 7ea3399c-1234-5678-8d8f-d320ea406630
         quoteStatus: ACTIVE
         expiresAt: 2023-11-02T18:26:00.000123Z
         createdAt: 2023-11-02T18:26:00.000123Z
         payinCategory: PRE_FUNDING
+        paymentRail: SPEI
         destinationCurrency: MXN
         sourceAmount: 123.45
-        payoutCategory: BANK
         destinationAmount: 2438.19
         adjustedExchangeRate:
           adjustedRate: 2
@@ -5659,20 +5577,14 @@ components:
         quoteAmountType:
           $ref: '#/components/schemas/QuoteAmountType'
         sourceAmount:
-          description: |
-            Amount to be sent by the originator. The value is rounded to the number of decimal
-            places defined by the ISO 4217 standard for the source currency (for example, 2 for
-            USD/EUR, 0 for JPY/KRW, 3 for BHD/KWD), using HALF_UP rounding mode.
+          description: Amount to be sent by the originator.
           example: 123.45
           format: double
           maximum: 100000000
           minimum: 1
           type: number
         destinationAmount:
-          description: |
-            Amount to be received by the beneficiary. The value is rounded to the number of decimal
-            places defined by the ISO 4217 standard for the destination currency (for example, 2 for
-            USD/EUR, 0 for JPY/KRW, 3 for BHD/KWD), using HALF_UP rounding mode.
+          description: Amount to be received by destination
           example: 2438.19
           format: double
           maximum: 100000000
@@ -5702,12 +5614,6 @@ components:
           example: MX
           pattern: "^[a-zA-Z]{2}$"
           type: string
-        payoutCategory:
-          description: Name of the payout category specified in the quote request.
-          example: BANK
-          maxLength: 128
-          minLength: 1
-          type: string
         payinCategory:
           description: The name of payin category specified in the quote request.
           example: PRE_FUNDING
@@ -5719,7 +5625,7 @@ components:
         fees:
           description: A summary of fees included in this quote.
           items:
-            $ref: '#/components/schemas/FeeSummary'
+            $ref: '#/components/schemas/FeeSummaryV2'
           type: array
         taxes:
           description: A summary of taxes included in this quote.
@@ -5740,22 +5646,20 @@ components:
           maxLength: 128
           minLength: 1
           type: string
-        destinationBlockchainNetwork:
-          description: The name of the blockchain network on which the beneficiary
-            will receive this payment.
-          example: Ethereum
-          maxLength: 20
+        paymentRail:
+          description: The payment rail used for this quote.
+          example: SPEI
+          maxLength: 50
           minLength: 1
           type: string
       required:
       - destinationCurrency
       - payinCategory
-      - payoutCategory
       - quoteId
       - quoteStatus
       - sourceCurrency
       type: object
-    QuoteCollection:
+    QuoteCollectionV2:
       additionalProperties: false
       example:
         quoteCollectionId: 11111111-aaaa-2222-bbbb-222222222222
@@ -5766,18 +5670,22 @@ components:
             feeCurrency: USD
             feeBreakdown:
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: ACH/ Wire etc
               calculatedFee: 2.43
               feeName: Service fee
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: ACH/ Wire etc
               calculatedFee: 2.43
               feeName: Service fee
           - totalFee: 12.23
             feeCurrency: USD
             feeBreakdown:
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: ACH/ Wire etc
               calculatedFee: 2.43
               feeName: Service fee
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: ACH/ Wire etc
               calculatedFee: 2.43
               feeName: Service fee
           taxes:
@@ -5806,15 +5714,14 @@ components:
           quoteAmountType: SOURCE_AMOUNT
           sourceCurrency: USD
           destinationCountry: MX
-          destinationBlockchainNetwork: Ethereum
           quoteId: 7ea3399c-1234-5678-8d8f-d320ea406630
           quoteStatus: ACTIVE
           expiresAt: 2023-11-02T18:26:00.000123Z
           createdAt: 2023-11-02T18:26:00.000123Z
           payinCategory: PRE_FUNDING
+          paymentRail: SPEI
           destinationCurrency: MXN
           sourceAmount: 123.45
-          payoutCategory: BANK
           destinationAmount: 2438.19
           adjustedExchangeRate:
             adjustedRate: 2
@@ -5824,18 +5731,22 @@ components:
             feeCurrency: USD
             feeBreakdown:
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: ACH/ Wire etc
               calculatedFee: 2.43
               feeName: Service fee
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: ACH/ Wire etc
               calculatedFee: 2.43
               feeName: Service fee
           - totalFee: 12.23
             feeCurrency: USD
             feeBreakdown:
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: ACH/ Wire etc
               calculatedFee: 2.43
               feeName: Service fee
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: ACH/ Wire etc
               calculatedFee: 2.43
               feeName: Service fee
           taxes:
@@ -5864,15 +5775,14 @@ components:
           quoteAmountType: SOURCE_AMOUNT
           sourceCurrency: USD
           destinationCountry: MX
-          destinationBlockchainNetwork: Ethereum
           quoteId: 7ea3399c-1234-5678-8d8f-d320ea406630
           quoteStatus: ACTIVE
           expiresAt: 2023-11-02T18:26:00.000123Z
           createdAt: 2023-11-02T18:26:00.000123Z
           payinCategory: PRE_FUNDING
+          paymentRail: SPEI
           destinationCurrency: MXN
           sourceAmount: 123.45
-          payoutCategory: BANK
           destinationAmount: 2438.19
           adjustedExchangeRate:
             adjustedRate: 2
@@ -5887,12 +5797,78 @@ components:
         quotes:
           description: List of quotes
           items:
-            $ref: '#/components/schemas/Quote'
+            $ref: '#/components/schemas/QuoteV2'
           minItems: 0
           type: array
       required:
       - quoteCollectionId
       - quotes
+      type: object
+    TotalFeeBreakdownV2:
+      additionalProperties: false
+      description: A breakdown of the total fees included in this quote.
+      example:
+        feeDescription: The service fee charged for this transaction.
+        paymentRail: ACH/ Wire etc
+        calculatedFee: 2.43
+        feeName: Service fee
+      properties:
+        calculatedFee:
+          description: Value of the fee when the configured fee unit is applied against
+            the `value`.
+          example: 2.43
+          format: double
+          type: number
+        feeName:
+          description: The name of the fee.
+          example: Service fee
+          maxLength: 128
+          minLength: 1
+          type: string
+        feeDescription:
+          description: Description of the fee.
+          example: The service fee charged for this transaction.
+          maxLength: 256
+          minLength: 1
+          type: string
+        paymentRail:
+          description: The payment rail associated with this fee line item.
+          example: ACH/ Wire etc
+          maxLength: 30
+          minLength: 1
+          type: string
+      type: object
+    FeeSummaryV2:
+      description: A summary of fees included in this quote.
+      example:
+        totalFee: 12.23
+        feeCurrency: USD
+        feeBreakdown:
+        - feeDescription: The service fee charged for this transaction.
+          paymentRail: ACH/ Wire etc
+          calculatedFee: 2.43
+          feeName: Service fee
+        - feeDescription: The service fee charged for this transaction.
+          paymentRail: ACH/ Wire etc
+          calculatedFee: 2.43
+          feeName: Service fee
+      properties:
+        totalFee:
+          description: The value of the total fee included in this quote.
+          example: 12.23
+          format: double
+          type: number
+        feeCurrency:
+          description: The currency in which fees are charged.
+          example: USD
+          pattern: "^[a-zA-Z]{3,5}$"
+          type: string
+        feeBreakdown:
+          description: An array of fees that provides a breakdown of how the total
+            fees is calculated for this quote.
+          items:
+            $ref: '#/components/schemas/TotalFeeBreakdownV2'
+          type: array
       type: object
     getBalances_200_response_balances_inner:
       description: Customer available prefund balance for specific currency

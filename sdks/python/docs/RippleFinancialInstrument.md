@@ -16,7 +16,6 @@ Name | Type | Description | Notes
 **co_pse** | [**CoPse**](CoPse.md) |  | [optional] 
 **br_ted** | [**BrTed**](BrTed.md) |  | [optional] 
 **ca_eft** | [**CaEft**](CaEft.md) |  | [optional] 
-**swift** | [**Swift**](Swift.md) |  | [optional] 
 **currency** | **str** | The 3-letter ISO currency code of the financial instrument. | 
 **label** | **str** | A user-defined label for the financial instrument. | [optional] 
 **financial_instrument_type** | **str** | The type of financial instrument or payment rail used for executing the transaction. This determines the structure and validation of account details required for the payout.  | 

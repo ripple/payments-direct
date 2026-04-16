@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 **CoPse** | Pointer to [**CoPse**](CoPse.md) |  | [optional] 
 **BrTed** | Pointer to [**BrTed**](BrTed.md) |  | [optional] 
 **CaEft** | Pointer to [**CaEft**](CaEft.md) |  | [optional] 
-**Swift** | Pointer to [**Swift**](Swift.md) |  | [optional] 
 
 ## Methods
 
@@ -310,31 +309,6 @@ SetCaEft sets CaEft field to given value.
 `func (o *PutRippleFinancialInstrument) HasCaEft() bool`
 
 HasCaEft returns a boolean if a field has been set.
-
-### GetSwift
-
-`func (o *PutRippleFinancialInstrument) GetSwift() Swift`
-
-GetSwift returns the Swift field if non-nil, zero value otherwise.
-
-### GetSwiftOk
-
-`func (o *PutRippleFinancialInstrument) GetSwiftOk() (*Swift, bool)`
-
-GetSwiftOk returns a tuple with the Swift field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSwift
-
-`func (o *PutRippleFinancialInstrument) SetSwift(v Swift)`
-
-SetSwift sets Swift field to given value.
-
-### HasSwift
-
-`func (o *PutRippleFinancialInstrument) HasSwift() bool`
-
-HasSwift returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
