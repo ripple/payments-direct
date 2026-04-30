@@ -1,6 +1,6 @@
 {
   "name": "@ripple/payments-direct-client",
-  "version": "2026.04",
+  "version": "2025.11",
   "description": "OpenAPI client for @ripple/payments-direct-client",
   "author": "OpenAPI-Generator Contributors",
   "repository": {

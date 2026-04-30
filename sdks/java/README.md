@@ -2,7 +2,7 @@
 
 Payments Direct API
 
-- API version: 2026.04
+- API version: 2025.11
 
 - Generator version: 7.13.0
 
@@ -81,7 +81,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.ripple.payments</groupId>
   <artifactId>payments-direct-client</artifactId>
-  <version>2026.04</version>
+  <version>2025.11</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -91,7 +91,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.ripple.payments:payments-direct-client:2026.04"
+compile "com.ripple.payments:payments-direct-client:2025.11"
 ```
 
 ### Others
@@ -104,7 +104,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/payments-direct-client-2026.04.jar`
+- `target/payments-direct-client-2025.11.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -155,27 +155,20 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AuthenticationApi* | [**authenticate**](docs/AuthenticationApi.md#authenticate) | **POST** /v2/oauth/token | Request an access token
 *AuthenticationApi* | [**testAuthToken**](docs/AuthenticationApi.md#testAuthToken) | **GET** /v2/oauth/token/test | Test access token
-*IdentitiesV3Api* | [**createFinancialInstrument**](docs/IdentitiesV3Api.md#createFinancialInstrument) | **POST** /v3/identities/{identity-id}/financial-instruments | Add a financial instrument (v3)
-*IdentitiesV3Api* | [**createIdentity**](docs/IdentitiesV3Api.md#createIdentity) | **POST** /v3/identities | Create an identity (v3)
-*IdentitiesV3Api* | [**deactivateFinancialInstrumentV3**](docs/IdentitiesV3Api.md#deactivateFinancialInstrumentV3) | **DELETE** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Deactivate a Financial Instrument (v3)
-*IdentitiesV3Api* | [**deactivateIdentityV3**](docs/IdentitiesV3Api.md#deactivateIdentityV3) | **DELETE** /v3/identities/{identity-id} | Deactivate an identity (v3)
-*IdentitiesV3Api* | [**getFinancialInstrumentById**](docs/IdentitiesV3Api.md#getFinancialInstrumentById) | **GET** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Get a financial instrument by ID (v3)
-*IdentitiesV3Api* | [**getFinancialInstruments**](docs/IdentitiesV3Api.md#getFinancialInstruments) | **GET** /v3/identities/{identity-id}/financial-instruments | Get a list of financial instruments of the identity (v3)
-*IdentitiesV3Api* | [**getIdentities**](docs/IdentitiesV3Api.md#getIdentities) | **GET** /v3/identities | Get a list of identities (v3)
-*IdentitiesV3Api* | [**getIdentityById**](docs/IdentitiesV3Api.md#getIdentityById) | **GET** /v3/identities/{identity-id} | Get an identity by ID (v3)
-*IdentitiesV3Api* | [**getIdentityByInternalId**](docs/IdentitiesV3Api.md#getIdentityByInternalId) | **GET** /v3/identities/by-internal-id/{internal-id} | Get an identity by Internal ID (v3)
-*IdentitiesV3Api* | [**putFinancialInstrument**](docs/IdentitiesV3Api.md#putFinancialInstrument) | **PUT** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Update a financial instrument (v3)
-*IdentitiesV3Api* | [**putIdentity**](docs/IdentitiesV3Api.md#putIdentity) | **PUT** /v3/identities/{identity-id} | Update an identity (v3)
+*IdentitiesV2Api* | [**createIdentityV2**](docs/IdentitiesV2Api.md#createIdentityV2) | **POST** /v2/identities | Create a new identity (v2) - Legacy
+*IdentitiesV2Api* | [**deactivateIdentityV2**](docs/IdentitiesV2Api.md#deactivateIdentityV2) | **DELETE** /v2/identities/{identity-id} | Delete an identity (v2) - Legacy
+*IdentitiesV2Api* | [**getIdentitiesV2**](docs/IdentitiesV2Api.md#getIdentitiesV2) | **GET** /v2/identities | Get a list of identities (v2) - Legacy
+*IdentitiesV2Api* | [**getIdentityByIdV2**](docs/IdentitiesV2Api.md#getIdentityByIdV2) | **GET** /v2/identities/{identity-id} | Get an identity by ID (v2) - Legacy
 *LedgerPublicApi* | [**getBalances**](docs/LedgerPublicApi.md#getBalances) | **GET** /v2/balances | Get available balances
 *LedgerPublicApi* | [**getStatementsTransactionsForCustomer**](docs/LedgerPublicApi.md#getStatementsTransactionsForCustomer) | **GET** /v2/ledger-transactions | Get ledger transactions
-*PaymentsV2Api* | [**createPaymentV2**](docs/PaymentsV2Api.md#createPaymentV2) | **POST** /v3/payments | Create payment V2
-*PaymentsV2Api* | [**getPaymentByIdV2**](docs/PaymentsV2Api.md#getPaymentByIdV2) | **GET** /v3/payments/{paymentId} | Get a payment by ID V2
-*PaymentsV2Api* | [**getPaymentStateTransitionsByIdV2**](docs/PaymentsV2Api.md#getPaymentStateTransitionsByIdV2) | **GET** /v3/payments/{paymentId}/states | Get state transitions by payment ID
-*PaymentsV2Api* | [**searchPaymentsV2**](docs/PaymentsV2Api.md#searchPaymentsV2) | **POST** /v3/payments/filter | Search payments V2
-*PaymentsV2Api* | [**updatePaymentLabelsV2**](docs/PaymentsV2Api.md#updatePaymentLabelsV2) | **PATCH** /v3/payments/{paymentId}/labels | Update payment labels
-*QuoteApi* | [**createQuoteCollectionV2**](docs/QuoteApi.md#createQuoteCollectionV2) | **POST** /v3/quotes/quote-collection | Create quote collection
-*QuoteApi* | [**getQuoteCollectionV2**](docs/QuoteApi.md#getQuoteCollectionV2) | **GET** /v3/quotes/quote-collection/{quote-collection-id} | Get quote collection
-*QuoteApi* | [**getQuoteV2**](docs/QuoteApi.md#getQuoteV2) | **GET** /v3/quotes/{quote-id} | Get a quote
+*PaymentsApi* | [**createPayment**](docs/PaymentsApi.md#createPayment) | **POST** /v2/payments | Create payment
+*PaymentsApi* | [**getPaymentById**](docs/PaymentsApi.md#getPaymentById) | **GET** /v2/payments/{paymentId} | Get a payment by ID
+*PaymentsApi* | [**getPaymentStateTransitionsById**](docs/PaymentsApi.md#getPaymentStateTransitionsById) | **GET** /v2/payments/{paymentId}/states | Get state transitions by payment ID
+*PaymentsApi* | [**searchPayments**](docs/PaymentsApi.md#searchPayments) | **POST** /v2/payments/filter | Search payments
+*PaymentsApi* | [**updatePaymentLabels**](docs/PaymentsApi.md#updatePaymentLabels) | **PATCH** /v2/payments/{paymentId}/labels | Update payment labels
+*QuoteApi* | [**createQuoteCollection**](docs/QuoteApi.md#createQuoteCollection) | **POST** /v2/quotes/quote-collection | Create quote collection
+*QuoteApi* | [**getQuote**](docs/QuoteApi.md#getQuote) | **GET** /v2/quotes/{quote-id} | Get quote
+*QuoteApi* | [**getQuoteCollection**](docs/QuoteApi.md#getQuoteCollection) | **GET** /v2/quotes/quote-collection/{quote-collection-id} | Get quote collection
 
 
 ## Documentation for Models
@@ -183,79 +176,55 @@ Class | Method | HTTP request | Description
  - [AdjustedExchangeRateDTO](docs/AdjustedExchangeRateDTO.md)
  - [AuthenticationRequestDTO](docs/AuthenticationRequestDTO.md)
  - [AuthenticationResponseDTO](docs/AuthenticationResponseDTO.md)
- - [BrPixDTO](docs/BrPixDTO.md)
- - [BrTedDTO](docs/BrTedDTO.md)
- - [BusinessIdentityAddressDTO](docs/BusinessIdentityAddressDTO.md)
- - [BusinessIdentityDTO](docs/BusinessIdentityDTO.md)
- - [BusinessIdentityRegistrationInnerDTO](docs/BusinessIdentityRegistrationInnerDTO.md)
- - [CaEftDTO](docs/CaEftDTO.md)
- - [CoPseDTO](docs/CoPseDTO.md)
- - [CreateFinancialInstrumentResponseDTO](docs/CreateFinancialInstrumentResponseDTO.md)
- - [CreateIdentityRequestV3DTO](docs/CreateIdentityRequestV3DTO.md)
- - [CreateIdentityResponseV3DTO](docs/CreateIdentityResponseV3DTO.md)
- - [DestinationV2DTO](docs/DestinationV2DTO.md)
+ - [CreateIdentityRequestV2DTO](docs/CreateIdentityRequestV2DTO.md)
+ - [CreateIdentityResponseDTO](docs/CreateIdentityResponseDTO.md)
+ - [DestinationDTO](docs/DestinationDTO.md)
  - [ErrorDTO](docs/ErrorDTO.md)
  - [ErrorResponseDTO](docs/ErrorResponseDTO.md)
- - [EuSepaDTO](docs/EuSepaDTO.md)
  - [FeeSummaryDTO](docs/FeeSummaryDTO.md)
- - [FeeSummaryV2DTO](docs/FeeSummaryV2DTO.md)
- - [FinancialInstrumentMetadataDTO](docs/FinancialInstrumentMetadataDTO.md)
- - [GbFpsDTO](docs/GbFpsDTO.md)
  - [GetBalances200ResponseBalancesInnerDTO](docs/GetBalances200ResponseBalancesInnerDTO.md)
  - [GetBalances200ResponseDTO](docs/GetBalances200ResponseDTO.md)
  - [GetBalances400ResponseDTO](docs/GetBalances400ResponseDTO.md)
  - [GetBalances400ResponseErrorsInnerDTO](docs/GetBalances400ResponseErrorsInnerDTO.md)
- - [GetFinancialInstrumentResponseDTO](docs/GetFinancialInstrumentResponseDTO.md)
- - [GetIdentityResponseV3DTO](docs/GetIdentityResponseV3DTO.md)
- - [GetStatementsTransactionsForCustomer200ResponseInnerDTO](docs/GetStatementsTransactionsForCustomer200ResponseInnerDTO.md)
- - [GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInnerDTO](docs/GetStatementsTransactionsForCustomer200ResponseInnerStatementTransactionsInnerDTO.md)
- - [IdentityResponseV3DTO](docs/IdentityResponseV3DTO.md)
- - [IndividualIdentityAddressDTO](docs/IndividualIdentityAddressDTO.md)
- - [IndividualIdentityDTO](docs/IndividualIdentityDTO.md)
- - [IndividualIdentityIdentityDocumentsInnerDTO](docs/IndividualIdentityIdentityDocumentsInnerDTO.md)
- - [ListFinancialInstrumentsResponseDTO](docs/ListFinancialInstrumentsResponseDTO.md)
- - [ListIdentitiesResponseV3DTO](docs/ListIdentitiesResponseV3DTO.md)
- - [MxSpeiDTO](docs/MxSpeiDTO.md)
- - [NgBankPayoutDTO](docs/NgBankPayoutDTO.md)
- - [OriginatorV2DTO](docs/OriginatorV2DTO.md)
+ - [GetStatementsTransactionsForCustomer200ResponseDTO](docs/GetStatementsTransactionsForCustomer200ResponseDTO.md)
+ - [GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInnerDTO](docs/GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInnerDTO.md)
+ - [IdentityResponseV2DTO](docs/IdentityResponseV2DTO.md)
+ - [IdentityTypeV2DTO](docs/IdentityTypeV2DTO.md)
+ - [IdentityV2DTO](docs/IdentityV2DTO.md)
+ - [ListIdentitiesResponseV2DTO](docs/ListIdentitiesResponseV2DTO.md)
+ - [OriginatorDTO](docs/OriginatorDTO.md)
  - [PageDTO](docs/PageDTO.md)
+ - [PaymentDTO](docs/PaymentDTO.md)
  - [PaymentErrorDTO](docs/PaymentErrorDTO.md)
  - [PaymentErrorResponseDTO](docs/PaymentErrorResponseDTO.md)
- - [PaymentFilterV2DTO](docs/PaymentFilterV2DTO.md)
- - [PaymentRailObjectsDTO](docs/PaymentRailObjectsDTO.md)
- - [PaymentRequestV2DTO](docs/PaymentRequestV2DTO.md)
- - [PaymentV2DTO](docs/PaymentV2DTO.md)
- - [PaymentWithDetailsV2DTO](docs/PaymentWithDetailsV2DTO.md)
- - [PaymentsResponseV2DTO](docs/PaymentsResponseV2DTO.md)
+ - [PaymentFilterDTO](docs/PaymentFilterDTO.md)
+ - [PaymentFilterRangeTypeDTO](docs/PaymentFilterRangeTypeDTO.md)
+ - [PaymentRequestDTO](docs/PaymentRequestDTO.md)
+ - [PaymentSortFieldDTO](docs/PaymentSortFieldDTO.md)
+ - [PaymentStateDTO](docs/PaymentStateDTO.md)
+ - [PaymentWithDetailsDTO](docs/PaymentWithDetailsDTO.md)
+ - [PaymentsResponseDTO](docs/PaymentsResponseDTO.md)
  - [PayoutExecutionDetailsDTO](docs/PayoutExecutionDetailsDTO.md)
- - [PutIdentityRequestV3DTO](docs/PutIdentityRequestV3DTO.md)
- - [PutRippleFinancialInstrumentDTO](docs/PutRippleFinancialInstrumentDTO.md)
- - [PutRippleIdentityDTO](docs/PutRippleIdentityDTO.md)
  - [QuoteAmountTypeDTO](docs/QuoteAmountTypeDTO.md)
- - [QuoteCollectionRequestV2DTO](docs/QuoteCollectionRequestV2DTO.md)
- - [QuoteCollectionV2DTO](docs/QuoteCollectionV2DTO.md)
+ - [QuoteCollectionDTO](docs/QuoteCollectionDTO.md)
+ - [QuoteCollectionRequestDTO](docs/QuoteCollectionRequestDTO.md)
+ - [QuoteDTO](docs/QuoteDTO.md)
  - [QuoteErrorDTO](docs/QuoteErrorDTO.md)
  - [QuoteErrorResponseDTO](docs/QuoteErrorResponseDTO.md)
  - [QuoteStatusDTO](docs/QuoteStatusDTO.md)
- - [QuoteV2DTO](docs/QuoteV2DTO.md)
- - [RippleFinancialInstrumentDTO](docs/RippleFinancialInstrumentDTO.md)
- - [RippleFinancialInstrumentEntryDTO](docs/RippleFinancialInstrumentEntryDTO.md)
- - [RippleIdentityDTO](docs/RippleIdentityDTO.md)
- - [SearchPaymentsRequestV2DTO](docs/SearchPaymentsRequestV2DTO.md)
- - [SortV2DTO](docs/SortV2DTO.md)
- - [StateTransitionV2DTO](docs/StateTransitionV2DTO.md)
- - [StateTransitionsResponseV2DTO](docs/StateTransitionsResponseV2DTO.md)
+ - [SearchPaymentsRequestDTO](docs/SearchPaymentsRequestDTO.md)
+ - [SortDTO](docs/SortDTO.md)
+ - [StateTransitionDTO](docs/StateTransitionDTO.md)
+ - [StateTransitionsResponseDTO](docs/StateTransitionsResponseDTO.md)
+ - [StateTypeDTO](docs/StateTypeDTO.md)
  - [TaxBreakdownDTO](docs/TaxBreakdownDTO.md)
  - [TaxSummaryDTO](docs/TaxSummaryDTO.md)
  - [TotalFeeBreakdownDTO](docs/TotalFeeBreakdownDTO.md)
- - [TotalFeeBreakdownV2DTO](docs/TotalFeeBreakdownV2DTO.md)
  - [TrackingReferenceDTO](docs/TrackingReferenceDTO.md)
- - [TransactionDetailsV2DTO](docs/TransactionDetailsV2DTO.md)
- - [UpdateFinancialInstrumentResponseDTO](docs/UpdateFinancialInstrumentResponseDTO.md)
+ - [TransactionDetailsDTO](docs/TransactionDetailsDTO.md)
  - [UpdatePaymentLabelsRequestDTO](docs/UpdatePaymentLabelsRequestDTO.md)
  - [UpdatePaymentLabelsResponseDTO](docs/UpdatePaymentLabelsResponseDTO.md)
- - [UsAchDTO](docs/UsAchDTO.md)
- - [UsFedwireDTO](docs/UsFedwireDTO.md)
+ - [UseCaseTypeDTO](docs/UseCaseTypeDTO.md)
  - [ValidateTokenResponseDTO](docs/ValidateTokenResponseDTO.md)
 
 

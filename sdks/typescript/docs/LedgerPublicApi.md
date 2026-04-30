@@ -61,7 +61,7 @@ const { status, data } = await apiInstance.getBalances(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getStatementsTransactionsForCustomer**
-> Array<GetStatementsTransactionsForCustomer200ResponseInner> getStatementsTransactionsForCustomer()
+> GetStatementsTransactionsForCustomer200Response getStatementsTransactionsForCustomer()
 
 Retrieve a paginated list of ledger transactions for your tenant within a specified date and time range. This endpoint returns detailed transaction data, including amounts, references, operations, and running balances, so you can reconcile balance changes over time for a given currency. 
 
@@ -116,7 +116,7 @@ const { status, data } = await apiInstance.getStatementsTransactionsForCustomer(
 
 ### Return type
 
-**Array<GetStatementsTransactionsForCustomer200ResponseInner>**
+**GetStatementsTransactionsForCustomer200Response**
 
 ### Authorization
 
@@ -131,7 +131,7 @@ const { status, data } = await apiInstance.getStatementsTransactionsForCustomer(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | A page of ledger statement transactions for the tenant that match the specified query parameters.  |  -  |
+|**200** | A page of ledger statement transactions for the customer that match the specified query parameters. |  -  |
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
 |**500** | Internal server error |  -  |

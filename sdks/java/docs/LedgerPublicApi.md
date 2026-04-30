@@ -83,7 +83,7 @@ public class Example {
 
 ## getStatementsTransactionsForCustomer
 
-> List&lt;GetStatementsTransactionsForCustomer200ResponseInnerDTO&gt; getStatementsTransactionsForCustomer(currency, startDttm, endDttm, pageSize, status, txnReference, offset, sortKey, sortDirection)
+> GetStatementsTransactionsForCustomer200ResponseDTO getStatementsTransactionsForCustomer(currency, startDttm, endDttm, pageSize, status, txnReference, offset, sortKey, sortDirection)
 
 Get ledger transactions
 
@@ -120,7 +120,7 @@ public class Example {
         String sortKey = "sortKey_example"; // String | Field to use for sorting the results. Allowed values include: - CREATED_AT: sort by transaction creation timestamp. - STATEMENT_OPERATION: sort by the operation type (for example, CREDIT, DEBIT). - STATEMENT_SOURCE: sort by the transaction source (for example, PAYMENTS, BANK). - STATEMENT_STATUS: sort by the ledger transaction status. - STATEMENT_TXN_REFERENCE: sort by the transaction reference. - STATEMENT_UPDATED_AT: sort by the last update timestamp. 
         String sortDirection = "sortDirection_example"; // String | Sort direction. Allowed values: - ASC: ascending order. - DESC: descending order. 
         try {
-            List<GetStatementsTransactionsForCustomer200ResponseInnerDTO> result = apiInstance.getStatementsTransactionsForCustomer(currency, startDttm, endDttm, pageSize, status, txnReference, offset, sortKey, sortDirection);
+            GetStatementsTransactionsForCustomer200ResponseDTO result = apiInstance.getStatementsTransactionsForCustomer(currency, startDttm, endDttm, pageSize, status, txnReference, offset, sortKey, sortDirection);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LedgerPublicApi#getStatementsTransactionsForCustomer");
@@ -150,7 +150,7 @@ public class Example {
 
 ### Return type
 
-[**List&lt;GetStatementsTransactionsForCustomer200ResponseInnerDTO&gt;**](GetStatementsTransactionsForCustomer200ResponseInnerDTO.md)
+[**GetStatementsTransactionsForCustomer200ResponseDTO**](GetStatementsTransactionsForCustomer200ResponseDTO.md)
 
 ### Authorization
 
@@ -165,7 +165,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | A page of ledger statement transactions for the tenant that match the specified query parameters.  |  -  |
+| **200** | A page of ledger statement transactions for the customer that match the specified query parameters. |  -  |
 | **400** | Bad request |  -  |
 | **401** | Unauthorized |  -  |
 | **500** | Internal server error |  -  |

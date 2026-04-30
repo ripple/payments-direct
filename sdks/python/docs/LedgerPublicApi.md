@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_statements_transactions_for_customer**
-> List[GetStatementsTransactionsForCustomer200ResponseInner] get_statements_transactions_for_customer(currency, start_dttm, end_dttm, page_size, status=status, txn_reference=txn_reference, offset=offset, sort_key=sort_key, sort_direction=sort_direction)
+> GetStatementsTransactionsForCustomer200Response get_statements_transactions_for_customer(currency, start_dttm, end_dttm, page_size, status=status, txn_reference=txn_reference, offset=offset, sort_key=sort_key, sort_direction=sort_direction)
 
 Get ledger transactions
 
@@ -101,7 +101,7 @@ Retrieve a paginated list of ledger transactions for your tenant within a specif
 
 ```python
 import ripple_payments_direct
-from ripple_payments_direct.models.get_statements_transactions_for_customer200_response_inner import GetStatementsTransactionsForCustomer200ResponseInner
+from ripple_payments_direct.models.get_statements_transactions_for_customer200_response import GetStatementsTransactionsForCustomer200Response
 from ripple_payments_direct.rest import ApiException
 from pprint import pprint
 
@@ -163,7 +163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[GetStatementsTransactionsForCustomer200ResponseInner]**](GetStatementsTransactionsForCustomer200ResponseInner.md)
+[**GetStatementsTransactionsForCustomer200Response**](GetStatementsTransactionsForCustomer200Response.md)
 
 ### Authorization
 
@@ -178,7 +178,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | A page of ledger statement transactions for the tenant that match the specified query parameters.  |  -  |
+**200** | A page of ledger statement transactions for the customer that match the specified query parameters. |  -  |
 **400** | Bad request |  -  |
 **401** | Unauthorized |  -  |
 **500** | Internal server error |  -  |

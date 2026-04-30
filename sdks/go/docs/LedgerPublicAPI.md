@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 
 ## GetStatementsTransactionsForCustomer
 
-> []GetStatementsTransactionsForCustomer200ResponseInner GetStatementsTransactionsForCustomer(ctx).Currency(currency).StartDttm(startDttm).EndDttm(endDttm).PageSize(pageSize).Status(status).TxnReference(txnReference).Offset(offset).SortKey(sortKey).SortDirection(sortDirection).Execute()
+> GetStatementsTransactionsForCustomer200Response GetStatementsTransactionsForCustomer(ctx).Currency(currency).StartDttm(startDttm).EndDttm(endDttm).PageSize(pageSize).Status(status).TxnReference(txnReference).Offset(offset).SortKey(sortKey).SortDirection(sortDirection).Execute()
 
 Get ledger transactions
 
@@ -112,7 +112,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `LedgerPublicAPI.GetStatementsTransactionsForCustomer``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetStatementsTransactionsForCustomer`: []GetStatementsTransactionsForCustomer200ResponseInner
+	// response from `GetStatementsTransactionsForCustomer`: GetStatementsTransactionsForCustomer200Response
 	fmt.Fprintf(os.Stdout, "Response from `LedgerPublicAPI.GetStatementsTransactionsForCustomer`: %v\n", resp)
 }
 ```
@@ -140,7 +140,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]GetStatementsTransactionsForCustomer200ResponseInner**](GetStatementsTransactionsForCustomer200ResponseInner.md)
+[**GetStatementsTransactionsForCustomer200Response**](GetStatementsTransactionsForCustomer200Response.md)
 
 ### Authorization
 

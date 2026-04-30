@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Payments Direct API
-  version: 2026.04
+  version: 2025.11
   license:
     name: Apache 2.0
     url: http://apache.org
@@ -60,47 +60,43 @@ tags:
     | [Request an access token](#operation/authenticate) | POST | Request an access token for authentication with Ripple APIs. |
     | [Test access token](#operation/testAuthToken) | GET | Test if an access token can be used for authentication. |
   x-displayName: Authentication
-- name: IdentitiesV3
-  x-displayName: Identities (v3)
+- name: IdentitiesV2
+  x-displayName: Identities (v2)
   description: |
-    Use these API operations to manage your identities with **Identity Management v3** (recommended for all new integrations).
-    **Note:** **Identity Management v3** is scheduled for release in **April 2026**. For early access or specific migration details, please contact your Ripple representative.
-    For more information about identity management, see [Payment identities](/products/payments-direct-2/api-docs/concepts/payment-identities) and [Financial instruments](/products/payments-direct-2/api-docs/concepts/financial-instruments).
+    Use these API operations to manage your identities for **existing integrations** built on **Identity Management v2.**
+
+    **Versioning notes**
+    - v2 identities remain fully supported for ongoing operations.
+    - New integrations should use **v3**.
+
     | Operation | Method | Description |
     | --- | --- | --- |
-    | [Create an identity (v3)](./#operation/createIdentity) | POST | Create a new identity (INDIVIDUAL/BUSINESS; ORIGINATOR/BENEFICIARY). |
-    | [Get a list of identies (v3)](./#operation/getIdentities) | GET | Retrieve a list of identities with optional filters (e.g., `paymentRole`, `identityType`). |
-    | [Get an identity by ID (v3)](./#operation/getIdentityById) | GET | Retrieve a specific identity by `identityId` (latest version by default). |
-    | [Get an identity by internal ID (v3)](./#operation/getIdentityByInternalId) | GET | Retrieve an active identity by client-provided `internalId`. |
-    | [Update an identity (v3)](./#operation/putIdentity) | PUT | Update one or more fields; creates a new version. |
-    | [Deactivate an identity (v3)](./#operation/deactivateIdentityV3) | DELETE | Set the identity state to `DEACTIVATED` (cannot be used for new payments). |
-    | [Add a financial instrument (v3)](./#operation/createFinancialInstrument) | POST | Add a financial instrument to an identity. |
-    | [Get a list of financial instruments (v3)](./#operation/getFinancialInstruments) | GET | Get a list of financial instruments for an identity. |
-    | [Get a financial instrument by ID (v3)](./#operation/getFinancialInstrumentById) | GET | Get a specific financial instrument by `financialInstrumentId`. |
-    | [Update a financial instrument (v3)](./#operation/putFinancialInstrument) | PUT | Update a financial instrument by `financialInstrumentId`. |
-    | [Deactivate a financial instrument (v3)](./#operation/deactivateFinancialInstrumentV3) | DELETE | Deactivate a financial instrument by `financialInstrumentId`. |
+    | [Create a new identity (v2)](./#operation/createIdentityV2) | POST | Create a new v2 identity. |
+    | [Get a list of identities (v2)](./#operation/getIdentitiesV2) | GET | Get a list of existing v2 identities. |
+    | [Get an identity by ID (v2)](./#operation/getIdentityByIdV2) | GET | Get a v2 identity by its unique ID. |
+    | [Delete an identity (v2)](./#operation/deactivateIdentityV2) | DELETE | Deactivate a v2 identity. |
 - name: Quote
-  x-displayName: Quotes (v3)
+  x-displayName: Quotes
   description: |
     Use these API operations to manage your quotes.
 
     | Operation | Method | Description |
     | --- | --- | --- |
-    | [Create quote collection](./#operation/createQuoteCollectionV2) | POST | Create a collection of quotes.  |
-    | [Get quote collection](./#operation/getQuoteCollectionV2) | GET | Get a quote collection by ID. |
-    | [Get a quote](./#operation/getQuoteV2) | GET | Get a specific quote by ID.  |
-- name: PaymentsV2
-  x-displayName: Payments (v3)
+    | [Create quote collection](./#operation/createQuoteCollection) | POST | Create a collection of quotes.  |
+    | [Get quote collection](./#operation/getQuoteCollection) | GET | Get a quote collection by ID. |
+    | [Get a quote](./#operation/getQuote) | GET | Get a specific quote by ID.  |
+- name: Payments
+  x-displayName: Payments (v2)
   description: |
-    Use these API operations to manage your payments with **Payment Management v3** (recommended for all new integrations).
+    Use these API operations to manage your v2 payments.
 
     | Operation | Method | Description |
     | --- | --- | --- |
-    | [Search payments (v3)](./#operation/searchPaymentsV2) | POST | Search for v3 payments based on filtering criteria. |
-    | [Create a payment (v3)](./#operation/createPaymentV2) | POST | Create a v3payment by accepting a quote. |
-    | [Get payment by payment ID (v3)](./#operation/getPaymentByIdV2) | GET | Get a specific v3 payment by payment ID.  |
-    | [Get state transitions by payment ID (v3)](./#operation/getPaymentStateTransitionsByIdV2) | GET | Get the state transitions for a specific v3 payment by payment ID. |
-    | [Update payment labels (v3)](./#operation/updatePaymentLabelsV2) | PATCH | Update the labels for a specific v3 payment by payment ID. |
+    | [Search payments (v2))](./#operation/searchPayments) | POST | Search for v2 payments based on filtering criteria. |
+    | [Create a payment (v2))](./#operation/createPayment) | POST | Create a v2 payment by accepting a quote. |
+    | [Get a payment by payment ID (v2)](./#operation/getPaymentById) | GET | Get a specific v2 payment by payment ID.  |
+    | [Get state transitions by payment ID (v2)](./#operation/getPaymentStateTransitionsById) | GET | Get the state transitions for a specific v2 payment by payment ID. |
+    | [Update payment labels (v2)](./#operation/updatePaymentLabels) | PATCH | Update the labels for a specific v2 payment by payment ID. |
 - name: ledger-public
   x-displayName: Ledger
   description: |
@@ -221,14 +217,14 @@ paths:
                 token]
         '401':
           description: Unauthorized
-  /v3/payments/filter:
+  /v2/payments/filter:
     post:
       tags:
-      - PaymentsV2
+      - Payments
       security:
       - Bearer: []
-      operationId: searchPaymentsV2
-      summary: Search payments V2
+      operationId: searchPayments
+      summary: Search payments
       description: Search for payments based on filtering criteria.
       requestBody:
         description: Search payments request
@@ -236,14 +232,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SearchPaymentsRequestV2'
+              $ref: '#/components/schemas/SearchPaymentsRequest'
       responses:
         '200':
           description: Payments matching the specified filtering criteria.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaymentsResponseV2'
+                $ref: '#/components/schemas/PaymentsResponse'
         '400':
           description: Invalid input variables for the request.
           content:
@@ -274,34 +270,35 @@ paths:
                   description: Unable to process the request due to an internal 
                     server error.
                   timestamp: '2024-12-01T12:00:00Z'
-  /v3/payments:
+  /v2/payments:
     post:
       tags:
-      - PaymentsV2
+      - Payments
       security:
       - Bearer: []
-      operationId: createPaymentV2
-      summary: Create payment V2
+      operationId: createPayment
+      summary: Create payment
       description: |
         Create a payment
 
-        **Tutorial**
+        **Tutorials**
 
-        * Learn how to [Create a payment](/products/payments-direct-2/api-docs/tutorials/create-a-payment/).
+        * Learn how to [Create a payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-payment/).
+        * Learn how to [Create a third-party payment](/products/payments-direct-2/api-docs/tutorials/create-a-v2-third-party-payment/).
       requestBody:
         description: create payment request
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PaymentRequestV2'
+              $ref: '#/components/schemas/PaymentRequest'
       responses:
         '201':
           description: Valid payment
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaymentV2'
+                $ref: '#/components/schemas/Payment'
         '400':
           description: Invalid input variables for the payment.
           content:
@@ -327,10 +324,11 @@ paths:
                 status: 402
                 errors:
                   code: USR_067
-                  type: USER_ERROR
+                  type: INSUFFICIENT_BALANCE_ERROR
                   title: Insufficient balance
-                  description: Payment failed due to insufficient balance. Add 
-                    funds to your account and try again.
+                  description: 'Payment failed due to insufficient balance. Required
+                    amount: 10, Available balance: 0. Add funds to your account and
+                    try again.'
                   timestamp: '2024-12-01T12:00:00Z'
         '500':
           description: Internal processing error
@@ -347,15 +345,15 @@ paths:
                   description: Unable to process the request due to an internal 
                     server error.
                   timestamp: '2024-12-01T12:00:00Z'
-  /v3/payments/{paymentId}:
+  /v2/payments/{paymentId}:
     get:
       tags:
-      - PaymentsV2
+      - Payments
       security:
       - Bearer: []
-      operationId: getPaymentByIdV2
+      operationId: getPaymentById
       description: Gets a payment by ID.
-      summary: Get a payment by ID V2
+      summary: Get a payment by ID
       parameters:
       - in: path
         name: paymentId
@@ -371,7 +369,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaymentWithDetailsV2'
+                $ref: '#/components/schemas/PaymentWithDetails'
         '400':
           description: Invalid input variables for the payment.
           content:
@@ -416,13 +414,13 @@ paths:
                   description: Unable to process the request due to an internal 
                     server error.
                   timestamp: '2024-12-01T12:00:00Z'
-  /v3/payments/{paymentId}/states:
+  /v2/payments/{paymentId}/states:
     get:
       tags:
-      - PaymentsV2
+      - Payments
       security:
       - Bearer: []
-      operationId: getPaymentStateTransitionsByIdV2
+      operationId: getPaymentStateTransitionsById
       description: Gets the state transitions for a payment by ID.
       summary: Get state transitions by payment ID
       parameters:
@@ -441,7 +439,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StateTransitionsResponseV2'
+                $ref: '#/components/schemas/StateTransitionsResponse'
         '400':
           description: Invalid input variables for the payment.
           content:
@@ -486,13 +484,13 @@ paths:
                   description: Unable to process the request due to an internal 
                     server error.
                   timestamp: '2024-12-01T12:00:00Z'
-  /v3/payments/{paymentId}/labels:
+  /v2/payments/{paymentId}/labels:
     patch:
       tags:
-      - PaymentsV2
+      - Payments
       security:
       - Bearer: []
-      operationId: updatePaymentLabelsV2
+      operationId: updatePaymentLabels
       summary: Update payment labels
       description: Add or remove labels for a payment.
       parameters:
@@ -563,223 +561,149 @@ paths:
                   description: Unable to process the request due to an internal 
                     server error.
                   timestamp: '2024-12-01T12:00:00Z'
-  /v3/identities:
+  /v2/identities:
     post:
       tags:
-      - IdentitiesV3
+      - IdentitiesV2
       security:
       - Bearer: []
-      operationId: createIdentity
-      summary: Create an identity (v3)
+      operationId: createIdentityV2
+      summary: Create a new identity (v2) - Legacy
       description: |
-        Create a new payment identity as an ORIGINATOR or BENEFICIARY for either an INDIVIDUAL or BUSINESS.
-        The request body must follow the v3 identity schema and will be validated against corridor rules where applicable.
-        On success, the API returns the new identityId and its initial version.
+        Create a new identity.
+
+        <!-- **Tutorials**
+
+        * Learn how to [Create an identity](../../tutorials/create-an-identity/). -->
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/create-identity-request-v3'
-            examples:
-              create-individual-originator:
-                summary: INDIVIDUAL ORIGINATOR
-                value:
-                  identityType: INDIVIDUAL
-                  paymentRole: ORIGINATOR
-                  internalId: customer-12345-uuid
-                  nickName: Alice Sender USD
-                  tags:
-                  - sender
-                  - priority
-                  validatePayoutRails:
-                  - CO_PSE
-                  individual:
-                    firstName: Alice
-                    lastName: Chen
-                    dateOfBirth: '1990-05-14'
-                    citizenship: US
-                    address:
-                      streetAddress:
-                      - 123 Main Street
-                      city: San Francisco
-                      stateOrProvince: CA
-                      postalCode: '94105'
-                      country: US
-              create-business-beneficiary:
-                summary: BUSINESS BENEFICIARY
-                value:
-                  identityType: BUSINESS
-                  paymentRole: BENEFICIARY
-                  nickName: Widgets Org MX
-                  tags:
-                  - beneficiary
-                  - mx
-                  validatePayoutRails:
-                  - CO_PSE
-                  business:
-                    businessName: Widgets Org
-                    incorporationCountry: US
-                    registration:
-                    - number: 123ABC
-                      type: INCORPORATION_CERTIFICATE
-                    email: fake@example.com
-                    phone: '+1234567890'
-                    address:
-                      streetAddress:
-                      - 123 Example MA
-                      city: Boston
-                      stateOrProvince: MS
-                      postalCode: '12345'
-                      country: US
+              $ref: '#/components/schemas/create-identity-request-v2'
       responses:
         '201':
-          description: Identity created.
+          description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/create-identity-response-v3'
-              example:
-                identityId: 99254c4f-f207-4792-a846-06928825018c
-                version: '1'
+                $ref: '#/components/schemas/create-identity-response'
         '400':
-          description: Invalid request.
+          description: Invalid Request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-400:
-                  $ref: '#/components/examples/error-400-example'
-        '409':
-          description: Conflict - An identity with the provided internalId 
-            already exists.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
+              example:
+                status: 400
+                errors:
+                - code: USR_101
+                  title: Bad Request
+                  type: USER_ERROR
+                  description: Invalid request. Check your request body and try 
+                    again.
+                  timestamp: '2025-05-23T15:02:56.516Z'
         '500':
-          description: Internal processing error.
+          description: Internal Processing Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-500:
-                  $ref: '#/components/examples/error-500-example'
+              example:
+                status: 500
+                errors:
+                - code: SYS_001
+                  title: Internal server error
+                  type: SYSTEM_ERROR
+                  description: Unable to process the request due to an internal 
+                    server error.
+                  timestamp: '2025-05-23T15:02:56.516Z'
     get:
       tags:
-      - IdentitiesV3
+      - IdentitiesV2
       security:
       - Bearer: []
-      operationId: getIdentities
-      summary: Get a list of identities (v3)
+      operationId: getIdentitiesV2
+      summary: Get a list of identities (v2) - Legacy
       description: |
-        Retrieve identities for your tenant with optional filters.
-        Use `limit` and `next-token` for pagination. The response includes a `data` array and an optional `nextToken`.
+        Get a list of identities that match the query parameters.
+
+        **Note**: Depending on the number of identities in your account, not all of them may be returned even if they match your query parameters.
       parameters:
       - in: query
-        name: payment-role
+        name: identityType
         required: false
         schema:
-          type: string
+          $ref: '#/components/schemas/identity-type-v2'
         example: BENEFICIARY
-        description: Filter by payment role.
+        description: The type of identities you want to retrieve
       - in: query
-        name: nick-name
+        name: nickName
         required: false
         schema:
           type: string
-          maxLength: 256
-        example: Alice
-        description: Filter by nickname.
-      - in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-          minimum: 1
-          example: 20
-          default: 10
-        description: Maximum number of identities to return. Default value is 
-          10, maximum is 100.
-      - in: query
-        name: next-token
-        required: false
-        schema:
-          type: string
-        example: eyJrZXkxIjoidmFsdWVfMSIsImtleTIiOiJ2YWx1ZTIifQ==
-        description: Opaque token to fetch the next page of results.
+        example: Successful Beneficiary
+        description: The nickname for the identity provided at the time of 
+          identity creation
       responses:
         '200':
-          description: A page of identities.
+          description: Requested identity info in JSON format
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/list-identities-response-v3'
-              examples:
-                list-identities-v3:
-                  value:
-                    data:
-                    - identityId: 0116bacc-ffbf-4fa2-a29c-ecd9ea346806
-                      identityType: BUSINESS
-                      paymentRole: BENEFICIARY
-                      createdAt: '2025-10-01T16:14:13.200Z'
-                      updatedAt: '2025-10-01T16:14:15.763Z'
-                      identityState: ACTIVE
-                      nickName: testNickName
-                      tags:
-                      - tag1
-                      version: 2
-                      schemaVersion: 1.0.0
-                    - identityId: 1d927c62-45fa-4f42-b9f8-8210e1a111bb
-                      identityType: INDIVIDUAL
-                      paymentRole: ORIGINATOR
-                      createdAt: '2025-10-01T17:20:05.111Z'
-                      updatedAt: '2025-10-01T17:20:06.500Z'
-                      identityState: ACTIVE
-                      nickName: Alice Originator
-                      tags:
-                      - sender
-                      - priority
-                      version: 1
-                      schemaVersion: 1.0.0
-                    nextToken: eyJrZXkxIjoidmFsdWUifQ==
+                $ref: '#/components/schemas/list-identities-response-v2'
         '400':
-          description: Invalid request.
+          description: Invalid request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-400:
-                  $ref: '#/components/examples/error-400-example'
+              example:
+                status: 400
+                errors:
+                - code: USR_102
+                  title: Bad request
+                  type: USER_ERROR
+                  description: Unable to get identity. Identity ID should be in 
+                    UUID format.
+                  timestamp: '2025-05-23T15:02:56.516Z'
         '404':
-          description: No identities found.
+          description: No identities found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-404:
-                  $ref: '#/components/examples/error-404-example'
+              example:
+                status: 404
+                errors:
+                - code: USR_103
+                  title: Identities not found
+                  type: NOT_FOUND
+                  description: No identities exist
+                  timestamp: '2025-05-23T15:02:56.516Z'
         '500':
-          description: Internal processing error.
+          description: Internal Processing Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-500:
-                  $ref: '#/components/examples/error-500-example'
-  /v3/identities/{identity-id}:
+              example:
+                status: 500
+                errors:
+                - code: SYS_001
+                  title: Internal server error
+                  type: SYSTEM_ERROR
+                  description: Unable to process the request due to an internal 
+                    server error.
+                  timestamp: '2025-05-23T15:02:56.516Z'
+  /v2/identities/{identity-id}:
     get:
       tags:
-      - IdentitiesV3
+      - IdentitiesV2
       security:
       - Bearer: []
-      operationId: getIdentityById
-      summary: Get an identity by ID (v3)
+      operationId: getIdentityByIdV2
+      summary: Get an identity by ID (v2) - Legacy
       description: |
         Retrieve a specific identity by ID.
         If `version` is not provided, the latest version is returned.
@@ -788,177 +712,67 @@ paths:
         in: path
         required: true
         description: The ID of the identity to retrieve.
-        example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
+        example: 146f3c51-c313-47ce-b6f2-691c5a238b3e
         schema:
           type: string
       - in: query
         name: version
         description: Specific version to retrieve. If omitted, returns the 
           latest version.
-        example: '2'
+        example: 2
         required: false
         schema:
-          type: string
+          type: integer
+          minimum: 1
       responses:
         '200':
           description: Identity details.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/get-identity-response-v3'
-              examples:
-                get-identity-v3:
-                  value:
-                    identityId: 9d839f58-7fd3-4913-a27e-48d31973d3f9
-                    identityState: ACTIVE
-                    nickName: nickName
-                    tags:
-                    - tag1
-                    version: '2'
-                    schemaVersion: 1.0.0
-                    createdAt: '2025-10-01T18:46:41.833Z'
-                    updatedAt: '2025-10-01T18:46:47.430Z'
-                    identityType: BUSINESS
-                    paymentRole: BENEFICIARY
-                    business:
-                      businessName: Widgets Org
-                      address:
-                        streetAddress:
-                        - 123 Example MA
-                        country: US
-                        city: Boston
-                        stateOrProvince: MS
-                        postalCode: '12345'
-                      email: fake@example.com
-                      phone: '+1234567890'
-                      registration:
-                      - number: 123ABC
-                        type: INCORPORATION_CERTIFICATE
-                      incorporationCountry: US
+                $ref: '#/components/schemas/identity-response-v2'
         '400':
           description: Invalid identity ID.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-400:
-                  $ref: '#/components/examples/error-400-example'
+              example:
+                status: 400
+                errors:
+                - code: USR_102
+                  title: Bad request
+                  type: USER_ERROR
+                  description: Unable to get identity. Identity ID should be in 
+                    UUID format.
+                  timestamp: '2025-05-23T15:02:56.516Z'
         '404':
           description: Identity not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-404:
-                  $ref: '#/components/examples/error-404-example'
+              example:
+                status: 404
+                errors:
+                - code: USR_103
+                  title: Identity not found
+                  type: NOT_FOUND
+                  description: No identity exists for identityId
+                  timestamp: '2025-05-23T15:02:56.516Z'
         '500':
           description: Internal processing error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-500:
-                  $ref: '#/components/examples/error-500-example'
-    put:
-      tags:
-      - IdentitiesV3
-      security:
-      - Bearer: []
-      operationId: putIdentity
-      summary: Update an identity (v3)
-      description: |
-        Update all fields of an existing identity. Supports updates to PII fields and metadata.
-        Each successful PUT creates a new version and preserves prior versions for audit.
-      parameters:
-      - name: identity-id
-        in: path
-        required: true
-        description: The ID of the identity to update.
-        example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
-        schema:
-          type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/put-identity-request-v3'
-            examples:
-              put-metadata:
-                summary: Update nickname and tags
-                value:
-                  nickName: Alice Sender USD - Updated
-                  tags:
-                  - usd
-                  - high-value
-              put-individual-address:
-                summary: Update INDIVIDUAL address
-                value:
-                  individual:
-                    address:
-                      streetAddress:
-                      - 500 Market Street
-                      city: San Francisco
-                      stateOrProvince: CA
-                      postalCode: '94103'
-                      country: US
-              put-business-contact:
-                summary: Update BUSINESS contact info
-                value:
-                  business:
-                    email: ops@example.com
-                    phone: '+14155551234'
-      responses:
-        '200':
-          description: Identity updated. Latest version returned.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/get-identity-response-v3'
-        '400':
-          description: Invalid request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-400:
-                  $ref: '#/components/examples/error-400-example'
-        '404':
-          description: Identity not found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-404:
-                  $ref: '#/components/examples/error-404-example'
-        '409':
-          description: Conflict - The provided internalId already exists on a 
-            different identity.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-        '500':
-          description: Internal processing error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-500:
-                  $ref: '#/components/examples/error-500-example'
     delete:
       tags:
-      - IdentitiesV3
+      - IdentitiesV2
       security:
       - Bearer: []
-      operationId: deactivateIdentityV3
-      summary: Deactivate an identity (v3)
+      operationId: deactivateIdentityV2
+      summary: Delete an identity (v2) - Legacy
       description: |
         Deactivate an identity and its financial instruments.
         Deactivation is permanent and prevents further use in payments.
@@ -980,572 +794,86 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-400:
-                  $ref: '#/components/examples/error-400-example'
+              example:
+                status: 400
+                errors:
+                - code: USR_102
+                  title: Bad request
+                  type: USER_ERROR
+                  description: Unable to get identity. Identity ID should be in 
+                    UUID format.
+                  timestamp: '2025-05-23T15:02:56.516Z'
         '404':
           description: Identity not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-404:
-                  $ref: '#/components/examples/error-404-example'
+              example:
+                status: 404
+                errors:
+                - code: USR_103
+                  title: Identity not found
+                  type: NOT_FOUND
+                  description: No identity exists for identityId
+                  timestamp: '2025-05-23T15:02:56.516Z'
         '422':
           description: Identity already deactivated or cannot be deactivated.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error-response'
-        '500':
-          description: Internal processing error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-500:
-                  $ref: '#/components/examples/error-500-example'
-  /v3/identities/by-internal-id/{internal-id}:
-    get:
-      tags:
-      - IdentitiesV3
-      security:
-      - Bearer: []
-      operationId: getIdentityByInternalId
-      summary: Get an identity by Internal ID (v3)
-      description: |
-        Retrieve a specific identity by its internal ID.
-
-        **Behavior:**
-        - Only returns identities in the `ACTIVE` state. Deactivated identities will result in an error.
-        - Always returns the latest version of the identity. Historical versions are not accessible through this endpoint.
-        - If no active identity exists for the given `internal-id`, a 404 is returned.
-      parameters:
-      - name: internal-id
-        in: path
-        required: true
-        description: The Internal ID of the identity to retrieve.
-        example: customer-12345-uuid
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Identity details.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/get-identity-response-v3'
-              examples:
-                get-identity-v3:
-                  value:
-                    identityId: 9d839f58-7fd3-4913-a27e-48d31973d3f9
-                    identityState: ACTIVE
-                    nickName: nickName
-                    tags:
-                    - tag1
-                    version: '2'
-                    schemaVersion: 1.0.0
-                    createdAt: '2025-10-01T18:46:41.833Z'
-                    updatedAt: '2025-10-01T18:46:47.430Z'
-                    identityType: BUSINESS
-                    paymentRole: ORIGINATOR
-                    internalId: customer-12345-uuid
-                    business:
-                      businessName: Widgets Org
-                      address:
-                        streetAddress:
-                        - 123 Example MA
-                        country: US
-                        city: Boston
-                        stateOrProvince: MS
-                        postalCode: '12345'
-                      email: fake@example.com
-                      phone: '+1234567890'
-                      registration:
-                      - number: 123ABC
-                        type: INCORPORATION_CERTIFICATE
-                      incorporationCountry: US
-        '400':
-          description: Invalid internal ID.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-400:
-                  $ref: '#/components/examples/error-400-example'
-        '404':
-          description: Active Identity not found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-404:
-                  $ref: '#/components/examples/error-404-example'
-        '500':
-          description: Internal processing error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-500:
-                  $ref: '#/components/examples/error-500-example'
-  /v3/identities/{identity-id}/financial-instruments:
-    post:
-      tags:
-      - IdentitiesV3
-      security:
-      - Bearer: []
-      operationId: createFinancialInstrument
-      summary: Add a financial instrument (v3)
-      description: |
-        Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address).
-        In the current release, each identity can have **one** financial instrument.
-        Future releases will support multiple instruments per identity.
-      parameters:
-      - name: identity-id
-        in: path
-        required: true
-        description: Unique identifier of the identity that will own the 
-          financial instrument.
-        example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
-        schema:
-          type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ripple-financial-instrument'
-            examples:
-              create-us-ach:
-                summary: US_ACH bank account
-                value:
-                  financialInstrumentType: US_ACH
-                  currency: USD
-                  label: US bank account
-                  usAch:
-                    bankName: Bank of Example
-                    bankRoutingNumber: '266231608'
-                    accountNumber: '60480'
-                    accountType: CHECKING
-      responses:
-        '201':
-          description: Financial instrument created.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/create-financial-instrument-response'
               example:
-                financialInstrumentId: d3cd4f8e-3a6d-46e6-bdb6-0b7f358f2ad8
-        '400':
-          description: Invalid request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-400:
-                  $ref: '#/components/examples/error-400-example'
-        '404':
-          description: Identity not found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-404:
-                  $ref: '#/components/examples/error-404-example'
+                status: 422
+                errors:
+                - code: USR_104
+                  title: Invalid request
+                  type: USER_ERROR
+                  description: The identity has already been deactivated.
+                  timestamp: '2025-05-23T15:02:56.516Z'
         '500':
           description: Internal processing error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-500:
-                  $ref: '#/components/examples/error-500-example'
-    get:
-      tags:
-      - IdentitiesV3
-      security:
-      - Bearer: []
-      operationId: getFinancialInstruments
-      summary: Get a list of financial instruments of the identity (v3)
-      description: List financial instruments for an identity.
-      parameters:
-      - in: path
-        name: identity-id
-        required: true
-        description: Unique UUID string that maps to an identity
-        example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
-        schema:
-          type: string
-      - in: query
-        name: version
-        required: false
-        description: Version of the identity
-        example: '2'
-        schema:
-          type: string
-      - in: query
-        name: next-token
-        required: false
-        schema:
-          type: string
-        example: eyJrZXkxIjoidmFsdWVfMSIsImtleTIiOiJ2YWx1ZTIifQ==
-        description: The token to use for the next page of results. If provided,
-          the API will return financial instruments after this token.
-      - in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 100
-          example: 20
-          default: 10
-        description: The maximum number of financial instruments to return. 
-          Default is 10, maximum is 100.
-      responses:
-        '200':
-          description: Requested financial instruments of the identity in JSON 
-            format
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/list-financial-instruments-response'
-              examples:
-                list-fi-v3:
-                  value:
-                    data:
-                    - financialInstrumentId: 
-                        7f2bac05-42a3-4b26-89fd-333396fdba70
-                      financialInstrumentType: US_ACH
-                      currency: USD
-                      label: US bank account
-                      country: US
-                      createdAt: '2025-10-01T18:46:47.430Z'
-                      updatedAt: '2025-10-01T18:46:47.430Z'
-        '400':
-          description: Invalid request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-400:
-                  $ref: '#/components/examples/error-400-example'
-        '404':
-          description: No identity or financial instruments found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-404:
-                  $ref: '#/components/examples/error-404-example'
-        '500':
-          description: Internal Processing Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-500:
-                  $ref: '#/components/examples/error-500-example'
-  /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id}:
-    get:
-      tags:
-      - IdentitiesV3
-      security:
-      - Bearer: []
-      operationId: getFinancialInstrumentById
-      summary: Get a financial instrument by ID (v3)
-      description: |
-        Retrieves one financial instrument associated with the specified identity.
-        In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity.
-      parameters:
-      - name: identity-id
-        in: path
-        required: true
-        description: Unique identifier of the identity whose instruments you 
-          want to list.
-        example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
-        schema:
-          type: string
-      - name: financial-instrument-id
-        in: path
-        required: true
-        description: The ID of the financial instrument of the identity.
-        example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
-        schema:
-          type: string
-      - in: query
-        name: version
-        required: false
-        description: Version of the identity
-        example: '2'
-        schema:
-          type: string
-      - name: expand-identity
-        in: query
-        required: false
-        description: |
-          Optional parameter to expand the financial instrument details.
-          If set to true, the details about the identity will be included in the response.
-        schema:
-          type: boolean
-          example: true
-      responses:
-        '200':
-          description: List of financial instruments for the identity.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/get-financial-instrument-response'
-              examples:
-                get-fi-v3:
-                  value:
-                    financialInstrument:
-                      country: US
-                      financialInstrumentId: 
-                        7f2bac05-42a3-4b26-89fd-333396fdba70
-                      createdAt: '2025-10-01T18:46:47.430Z'
-                      updatedAt: '2025-10-01T18:46:47.430Z'
-                      usAch:
-                        bankName: string
-                        bankRoutingNumber: '266231608'
-                        accountNumber: '60480'
-                        accountType: CHECKING
-                      currency: USD
-                      label: US bank account
-                      financialInstrumentType: US_ACH
-        '400':
-          description: Identity ID or financial instrument ID is not valid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-400:
-                  $ref: '#/components/examples/error-400-example'
-        '404':
-          description: The specified identity-id does not exist.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-404:
-                  $ref: '#/components/examples/error-404-example'
-        '500':
-          description: Internal processing error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-500:
-                  $ref: '#/components/examples/error-500-example'
-    put:
-      tags:
-      - IdentitiesV3
-      security:
-      - Bearer: []
-      operationId: putFinancialInstrument
-      summary: Update a financial instrument (v3)
-      description: |
-        Update editable fields of a financial instrument including rail-specific details and labels.
-        The financialInstrumentType is immutable after creation.
-      parameters:
-      - name: identity-id
-        in: path
-        required: true
-        description: The unique ID of the identity.
-        example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
-        schema:
-          type: string
-      - name: financial-instrument-id
-        in: path
-        required: true
-        description: The ID of the financial instrument to update.
-        example: c7e2f5b4-d1a2-4c3a-9e1b-4d5c6f7e8a9d
-        schema:
-          type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/put-ripple-financial-instrument'
-            examples:
-              put-label-only:
-                summary: Update label
-                value:
-                  label: Operating account
-              put-ach-details:
-                summary: Update ACH details
-                value:
-                  usAch:
-                    bankRoutingNumber: '266231608'
-                    accountNumber: 987654321
-                    accountType: SAVINGS
-              put-xrpl-wallet:
-                summary: Update XRPL destination tag
-                value:
-                  xrplWallet:
-                    destinationTag: 654321
-      responses:
-        '200':
-          description: Financial instrument updated.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/update-financial-instrument-response'
-        '400':
-          description: Invalid request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-400:
-                  $ref: '#/components/examples/error-400-example'
-        '404':
-          description: Identity or financial instrument not found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-404:
-                  $ref: '#/components/examples/error-404-example'
-        '409':
-          description: Conflicting resource state.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-409:
-                  $ref: '#/components/examples/error-409-example'
-        '500':
-          description: Internal processing error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-500:
-                  $ref: '#/components/examples/error-500-example'
-    delete:
-      tags:
-      - IdentitiesV3
-      security:
-      - Bearer: []
-      operationId: deactivateFinancialInstrumentV3
-      summary: Deactivate a Financial Instrument (v3)
-      description: |
-        Deactivate a financial instrument of an Identity.
-        Deactivation is permanent and prevents further use in payments.
-        Historical versions remain available for audit.
-      parameters:
-      - name: identity-id
-        in: path
-        required: true
-        description: The unique ID of the identity.
-        example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
-        schema:
-          type: string
-      - name: financial-instrument-id
-        in: path
-        required: true
-        description: The ID of the financial instrument to deactivate.
-        example: c7e2f5b4-d1a2-4c3a-9e1b-4d5c6f7e8a9d
-        schema:
-          type: string
-      responses:
-        '204':
-          description: Financial Instrument deactivated.
-        '400':
-          description: Invalid request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-400:
-                  $ref: '#/components/examples/error-400-example'
-        '404':
-          description: Financial Instrument not found for the identity.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-404:
-                  $ref: '#/components/examples/error-404-example'
-        '405':
-          description: Method not allowed.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-        '409':
-          description: Conflicting resource state. Identity/Financial Instrument
-            already deactivated or cannot be deactivated.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-409:
-                  $ref: '#/components/examples/error-409-example'
-        '500':
-          description: Internal processing error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              examples:
-                error-response-500:
-                  $ref: '#/components/examples/error-500-example'
-  /v3/quotes/quote-collection:
+              example:
+                status: 500
+                errors:
+                - code: SYS_001
+                  title: Internal server error
+                  type: SYSTEM_ERROR
+                  description: Unable to process the request due to an internal 
+                    server error.
+                  timestamp: '2025-05-23T15:02:56.516Z'
+  /v2/quotes/quote-collection:
     post:
       tags:
       - Quote
       security:
       - Bearer: []
-      operationId: createQuoteCollectionV2
+      operationId: createQuoteCollection
       summary: Create quote collection
       description: |
-        Create a quote collection to preview the cost and terms of a proposed payment before initiating it.
+        Creates a collection of quotes for a proposed payment.
 
-        **What's new in v3:**
-        - `payoutCategory` and `destinationBlockchainNetwork` are no longer accepted in requests.
-        - `paymentRail` is added as an optional field in the request to allow filtering quotes by a specific payment rail. When paymentRail is not passed, quotes will be returned for all supported payment rails.
+        **Tutorials**
 
-         **Tutorials**
-        - `paymentRail` is added as an optional field in the request to allow filtering quotes by a specific payment rail. When paymentRail is not passed, quotes will be returned for all supported payment rails. For a list of supported values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
+        * Learn how to [Create a quote](../../tutorials/create-a-payment/#create-a-quote-collection).
       requestBody:
         description: Create quote collection request
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/QuoteCollectionRequestV2'
+              $ref: '#/components/schemas/QuoteCollectionRequest'
       responses:
         '201':
           description: Creates a collection of quotes
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteCollectionV2'
+                $ref: '#/components/schemas/QuoteCollection'
         '400':
           description: Bad request
           content:
@@ -1571,18 +899,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/QuoteErrorResponse'
-  /v3/quotes/quote-collection/{quote-collection-id}:
+  /v2/quotes/quote-collection/{quote-collection-id}:
     get:
       tags:
       - Quote
       security:
       - Bearer: []
-      operationId: getQuoteCollectionV2
+      operationId: getQuoteCollection
       summary: Get quote collection
-      description: |
-        Retrieve a previously created quote collection by its unique identifier.
-
-        Use this endpoint to check the status of quotes (ACTIVE or EXPIRED) and retrieve quote details needed for payment creation.
       parameters:
       - in: path
         name: quote-collection-id
@@ -1599,7 +923,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteCollectionV2'
+                $ref: '#/components/schemas/QuoteCollection'
         '401':
           description: Unauthorized request
           content:
@@ -1625,23 +949,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/QuoteErrorResponse'
-  /v3/quotes/{quote-id}:
+  /v2/quotes/{quote-id}:
     get:
       tags:
       - Quote
       security:
       - Bearer: []
-      operationId: getQuoteV2
-      summary: Get a quote
-      description: |
-        Retrieve a specific quote by its unique identifier.
-
-        Use this endpoint to:
-        - Verify quote details before creating a payment
-        - Check if a quote is still active (not expired)
-        - Retrieve the `quoteId` needed for payment creation
-
-        **Note:** Quotes expire after a defined period. Check the `quoteStatus` field to confirm the quote is `ACTIVE` before using it to create a payment.
+      operationId: getQuote
+      summary: Get quote
       parameters:
       - in: path
         name: quote-id
@@ -1657,7 +972,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteV2'
+                $ref: '#/components/schemas/Quote'
         '401':
           description: Unauthorized request
           content:
@@ -1954,7 +1269,9 @@ paths:
         schema:
           type: string
         description: |
-          Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.
+          Filter results by transaction status. Allowed values:
+          - SUCCESS: the ledger transaction completed successfully.
+          - PENDING: reserved for future use to represent an in-flight ledger transaction.
       - name: txnReference
         in: query
         required: false
@@ -1986,242 +1303,133 @@ paths:
         schema:
           type: string
         description: |
-          Field to use for sorting the results. Allowed values include: - CREATED_AT: sort by transaction creation timestamp. - STATEMENT_OPERATION: sort by the operation type (for example, CREDIT, DEBIT). - STATEMENT_SOURCE: sort by the transaction source (for example, PAYMENTS, BANK). - STATEMENT_STATUS: sort by the ledger transaction status. - STATEMENT_TXN_REFERENCE: sort by the transaction reference. - STATEMENT_UPDATED_AT: sort by the last update timestamp.
+          Field to use for sorting the results. Allowed values include:
+          - CREATED_AT: sort by transaction creation timestamp.
+          - STATEMENT_OPERATION: sort by the operation type (for example, CREDIT, DEBIT).
+          - STATEMENT_SOURCE: sort by the transaction source (for example, PAYMENTS, BANK).
+          - STATEMENT_STATUS: sort by the ledger transaction status.
+          - STATEMENT_TXN_REFERENCE: sort by the transaction reference.
+          - STATEMENT_UPDATED_AT: sort by the last update timestamp.
       - name: sort-direction
         in: query
         required: false
         schema:
           type: string
         description: |
-          Sort direction. Allowed values: - ASC: ascending order. - DESC: descending order.
+          Sort direction. Allowed values:
+          - ASC: ascending order.
+          - DESC: descending order.
       responses:
         '200':
-          description: |
-            A page of ledger statement transactions for the tenant that match the specified query parameters.
+          description: A page of ledger statement transactions for the customer that match the specified query parameters.
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  description: A page of ledger statement transactions and 
-                    pagination metadata.
-                  properties:
-                    offset:
-                      type: integer
-                      description: |
-                        Offset used in the request to skip a specific number of records.
-                      example: 0
-                    pageSize:
-                      type: integer
-                      description: Number of records requested per page
-                      example: 25
-                    pageElements:
-                      type: integer
-                      description: Number of records returned in requested page
-                      example: 25
-                    total:
-                      type: integer
-                      format: int64
-                      description: Total number of records available for the 
-                        given filters.
-                      example: 1000
-                    statementTransactions:
-                      type: array
-                      description: Statement transaction details for the tenant.
-                      items:
-                        type: object
-                        properties:
-                          tenant:
-                            type: string
-                            description: Identifier of the tenant that owns this
-                              ledger transaction.
-                            example: rocketfuel
-                          amount:
-                            type: number
-                            description: |
-                              Amount of the transaction applied to the tenant’s ledger account.
-                            example: 100
-                          currency:
-                            type: string
-                            description: Three-letter ISO 4217 currency code of 
-                              the transaction.
-                            example: USD
-                          txnReference:
-                            type: string
-                            nullable: true
-                            description: |
-                              External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types.
-                          operation:
-                            type: string
-                            description: |
-                              Operation performed on the tenant’s prefunded ledger account.
-                            x-enumDescriptions:
-                              CREDIT: Credit to the ledger account.
-                              RESERVE: Funds reserved in an intermediate state.
-                              DEBIT: Funds debited from the reserved state.
-                              RELEASE: Reserved funds released back to the 
-                                account.
-                              VOID_PREFUND_BALANCE: Prefund balance has been 
-                                voided. [Deprecated]
-                              OVERRIDE_PREFUND_BALANCE: Prefund balance has been
-                                overridden. [Deprecated]
-                              VOID_BALANCE: Balance has been voided.
-                              OVERRIDE_BALANCE: Balance has been overridden.
-                          txnSource:
-                            type: string
-                            description: |
-                              Source of the ledger transaction (for example, which system or flow created it).
-                            x-enumDescriptions:
-                              PAYMENTS: Created by a payments flow.
-                              BANK: Created by a bank transaction.
-                              POSTED_PAYMENT: Created by a posted payment 
-                                operation.
-                              CREDIT_MEMO: Created by a credit memo.
-                              MANUAL: Created manually via API.
-                          status:
-                            type: string
-                            description: State of the ledger transaction.
-                            x-enumDescriptions:
-                              SUCCESS: Ledger transaction completed 
-                                successfully.
-                              PENDING: Reserved for future use to represent an 
-                                in-flight ledger transaction.
-                          createdDttm:
-                            type: string
-                            format: date-time
-                            nullable: false
-                            description: Timestamp (UTC) when the ledger 
-                              transaction was created.
-                            example: '2024-06-01T00:00:00.000000Z'
-                          updatedDttm:
-                            type: string
-                            format: date-time
-                            nullable: false
-                            description: Timestamp (UTC) when the ledger 
-                              transaction was last updated.
-                            example: '2024-06-01T00:00:00.000000Z'
-                          availableBalanceBefore:
-                            type: number
-                            description: |
-                              Available ledger account balance (in the transaction currency) immediately before this transaction was applied.
-                            example: 100
-                          availableBalanceAfter:
-                            type: number
-                            description: |
-                              Available ledger account balance (in the transaction currency) immediately after this transaction was applied.
-                            example: 90
+                type: object
+                description: A page of ledger statement transactions and pagination metadata.
+                properties:
+                  offset:
+                    type: integer
+                    description: |
+                      Offset used in the request to skip a specific number of records.
+                    example: 0
+                  pageSize:
+                    type: integer
+                    description: Number of records requested per page
+                    example: 25
+                  pageElements:
+                    type: integer
+                    description: Number of records returned in requested page
+                    example: 25
+                  total:
+                    type: integer
+                    format: int64
+                    description: Total number of records available for the given filters.
+                    example: 1000
+                  statementTransactions:
+                    type: array
+                    description: Statement transaction details for the customer.
+                    items:
+                      type: object
+                      properties:
+                        tenant:
+                          type: string
+                          description: Identifier of the customer that owns this ledger transaction.
+                          example: rocketfuel
+                        amount:
+                          type: number
+                          description: |
+                            Amount of the transaction applied to the customer’s ledger account.
+                          example: 100
+                        currency:
+                          type: string
+                          description: Three-letter ISO 4217 currency code of the transaction.
+                          example: USD
+                        txnReference:
+                          type: string
+                          nullable: true
+                          description: |
+                            External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types.
+                        operation:
+                          type: string
+                          description: |
+                            Operation performed on the customer’s prefunded ledger account.
+                          x-enumDescriptions:
+                            CREDIT: Credit to the ledger account.
+                            RESERVE: Funds reserved in an intermediate state.
+                            DEBIT: Funds debited from the reserved state.
+                            RELEASE: Reserved funds released back to the account.
+                            VOID_PREFUND_BALANCE: Prefund balance has been voided. [Deprecated]
+                            OVERRIDE_PREFUND_BALANCE: Prefund balance has been overridden. [Deprecated]
+                            VOID_BALANCE: Balance has been voided.
+                            OVERRIDE_BALANCE: Balance has been overridden.
+                        txnSource:
+                          type: string
+                          description: |
+                            Source of the ledger transaction (for example, which system or flow created it).
+                          x-enumDescriptions:
+                            PAYMENTS: Created by a payments flow.
+                            BANK: Created by a bank transaction.
+                            POSTED_PAYMENT: Created by a posted payment operation.
+                            CREDIT_MEMO: Created by a credit memo.
+                            MANUAL: Created manually via API.
+                        status:
+                          type: string
+                          description: State of the ledger transaction.
+                          x-enumDescriptions:
+                            SUCCESS: Ledger transaction completed successfully.
+                            PENDING: Reserved for future use to represent an in-flight ledger transaction.
+                        createdDttm:
+                          type: string
+                          format: date-time
+                          nullable: false
+                          description: Timestamp (UTC) when the ledger transaction was created.
+                          example: ‘2024-06-01T00:00:00.000000Z’
+                        updatedDttm:
+                          type: string
+                          format: date-time
+                          nullable: false
+                          description: Timestamp (UTC) when the ledger transaction was last updated.
+                          example: ‘2024-06-01T00:00:00.000000Z’
+                        availableBalanceBefore:
+                          type: number
+                          description: |
+                            Available ledger account balance (in the transaction currency) immediately before this transaction was applied.
+                          example: 100
+                        availableBalanceAfter:
+                          type: number
+                          description: |
+                            Available ledger account balance (in the transaction currency) immediately after this transaction was applied.
+                          example: 90
             text/csv:
               schema:
-                items:
-                  type: object
-                  description: A page of ledger statement transactions and 
-                    pagination metadata.
-                  properties:
-                    offset:
-                      type: integer
-                      description: |
-                        Offset used in the request to skip a specific number of records.
-                      example: 0
-                    pageSize:
-                      type: integer
-                      description: Number of records requested per page
-                      example: 25
-                    pageElements:
-                      type: integer
-                      description: Number of records returned in requested page
-                      example: 25
-                    total:
-                      type: integer
-                      format: int64
-                      description: Total number of records available for the 
-                        given filters.
-                      example: 1000
-                    statementTransactions:
-                      type: array
-                      description: Statement transaction details for the tenant.
-                      items:
-                        type: object
-                        properties:
-                          tenant:
-                            type: string
-                            description: Identifier of the tenant that owns this
-                              ledger transaction.
-                            example: rocketfuel
-                          amount:
-                            type: number
-                            description: |
-                              Amount of the transaction applied to the tenant’s ledger account.
-                            example: 100
-                          currency:
-                            type: string
-                            description: Three-letter ISO 4217 currency code of 
-                              the transaction.
-                            example: USD
-                          txnReference:
-                            type: string
-                            nullable: true
-                            description: |
-                              External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types.
-                          operation:
-                            type: string
-                            description: |
-                              Operation performed on the tenant’s prefunded ledger account.
-                            x-enumDescriptions:
-                              CREDIT: Credit to the ledger account.
-                              RESERVE: Funds reserved in an intermediate state.
-                              DEBIT: Funds debited from the reserved state.
-                              RELEASE: Reserved funds released back to the 
-                                account.
-                              VOID_PREFUND_BALANCE: Prefund balance has been 
-                                voided. [Deprecated]
-                              OVERRIDE_PREFUND_BALANCE: Prefund balance has been
-                                overridden. [Deprecated]
-                              VOID_BALANCE: Balance has been voided.
-                              OVERRIDE_BALANCE: Balance has been overridden.
-                          txnSource:
-                            type: string
-                            description: |
-                              Source of the ledger transaction (for example, which system or flow created it).
-                            x-enumDescriptions:
-                              PAYMENTS: Created by a payments flow.
-                              BANK: Created by a bank transaction.
-                              POSTED_PAYMENT: Created by a posted payment 
-                                operation.
-                              CREDIT_MEMO: Created by a credit memo.
-                              MANUAL: Created manually via API.
-                          status:
-                            type: string
-                            description: State of the ledger transaction.
-                            x-enumDescriptions:
-                              SUCCESS: Ledger transaction completed 
-                                successfully.
-                              PENDING: Reserved for future use to represent an 
-                                in-flight ledger transaction.
-                          createdDttm:
-                            type: string
-                            format: date-time
-                            nullable: false
-                            description: Timestamp (UTC) when the ledger 
-                              transaction was created.
-                            example: '2024-06-01T00:00:00.000000Z'
-                          updatedDttm:
-                            type: string
-                            format: date-time
-                            nullable: false
-                            description: Timestamp (UTC) when the ledger 
-                              transaction was last updated.
-                            example: '2024-06-01T00:00:00.000000Z'
-                          availableBalanceBefore:
-                            type: number
-                            description: |
-                              Available ledger account balance (in the transaction currency) immediately before this transaction was applied.
-                            example: 100
-                          availableBalanceAfter:
-                            type: number
-                            description: |
-                              Available ledger account balance (in the transaction currency) immediately after this transaction was applied.
-                            example: 90
+                type: string
+                description: |
+                  A CSV formatted string containing the ledger transactions.
+                  Columns include: tenant, amount, currency, txnReference, operation, txnSource, status, createdDttm, updatedDttm, availableBalanceBefore, availableBalanceAfter.
+              example: |
+                tenant,amount,currency,txnReference,operation,txnSource,status,createdDttm,updatedDttm,availableBalanceBefore,availableBalanceAfter
+                rpd2demo,2.06,USD,b6176a4a-c89e-44c9-a1c2-acf149c6f013,DEBIT,PAYMENTS,SUCCESS,2025-12-12T23:08:23.399345535Z,2025-12-12T23:08:23.399345704Z,1140833.98234594,1140831.92234594
         '400':
           description: Bad request
           content:
@@ -2538,7 +1746,7 @@ components:
           type: string
           format: date-time
           example: '2024-11-21T14:15:22Z'
-    PaymentV2:
+    Payment:
       type: object
       required:
       - paymentId
@@ -2580,16 +1788,16 @@ components:
           format: date-time
           example: '2019-08-24T14:15:22Z'
         paymentState:
-          $ref: '#/components/schemas/PaymentStateV2'
+          $ref: '#/components/schemas/PaymentState'
         originator:
-          $ref: '#/components/schemas/OriginatorV2'
+          $ref: '#/components/schemas/Originator'
         destination:
-          $ref: '#/components/schemas/DestinationV2'
+          $ref: '#/components/schemas/Destination'
         adjustedExchangeRate:
           $ref: '#/components/schemas/AdjustedExchangeRate'
         fees:
           type: array
-          description: A summary of fees included in the payment quote.
+          description: A summary of fees included in payment quote.
           items:
             $ref: '#/components/schemas/FeeSummary'
         taxes:
@@ -2598,8 +1806,9 @@ components:
           items:
             $ref: '#/components/schemas/TaxSummary'
         sourceOfCash:
-          description: Source of Cash may be required depending on corridor and 
-            payout partner. Valid Source of Cash values vary by corridor.
+          description: The source of cash may be required depending on corridor 
+            and payout partner. Valid values for the source of cash vary by 
+            corridor.
           type: string
           example: EMIN
         purposeCode:
@@ -2608,16 +1817,12 @@ components:
           type: string
           example: PAYR
         transactionDetails:
-          $ref: '#/components/schemas/TransactionDetailsV2'
+          $ref: '#/components/schemas/TransactionDetails'
         paymentLabels:
           $ref: '#/components/schemas/PaymentLabels'
-        receiverRelationship:
-          description: The relationship to the debtor.
-          type: string
-          example: SUBS
         paymentMemo:
           $ref: '#/components/schemas/PaymentMemo'
-    PaymentWithDetailsV2:
+    PaymentWithDetails:
       type: object
       required:
       - paymentId
@@ -2659,11 +1864,11 @@ components:
           format: date-time
           example: '2019-08-24T14:15:22Z'
         paymentState:
-          $ref: '#/components/schemas/PaymentStateV2'
+          $ref: '#/components/schemas/PaymentState'
         originator:
-          $ref: '#/components/schemas/OriginatorV2'
+          $ref: '#/components/schemas/Originator'
         destination:
-          $ref: '#/components/schemas/DestinationV2'
+          $ref: '#/components/schemas/Destination'
         adjustedExchangeRate:
           $ref: '#/components/schemas/AdjustedExchangeRate'
         fees:
@@ -2687,39 +1892,35 @@ components:
           type: string
           example: PAYR
         transactionDetails:
-          $ref: '#/components/schemas/TransactionDetailsV2'
+          $ref: '#/components/schemas/TransactionDetails'
         errors:
           type: array
           items:
             $ref: '#/components/schemas/PaymentError'
         paymentLabels:
           $ref: '#/components/schemas/PaymentLabels'
-        receiverRelationship:
-          description: The relationship to the debtor.
-          type: string
-          example: SUBS
         paymentMemo:
           $ref: '#/components/schemas/PaymentMemo'
         payoutExecutionDetails:
           $ref: '#/components/schemas/PayoutExecutionDetails'
-    StateTransitionsResponseV2:
+    StateTransitionsResponse:
       type: object
       properties:
         stateTransitions:
           type: array
           items:
-            $ref: '#/components/schemas/StateTransitionV2'
+            $ref: '#/components/schemas/StateTransition'
       required:
       - stateTransitions
-    StateTransitionV2:
+    StateTransition:
       type: object
       properties:
         updatedFrom:
-          $ref: '#/components/schemas/PaymentStateV2'
+          $ref: '#/components/schemas/PaymentState'
           description: The initial payment state before it was updated.
           example: INITIATED
         updatedTo:
-          $ref: '#/components/schemas/PaymentStateV2'
+          $ref: '#/components/schemas/PaymentState'
           description: The payment state after it was updated.
           example: VALIDATING
         updatedAt:
@@ -2731,26 +1932,26 @@ components:
       - updatedFrom
       - updatedTo
       - updatedAt
-    PaymentsResponseV2:
+    PaymentsResponse:
       type: object
       properties:
         data:
           description: Array of Payment objects
           type: array
           items:
-            $ref: '#/components/schemas/PaymentV2'
+            $ref: '#/components/schemas/Payment'
         filter:
-          $ref: '#/components/schemas/PaymentFilterV2'
+          $ref: '#/components/schemas/PaymentFilter'
         sort:
-          $ref: '#/components/schemas/SortV2'
+          $ref: '#/components/schemas/Sort'
         page:
           $ref: '#/components/schemas/Page'
-    PaymentRequestV2:
+    PaymentRequest:
       type: object
+      description: Information required to initiate a payment.
       required:
       - quoteId
       - beneficiaryIdentityId
-      - beneficiaryFinancialInstrumentId
       properties:
         quoteId:
           description: ID of the quote you want to accept to initiate this 
@@ -2759,14 +1960,17 @@ components:
           format: uuid
           example: 7ea3399c-1234-5678-8d8f-d320ea406630
         originatorIdentityId:
-          description: The identity ID of the payment originator. You can find 
-            the identity ID using the `GET /identities` operation.
+          description: The identity ID of the payment originator in UUID format.
+            You can find the identity ID using the `GET /identities` operation.
           type: string
+          format: uuid
           example: 7ea3399c-1234-5678-8d8f-d320ea406630
         beneficiaryIdentityId:
-          description: The identity ID of the payment beneficiary. You can find 
-            the identity ID using the `GET /identities` operation.
+          description: The identity ID of the payment beneficiary in UUID 
+            format. You can find the identity ID using the `GET /identities` 
+            operation.
           type: string
+          format: uuid
           example: 7ea3399c-1234-5678-8d8f-d320ea406630
         internalId:
           maxLength: 36
@@ -2785,71 +1989,83 @@ components:
           example: EMIN
         paymentLabels:
           $ref: '#/components/schemas/PaymentLabels'
-        beneficiaryFinancialInstrumentId:
-          description: |
-            The financial instrument ID associated with a payment beneficiary’s identity.
-            This value must reference a financial instrument created for the same beneficiary identity using Identity Management v3. Use the `financialInstrumentId` returned when you create or fetch the beneficiary’s payout instrument.
-          type: string
-          example: 7ea3399c-1234-5678-8d8f-d320ea406630
-        receiverRelationship:
-          description: The relationship to the debtor.
-          type: string
-          example: SUBS
         paymentMemo:
           $ref: '#/components/schemas/PaymentMemo'
-    PaymentStateV2:
+    PaymentState:
       type: string
       example: INITIATED
-      description: |
-        Current state of a payment.
-        The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`
-        Additional states may be introduced in the future without breaking existing integrations.
+      enum:
+      - INITIATED
+      - VALIDATING
+      - TRANSFERRING
+      - COMPLETED
+      - FAILED
+      - QUOTED
+      - RETURNED
       x-enumDescriptions:
-        QUOTED: A quote has been created, but the payment has not yet been 
-          initiated.
-        INITIATED: The payment has been submitted and is awaiting validation.
-        VALIDATING: Ripple is validating the payment details and reserving funds
-          from the originator’s available balance.
-        TRANSFERRING: The payment is being processed and funds are moving 
-          through the network toward the beneficiary.
-        COMPLETED: The payment has completed and the beneficiary has received 
-          the funds.
-        FAILED: The payment could not be completed. The failure reason, if 
-          available, is listed in the response. Funds that were previously 
-          reserved to complete the payment are released and added back to the 
+        INITIATED: You, the payment originator, have initiated a payment. The 
+          payment now has a unique `paymentId` that's the same as the `quoteId` 
+          of the quote you accepted.
+        VALIDATING: Ripple validates the payment details and reserves funds from
+          your available balance to complete the payment.
+        TRANSFERRING: The payment is moving through the network to the ultimate 
+          beneficiary. The payment amount is debited from your available 
+          balance.
+        COMPLETED: The payment is complete and the beneficiary has received the 
+          funds.
+        FAILED: The payment failed. The failure reason, if available, is listed 
+          in the response. Funds that were previously reserved to complete the 
+          payment are released and added back to the available balance.
+        QUOTED: 'A quote has been created, but you haven''t accepted it yet to initiate
+          a payment. Note: This state is not shown as part of the payment detail as
+          the payment doesn''t exist yet.'
+        RETURNED: The payment is returned. The return reason, if available, is 
+          listed in the response. Funds that were previously reserved and 
+          debited to complete the payment are returned and added back to the 
           available balance.
-        RETURNED: The payment was returned by a downstream institution. The 
-          return reason, if available, is listed in the response. Funds that 
-          were previously reserved and debited to complete the payment are 
-          returned and added back to the available balance.
-        DECLINED: The payment was declined due to user input errors or business 
-          rule violations. The decline reason, if available, is listed in the 
-          response. Funds that were previously reserved to complete the payment 
-          are released and added back to the available balance.
-        AWAITING_FUNDING: The payment is waiting for funds to be transferred to 
-          your Ripple ledger account. This state applies only to just-in-time 
-          (JIT) funded payments.
-    PaymentSortFieldV2:
+    PaymentSortField:
       type: string
-      description: |
-        The field to use when sorting payments in the requested sort order.
-        Currently supported values include: - `internalId` - `paymentState` - `sourceCurrency` - `sourceAmount` - `destinationCurrency` - `destinationCountry` - `destinationAmount` - `initiatedAt` - `expiresAt` - `lastStateUpdatedAt` - `paymentLabel`
-        If an unsupported value is provided, the request fails with a validation error.
+      description: The field based on which you want to sort the payments in the
+        specified sort order.
       default: initiatedAt
       example: initiatedAt
+      enum:
+      - internalId
+      - paymentState
+      - sourceCurrency
+      - sourceAmount
+      - destinationCurrency
+      - destinationCountry
+      - destinationAmount
+      - initiatedAt
+      - expiresAt
+      - lastStateUpdatedAt
+      - paymentLabel
+      x-enum-varnames:
+      - INTERNAL_ID
+      - PAYMENT_STATE
+      - SOURCE_CURRENCY
+      - SOURCE_AMOUNT
+      - DESTINATION_CURRENCY
+      - DESTINATION_COUNTRY
+      - DESTINATION_AMOUNT
+      - INITIATED_AT
+      - EXPIRES_AT
+      - LAST_STATE_UPDATED_AT
+      - PAYMENT_LABEL
       x-enumDescriptions:
-        internalId: Internal identifier of a payment
-        paymentState: Current state of a payment
-        sourceCurrency: Source currency of a payment
-        sourceAmount: Source amount of a payment
-        destinationCurrency: Destination currency of a payment
-        destinationCountry: Destination country of a payment
-        destinationAmount: Destination amount of a payment
-        initiatedAt: Timestamp when a payment was initiated
-        expiresAt: Timestamp when a payment will expire
-        lastStateUpdatedAt: Timestamp when a payment state was last updated
-        paymentLabel: Label associated with a payment
-    OriginatorV2:
+        internalId: Sort by an internalId of payment
+        paymentState: Sort by payment state
+        sourceCurrency: Sort by source currency of payment
+        sourceAmount: Sort by source amount of payment
+        destinationCurrency: Sort by destination currency of payment
+        destinationCountry: Sort by destination currency of payment
+        destinationAmount: Sort by destination amount of payment
+        initiatedAt: Sort by payment initiated timestamp
+        expiresAt: Sort by payment expiry timestamp
+        lastStateUpdatedAt: Sort by last updated timestamp of payment
+        paymentLabel: Sort by labels attached to a payment
+    Originator:
       type: object
       description: Payment originator and source details.
       properties:
@@ -2857,6 +2073,8 @@ components:
           description: The unique ID associated with the payment originator's 
             identity record.
           type: string
+          format: uuid
+          maxLength: 36
           example: 7ea3399c-1234-5678-8d8f-d320ea406630
         originatorIdentityIdVersion:
           description: The current version of the originator's identity record.
@@ -2890,14 +2108,10 @@ components:
           description: Details about how this payment is funded.
           type: string
           example: FUNDED
-    DestinationV2:
+    Destination:
       type: object
+      description: Payment beneficiary and destination details.
       properties:
-        beneficiaryFinancialInstrumentId:
-          description: The financial instrument ID, the identity ID of the 
-            payment beneficiary is related to.
-          type: string
-          example: 7ea3399c-1234-5678-8d8f-d320ea406630
         destinationAmount:
           description: The amount received by the payment beneficiary. This 
             field can hold a value with up to 6 decimal places.
@@ -2932,6 +2146,8 @@ components:
           description: The unique ID associated with the payment beneficiary's 
             identity record.
           type: string
+          format: uuid
+          maxLength: 36
           example: 7ea3399c-1234-5678-8d8f-d320ea406630
         beneficiaryIdentityVersion:
           description: The current version of the beneficiary's identity record.
@@ -2947,7 +2163,7 @@ components:
           description: The payout category for this payment.
           type: string
           example: BANK
-    TransactionDetailsV2:
+    TransactionDetails:
       type: object
       description: A summary of the payment category.
       properties:
@@ -2963,6 +2179,11 @@ components:
             beneficiary.
           type: string
           nullable: true
+          enum:
+          - B2B
+          - B2C
+          - C2B
+          - C2C
           x-enumDescriptions:
             B2B: |
               Specifies that this payment is made by a business originator to a business beneficiary.
@@ -2986,6 +2207,11 @@ components:
           description: Indicates the type of payment you're making.
           type: string
           nullable: true
+          enum:
+          - ON_RAMP
+          - OFF_RAMP
+          - FIAT_TRANSFER
+          - CRYPTO_TRANSFER
           x-enumDescriptions:
             FIAT_TRANSFER: Indicates fiat source currency to fiat destination.
     PayoutExecutionDetails:
@@ -3067,26 +2293,25 @@ components:
             retrieve subsequent item(s) if any, specify this value as the value 
             of the `Page.list` field in the  `POST /payments/filter` operation 
             request body.
-    SearchPaymentsRequestV2:
+    SearchPaymentsRequest:
       type: object
       description: Request body containing search criteria for payments.
       properties:
         filter:
-          $ref: '#/components/schemas/PaymentFilterV2'
+          $ref: '#/components/schemas/PaymentFilter'
         sort:
-          $ref: '#/components/schemas/SortV2'
+          $ref: '#/components/schemas/Sort'
         page:
           $ref: '#/components/schemas/Page'
-    SortV2:
+    Sort:
       type: object
-      description: Defines the sorting parameters for listing payments, 
-        including the field and sort direction.
+      description: Specify sorting direction and the filtering criterion to sort
+        by.
       properties:
         sortField:
-          $ref: '#/components/schemas/PaymentSortFieldV2'
+          $ref: '#/components/schemas/PaymentSortField'
         sortDirection:
-          description: Indicates whether results are sorted in ascending (`ASC`)
-            or descending (`DESC`) order.
+          description: Sort results in ascending or descending order.
           type: string
           default: DESC
           example: DESC
@@ -3096,7 +2321,7 @@ components:
           x-enumDescriptions:
             ASC: Sort results in ascending order.
             DESC: Sort results in descending order.
-    PaymentFilterV2:
+    PaymentFilter:
       type: object
       description: Filter criteria to return desired payment search results.
       properties:
@@ -3113,11 +2338,11 @@ components:
           description: Array of payment states like `EXECUTING` or `COMPLETED`.
           type: array
           items:
-            $ref: '#/components/schemas/PaymentStateV2'
+            $ref: '#/components/schemas/PaymentState'
         filterRangeType:
           description: Specify a type to filter on. For example, 
             PAYMENT_CREATION, PAYMENT_EXPIRY, or PAYMENT_STATUS_LAST_UPDATED
-          $ref: '#/components/schemas/PaymentFilterRangeTypeV2'
+          $ref: '#/components/schemas/PaymentFilterRangeType'
         beforeTimestamp:
           description: Depending on the value of the `filterRangeType` field, 
             this timestamp returns a list of payments that were 
@@ -3139,12 +2364,13 @@ components:
           type: array
           items:
             type: string
+            format: uuid
             example: aaaaaaaa-1111-bbbb-abab-123412341234
+            maxLength: 36
         internalId:
           description: Specify an `internalId` to get payments associated with 
             them. A prefix match will be executed.
           type: string
-          maxLength: 36
         beneficiaryIdentityNickname:
           description: To get all payments made to a beneficiary, specify the 
             nickname of that beneficiary in this field. You can find the 
@@ -3161,18 +2387,25 @@ components:
           pattern: ^[A-Z]{3,5}$
         paymentLabels:
           $ref: '#/components/schemas/PaymentLabels'
-    PaymentFilterRangeTypeV2:
-      description: |
-        The type of timestamp to use when filtering payments by a date and time range.
-        Supported values include: - `PAYMENT_CREATION` - `PAYMENT_EXPIRY` - `PAYMENT_STATUS_LAST_UPDATED`
-        If another value is provided, the filter is rejected with a validation error.
+    PaymentFilterRangeType:
+      description: The range type to filter payments on.
       type: string
       example: PAYMENT_CREATION
+      enum:
+      - PAYMENT_CREATION
+      - PAYMENT_EXPIRY
+      - PAYMENT_STATUS_LAST_UPDATED
+      x-enum-varnames:
+      - PAYMENT_CREATION
+      - PAYMENT_EXPIRY
+      - PAYMENT_STATUS_LAST_UPDATED
       x-enumDescriptions:
-        PAYMENT_CREATION: Filter by the time a payment was created
-        PAYMENT_EXPIRY: Filter by the time a payment is scheduled to expire
-        PAYMENT_STATUS_LAST_UPDATED: Filter by the time a payment state was last
-          updated
+        PAYMENT_CREATION: Filter results to show payments that were created 
+          within the specified time period.
+        PAYMENT_EXPIRY: Filter results to show payments that expired or are set 
+          to expire within the specified time period.
+        PAYMENT_STATUS_LAST_UPDATED: Filter results to show payments whose 
+          status was last updated within the specified time period.
     PaymentLabels:
       description: Application-defined labels for grouping and categorizing 
         payments (e.g., campaign IDs, workflow tags, or batch identifiers). 
@@ -3310,108 +2543,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TaxBreakdown'
-    get-identity-response-v3:
-      allOf:
-      - $ref: '#/components/schemas/ripple-identity'
-      type: object
-      properties:
-        identityId:
-          type: string
-          description: Server-generated unique identifier of the identity.
-          example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
-        identityState:
-          $ref: '#/components/schemas/identity-state'
-        nickName:
-          type: string
-          description: Optional human-readable alias set by the client.
-          example: nickName
-        tags:
-          type: array
-          description: Optional labels used to categorize or filter identities.
-          items:
-            type: string
-            example: tag1
-        validatePayoutRails:
-          type: array
-          description: List of payout methods where this identity is considered 
-            valid. Use this to indicate which payout methods (for example, 
-            US_ACH, EU_SEPA) the identity can be used with in payments.
-          items:
-            $ref: '#/components/schemas/financial-instrument-type'
-        version:
-          type: string
-          description: Sequential version number. Each successful PUT creates a 
-            higher version.
-          example: 2
-        schemaVersion:
-          type: string
-          description: Schema version used to validate this identity, for 
-            example 1.0.0.
-          example: 1.0.0
-        createdAt:
-          type: string
-          format: date-time
-          description: RFC 3339 timestamp when the identity was created.
-          example: '2023-11-02T18:26:00.000Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: RFC 3339 timestamp when the identity was last updated.
-          example: '2023-11-03T18:26:00.000Z'
-    put-identity-request-v3:
-      allOf:
-      - $ref: '#/components/schemas/put-ripple-identity'
-      type: object
-      properties:
-        nickName:
-          type: string
-          description: The new nickname for the identity
-          example: nickName
-        validatePayoutRails:
-          type: array
-          description: The payout rails to validate the identity against
-          items:
-            $ref: '#/components/schemas/financial-instrument-type'
-        tags:
-          type: array
-          description: |
-            Tags are used to categorize the identity.
-          items:
-            type: string
-            example: tag1
-    create-identity-request-v3:
-      allOf:
-      - $ref: '#/components/schemas/ripple-identity'
-      type: object
-      properties:
-        nickName:
-          type: string
-          description: The nickname for the identity
-          example: nickName
-          maxLength: 256
-        validatePayoutRails:
-          type: array
-          description: The payout rails to validate the identity against
-          items:
-            $ref: '#/components/schemas/financial-instrument-type'
-        tags:
-          type: array
-          description: |
-            Tags are used to categorize the identity.
-          items:
-            type: string
-            example: tag1
-    identity-state:
+    state-type:
       type: string
+      enum:
+      - ACTIVE
+      - BLOCKED
+      - DEACTIVATED
       description: |
-        The state of the identity
-          * ACTIVE
-          * DEACTIVATED
-      x-enumDescriptions:
-        ACTIVE: The identity requested exists and is active.
-        DEACTIVATED: The identity requested has been deactivated.
+        Lifecycle state of the identity:
+          • ACTIVE - The identity exists and can be used.
+          • BLOCKED - The identity exists but is restricted from use.
+          • DEACTIVATED - The identity is inactive and cannot be used for new payments.
       example: ACTIVE
-    create-identity-response-v3:
+    create-identity-response:
       type: object
       required:
       - identityId
@@ -3422,9 +2566,9 @@ components:
           description: The unique ID of the identity
           example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
         version:
-          type: string
+          type: integer
           description: The version number of the identity
-          example: '2'
+          example: 2
     error:
       type: object
       required:
@@ -3483,1248 +2627,128 @@ components:
           type: string
           description: The timestamp of the error
           example: '2023-11-02T18:26:00.000Z'
-    list-identities-response-v3:
+    identity-v2:
+      type: object
+      required:
+      - identityId
+      - nickName
+      - createdAt
+      - identityType
+      - useCaseType
+      properties:
+        identityId:
+          type: string
+          description: The unique ID of the identity
+          example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
+        nickName:
+          type: string
+          description: The nickname of the identity provided at the time of 
+            identity creation.
+          example: MyCompany
+        createdAt:
+          type: string
+          format: date-time
+          description: The time at which the identity was created
+          example: '2023-11-02T18:26:00.000Z'
+        identityType:
+          $ref: '#/components/schemas/identity-type-v2'
+        useCaseType:
+          $ref: '#/components/schemas/useCaseType'
+    useCaseType:
+      type: string
+      enum:
+      - INDIVIDUAL
+      - BUSINESS
+      description: |
+        Classification of the identity:
+          • INDIVIDUAL - A natural person.
+          • BUSINESS - A legal entity such as a company or institution.
+      example: BUSINESS
+    create-identity-request-v2:
+      type: object
+      required:
+      - identityType
+      - piiData
+      - useCaseType
+      properties:
+        piiData:
+          type: object
+          description: |
+            PII data in JSON format.
+
+            You must use the correct `piiData` schema for the type of identity you want to create.
+
+            **Note**: Reach out to your Ripple liaison to get this schema.
+          additionalProperties: true
+        identityType:
+          $ref: '#/components/schemas/identity-type-v2'
+        nickName:
+          type: string
+          description: The nickname for the identity provided at the time of 
+            identity creation
+          example: MyCompany
+        useCaseType:
+          $ref: '#/components/schemas/useCaseType'
+    identity-type-v2:
+      type: string
+      enum:
+      - SENDER
+      - BENEFICIARY
+      - ORIGINATOR
+      x-enumDescriptions:
+        BENEFICIARY: Identity associated with the beneficiary.
+        ORIGINATOR: Identity associated with the party originating the payment.
+      description: The type of the identity
+      example: BENEFICIARY
+    list-identities-response-v2:
       type: object
       format: application/json
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/identity-response-v3'
+            $ref: '#/components/schemas/identity-v2'
           description: The list of the identities that match the query 
             parameters
-        nextToken:
-          type: string
-          description: The token to retrieve the next page of results
-    create-financial-instrument-response:
-      type: object
-      required:
-      - financialInstrumentId
-      properties:
-        financialInstrumentId:
-          type: string
-          description: The unique ID of the financial instrument
-          example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
-    identity-response-v3:
+    identity-response-v2:
       type: object
       required:
       - identityId
       - identityType
-      - paymentRole
       - createdAt
-      - updatedAt
       - identityState
+      - piiData
       - version
-      - schemaVersion
+      - useCaseType
       properties:
         identityId:
           type: string
           description: The unique ID of the identity
           example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
         identityType:
-          $ref: '#/components/schemas/identity-type-v3'
-        paymentRole:
-          $ref: '#/components/schemas/payment-role'
+          $ref: '#/components/schemas/identity-type-v2'
         createdAt:
           type: string
           format: date-time
           description: The time at which the identity was created
           example: '2023-11-02T18:26:00.000Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: The time at which the identity was last updated
-          example: '2023-11-03T18:26:00.000Z'
         identityState:
-          $ref: '#/components/schemas/identity-state'
+          $ref: '#/components/schemas/state-type'
         nickName:
           type: string
           description: The nickname for the identity provided at the time of 
             identity creation
-          example: nickName
-        internalId:
-          type: string
-          description: The internal ID of the identity used for internal 
-            processing
-          example: 2f4ac57f-c5ba-4051-b51f-b3565778717b
-        tags:
-          type: array
-          description: |
-            Tags are used to categorize the identity.
-          items:
-            type: string
-            example: tag1
+          example: MyCompany
+        piiData:
+          type: object
+          description: PII data in JSON format
+          additionalProperties: true
         version:
           type: integer
           description: The version number of the identity
           example: 2
-        schemaVersion:
-          type: string
-          description: The version of the schema
-          example: 1.0.0
-    get-financial-instrument-response:
-      type: object
-      required:
-      - financialInstrument
-      description: This object contains the details of a financial instrument 
-        and optional identity if requested.
-      properties:
-        financialInstrument:
-          $ref: '#/components/schemas/ripple-financial-instrument-entry'
-        identity:
-          $ref: '#/components/schemas/get-identity-response-v3'
-    update-financial-instrument-response:
-      allOf:
-      - $ref: '#/components/schemas/ripple-financial-instrument-entry'
-      type: object
-      description: This object contains the details of the updated financial 
-        instrument.
-      required:
-      - financialInstrumentId
-    list-financial-instruments-response:
-      type: object
-      format: application/json
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/financial-instrument-metadata'
-          description: The list of the financial instruments that match the 
-            query parameters
-        nextToken:
-          type: string
-          description: The token to retrieve the next page of results
-    identity-type-v3:
-      type: string
-      x-extensible-enum:
-      - BUSINESS
-      - INDIVIDUAL
-      x-enumDescriptions:
-        BUSINESS: Identity associated with an institution or business
-        INDIVIDUAL: Identity associated with an individual
-      description: The type of the identity
-      example: BUSINESS
-    payment-role:
-      type: string
-      x-extensible-enum:
-      - ORIGINATOR
-      - BENEFICIARY
-      x-enumDescriptions:
-        ORIGINATOR: Refers to originator identity
-        BENEFICIARY: Refers to beneficiary identity
-      description: The payment role of the identity
-      example: BENEFICIARY
-    business-identity:
-      type: object
-      title: Business identity
-      description: |
-        PII data to support business and institutional identities
-      required:
-      - businessName
-      - address
-      properties:
-        businessName:
-          type: string
-          description: Business Legal Name
-          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
-            .,'&\/()-]+(?<![ .,'&\/-])?$
-          minLength: 1
-          maxLength: 140
-          example: Widgets Org
-        address:
-          type: object
-          description: Holds general information about the business
-          required:
-          - streetAddress
-          - country
-          - city
-          - stateOrProvince
-          - postalCode
-          properties:
-            streetAddress:
-              type: array
-              description: Allows the street address of the business to be held
-              items:
-                type: string
-                description: Street address of the business
-                minLength: 1
-                maxLength: 70
-                pattern: ^[^\p{C}\r\n<>]+$
-              example:
-              - 123 Example St. Boston, MA
-            country:
-              type: string
-              description: Allows the country of the business to be held. Use 
-                Alpha-2 Code as defined in the [ISO CountryCode ISO 
-                3166-1](https://www.iso.org/obp/ui/#search) list.
-              minLength: 2
-              maxLength: 2
-              pattern: ^[A-Z]+$
-              example: US
-            city:
-              type: string
-              description: City
-              minLength: 1
-              maxLength: 140
-              pattern: ^(?![ .'-])(?!.*[ .'-]{2})[\p{L} .'-]+(?<![ .'-])$
-              example: Boston
-            stateOrProvince:
-              type: string
-              description: Information that locates and identifies the state / 
-                county for the individual, as defined by postal services.
-              minLength: 1
-              maxLength: 140
-              pattern: ^(?![ .'-])(?!.*[ .'-]{2})[\p{L}\p{N} .'-]+(?<![ .'-])$
-              example: Massachusetts
-            postalCode:
-              type: string
-              description: Postal code for the business
-              minLength: 3
-              maxLength: 15
-              pattern: ^[\p{L}\p{N}][\p{L}\p{N} -]{1,15}[\p{L}\p{N}]$
-              example: '12345'
-        email:
-          x-requiredByBeneficiaryFor:
-          - BR_PIX
-          - BR_TED
-          - CO_PSE
-          x-requiredByOriginatorFor:
-          - BR_PIX
-          - BR_TED
-          type: string
-          description: Address for electronic mail (e-mail).
-          format: email
-          minLength: 6
-          maxLength: 255
-          pattern: 
-            ^(?=.{1,254}$)(?:[\p{L}\p{N}%+_-]+(?:\.[\p{L}\p{N}%+_-]+)*)@(?:(?:[\p{L}\p{N}](?:[\p{L}\p{N}-]{0,61}[\p{L}\p{N}])?)\.)+[\p{L}]{2,63}$
-          example: fake@example.com
-        phone:
-          x-requiredByBeneficiaryFor:
-          - BR_PIX
-          - BR_TED
-          - NG_BANK_PAYOUT
-          x-requiredByOriginatorFor:
-          - BR_PIX
-          - BR_TED
-          - NG_BANK_PAYOUT
-          type: string
-          description: Phone Number
-          minLength: 8
-          maxLength: 16
-          pattern: ^\+[1-9]\d+$
-          example: 1234567890
-        registration:
-          x-requiredByBeneficiaryFor:
-          - BR_PIX
-          - BR_TED
-          - CO_PSE
-          - CA_EFT
-          - US_ACH
-          - NG_BANK_PAYOUT
-          x-requiredByOriginatorFor:
-          - US_ACH
-          - CA_EFT
-          - BR_PIX
-          - BR_TED
-          - EU_SEPA
-          type: array
-          description: Unique and unambiguous way to identify a business or 
-            organization. An array of objects, each containing unique 
-            identification of an organization, as assigned by an institution, 
-            using an identification scheme.
-          items:
-            type: object
-            required:
-            - number
-            - type
-            properties:
-              number:
-                type: string
-                description: The unique identifier of the organization
-                example: 123ABC
-                minLength: 3
-                maxLength: 35
-                pattern: ^(?![ .'-\/])(?!.*[ .'-\/]{2})([A-Za-z0-9 .'-\/]+)(?<![
-                  .'-\/])\/?$
-              type:
-                type: string
-                x-extensible-enum:
-                - INCORPORATION_CERTIFICATE
-                - TAX_ID
-                x-enumDescriptions:
-                  INCORPORATION_CERTIFICATE: Certificate of Incorporation Number
-                  TAX_ID: Tax Identification Number
-                description: Type of business identification document.
-                example: INCORPORATION_CERTIFICATE
-        incorporationCountry:
-          x-requiredByBeneficiaryFor:
-          - BR_PIX
-          - BR_TED
-          - NG_BANK_PAYOUT
-          x-requiredByOriginatorFor:
-          - BR_PIX
-          - BR_TED
-          type: string
-          description: Information that locates and identifies the country, as 
-            defined by postal services where the organization was incorporated. 
-            Use Alpha-2 Code as defined in the ISO CountryCode ISO 3166-1 list.
-          minLength: 2
-          maxLength: 2
-          pattern: ^[A-Z]+$
-          example: US
-        incorporationDate:
-          type: string
-          format: date
-          description: The date when the business was incorporated.
-          example: '2020-01-15'
-        legalEntityType:
-          x-requiredByOriginatorFor:
-          - BR_PIX
-          type: string
-          x-extensible-enum:
-          - BANK_CENTRAL
-          - BANK_COMMERCIAL
-          - PAYMENT_INSTITUTION
-          - CORPORATE_PRIVATE
-          - CORPORATE_PUBLIC
-          - GOVERNMENT_ENTITY
-          - NON_PROFIT
-          - SOLE_TRADER
-          x-enumDescriptions:
-            BANK_CENTRAL: Central Banks and National Monetary Authorities.
-            BANK_COMMERCIAL: Traditional regulated banks and credit unions.
-            PAYMENT_INSTITUTION: Regulated Fintechs, PSPs, MSBs.
-            CORPORATE_PRIVATE: Standard private commercial entities (e.g., LLC, 
-              Ltd).
-            CORPORATE_PUBLIC: Publicly traded companies listed on a stock 
-              exchange.
-            GOVERNMENT_ENTITY: Non-financial state bodies
-            NON_PROFIT: Charitable Org, NGOs, and foundations.
-            SOLE_TRADER: Registered businesses owned/operated by a single 
-              individual.
-          description: |
-            Type of legal entity to distinguish between Financial Institutions and Non-Financial Institutions.
-
-            This classification is used to determine regulatory treatment and compliance requirements for certain payment corridors.
-          example: BANK_CENTRAL
-    individual-identity:
-      type: object
-      title: Individual identity
-      description: |
-        Data for an individual
-      required:
-      - firstName
-      - lastName
-      - address
-      properties:
-        firstName:
-          type: string
-          description: First name of the individual
-          pattern: ^(?![ .'-])(?!.*([ .'-])\1)[\p{L} .'-]+(?<![ .'-])$
-          minLength: 1
-          maxLength: 140
-          example: John
-        lastName:
-          type: string
-          description: Last name of the individual
-          pattern: ^(?![ .'-])(?!.*([ .'-])\1)[\p{L} .'-]+(?<![ .'-])$
-          minLength: 1
-          maxLength: 140
-          example: Smith
-        address:
-          type: object
-          description: Holds general information about the individual
-          required:
-          - streetAddress
-          - country
-          - city
-          - stateOrProvince
-          - postalCode
-          properties:
-            streetAddress:
-              type: array
-              description: Allows the street address of the individual to be 
-                held
-              items:
-                type: string
-                description: Street address of the individual
-                minLength: 1
-                maxLength: 70
-                pattern: ^[^\p{C}\r\n<>]+$
-              example:
-              - 123 Example St. Boston, MA
-            country:
-              type: string
-              description: Allows the Country of the individual to be held. Use 
-                Alpha-2 Code as defined in the [ISO CountryCode ISO 
-                3166-1](https://www.iso.org/obp/ui/#search) list.
-              minLength: 2
-              maxLength: 2
-              pattern: ^[A-Z]+$
-              example: US
-            city:
-              type: string
-              description: City
-              minLength: 1
-              maxLength: 140
-              pattern: ^(?![ .'-])(?!.*[ .'-]{2})[\p{L} .'-]+(?<![ .'-])$
-              example: Boston
-            stateOrProvince:
-              type: string
-              description: Information that locates and identifies the state / 
-                county for the party, as defined by postal services
-              minLength: 1
-              maxLength: 140
-              pattern: ^(?![ .'-])(?!.*[ .'-]{2})[\p{L}\p{N} .'-]+(?<![ .'-])$
-              example: Massachusetts
-            postalCode:
-              type: string
-              description: Postal code for the individual's address
-              minLength: 3
-              maxLength: 15
-              pattern: ^[\p{L}\p{N}][\p{L}\p{N} -]{1,15}[\p{L}\p{N}]$
-              example: '12345'
-        email:
-          x-requiredByBeneficiaryFor:
-          - BR_PIX
-          - BR_TED
-          - CO_PSE
-          type: string
-          description: Address for electronic mail (e-mail).
-          format: email
-          minLength: 6
-          maxLength: 255
-          pattern: 
-            ^(?=.{1,254}$)(?:[\p{L}\p{N}%+_-]+(?:\.[\p{L}\p{N}%+_-]+)*)@(?:(?:[\p{L}\p{N}](?:[\p{L}\p{N}-]{0,61}[\p{L}\p{N}])?)\.)+[\p{L}]{2,63}$
-          example: fake@example.com
-        phone:
-          x-requiredByBeneficiaryFor:
-          - BR_PIX
-          - BR_TED
-          - NG_BANK_PAYOUT
-          type: string
-          description: Phone Number
-          minLength: 8
-          maxLength: 16
-          pattern: ^\+[1-9]\d+$
-          example: 1234567890
-        identityDocuments:
-          x-requiredByBeneficiaryFor:
-          - US_ACH
-          - BR_PIX
-          - BR_TED
-          - CO_PSE
-          - NG_BANK_PAYOUT
-          x-requiredByOriginatorFor:
-          - BR_PIX
-          - BR_TED
-          description: Gathers identifying documentation
-          type: array
-          items:
-            type: object
-            required:
-            - idNumber
-            - idType
-            properties:
-              idNumber:
-                type: string
-                description: Identification Number.
-                minLength: 3
-                maxLength: 35
-                pattern: ^(?![ .'-\/])(?!.*[ .'-\/]{2})([A-Za-z0-9 .'-\/]+)(?<![
-                  .'-\/])\/?$
-                example: 123ABC
-              idType:
-                type: string
-                x-extensible-enum:
-                - ALIEN_REGISTRATION
-                - CUSTOMER_ID
-                - DRIVERS_LICENSE
-                - EMPLOYEE_ID
-                - NATIONAL_ID_NUMBER
-                - PASSPORT
-                - SSN
-                - TAX_ID
-                x-enumDescriptions:
-                  ALIEN_REGISTRATION: Alien Registration Number
-                  CUSTOMER_ID: Customer ID Number
-                  DRIVERS_LICENSE: Driver's License Number
-                  EMPLOYEE_ID: Employee ID Number
-                  NATIONAL_ID_NUMBER: National ID Number
-                  PASSPORT: Passport Number
-                  SSN: Social Security Number
-                  TAX_ID: Tax Identification Number
-                description: The type of identification document used to 
-                  identify the identity.
-        dateOfBirth:
-          x-requiredByBeneficiaryFor:
-          - US_ACH
-          - EU_SEPA
-          - GB_FPS
-          - BR_PIX
-          - BR_TED
-          - CA_EFT
-          x-requiredByOriginatorFor:
-          - EU_SEPA
-          - GB_FPS
-          - BR_PIX
-          - BR_TED
-          type: string
-          format: date
-          description: Date of Birth.
-          example: '2001-01-24'
-        countryOfBirth:
-          x-requiredByOriginatorFor:
-          - NG_BANK_PAYOUT
-          - BR_PIX
-          - BR_TED
-          type: string
-          description: Country of Birth. Use Alpha-2 Code as defined in the [ISO
-            CountryCode ISO 3166-1](https://www.iso.org/obp/ui/#search) list.
-          minLength: 2
-          maxLength: 2
-          pattern: ^[A-Z]+$
-          example: US
-        citizenship:
-          x-requiredByBeneficiaryFor:
-          - BR_PIX
-          - BR_TED
-          - NG_BANK_PAYOUT
-          x-requiredByOriginatorFor:
-          - BR_PIX
-          - BR_TED
-          type: string
-          description: Alpha-2 country code for the nationality of the 
-            individual in ISO 3166-1 format.
-          minLength: 2
-          maxLength: 2
-          pattern: ^[A-Z]+$
-          example: US
-        gender:
-          x-requiredByBeneficiaryFor:
-          - NG_BANK_PAYOUT
-          type: string
-          x-extensible-enum:
-          - MALE
-          - FEMALE
-          - OTHER
-          x-enumDescriptions:
-            MALE: Male identity
-            FEMALE: Female identity
-            OTHER: Other identity
-          description: Gender of the identity.
-          example: FEMALE
-    ripple-identity:
-      type: object
-      required:
-      - identityType
-      - paymentRole
-      properties:
-        identityType:
-          $ref: '#/components/schemas/identity-type-v3'
-        paymentRole:
-          $ref: '#/components/schemas/payment-role'
-        internalId:
-          x-requiredByOriginatorFor:
-          - ALL
-          type: string
-          description: |
-            Optional client-provided unique identifier for idempotency and deduplication. 
-            Must be unique across all active identities within your tenant. Duplicate values will result in a 409 Conflict error.
-          example: customer-12345-uuid
-        business:
-          $ref: '#/components/schemas/business-identity'
-        individual:
-          $ref: '#/components/schemas/individual-identity'
-    financial-instrument-type:
-      type: string
-      description: |
-        The type of financial instrument or payment rail used for executing the transaction.
-        This determines the structure and validation of account details required for the payout.
-      x-extensible-enum:
-      - US_ACH
-      - US_FEDWIRE
-      - MX_SPEI
-      - EU_SEPA
-      - GB_FPS
-      - NG_BANK_PAYOUT
-      - BR_PIX
-      - CO_PSE
-      - BR_TED
-      - CA_EFT
-      x-enumDescriptions:
-        US_ACH: Automated Clearing House - U.S. batch processing network used 
-          for domestic payments.
-        US_FEDWIRE: Fedwire Funds Service - U.S. real-time gross settlement 
-          network for high-value domestic USD transfers.
-        MX_SPEI: Mexico's real-time interbank transfer system.
-        EU_SEPA: European Union's standardized payment system for 
-          euro-denominated transactions.
-        GB_FPS: Faster Payments Service in the UK for near-instant payments.
-        NG_BANK_PAYOUT: Nigeria Bank Payout - A payment method for bank 
-          transfers in Nigeria.
-        BR_PIX: Brazil's instant payment platform developed by the Central Bank 
-          of Brazil.
-        CO_PSE: Colombia's secure online banking payment system.
-        BR_TED: Brazil's Electronic Funds Transfer system for high-value 
-          transactions.
-        CA_EFT: Canada's Electronic Funds Transfer system for batch processing.
-      example: BR_PIX
-    put-ripple-identity:
-      type: object
-      description: |
-        Request to update an existing identity.
-      properties:
-        internalId:
-          x-requiredByOriginatorFor:
-          - ALL
-          type: string
-          description: |
-            Optional client-provided unique identifier for idempotency and deduplication. 
-            Must be unique across all active identities within your tenant. Duplicate values will result in a 409 Conflict error.
-          example: customer-12345-uuid
-        business:
-          $ref: '#/components/schemas/business-identity'
-        individual:
-          $ref: '#/components/schemas/individual-identity'
-    financial-instrument-currency:
-      type: string
-      description: The 3-letter ISO currency code of the financial instrument.
-      example: MXN
-      x-extensible-enum:
-      - AED
-      - BRL
-      - CAD
-      - COP
-      - EUR
-      - GBP
-      - GHS
-      - MXN
-      - NGN
-      - RWF
-      - UGX
-      - USD
-      - ZAR
-      - ZMW
-      - RLUSD
-      - USDC
-      - USDT
-    financial-instrument-metadata:
-      type: object
-      description: |
-        Metadata information for a financial instrument without the payment rail specific details.
-        Used in list operations to provide summary information.
-      required:
-      - financialInstrumentId
-      - financialInstrumentType
-      - currency
-      properties:
-        financialInstrumentId:
-          type: string
-          description: The unique identifier of the financial instrument.
-          example: 3fc74743-e7f3-414a-9fcf-eb8c1d52356a
-        financialInstrumentType:
-          $ref: '#/components/schemas/financial-instrument-type'
-        currency:
-          $ref: '#/components/schemas/financial-instrument-currency'
-        label:
-          type: string
-          description: A user-defined label for the financial instrument.
-          example: mexico bank account
-        country:
-          type: string
-          description: |
-            The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, XRPL_WALLET, TRON_WALLET, SOL_WALLET), this field returns `ZZ`, the ISO 3166-1 user-assigned code used when no country jurisdiction applies.
-          example: MX
-          minLength: 2
-          maxLength: 2
-          pattern: ^[A-Z]+$
-        createdAt:
-          type: string
-          format: date-time
-          description: The time at which the financial instrument was created
-          example: '2023-11-02T18:26:00.000Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: The time at which the financial instrument was last 
-            updated
-          example: '2023-11-03T18:26:00.000Z'
-    us-ach:
-      type: object
-      description: |
-        Rails: RTP, ACH
-
-        Rail Definitions:
-
-        RTP:
-          - Availability: 24/7/365
-          - Limit: $5,000,000
-          - Settlement: <5 minutes
-          - Cut-off time: None
-          - Banking holidays: Not applicable
-
-        ACH:
-          - Availability: Business days only
-          - Limit: $1,000,000
-          - Settlement: Same-day
-          - Cut-off time: 3:00 PM EST
-          - Banking holidays: U.S. banking holidays apply
-
-        Routing Evaluation Order:
-
-          1. RTP
-             - Conditions: beneficiary account is RTP-addressable AND amount ≤ $5,000,000
-          2. ACH
-             - Conditions: otherwise applicable
-      required:
-      - bankName
-      - bankRoutingNumber
-      - accountNumber
-      - accountType
-      properties:
-        bankName:
-          type: string
-          description: The name of the identity's bank
-          minLength: 2
-          maxLength: 140
-          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
-            .,'&\/()-]+(?<![ .,'&\/-])?$
-        bankRoutingNumber:
-          type: string
-          description: The identity's bank routing number
-          minLength: 9
-          maxLength: 9
-          pattern: ^\d+$
-        accountNumber:
-          type: string
-          description: The identity's account number into which the funds must 
-            be credited
-          minLength: 4
-          maxLength: 21
-          pattern: ^\d+$
-        accountType:
-          type: string
-          x-extensible-enum:
-          - CHECKING
-          - SAVINGS
-          x-enumDescriptions:
-            CHECKING: Checking account
-            SAVINGS: Savings account
-          description: The identity’s account type.
-    us-fedwire:
-      type: object
-      description: |
-        Rails: FEDWIRE
-
-        Rail Definitions:
-
-        FEDWIRE:
-          - Availability: U.S. business days and operating hours.
-          - Limit: No limit
-          - Settlement: Real-time gross settlement (typically within minutes).
-          - Cut-off time: 5:00 p.m. ET; transfers submitted after cut-off queue for next business day.
-          - Banking holidays: Follows the Federal Reserve holiday schedule.
-      required:
-      - bankName
-      - bankRoutingNumber
-      - accountNumber
-      properties:
-        bankName:
-          type: string
-          description: The name of the identity's bank.
-          minLength: 2
-          maxLength: 140
-          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
-            .,'&\/()-]+(?<![ .,'&\/-])?$
-        bankRoutingNumber:
-          type: string
-          description: 9-digit ABA Routing Transit Number (RTN) of the 
-            beneficiary’s bank.
-          minLength: 9
-          maxLength: 9
-          pattern: ^\d+$
-        accountNumber:
-          type: string
-          description: The identity's account number to be credited.
-          minLength: 4
-          maxLength: 21
-          pattern: ^\d+$
-    mx-spei:
-      description: |
-        Rails: SPEI
-
-        Rail Definitions:
-
-        SPEI:
-        - Availability: 24/7/365
-        - Limit: None
-        - Settlement: Instant
-        - Cut-off time: None
-        - Banking holidays: Not applicable
-
-        Routing Evaluation Order: Not applicable
-      type: object
-      required:
-      - bankName
-      - clabe
-      properties:
-        bankName:
-          type: string
-          description: The name of the identity's bank
-          minLength: 2
-          maxLength: 140
-          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
-            .,'&\/()-]+(?<![ .,'&\/-])?$
-        clabe:
-          type: string
-          description: The identity's CLABE account identification code
-          minLength: 18
-          maxLength: 18
-          pattern: ^\d+$
-    eu-sepa:
-      type: object
-      description: |
-        Rails: SCT Inst, SCT
-
-        Rail Definitions:
-
-        SCT Inst:
-        - Availability: 24/7/365
-        - Limit: €100,000 (bank-dependent)
-        - Settlement: Instant
-        - Cut-off time: None
-        - Banking holidays: Not applicable
-
-        SCT:
-        - Availability: Business days only
-        - Limit: No limit
-        - Settlement: T+2 to T+5 
-        - Cut-off time: 3:00PM GMT/BST
-        - Banking holidays: TARGET2 holidays apply
-
-        Routing Evaluation Order:
-
-          1. SCT Inst  
-             - Conditions: beneficiary account is SCT Inst-addressable AND amount ≤ €100,000
-          2. SCT  
-             - Conditions: otherwise applicable
-      required:
-      - bankName
-      - iban
-      properties:
-        bankName:
-          type: string
-          description: The name of the identity's bank
-          minLength: 2
-          maxLength: 140
-          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
-            .,'&\/()-]+(?<![ .,'&\/-])?$
-        iban:
-          type: string
-          description: The International Bank Account Number (IBAN) of the 
-            identity's account
-          minLength: 15
-          maxLength: 34
-          pattern: ^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$
-    gb-fps:
-      type: object
-      description: |
-        Rails: FPS, CHAPS
-
-        Rail Definitions:
-
-        FPS:
-        - Availability: 24/7/365
-        - Limit: £1,000,000
-        - Settlement: Instant
-        - Cut-off time: None
-        - Banking holidays: Not applicable
-
-        CHAPS:
-        - Availability: Business days only
-        - Limit: No limit
-        - Settlement: Same-day
-        - Cut-off time: Typically 5:00 PM GMT/BST (bank-dependent)
-        - Banking holidays: UK banking holidays apply
-
-        Routing Evaluation Order:
-          1. FPS  
-             - Conditions: beneficiary account is FPS-addressable AND amount ≤ £1,000,000
-          2. CHAPS  
-             - Conditions: otherwise applicable
-      required:
-      - bankName
-      - sortCode
-      - accountNumber
-      properties:
-        bankName:
-          type: string
-          description: The name of the identity's bank
-          minLength: 2
-          maxLength: 140
-          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
-            .,'&\/()-]+(?<![ .,'&\/-])?$
-        sortCode:
-          type: string
-          description: The sort code of the identity's bank account
-          minLength: 6
-          maxLength: 6
-          pattern: ^[0-9]+$
-        accountNumber:
-          type: string
-          description: The account number of the identity's bank account
-          minLength: 8
-          maxLength: 8
-          pattern: ^[0-9]+$
-    ng-bank-payout:
-      type: object
-      description: |
-        Rails: Bank Payout
-
-        Rail Definitions:
-
-        Bank Payout:
-        - Availability: Country-dependant
-        - Limit:
-        - Nigeria: ₦5,000,000
-        - Settlement: Real time to 48 hours
-        - Cut-off time: Real time
-        - Banking holidays: Nigeria banking holidays apply
-
-        Routing Evaluation Order: Not applicable
-      required:
-      - bankName
-      - bankCode
-      - accountNumber
-      properties:
-        bankName:
-          type: string
-          description: The name of the identity's bank
-          minLength: 2
-          maxLength: 140
-          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
-            .,'&\/()-]+(?<![ .,'&\/-])?$
-        bankCode:
-          type: string
-          description: The bank code of the identity's bank
-          minLength: 1
-          maxLength: 50
-          pattern: ^[A-Za-z0-9 ._-]+$
-        accountNumber:
-          type: string
-          description: The identity's account number associated with the Account
-            Identification Scheme
-          minLength: 4
-          maxLength: 21
-          pattern: ^[a-zA-Z0-9]+$
-    br-pix:
-      description: |
-        Rails: PIX
-
-        Rail Definitions:
-
-        PIX:
-        - Availability: 24/7/365
-        - Limit: No limit
-        - Settlement: Instant
-        - Cut-off time: None
-        - Banking holidays: Not applicable
-
-        Routing Evaluation Order: Not applicable
-      type: object
-      required:
-      - bankName
-      - bankCode
-      - branchNumber
-      - pixKey
-      - pixKeyType
-      properties:
-        bankName:
-          type: string
-          description: The name of the identity's bank
-          minLength: 2
-          maxLength: 140
-          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
-            .,'&\/()-]+(?<![ .,'&\/-])?$
-        bankCode:
-          type: string
-          description: The code of the identity's bank (BICFI code)
-          minLength: 8
-          maxLength: 11
-          pattern: ^[A-Za-z0-9]+$
-        branchNumber:
-          type: string
-          description: The identity's bank branch number
-          minLength: 4
-          maxLength: 6
-          pattern: ^\d{4}(-?[0-9X])?$
-        pixKey:
-          type: string
-          description: The identity's PIX key, which can be an email, phone 
-            number, or a hash
-          minLength: 6
-          maxLength: 77
-          pattern: (?x) ^( \+[1-9]\d{7,15}$ | 
-            [\p{L}\p{N}._%+\-]+@[\p{L}\p{N}.\-]+\.[\p{L}]{2,} | 
-            [0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}- 
-            [0-9A-Fa-f]{4}-[0-9A-Fa-f]{12} | \d{11} | \d{14} | 
-            \d{3}\.\d{3}\.\d{3}-\d{2} | \d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2} )$
-        pixKeyType:
-          type: string
-          x-extensible-enum:
-          - CPF
-          - CNPJ
-          - EMAIL
-          - PHONE
-          - EVP
-          x-enumDescriptions:
-            CPF: Individual taxpayer registry number
-            CNPJ: Legal entity identification number
-            EMAIL: Email address
-            PHONE: Phone number
-            EVP: Bank account
-          description: The type of PIX key used by the identity.
-    co-pse:
-      description: "Rails: PSE\n\nRail Definitions:\n\nPSE:\n- Availability: Business
-        days and banking hours only\n- Limit: None\n- Settlement: \n\t- Major banks
-        (Bancolombia, Davivienda, Banco de Bogotá, BBVA, Grupo Aval, Nequi): 35–100
-        min\n\t- Other banks (via ACH): Same-day or T+1 depending on cutoff\n- Cut-off
-        time: 3PM COT\n- Banking holidays: Colombia banking holidays apply\n\nRouting
-        Evaluation Order: Not applicable\n"
-      type: object
-      required:
-      - bankName
-      - bankCode
-      - accountNumber
-      - accountType
-      properties:
-        bankName:
-          type: string
-          description: The name of the identity's bank
-          minLength: 2
-          maxLength: 140
-          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
-            .,'&\/()-]+(?<![ .,'&\/-])?$
-        bankCode:
-          type: string
-          description: The identity's bank identifier code
-          minLength: 2
-          maxLength: 4
-          pattern: ^\d+$
-        accountNumber:
-          type: string
-          description: The identity's account number associated with the Account
-            Identification Scheme
-          minLength: 1
-          maxLength: 20
-          pattern: ^\d+$
-        accountType:
-          type: string
-          x-extensible-enum:
-          - CURRENT
-          - SAVINGS
-          x-enumDescriptions:
-            CURRENT: Current account
-            SAVINGS: Savings account
-          description: The type of account associated with the identity.
-    br-ted:
-      type: object
-      description: |
-        Rails: TED
-
-        Rail Definitions:
-
-        TED:
-        - Availability: Business days only
-        - Limit: No limit
-        - Settlement: Same-day
-        - Cut-off time: ~5:00 PM BRT 
-        - Banking holidays: Brazil banking holidays apply
-
-        Routing Evaluation Order: Not applicable
-      required:
-      - bankName
-      - bankCode
-      - branchNumber
-      - accountNumber
-      - accountType
-      properties:
-        bankName:
-          type: string
-          description: The name of the identity's bank
-          minLength: 2
-          maxLength: 140
-          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
-            .,'&\/()-]+(?<![ .,'&\/-])?$
-        bankCode:
-          type: string
-          description: The code of the identity's bank (BICFI code)
-          minLength: 8
-          maxLength: 11
-          pattern: ^[A-Za-z0-9]+$
-        branchNumber:
-          type: string
-          description: The branch number of the identity's bank account
-          minLength: 4
-          maxLength: 6
-          pattern: ^\d{4}(-?[0-9X])?$
-        accountNumber:
-          type: string
-          description: The identity's account number associated with the Account
-            Identification Scheme
-          minLength: 5
-          maxLength: 14
-          pattern: ^\d+$
-        accountType:
-          type: string
-          x-extensible-enum:
-          - CHECKING
-          - SAVINGS
-          x-enumDescriptions:
-            CHECKING: Checking account
-            SAVINGS: Savings account
-          description: The identity's account type (Savings, Checking etc.)
-          example: SAVINGS
-    ca-eft:
-      type: object
-      description: |
-        Rails: EFT
-
-        Rail Definitions:
-
-        EFT:
-        - Availability: Business days only
-        - Limit: CAD 1,000,000
-        - Settlement: T+1
-        - Cut-off time: ~4:30 PM EST
-        - Banking holidays: Canadian banking holidays apply
-
-        Routing Evaluation Order: Not applicable
-      required:
-      - bankName
-      - institutionNumber
-      - transitNumber
-      - accountNumber
-      - accountType
-      properties:
-        bankName:
-          type: string
-          description: The name of the identity's bank
-          minLength: 2
-          maxLength: 140
-          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
-            .,'&\/()-]+(?<![ .,'&\/-])?$
-        institutionNumber:
-          type: string
-          description: The institution number of the identity's bank
-          minLength: 3
-          maxLength: 3
-          pattern: ^\d+$
-        transitNumber:
-          type: string
-          description: The transit number of the identity's bank account
-          minLength: 5
-          maxLength: 5
-          pattern: ^\d+$
-        accountNumber:
-          type: string
-          description: The identity's account number associated with the Account
-            Identification Scheme
-          minLength: 7
-          maxLength: 12
-          pattern: ^\d+$
-        accountType:
-          type: string
-          x-extensible-enum:
-          - CHECKING
-          - SAVINGS
-          x-enumDescriptions:
-            CHECKING: Checking account
-            SAVINGS: Savings account
-          description: The identity’s account type.
-    payment-rail-objects:
-      type: object
-      properties:
-        usAch:
-          $ref: '#/components/schemas/us-ach'
-        usFedwire:
-          $ref: '#/components/schemas/us-fedwire'
-        mxSpei:
-          $ref: '#/components/schemas/mx-spei'
-        euSepa:
-          $ref: '#/components/schemas/eu-sepa'
-        gbFps:
-          $ref: '#/components/schemas/gb-fps'
-        ngBankPayout:
-          $ref: '#/components/schemas/ng-bank-payout'
-        brPix:
-          $ref: '#/components/schemas/br-pix'
-        coPse:
-          $ref: '#/components/schemas/co-pse'
-        brTed:
-          $ref: '#/components/schemas/br-ted'
-        caEft:
-          $ref: '#/components/schemas/ca-eft'
-    ripple-financial-instrument:
-      type: object
-      description: |
-        Request to create a new financial instrument for an identity.
-      allOf:
-      - $ref: '#/components/schemas/payment-rail-objects'
-      - type: object
-        properties:
-          currency:
-            $ref: '#/components/schemas/financial-instrument-currency'
-          label:
-            type: string
-            description: A user-defined label for the financial instrument.
-            example: mexico bank account
-          financialInstrumentType:
-            $ref: '#/components/schemas/financial-instrument-type'
-      required:
-      - financialInstrumentType
-      - currency
-    ripple-financial-instrument-entry:
-      allOf:
-      - $ref: '#/components/schemas/ripple-financial-instrument'
-      - type: object
-        properties:
-          country:
-            type: string
-            description: |
-              The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, XRPL_WALLET, TRON_WALLET, SOL_WALLET), this field returns `ZZ`, the ISO 3166-1 user-assigned code used when no country jurisdiction applies.
-            example: MX
-            minLength: 2
-            maxLength: 2
-            pattern: ^[A-Z]+$
-          financialInstrumentId:
-            type: string
-            description: The unique identifier of the financial instrument.
-            example: 3fc74743-e7f3-414a-9fcf-eb8c1d52356a
-          createdAt:
-            type: string
-            format: date-time
-            description: The time at which the financial instrument was created
-            example: '2023-11-02T18:26:00.000Z'
-          updatedAt:
-            type: string
-            format: date-time
-            description: The time at which the financial instrument was last 
-              updated
-            example: '2023-11-03T18:26:00.000Z'
-    put-ripple-financial-instrument:
-      type: object
-      description: |
-        Request to update an existing financial instrument of an identity.
-      allOf:
-      - $ref: '#/components/schemas/payment-rail-objects'
-      properties:
-        label:
-          type: string
-          description: A user-defined label for the financial instrument.
-          example: mexico bank account
+        useCaseType:
+          $ref: '#/components/schemas/useCaseType'
     QuoteErrorResponse:
       type: object
       required:
@@ -4803,19 +2827,15 @@ components:
           want to send.
         DESTINATION_AMOUNT: Specify this value to get a quote for the amount 
           that the beneficiary should receive.
-    QuoteCollectionRequestV2:
+    QuoteCollectionRequest:
       type: object
-      description: |
-        Request to create a quote collection (v2).
-
-        **What's new in v3:**
-        - `payoutCategory` and `destinationBlockchainNetwork` are no longer accepted in requests.
-        - `paymentRail` is added as an optional field in the request to allow filtering quotes by a specific payment rail. When paymentRail is not passed, quotes will be returned for all supported payment rails. For a list of supported values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
+      description: Request to create a quote collection
       required:
       - quoteAmountType
       - quoteAmount
       - sourceCurrency
       - destinationCurrency
+      - payoutCategory
       - payinCategory
       properties:
         quoteAmount:
@@ -4853,10 +2873,22 @@ components:
             this value is their the country of incorporation.
           type: string
           pattern: ^[a-zA-Z]{2}$
-          example: MX
+          example: PH
+        payoutCategory:
+          description: The name of the payout category.
+          type: string
+          minLength: 1
+          maxLength: 128
+          x-enumDescriptions:
+            BANK: Indicates that the payout will be made in fiat currency to a 
+              recipient’s bank account through local banking rails.
+            CRYPTO: Indicates that the payout will be made in stablecoin to a 
+              recipient’s crypto wallet address.
+          example: BANK
         payinCategory:
           description: The name of the pay in category indicating how this 
-            payment will be funded.
+            payment will be funded. The values FUNDED and T_PLUS_ONE are 
+            deprecated and will be removed in a future release.
           type: string
           minLength: 1
           maxLength: 128
@@ -4867,31 +2899,27 @@ components:
               the outstanding invoice.
             JIT_FUNDING: Indicates that the payment is being made and you will 
               pay the outstanding amount before the payment expires.
+            FUNDED: Indicates that the payment is being made from funds you've 
+              deposited with Ripple.
+            T_PLUS_ONE: Indicates the payment is being made and you will pay the
+              outstanding invoice.
           example: PRE_FUNDING
-        paymentRail:
-          description: |
-            The payment rail on which the beneficiary will receive this payment. This value may be used to filter quotes to a specific subset of supported payout rails. If not provided, quotes will be returned for all supported payout rails. For a list of supported values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
+        destinationBlockchainNetwork:
+          description: The name of the blockchain network on which the 
+            beneficiary will receive this payment.
           type: string
           minLength: 1
-          maxLength: 50
-          x-enumDescriptions:
-            RTP: Indicates that the payout will be made in fiat currency to a 
-              recipient’s bank account through the RTP network.
-            ACH: Indicates that the payout will be made in fiat currency to a 
-              recipient’s bank account through the ACH network.
-            WIRE: Indicates that the payout will be made in fiat currency to a 
-              recipient’s bank account through the wire transfer network.
-            ETHEREUM: Indicates that the payout will be made in stablecoin to a 
-              recipient's Ethereum wallet address.
-          example: SPEI
+          maxLength: 20
+          example: Ethereum
       additionalProperties: false
-    QuoteV2:
+    Quote:
       type: object
       required:
       - quoteId
       - quoteStatus
       - sourceCurrency
       - destinationCurrency
+      - payoutCategory
       - payinCategory
       properties:
         quoteId:
@@ -4906,14 +2934,20 @@ components:
         quoteAmountType:
           $ref: '#/components/schemas/QuoteAmountType'
         sourceAmount:
-          description: Amount to be sent by the originator.
+          description: |
+            Amount to be sent by the originator. The value is rounded to the number of decimal
+            places defined by the ISO 4217 standard for the source currency (for example, 2 for
+            USD/EUR, 0 for JPY/KRW, 3 for BHD/KWD), using HALF_UP rounding mode.
           type: number
           format: double
           minimum: 1
           maximum: 100000000
           example: 123.45
         destinationAmount:
-          description: Amount to be received by destination
+          description: |
+            Amount to be received by the beneficiary. The value is rounded to the number of decimal
+            places defined by the ISO 4217 standard for the destination currency (for example, 2 for
+            USD/EUR, 0 for JPY/KRW, 3 for BHD/KWD), using HALF_UP rounding mode.
           type: number
           minimum: 1
           maximum: 100000000
@@ -4943,6 +2977,13 @@ components:
           type: string
           pattern: ^[a-zA-Z]{2}$
           example: MX
+        payoutCategory:
+          description: Name of the payout category specified in the quote 
+            request.
+          type: string
+          minLength: 1
+          maxLength: 128
+          example: BANK
         payinCategory:
           description: The name of payin category specified in the quote 
             request.
@@ -4956,7 +2997,7 @@ components:
           type: array
           description: A summary of fees included in this quote.
           items:
-            $ref: '#/components/schemas/FeeSummaryV2'
+            $ref: '#/components/schemas/FeeSummary'
         taxes:
           type: array
           description: A summary of taxes included in this quote.
@@ -4976,14 +3017,15 @@ components:
           format: date-time
           example: '2023-11-02T18:26:00.000123Z'
           description: The time when this quote expires, specified in UTC.
-        paymentRail:
-          description: The payment rail used for this quote.
+        destinationBlockchainNetwork:
+          description: The name of the blockchain network on which the 
+            beneficiary will receive this payment.
           type: string
           minLength: 1
-          maxLength: 50
-          example: SPEI
+          maxLength: 20
+          example: Ethereum
       additionalProperties: false
-    QuoteCollectionV2:
+    QuoteCollection:
       type: object
       required:
       - quoteCollectionId
@@ -5001,57 +3043,8 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/QuoteV2'
+            $ref: '#/components/schemas/Quote'
       additionalProperties: false
-    TotalFeeBreakdownV2:
-      description: A breakdown of the total fees included in this quote.
-      type: object
-      properties:
-        calculatedFee:
-          description: Value of the fee when the configured fee unit is applied 
-            against the `value`.
-          type: number
-          format: double
-          example: 2.43
-        feeName:
-          description: The name of the fee.
-          type: string
-          minLength: 1
-          maxLength: 128
-          example: Service fee
-        feeDescription:
-          description: Description of the fee.
-          type: string
-          minLength: 1
-          maxLength: 256
-          example: The service fee charged for this transaction.
-        paymentRail:
-          description: The payment rail associated with this fee line item.
-          type: string
-          minLength: 1
-          maxLength: 30
-          example: ACH/ Wire etc
-      additionalProperties: false
-    FeeSummaryV2:
-      type: object
-      description: A summary of fees included in this quote.
-      properties:
-        totalFee:
-          description: The value of the total fee included in this quote.
-          type: number
-          format: double
-          example: 12.23
-        feeCurrency:
-          description: The currency in which fees are charged.
-          type: string
-          pattern: ^[a-zA-Z]{3,5}$
-          example: USD
-        feeBreakdown:
-          description: An array of fees that provides a breakdown of how the 
-            total fees is calculated for this quote.
-          type: array
-          items:
-            $ref: '#/components/schemas/TotalFeeBreakdownV2'
   examples:
     error-500-example:
       value:
