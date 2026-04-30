@@ -14,11 +14,7 @@ Method | HTTP request | Description
 
 Create quote collection
 
-Creates a collection of quotes for a proposed payment.
-
-**Tutorials**
-
-* Learn how to [Create a quote](../../tutorials/create-a-payment/#create-a-quote-collection).
+Creates a collection of quotes for a proposed payment..
 
 
 ### Example

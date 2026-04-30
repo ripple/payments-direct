@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PaymentRailUsed** | Pointer to **string** | The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP, SEPA, SWIFT).  | [optional] 
+**PaymentRailUsed** | Pointer to **string** | The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP, SEPA).  | [optional] 
 **PayoutStartTime** | Pointer to **time.Time** | The time at which the payout execution started, specified in UTC.  | [optional] 
 **PayoutEndTime** | Pointer to **time.Time** | The timestamp when the payout execution completed or was last updated, as reported by the payout partner. Specified in UTC using ISO 8601 format. For in-progress payouts, this may represent the last status update time.  | [optional] 
 **TrackingReferences** | Pointer to [**[]TrackingReference**](TrackingReference.md) | A list of tracking references for this transaction, such as transaction IDs and confirmation numbers.  | [optional] 

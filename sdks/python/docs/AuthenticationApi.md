@@ -21,7 +21,7 @@ You need to request a token for the environment you want to authenticate with.
 
 **Tutorials**
 
-* Learn how to [Request an access token](../../tutorials/request-an-access-token/).
+* Learn how to [Request an access token](/products/payments-direct-2/api-docs/tutorials/request-an-access-token).
 
 #### Environments
 

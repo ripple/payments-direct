@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Tenant** | Pointer to **string** | Identifier of the customer that owns this ledger transaction. | [optional] 
-**Amount** | Pointer to **float32** | Amount of the transaction applied to the customer’s ledger account.  | [optional] 
+**Amount** | Pointer to **float32** | Amount of the transaction applied to the customer&#39;s ledger account.  | [optional] 
 **Currency** | Pointer to **string** | Three-letter ISO 4217 currency code of the transaction. | [optional] 
 **TxnReference** | Pointer to **NullableString** | External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types.  | [optional] 
-**Operation** | Pointer to **string** | Operation performed on the customer’s prefunded ledger account.  | [optional] 
+**Operation** | Pointer to **string** | Operation performed on the customer&#39;s prefunded ledger account.  | [optional] 
 **TxnSource** | Pointer to **string** | Source of the ledger transaction (for example, which system or flow created it).  | [optional] 
 **Status** | Pointer to **string** | State of the ledger transaction. | [optional] 
 **CreatedDttm** | Pointer to **time.Time** | Timestamp (UTC) when the ledger transaction was created. | [optional] 
