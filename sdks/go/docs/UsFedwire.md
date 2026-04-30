@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BankName** | **string** | The name of the identity&#39;s bank. | 
-**BankRoutingNumber** | **string** | 9-digit ABA Routing Transit Number (RTN) of the beneficiary&#39;s bank. | 
+**BankRoutingNumber** | **string** | 9-digit ABA Routing Transit Number (RTN) of the beneficiary’s bank. | 
 **AccountNumber** | **string** | The identity&#39;s account number to be credited. | 
 
 ## Methods

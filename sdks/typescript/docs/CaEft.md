@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **institutionNumber** | **string** | The institution number of the identity\&#39;s bank | [default to undefined]
 **transitNumber** | **string** | The transit number of the identity\&#39;s bank account | [default to undefined]
 **accountNumber** | **string** | The identity\&#39;s account number associated with the Account Identification Scheme | [default to undefined]
-**accountType** | **string** | The identity\&#39;s account type. | [default to undefined]
+**accountType** | **string** | The identity’s account type. | [default to undefined]
 
 ## Example
 

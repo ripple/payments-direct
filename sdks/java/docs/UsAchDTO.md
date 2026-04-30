@@ -11,7 +11,7 @@ Rails: RTP, ACH  Rail Definitions:  RTP:   - Availability: 24/7/365   - Limit: $
 |**bankName** | **String** | The name of the identity&#39;s bank |  |
 |**bankRoutingNumber** | **String** | The identity&#39;s bank routing number |  |
 |**accountNumber** | **String** | The identity&#39;s account number into which the funds must be credited |  |
-|**accountType** | **String** | The identity&#39;s account type. |  |
+|**accountType** | **String** | The identity’s account type. |  |
 
 
 

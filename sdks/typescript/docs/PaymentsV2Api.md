@@ -4,10 +4,10 @@ All URIs are relative to *https://api.test.ripple.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createPaymentV2**](#createpaymentv2) | **POST** /v3/payments | Create payment|
-|[**getPaymentByIdV2**](#getpaymentbyidv2) | **GET** /v3/payments/{paymentId} | Get a payment by ID|
+|[**createPaymentV2**](#createpaymentv2) | **POST** /v3/payments | Create payment V2|
+|[**getPaymentByIdV2**](#getpaymentbyidv2) | **GET** /v3/payments/{paymentId} | Get a payment by ID V2|
 |[**getPaymentStateTransitionsByIdV2**](#getpaymentstatetransitionsbyidv2) | **GET** /v3/payments/{paymentId}/states | Get state transitions by payment ID|
-|[**searchPaymentsV2**](#searchpaymentsv2) | **POST** /v3/payments/filter | Search payments|
+|[**searchPaymentsV2**](#searchpaymentsv2) | **POST** /v3/payments/filter | Search payments V2|
 |[**updatePaymentLabelsV2**](#updatepaymentlabelsv2) | **PATCH** /v3/payments/{paymentId}/labels | Update payment labels|
 
 # **createPaymentV2**

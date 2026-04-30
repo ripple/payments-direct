@@ -95,13 +95,13 @@ import (
 )
 
 func main() {
-	currency := "USD" // string | Three-letter ISO 4217 currency code for the transactions to return (for example, USD). 
-	startDttm := time.Now() // time.Time | Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions. 
-	endDttm := time.Now() // time.Time | End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions. 
-	pageSize := int32(56) // int32 | Number of records to return in the response page. Use page-size together with offset for offset-based pagination  (default to 25)
+	currency := "USD" // string | Three-letter ISO 4217 currency code for the transactions to return (for example, USD).
+	startDttm := time.Now() // time.Time | Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions.
+	endDttm := time.Now() // time.Time | End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions.
+	pageSize := int32(56) // int32 | Number of records to return in the response page. Use page-size together with offset for offset-based pagination (default to 25)
 	status := "status_example" // string | Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  (optional)
-	txnReference := "txnReference_example" // string | Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  (optional)
-	offset := int32(56) // int32 | Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, `offset=25&page-size=25` returns the second page of results.  (optional)
+	txnReference := "txnReference_example" // string | Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference. (optional)
+	offset := int32(56) // int32 | Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination.  For example, `offset=25&page-size=25` returns the second page of results.  (optional)
 	sortKey := "sortKey_example" // string | Field to use for sorting the results. Allowed values include: - CREATED_AT: sort by transaction creation timestamp. - STATEMENT_OPERATION: sort by the operation type (for example, CREDIT, DEBIT). - STATEMENT_SOURCE: sort by the transaction source (for example, PAYMENTS, BANK). - STATEMENT_STATUS: sort by the ledger transaction status. - STATEMENT_TXN_REFERENCE: sort by the transaction reference. - STATEMENT_UPDATED_AT: sort by the last update timestamp.  (optional)
 	sortDirection := "sortDirection_example" // string | Sort direction. Allowed values: - ASC: ascending order. - DESC: descending order.  (optional)
 
@@ -128,13 +128,13 @@ Other parameters are passed through a pointer to a apiGetStatementsTransactionsF
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **currency** | **string** | Three-letter ISO 4217 currency code for the transactions to return (for example, USD).  | 
- **startDttm** | **time.Time** | Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions.  | 
- **endDttm** | **time.Time** | End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions.  | 
- **pageSize** | **int32** | Number of records to return in the response page. Use page-size together with offset for offset-based pagination  | [default to 25]
+ **currency** | **string** | Three-letter ISO 4217 currency code for the transactions to return (for example, USD). | 
+ **startDttm** | **time.Time** | Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions. | 
+ **endDttm** | **time.Time** | End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions. | 
+ **pageSize** | **int32** | Number of records to return in the response page. Use page-size together with offset for offset-based pagination | [default to 25]
  **status** | **string** | Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  | 
- **txnReference** | **string** | Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  | 
- **offset** | **int32** | Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, &#x60;offset&#x3D;25&amp;page-size&#x3D;25&#x60; returns the second page of results.  | 
+ **txnReference** | **string** | Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference. | 
+ **offset** | **int32** | Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination.  For example, &#x60;offset&#x3D;25&amp;page-size&#x3D;25&#x60; returns the second page of results.  | 
  **sortKey** | **string** | Field to use for sorting the results. Allowed values include: - CREATED_AT: sort by transaction creation timestamp. - STATEMENT_OPERATION: sort by the operation type (for example, CREDIT, DEBIT). - STATEMENT_SOURCE: sort by the transaction source (for example, PAYMENTS, BANK). - STATEMENT_STATUS: sort by the ledger transaction status. - STATEMENT_TXN_REFERENCE: sort by the transaction reference. - STATEMENT_UPDATED_AT: sort by the last update timestamp.  | 
  **sortDirection** | **string** | Sort direction. Allowed values: - ASC: ascending order. - DESC: descending order.  | 
 

@@ -4,10 +4,10 @@ All URIs are relative to *https://api.test.ripple.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createPaymentV2**](PaymentsV2Api.md#createPaymentV2) | **POST** /v3/payments | Create payment |
-| [**getPaymentByIdV2**](PaymentsV2Api.md#getPaymentByIdV2) | **GET** /v3/payments/{paymentId} | Get a payment by ID |
+| [**createPaymentV2**](PaymentsV2Api.md#createPaymentV2) | **POST** /v3/payments | Create payment V2 |
+| [**getPaymentByIdV2**](PaymentsV2Api.md#getPaymentByIdV2) | **GET** /v3/payments/{paymentId} | Get a payment by ID V2 |
 | [**getPaymentStateTransitionsByIdV2**](PaymentsV2Api.md#getPaymentStateTransitionsByIdV2) | **GET** /v3/payments/{paymentId}/states | Get state transitions by payment ID |
-| [**searchPaymentsV2**](PaymentsV2Api.md#searchPaymentsV2) | **POST** /v3/payments/filter | Search payments |
+| [**searchPaymentsV2**](PaymentsV2Api.md#searchPaymentsV2) | **POST** /v3/payments/filter | Search payments V2 |
 | [**updatePaymentLabelsV2**](PaymentsV2Api.md#updatePaymentLabelsV2) | **PATCH** /v3/payments/{paymentId}/labels | Update payment labels |
 
 
@@ -16,7 +16,7 @@ All URIs are relative to *https://api.test.ripple.com*
 
 > PaymentV2DTO createPaymentV2(paymentRequestV2DTO)
 
-Create payment
+Create payment V2
 
 Create a payment  **Tutorial**  * Learn how to [Create a payment](/products/payments-direct-2/api-docs/tutorials/create-a-payment/). 
 
@@ -90,7 +90,7 @@ public class Example {
 
 > PaymentWithDetailsV2DTO getPaymentByIdV2(paymentId)
 
-Get a payment by ID
+Get a payment by ID V2
 
 Gets a payment by ID.
 
@@ -238,7 +238,7 @@ public class Example {
 
 > PaymentsResponseV2DTO searchPaymentsV2(searchPaymentsRequestV2DTO)
 
-Search payments
+Search payments V2
 
 Search for payments based on filtering criteria.
 

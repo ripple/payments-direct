@@ -4,17 +4,17 @@ All URIs are relative to *https://api.test.ripple.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_payment_v2**](PaymentsV2Api.md#create_payment_v2) | **POST** /v3/payments | Create payment
-[**get_payment_by_id_v2**](PaymentsV2Api.md#get_payment_by_id_v2) | **GET** /v3/payments/{paymentId} | Get a payment by ID
+[**create_payment_v2**](PaymentsV2Api.md#create_payment_v2) | **POST** /v3/payments | Create payment V2
+[**get_payment_by_id_v2**](PaymentsV2Api.md#get_payment_by_id_v2) | **GET** /v3/payments/{paymentId} | Get a payment by ID V2
 [**get_payment_state_transitions_by_id_v2**](PaymentsV2Api.md#get_payment_state_transitions_by_id_v2) | **GET** /v3/payments/{paymentId}/states | Get state transitions by payment ID
-[**search_payments_v2**](PaymentsV2Api.md#search_payments_v2) | **POST** /v3/payments/filter | Search payments
+[**search_payments_v2**](PaymentsV2Api.md#search_payments_v2) | **POST** /v3/payments/filter | Search payments V2
 [**update_payment_labels_v2**](PaymentsV2Api.md#update_payment_labels_v2) | **PATCH** /v3/payments/{paymentId}/labels | Update payment labels
 
 
 # **create_payment_v2**
 > PaymentV2 create_payment_v2(payment_request_v2)
 
-Create payment
+Create payment V2
 
 Create a payment
 
@@ -57,7 +57,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     payment_request_v2 = ripple_payments_direct.PaymentRequestV2() # PaymentRequestV2 | create payment request
 
     try:
-        # Create payment
+        # Create payment V2
         api_response = api_instance.create_payment_v2(payment_request_v2)
         print("The response of PaymentsV2Api->create_payment_v2:\n")
         pprint(api_response)
@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 # **get_payment_by_id_v2**
 > PaymentWithDetailsV2 get_payment_by_id_v2(payment_id)
 
-Get a payment by ID
+Get a payment by ID V2
 
 Gets a payment by ID.
 
@@ -138,7 +138,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     payment_id = '7ea3399c-1234-5678-8d8f-d320ea406630' # str | Unique identifier of the payment to get.
 
     try:
-        # Get a payment by ID
+        # Get a payment by ID V2
         api_response = api_instance.get_payment_by_id_v2(payment_id)
         print("The response of PaymentsV2Api->get_payment_by_id_v2:\n")
         pprint(api_response)
@@ -263,7 +263,7 @@ Name | Type | Description  | Notes
 # **search_payments_v2**
 > PaymentsResponseV2 search_payments_v2(search_payments_request_v2)
 
-Search payments
+Search payments V2
 
 Search for payments based on filtering criteria.
 
@@ -301,7 +301,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     search_payments_request_v2 = ripple_payments_direct.SearchPaymentsRequestV2() # SearchPaymentsRequestV2 | Search payments request
 
     try:
-        # Search payments
+        # Search payments V2
         api_response = api_instance.search_payments_v2(search_payments_request_v2)
         print("The response of PaymentsV2Api->search_payments_v2:\n")
         pprint(api_response)

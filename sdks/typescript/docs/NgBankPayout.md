@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **bankName** | **string** | The name of the identity\&#39;s bank | [default to undefined]
 **bankCode** | **string** | The bank code of the identity\&#39;s bank | [default to undefined]
 **accountNumber** | **string** | The identity\&#39;s account number associated with the Account Identification Scheme | [default to undefined]
-**country** | **string** | The country of the identity\&#39;s bank, using the Alpha-2 code as defined in ISO 3166-1. | [default to undefined]
 
 ## Example
 
@@ -20,7 +19,6 @@ const instance: NgBankPayout = {
     bankName,
     bankCode,
     accountNumber,
-    country,
 };
 ```
 

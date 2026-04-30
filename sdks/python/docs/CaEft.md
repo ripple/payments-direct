@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **institution_number** | **str** | The institution number of the identity&#39;s bank | 
 **transit_number** | **str** | The transit number of the identity&#39;s bank account | 
 **account_number** | **str** | The identity&#39;s account number associated with the Account Identification Scheme | 
-**account_type** | **str** | The identity&#39;s account type. | 
+**account_type** | **str** | The identity’s account type. | 
 
 ## Example
 

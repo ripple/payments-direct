@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PaymentIds** | Pointer to **[]string** | Specify a list of uuids to search for payment with payment ids equals one from the list | [optional] 
 **PaymentStates** | Pointer to **[]string** | Array of payment states like &#x60;EXECUTING&#x60; or &#x60;COMPLETED&#x60;. | [optional] 
-**FilterRangeType** | Pointer to **string** | The type of timestamp to use when filtering payments by a date and time range.  Supported values include:  - &#x60;PAYMENT_CREATION&#x60;  - &#x60;PAYMENT_EXPIRY&#x60;  - &#x60;PAYMENT_STATUS_LAST_UPDATED&#x60;  If another value is provided, the filter is rejected with a validation error.  | [optional] 
+**FilterRangeType** | Pointer to **string** | The type of timestamp to use when filtering payments by a date and time range. Supported values include: - &#x60;PAYMENT_CREATION&#x60; - &#x60;PAYMENT_EXPIRY&#x60; - &#x60;PAYMENT_STATUS_LAST_UPDATED&#x60; If another value is provided, the filter is rejected with a validation error.  | [optional] 
 **BeforeTimestamp** | Pointer to **time.Time** | Depending on the value of the &#x60;filterRangeType&#x60; field, this timestamp returns a list of payments that were created/modified/expired at or before the specified time. | [optional] 
 **AfterTimestamp** | Pointer to **time.Time** | Depending on the value of the &#x60;filterRangeType&#x60; field, this timestamp returns a list of payments that were created/modified/expired at or after the specified time. | [optional] 
 **BeneficiaryIdentityIds** | Pointer to **[]string** | To get all payments made to one or more beneficiaries, specify the identity ID(s) of those beneficiaries in this field. You can find the identity ID using the &#x60;GET /identities&#x60; operation. | [optional] 
 **InternalId** | Pointer to **string** | Specify an &#x60;internalId&#x60; to get payments associated with them. A prefix match will be executed. | [optional] 
 **BeneficiaryIdentityNickname** | Pointer to **string** | To get all payments made to a beneficiary, specify the nickname of that beneficiary in this field. You can find the nickname using the &#x60;GET /identities&#x60; operation. | [optional] 
 **DestinationCurrencies** | Pointer to **[]string** | Specify one or more currency codes to get payments where the beneficiary received funds in these currencies. | [optional] 
-**PaymentLabels** | Pointer to **[]string** | Application-defined labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment&#39;s lifetime. | [optional] 
+**PaymentLabels** | Pointer to **[]string** | Application-defined labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment’s lifetime. | [optional] 
 
 ## Methods
 

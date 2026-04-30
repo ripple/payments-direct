@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **InstitutionNumber** | **string** | The institution number of the identity&#39;s bank | 
 **TransitNumber** | **string** | The transit number of the identity&#39;s bank account | 
 **AccountNumber** | **string** | The identity&#39;s account number associated with the Account Identification Scheme | 
-**AccountType** | **string** | The identity&#39;s account type. | 
+**AccountType** | **string** | The identity’s account type. | 
 
 ## Methods
 

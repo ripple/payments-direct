@@ -44,7 +44,7 @@ info:
     name: Apache 2.0
     url: http://apache.org
   title: Payments Direct API
-  version: "2026.03"
+  version: "2026.04"
 servers:
 - description: UAT environment with simulated currency
   url: https://api.test.ripple.com
@@ -84,11 +84,11 @@ tags:
 
     | Operation | Method | Description |
     | --- | --- | --- |
-    | [Create quote collection](./#operation/createQuoteCollection) | POST | Create a collection of quotes.  |
-    | [Get quote collection](./#operation/getQuoteCollection) | GET | Get a quote collection by ID. |
-    | [Get a quote](./#operation/getQuote) | GET | Get a specific quote by ID.  |
+    | [Create quote collection](./#operation/createQuoteCollectionV2) | POST | Create a collection of quotes.  |
+    | [Get quote collection](./#operation/getQuoteCollectionV2) | GET | Get a quote collection by ID. |
+    | [Get a quote](./#operation/getQuoteV2) | GET | Get a specific quote by ID.  |
   name: Quote
-  x-displayName: Quotes
+  x-displayName: Quotes (v3)
 - description: |
     Use these API operations to manage your payments with **Payment Management v3** (recommended for all new integrations).
 
@@ -122,7 +122,7 @@ paths:
 
         **Tutorials**
 
-        * Learn how to [Request an access token](/products/payments-direct-2/api-docs/tutorials/request-an-access-token).
+        * Learn how to [Request an access token](../../tutorials/request-an-access-token/).
 
         #### Environments
 
@@ -278,7 +278,7 @@ paths:
           description: Internal processing error
       security:
       - Bearer: []
-      summary: Search payments
+      summary: Search payments V2
       tags:
       - PaymentsV2
       x-content-type: application/json
@@ -354,7 +354,7 @@ paths:
           description: Internal processing error
       security:
       - Bearer: []
-      summary: Create payment
+      summary: Create payment V2
       tags:
       - PaymentsV2
       x-content-type: application/json
@@ -428,7 +428,7 @@ paths:
           description: Internal processing error
       security:
       - Bearer: []
-      summary: Get a payment by ID
+      summary: Get a payment by ID V2
       tags:
       - PaymentsV2
       x-accepts:
@@ -1549,11 +1549,6 @@ paths:
                     bankRoutingNumber: "266231608"
                     accountNumber: 987654321
                     accountType: SAVINGS
-              put-xrpl-wallet:
-                summary: Update XRPL destination tag
-                value:
-                  xrplWallet:
-                    destinationTag: 654321
             schema:
               $ref: '#/components/schemas/put-ripple-financial-instrument'
         required: true
@@ -1608,16 +1603,23 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /v2/quotes/quote-collection:
+  /v3/quotes/quote-collection:
     post:
       description: |
-        Creates a collection of quotes for a proposed payment..
-      operationId: createQuoteCollection
+        Create a quote collection to preview the cost and terms of a proposed payment before initiating it.
+
+        **What's new in v3:**
+        - `payoutCategory` and `destinationBlockchainNetwork` are no longer accepted in requests.
+        - `paymentRail` is added as an optional field in the request to allow filtering quotes by a specific payment rail. When paymentRail is not passed, quotes will be returned for all supported payment rails.
+
+         **Tutorials**
+        - `paymentRail` is added as an optional field in the request to allow filtering quotes by a specific payment rail. When paymentRail is not passed, quotes will be returned for all supported payment rails. For a list of supported values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
+      operationId: createQuoteCollectionV2
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/QuoteCollectionRequest'
+              $ref: '#/components/schemas/QuoteCollectionRequestV2'
         description: Create quote collection request
         required: true
       responses:
@@ -1625,7 +1627,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteCollection'
+                $ref: '#/components/schemas/QuoteCollectionV2'
           description: Creates a collection of quotes
         "400":
           content:
@@ -1660,9 +1662,13 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /v2/quotes/quote-collection/{quote-collection-id}:
+  /v3/quotes/quote-collection/{quote-collection-id}:
     get:
-      operationId: getQuoteCollection
+      description: |
+        Retrieve a previously created quote collection by its unique identifier.
+
+        Use this endpoint to check the status of quotes (ACTIVE or EXPIRED) and retrieve quote details needed for payment creation.
+      operationId: getQuoteCollectionV2
       parameters:
       - description: The unique identifier of the quote collection you want to retrieve
         explode: false
@@ -1679,7 +1685,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteCollection'
+                $ref: '#/components/schemas/QuoteCollectionV2'
           description: Valid quote collection found
         "401":
           content:
@@ -1713,9 +1719,18 @@ paths:
       - Quote
       x-accepts:
       - application/json
-  /v2/quotes/{quote-id}:
+  /v3/quotes/{quote-id}:
     get:
-      operationId: getQuote
+      description: |
+        Retrieve a specific quote by its unique identifier.
+
+        Use this endpoint to:
+        - Verify quote details before creating a payment
+        - Check if a quote is still active (not expired)
+        - Retrieve the `quoteId` needed for payment creation
+
+        **Note:** Quotes expire after a defined period. Check the `quoteStatus` field to confirm the quote is `ACTIVE` before using it to create a payment.
+      operationId: getQuoteV2
       parameters:
       - description: The unique identifier of the quote to retrieve
         explode: false
@@ -1732,7 +1747,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Quote'
+                $ref: '#/components/schemas/QuoteV2'
           description: Valid quote found
         "401":
           content:
@@ -1761,7 +1776,7 @@ paths:
           description: Internal server error
       security:
       - Bearer: []
-      summary: Get quote
+      summary: Get a quote
       tags:
       - Quote
       x-accepts:
@@ -1795,13 +1810,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getBalances_400_response'
+                $ref: '#/components/schemas/getBalances_401_response'
           description: Unauthorized access
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getBalances_400_response'
+                $ref: '#/components/schemas/getBalances_500_response'
           description: Internal server error
       security:
       - Bearer: []
@@ -1812,12 +1827,13 @@ paths:
       - application/json
   /v2/ledger-transactions:
     get:
-      description: |
-        Retrieve a paginated list of ledger transactions for your tenant within a specified date and time range. This endpoint returns detailed transaction data, including amounts, references, operations, and running balances, so you can reconcile balance changes over time for a given currency.
+      description: "Retrieve a paginated list of ledger transactions within a specified\
+        \ date and time range. This endpoint returns detailed transaction data, including\
+        \ amounts, references, operations, and running balances."
       operationId: getStatementsTransactionsForCustomer
       parameters:
-      - description: |
-          Three-letter ISO 4217 currency code for the transactions to return (for example, USD).
+      - description: "Three-letter ISO 4217 currency code for the transactions to\
+          \ return (for example, USD)."
         example: USD
         explode: true
         in: query
@@ -1826,8 +1842,8 @@ paths:
         schema:
           type: string
         style: form
-      - description: |
-          Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions.
+      - description: "Start of the date and time range (inclusive), in UTC, for which\
+          \ you want to retrieve ledger transactions."
         example: 2022-02-27T08:30:00Z
         explode: true
         in: query
@@ -1837,8 +1853,8 @@ paths:
           format: date-time
           type: string
         style: form
-      - description: |
-          End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions.
+      - description: "End of the date and time range (exclusive), in UTC, for which\
+          \ you want to retrieve ledger transactions."
         example: 2022-02-27T08:30:00Z
         explode: true
         in: query
@@ -1859,8 +1875,8 @@ paths:
         schema:
           type: string
         style: form
-      - description: |
-          Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.
+      - description: Filter results by an exact transaction reference. Use this to
+          locate all ledger transactions associated with a specific external reference.
         explode: true
         in: query
         name: txnReference
@@ -1868,8 +1884,8 @@ paths:
         schema:
           type: string
         style: form
-      - description: |
-          Number of records to return in the response page. Use page-size together with offset for offset-based pagination
+      - description: Number of records to return in the response page. Use page-size
+          together with offset for offset-based pagination
         explode: true
         in: query
         name: page-size
@@ -1882,6 +1898,7 @@ paths:
         style: form
       - description: |
           Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination.
+
           For example, `offset=25&page-size=25` returns the second page of results.
         explode: true
         in: query
@@ -2192,7 +2209,7 @@ components:
           payout: BANK
           destinationCurrency: USD
           destinationCountry: US
-          destinationBlockchainNetwork: "Ethereum, TRON"
+          destinationBlockchainNetwork: ETHEREUM
           destinationAmount: 1234.111223
         taxes:
         - taxCurrency: USD
@@ -2279,18 +2296,17 @@ components:
           format: date-time
           type: string
         paymentState:
-          description: "Current state of a payment.\n\nThe payment lifecycle currently\
-            \ uses the following values: \n- `QUOTED` \n- `INITIATED` \n- `VALIDATING`\
-            \ \n- `TRANSFERRING` \n- `COMPLETED` \n- `FAILED` \n- `RETURNED` \n- `DECLINED`\
-            \ \n- `AWAITING_FUNDING`\n\nAdditional states may be introduced in the\
-            \ future without breaking existing integrations.\n"
+          description: |
+            Current state of a payment.
+            The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`
+            Additional states may be introduced in the future without breaking existing integrations.
           example: INITIATED
           type: string
           x-enumDescriptions:
             QUOTED: "A quote has been created, but the payment has not yet been initiated."
             INITIATED: The payment has been submitted and is awaiting validation.
             VALIDATING: Ripple is validating the payment details and reserving funds
-              from the originator's available balance.
+              from the originator’s available balance.
             TRANSFERRING: The payment is being processed and funds are moving through
               the network toward the beneficiary.
             COMPLETED: The payment has completed and the beneficiary has received
@@ -2341,8 +2357,8 @@ components:
         paymentLabels:
           description: "Application-defined labels for grouping and categorizing payments\
             \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
-            \ optional and mutable; they can be added or removed over the payment's\
-            \ lifetime."
+            \ optional and mutable; they can be added or removed over the payment’\
+            s lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -2402,7 +2418,7 @@ components:
           payout: BANK
           destinationCurrency: USD
           destinationCountry: US
-          destinationBlockchainNetwork: "Ethereum, TRON"
+          destinationBlockchainNetwork: ETHEREUM
           destinationAmount: 1234.111223
         taxes:
         - taxCurrency: USD
@@ -2517,18 +2533,17 @@ components:
           format: date-time
           type: string
         paymentState:
-          description: "Current state of a payment.\n\nThe payment lifecycle currently\
-            \ uses the following values: \n- `QUOTED` \n- `INITIATED` \n- `VALIDATING`\
-            \ \n- `TRANSFERRING` \n- `COMPLETED` \n- `FAILED` \n- `RETURNED` \n- `DECLINED`\
-            \ \n- `AWAITING_FUNDING`\n\nAdditional states may be introduced in the\
-            \ future without breaking existing integrations.\n"
+          description: |
+            Current state of a payment.
+            The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`
+            Additional states may be introduced in the future without breaking existing integrations.
           example: INITIATED
           type: string
           x-enumDescriptions:
             QUOTED: "A quote has been created, but the payment has not yet been initiated."
             INITIATED: The payment has been submitted and is awaiting validation.
             VALIDATING: Ripple is validating the payment details and reserving funds
-              from the originator's available balance.
+              from the originator’s available balance.
             TRANSFERRING: The payment is being processed and funds are moving through
               the network toward the beneficiary.
             COMPLETED: The payment has completed and the beneficiary has received
@@ -2583,8 +2598,8 @@ components:
         paymentLabels:
           description: "Application-defined labels for grouping and categorizing payments\
             \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
-            \ optional and mutable; they can be added or removed over the payment's\
-            \ lifetime."
+            \ optional and mutable; they can be added or removed over the payment’\
+            s lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -2634,18 +2649,17 @@ components:
         updatedAt: 2024-08-13T20:15:50.990995Z
       properties:
         updatedFrom:
-          description: "Current state of a payment.\n\nThe payment lifecycle currently\
-            \ uses the following values: \n- `QUOTED` \n- `INITIATED` \n- `VALIDATING`\
-            \ \n- `TRANSFERRING` \n- `COMPLETED` \n- `FAILED` \n- `RETURNED` \n- `DECLINED`\
-            \ \n- `AWAITING_FUNDING`\n\nAdditional states may be introduced in the\
-            \ future without breaking existing integrations.\n"
+          description: |
+            Current state of a payment.
+            The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`
+            Additional states may be introduced in the future without breaking existing integrations.
           example: INITIATED
           type: string
           x-enumDescriptions:
             QUOTED: "A quote has been created, but the payment has not yet been initiated."
             INITIATED: The payment has been submitted and is awaiting validation.
             VALIDATING: Ripple is validating the payment details and reserving funds
-              from the originator's available balance.
+              from the originator’s available balance.
             TRANSFERRING: The payment is being processed and funds are moving through
               the network toward the beneficiary.
             COMPLETED: The payment has completed and the beneficiary has received
@@ -2666,18 +2680,17 @@ components:
               your Ripple ledger account. This state applies only to just-in-time
               (JIT) funded payments.
         updatedTo:
-          description: "Current state of a payment.\n\nThe payment lifecycle currently\
-            \ uses the following values: \n- `QUOTED` \n- `INITIATED` \n- `VALIDATING`\
-            \ \n- `TRANSFERRING` \n- `COMPLETED` \n- `FAILED` \n- `RETURNED` \n- `DECLINED`\
-            \ \n- `AWAITING_FUNDING`\n\nAdditional states may be introduced in the\
-            \ future without breaking existing integrations.\n"
+          description: |
+            Current state of a payment.
+            The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`
+            Additional states may be introduced in the future without breaking existing integrations.
           example: INITIATED
           type: string
           x-enumDescriptions:
             QUOTED: "A quote has been created, but the payment has not yet been initiated."
             INITIATED: The payment has been submitted and is awaiting validation.
             VALIDATING: Ripple is validating the payment details and reserving funds
-              from the originator's available balance.
+              from the originator’s available balance.
             TRANSFERRING: The payment is being processed and funds are moving through
               the network toward the beneficiary.
             COMPLETED: The payment has completed and the beneficiary has received
@@ -2768,7 +2781,7 @@ components:
             payout: BANK
             destinationCurrency: USD
             destinationCountry: US
-            destinationBlockchainNetwork: "Ethereum, TRON"
+            destinationBlockchainNetwork: ETHEREUM
             destinationAmount: 1234.111223
           taxes:
           - taxCurrency: USD
@@ -2852,7 +2865,7 @@ components:
             payout: BANK
             destinationCurrency: USD
             destinationCountry: US
-            destinationBlockchainNetwork: "Ethereum, TRON"
+            destinationBlockchainNetwork: ETHEREUM
             destinationAmount: 1234.111223
           taxes:
           - taxCurrency: USD
@@ -2957,8 +2970,8 @@ components:
         paymentLabels:
           description: "Application-defined labels for grouping and categorizing payments\
             \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
-            \ optional and mutable; they can be added or removed over the payment's\
-            \ lifetime."
+            \ optional and mutable; they can be added or removed over the payment’\
+            s lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -2967,8 +2980,8 @@ components:
           type: array
         beneficiaryFinancialInstrumentId:
           description: |
-            The financial instrument ID associated with a payment beneficiary's identity.
-            This value must reference a financial instrument created for the same beneficiary identity using Identity Management v3. Use the `financialInstrumentId` returned when you create or fetch the beneficiary's payout instrument.
+            The financial instrument ID associated with a payment beneficiary’s identity.
+            This value must reference a financial instrument created for the same beneficiary identity using Identity Management v3. Use the `financialInstrumentId` returned when you create or fetch the beneficiary’s payout instrument.
           example: 7ea3399c-1234-5678-8d8f-d320ea406630
           type: string
         receiverRelationship:
@@ -2990,18 +3003,17 @@ components:
       - quoteId
       type: object
     PaymentStateV2:
-      description: "Current state of a payment.\n\nThe payment lifecycle currently\
-        \ uses the following values: \n- `QUOTED` \n- `INITIATED` \n- `VALIDATING`\
-        \ \n- `TRANSFERRING` \n- `COMPLETED` \n- `FAILED` \n- `RETURNED` \n- `DECLINED`\
-        \ \n- `AWAITING_FUNDING`\n\nAdditional states may be introduced in the future\
-        \ without breaking existing integrations.\n"
+      description: |
+        Current state of a payment.
+        The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`
+        Additional states may be introduced in the future without breaking existing integrations.
       example: INITIATED
       type: string
       x-enumDescriptions:
         QUOTED: "A quote has been created, but the payment has not yet been initiated."
         INITIATED: The payment has been submitted and is awaiting validation.
         VALIDATING: Ripple is validating the payment details and reserving funds from
-          the originator's available balance.
+          the originator’s available balance.
         TRANSFERRING: The payment is being processed and funds are moving through
           the network toward the beneficiary.
         COMPLETED: The payment has completed and the beneficiary has received the
@@ -3022,12 +3034,10 @@ components:
           payments.
     PaymentSortFieldV2:
       default: initiatedAt
-      description: "The field to use when sorting payments in the requested sort order.\n\
-        \nCurrently supported values include: \n- `internalId` \n- `paymentState`\
-        \ \n- `sourceCurrency` \n- `sourceAmount` \n- `destinationCurrency` \n- `destinationCountry`\
-        \ \n- `destinationAmount` \n- `initiatedAt` \n- `expiresAt` \n- `lastStateUpdatedAt`\
-        \ \n- `paymentLabel`\n\nIf an unsupported value is provided, the request fails\
-        \ with a validation error.\n"
+      description: |
+        The field to use when sorting payments in the requested sort order.
+        Currently supported values include: - `internalId` - `paymentState` - `sourceCurrency` - `sourceAmount` - `destinationCurrency` - `destinationCountry` - `destinationAmount` - `initiatedAt` - `expiresAt` - `lastStateUpdatedAt` - `paymentLabel`
+        If an unsupported value is provided, the request fails with a validation error.
       example: initiatedAt
       type: string
       x-enumDescriptions:
@@ -3099,7 +3109,7 @@ components:
         payout: BANK
         destinationCurrency: USD
         destinationCountry: US
-        destinationBlockchainNetwork: "Ethereum, TRON"
+        destinationBlockchainNetwork: ETHEREUM
         destinationAmount: 1234.111223
       properties:
         beneficiaryFinancialInstrumentId:
@@ -3133,7 +3143,7 @@ components:
         destinationBlockchainNetwork:
           description: The name of the blockchain network on which the beneficiary
             will receive this payment.
-          example: "Ethereum, TRON"
+          example: ETHEREUM
           maxLength: 20
           minLength: 1
           type: string
@@ -3228,7 +3238,7 @@ components:
       properties:
         paymentRailUsed:
           description: |
-            The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP, SEPA).
+            The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP_US, SPEI, FPS_UK).
           example: FEDWIRE
           type: string
         payoutStartTime:
@@ -3320,12 +3330,10 @@ components:
       properties:
         sortField:
           default: initiatedAt
-          description: "The field to use when sorting payments in the requested sort\
-            \ order.\n\nCurrently supported values include: \n- `internalId` \n- `paymentState`\
-            \ \n- `sourceCurrency` \n- `sourceAmount` \n- `destinationCurrency` \n\
-            - `destinationCountry` \n- `destinationAmount` \n- `initiatedAt` \n- `expiresAt`\
-            \ \n- `lastStateUpdatedAt` \n- `paymentLabel`\n\nIf an unsupported value\
-            \ is provided, the request fails with a validation error.\n"
+          description: |
+            The field to use when sorting payments in the requested sort order.
+            Currently supported values include: - `internalId` - `paymentState` - `sourceCurrency` - `sourceAmount` - `destinationCurrency` - `destinationCountry` - `destinationAmount` - `initiatedAt` - `expiresAt` - `lastStateUpdatedAt` - `paymentLabel`
+            If an unsupported value is provided, the request fails with a validation error.
           example: initiatedAt
           type: string
           x-enumDescriptions:
@@ -3395,10 +3403,10 @@ components:
             $ref: '#/components/schemas/PaymentStateV2'
           type: array
         filterRangeType:
-          description: "The type of timestamp to use when filtering payments by a\
-            \ date and time range.\n\nSupported values include: \n- `PAYMENT_CREATION`\
-            \ \n- `PAYMENT_EXPIRY` \n- `PAYMENT_STATUS_LAST_UPDATED`\n\nIf another\
-            \ value is provided, the filter is rejected with a validation error.\n"
+          description: |
+            The type of timestamp to use when filtering payments by a date and time range.
+            Supported values include: - `PAYMENT_CREATION` - `PAYMENT_EXPIRY` - `PAYMENT_STATUS_LAST_UPDATED`
+            If another value is provided, the filter is rejected with a validation error.
           example: PAYMENT_CREATION
           type: string
           x-enumDescriptions:
@@ -3450,8 +3458,8 @@ components:
         paymentLabels:
           description: "Application-defined labels for grouping and categorizing payments\
             \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
-            \ optional and mutable; they can be added or removed over the payment's\
-            \ lifetime."
+            \ optional and mutable; they can be added or removed over the payment’\
+            s lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -3460,10 +3468,10 @@ components:
           type: array
       type: object
     PaymentFilterRangeTypeV2:
-      description: "The type of timestamp to use when filtering payments by a date\
-        \ and time range.\n\nSupported values include: \n- `PAYMENT_CREATION` \n-\
-        \ `PAYMENT_EXPIRY` \n- `PAYMENT_STATUS_LAST_UPDATED`\n\nIf another value is\
-        \ provided, the filter is rejected with a validation error.\n"
+      description: |
+        The type of timestamp to use when filtering payments by a date and time range.
+        Supported values include: - `PAYMENT_CREATION` - `PAYMENT_EXPIRY` - `PAYMENT_STATUS_LAST_UPDATED`
+        If another value is provided, the filter is rejected with a validation error.
       example: PAYMENT_CREATION
       type: string
       x-enumDescriptions:
@@ -3473,7 +3481,7 @@ components:
     PaymentLabels:
       description: "Application-defined labels for grouping and categorizing payments\
         \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional\
-        \ and mutable; they can be added or removed over the payment's lifetime."
+        \ and mutable; they can be added or removed over the payment’s lifetime."
       items:
         example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
         maxLength: 100
@@ -3493,8 +3501,8 @@ components:
         labels:
           description: "Application-defined labels for grouping and categorizing payments\
             \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
-            \ optional and mutable; they can be added or removed over the payment's\
-            \ lifetime."
+            \ optional and mutable; they can be added or removed over the payment’\
+            s lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -3511,8 +3519,8 @@ components:
         labelsToAdd:
           description: "Application-defined labels for grouping and categorizing payments\
             \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
-            \ optional and mutable; they can be added or removed over the payment's\
-            \ lifetime."
+            \ optional and mutable; they can be added or removed over the payment’\
+            s lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -3522,8 +3530,8 @@ components:
         labelsToRemove:
           description: "Application-defined labels for grouping and categorizing payments\
             \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
-            \ optional and mutable; they can be added or removed over the payment's\
-            \ lifetime."
+            \ optional and mutable; they can be added or removed over the payment’\
+            s lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -4105,7 +4113,6 @@ components:
           currency: MXN
           ngBankPayout:
             bankCode: bankCode
-            country: NG
             bankName: bankName
             accountNumber: accountNumber
           financialInstrumentType: BR_PIX
@@ -4172,7 +4179,6 @@ components:
         currency: MXN
         ngBankPayout:
           bankCode: bankCode
-          country: NG
           bankName: bankName
           accountNumber: accountNumber
         financialInstrumentType: BR_PIX
@@ -4287,10 +4293,8 @@ components:
           - BR_TED
           - CO_PSE
           - CA_EFT
-          - US_ACH
           - NG_BANK_PAYOUT
           x-requiredByOriginatorFor:
-          - US_ACH
           - CA_EFT
           - BR_PIX
           - BR_TED
@@ -4398,7 +4402,6 @@ components:
             $ref: '#/components/schemas/individual_identity_identityDocuments_inner'
           type: array
           x-requiredByBeneficiaryFor:
-          - US_ACH
           - BR_PIX
           - BR_TED
           - CO_PSE
@@ -4657,7 +4660,8 @@ components:
           example: mexico bank account
           type: string
         country:
-          description: The country of the financial instrument.
+          description: The 2-letter ISO 3166-1 alpha-2 country code of the financial
+            instrument.
           example: MX
           maxLength: 2
           minLength: 2
@@ -4731,7 +4735,7 @@ components:
           pattern: ^\d+$
           type: string
         accountType:
-          description: The identity's account type.
+          description: The identity’s account type.
           type: string
           x-extensible-enum:
           - CHECKING
@@ -4770,7 +4774,7 @@ components:
             /()-]+(?<![ .,'&\\/-])?$"
           type: string
         bankRoutingNumber:
-          description: 9-digit ABA Routing Transit Number (RTN) of the beneficiary's
+          description: 9-digit ABA Routing Transit Number (RTN) of the beneficiary’s
             bank.
           maxLength: 9
           minLength: 9
@@ -4908,7 +4912,6 @@ components:
         Routing Evaluation Order: Not applicable
       example:
         bankCode: bankCode
-        country: NG
         bankName: bankName
         accountNumber: accountNumber
       properties:
@@ -4932,20 +4935,10 @@ components:
           minLength: 4
           pattern: "^[a-zA-Z0-9]+$"
           type: string
-        country:
-          description: "The country of the identity's bank, using the Alpha-2 code\
-            \ as defined in ISO 3166-1."
-          example: NG
-          type: string
-          x-extensible-enum:
-          - NG
-          x-enumDescriptions:
-            NG: Nigeria
       required:
       - accountNumber
       - bankCode
       - bankName
-      - country
       type: object
     br-pix:
       description: |
@@ -5170,7 +5163,7 @@ components:
           pattern: ^\d+$
           type: string
         accountType:
-          description: The identity's account type.
+          description: The identity’s account type.
           type: string
           x-extensible-enum:
           - CHECKING
@@ -5303,7 +5296,6 @@ components:
         currency: MXN
         ngBankPayout:
           bankCode: bankCode
-          country: NG
           bankName: bankName
           accountNumber: accountNumber
         financialInstrumentType: BR_PIX
@@ -5415,9 +5407,14 @@ components:
           to send.
         DESTINATION_AMOUNT: Specify this value to get a quote for the amount that
           the beneficiary should receive.
-    QuoteCollectionRequest:
+    QuoteCollectionRequestV2:
       additionalProperties: false
-      description: Request to create a quote collection
+      description: |
+        Request to create a quote collection (v2).
+
+        **What's new in v3:**
+        - `payoutCategory` and `destinationBlockchainNetwork` are no longer accepted in requests.
+        - `paymentRail` is added as an optional field in the request to allow filtering quotes by a specific payment rail. When paymentRail is not passed, quotes will be returned for all supported payment rails. For a list of supported values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
       properties:
         quoteAmount:
           description: The amount for which you wish to receive a collection of quotes.
@@ -5451,24 +5448,12 @@ components:
             \ If the beneficiary is an individual, then this value is their country\
             \ of residence. If the beneficiary is an institution, then this value\
             \ is their the country of incorporation."
-          example: PH
+          example: MX
           pattern: "^[a-zA-Z]{2}$"
           type: string
-        payoutCategory:
-          description: The name of the payout category.
-          example: BANK
-          maxLength: 128
-          minLength: 1
-          type: string
-          x-enumDescriptions:
-            BANK: Indicates that the payout will be made in fiat currency to a recipient's
-              bank account through local banking rails.
-            CRYPTO: Indicates that the payout will be made in stablecoin to a recipient's
-              crypto wallet address.
         payinCategory:
           description: The name of the pay in category indicating how this payment
-            will be funded. The values FUNDED and T_PLUS_ONE are deprecated and will
-            be removed in a future release.
+            will be funded.
           example: PRE_FUNDING
           maxLength: 128
           minLength: 1
@@ -5480,26 +5465,30 @@ components:
               outstanding invoice.
             JIT_FUNDING: Indicates that the payment is being made and you will pay
               the outstanding amount before the payment expires.
-            FUNDED: Indicates that the payment is being made from funds you've deposited
-              with Ripple.
-            T_PLUS_ONE: Indicates the payment is being made and you will pay the outstanding
-              invoice.
-        destinationBlockchainNetwork:
-          description: The name of the blockchain network on which the beneficiary
-            will receive this payment.
-          example: Ethereum
-          maxLength: 20
+        paymentRail:
+          description: |
+            The payment rail on which the beneficiary will receive this payment. This value may be used to filter quotes to a specific subset of supported payout rails. If not provided, quotes will be returned for all supported payout rails. For a list of supported values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
+          example: SPEI
+          maxLength: 50
           minLength: 1
           type: string
+          x-enumDescriptions:
+            RTP: Indicates that the payout will be made in fiat currency to a recipient’s
+              bank account through the RTP network.
+            ACH: Indicates that the payout will be made in fiat currency to a recipient’s
+              bank account through the ACH network.
+            WIRE: Indicates that the payout will be made in fiat currency to a recipient’s
+              bank account through the wire transfer network.
+            ETHEREUM: Indicates that the payout will be made in stablecoin to a recipient's
+              Ethereum wallet address.
       required:
       - destinationCurrency
       - payinCategory
-      - payoutCategory
       - quoteAmount
       - quoteAmountType
       - sourceCurrency
       type: object
-    Quote:
+    QuoteV2:
       additionalProperties: false
       example:
         sourceCountry: US
@@ -5508,18 +5497,22 @@ components:
           feeCurrency: USD
           feeBreakdown:
           - feeDescription: The service fee charged for this transaction.
+            paymentRail: SPEI
             calculatedFee: 2.43
             feeName: Service fee
           - feeDescription: The service fee charged for this transaction.
+            paymentRail: SPEI
             calculatedFee: 2.43
             feeName: Service fee
         - totalFee: 12.23
           feeCurrency: USD
           feeBreakdown:
           - feeDescription: The service fee charged for this transaction.
+            paymentRail: SPEI
             calculatedFee: 2.43
             feeName: Service fee
           - feeDescription: The service fee charged for this transaction.
+            paymentRail: SPEI
             calculatedFee: 2.43
             feeName: Service fee
         taxes:
@@ -5548,15 +5541,14 @@ components:
         quoteAmountType: SOURCE_AMOUNT
         sourceCurrency: USD
         destinationCountry: MX
-        destinationBlockchainNetwork: Ethereum
         quoteId: 7ea3399c-1234-5678-8d8f-d320ea406630
         quoteStatus: ACTIVE
         expiresAt: 2023-11-02T18:26:00.000123Z
         createdAt: 2023-11-02T18:26:00.000123Z
         payinCategory: PRE_FUNDING
+        paymentRail: SPEI
         destinationCurrency: MXN
         sourceAmount: 123.45
-        payoutCategory: BANK
         destinationAmount: 2438.19
         adjustedExchangeRate:
           adjustedRate: 2
@@ -5573,20 +5565,14 @@ components:
         quoteAmountType:
           $ref: '#/components/schemas/QuoteAmountType'
         sourceAmount:
-          description: |
-            Amount to be sent by the originator. The value is rounded to the number of decimal
-            places defined by the ISO 4217 standard for the source currency (for example, 2 for
-            USD/EUR, 0 for JPY/KRW, 3 for BHD/KWD), using HALF_UP rounding mode.
+          description: Amount to be sent by the originator.
           example: 123.45
           format: double
           maximum: 100000000
           minimum: 1
           type: number
         destinationAmount:
-          description: |
-            Amount to be received by the beneficiary. The value is rounded to the number of decimal
-            places defined by the ISO 4217 standard for the destination currency (for example, 2 for
-            USD/EUR, 0 for JPY/KRW, 3 for BHD/KWD), using HALF_UP rounding mode.
+          description: Amount to be received by destination
           example: 2438.19
           format: double
           maximum: 100000000
@@ -5616,12 +5602,6 @@ components:
           example: MX
           pattern: "^[a-zA-Z]{2}$"
           type: string
-        payoutCategory:
-          description: Name of the payout category specified in the quote request.
-          example: BANK
-          maxLength: 128
-          minLength: 1
-          type: string
         payinCategory:
           description: The name of payin category specified in the quote request.
           example: PRE_FUNDING
@@ -5633,7 +5613,7 @@ components:
         fees:
           description: A summary of fees included in this quote.
           items:
-            $ref: '#/components/schemas/FeeSummary'
+            $ref: '#/components/schemas/FeeSummaryV2'
           type: array
         taxes:
           description: A summary of taxes included in this quote.
@@ -5654,22 +5634,20 @@ components:
           maxLength: 128
           minLength: 1
           type: string
-        destinationBlockchainNetwork:
-          description: The name of the blockchain network on which the beneficiary
-            will receive this payment.
-          example: Ethereum
-          maxLength: 20
+        paymentRail:
+          description: The payment rail used for this quote.
+          example: SPEI
+          maxLength: 50
           minLength: 1
           type: string
       required:
       - destinationCurrency
       - payinCategory
-      - payoutCategory
       - quoteId
       - quoteStatus
       - sourceCurrency
       type: object
-    QuoteCollection:
+    QuoteCollectionV2:
       additionalProperties: false
       example:
         quoteCollectionId: 11111111-aaaa-2222-bbbb-222222222222
@@ -5680,18 +5658,22 @@ components:
             feeCurrency: USD
             feeBreakdown:
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
           - totalFee: 12.23
             feeCurrency: USD
             feeBreakdown:
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
           taxes:
@@ -5720,15 +5702,14 @@ components:
           quoteAmountType: SOURCE_AMOUNT
           sourceCurrency: USD
           destinationCountry: MX
-          destinationBlockchainNetwork: Ethereum
           quoteId: 7ea3399c-1234-5678-8d8f-d320ea406630
           quoteStatus: ACTIVE
           expiresAt: 2023-11-02T18:26:00.000123Z
           createdAt: 2023-11-02T18:26:00.000123Z
           payinCategory: PRE_FUNDING
+          paymentRail: SPEI
           destinationCurrency: MXN
           sourceAmount: 123.45
-          payoutCategory: BANK
           destinationAmount: 2438.19
           adjustedExchangeRate:
             adjustedRate: 2
@@ -5738,18 +5719,22 @@ components:
             feeCurrency: USD
             feeBreakdown:
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
           - totalFee: 12.23
             feeCurrency: USD
             feeBreakdown:
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
             - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
           taxes:
@@ -5778,15 +5763,14 @@ components:
           quoteAmountType: SOURCE_AMOUNT
           sourceCurrency: USD
           destinationCountry: MX
-          destinationBlockchainNetwork: Ethereum
           quoteId: 7ea3399c-1234-5678-8d8f-d320ea406630
           quoteStatus: ACTIVE
           expiresAt: 2023-11-02T18:26:00.000123Z
           createdAt: 2023-11-02T18:26:00.000123Z
           payinCategory: PRE_FUNDING
+          paymentRail: SPEI
           destinationCurrency: MXN
           sourceAmount: 123.45
-          payoutCategory: BANK
           destinationAmount: 2438.19
           adjustedExchangeRate:
             adjustedRate: 2
@@ -5801,12 +5785,78 @@ components:
         quotes:
           description: List of quotes
           items:
-            $ref: '#/components/schemas/Quote'
+            $ref: '#/components/schemas/QuoteV2'
           minItems: 0
           type: array
       required:
       - quoteCollectionId
       - quotes
+      type: object
+    TotalFeeBreakdownV2:
+      additionalProperties: false
+      description: A breakdown of the total fees included in this quote.
+      example:
+        feeDescription: The service fee charged for this transaction.
+        paymentRail: SPEI
+        calculatedFee: 2.43
+        feeName: Service fee
+      properties:
+        calculatedFee:
+          description: Value of the fee when the configured fee unit is applied against
+            the `value`.
+          example: 2.43
+          format: double
+          type: number
+        feeName:
+          description: The name of the fee.
+          example: Service fee
+          maxLength: 128
+          minLength: 1
+          type: string
+        feeDescription:
+          description: Description of the fee.
+          example: The service fee charged for this transaction.
+          maxLength: 256
+          minLength: 1
+          type: string
+        paymentRail:
+          description: The payment rail associated with this fee line item.
+          example: SPEI
+          maxLength: 30
+          minLength: 1
+          type: string
+      type: object
+    FeeSummaryV2:
+      description: A summary of fees included in this quote.
+      example:
+        totalFee: 12.23
+        feeCurrency: USD
+        feeBreakdown:
+        - feeDescription: The service fee charged for this transaction.
+          paymentRail: SPEI
+          calculatedFee: 2.43
+          feeName: Service fee
+        - feeDescription: The service fee charged for this transaction.
+          paymentRail: SPEI
+          calculatedFee: 2.43
+          feeName: Service fee
+      properties:
+        totalFee:
+          description: The value of the total fee included in this quote.
+          example: 12.23
+          format: double
+          type: number
+        feeCurrency:
+          description: The currency in which fees are charged.
+          example: USD
+          pattern: "^[a-zA-Z]{3,5}$"
+          type: string
+        feeBreakdown:
+          description: An array of fees that provides a breakdown of how the total
+            fees is calculated for this quote.
+          items:
+            $ref: '#/components/schemas/TotalFeeBreakdownV2'
+          type: array
       type: object
     getBalances_200_response_balances_inner:
       description: Customer available prefund balance for specific currency
@@ -5941,6 +5991,66 @@ components:
       - errors
       - status
       type: object
+    getBalances_401_response:
+      example:
+        errors:
+        - code: SYS_003
+          description: "The payout category value must be one of BANK, EWALLET, CASH_PICKUP,\
+            \ or ATM."
+          type: SYSTEM_ERROR
+          title: Internal Server Error
+          timestamp: 2024-01-02T14:16:00Z
+        - code: SYS_003
+          description: "The payout category value must be one of BANK, EWALLET, CASH_PICKUP,\
+            \ or ATM."
+          type: SYSTEM_ERROR
+          title: Internal Server Error
+          timestamp: 2024-01-02T14:16:00Z
+        status: 401
+      properties:
+        status:
+          description: The HTTP status code representing the error response
+          example: 401
+          type: integer
+        errors:
+          description: An array containing details about the errors encountered
+          items:
+            $ref: '#/components/schemas/getBalances_400_response_errors_inner'
+          type: array
+      required:
+      - errors
+      - status
+      type: object
+    getBalances_500_response:
+      example:
+        errors:
+        - code: SYS_003
+          description: "The payout category value must be one of BANK, EWALLET, CASH_PICKUP,\
+            \ or ATM."
+          type: SYSTEM_ERROR
+          title: Internal Server Error
+          timestamp: 2024-01-02T14:16:00Z
+        - code: SYS_003
+          description: "The payout category value must be one of BANK, EWALLET, CASH_PICKUP,\
+            \ or ATM."
+          type: SYSTEM_ERROR
+          title: Internal Server Error
+          timestamp: 2024-01-02T14:16:00Z
+        status: 500
+      properties:
+        status:
+          description: The HTTP status code representing the error response
+          example: 500
+          type: integer
+        errors:
+          description: An array containing details about the errors encountered
+          items:
+            $ref: '#/components/schemas/getBalances_400_response_errors_inner'
+          type: array
+      required:
+      - errors
+      - status
+      type: object
     getStatementsTransactionsForCustomer_200_response_statementTransactions_inner:
       example:
         availableBalanceAfter: 90
@@ -5960,8 +6070,8 @@ components:
           example: rocketfuel
           type: string
         amount:
-          description: |
-            Amount of the transaction applied to the customer's ledger account.
+          description: Amount of the transaction applied to the customer's ledger
+            account.
           example: 100
           type: number
         currency:
@@ -5970,12 +6080,15 @@ components:
           type: string
         txnReference:
           description: |
-            External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types.
+            External reference that links this ledger transaction to a payment or other upstream operation.
+
+            Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID.
+
+            Null for all other operation types.
           nullable: true
           type: string
         operation:
-          description: |
-            Operation performed on the customer's prefunded ledger account.
+          description: Operation performed on the customer's  prefunded ledger account.
           type: string
           x-enumDescriptions:
             CREDIT: Credit to the ledger account.
@@ -5987,8 +6100,8 @@ components:
             VOID_BALANCE: Balance has been voided.
             OVERRIDE_BALANCE: Balance has been overridden.
         txnSource:
-          description: |
-            Source of the ledger transaction (for example, which system or flow created it).
+          description: "Source of the ledger transaction (for example, which system\
+            \ or flow created it)."
           type: string
           x-enumDescriptions:
             PAYMENTS: Created by a payments flow.
@@ -6015,13 +6128,13 @@ components:
           nullable: false
           type: string
         availableBalanceBefore:
-          description: |
-            Available ledger account balance (in the transaction currency) immediately before this transaction was applied.
+          description: Available ledger account balance (in the transaction currency)
+            immediately before this transaction was applied.
           example: 100
           type: number
         availableBalanceAfter:
-          description: |
-            Available ledger account balance (in the transaction currency) immediately after this transaction was applied.
+          description: Available ledger account balance (in the transaction currency)
+            immediately after this transaction was applied.
           example: 90
           type: number
       type: object
@@ -6057,8 +6170,7 @@ components:
         pageSize: 25
       properties:
         offset:
-          description: |
-            Offset used in the request to skip a specific number of records.
+          description: Offset used in the request to skip a specific number of records.
           example: 0
           type: integer
         pageSize:

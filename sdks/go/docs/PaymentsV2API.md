@@ -4,10 +4,10 @@ All URIs are relative to *https://api.test.ripple.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreatePaymentV2**](PaymentsV2API.md#CreatePaymentV2) | **Post** /v3/payments | Create payment
-[**GetPaymentByIdV2**](PaymentsV2API.md#GetPaymentByIdV2) | **Get** /v3/payments/{paymentId} | Get a payment by ID
+[**CreatePaymentV2**](PaymentsV2API.md#CreatePaymentV2) | **Post** /v3/payments | Create payment V2
+[**GetPaymentByIdV2**](PaymentsV2API.md#GetPaymentByIdV2) | **Get** /v3/payments/{paymentId} | Get a payment by ID V2
 [**GetPaymentStateTransitionsByIdV2**](PaymentsV2API.md#GetPaymentStateTransitionsByIdV2) | **Get** /v3/payments/{paymentId}/states | Get state transitions by payment ID
-[**SearchPaymentsV2**](PaymentsV2API.md#SearchPaymentsV2) | **Post** /v3/payments/filter | Search payments
+[**SearchPaymentsV2**](PaymentsV2API.md#SearchPaymentsV2) | **Post** /v3/payments/filter | Search payments V2
 [**UpdatePaymentLabelsV2**](PaymentsV2API.md#UpdatePaymentLabelsV2) | **Patch** /v3/payments/{paymentId}/labels | Update payment labels
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > PaymentV2 CreatePaymentV2(ctx).PaymentRequestV2(paymentRequestV2).Execute()
 
-Create payment
+Create payment V2
 
 
 
@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 
 > PaymentWithDetailsV2 GetPaymentByIdV2(ctx, paymentId).Execute()
 
-Get a payment by ID
+Get a payment by ID V2
 
 
 
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 > PaymentsResponseV2 SearchPaymentsV2(ctx).SearchPaymentsRequestV2(searchPaymentsRequestV2).Execute()
 
-Search payments
+Search payments V2
 
 
 

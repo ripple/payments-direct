@@ -10,7 +10,7 @@ All URIs are relative to *https://api.test.ripple.com*
 # **authenticate**
 > AuthenticationResponse authenticate(authenticationRequest)
 
-Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn\'t fixed, hence it can vary. Avoid validating tokens based on character length.  **Tutorials**  * Learn how to [Request an access token](/products/payments-direct-2/api-docs/tutorials/request-an-access-token).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
+Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn\'t fixed, hence it can vary. Avoid validating tokens based on character length.  **Tutorials**  * Learn how to [Request an access token](../../tutorials/request-an-access-token/).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
 
 ### Example
 

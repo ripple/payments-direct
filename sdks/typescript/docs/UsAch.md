@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **bankName** | **string** | The name of the identity\&#39;s bank | [default to undefined]
 **bankRoutingNumber** | **string** | The identity\&#39;s bank routing number | [default to undefined]
 **accountNumber** | **string** | The identity\&#39;s account number into which the funds must be credited | [default to undefined]
-**accountType** | **string** | The identity\&#39;s account type. | [default to undefined]
+**accountType** | **string** | The identity’s account type. | [default to undefined]
 
 ## Example
 

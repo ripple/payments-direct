@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **financial_instrument_type** | **str** | The type of financial instrument or payment rail used for executing the transaction. This determines the structure and validation of account details required for the payout.  | 
 **currency** | **str** | The 3-letter ISO currency code of the financial instrument. | 
 **label** | **str** | A user-defined label for the financial instrument. | [optional] 
-**country** | **str** | The country of the financial instrument. | [optional] 
+**country** | **str** | The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. | [optional] 
 **created_at** | **datetime** | The time at which the financial instrument was created | [optional] 
 **updated_at** | **datetime** | The time at which the financial instrument was last updated | [optional] 
 

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **bank_name** | **str** | The name of the identity&#39;s bank | 
 **bank_routing_number** | **str** | The identity&#39;s bank routing number | 
 **account_number** | **str** | The identity&#39;s account number into which the funds must be credited | 
-**account_type** | **str** | The identity&#39;s account type. | 
+**account_type** | **str** | The identity’s account type. | 
 
 ## Example
 

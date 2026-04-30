@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **ExpiresAt** | Pointer to **time.Time** | The time at which this payment expires, specified in UTC. | [optional] 
 **JitFundingExpiresAt** | Pointer to **time.Time** | The time at which JIT funding for this payment expires, specified in UTC. | [optional] 
 **LastStateUpdatedAt** | Pointer to **time.Time** | The time at which the payment state was last updated for this payment, specified in UTC. | [optional] 
-**PaymentState** | **string** | Current state of a payment.  The payment lifecycle currently uses the following values:  - &#x60;QUOTED&#x60;  - &#x60;INITIATED&#x60;  - &#x60;VALIDATING&#x60;  - &#x60;TRANSFERRING&#x60;  - &#x60;COMPLETED&#x60;  - &#x60;FAILED&#x60;  - &#x60;RETURNED&#x60;  - &#x60;DECLINED&#x60;  - &#x60;AWAITING_FUNDING&#x60;  Additional states may be introduced in the future without breaking existing integrations.  | 
+**PaymentState** | **string** | Current state of a payment. The payment lifecycle currently uses the following values: - &#x60;QUOTED&#x60; - &#x60;INITIATED&#x60; - &#x60;VALIDATING&#x60; - &#x60;TRANSFERRING&#x60; - &#x60;COMPLETED&#x60; - &#x60;FAILED&#x60; - &#x60;RETURNED&#x60; - &#x60;DECLINED&#x60; - &#x60;AWAITING_FUNDING&#x60; Additional states may be introduced in the future without breaking existing integrations.  | 
 **Originator** | Pointer to [**OriginatorV2**](OriginatorV2.md) |  | [optional] 
 **Destination** | Pointer to [**DestinationV2**](DestinationV2.md) |  | [optional] 
 **AdjustedExchangeRate** | Pointer to [**AdjustedExchangeRate**](AdjustedExchangeRate.md) |  | [optional] 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **PurposeCode** | Pointer to **string** | Purpose Code may be required depending on corridor and payout partner. Valid Purpose Code values vary by corridor. | [optional] 
 **TransactionDetails** | Pointer to [**TransactionDetailsV2**](TransactionDetailsV2.md) |  | [optional] 
 **Errors** | Pointer to [**[]PaymentError**](PaymentError.md) |  | [optional] 
-**PaymentLabels** | Pointer to **[]string** | Application-defined labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment&#39;s lifetime. | [optional] 
+**PaymentLabels** | Pointer to **[]string** | Application-defined labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment’s lifetime. | [optional] 
 **ReceiverRelationship** | Pointer to **string** | The relationship to the debtor. | [optional] 
 **PaymentMemo** | Pointer to **string** | Optional, transaction-specific memo carried with the payment for beneficiary reconciliation. Validation rules (required, allowed characters, max length) vary by corridor. Consult the data requirements for your corridor. Not stored in PII; persisted on the payment object and forwarded to compliance and payout partners. Where possible, the memo will also be delivered to the final beneficiary&#39;s credit record, but delivery cannot be guaranteed in all cases due to payout partner or downstream constraints. If omitted, Ripple may generate a memo automatically.  | [optional] 
 **PayoutExecutionDetails** | Pointer to [**PayoutExecutionDetails**](PayoutExecutionDetails.md) |  | [optional] 

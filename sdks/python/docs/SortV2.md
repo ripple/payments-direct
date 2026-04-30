@@ -6,7 +6,7 @@ Defines the sorting parameters for listing payments, including the field and sor
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**sort_field** | **str** | The field to use when sorting payments in the requested sort order.  Currently supported values include:  - &#x60;internalId&#x60;  - &#x60;paymentState&#x60;  - &#x60;sourceCurrency&#x60;  - &#x60;sourceAmount&#x60;  - &#x60;destinationCurrency&#x60;  - &#x60;destinationCountry&#x60;  - &#x60;destinationAmount&#x60;  - &#x60;initiatedAt&#x60;  - &#x60;expiresAt&#x60;  - &#x60;lastStateUpdatedAt&#x60;  - &#x60;paymentLabel&#x60;  If an unsupported value is provided, the request fails with a validation error.  | [optional] [default to 'initiatedAt']
+**sort_field** | **str** | The field to use when sorting payments in the requested sort order. Currently supported values include: - &#x60;internalId&#x60; - &#x60;paymentState&#x60; - &#x60;sourceCurrency&#x60; - &#x60;sourceAmount&#x60; - &#x60;destinationCurrency&#x60; - &#x60;destinationCountry&#x60; - &#x60;destinationAmount&#x60; - &#x60;initiatedAt&#x60; - &#x60;expiresAt&#x60; - &#x60;lastStateUpdatedAt&#x60; - &#x60;paymentLabel&#x60; If an unsupported value is provided, the request fails with a validation error.  | [optional] [default to 'initiatedAt']
 **sort_direction** | **str** | Indicates whether results are sorted in ascending (&#x60;ASC&#x60;) or descending (&#x60;DESC&#x60;) order. | [optional] [default to 'DESC']
 
 ## Example

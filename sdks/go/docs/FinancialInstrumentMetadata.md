@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **FinancialInstrumentType** | **string** | The type of financial instrument or payment rail used for executing the transaction. This determines the structure and validation of account details required for the payout.  | 
 **Currency** | **string** | The 3-letter ISO currency code of the financial instrument. | 
 **Label** | Pointer to **string** | A user-defined label for the financial instrument. | [optional] 
-**Country** | Pointer to **string** | The country of the financial instrument. | [optional] 
+**Country** | Pointer to **string** | The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The time at which the financial instrument was created | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The time at which the financial instrument was last updated | [optional] 
 

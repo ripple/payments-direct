@@ -92,8 +92,7 @@ Name | Type | Description  | Notes
 
 Get ledger transactions
 
-Retrieve a paginated list of ledger transactions for your tenant within a specified date and time range. This endpoint returns detailed transaction data, including amounts, references, operations, and running balances, so you can reconcile balance changes over time for a given currency.
-
+Retrieve a paginated list of ledger transactions within a specified date and time range. This endpoint returns detailed transaction data, including amounts, references, operations, and running balances.
 
 ### Example
 
@@ -125,13 +124,13 @@ configuration = ripple_payments_direct.Configuration(
 with ripple_payments_direct.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ripple_payments_direct.LedgerPublicApi(api_client)
-    currency = 'USD' # str | Three-letter ISO 4217 currency code for the transactions to return (for example, USD). 
-    start_dttm = '2022-02-27T08:30:00Z' # datetime | Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions. 
-    end_dttm = '2022-02-27T08:30:00Z' # datetime | End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions. 
-    page_size = 25 # int | Number of records to return in the response page. Use page-size together with offset for offset-based pagination  (default to 25)
+    currency = 'USD' # str | Three-letter ISO 4217 currency code for the transactions to return (for example, USD).
+    start_dttm = '2022-02-27T08:30:00Z' # datetime | Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions.
+    end_dttm = '2022-02-27T08:30:00Z' # datetime | End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions.
+    page_size = 25 # int | Number of records to return in the response page. Use page-size together with offset for offset-based pagination (default to 25)
     status = 'status_example' # str | Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  (optional)
-    txn_reference = 'txn_reference_example' # str | Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  (optional)
-    offset = 56 # int | Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, `offset=25&page-size=25` returns the second page of results.  (optional)
+    txn_reference = 'txn_reference_example' # str | Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference. (optional)
+    offset = 56 # int | Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination.  For example, `offset=25&page-size=25` returns the second page of results.  (optional)
     sort_key = 'sort_key_example' # str | Field to use for sorting the results. Allowed values include: - CREATED_AT: sort by transaction creation timestamp. - STATEMENT_OPERATION: sort by the operation type (for example, CREDIT, DEBIT). - STATEMENT_SOURCE: sort by the transaction source (for example, PAYMENTS, BANK). - STATEMENT_STATUS: sort by the ledger transaction status. - STATEMENT_TXN_REFERENCE: sort by the transaction reference. - STATEMENT_UPDATED_AT: sort by the last update timestamp.  (optional)
     sort_direction = 'sort_direction_example' # str | Sort direction. Allowed values: - ASC: ascending order. - DESC: descending order.  (optional)
 
@@ -151,13 +150,13 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **currency** | **str**| Three-letter ISO 4217 currency code for the transactions to return (for example, USD).  | 
- **start_dttm** | **datetime**| Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions.  | 
- **end_dttm** | **datetime**| End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions.  | 
- **page_size** | **int**| Number of records to return in the response page. Use page-size together with offset for offset-based pagination  | [default to 25]
+ **currency** | **str**| Three-letter ISO 4217 currency code for the transactions to return (for example, USD). | 
+ **start_dttm** | **datetime**| Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions. | 
+ **end_dttm** | **datetime**| End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions. | 
+ **page_size** | **int**| Number of records to return in the response page. Use page-size together with offset for offset-based pagination | [default to 25]
  **status** | **str**| Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  | [optional] 
- **txn_reference** | **str**| Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  | [optional] 
- **offset** | **int**| Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, &#x60;offset&#x3D;25&amp;page-size&#x3D;25&#x60; returns the second page of results.  | [optional] 
+ **txn_reference** | **str**| Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference. | [optional] 
+ **offset** | **int**| Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination.  For example, &#x60;offset&#x3D;25&amp;page-size&#x3D;25&#x60; returns the second page of results.  | [optional] 
  **sort_key** | **str**| Field to use for sorting the results. Allowed values include: - CREATED_AT: sort by transaction creation timestamp. - STATEMENT_OPERATION: sort by the operation type (for example, CREDIT, DEBIT). - STATEMENT_SOURCE: sort by the transaction source (for example, PAYMENTS, BANK). - STATEMENT_STATUS: sort by the ledger transaction status. - STATEMENT_TXN_REFERENCE: sort by the transaction reference. - STATEMENT_UPDATED_AT: sort by the last update timestamp.  | [optional] 
  **sort_direction** | **str**| Sort direction. Allowed values: - ASC: ascending order. - DESC: descending order.  | [optional] 
 

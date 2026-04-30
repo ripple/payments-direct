@@ -7,7 +7,7 @@ Rails: FEDWIRE  Rail Definitions:  FEDWIRE:   - Availability: U.S. business days
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bankName** | **string** | The name of the identity\&#39;s bank. | [default to undefined]
-**bankRoutingNumber** | **string** | 9-digit ABA Routing Transit Number (RTN) of the beneficiary\&#39;s bank. | [default to undefined]
+**bankRoutingNumber** | **string** | 9-digit ABA Routing Transit Number (RTN) of the beneficiary’s bank. | [default to undefined]
 **accountNumber** | **string** | The identity\&#39;s account number to be credited. | [default to undefined]
 
 ## Example

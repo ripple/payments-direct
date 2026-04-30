@@ -12,7 +12,7 @@ Rails: EFT  Rail Definitions:  EFT: - Availability: Business days only - Limit: 
 |**institutionNumber** | **String** | The institution number of the identity&#39;s bank |  |
 |**transitNumber** | **String** | The transit number of the identity&#39;s bank account |  |
 |**accountNumber** | **String** | The identity&#39;s account number associated with the Account Identification Scheme |  |
-|**accountType** | **String** | The identity&#39;s account type. |  |
+|**accountType** | **String** | The identity’s account type. |  |
 
 
 

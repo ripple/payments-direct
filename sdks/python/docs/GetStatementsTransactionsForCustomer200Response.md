@@ -6,7 +6,7 @@ A page of ledger statement transactions and pagination metadata.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**offset** | **int** | Offset used in the request to skip a specific number of records.  | [optional] 
+**offset** | **int** | Offset used in the request to skip a specific number of records. | [optional] 
 **page_size** | **int** | Number of records requested per page | [optional] 
 **page_elements** | **int** | Number of records returned in requested page | [optional] 
 **total** | **int** | Total number of records available for the given filters. | [optional] 

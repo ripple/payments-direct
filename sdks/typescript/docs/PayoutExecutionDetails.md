@@ -6,7 +6,7 @@ Metadata about the payout execution, including the payment rail used, timing, an
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**paymentRailUsed** | **string** | The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP, SEPA).  | [optional] [default to undefined]
+**paymentRailUsed** | **string** | The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP_US, SPEI, FPS_UK).  | [optional] [default to undefined]
 **payoutStartTime** | **string** | The time at which the payout execution started, specified in UTC.  | [optional] [default to undefined]
 **payoutEndTime** | **string** | The timestamp when the payout execution completed or was last updated, as reported by the payout partner. Specified in UTC using ISO 8601 format. For in-progress payouts, this may represent the last status update time.  | [optional] [default to undefined]
 **trackingReferences** | [**Array&lt;TrackingReference&gt;**](TrackingReference.md) | A list of tracking references for this transaction, such as transaction IDs and confirmation numbers.  | [optional] [default to undefined]

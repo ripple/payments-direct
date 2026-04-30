@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **BankName** | **string** | The name of the identity&#39;s bank | 
 **BankRoutingNumber** | **string** | The identity&#39;s bank routing number | 
 **AccountNumber** | **string** | The identity&#39;s account number into which the funds must be credited | 
-**AccountType** | **string** | The identity&#39;s account type. | 
+**AccountType** | **string** | The identity’s account type. | 
 
 ## Methods
 
