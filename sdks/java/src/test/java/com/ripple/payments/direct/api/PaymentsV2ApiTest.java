@@ -1,8 +1,8 @@
 /*
  * Payments Direct API
- * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+ * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
  *
- * The version of the OpenAPI document: 2026.04
+ * The version of the OpenAPI document: 2026.03
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -44,9 +44,9 @@ public class PaymentsV2ApiTest {
     private final PaymentsV2Api api = new PaymentsV2Api();
 
     /**
-     * Create payment V2
+     * Create payment
      *
-     * Create a payment  **Tutorial**  * Learn how to [Create a payment](/products/payments-direct-2/api-docs/tutorials/create-a-payment/). 
+     * Initiates a new cross-border payment. Payments are processed asynchronously. Use **Get a payment by ID** to poll for status updates, or **Get state transitions** to view the full status history. 
      *
      * @throws ApiException
      *          if the Api call fails
@@ -59,9 +59,9 @@ public class PaymentsV2ApiTest {
         // TODO: test validations
     }
     /**
-     * Get a payment by ID V2
+     * Get a payment by ID
      *
-     * Gets a payment by ID.
+     * Returns the current status and full details of a payment, including amounts, beneficiary information, and the associated quote.
      *
      * @throws ApiException
      *          if the Api call fails
@@ -76,7 +76,7 @@ public class PaymentsV2ApiTest {
     /**
      * Get state transitions by payment ID
      *
-     * Gets the state transitions for a payment by ID.
+     * Returns the complete state transition history for a payment, including each status change and its timestamp. Use this to audit payment progress or debug processing issues.
      *
      * @throws ApiException
      *          if the Api call fails
@@ -89,9 +89,9 @@ public class PaymentsV2ApiTest {
         // TODO: test validations
     }
     /**
-     * Search payments V2
+     * Search payments
      *
-     * Search for payments based on filtering criteria.
+     * Returns a paginated list of payments matching the specified filters. You can filter by status, date range, destination country, currency, or custom labels.
      *
      * @throws ApiException
      *          if the Api call fails
@@ -106,7 +106,7 @@ public class PaymentsV2ApiTest {
     /**
      * Update payment labels
      *
-     * Add or remove labels for a payment.
+     * Add or remove labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment&#39;s lifetime.
      *
      * @throws ApiException
      *          if the Api call fails

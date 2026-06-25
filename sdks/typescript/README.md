@@ -1,4 +1,4 @@
-## @ripple/payments-direct-client@2026.04
+## @ripple/payments-direct-client@2026.03
 
 This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
@@ -36,7 +36,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @ripple/payments-direct-client@2026.04 --save
+npm install @ripple/payments-direct-client@2026.03 --save
 ```
 
 _unPublished (not recommended):_
@@ -53,27 +53,27 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AuthenticationApi* | [**authenticate**](docs/AuthenticationApi.md#authenticate) | **POST** /v2/oauth/token | Request an access token
 *AuthenticationApi* | [**testAuthToken**](docs/AuthenticationApi.md#testauthtoken) | **GET** /v2/oauth/token/test | Test access token
-*IdentitiesV3Api* | [**createFinancialInstrument**](docs/IdentitiesV3Api.md#createfinancialinstrument) | **POST** /v3/identities/{identity-id}/financial-instruments | Add a financial instrument (v3)
-*IdentitiesV3Api* | [**createIdentity**](docs/IdentitiesV3Api.md#createidentity) | **POST** /v3/identities | Create an identity (v3)
-*IdentitiesV3Api* | [**deactivateFinancialInstrumentV3**](docs/IdentitiesV3Api.md#deactivatefinancialinstrumentv3) | **DELETE** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Deactivate a Financial Instrument (v3)
-*IdentitiesV3Api* | [**deactivateIdentityV3**](docs/IdentitiesV3Api.md#deactivateidentityv3) | **DELETE** /v3/identities/{identity-id} | Deactivate an identity (v3)
-*IdentitiesV3Api* | [**getFinancialInstrumentById**](docs/IdentitiesV3Api.md#getfinancialinstrumentbyid) | **GET** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Get a financial instrument by ID (v3)
-*IdentitiesV3Api* | [**getFinancialInstruments**](docs/IdentitiesV3Api.md#getfinancialinstruments) | **GET** /v3/identities/{identity-id}/financial-instruments | Get a list of financial instruments of the identity (v3)
-*IdentitiesV3Api* | [**getIdentities**](docs/IdentitiesV3Api.md#getidentities) | **GET** /v3/identities | Get a list of identities (v3)
-*IdentitiesV3Api* | [**getIdentityById**](docs/IdentitiesV3Api.md#getidentitybyid) | **GET** /v3/identities/{identity-id} | Get an identity by ID (v3)
-*IdentitiesV3Api* | [**getIdentityByInternalId**](docs/IdentitiesV3Api.md#getidentitybyinternalid) | **GET** /v3/identities/by-internal-id/{internal-id} | Get an identity by Internal ID (v3)
-*IdentitiesV3Api* | [**putFinancialInstrument**](docs/IdentitiesV3Api.md#putfinancialinstrument) | **PUT** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Update a financial instrument (v3)
-*IdentitiesV3Api* | [**putIdentity**](docs/IdentitiesV3Api.md#putidentity) | **PUT** /v3/identities/{identity-id} | Update an identity (v3)
+*IdentitiesV3Api* | [**createFinancialInstrument**](docs/IdentitiesV3Api.md#createfinancialinstrument) | **POST** /v3/identities/{identity-id}/financial-instruments | Add a financial instrument
+*IdentitiesV3Api* | [**createIdentity**](docs/IdentitiesV3Api.md#createidentity) | **POST** /v3/identities | Create an identity
+*IdentitiesV3Api* | [**deactivateFinancialInstrumentV3**](docs/IdentitiesV3Api.md#deactivatefinancialinstrumentv3) | **DELETE** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Deactivate a Financial Instrument
+*IdentitiesV3Api* | [**deactivateIdentityV3**](docs/IdentitiesV3Api.md#deactivateidentityv3) | **DELETE** /v3/identities/{identity-id} | Deactivate an identity
+*IdentitiesV3Api* | [**getFinancialInstrumentById**](docs/IdentitiesV3Api.md#getfinancialinstrumentbyid) | **GET** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Get a financial instrument by ID
+*IdentitiesV3Api* | [**getFinancialInstruments**](docs/IdentitiesV3Api.md#getfinancialinstruments) | **GET** /v3/identities/{identity-id}/financial-instruments | Get a list of financial instruments of the identity
+*IdentitiesV3Api* | [**getIdentities**](docs/IdentitiesV3Api.md#getidentities) | **GET** /v3/identities | Get a list of identities
+*IdentitiesV3Api* | [**getIdentityById**](docs/IdentitiesV3Api.md#getidentitybyid) | **GET** /v3/identities/{identity-id} | Get an identity by ID
+*IdentitiesV3Api* | [**getIdentityByInternalId**](docs/IdentitiesV3Api.md#getidentitybyinternalid) | **GET** /v3/identities/by-internal-id/{internal-id} | Get an identity by Internal ID
+*IdentitiesV3Api* | [**putFinancialInstrument**](docs/IdentitiesV3Api.md#putfinancialinstrument) | **PUT** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Update a financial instrument
+*IdentitiesV3Api* | [**putIdentity**](docs/IdentitiesV3Api.md#putidentity) | **PUT** /v3/identities/{identity-id} | Update an identity
 *LedgerPublicApi* | [**getBalances**](docs/LedgerPublicApi.md#getbalances) | **GET** /v2/balances | Get available balances
 *LedgerPublicApi* | [**getStatementsTransactionsForCustomer**](docs/LedgerPublicApi.md#getstatementstransactionsforcustomer) | **GET** /v2/ledger-transactions | Get ledger transactions
-*PaymentsV2Api* | [**createPaymentV2**](docs/PaymentsV2Api.md#createpaymentv2) | **POST** /v3/payments | Create payment V2
-*PaymentsV2Api* | [**getPaymentByIdV2**](docs/PaymentsV2Api.md#getpaymentbyidv2) | **GET** /v3/payments/{paymentId} | Get a payment by ID V2
+*PaymentsV2Api* | [**createPaymentV2**](docs/PaymentsV2Api.md#createpaymentv2) | **POST** /v3/payments | Create payment
+*PaymentsV2Api* | [**getPaymentByIdV2**](docs/PaymentsV2Api.md#getpaymentbyidv2) | **GET** /v3/payments/{paymentId} | Get a payment by ID
 *PaymentsV2Api* | [**getPaymentStateTransitionsByIdV2**](docs/PaymentsV2Api.md#getpaymentstatetransitionsbyidv2) | **GET** /v3/payments/{paymentId}/states | Get state transitions by payment ID
-*PaymentsV2Api* | [**searchPaymentsV2**](docs/PaymentsV2Api.md#searchpaymentsv2) | **POST** /v3/payments/filter | Search payments V2
+*PaymentsV2Api* | [**searchPaymentsV2**](docs/PaymentsV2Api.md#searchpaymentsv2) | **POST** /v3/payments/filter | Search payments
 *PaymentsV2Api* | [**updatePaymentLabelsV2**](docs/PaymentsV2Api.md#updatepaymentlabelsv2) | **PATCH** /v3/payments/{paymentId}/labels | Update payment labels
-*QuoteApi* | [**createQuoteCollectionV2**](docs/QuoteApi.md#createquotecollectionv2) | **POST** /v3/quotes/quote-collection | Create quote collection
-*QuoteApi* | [**getQuoteCollectionV2**](docs/QuoteApi.md#getquotecollectionv2) | **GET** /v3/quotes/quote-collection/{quote-collection-id} | Get quote collection
-*QuoteApi* | [**getQuoteV2**](docs/QuoteApi.md#getquotev2) | **GET** /v3/quotes/{quote-id} | Get a quote
+*QuoteApi* | [**createQuoteCollection**](docs/QuoteApi.md#createquotecollection) | **POST** /v2/quotes/quote-collection | Create quote collection
+*QuoteApi* | [**getQuote**](docs/QuoteApi.md#getquote) | **GET** /v2/quotes/{quote-id} | Get quote
+*QuoteApi* | [**getQuoteCollection**](docs/QuoteApi.md#getquotecollection) | **GET** /v2/quotes/quote-collection/{quote-collection-id} | Get quote collection
 
 
 ### Documentation For Models
@@ -87,27 +87,31 @@ Class | Method | HTTP request | Description
  - [BusinessIdentityAddress](docs/BusinessIdentityAddress.md)
  - [BusinessIdentityRegistrationInner](docs/BusinessIdentityRegistrationInner.md)
  - [CaEft](docs/CaEft.md)
+ - [CnCfxps](docs/CnCfxps.md)
+ - [CnIndividual](docs/CnIndividual.md)
+ - [CnIndividualTrade](docs/CnIndividualTrade.md)
+ - [CnTrade](docs/CnTrade.md)
  - [CoPse](docs/CoPse.md)
  - [CreateFinancialInstrumentResponse](docs/CreateFinancialInstrumentResponse.md)
  - [CreateIdentityRequestV3](docs/CreateIdentityRequestV3.md)
  - [CreateIdentityResponseV3](docs/CreateIdentityResponseV3.md)
  - [DestinationV2](docs/DestinationV2.md)
  - [ErrorResponse](docs/ErrorResponse.md)
+ - [EthWallet](docs/EthWallet.md)
  - [EuSepa](docs/EuSepa.md)
  - [FeeSummary](docs/FeeSummary.md)
- - [FeeSummaryV2](docs/FeeSummaryV2.md)
  - [FinancialInstrumentMetadata](docs/FinancialInstrumentMetadata.md)
  - [GbFps](docs/GbFps.md)
  - [GetBalances200Response](docs/GetBalances200Response.md)
  - [GetBalances200ResponseBalancesInner](docs/GetBalances200ResponseBalancesInner.md)
  - [GetBalances400Response](docs/GetBalances400Response.md)
  - [GetBalances400ResponseErrorsInner](docs/GetBalances400ResponseErrorsInner.md)
- - [GetBalances401Response](docs/GetBalances401Response.md)
- - [GetBalances500Response](docs/GetBalances500Response.md)
  - [GetFinancialInstrumentResponse](docs/GetFinancialInstrumentResponse.md)
  - [GetIdentityResponseV3](docs/GetIdentityResponseV3.md)
  - [GetStatementsTransactionsForCustomer200Response](docs/GetStatementsTransactionsForCustomer200Response.md)
  - [GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner](docs/GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner.md)
+ - [GhBankPayout](docs/GhBankPayout.md)
+ - [HkBankPayout](docs/HkBankPayout.md)
  - [IdentityResponseV3](docs/IdentityResponseV3.md)
  - [IndividualIdentity](docs/IndividualIdentity.md)
  - [IndividualIdentityAddress](docs/IndividualIdentityAddress.md)
@@ -131,32 +135,37 @@ Class | Method | HTTP request | Description
  - [PutIdentityRequestV3](docs/PutIdentityRequestV3.md)
  - [PutRippleFinancialInstrument](docs/PutRippleFinancialInstrument.md)
  - [PutRippleIdentity](docs/PutRippleIdentity.md)
+ - [Quote](docs/Quote.md)
  - [QuoteAmountType](docs/QuoteAmountType.md)
- - [QuoteCollectionRequestV2](docs/QuoteCollectionRequestV2.md)
- - [QuoteCollectionV2](docs/QuoteCollectionV2.md)
+ - [QuoteCollection](docs/QuoteCollection.md)
+ - [QuoteCollectionRequest](docs/QuoteCollectionRequest.md)
  - [QuoteError](docs/QuoteError.md)
  - [QuoteErrorResponse](docs/QuoteErrorResponse.md)
  - [QuoteStatus](docs/QuoteStatus.md)
- - [QuoteV2](docs/QuoteV2.md)
  - [RippleFinancialInstrument](docs/RippleFinancialInstrument.md)
  - [RippleFinancialInstrumentEntry](docs/RippleFinancialInstrumentEntry.md)
  - [RippleIdentity](docs/RippleIdentity.md)
+ - [RwBankPayout](docs/RwBankPayout.md)
  - [SearchPaymentsRequestV2](docs/SearchPaymentsRequestV2.md)
+ - [SolWallet](docs/SolWallet.md)
  - [SortV2](docs/SortV2.md)
  - [StateTransitionV2](docs/StateTransitionV2.md)
  - [StateTransitionsResponseV2](docs/StateTransitionsResponseV2.md)
  - [TaxBreakdown](docs/TaxBreakdown.md)
  - [TaxSummary](docs/TaxSummary.md)
  - [TotalFeeBreakdown](docs/TotalFeeBreakdown.md)
- - [TotalFeeBreakdownV2](docs/TotalFeeBreakdownV2.md)
  - [TrackingReference](docs/TrackingReference.md)
  - [TransactionDetailsV2](docs/TransactionDetailsV2.md)
+ - [TronWallet](docs/TronWallet.md)
+ - [UgBankPayout](docs/UgBankPayout.md)
  - [UpdateFinancialInstrumentResponse](docs/UpdateFinancialInstrumentResponse.md)
  - [UpdatePaymentLabelsRequest](docs/UpdatePaymentLabelsRequest.md)
  - [UpdatePaymentLabelsResponse](docs/UpdatePaymentLabelsResponse.md)
  - [UsAch](docs/UsAch.md)
  - [UsFedwire](docs/UsFedwire.md)
  - [ValidateTokenResponse](docs/ValidateTokenResponse.md)
+ - [ZaBankPayout](docs/ZaBankPayout.md)
+ - [ZmBankPayout](docs/ZmBankPayout.md)
 
 
 <a id="documentation-for-authorization"></a>

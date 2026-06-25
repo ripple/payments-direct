@@ -4,23 +4,19 @@ All URIs are relative to *https://api.test.ripple.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_payment_v2**](PaymentsV2Api.md#create_payment_v2) | **POST** /v3/payments | Create payment V2
-[**get_payment_by_id_v2**](PaymentsV2Api.md#get_payment_by_id_v2) | **GET** /v3/payments/{paymentId} | Get a payment by ID V2
+[**create_payment_v2**](PaymentsV2Api.md#create_payment_v2) | **POST** /v3/payments | Create payment
+[**get_payment_by_id_v2**](PaymentsV2Api.md#get_payment_by_id_v2) | **GET** /v3/payments/{paymentId} | Get a payment by ID
 [**get_payment_state_transitions_by_id_v2**](PaymentsV2Api.md#get_payment_state_transitions_by_id_v2) | **GET** /v3/payments/{paymentId}/states | Get state transitions by payment ID
-[**search_payments_v2**](PaymentsV2Api.md#search_payments_v2) | **POST** /v3/payments/filter | Search payments V2
+[**search_payments_v2**](PaymentsV2Api.md#search_payments_v2) | **POST** /v3/payments/filter | Search payments
 [**update_payment_labels_v2**](PaymentsV2Api.md#update_payment_labels_v2) | **PATCH** /v3/payments/{paymentId}/labels | Update payment labels
 
 
 # **create_payment_v2**
 > PaymentV2 create_payment_v2(payment_request_v2)
 
-Create payment V2
+Create payment
 
-Create a payment
-
-**Tutorial**
-
-* Learn how to [Create a payment](/products/payments-direct-2/api-docs/tutorials/create-a-payment/).
+Initiates a new cross-border payment. Payments are processed asynchronously. Use **Get a payment by ID** to poll for status updates, or **Get state transitions** to view the full status history.
 
 
 ### Example
@@ -57,7 +53,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     payment_request_v2 = ripple_payments_direct.PaymentRequestV2() # PaymentRequestV2 | create payment request
 
     try:
-        # Create payment V2
+        # Create payment
         api_response = api_instance.create_payment_v2(payment_request_v2)
         print("The response of PaymentsV2Api->create_payment_v2:\n")
         pprint(api_response)
@@ -101,9 +97,9 @@ Name | Type | Description  | Notes
 # **get_payment_by_id_v2**
 > PaymentWithDetailsV2 get_payment_by_id_v2(payment_id)
 
-Get a payment by ID V2
+Get a payment by ID
 
-Gets a payment by ID.
+Returns the current status and full details of a payment, including amounts, beneficiary information, and the associated quote.
 
 ### Example
 
@@ -138,7 +134,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     payment_id = '7ea3399c-1234-5678-8d8f-d320ea406630' # str | Unique identifier of the payment to get.
 
     try:
-        # Get a payment by ID V2
+        # Get a payment by ID
         api_response = api_instance.get_payment_by_id_v2(payment_id)
         print("The response of PaymentsV2Api->get_payment_by_id_v2:\n")
         pprint(api_response)
@@ -184,7 +180,7 @@ Name | Type | Description  | Notes
 
 Get state transitions by payment ID
 
-Gets the state transitions for a payment by ID.
+Returns the complete state transition history for a payment, including each status change and its timestamp. Use this to audit payment progress or debug processing issues.
 
 ### Example
 
@@ -263,9 +259,9 @@ Name | Type | Description  | Notes
 # **search_payments_v2**
 > PaymentsResponseV2 search_payments_v2(search_payments_request_v2)
 
-Search payments V2
+Search payments
 
-Search for payments based on filtering criteria.
+Returns a paginated list of payments matching the specified filters. You can filter by status, date range, destination country, currency, or custom labels.
 
 ### Example
 
@@ -301,7 +297,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     search_payments_request_v2 = ripple_payments_direct.SearchPaymentsRequestV2() # SearchPaymentsRequestV2 | Search payments request
 
     try:
-        # Search payments V2
+        # Search payments
         api_response = api_instance.search_payments_v2(search_payments_request_v2)
         print("The response of PaymentsV2Api->search_payments_v2:\n")
         pprint(api_response)
@@ -346,7 +342,7 @@ Name | Type | Description  | Notes
 
 Update payment labels
 
-Add or remove labels for a payment.
+Add or remove labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment's lifetime.
 
 ### Example
 

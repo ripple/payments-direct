@@ -4,9 +4,9 @@
 """
     Payments Direct API
 
-    Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+    Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
 
-    The version of the OpenAPI document: 2026.04
+    The version of the OpenAPI document: 2026.03
     Generated by OpenAPI Generator (https://openapi-generator.tech)
 
     Do not edit the class manually.
@@ -23,6 +23,10 @@ from ripple_payments_direct.models.business_identity import BusinessIdentity
 from ripple_payments_direct.models.business_identity_address import BusinessIdentityAddress
 from ripple_payments_direct.models.business_identity_registration_inner import BusinessIdentityRegistrationInner
 from ripple_payments_direct.models.ca_eft import CaEft
+from ripple_payments_direct.models.cn_cfxps import CnCfxps
+from ripple_payments_direct.models.cn_individual import CnIndividual
+from ripple_payments_direct.models.cn_individual_trade import CnIndividualTrade
+from ripple_payments_direct.models.cn_trade import CnTrade
 from ripple_payments_direct.models.co_pse import CoPse
 from ripple_payments_direct.models.create_financial_instrument_response import CreateFinancialInstrumentResponse
 from ripple_payments_direct.models.create_identity_request_v3 import CreateIdentityRequestV3
@@ -30,21 +34,21 @@ from ripple_payments_direct.models.create_identity_response_v3 import CreateIden
 from ripple_payments_direct.models.destination_v2 import DestinationV2
 from ripple_payments_direct.models.error import Error
 from ripple_payments_direct.models.error_response import ErrorResponse
+from ripple_payments_direct.models.eth_wallet import EthWallet
 from ripple_payments_direct.models.eu_sepa import EuSepa
 from ripple_payments_direct.models.fee_summary import FeeSummary
-from ripple_payments_direct.models.fee_summary_v2 import FeeSummaryV2
 from ripple_payments_direct.models.financial_instrument_metadata import FinancialInstrumentMetadata
 from ripple_payments_direct.models.gb_fps import GbFps
 from ripple_payments_direct.models.get_balances200_response import GetBalances200Response
 from ripple_payments_direct.models.get_balances200_response_balances_inner import GetBalances200ResponseBalancesInner
 from ripple_payments_direct.models.get_balances400_response import GetBalances400Response
 from ripple_payments_direct.models.get_balances400_response_errors_inner import GetBalances400ResponseErrorsInner
-from ripple_payments_direct.models.get_balances401_response import GetBalances401Response
-from ripple_payments_direct.models.get_balances500_response import GetBalances500Response
 from ripple_payments_direct.models.get_financial_instrument_response import GetFinancialInstrumentResponse
 from ripple_payments_direct.models.get_identity_response_v3 import GetIdentityResponseV3
 from ripple_payments_direct.models.get_statements_transactions_for_customer200_response import GetStatementsTransactionsForCustomer200Response
 from ripple_payments_direct.models.get_statements_transactions_for_customer200_response_statement_transactions_inner import GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner
+from ripple_payments_direct.models.gh_bank_payout import GhBankPayout
+from ripple_payments_direct.models.hk_bank_payout import HkBankPayout
 from ripple_payments_direct.models.identity_response_v3 import IdentityResponseV3
 from ripple_payments_direct.models.individual_identity import IndividualIdentity
 from ripple_payments_direct.models.individual_identity_address import IndividualIdentityAddress
@@ -67,29 +71,34 @@ from ripple_payments_direct.models.payout_execution_details import PayoutExecuti
 from ripple_payments_direct.models.put_identity_request_v3 import PutIdentityRequestV3
 from ripple_payments_direct.models.put_ripple_financial_instrument import PutRippleFinancialInstrument
 from ripple_payments_direct.models.put_ripple_identity import PutRippleIdentity
+from ripple_payments_direct.models.quote import Quote
 from ripple_payments_direct.models.quote_amount_type import QuoteAmountType
-from ripple_payments_direct.models.quote_collection_request_v2 import QuoteCollectionRequestV2
-from ripple_payments_direct.models.quote_collection_v2 import QuoteCollectionV2
+from ripple_payments_direct.models.quote_collection import QuoteCollection
+from ripple_payments_direct.models.quote_collection_request import QuoteCollectionRequest
 from ripple_payments_direct.models.quote_error import QuoteError
 from ripple_payments_direct.models.quote_error_response import QuoteErrorResponse
 from ripple_payments_direct.models.quote_status import QuoteStatus
-from ripple_payments_direct.models.quote_v2 import QuoteV2
 from ripple_payments_direct.models.ripple_financial_instrument import RippleFinancialInstrument
 from ripple_payments_direct.models.ripple_financial_instrument_entry import RippleFinancialInstrumentEntry
 from ripple_payments_direct.models.ripple_identity import RippleIdentity
+from ripple_payments_direct.models.rw_bank_payout import RwBankPayout
 from ripple_payments_direct.models.search_payments_request_v2 import SearchPaymentsRequestV2
+from ripple_payments_direct.models.sol_wallet import SolWallet
 from ripple_payments_direct.models.sort_v2 import SortV2
 from ripple_payments_direct.models.state_transition_v2 import StateTransitionV2
 from ripple_payments_direct.models.state_transitions_response_v2 import StateTransitionsResponseV2
 from ripple_payments_direct.models.tax_breakdown import TaxBreakdown
 from ripple_payments_direct.models.tax_summary import TaxSummary
 from ripple_payments_direct.models.total_fee_breakdown import TotalFeeBreakdown
-from ripple_payments_direct.models.total_fee_breakdown_v2 import TotalFeeBreakdownV2
 from ripple_payments_direct.models.tracking_reference import TrackingReference
 from ripple_payments_direct.models.transaction_details_v2 import TransactionDetailsV2
+from ripple_payments_direct.models.tron_wallet import TronWallet
+from ripple_payments_direct.models.ug_bank_payout import UgBankPayout
 from ripple_payments_direct.models.update_financial_instrument_response import UpdateFinancialInstrumentResponse
 from ripple_payments_direct.models.update_payment_labels_request import UpdatePaymentLabelsRequest
 from ripple_payments_direct.models.update_payment_labels_response import UpdatePaymentLabelsResponse
 from ripple_payments_direct.models.us_ach import UsAch
 from ripple_payments_direct.models.us_fedwire import UsFedwire
 from ripple_payments_direct.models.validate_token_response import ValidateTokenResponse
+from ripple_payments_direct.models.za_bank_payout import ZaBankPayout
+from ripple_payments_direct.models.zm_bank_payout import ZmBankPayout

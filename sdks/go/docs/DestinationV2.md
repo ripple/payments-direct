@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **BeneficiaryIdentityVersion** | Pointer to **int32** | The current version of the beneficiary&#39;s identity record. | [optional] 
 **BeneficiaryIdentityNickName** | Pointer to **string** | Nickname associated with the beneficiary&#39;s identity record. | [optional] 
 **Payout** | Pointer to **string** | The payout category for this payment. | [optional] 
+**SelectedPaymentRail** | Pointer to **string** | The payment rail the customer selected when accepting the quote for this payment. Reflects the intended routing at the time of quote acceptance. For the rail confirmed by the payout partner at execution time, see &#x60;payoutExecutionDetails.paymentRailUsed&#x60;. These values may differ if the payout partner executed on an alternate rail.  | [optional] 
 
 ## Methods
 
@@ -257,6 +258,31 @@ SetPayout sets Payout field to given value.
 `func (o *DestinationV2) HasPayout() bool`
 
 HasPayout returns a boolean if a field has been set.
+
+### GetSelectedPaymentRail
+
+`func (o *DestinationV2) GetSelectedPaymentRail() string`
+
+GetSelectedPaymentRail returns the SelectedPaymentRail field if non-nil, zero value otherwise.
+
+### GetSelectedPaymentRailOk
+
+`func (o *DestinationV2) GetSelectedPaymentRailOk() (*string, bool)`
+
+GetSelectedPaymentRailOk returns a tuple with the SelectedPaymentRail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSelectedPaymentRail
+
+`func (o *DestinationV2) SetSelectedPaymentRail(v string)`
+
+SetSelectedPaymentRail sets SelectedPaymentRail field to given value.
+
+### HasSelectedPaymentRail
+
+`func (o *DestinationV2) HasSelectedPaymentRail() bool`
+
+HasSelectedPaymentRail returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

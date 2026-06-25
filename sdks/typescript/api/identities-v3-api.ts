@@ -2,9 +2,9 @@
 /* eslint-disable */
 /**
  * Payments Direct API
- * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you\'re using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization\'s security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization\'s security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+ * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you\'re using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization\'s security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization\'s security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
  *
- * The version of the OpenAPI document: 2026.04
+ * The version of the OpenAPI document: 2026.03
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -52,8 +52,8 @@ import type { UpdateFinancialInstrumentResponse } from '../models';
 export const IdentitiesV3ApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address). In the current release, each identity can have **one** financial instrument. Future releases will support multiple instruments per identity. 
-         * @summary Add a financial instrument (v3)
+         * Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address).  In the current release, each identity can have **one** financial instrument.  Future releases will support multiple instruments per identity. 
+         * @summary Add a financial instrument
          * @param {string} identityId Unique identifier of the identity that will own the financial instrument.
          * @param {RippleFinancialInstrument} rippleFinancialInstrument 
          * @param {*} [options] Override http request option.
@@ -96,8 +96,8 @@ export const IdentitiesV3ApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Create a new payment identity as an ORIGINATOR or BENEFICIARY for either an INDIVIDUAL or BUSINESS. The request body must follow the v3 identity schema and will be validated against corridor rules where applicable. On success, the API returns the new identityId and its initial version. 
-         * @summary Create an identity (v3)
+         * Create a new payment identity as an `ORIGINATOR` or `BENEFICIARY` for either an `INDIVIDUAL` or `BUSINESS`.  The request body must follow the v3 identity schema and will be validated against corridor rules where applicable.  On success, the API returns the new `identityId` and its initial version. 
+         * @summary Create an identity
          * @param {CreateIdentityRequestV3} createIdentityRequestV3 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -136,8 +136,8 @@ export const IdentitiesV3ApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Deactivate a financial instrument of an Identity. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
-         * @summary Deactivate a Financial Instrument (v3)
+         * Deactivate a financial instrument of an Identity.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
+         * @summary Deactivate a Financial Instrument
          * @param {string} identityId The unique ID of the identity.
          * @param {string} financialInstrumentId The ID of the financial instrument to deactivate.
          * @param {*} [options] Override http request option.
@@ -178,8 +178,8 @@ export const IdentitiesV3ApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Deactivate an identity and its financial instruments. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
-         * @summary Deactivate an identity (v3)
+         * Deactivate an identity and its financial instruments.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
+         * @summary Deactivate an identity
          * @param {string} identityId ID of the identity to deactivate.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -216,8 +216,8 @@ export const IdentitiesV3ApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Retrieves one financial instrument associated with the specified identity. In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
-         * @summary Get a financial instrument by ID (v3)
+         * Retrieves one financial instrument associated with the specified identity.  In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
+         * @summary Get a financial instrument by ID
          * @param {string} identityId Unique identifier of the identity whose instruments you want to list.
          * @param {string} financialInstrumentId The ID of the financial instrument of the identity.
          * @param {string} [version] Version of the identity
@@ -269,7 +269,7 @@ export const IdentitiesV3ApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * List financial instruments for an identity.
-         * @summary Get a list of financial instruments of the identity (v3)
+         * @summary Get a list of financial instruments of the identity
          * @param {string} identityId Unique UUID string that maps to an identity
          * @param {string} [version] Version of the identity
          * @param {string} [nextToken] The token to use for the next page of results. If provided, the API will return financial instruments after this token.
@@ -321,8 +321,8 @@ export const IdentitiesV3ApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Retrieve identities for your tenant with optional filters. Use `limit` and `next-token` for pagination. The response includes a `data` array and an optional `nextToken`. 
-         * @summary Get a list of identities (v3)
+         * Retrieve identities for your tenant with optional filters.  Use `limit` and `next-token` for pagination. The response includes a `data` array and an optional `nextToken`. 
+         * @summary Get a list of identities
          * @param {string} [paymentRole] Filter by payment role.
          * @param {string} [nickName] Filter by nickname.
          * @param {number} [limit] Maximum number of identities to return. Default value is 10, maximum is 100.
@@ -375,8 +375,8 @@ export const IdentitiesV3ApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Retrieve a specific identity by ID. If `version` is not provided, the latest version is returned. 
-         * @summary Get an identity by ID (v3)
+         * Retrieve a specific identity by ID.  If `version` is not provided, the latest version is returned. 
+         * @summary Get an identity by ID
          * @param {string} identityId The ID of the identity to retrieve.
          * @param {string} [version] Specific version to retrieve. If omitted, returns the latest version.
          * @param {*} [options] Override http request option.
@@ -419,7 +419,7 @@ export const IdentitiesV3ApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * Retrieve a specific identity by its internal ID.  **Behavior:** - Only returns identities in the `ACTIVE` state. Deactivated identities will result in an error. - Always returns the latest version of the identity. Historical versions are not accessible through this endpoint. - If no active identity exists for the given `internal-id`, a 404 is returned. 
-         * @summary Get an identity by Internal ID (v3)
+         * @summary Get an identity by Internal ID
          * @param {string} internalId The Internal ID of the identity to retrieve.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -456,8 +456,8 @@ export const IdentitiesV3ApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Update editable fields of a financial instrument including rail-specific details and labels. The financialInstrumentType is immutable after creation. 
-         * @summary Update a financial instrument (v3)
+         * Update editable fields of a financial instrument including rail-specific details and labels.  The financialInstrumentType is immutable after creation. 
+         * @summary Update a financial instrument
          * @param {string} identityId The unique ID of the identity.
          * @param {string} financialInstrumentId The ID of the financial instrument to update.
          * @param {PutRippleFinancialInstrument} putRippleFinancialInstrument 
@@ -504,8 +504,8 @@ export const IdentitiesV3ApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Update all fields of an existing identity. Supports updates to PII fields and metadata. Each successful PUT creates a new version and preserves prior versions for audit. 
-         * @summary Update an identity (v3)
+         * Update all fields of an existing identity. Supports updates to PII fields and metadata.  Each successful PUT creates a new version and preserves prior versions for audit. 
+         * @summary Update an identity
          * @param {string} identityId The ID of the identity to update.
          * @param {PutIdentityRequestV3} putIdentityRequestV3 
          * @param {*} [options] Override http request option.
@@ -558,8 +558,8 @@ export const IdentitiesV3ApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = IdentitiesV3ApiAxiosParamCreator(configuration)
     return {
         /**
-         * Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address). In the current release, each identity can have **one** financial instrument. Future releases will support multiple instruments per identity. 
-         * @summary Add a financial instrument (v3)
+         * Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address).  In the current release, each identity can have **one** financial instrument.  Future releases will support multiple instruments per identity. 
+         * @summary Add a financial instrument
          * @param {string} identityId Unique identifier of the identity that will own the financial instrument.
          * @param {RippleFinancialInstrument} rippleFinancialInstrument 
          * @param {*} [options] Override http request option.
@@ -572,8 +572,8 @@ export const IdentitiesV3ApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Create a new payment identity as an ORIGINATOR or BENEFICIARY for either an INDIVIDUAL or BUSINESS. The request body must follow the v3 identity schema and will be validated against corridor rules where applicable. On success, the API returns the new identityId and its initial version. 
-         * @summary Create an identity (v3)
+         * Create a new payment identity as an `ORIGINATOR` or `BENEFICIARY` for either an `INDIVIDUAL` or `BUSINESS`.  The request body must follow the v3 identity schema and will be validated against corridor rules where applicable.  On success, the API returns the new `identityId` and its initial version. 
+         * @summary Create an identity
          * @param {CreateIdentityRequestV3} createIdentityRequestV3 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -585,8 +585,8 @@ export const IdentitiesV3ApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deactivate a financial instrument of an Identity. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
-         * @summary Deactivate a Financial Instrument (v3)
+         * Deactivate a financial instrument of an Identity.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
+         * @summary Deactivate a Financial Instrument
          * @param {string} identityId The unique ID of the identity.
          * @param {string} financialInstrumentId The ID of the financial instrument to deactivate.
          * @param {*} [options] Override http request option.
@@ -599,8 +599,8 @@ export const IdentitiesV3ApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deactivate an identity and its financial instruments. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
-         * @summary Deactivate an identity (v3)
+         * Deactivate an identity and its financial instruments.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
+         * @summary Deactivate an identity
          * @param {string} identityId ID of the identity to deactivate.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -612,8 +612,8 @@ export const IdentitiesV3ApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Retrieves one financial instrument associated with the specified identity. In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
-         * @summary Get a financial instrument by ID (v3)
+         * Retrieves one financial instrument associated with the specified identity.  In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
+         * @summary Get a financial instrument by ID
          * @param {string} identityId Unique identifier of the identity whose instruments you want to list.
          * @param {string} financialInstrumentId The ID of the financial instrument of the identity.
          * @param {string} [version] Version of the identity
@@ -629,7 +629,7 @@ export const IdentitiesV3ApiFp = function(configuration?: Configuration) {
         },
         /**
          * List financial instruments for an identity.
-         * @summary Get a list of financial instruments of the identity (v3)
+         * @summary Get a list of financial instruments of the identity
          * @param {string} identityId Unique UUID string that maps to an identity
          * @param {string} [version] Version of the identity
          * @param {string} [nextToken] The token to use for the next page of results. If provided, the API will return financial instruments after this token.
@@ -644,8 +644,8 @@ export const IdentitiesV3ApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Retrieve identities for your tenant with optional filters. Use `limit` and `next-token` for pagination. The response includes a `data` array and an optional `nextToken`. 
-         * @summary Get a list of identities (v3)
+         * Retrieve identities for your tenant with optional filters.  Use `limit` and `next-token` for pagination. The response includes a `data` array and an optional `nextToken`. 
+         * @summary Get a list of identities
          * @param {string} [paymentRole] Filter by payment role.
          * @param {string} [nickName] Filter by nickname.
          * @param {number} [limit] Maximum number of identities to return. Default value is 10, maximum is 100.
@@ -660,8 +660,8 @@ export const IdentitiesV3ApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Retrieve a specific identity by ID. If `version` is not provided, the latest version is returned. 
-         * @summary Get an identity by ID (v3)
+         * Retrieve a specific identity by ID.  If `version` is not provided, the latest version is returned. 
+         * @summary Get an identity by ID
          * @param {string} identityId The ID of the identity to retrieve.
          * @param {string} [version] Specific version to retrieve. If omitted, returns the latest version.
          * @param {*} [options] Override http request option.
@@ -675,7 +675,7 @@ export const IdentitiesV3ApiFp = function(configuration?: Configuration) {
         },
         /**
          * Retrieve a specific identity by its internal ID.  **Behavior:** - Only returns identities in the `ACTIVE` state. Deactivated identities will result in an error. - Always returns the latest version of the identity. Historical versions are not accessible through this endpoint. - If no active identity exists for the given `internal-id`, a 404 is returned. 
-         * @summary Get an identity by Internal ID (v3)
+         * @summary Get an identity by Internal ID
          * @param {string} internalId The Internal ID of the identity to retrieve.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -687,8 +687,8 @@ export const IdentitiesV3ApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Update editable fields of a financial instrument including rail-specific details and labels. The financialInstrumentType is immutable after creation. 
-         * @summary Update a financial instrument (v3)
+         * Update editable fields of a financial instrument including rail-specific details and labels.  The financialInstrumentType is immutable after creation. 
+         * @summary Update a financial instrument
          * @param {string} identityId The unique ID of the identity.
          * @param {string} financialInstrumentId The ID of the financial instrument to update.
          * @param {PutRippleFinancialInstrument} putRippleFinancialInstrument 
@@ -702,8 +702,8 @@ export const IdentitiesV3ApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Update all fields of an existing identity. Supports updates to PII fields and metadata. Each successful PUT creates a new version and preserves prior versions for audit. 
-         * @summary Update an identity (v3)
+         * Update all fields of an existing identity. Supports updates to PII fields and metadata.  Each successful PUT creates a new version and preserves prior versions for audit. 
+         * @summary Update an identity
          * @param {string} identityId The ID of the identity to update.
          * @param {PutIdentityRequestV3} putIdentityRequestV3 
          * @param {*} [options] Override http request option.
@@ -726,8 +726,8 @@ export const IdentitiesV3ApiFactory = function (configuration?: Configuration, b
     const localVarFp = IdentitiesV3ApiFp(configuration)
     return {
         /**
-         * Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address). In the current release, each identity can have **one** financial instrument. Future releases will support multiple instruments per identity. 
-         * @summary Add a financial instrument (v3)
+         * Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address).  In the current release, each identity can have **one** financial instrument.  Future releases will support multiple instruments per identity. 
+         * @summary Add a financial instrument
          * @param {string} identityId Unique identifier of the identity that will own the financial instrument.
          * @param {RippleFinancialInstrument} rippleFinancialInstrument 
          * @param {*} [options] Override http request option.
@@ -737,8 +737,8 @@ export const IdentitiesV3ApiFactory = function (configuration?: Configuration, b
             return localVarFp.createFinancialInstrument(identityId, rippleFinancialInstrument, options).then((request) => request(axios, basePath));
         },
         /**
-         * Create a new payment identity as an ORIGINATOR or BENEFICIARY for either an INDIVIDUAL or BUSINESS. The request body must follow the v3 identity schema and will be validated against corridor rules where applicable. On success, the API returns the new identityId and its initial version. 
-         * @summary Create an identity (v3)
+         * Create a new payment identity as an `ORIGINATOR` or `BENEFICIARY` for either an `INDIVIDUAL` or `BUSINESS`.  The request body must follow the v3 identity schema and will be validated against corridor rules where applicable.  On success, the API returns the new `identityId` and its initial version. 
+         * @summary Create an identity
          * @param {CreateIdentityRequestV3} createIdentityRequestV3 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -747,8 +747,8 @@ export const IdentitiesV3ApiFactory = function (configuration?: Configuration, b
             return localVarFp.createIdentity(createIdentityRequestV3, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deactivate a financial instrument of an Identity. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
-         * @summary Deactivate a Financial Instrument (v3)
+         * Deactivate a financial instrument of an Identity.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
+         * @summary Deactivate a Financial Instrument
          * @param {string} identityId The unique ID of the identity.
          * @param {string} financialInstrumentId The ID of the financial instrument to deactivate.
          * @param {*} [options] Override http request option.
@@ -758,8 +758,8 @@ export const IdentitiesV3ApiFactory = function (configuration?: Configuration, b
             return localVarFp.deactivateFinancialInstrumentV3(identityId, financialInstrumentId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deactivate an identity and its financial instruments. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
-         * @summary Deactivate an identity (v3)
+         * Deactivate an identity and its financial instruments.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
+         * @summary Deactivate an identity
          * @param {string} identityId ID of the identity to deactivate.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -768,8 +768,8 @@ export const IdentitiesV3ApiFactory = function (configuration?: Configuration, b
             return localVarFp.deactivateIdentityV3(identityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieves one financial instrument associated with the specified identity. In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
-         * @summary Get a financial instrument by ID (v3)
+         * Retrieves one financial instrument associated with the specified identity.  In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
+         * @summary Get a financial instrument by ID
          * @param {string} identityId Unique identifier of the identity whose instruments you want to list.
          * @param {string} financialInstrumentId The ID of the financial instrument of the identity.
          * @param {string} [version] Version of the identity
@@ -782,7 +782,7 @@ export const IdentitiesV3ApiFactory = function (configuration?: Configuration, b
         },
         /**
          * List financial instruments for an identity.
-         * @summary Get a list of financial instruments of the identity (v3)
+         * @summary Get a list of financial instruments of the identity
          * @param {string} identityId Unique UUID string that maps to an identity
          * @param {string} [version] Version of the identity
          * @param {string} [nextToken] The token to use for the next page of results. If provided, the API will return financial instruments after this token.
@@ -794,8 +794,8 @@ export const IdentitiesV3ApiFactory = function (configuration?: Configuration, b
             return localVarFp.getFinancialInstruments(identityId, version, nextToken, limit, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieve identities for your tenant with optional filters. Use `limit` and `next-token` for pagination. The response includes a `data` array and an optional `nextToken`. 
-         * @summary Get a list of identities (v3)
+         * Retrieve identities for your tenant with optional filters.  Use `limit` and `next-token` for pagination. The response includes a `data` array and an optional `nextToken`. 
+         * @summary Get a list of identities
          * @param {string} [paymentRole] Filter by payment role.
          * @param {string} [nickName] Filter by nickname.
          * @param {number} [limit] Maximum number of identities to return. Default value is 10, maximum is 100.
@@ -807,8 +807,8 @@ export const IdentitiesV3ApiFactory = function (configuration?: Configuration, b
             return localVarFp.getIdentities(paymentRole, nickName, limit, nextToken, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieve a specific identity by ID. If `version` is not provided, the latest version is returned. 
-         * @summary Get an identity by ID (v3)
+         * Retrieve a specific identity by ID.  If `version` is not provided, the latest version is returned. 
+         * @summary Get an identity by ID
          * @param {string} identityId The ID of the identity to retrieve.
          * @param {string} [version] Specific version to retrieve. If omitted, returns the latest version.
          * @param {*} [options] Override http request option.
@@ -819,7 +819,7 @@ export const IdentitiesV3ApiFactory = function (configuration?: Configuration, b
         },
         /**
          * Retrieve a specific identity by its internal ID.  **Behavior:** - Only returns identities in the `ACTIVE` state. Deactivated identities will result in an error. - Always returns the latest version of the identity. Historical versions are not accessible through this endpoint. - If no active identity exists for the given `internal-id`, a 404 is returned. 
-         * @summary Get an identity by Internal ID (v3)
+         * @summary Get an identity by Internal ID
          * @param {string} internalId The Internal ID of the identity to retrieve.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -828,8 +828,8 @@ export const IdentitiesV3ApiFactory = function (configuration?: Configuration, b
             return localVarFp.getIdentityByInternalId(internalId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Update editable fields of a financial instrument including rail-specific details and labels. The financialInstrumentType is immutable after creation. 
-         * @summary Update a financial instrument (v3)
+         * Update editable fields of a financial instrument including rail-specific details and labels.  The financialInstrumentType is immutable after creation. 
+         * @summary Update a financial instrument
          * @param {string} identityId The unique ID of the identity.
          * @param {string} financialInstrumentId The ID of the financial instrument to update.
          * @param {PutRippleFinancialInstrument} putRippleFinancialInstrument 
@@ -840,8 +840,8 @@ export const IdentitiesV3ApiFactory = function (configuration?: Configuration, b
             return localVarFp.putFinancialInstrument(identityId, financialInstrumentId, putRippleFinancialInstrument, options).then((request) => request(axios, basePath));
         },
         /**
-         * Update all fields of an existing identity. Supports updates to PII fields and metadata. Each successful PUT creates a new version and preserves prior versions for audit. 
-         * @summary Update an identity (v3)
+         * Update all fields of an existing identity. Supports updates to PII fields and metadata.  Each successful PUT creates a new version and preserves prior versions for audit. 
+         * @summary Update an identity
          * @param {string} identityId The ID of the identity to update.
          * @param {PutIdentityRequestV3} putIdentityRequestV3 
          * @param {*} [options] Override http request option.
@@ -861,8 +861,8 @@ export const IdentitiesV3ApiFactory = function (configuration?: Configuration, b
  */
 export class IdentitiesV3Api extends BaseAPI {
     /**
-     * Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address). In the current release, each identity can have **one** financial instrument. Future releases will support multiple instruments per identity. 
-     * @summary Add a financial instrument (v3)
+     * Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address).  In the current release, each identity can have **one** financial instrument.  Future releases will support multiple instruments per identity. 
+     * @summary Add a financial instrument
      * @param {string} identityId Unique identifier of the identity that will own the financial instrument.
      * @param {RippleFinancialInstrument} rippleFinancialInstrument 
      * @param {*} [options] Override http request option.
@@ -874,8 +874,8 @@ export class IdentitiesV3Api extends BaseAPI {
     }
 
     /**
-     * Create a new payment identity as an ORIGINATOR or BENEFICIARY for either an INDIVIDUAL or BUSINESS. The request body must follow the v3 identity schema and will be validated against corridor rules where applicable. On success, the API returns the new identityId and its initial version. 
-     * @summary Create an identity (v3)
+     * Create a new payment identity as an `ORIGINATOR` or `BENEFICIARY` for either an `INDIVIDUAL` or `BUSINESS`.  The request body must follow the v3 identity schema and will be validated against corridor rules where applicable.  On success, the API returns the new `identityId` and its initial version. 
+     * @summary Create an identity
      * @param {CreateIdentityRequestV3} createIdentityRequestV3 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -886,8 +886,8 @@ export class IdentitiesV3Api extends BaseAPI {
     }
 
     /**
-     * Deactivate a financial instrument of an Identity. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
-     * @summary Deactivate a Financial Instrument (v3)
+     * Deactivate a financial instrument of an Identity.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
+     * @summary Deactivate a Financial Instrument
      * @param {string} identityId The unique ID of the identity.
      * @param {string} financialInstrumentId The ID of the financial instrument to deactivate.
      * @param {*} [options] Override http request option.
@@ -899,8 +899,8 @@ export class IdentitiesV3Api extends BaseAPI {
     }
 
     /**
-     * Deactivate an identity and its financial instruments. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
-     * @summary Deactivate an identity (v3)
+     * Deactivate an identity and its financial instruments.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
+     * @summary Deactivate an identity
      * @param {string} identityId ID of the identity to deactivate.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -911,8 +911,8 @@ export class IdentitiesV3Api extends BaseAPI {
     }
 
     /**
-     * Retrieves one financial instrument associated with the specified identity. In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
-     * @summary Get a financial instrument by ID (v3)
+     * Retrieves one financial instrument associated with the specified identity.  In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
+     * @summary Get a financial instrument by ID
      * @param {string} identityId Unique identifier of the identity whose instruments you want to list.
      * @param {string} financialInstrumentId The ID of the financial instrument of the identity.
      * @param {string} [version] Version of the identity
@@ -927,7 +927,7 @@ export class IdentitiesV3Api extends BaseAPI {
 
     /**
      * List financial instruments for an identity.
-     * @summary Get a list of financial instruments of the identity (v3)
+     * @summary Get a list of financial instruments of the identity
      * @param {string} identityId Unique UUID string that maps to an identity
      * @param {string} [version] Version of the identity
      * @param {string} [nextToken] The token to use for the next page of results. If provided, the API will return financial instruments after this token.
@@ -941,8 +941,8 @@ export class IdentitiesV3Api extends BaseAPI {
     }
 
     /**
-     * Retrieve identities for your tenant with optional filters. Use `limit` and `next-token` for pagination. The response includes a `data` array and an optional `nextToken`. 
-     * @summary Get a list of identities (v3)
+     * Retrieve identities for your tenant with optional filters.  Use `limit` and `next-token` for pagination. The response includes a `data` array and an optional `nextToken`. 
+     * @summary Get a list of identities
      * @param {string} [paymentRole] Filter by payment role.
      * @param {string} [nickName] Filter by nickname.
      * @param {number} [limit] Maximum number of identities to return. Default value is 10, maximum is 100.
@@ -956,8 +956,8 @@ export class IdentitiesV3Api extends BaseAPI {
     }
 
     /**
-     * Retrieve a specific identity by ID. If `version` is not provided, the latest version is returned. 
-     * @summary Get an identity by ID (v3)
+     * Retrieve a specific identity by ID.  If `version` is not provided, the latest version is returned. 
+     * @summary Get an identity by ID
      * @param {string} identityId The ID of the identity to retrieve.
      * @param {string} [version] Specific version to retrieve. If omitted, returns the latest version.
      * @param {*} [options] Override http request option.
@@ -970,7 +970,7 @@ export class IdentitiesV3Api extends BaseAPI {
 
     /**
      * Retrieve a specific identity by its internal ID.  **Behavior:** - Only returns identities in the `ACTIVE` state. Deactivated identities will result in an error. - Always returns the latest version of the identity. Historical versions are not accessible through this endpoint. - If no active identity exists for the given `internal-id`, a 404 is returned. 
-     * @summary Get an identity by Internal ID (v3)
+     * @summary Get an identity by Internal ID
      * @param {string} internalId The Internal ID of the identity to retrieve.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -981,8 +981,8 @@ export class IdentitiesV3Api extends BaseAPI {
     }
 
     /**
-     * Update editable fields of a financial instrument including rail-specific details and labels. The financialInstrumentType is immutable after creation. 
-     * @summary Update a financial instrument (v3)
+     * Update editable fields of a financial instrument including rail-specific details and labels.  The financialInstrumentType is immutable after creation. 
+     * @summary Update a financial instrument
      * @param {string} identityId The unique ID of the identity.
      * @param {string} financialInstrumentId The ID of the financial instrument to update.
      * @param {PutRippleFinancialInstrument} putRippleFinancialInstrument 
@@ -995,8 +995,8 @@ export class IdentitiesV3Api extends BaseAPI {
     }
 
     /**
-     * Update all fields of an existing identity. Supports updates to PII fields and metadata. Each successful PUT creates a new version and preserves prior versions for audit. 
-     * @summary Update an identity (v3)
+     * Update all fields of an existing identity. Supports updates to PII fields and metadata.  Each successful PUT creates a new version and preserves prior versions for audit. 
+     * @summary Update an identity
      * @param {string} identityId The ID of the identity to update.
      * @param {PutIdentityRequestV3} putIdentityRequestV3 
      * @param {*} [options] Override http request option.

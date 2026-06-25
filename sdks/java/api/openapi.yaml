@@ -31,11 +31,11 @@ info:
 
     **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.
 
-    You can now use the client ID and client secret to generate access tokens using the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation.
+    You can now use the client ID and client secret to generate access tokens using the [Request an access token](#operation/authenticate) operation.
 
     ### Request an access token
 
-    To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.
+    To get an access token, use the [Request an access token](#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.
 
     We recommend rotating your API credentials at regular intervals according to your organization's security policy.
 
@@ -44,7 +44,7 @@ info:
     name: Apache 2.0
     url: http://apache.org
   title: Payments Direct API
-  version: "2026.04"
+  version: "2026.03"
 servers:
 - description: UAT environment with simulated currency
   url: https://api.test.ripple.com
@@ -61,53 +61,51 @@ tags:
   name: Authentication
   x-displayName: Authentication
 - description: |
-    Use these API operations to manage your identities with **Identity Management v3** (recommended for all new integrations).
-    **Note:** **Identity Management v3** is scheduled for release in **April 2026**. For early access or specific migration details, please contact your Ripple representative.
-    For more information about identity management, see [Payment identities](/products/payments-direct-2/api-docs/concepts/payment-identities) and [Financial instruments](/products/payments-direct-2/api-docs/concepts/financial-instruments).
+    Use these API operations to manage your identities with **Identity Management v3** (recommended for all new integrations). For more information about identity management, see [Payment identities](/products/payments-direct-2/introduction/concepts/payment-identities) and [Financial instruments](/products/payments-direct-2/introduction/concepts/financial-instruments).
     | Operation | Method | Description |
     | --- | --- | --- |
-    | [Create an identity (v3)](./#operation/createIdentity) | POST | Create a new identity (INDIVIDUAL/BUSINESS; ORIGINATOR/BENEFICIARY). |
-    | [Get a list of identies (v3)](./#operation/getIdentities) | GET | Retrieve a list of identities with optional filters (e.g., `paymentRole`, `identityType`). |
-    | [Get an identity by ID (v3)](./#operation/getIdentityById) | GET | Retrieve a specific identity by `identityId` (latest version by default). |
-    | [Get an identity by internal ID (v3)](./#operation/getIdentityByInternalId) | GET | Retrieve an active identity by client-provided `internalId`. |
-    | [Update an identity (v3)](./#operation/putIdentity) | PUT | Update one or more fields; creates a new version. |
-    | [Deactivate an identity (v3)](./#operation/deactivateIdentityV3) | DELETE | Set the identity state to `DEACTIVATED` (cannot be used for new payments). |
-    | [Add a financial instrument (v3)](./#operation/createFinancialInstrument) | POST | Add a financial instrument to an identity. |
-    | [Get a list of financial instruments (v3)](./#operation/getFinancialInstruments) | GET | Get a list of financial instruments for an identity. |
-    | [Get a financial instrument by ID (v3)](./#operation/getFinancialInstrumentById) | GET | Get a specific financial instrument by `financialInstrumentId`. |
-    | [Update a financial instrument (v3)](./#operation/putFinancialInstrument) | PUT | Update a financial instrument by `financialInstrumentId`. |
-    | [Deactivate a financial instrument (v3)](./#operation/deactivateFinancialInstrumentV3) | DELETE | Deactivate a financial instrument by `financialInstrumentId`. |
+    | [Create an identity](#operation/createIdentity) | POST | Create a new identity (INDIVIDUAL/BUSINESS; ORIGINATOR/BENEFICIARY). |
+    | [Get a list of identities](#operation/getIdentities) | GET | Retrieve a list of identities with optional filters (e.g., `paymentRole`, `identityType`). |
+    | [Get an identity by ID](#operation/getIdentityById) | GET | Retrieve a specific identity by `identityId` (latest version by default). |
+    | [Get an identity by internal ID](#operation/getIdentityByInternalId) | GET | Retrieve an active identity by client-provided `internalId`. |
+    | [Update an identity](#operation/putIdentity) | PUT | Update one or more fields; creates a new version. |
+    | [Deactivate an identity](#operation/deactivateIdentityV3) | DELETE | Set the identity state to `DEACTIVATED` (cannot be used for new payments). |
+    | [Add a financial instrument](#operation/createFinancialInstrument) | POST | Add a financial instrument to an identity. |
+    | [Get a list of financial instruments](#operation/getFinancialInstruments) | GET | Get a list of financial instruments for an identity. |
+    | [Get a financial instrument by ID](#operation/getFinancialInstrumentById) | GET | Get a specific financial instrument by `financialInstrumentId`. |
+    | [Update a financial instrument](#operation/putFinancialInstrument) | PUT | Update a financial instrument by `financialInstrumentId`. |
+    | [Deactivate a financial instrument](#operation/deactivateFinancialInstrumentV3) | DELETE | Deactivate a financial instrument by `financialInstrumentId`. |
   name: IdentitiesV3
-  x-displayName: Identities (v3)
+  x-displayName: Identities
 - description: |
     Use these API operations to manage your quotes.
 
     | Operation | Method | Description |
     | --- | --- | --- |
-    | [Create quote collection](./#operation/createQuoteCollectionV2) | POST | Create a collection of quotes.  |
-    | [Get quote collection](./#operation/getQuoteCollectionV2) | GET | Get a quote collection by ID. |
-    | [Get a quote](./#operation/getQuoteV2) | GET | Get a specific quote by ID.  |
+    | [Create quote collection](#operation/createQuoteCollection) | POST | Create a collection of quotes.  |
+    | [Get quote collection](#operation/getQuoteCollection) | GET | Get a quote collection by ID. |
+    | [Get a quote](#operation/getQuote) | GET | Get a specific quote by ID.  |
   name: Quote
-  x-displayName: Quotes (v3)
+  x-displayName: Quotes
 - description: |
     Use these API operations to manage your payments with **Payment Management v3** (recommended for all new integrations).
 
     | Operation | Method | Description |
     | --- | --- | --- |
-    | [Search payments (v3)](./#operation/searchPaymentsV2) | POST | Search for v3 payments based on filtering criteria. |
-    | [Create a payment (v3)](./#operation/createPaymentV2) | POST | Create a v3payment by accepting a quote. |
-    | [Get payment by payment ID (v3)](./#operation/getPaymentByIdV2) | GET | Get a specific v3 payment by payment ID.  |
-    | [Get state transitions by payment ID (v3)](./#operation/getPaymentStateTransitionsByIdV2) | GET | Get the state transitions for a specific v3 payment by payment ID. |
-    | [Update payment labels (v3)](./#operation/updatePaymentLabelsV2) | PATCH | Update the labels for a specific v3 payment by payment ID. |
+    | [Search payments](#operation/searchPaymentsV2) | POST | Search for payments based on filtering criteria. |
+    | [Create a payment](#operation/createPaymentV2) | POST | Create a payment by accepting a quote. |
+    | [Get payment by payment ID](#operation/getPaymentByIdV2) | GET | Get a specific payment by payment ID.  |
+    | [Get state transitions by payment ID](#operation/getPaymentStateTransitionsByIdV2) | GET | Get the state transitions for a specific payment by payment ID. |
+    | [Update payment labels](#operation/updatePaymentLabelsV2) | PATCH | Update the labels for a specific payment by payment ID. |
   name: PaymentsV2
-  x-displayName: Payments (v3)
+  x-displayName: Payments
 - description: |
     Use these API operation to fetch ledger transactions and check balances.
 
     | Operation | Method | Description |
     | --- | --- | --- |
-    | [Get balances](./#operation/getBalances) | GET | View your existing balances  |
-    | [Get ledger transactions](./#operation/getStatementsTransactionsForCustomer) | GET | View your ledger transactions.  |
+    | [Get balances](#operation/getBalances) | GET | View your existing balances  |
+    | [Get ledger transactions](#operation/getStatementsTransactionsForCustomer) | GET | View your ledger transactions.  |
   name: ledger-public
   x-displayName: Ledger
 paths:
@@ -120,9 +118,9 @@ paths:
 
         **Note**: The length of the access token isn't fixed, hence it can vary. Avoid validating tokens based on character length.
 
-        **Tutorials**
+        **Developer guide**
 
-        * Learn how to [Request an access token](../../tutorials/request-an-access-token/).
+        * Learn how to [Request an access token](../../developer-guides/request-an-access-token/).
 
         #### Environments
 
@@ -230,7 +228,9 @@ paths:
       - text/plain
   /v3/payments/filter:
     post:
-      description: Search for payments based on filtering criteria.
+      description: "Returns a paginated list of payments matching the specified filters.\
+        \ You can filter by status, date range, destination country, currency, or\
+        \ custom labels."
       operationId: searchPaymentsV2
       requestBody:
         content:
@@ -278,7 +278,7 @@ paths:
           description: Internal processing error
       security:
       - Bearer: []
-      summary: Search payments V2
+      summary: Search payments
       tags:
       - PaymentsV2
       x-content-type: application/json
@@ -287,11 +287,7 @@ paths:
   /v3/payments:
     post:
       description: |
-        Create a payment
-
-        **Tutorial**
-
-        * Learn how to [Create a payment](/products/payments-direct-2/api-docs/tutorials/create-a-payment/).
+        Initiates a new cross-border payment. Payments are processed asynchronously. Use **Get a payment by ID** to poll for status updates, or **Get state transitions** to view the full status history.
       operationId: createPaymentV2
       requestBody:
         content:
@@ -354,7 +350,7 @@ paths:
           description: Internal processing error
       security:
       - Bearer: []
-      summary: Create payment V2
+      summary: Create payment
       tags:
       - PaymentsV2
       x-content-type: application/json
@@ -362,7 +358,8 @@ paths:
       - application/json
   /v3/payments/{paymentId}:
     get:
-      description: Gets a payment by ID.
+      description: "Returns the current status and full details of a payment, including\
+        \ amounts, beneficiary information, and the associated quote."
       operationId: getPaymentByIdV2
       parameters:
       - description: Unique identifier of the payment to get.
@@ -428,14 +425,16 @@ paths:
           description: Internal processing error
       security:
       - Bearer: []
-      summary: Get a payment by ID V2
+      summary: Get a payment by ID
       tags:
       - PaymentsV2
       x-accepts:
       - application/json
   /v3/payments/{paymentId}/states:
     get:
-      description: Gets the state transitions for a payment by ID.
+      description: "Returns the complete state transition history for a payment, including\
+        \ each status change and its timestamp. Use this to audit payment progress\
+        \ or debug processing issues."
       operationId: getPaymentStateTransitionsByIdV2
       parameters:
       - description: Unique identifier of the payment for which you want to get state
@@ -509,7 +508,9 @@ paths:
       - application/json
   /v3/payments/{paymentId}/labels:
     patch:
-      description: Add or remove labels for a payment.
+      description: "Add or remove labels for grouping and categorizing payments (e.g.,\
+        \ campaign IDs, workflow tags, or batch identifiers). Labels are optional\
+        \ and mutable; they can be added or removed over the payment's lifetime."
       operationId: updatePaymentLabelsV2
       parameters:
       - description: The unique ID that identifies the payment for which you want
@@ -593,6 +594,7 @@ paths:
     get:
       description: |
         Retrieve identities for your tenant with optional filters.
+
         Use `limit` and `next-token` for pagination. The response includes a `data` array and an optional `nextToken`.
       operationId: getIdentities
       parameters:
@@ -700,16 +702,18 @@ paths:
           description: Internal processing error.
       security:
       - Bearer: []
-      summary: Get a list of identities (v3)
+      summary: Get a list of identities
       tags:
       - IdentitiesV3
       x-accepts:
       - application/json
     post:
       description: |
-        Create a new payment identity as an ORIGINATOR or BENEFICIARY for either an INDIVIDUAL or BUSINESS.
+        Create a new payment identity as an `ORIGINATOR` or `BENEFICIARY` for either an `INDIVIDUAL` or `BUSINESS`.
+
         The request body must follow the v3 identity schema and will be validated against corridor rules where applicable.
-        On success, the API returns the new identityId and its initial version.
+
+        On success, the API returns the new `identityId` and its initial version.
       operationId: createIdentity
       requestBody:
         content:
@@ -805,7 +809,7 @@ paths:
           description: Internal processing error.
       security:
       - Bearer: []
-      summary: Create an identity (v3)
+      summary: Create an identity
       tags:
       - IdentitiesV3
       x-content-type: application/json
@@ -815,7 +819,9 @@ paths:
     delete:
       description: |
         Deactivate an identity and its financial instruments.
+
         Deactivation is permanent and prevents further use in payments.
+
         Historical versions remain available for audit.
       operationId: deactivateIdentityV3
       parameters:
@@ -866,7 +872,7 @@ paths:
           description: Internal processing error.
       security:
       - Bearer: []
-      summary: Deactivate an identity (v3)
+      summary: Deactivate an identity
       tags:
       - IdentitiesV3
       x-accepts:
@@ -874,6 +880,7 @@ paths:
     get:
       description: |
         Retrieve a specific identity by ID.
+
         If `version` is not provided, the latest version is returned.
       operationId: getIdentityById
       parameters:
@@ -961,7 +968,7 @@ paths:
           description: Internal processing error.
       security:
       - Bearer: []
-      summary: Get an identity by ID (v3)
+      summary: Get an identity by ID
       tags:
       - IdentitiesV3
       x-accepts:
@@ -969,6 +976,7 @@ paths:
     put:
       description: |
         Update all fields of an existing identity. Supports updates to PII fields and metadata.
+
         Each successful PUT creates a new version and preserves prior versions for audit.
       operationId: putIdentity
       parameters:
@@ -1055,7 +1063,7 @@ paths:
           description: Internal processing error.
       security:
       - Bearer: []
-      summary: Update an identity (v3)
+      summary: Update an identity
       tags:
       - IdentitiesV3
       x-content-type: application/json
@@ -1147,7 +1155,7 @@ paths:
           description: Internal processing error.
       security:
       - Bearer: []
-      summary: Get an identity by Internal ID (v3)
+      summary: Get an identity by Internal ID
       tags:
       - IdentitiesV3
       x-accepts:
@@ -1245,15 +1253,19 @@ paths:
           description: Internal Processing Error
       security:
       - Bearer: []
-      summary: Get a list of financial instruments of the identity (v3)
+      summary: Get a list of financial instruments of the identity
       tags:
       - IdentitiesV3
       x-accepts:
       - application/json
     post:
       description: |
-        Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address).
+        Create a financial instrument for the specified identity. The request body must include
+        the payment rail (financialInstrumentType), currency or asset code, and the rail-specific
+        details (for example, US ACH account numbers or a wallet address).
+
         In the current release, each identity can have **one** financial instrument.
+
         Future releases will support multiple instruments per identity.
       operationId: createFinancialInstrument
       parameters:
@@ -1323,7 +1335,7 @@ paths:
           description: Internal processing error
       security:
       - Bearer: []
-      summary: Add a financial instrument (v3)
+      summary: Add a financial instrument
       tags:
       - IdentitiesV3
       x-content-type: application/json
@@ -1333,7 +1345,9 @@ paths:
     delete:
       description: |
         Deactivate a financial instrument of an Identity.
+
         Deactivation is permanent and prevents further use in payments.
+
         Historical versions remain available for audit.
       operationId: deactivateFinancialInstrumentV3
       parameters:
@@ -1403,7 +1417,7 @@ paths:
           description: Internal processing error.
       security:
       - Bearer: []
-      summary: Deactivate a Financial Instrument (v3)
+      summary: Deactivate a Financial Instrument
       tags:
       - IdentitiesV3
       x-accepts:
@@ -1411,6 +1425,7 @@ paths:
     get:
       description: |
         Retrieves one financial instrument associated with the specified identity.
+
         In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity.
       operationId: getFinancialInstrumentById
       parameters:
@@ -1475,7 +1490,7 @@ paths:
                       financialInstrumentType: US_ACH
               schema:
                 $ref: '#/components/schemas/get-financial-instrument-response'
-          description: List of financial instruments for the identity.
+          description: Financial instrument for the identity.
         "400":
           content:
             application/json:
@@ -1505,7 +1520,7 @@ paths:
           description: Internal processing error
       security:
       - Bearer: []
-      summary: Get a financial instrument by ID (v3)
+      summary: Get a financial instrument by ID
       tags:
       - IdentitiesV3
       x-accepts:
@@ -1513,6 +1528,7 @@ paths:
     put:
       description: |
         Update editable fields of a financial instrument including rail-specific details and labels.
+
         The financialInstrumentType is immutable after creation.
       operationId: putFinancialInstrument
       parameters:
@@ -1597,29 +1613,21 @@ paths:
           description: Internal processing error.
       security:
       - Bearer: []
-      summary: Update a financial instrument (v3)
+      summary: Update a financial instrument
       tags:
       - IdentitiesV3
       x-content-type: application/json
       x-accepts:
       - application/json
-  /v3/quotes/quote-collection:
+  /v2/quotes/quote-collection:
     post:
-      description: |
-        Create a quote collection to preview the cost and terms of a proposed payment before initiating it.
-
-        **What's new in v3:**
-        - `payoutCategory` and `destinationBlockchainNetwork` are no longer accepted in requests.
-        - `paymentRail` is added as an optional field in the request to allow filtering quotes by a specific payment rail. When paymentRail is not passed, quotes will be returned for all supported payment rails.
-
-         **Tutorials**
-        - `paymentRail` is added as an optional field in the request to allow filtering quotes by a specific payment rail. When paymentRail is not passed, quotes will be returned for all supported payment rails. For a list of supported values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
-      operationId: createQuoteCollectionV2
+      description: Creates a collection of quotes for a proposed payment.
+      operationId: createQuoteCollection
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/QuoteCollectionRequestV2'
+              $ref: '#/components/schemas/QuoteCollectionRequest'
         description: Create quote collection request
         required: true
       responses:
@@ -1627,7 +1635,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteCollectionV2'
+                $ref: '#/components/schemas/QuoteCollection'
           description: Creates a collection of quotes
         "400":
           content:
@@ -1662,13 +1670,9 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /v3/quotes/quote-collection/{quote-collection-id}:
+  /v2/quotes/quote-collection/{quote-collection-id}:
     get:
-      description: |
-        Retrieve a previously created quote collection by its unique identifier.
-
-        Use this endpoint to check the status of quotes (ACTIVE or EXPIRED) and retrieve quote details needed for payment creation.
-      operationId: getQuoteCollectionV2
+      operationId: getQuoteCollection
       parameters:
       - description: The unique identifier of the quote collection you want to retrieve
         explode: false
@@ -1685,7 +1689,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteCollectionV2'
+                $ref: '#/components/schemas/QuoteCollection'
           description: Valid quote collection found
         "401":
           content:
@@ -1719,18 +1723,9 @@ paths:
       - Quote
       x-accepts:
       - application/json
-  /v3/quotes/{quote-id}:
+  /v2/quotes/{quote-id}:
     get:
-      description: |
-        Retrieve a specific quote by its unique identifier.
-
-        Use this endpoint to:
-        - Verify quote details before creating a payment
-        - Check if a quote is still active (not expired)
-        - Retrieve the `quoteId` needed for payment creation
-
-        **Note:** Quotes expire after a defined period. Check the `quoteStatus` field to confirm the quote is `ACTIVE` before using it to create a payment.
-      operationId: getQuoteV2
+      operationId: getQuote
       parameters:
       - description: The unique identifier of the quote to retrieve
         explode: false
@@ -1747,7 +1742,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteV2'
+                $ref: '#/components/schemas/Quote'
           description: Valid quote found
         "401":
           content:
@@ -1776,7 +1771,7 @@ paths:
           description: Internal server error
       security:
       - Bearer: []
-      summary: Get a quote
+      summary: Get quote
       tags:
       - Quote
       x-accepts:
@@ -1810,13 +1805,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getBalances_401_response'
+                $ref: '#/components/schemas/getBalances_400_response'
           description: Unauthorized access
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getBalances_500_response'
+                $ref: '#/components/schemas/getBalances_400_response'
           description: Internal server error
       security:
       - Bearer: []
@@ -2025,7 +2020,7 @@ components:
 
             **Format**: `urn:ripplexcurrent-{ENVIRONMENT_STRING}:{YOUR_TENANT_ID}`
 
-            * The first component is `urn:ripplenetxcurrent-`.
+            * The first component is `urn:ripplexcurrent-`.
             * The second component refers to the environment you want to access.
             * The third component is your tenant ID. Ripple integration engineers provide this component during training.
 
@@ -2208,8 +2203,9 @@ components:
           beneficiaryFinancialInstrumentId: 7ea3399c-1234-5678-8d8f-d320ea406630
           payout: BANK
           destinationCurrency: USD
+          selectedPaymentRail: XRP_LEDGER
           destinationCountry: US
-          destinationBlockchainNetwork: ETHEREUM
+          destinationBlockchainNetwork: "Ethereum, TRON"
           destinationAmount: 1234.111223
         taxes:
         - taxCurrency: USD
@@ -2296,17 +2292,18 @@ components:
           format: date-time
           type: string
         paymentState:
-          description: |
-            Current state of a payment.
-            The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`
-            Additional states may be introduced in the future without breaking existing integrations.
+          description: "Current state of a payment.\n\nThe payment lifecycle currently\
+            \ uses the following values: \n- `QUOTED` \n- `INITIATED` \n- `VALIDATING`\
+            \ \n- `TRANSFERRING` \n- `COMPLETED` \n- `FAILED` \n- `RETURNED` \n- `DECLINED`\
+            \ \n- `AWAITING_FUNDING`\n\nAdditional states may be introduced in the\
+            \ future without breaking existing integrations.\n"
           example: INITIATED
           type: string
           x-enumDescriptions:
             QUOTED: "A quote has been created, but the payment has not yet been initiated."
             INITIATED: The payment has been submitted and is awaiting validation.
             VALIDATING: Ripple is validating the payment details and reserving funds
-              from the originator’s available balance.
+              from the originator's available balance.
             TRANSFERRING: The payment is being processed and funds are moving through
               the network toward the beneficiary.
             COMPLETED: The payment has completed and the beneficiary has received
@@ -2357,8 +2354,8 @@ components:
         paymentLabels:
           description: "Application-defined labels for grouping and categorizing payments\
             \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
-            \ optional and mutable; they can be added or removed over the payment’\
-            s lifetime."
+            \ optional and mutable; they can be added or removed over the payment's\
+            \ lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -2417,8 +2414,9 @@ components:
           beneficiaryFinancialInstrumentId: 7ea3399c-1234-5678-8d8f-d320ea406630
           payout: BANK
           destinationCurrency: USD
+          selectedPaymentRail: XRP_LEDGER
           destinationCountry: US
-          destinationBlockchainNetwork: ETHEREUM
+          destinationBlockchainNetwork: "Ethereum, TRON"
           destinationAmount: 1234.111223
         taxes:
         - taxCurrency: USD
@@ -2533,17 +2531,18 @@ components:
           format: date-time
           type: string
         paymentState:
-          description: |
-            Current state of a payment.
-            The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`
-            Additional states may be introduced in the future without breaking existing integrations.
+          description: "Current state of a payment.\n\nThe payment lifecycle currently\
+            \ uses the following values: \n- `QUOTED` \n- `INITIATED` \n- `VALIDATING`\
+            \ \n- `TRANSFERRING` \n- `COMPLETED` \n- `FAILED` \n- `RETURNED` \n- `DECLINED`\
+            \ \n- `AWAITING_FUNDING`\n\nAdditional states may be introduced in the\
+            \ future without breaking existing integrations.\n"
           example: INITIATED
           type: string
           x-enumDescriptions:
             QUOTED: "A quote has been created, but the payment has not yet been initiated."
             INITIATED: The payment has been submitted and is awaiting validation.
             VALIDATING: Ripple is validating the payment details and reserving funds
-              from the originator’s available balance.
+              from the originator's available balance.
             TRANSFERRING: The payment is being processed and funds are moving through
               the network toward the beneficiary.
             COMPLETED: The payment has completed and the beneficiary has received
@@ -2598,8 +2597,8 @@ components:
         paymentLabels:
           description: "Application-defined labels for grouping and categorizing payments\
             \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
-            \ optional and mutable; they can be added or removed over the payment’\
-            s lifetime."
+            \ optional and mutable; they can be added or removed over the payment's\
+            \ lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -2649,17 +2648,18 @@ components:
         updatedAt: 2024-08-13T20:15:50.990995Z
       properties:
         updatedFrom:
-          description: |
-            Current state of a payment.
-            The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`
-            Additional states may be introduced in the future without breaking existing integrations.
+          description: "Current state of a payment.\n\nThe payment lifecycle currently\
+            \ uses the following values: \n- `QUOTED` \n- `INITIATED` \n- `VALIDATING`\
+            \ \n- `TRANSFERRING` \n- `COMPLETED` \n- `FAILED` \n- `RETURNED` \n- `DECLINED`\
+            \ \n- `AWAITING_FUNDING`\n\nAdditional states may be introduced in the\
+            \ future without breaking existing integrations.\n"
           example: INITIATED
           type: string
           x-enumDescriptions:
             QUOTED: "A quote has been created, but the payment has not yet been initiated."
             INITIATED: The payment has been submitted and is awaiting validation.
             VALIDATING: Ripple is validating the payment details and reserving funds
-              from the originator’s available balance.
+              from the originator's available balance.
             TRANSFERRING: The payment is being processed and funds are moving through
               the network toward the beneficiary.
             COMPLETED: The payment has completed and the beneficiary has received
@@ -2680,17 +2680,18 @@ components:
               your Ripple ledger account. This state applies only to just-in-time
               (JIT) funded payments.
         updatedTo:
-          description: |
-            Current state of a payment.
-            The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`
-            Additional states may be introduced in the future without breaking existing integrations.
+          description: "Current state of a payment.\n\nThe payment lifecycle currently\
+            \ uses the following values: \n- `QUOTED` \n- `INITIATED` \n- `VALIDATING`\
+            \ \n- `TRANSFERRING` \n- `COMPLETED` \n- `FAILED` \n- `RETURNED` \n- `DECLINED`\
+            \ \n- `AWAITING_FUNDING`\n\nAdditional states may be introduced in the\
+            \ future without breaking existing integrations.\n"
           example: INITIATED
           type: string
           x-enumDescriptions:
             QUOTED: "A quote has been created, but the payment has not yet been initiated."
             INITIATED: The payment has been submitted and is awaiting validation.
             VALIDATING: Ripple is validating the payment details and reserving funds
-              from the originator’s available balance.
+              from the originator's available balance.
             TRANSFERRING: The payment is being processed and funds are moving through
               the network toward the beneficiary.
             COMPLETED: The payment has completed and the beneficiary has received
@@ -2780,8 +2781,9 @@ components:
             beneficiaryFinancialInstrumentId: 7ea3399c-1234-5678-8d8f-d320ea406630
             payout: BANK
             destinationCurrency: USD
+            selectedPaymentRail: XRP_LEDGER
             destinationCountry: US
-            destinationBlockchainNetwork: ETHEREUM
+            destinationBlockchainNetwork: "Ethereum, TRON"
             destinationAmount: 1234.111223
           taxes:
           - taxCurrency: USD
@@ -2864,8 +2866,9 @@ components:
             beneficiaryFinancialInstrumentId: 7ea3399c-1234-5678-8d8f-d320ea406630
             payout: BANK
             destinationCurrency: USD
+            selectedPaymentRail: XRP_LEDGER
             destinationCountry: US
-            destinationBlockchainNetwork: ETHEREUM
+            destinationBlockchainNetwork: "Ethereum, TRON"
             destinationAmount: 1234.111223
           taxes:
           - taxCurrency: USD
@@ -2970,8 +2973,8 @@ components:
         paymentLabels:
           description: "Application-defined labels for grouping and categorizing payments\
             \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
-            \ optional and mutable; they can be added or removed over the payment’\
-            s lifetime."
+            \ optional and mutable; they can be added or removed over the payment's\
+            \ lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -2980,8 +2983,8 @@ components:
           type: array
         beneficiaryFinancialInstrumentId:
           description: |
-            The financial instrument ID associated with a payment beneficiary’s identity.
-            This value must reference a financial instrument created for the same beneficiary identity using Identity Management v3. Use the `financialInstrumentId` returned when you create or fetch the beneficiary’s payout instrument.
+            The financial instrument ID associated with a payment beneficiary's identity.
+            This value must reference a financial instrument created for the same beneficiary identity using Identity Management v3. Use the `financialInstrumentId` returned when you create or fetch the beneficiary's payout instrument.
           example: 7ea3399c-1234-5678-8d8f-d320ea406630
           type: string
         receiverRelationship:
@@ -3003,17 +3006,18 @@ components:
       - quoteId
       type: object
     PaymentStateV2:
-      description: |
-        Current state of a payment.
-        The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`
-        Additional states may be introduced in the future without breaking existing integrations.
+      description: "Current state of a payment.\n\nThe payment lifecycle currently\
+        \ uses the following values: \n- `QUOTED` \n- `INITIATED` \n- `VALIDATING`\
+        \ \n- `TRANSFERRING` \n- `COMPLETED` \n- `FAILED` \n- `RETURNED` \n- `DECLINED`\
+        \ \n- `AWAITING_FUNDING`\n\nAdditional states may be introduced in the future\
+        \ without breaking existing integrations.\n"
       example: INITIATED
       type: string
       x-enumDescriptions:
         QUOTED: "A quote has been created, but the payment has not yet been initiated."
         INITIATED: The payment has been submitted and is awaiting validation.
         VALIDATING: Ripple is validating the payment details and reserving funds from
-          the originator’s available balance.
+          the originator's available balance.
         TRANSFERRING: The payment is being processed and funds are moving through
           the network toward the beneficiary.
         COMPLETED: The payment has completed and the beneficiary has received the
@@ -3034,10 +3038,12 @@ components:
           payments.
     PaymentSortFieldV2:
       default: initiatedAt
-      description: |
-        The field to use when sorting payments in the requested sort order.
-        Currently supported values include: - `internalId` - `paymentState` - `sourceCurrency` - `sourceAmount` - `destinationCurrency` - `destinationCountry` - `destinationAmount` - `initiatedAt` - `expiresAt` - `lastStateUpdatedAt` - `paymentLabel`
-        If an unsupported value is provided, the request fails with a validation error.
+      description: "The field to use when sorting payments in the requested sort order.\n\
+        \nCurrently supported values include: \n- `internalId` \n- `paymentState`\
+        \ \n- `sourceCurrency` \n- `sourceAmount` \n- `destinationCurrency` \n- `destinationCountry`\
+        \ \n- `destinationAmount` \n- `initiatedAt` \n- `expiresAt` \n- `lastStateUpdatedAt`\
+        \ \n- `paymentLabel`\n\nIf an unsupported value is provided, the request fails\
+        \ with a validation error.\n"
       example: initiatedAt
       type: string
       x-enumDescriptions:
@@ -3108,8 +3114,9 @@ components:
         beneficiaryFinancialInstrumentId: 7ea3399c-1234-5678-8d8f-d320ea406630
         payout: BANK
         destinationCurrency: USD
+        selectedPaymentRail: XRP_LEDGER
         destinationCountry: US
-        destinationBlockchainNetwork: ETHEREUM
+        destinationBlockchainNetwork: "Ethereum, TRON"
         destinationAmount: 1234.111223
       properties:
         beneficiaryFinancialInstrumentId:
@@ -3143,7 +3150,7 @@ components:
         destinationBlockchainNetwork:
           description: The name of the blockchain network on which the beneficiary
             will receive this payment.
-          example: ETHEREUM
+          example: "Ethereum, TRON"
           maxLength: 20
           minLength: 1
           type: string
@@ -3164,6 +3171,11 @@ components:
         payout:
           description: The payout category for this payment.
           example: BANK
+          type: string
+        selectedPaymentRail:
+          description: |
+            The payment rail the customer selected when accepting the quote for this payment. Reflects the intended routing at the time of quote acceptance. For the rail confirmed by the payout partner at execution time, see `payoutExecutionDetails.paymentRailUsed`. These values may differ if the payout partner executed on an alternate rail.
+          example: XRP_LEDGER
           type: string
       type: object
     TransactionDetailsV2:
@@ -3238,7 +3250,7 @@ components:
       properties:
         paymentRailUsed:
           description: |
-            The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP_US, SPEI, FPS_UK).
+            The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP, SEPA).
           example: FEDWIRE
           type: string
         payoutStartTime:
@@ -3330,10 +3342,12 @@ components:
       properties:
         sortField:
           default: initiatedAt
-          description: |
-            The field to use when sorting payments in the requested sort order.
-            Currently supported values include: - `internalId` - `paymentState` - `sourceCurrency` - `sourceAmount` - `destinationCurrency` - `destinationCountry` - `destinationAmount` - `initiatedAt` - `expiresAt` - `lastStateUpdatedAt` - `paymentLabel`
-            If an unsupported value is provided, the request fails with a validation error.
+          description: "The field to use when sorting payments in the requested sort\
+            \ order.\n\nCurrently supported values include: \n- `internalId` \n- `paymentState`\
+            \ \n- `sourceCurrency` \n- `sourceAmount` \n- `destinationCurrency` \n\
+            - `destinationCountry` \n- `destinationAmount` \n- `initiatedAt` \n- `expiresAt`\
+            \ \n- `lastStateUpdatedAt` \n- `paymentLabel`\n\nIf an unsupported value\
+            \ is provided, the request fails with a validation error.\n"
           example: initiatedAt
           type: string
           x-enumDescriptions:
@@ -3403,10 +3417,10 @@ components:
             $ref: '#/components/schemas/PaymentStateV2'
           type: array
         filterRangeType:
-          description: |
-            The type of timestamp to use when filtering payments by a date and time range.
-            Supported values include: - `PAYMENT_CREATION` - `PAYMENT_EXPIRY` - `PAYMENT_STATUS_LAST_UPDATED`
-            If another value is provided, the filter is rejected with a validation error.
+          description: "The type of timestamp to use when filtering payments by a\
+            \ date and time range.\n\nSupported values include: \n- `PAYMENT_CREATION`\
+            \ \n- `PAYMENT_EXPIRY` \n- `PAYMENT_STATUS_LAST_UPDATED`\n\nIf another\
+            \ value is provided, the filter is rejected with a validation error.\n"
           example: PAYMENT_CREATION
           type: string
           x-enumDescriptions:
@@ -3458,8 +3472,8 @@ components:
         paymentLabels:
           description: "Application-defined labels for grouping and categorizing payments\
             \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
-            \ optional and mutable; they can be added or removed over the payment’\
-            s lifetime."
+            \ optional and mutable; they can be added or removed over the payment's\
+            \ lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -3468,10 +3482,10 @@ components:
           type: array
       type: object
     PaymentFilterRangeTypeV2:
-      description: |
-        The type of timestamp to use when filtering payments by a date and time range.
-        Supported values include: - `PAYMENT_CREATION` - `PAYMENT_EXPIRY` - `PAYMENT_STATUS_LAST_UPDATED`
-        If another value is provided, the filter is rejected with a validation error.
+      description: "The type of timestamp to use when filtering payments by a date\
+        \ and time range.\n\nSupported values include: \n- `PAYMENT_CREATION` \n-\
+        \ `PAYMENT_EXPIRY` \n- `PAYMENT_STATUS_LAST_UPDATED`\n\nIf another value is\
+        \ provided, the filter is rejected with a validation error.\n"
       example: PAYMENT_CREATION
       type: string
       x-enumDescriptions:
@@ -3481,7 +3495,7 @@ components:
     PaymentLabels:
       description: "Application-defined labels for grouping and categorizing payments\
         \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional\
-        \ and mutable; they can be added or removed over the payment’s lifetime."
+        \ and mutable; they can be added or removed over the payment's lifetime."
       items:
         example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
         maxLength: 100
@@ -3501,8 +3515,8 @@ components:
         labels:
           description: "Application-defined labels for grouping and categorizing payments\
             \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
-            \ optional and mutable; they can be added or removed over the payment’\
-            s lifetime."
+            \ optional and mutable; they can be added or removed over the payment's\
+            \ lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -3519,8 +3533,8 @@ components:
         labelsToAdd:
           description: "Application-defined labels for grouping and categorizing payments\
             \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
-            \ optional and mutable; they can be added or removed over the payment’\
-            s lifetime."
+            \ optional and mutable; they can be added or removed over the payment's\
+            \ lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -3530,8 +3544,8 @@ components:
         labelsToRemove:
           description: "Application-defined labels for grouping and categorizing payments\
             \ (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are\
-            \ optional and mutable; they can be added or removed over the payment’\
-            s lifetime."
+            \ optional and mutable; they can be added or removed over the payment's\
+            \ lifetime."
           items:
             example: batchId=aaaaaaaa-1111-bbbb-abab-123412341234
             maxLength: 100
@@ -4065,13 +4079,14 @@ components:
           updatedAt: 2023-11-03T18:26:00Z
         financialInstrument:
           country: MX
-          euSepa:
-            iban: iban
+          hkBankPayout:
+            swiftCode: swiftCode
             bankName: bankName
-          label: mexico bank account
-          usAch:
-            bankRoutingNumber: bankRoutingNumber
-            accountType: accountType
+            currency: currency
+            accountNumber: accountNumber
+            accountHolderName: accountHolderName
+          ghBankPayout:
+            bankCode: bankCode
             bankName: bankName
             accountNumber: accountNumber
           mxSpei:
@@ -4083,12 +4098,15 @@ components:
             bankName: bankName
             accountNumber: accountNumber
           createdAt: 2023-11-02T18:26:00Z
-          brPix:
-            bankCode: bankCode
-            branchNumber: branchNumber
-            pixKeyType: pixKeyType
+          cnCfxps:
+            swiftCode: swiftCode
             bankName: bankName
-            pixKey: pixKey
+            accountNumber: accountNumber
+            accountHolderName: accountHolderName
+          ugBankPayout:
+            bankCode: bankCode
+            bankName: bankName
+            accountNumber: accountNumber
           caEft:
             institutionNumber: institutionNumber
             transitNumber: transitNumber
@@ -4099,17 +4117,6 @@ components:
             bankName: bankName
             accountNumber: accountNumber
             sortCode: sortCode
-          usFedwire:
-            bankRoutingNumber: bankRoutingNumber
-            bankName: bankName
-            accountNumber: accountNumber
-          financialInstrumentId: 3fc74743-e7f3-414a-9fcf-eb8c1d52356a
-          brTed:
-            bankCode: bankCode
-            branchNumber: branchNumber
-            accountType: SAVINGS
-            bankName: bankName
-            accountNumber: accountNumber
           currency: MXN
           ngBankPayout:
             bankCode: bankCode
@@ -4117,6 +4124,81 @@ components:
             accountNumber: accountNumber
           financialInstrumentType: BR_PIX
           updatedAt: 2023-11-03T18:26:00Z
+          zmBankPayout:
+            bankCode: bankCode
+            bankName: bankName
+            accountNumber: accountNumber
+          euSepa:
+            iban: iban
+            bankName: bankName
+          cnIndividual:
+            bankCode: bankCode
+            bankName: bankName
+            accountNumber: accountNumber
+          solWallet:
+            cryptoInstitutionName: Bitso
+            supportedCorridors:
+            - SOLANA_USDC
+            - SOLANA_USDC
+            walletAddress: 7EcDhSYGxXyscszYEp35KHN8vvw3svAuLKTzXwCFLtV
+            network: SOLANA
+          cnTrade:
+            bankCode: bankCode
+            branchCity: branchCity
+            branchProvince: branchProvince
+            branchName: branchName
+            bankName: bankName
+            accountNumber: accountNumber
+            accountHolderName: accountHolderName
+          label: mexico bank account
+          usAch:
+            bankRoutingNumber: bankRoutingNumber
+            accountType: accountType
+            bankName: bankName
+            accountNumber: accountNumber
+          rwBankPayout:
+            bankCode: bankCode
+            bankName: bankName
+            accountNumber: accountNumber
+          cnIndividualTrade:
+            bankName: bankName
+            accountNumber: accountNumber
+            accountHolderName: accountHolderName
+          zaBankPayout:
+            bankCode: bankCode
+            bankName: bankName
+            accountNumber: accountNumber
+          brPix:
+            bankCode: bankCode
+            branchNumber: branchNumber
+            pixKeyType: pixKeyType
+            bankName: bankName
+            pixKey: pixKey
+          usFedwire:
+            bankRoutingNumber: bankRoutingNumber
+            bankName: bankName
+            accountNumber: accountNumber
+          financialInstrumentId: 3fc74743-e7f3-414a-9fcf-eb8c1d52356a
+          tronWallet:
+            cryptoInstitutionName: Bitso
+            supportedCorridors:
+            - TRON_USDT
+            - TRON_USDT
+            walletAddress: T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb
+            network: TRON
+          brTed:
+            bankCode: bankCode
+            branchNumber: branchNumber
+            accountType: SAVINGS
+            bankName: bankName
+            accountNumber: accountNumber
+          ethWallet:
+            cryptoInstitutionName: Bitso
+            supportedCorridors:
+            - ETH_USDT
+            - ETH_USDT
+            walletAddress: 0x742d35Cc6634C0532925a3b844Bc454e4438f44e
+            network: ETHEREUM
       properties:
         financialInstrument:
           $ref: '#/components/schemas/ripple-financial-instrument-entry'
@@ -4131,13 +4213,14 @@ components:
       description: This object contains the details of the updated financial instrument.
       example:
         country: MX
-        euSepa:
-          iban: iban
+        hkBankPayout:
+          swiftCode: swiftCode
           bankName: bankName
-        label: mexico bank account
-        usAch:
-          bankRoutingNumber: bankRoutingNumber
-          accountType: accountType
+          currency: currency
+          accountNumber: accountNumber
+          accountHolderName: accountHolderName
+        ghBankPayout:
+          bankCode: bankCode
           bankName: bankName
           accountNumber: accountNumber
         mxSpei:
@@ -4149,12 +4232,15 @@ components:
           bankName: bankName
           accountNumber: accountNumber
         createdAt: 2023-11-02T18:26:00Z
-        brPix:
-          bankCode: bankCode
-          branchNumber: branchNumber
-          pixKeyType: pixKeyType
+        cnCfxps:
+          swiftCode: swiftCode
           bankName: bankName
-          pixKey: pixKey
+          accountNumber: accountNumber
+          accountHolderName: accountHolderName
+        ugBankPayout:
+          bankCode: bankCode
+          bankName: bankName
+          accountNumber: accountNumber
         caEft:
           institutionNumber: institutionNumber
           transitNumber: transitNumber
@@ -4165,17 +4251,6 @@ components:
           bankName: bankName
           accountNumber: accountNumber
           sortCode: sortCode
-        usFedwire:
-          bankRoutingNumber: bankRoutingNumber
-          bankName: bankName
-          accountNumber: accountNumber
-        financialInstrumentId: 3fc74743-e7f3-414a-9fcf-eb8c1d52356a
-        brTed:
-          bankCode: bankCode
-          branchNumber: branchNumber
-          accountType: SAVINGS
-          bankName: bankName
-          accountNumber: accountNumber
         currency: MXN
         ngBankPayout:
           bankCode: bankCode
@@ -4183,6 +4258,81 @@ components:
           accountNumber: accountNumber
         financialInstrumentType: BR_PIX
         updatedAt: 2023-11-03T18:26:00Z
+        zmBankPayout:
+          bankCode: bankCode
+          bankName: bankName
+          accountNumber: accountNumber
+        euSepa:
+          iban: iban
+          bankName: bankName
+        cnIndividual:
+          bankCode: bankCode
+          bankName: bankName
+          accountNumber: accountNumber
+        solWallet:
+          cryptoInstitutionName: Bitso
+          supportedCorridors:
+          - SOLANA_USDC
+          - SOLANA_USDC
+          walletAddress: 7EcDhSYGxXyscszYEp35KHN8vvw3svAuLKTzXwCFLtV
+          network: SOLANA
+        cnTrade:
+          bankCode: bankCode
+          branchCity: branchCity
+          branchProvince: branchProvince
+          branchName: branchName
+          bankName: bankName
+          accountNumber: accountNumber
+          accountHolderName: accountHolderName
+        label: mexico bank account
+        usAch:
+          bankRoutingNumber: bankRoutingNumber
+          accountType: accountType
+          bankName: bankName
+          accountNumber: accountNumber
+        rwBankPayout:
+          bankCode: bankCode
+          bankName: bankName
+          accountNumber: accountNumber
+        cnIndividualTrade:
+          bankName: bankName
+          accountNumber: accountNumber
+          accountHolderName: accountHolderName
+        zaBankPayout:
+          bankCode: bankCode
+          bankName: bankName
+          accountNumber: accountNumber
+        brPix:
+          bankCode: bankCode
+          branchNumber: branchNumber
+          pixKeyType: pixKeyType
+          bankName: bankName
+          pixKey: pixKey
+        usFedwire:
+          bankRoutingNumber: bankRoutingNumber
+          bankName: bankName
+          accountNumber: accountNumber
+        financialInstrumentId: 3fc74743-e7f3-414a-9fcf-eb8c1d52356a
+        tronWallet:
+          cryptoInstitutionName: Bitso
+          supportedCorridors:
+          - TRON_USDT
+          - TRON_USDT
+          walletAddress: T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb
+          network: TRON
+        brTed:
+          bankCode: bankCode
+          branchNumber: branchNumber
+          accountType: SAVINGS
+          bankName: bankName
+          accountNumber: accountNumber
+        ethWallet:
+          cryptoInstitutionName: Bitso
+          supportedCorridors:
+          - ETH_USDT
+          - ETH_USDT
+          walletAddress: 0x742d35Cc6634C0532925a3b844Bc454e4438f44e
+          network: ETHEREUM
       required:
       - financialInstrumentId
       type: object
@@ -4263,9 +4413,11 @@ components:
           - BR_PIX
           - BR_TED
           - CO_PSE
+          - CL_TEF
           x-requiredByOriginatorFor:
           - BR_PIX
           - BR_TED
+          - CL_TEF
         phone:
           description: Phone Number
           example: "1234567890"
@@ -4277,10 +4429,29 @@ components:
           - BR_PIX
           - BR_TED
           - NG_BANK_PAYOUT
+          - GH_BANK_PAYOUT
+          - RW_BANK_PAYOUT
+          - ZA_BANK_PAYOUT
+          - UG_BANK_PAYOUT
+          - ZM_BANK_PAYOUT
+          - CO_PSE
+          - ID_BIFAST
+          - CL_TEF
+          - IN_NEFT
+          - SG_GIRO
           x-requiredByOriginatorFor:
           - BR_PIX
           - BR_TED
           - NG_BANK_PAYOUT
+          - ID_BIFAST
+          - CL_TEF
+          - IN_NEFT
+          - GH_BANK_PAYOUT
+          - RW_BANK_PAYOUT
+          - ZA_BANK_PAYOUT
+          - UG_BANK_PAYOUT
+          - ZM_BANK_PAYOUT
+          - SG_GIRO
         registration:
           description: "Unique and unambiguous way to identify a business or organization.\
             \ An array of objects, each containing unique identification of an organization,\
@@ -4294,11 +4465,46 @@ components:
           - CO_PSE
           - CA_EFT
           - NG_BANK_PAYOUT
+          - GH_BANK_PAYOUT
+          - RW_BANK_PAYOUT
+          - ZA_BANK_PAYOUT
+          - UG_BANK_PAYOUT
+          - ZM_BANK_PAYOUT
+          - CN_TRADE
+          - CN_CFXPS
+          - ETH_WALLET
+          - XRPL_WALLET
+          - TRON_WALLET
+          - SOL_WALLET
+          - CL_TEF
+          - ID_BIFAST
+          - IN_NEFT
+          - SG_GIRO
           x-requiredByOriginatorFor:
           - CA_EFT
           - BR_PIX
           - BR_TED
           - EU_SEPA
+          - SWIFT
+          - HK_BANK_PAYOUT
+          - CN_TRADE
+          - CN_INDIVIDUAL
+          - CN_INDIVIDUAL_TRADE
+          - CN_CFXPS
+          - NG_BANK_PAYOUT
+          - GH_BANK_PAYOUT
+          - RW_BANK_PAYOUT
+          - ZA_BANK_PAYOUT
+          - UG_BANK_PAYOUT
+          - ZM_BANK_PAYOUT
+          - GB_FPS
+          - CL_TEF
+          - ID_BIFAST
+          - IN_NEFT
+          - SG_GIRO
+          - TR_FAST
+          - AE_IPI
+          - SG_MEPS
         incorporationCountry:
           description: "Information that locates and identifies the country, as defined\
             \ by postal services where the organization was incorporated. Use Alpha-2\
@@ -4312,14 +4518,41 @@ components:
           - BR_PIX
           - BR_TED
           - NG_BANK_PAYOUT
+          - ID_BIFAST
+          - CL_TEF
+          - IN_NEFT
+          - GH_BANK_PAYOUT
+          - RW_BANK_PAYOUT
+          - ZA_BANK_PAYOUT
+          - UG_BANK_PAYOUT
+          - ZM_BANK_PAYOUT
+          - SG_GIRO
           x-requiredByOriginatorFor:
           - BR_PIX
           - BR_TED
+          - SWIFT
+          - HK_BANK_PAYOUT
+          - CL_TEF
+          - ID_BIFAST
+          - IN_NEFT
+          - SG_GIRO
+          - SG_MEPS
         incorporationDate:
           description: The date when the business was incorporated.
           example: 2020-01-15
           format: date
           type: string
+          x-requiredByBeneficiaryFor:
+          - SWIFT
+          - HK_BANK_PAYOUT
+          - SG_MEPS
+          x-requiredByOriginatorFor:
+          - SWIFT
+          - HK_BANK_PAYOUT
+          - ID_BIFAST
+          - IN_NEFT
+          - SG_GIRO
+          - SG_MEPS
         legalEntityType:
           description: |
             Type of legal entity to distinguish between Financial Institutions and Non-Financial Institutions.
@@ -4385,6 +4618,10 @@ components:
           - BR_PIX
           - BR_TED
           - CO_PSE
+          - CL_TEF
+          x-requiredByOriginatorFor:
+          - BR_PIX
+          - CL_TEF
         phone:
           description: Phone Number
           example: "1234567890"
@@ -4396,6 +4633,29 @@ components:
           - BR_PIX
           - BR_TED
           - NG_BANK_PAYOUT
+          - GH_BANK_PAYOUT
+          - RW_BANK_PAYOUT
+          - ZA_BANK_PAYOUT
+          - UG_BANK_PAYOUT
+          - ZM_BANK_PAYOUT
+          - CN_INDIVIDUAL
+          - CO_PSE
+          - CL_TEF
+          - ID_BIFAST
+          - IN_NEFT
+          - SG_GIRO
+          x-requiredByOriginatorFor:
+          - BR_PIX
+          - NG_BANK_PAYOUT
+          - ID_BIFAST
+          - CL_TEF
+          - IN_NEFT
+          - GH_BANK_PAYOUT
+          - RW_BANK_PAYOUT
+          - ZA_BANK_PAYOUT
+          - UG_BANK_PAYOUT
+          - ZM_BANK_PAYOUT
+          - SG_GIRO
         identityDocuments:
           description: Gathers identifying documentation
           items:
@@ -4406,9 +4666,28 @@ components:
           - BR_TED
           - CO_PSE
           - NG_BANK_PAYOUT
+          - GH_BANK_PAYOUT
+          - RW_BANK_PAYOUT
+          - ZA_BANK_PAYOUT
+          - UG_BANK_PAYOUT
+          - ZM_BANK_PAYOUT
+          - CN_INDIVIDUAL
+          - CN_INDIVIDUAL_TRADE
+          - ID_BIFAST
+          - CL_TEF
+          - IN_NEFT
+          - SG_GIRO
           x-requiredByOriginatorFor:
           - BR_PIX
           - BR_TED
+          - SWIFT
+          - HK_BANK_PAYOUT
+          - CN_INDIVIDUAL
+          - CL_TEF
+          - ID_BIFAST
+          - IN_NEFT
+          - SG_GIRO
+          - SG_MEPS
         dateOfBirth:
           description: Date of Birth.
           example: 2001-01-24
@@ -4421,11 +4700,24 @@ components:
           - BR_PIX
           - BR_TED
           - CA_EFT
+          - SWIFT
+          - HK_BANK_PAYOUT
+          - CL_TEF
+          - SG_MEPS
           x-requiredByOriginatorFor:
           - EU_SEPA
           - GB_FPS
           - BR_PIX
           - BR_TED
+          - SWIFT
+          - HK_BANK_PAYOUT
+          - ID_BIFAST
+          - CL_TEF
+          - IN_NEFT
+          - SG_GIRO
+          - TR_FAST
+          - AE_IPI
+          - SG_MEPS
         countryOfBirth:
           description: "Country of Birth. Use Alpha-2 Code as defined in the [ISO\
             \ CountryCode ISO 3166-1](https://www.iso.org/obp/ui/#search) list."
@@ -4436,8 +4728,14 @@ components:
           type: string
           x-requiredByOriginatorFor:
           - NG_BANK_PAYOUT
+          - GH_BANK_PAYOUT
+          - RW_BANK_PAYOUT
+          - ZA_BANK_PAYOUT
+          - UG_BANK_PAYOUT
+          - ZM_BANK_PAYOUT
           - BR_PIX
           - BR_TED
+          - CL_TEF
         citizenship:
           description: Alpha-2 country code for the nationality of the individual
             in ISO 3166-1 format.
@@ -4450,15 +4748,40 @@ components:
           - BR_PIX
           - BR_TED
           - NG_BANK_PAYOUT
+          - GH_BANK_PAYOUT
+          - RW_BANK_PAYOUT
+          - ZA_BANK_PAYOUT
+          - UG_BANK_PAYOUT
+          - ZM_BANK_PAYOUT
+          - SWIFT
+          - HK_BANK_PAYOUT
+          - CL_TEF
+          - IN_NEFT
+          - ID_BIFAST
+          - SG_GIRO
+          - SG_MEPS
           x-requiredByOriginatorFor:
           - BR_PIX
           - BR_TED
+          - SWIFT
+          - HK_BANK_PAYOUT
+          - CN_INDIVIDUAL
+          - CL_TEF
+          - ID_BIFAST
+          - IN_NEFT
+          - SG_GIRO
+          - SG_MEPS
         gender:
           description: Gender of the identity.
           example: FEMALE
           type: string
           x-requiredByBeneficiaryFor:
           - NG_BANK_PAYOUT
+          - GH_BANK_PAYOUT
+          - RW_BANK_PAYOUT
+          - ZA_BANK_PAYOUT
+          - UG_BANK_PAYOUT
+          - ZM_BANK_PAYOUT
           x-extensible-enum:
           - MALE
           - FEMALE
@@ -4524,10 +4847,23 @@ components:
       - EU_SEPA
       - GB_FPS
       - NG_BANK_PAYOUT
+      - GH_BANK_PAYOUT
+      - RW_BANK_PAYOUT
+      - ZA_BANK_PAYOUT
+      - UG_BANK_PAYOUT
+      - ZM_BANK_PAYOUT
+      - ETH_WALLET
+      - TRON_WALLET
+      - SOL_WALLET
       - BR_PIX
       - CO_PSE
       - BR_TED
       - CA_EFT
+      - HK_BANK_PAYOUT
+      - CN_TRADE
+      - CN_INDIVIDUAL
+      - CN_INDIVIDUAL_TRADE
+      - CN_CFXPS
       x-enumDescriptions:
         US_ACH: Automated Clearing House - U.S. batch processing network used for
           domestic payments.
@@ -4539,11 +4875,36 @@ components:
         GB_FPS: Faster Payments Service in the UK for near-instant payments.
         NG_BANK_PAYOUT: Nigeria Bank Payout - A payment method for bank transfers
           in Nigeria.
+        GH_BANK_PAYOUT: Ghana Bank Payout - A payment method for bank transfers in
+          Ghana.
+        RW_BANK_PAYOUT: Rwanda Bank Payout - A payment method for bank transfers in
+          Rwanda.
+        ZA_BANK_PAYOUT: South Africa Bank Payout - A payment method for bank transfers
+          in South Africa.
+        UG_BANK_PAYOUT: Uganda Bank Payout - A payment method for bank transfers in
+          Uganda.
+        ZM_BANK_PAYOUT: Zambia Bank Payout - A payment method for bank transfers in
+          Zambia.
+        ETH_WALLET: Ethereum-based crypto transactions using blockchain wallet addresses.
+        TRON_WALLET: Tron-based crypto transactions using blockchain wallet addresses.
+        SOL_WALLET: Solana-based crypto transactions using blockchain wallet addresses.
         BR_PIX: Brazil's instant payment platform developed by the Central Bank of
           Brazil.
         CO_PSE: Colombia's secure online banking payment system.
         BR_TED: Brazil's Electronic Funds Transfer system for high-value transactions.
         CA_EFT: Canada's Electronic Funds Transfer system for batch processing.
+        HK_BANK_PAYOUT: Hong Kong Bank Payout - Payment rail for bank account transfers
+          in Hong Kong using BBAN account numbers.
+        CN_TRADE: "China domestic CNY trade payments (B2B/B2B2B) with full bank routing.\
+          \ Settlement rail is automatically selected from CNAPS, SIB/IBPS, CUP, or\
+          \ NUCC."
+        CN_INDIVIDUAL: "China domestic CNY payments to individuals (B2C/B2B2C/C2B2C)\
+          \ for payroll, remittances, and family support. Multi-rail (CUP, CNAPS).\
+          \ Lightweight FI schema with bankName, bankCode, and accountNumber."
+        CN_INDIVIDUAL_TRADE: China domestic CNY trade/goods & services payments to
+          individuals (B2C/B2B2C) requiring business name and account holder name.
+        CN_CFXPS: "Cross-border Foreign Exchange Payment System, enabling USD business-to-business\
+          \ transfers to China via SWIFT/BIC routing."
     put-ripple-identity:
       description: |
         Request to update an existing identity.
@@ -4569,10 +4930,12 @@ components:
       - AED
       - BRL
       - CAD
+      - CNY
       - COP
       - EUR
       - GBP
       - GHS
+      - HKD
       - MXN
       - NGN
       - RWF
@@ -4613,10 +4976,23 @@ components:
           - EU_SEPA
           - GB_FPS
           - NG_BANK_PAYOUT
+          - GH_BANK_PAYOUT
+          - RW_BANK_PAYOUT
+          - ZA_BANK_PAYOUT
+          - UG_BANK_PAYOUT
+          - ZM_BANK_PAYOUT
+          - ETH_WALLET
+          - TRON_WALLET
+          - SOL_WALLET
           - BR_PIX
           - CO_PSE
           - BR_TED
           - CA_EFT
+          - HK_BANK_PAYOUT
+          - CN_TRADE
+          - CN_INDIVIDUAL
+          - CN_INDIVIDUAL_TRADE
+          - CN_CFXPS
           x-enumDescriptions:
             US_ACH: Automated Clearing House - U.S. batch processing network used
               for domestic payments.
@@ -4628,11 +5004,38 @@ components:
             GB_FPS: Faster Payments Service in the UK for near-instant payments.
             NG_BANK_PAYOUT: Nigeria Bank Payout - A payment method for bank transfers
               in Nigeria.
+            GH_BANK_PAYOUT: Ghana Bank Payout - A payment method for bank transfers
+              in Ghana.
+            RW_BANK_PAYOUT: Rwanda Bank Payout - A payment method for bank transfers
+              in Rwanda.
+            ZA_BANK_PAYOUT: South Africa Bank Payout - A payment method for bank transfers
+              in South Africa.
+            UG_BANK_PAYOUT: Uganda Bank Payout - A payment method for bank transfers
+              in Uganda.
+            ZM_BANK_PAYOUT: Zambia Bank Payout - A payment method for bank transfers
+              in Zambia.
+            ETH_WALLET: Ethereum-based crypto transactions using blockchain wallet
+              addresses.
+            TRON_WALLET: Tron-based crypto transactions using blockchain wallet addresses.
+            SOL_WALLET: Solana-based crypto transactions using blockchain wallet addresses.
             BR_PIX: Brazil's instant payment platform developed by the Central Bank
               of Brazil.
             CO_PSE: Colombia's secure online banking payment system.
             BR_TED: Brazil's Electronic Funds Transfer system for high-value transactions.
             CA_EFT: Canada's Electronic Funds Transfer system for batch processing.
+            HK_BANK_PAYOUT: Hong Kong Bank Payout - Payment rail for bank account
+              transfers in Hong Kong using BBAN account numbers.
+            CN_TRADE: "China domestic CNY trade payments (B2B/B2B2B) with full bank\
+              \ routing. Settlement rail is automatically selected from CNAPS, SIB/IBPS,\
+              \ CUP, or NUCC."
+            CN_INDIVIDUAL: "China domestic CNY payments to individuals (B2C/B2B2C/C2B2C)\
+              \ for payroll, remittances, and family support. Multi-rail (CUP, CNAPS).\
+              \ Lightweight FI schema with bankName, bankCode, and accountNumber."
+            CN_INDIVIDUAL_TRADE: China domestic CNY trade/goods & services payments
+              to individuals (B2C/B2B2C) requiring business name and account holder
+              name.
+            CN_CFXPS: "Cross-border Foreign Exchange Payment System, enabling USD\
+              \ business-to-business transfers to China via SWIFT/BIC routing."
         currency:
           description: The 3-letter ISO currency code of the financial instrument.
           example: MXN
@@ -4641,10 +5044,12 @@ components:
           - AED
           - BRL
           - CAD
+          - CNY
           - COP
           - EUR
           - GBP
           - GHS
+          - HKD
           - MXN
           - NGN
           - RWF
@@ -4660,8 +5065,8 @@ components:
           example: mexico bank account
           type: string
         country:
-          description: The 2-letter ISO 3166-1 alpha-2 country code of the financial
-            instrument.
+          description: |
+            The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, TRON_WALLET, SOL_WALLET), this field returns `ZZ`, the ISO 3166-1 user-assigned code used when no country jurisdiction applies.
           example: MX
           maxLength: 2
           minLength: 2
@@ -4735,7 +5140,7 @@ components:
           pattern: ^\d+$
           type: string
         accountType:
-          description: The identity’s account type.
+          description: The identity's account type.
           type: string
           x-extensible-enum:
           - CHECKING
@@ -4774,7 +5179,7 @@ components:
             /()-]+(?<![ .,'&\\/-])?$"
           type: string
         bankRoutingNumber:
-          description: 9-digit ABA Routing Transit Number (RTN) of the beneficiary’s
+          description: 9-digit ABA Routing Transit Number (RTN) of the beneficiary's
             bank.
           maxLength: 9
           minLength: 9
@@ -4939,6 +5344,378 @@ components:
       - accountNumber
       - bankCode
       - bankName
+      type: object
+    gh-bank-payout:
+      description: |
+        Rails: GIP
+
+        Rail Definitions:
+          GIP:
+            - Availability: 24/7/365
+            - Limit: ₵100,000
+            - Settlement: Real time to 48 hours
+            - Cut-off time: Real time
+            - Banking holidays: Applicable
+
+        Routing Evaluation Order:
+          1. GIP – Conditions: Account addressability, amount ≤ ₵100,000
+      example:
+        bankCode: bankCode
+        bankName: bankName
+        accountNumber: accountNumber
+      properties:
+        bankName:
+          description: The name of the identity's bank
+          maxLength: 140
+          minLength: 2
+          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
+            /()-]+(?<![ .,'&\\/-])?$"
+          type: string
+        bankCode:
+          description: The bank code of the identity's bank
+          maxLength: 50
+          minLength: 1
+          pattern: "^[A-Za-z0-9 ._-]+$"
+          type: string
+        accountNumber:
+          description: The identity's account number associated with the Account Identification
+            Scheme
+          maxLength: 21
+          minLength: 4
+          pattern: "^[a-zA-Z0-9]+$"
+          type: string
+      required:
+      - accountNumber
+      - bankCode
+      - bankName
+      type: object
+    rw-bank-payout:
+      description: |
+        Rails: RSwitch
+
+        Rail Definitions:
+          RSwitch:
+            - Availability: 24/7/365
+            - Limit: RWF 10,000,000
+            - Settlement: Real time to 48 hours
+            - Cut-off time: Real time
+            - Banking holidays: Applicable
+
+        Routing Evaluation Order:
+          1. RSwitch – Conditions: Account addressability, amount ≤ RWF 10,000,000
+      example:
+        bankCode: bankCode
+        bankName: bankName
+        accountNumber: accountNumber
+      properties:
+        bankName:
+          description: The name of the identity's bank
+          maxLength: 140
+          minLength: 2
+          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
+            /()-]+(?<![ .,'&\\/-])?$"
+          type: string
+        bankCode:
+          description: The bank code of the identity's bank
+          maxLength: 50
+          minLength: 1
+          pattern: "^[A-Za-z0-9 ._-]+$"
+          type: string
+        accountNumber:
+          description: The identity's account number associated with the Account Identification
+            Scheme
+          maxLength: 21
+          minLength: 4
+          pattern: "^[a-zA-Z0-9]+$"
+          type: string
+      required:
+      - accountNumber
+      - bankCode
+      - bankName
+      type: object
+    za-bank-payout:
+      description: |
+        Rails: Bank Payout
+
+        Rail Definitions:
+          Bank Payout:
+            - Availability: 24/7/365
+            - Limit: R 300,000
+            - Settlement: Real time to 48 hours
+            - Cut-off time: Real time
+            - Banking holidays: Applicable
+
+        Routing Evaluation Order:
+          1. Bank Payout – Conditions: Account addressability, amount ≤ R 300,000
+      example:
+        bankCode: bankCode
+        bankName: bankName
+        accountNumber: accountNumber
+      properties:
+        bankName:
+          description: The name of the identity's bank
+          maxLength: 140
+          minLength: 2
+          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
+            /()-]+(?<![ .,'&\\/-])?$"
+          type: string
+        bankCode:
+          description: The bank code of the identity's bank
+          maxLength: 50
+          minLength: 1
+          pattern: "^[A-Za-z0-9 ._-]+$"
+          type: string
+        accountNumber:
+          description: The identity's account number associated with the Account Identification
+            Scheme
+          maxLength: 21
+          minLength: 4
+          pattern: "^[a-zA-Z0-9]+$"
+          type: string
+      required:
+      - accountNumber
+      - bankCode
+      - bankName
+      type: object
+    ug-bank-payout:
+      description: |
+        Rails: Bank Payout
+
+        Rail Definitions:
+          Bank Payout:
+            - Availability: 24/7/365
+            - Limit: UGX 20,000
+            - Settlement: Real time to 48 hours
+            - Cut-off time: Real time
+            - Banking holidays: Applicable
+
+        Routing Evaluation Order:
+          1. Bank Payout – Conditions: Account addressability, amount ≤ UGX 20,000
+      example:
+        bankCode: bankCode
+        bankName: bankName
+        accountNumber: accountNumber
+      properties:
+        bankName:
+          description: The name of the identity's bank
+          maxLength: 140
+          minLength: 2
+          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
+            /()-]+(?<![ .,'&\\/-])?$"
+          type: string
+        bankCode:
+          description: The bank code of the identity's bank
+          maxLength: 50
+          minLength: 1
+          pattern: "^[A-Za-z0-9 ._-]+$"
+          type: string
+        accountNumber:
+          description: The identity's account number associated with the Account Identification
+            Scheme
+          maxLength: 21
+          minLength: 4
+          pattern: "^[a-zA-Z0-9]+$"
+          type: string
+      required:
+      - accountNumber
+      - bankCode
+      - bankName
+      type: object
+    zm-bank-payout:
+      description: |
+        Rails: Bank Payout
+
+        Rail Definitions:
+          Bank Payout:
+            - Availability: 24/7/365
+            - Limit: ZK 150,000
+            - Settlement: Real time to 48 hours
+            - Cut-off time: Real time
+            - Banking holidays: Applicable
+
+        Routing Evaluation Order:
+          1. Bank Payout – Conditions: Account addressability, amount ≤ ZK 150,000
+      example:
+        bankCode: bankCode
+        bankName: bankName
+        accountNumber: accountNumber
+      properties:
+        bankName:
+          description: The name of the identity's bank
+          maxLength: 140
+          minLength: 2
+          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
+            /()-]+(?<![ .,'&\\/-])?$"
+          type: string
+        bankCode:
+          description: The bank code of the identity's bank
+          maxLength: 50
+          minLength: 1
+          pattern: "^[A-Za-z0-9 ._-]+$"
+          type: string
+        accountNumber:
+          description: The identity's account number associated with the Account Identification
+            Scheme
+          maxLength: 21
+          minLength: 4
+          pattern: "^[a-zA-Z0-9]+$"
+          type: string
+      required:
+      - accountNumber
+      - bankCode
+      - bankName
+      type: object
+    eth-wallet:
+      description: |
+        Rails: CRYPTO
+
+        Rail Definitions:
+
+        CRYPTO:
+          - Availability: 24/7/365
+          - Limit: None
+          - Settlement: Blockchain dependent
+          - Cut-off time: None
+          - Banking holidays: Not applicable
+
+        Routing Policy: Not applicable
+      example:
+        cryptoInstitutionName: Bitso
+        supportedCorridors:
+        - ETH_USDT
+        - ETH_USDT
+        walletAddress: 0x742d35Cc6634C0532925a3b844Bc454e4438f44e
+        network: ETHEREUM
+      properties:
+        walletAddress:
+          description: Receiving wallet address at the exchange
+          example: 0x742d35Cc6634C0532925a3b844Bc454e4438f44e
+          maxLength: 42
+          minLength: 42
+          pattern: "^0x[a-fA-F0-9]+$"
+          type: string
+        cryptoInstitutionName:
+          description: Name of the crypto exchange
+          example: Bitso
+          type: string
+        network:
+          default: ETHEREUM
+          description: The default name of the blockchain network for this instrument
+          readOnly: true
+          type: string
+        supportedCorridors:
+          description: The list of supported corridors for the payout method
+          items:
+            enum:
+            - ETH_USDT
+            - ETH_USDC
+            - ETH_RLUSD
+            type: string
+          readOnly: true
+          type: array
+      required:
+      - cryptoInstitutionName
+      - walletAddress
+      type: object
+    tron-wallet:
+      description: |
+        Rails: CRYPTO
+
+        Rail Definitions:
+
+        CRYPTO:
+          - Availability: 24/7/365
+          - Limit: None
+          - Settlement: Blockchain dependent
+          - Cut-off time: None
+          - Banking holidays: Not applicable
+
+        Routing Policy: Not applicable
+      example:
+        cryptoInstitutionName: Bitso
+        supportedCorridors:
+        - TRON_USDT
+        - TRON_USDT
+        walletAddress: T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb
+        network: TRON
+      properties:
+        walletAddress:
+          description: Receiving wallet address at the exchange
+          example: T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb
+          maxLength: 34
+          minLength: 34
+          pattern: "^T[1-9A-HJ-NP-Za-km-z]+$"
+          type: string
+        cryptoInstitutionName:
+          description: Name of the crypto exchange
+          example: Bitso
+          type: string
+        network:
+          default: TRON
+          description: The default name of the blockchain network for this instrument
+          readOnly: true
+          type: string
+        supportedCorridors:
+          description: The list of supported corridors for the payout method
+          items:
+            enum:
+            - TRON_USDT
+            type: string
+          readOnly: true
+          type: array
+      required:
+      - cryptoInstitutionName
+      - walletAddress
+      type: object
+    sol-wallet:
+      description: |
+        Rails: CRYPTO
+
+        Rail Definitions:
+
+        CRYPTO:
+          - Availability: 24/7/365
+          - Limit: None
+          - Settlement: Blockchain dependent
+          - Cut-off time: None
+          - Banking holidays: Not applicable
+
+        Routing Policy: Not applicable
+      example:
+        cryptoInstitutionName: Bitso
+        supportedCorridors:
+        - SOLANA_USDC
+        - SOLANA_USDC
+        walletAddress: 7EcDhSYGxXyscszYEp35KHN8vvw3svAuLKTzXwCFLtV
+        network: SOLANA
+      properties:
+        walletAddress:
+          description: Receiving wallet address at the exchange
+          example: 7EcDhSYGxXyscszYEp35KHN8vvw3svAuLKTzXwCFLtV
+          maxLength: 44
+          minLength: 32
+          pattern: "^[1-9A-HJ-NP-Za-km-z]+$"
+          type: string
+        cryptoInstitutionName:
+          description: Name of the crypto exchange
+          example: Bitso
+          type: string
+        network:
+          default: SOLANA
+          description: The default name of the blockchain network for this instrument
+          readOnly: true
+          type: string
+        supportedCorridors:
+          description: The list of supported corridors for the payout method
+          items:
+            enum:
+            - SOLANA_USDC
+            type: string
+          readOnly: true
+          type: array
+      required:
+      - cryptoInstitutionName
+      - walletAddress
       type: object
     br-pix:
       description: |
@@ -5163,7 +5940,7 @@ components:
           pattern: ^\d+$
           type: string
         accountType:
-          description: The identity’s account type.
+          description: The identity's account type.
           type: string
           x-extensible-enum:
           - CHECKING
@@ -5177,6 +5954,313 @@ components:
       - bankName
       - institutionNumber
       - transitNumber
+      type: object
+    hk-bank-payout:
+      description: |
+        Rails: Bank Payout
+
+        Rail Definitions:
+
+        Bank Payout:
+        - Availability: Business days only
+        - Limit: None
+        - Settlement: Same-day to T+1
+        - Cut-off time: Bank-dependent
+        - Banking holidays: Hong Kong banking holidays apply
+
+        Routing Evaluation Order: Not applicable
+      example:
+        swiftCode: swiftCode
+        bankName: bankName
+        currency: currency
+        accountNumber: accountNumber
+        accountHolderName: accountHolderName
+      properties:
+        bankName:
+          description: The name of the beneficiary's bank
+          maxLength: 140
+          minLength: 2
+          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
+            /()-]+(?<![ .,'&\\/-])?$"
+          type: string
+        accountNumber:
+          description: Bank account number (BBAN)
+          maxLength: 30
+          minLength: 2
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+        accountHolderName:
+          description: Name of the account holder
+          maxLength: 100
+          minLength: 1
+          pattern: "^[\\p{L}\\p{N} .,'&\\/()-]+$"
+          type: string
+        swiftCode:
+          description: SWIFT/BIC code of the bank
+          maxLength: 11
+          minLength: 8
+          pattern: "^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$"
+          type: string
+        currency:
+          description: Currency code. Only HKD is supported for Hong Kong Bank Payout.
+          maxLength: 5
+          minLength: 3
+          pattern: "^[A-Z]+$"
+          type: string
+      required:
+      - accountHolderName
+      - accountNumber
+      - bankName
+      - swiftCode
+      type: object
+    cn-trade:
+      description: |
+        Rails: CNAPS, SIB (IBPS), CUP, NUCC
+
+        Rail Definitions:
+
+        CNAPS:
+        - Availability: Business days and banking hours only (HVPS); batch throughout day (BEPS)
+        - Limit: No limit (HVPS); CNY 50,000 (BEPS)
+        - Settlement: Same-day (HVPS real-time gross; BEPS batched)
+        - Cut-off time: 5:00 PM CST (varies by bank)
+        - Banking holidays: China banking holidays apply
+
+        SIB / IBPS (Super Internet Banking / Internet Banking Payment System):
+        - Availability: 24/7/365
+        - Limit: Varies by bank
+        - Settlement: Real-time or near real-time
+        - Cut-off time: None
+        - Banking holidays: Not applicable
+
+        CUP (China UnionPay):
+        - Availability: 24/7/365
+        - Limit: Varies by bank and account type
+        - Settlement: Real-time or near real-time
+        - Cut-off time: None
+        - Banking holidays: Not applicable
+
+        NUCC (NetsUnion Clearing Corporation):
+        - Availability: 24/7/365
+        - Limit: Varies
+        - Settlement: Real-time or near real-time
+        - Cut-off time: None
+        - Banking holidays: Not applicable
+
+        Routing Evaluation Order: Determined at runtime based on transaction type, amount, and operational conditions. All rails use the same CNAPS bank codes for routing.
+
+        Purpose codes: GDDS (Goods), SCVE (Services) — trade-only.
+      example:
+        bankCode: bankCode
+        branchCity: branchCity
+        branchProvince: branchProvince
+        branchName: branchName
+        bankName: bankName
+        accountNumber: accountNumber
+        accountHolderName: accountHolderName
+      properties:
+        bankName:
+          description: Beneficiary Bank Name. Looked up from bankCode.
+          maxLength: 140
+          minLength: 2
+          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
+            /()-]+(?<![ .,'&\\/-])?$"
+          type: string
+        bankCode:
+          description: Ripple Bank Code for the destination bank. Use the Ripple Bank
+            Codes lookup at docs.ripple.com to find the correct code.
+          maxLength: 32
+          minLength: 1
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+        branchName:
+          description: Beneficiary Branch Name (Hanzi). Branch name in Chinese Hanzi
+            characters.
+          maxLength: 200
+          minLength: 1
+          pattern: "^[\\p{L}\\p{N} .,'&\\/()-]+$"
+          type: string
+        branchProvince:
+          description: "Beneficiary Bank Branch Province. Province/region codes —\
+            \ 34 values published on Docs (e.g., 110000=北京, 310000=上海)."
+          maxLength: 6
+          minLength: 2
+          pattern: "^[0-9]+$"
+          type: string
+        branchCity:
+          description: "Beneficiary Bank Branch City. City codes — 700+ values published\
+            \ on Docs (e.g., 110000=北京, 130100=石家庄)."
+          maxLength: 6
+          minLength: 2
+          pattern: "^[0-9]+$"
+          type: string
+        accountNumber:
+          description: Beneficiary Account Number.
+          maxLength: 45
+          minLength: 1
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+        accountHolderName:
+          description: Beneficiary Account Holder Name (Hanzi). Account name in Chinese
+            Hanzi characters.
+          maxLength: 140
+          minLength: 1
+          pattern: "^[\\p{L}\\p{N} .,'&\\/()-]+$"
+          type: string
+      required:
+      - accountHolderName
+      - accountNumber
+      - bankCode
+      - bankName
+      - branchCity
+      - branchName
+      - branchProvince
+      type: object
+    cn-individual:
+      description: |
+        Rails: CUP (China UnionPay), CNAPS
+
+        Rail Definitions:
+
+        CUP (China UnionPay):
+        - Availability: 24/7/365
+        - Limit: Varies by bank and account type
+        - Settlement: Real-time or near real-time
+        - Cut-off time: None
+        - Banking holidays: Not applicable
+
+        CNAPS:
+        - Availability: Business days and banking hours only (HVPS); batch throughout day (BEPS)
+        - Limit: No limit (HVPS); CNY 30,000 limit to individuals;
+        - Settlement: Same-day (HVPS real-time gross; BEPS batched)
+        - Cut-off time: 5:00 PM CST (varies by bank)
+        - Banking holidays: China banking holidays apply
+
+        Routing Evaluation Order: Determined at runtime. CUP is the primary rail for card-based account routing. CNAPS may be used for bank account routing depending on account type.
+      example:
+        bankCode: bankCode
+        bankName: bankName
+        accountNumber: accountNumber
+      properties:
+        bankName:
+          description: Beneficiary Bank Name in English. Published list available
+            at docs.ripple.com.
+          maxLength: 140
+          minLength: 2
+          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
+            /()-]+(?<![ .,'&\\/-])?$"
+          type: string
+        bankCode:
+          description: Beneficiary Bank Code. Published bank code list at docs.ripple.com.
+          maxLength: 16
+          minLength: 1
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+        accountNumber:
+          description: Beneficiary Account Number.
+          maxLength: 45
+          minLength: 1
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+      required:
+      - accountNumber
+      - bankCode
+      - bankName
+      type: object
+    cn-individual-trade:
+      description: |
+        Rails: CUP (China UnionPay)
+
+        Rail Definitions:
+
+        CUP (China UnionPay):
+        - Availability: 24/7/365
+        - Limit: Varies by bank and account type
+        - Settlement: Real-time or near real-time
+        - Cut-off time: None
+        - Banking holidays: Not applicable (24/7 service)
+
+        Routing: CUP routes using the card/account number directly.
+      example:
+        bankName: bankName
+        accountNumber: accountNumber
+        accountHolderName: accountHolderName
+      properties:
+        bankName:
+          description: Beneficiary Bank Name.
+          maxLength: 140
+          minLength: 2
+          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
+            /()-]+(?<![ .,'&\\/-])?$"
+          type: string
+        accountNumber:
+          description: Beneficiary Account Number.
+          maxLength: 45
+          minLength: 1
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+        accountHolderName:
+          description: "Beneficiary Account Holder Name (Hanzi). Account name in Chinese\
+            \ Hanzi characters. For sole proprietors, bank account may be registered\
+            \ under business name."
+          maxLength: 140
+          minLength: 1
+          pattern: "^[\\p{L}\\p{N} .,'&\\/()-]+$"
+          type: string
+      required:
+      - accountHolderName
+      - accountNumber
+      - bankName
+      type: object
+    cn-cfxps:
+      description: |
+        Rails: CFXPS (Cross-border Foreign Exchange Payment System)
+
+        Rail Definitions:
+
+        CFXPS:
+        - Availability: Business days and banking hours only
+        - Limit: No limit (institutional)
+        - Settlement: Same-day or next business day
+        - Cut-off time: 5:00 PM CST (varies by bank)
+        - Banking holidays: China banking holidays apply
+      example:
+        swiftCode: swiftCode
+        bankName: bankName
+        accountNumber: accountNumber
+        accountHolderName: accountHolderName
+      properties:
+        bankName:
+          description: Beneficiary Bank Name. Looked up from swiftCode.
+          maxLength: 140
+          minLength: 2
+          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
+            /()-]+(?<![ .,'&\\/-])?$"
+          type: string
+        swiftCode:
+          description: "Beneficiary Bank SWIFT/BIC Code. ~67 proprietary SWIFT codes\
+            \ (e.g., ICBKCNBJXXX, BKCHCNBJXXX, CMBCCNBSXXX)."
+          maxLength: 11
+          minLength: 8
+          pattern: "^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$"
+          type: string
+        accountNumber:
+          description: Beneficiary Account Number.
+          maxLength: 34
+          minLength: 1
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+        accountHolderName:
+          description: Beneficiary Account Holder Name (English).
+          maxLength: 140
+          minLength: 1
+          pattern: "^[A-Za-z0-9 .,'&\\/()-]+$"
+          type: string
+      required:
+      - accountHolderName
+      - accountNumber
+      - bankName
+      - swiftCode
       type: object
     payment-rail-objects:
       properties:
@@ -5192,6 +6276,22 @@ components:
           $ref: '#/components/schemas/gb-fps'
         ngBankPayout:
           $ref: '#/components/schemas/ng-bank-payout'
+        ghBankPayout:
+          $ref: '#/components/schemas/gh-bank-payout'
+        rwBankPayout:
+          $ref: '#/components/schemas/rw-bank-payout'
+        zaBankPayout:
+          $ref: '#/components/schemas/za-bank-payout'
+        ugBankPayout:
+          $ref: '#/components/schemas/ug-bank-payout'
+        zmBankPayout:
+          $ref: '#/components/schemas/zm-bank-payout'
+        ethWallet:
+          $ref: '#/components/schemas/eth-wallet'
+        tronWallet:
+          $ref: '#/components/schemas/tron-wallet'
+        solWallet:
+          $ref: '#/components/schemas/sol-wallet'
         brPix:
           $ref: '#/components/schemas/br-pix'
         coPse:
@@ -5200,6 +6300,16 @@ components:
           $ref: '#/components/schemas/br-ted'
         caEft:
           $ref: '#/components/schemas/ca-eft'
+        hkBankPayout:
+          $ref: '#/components/schemas/hk-bank-payout'
+        cnTrade:
+          $ref: '#/components/schemas/cn-trade'
+        cnIndividual:
+          $ref: '#/components/schemas/cn-individual'
+        cnIndividualTrade:
+          $ref: '#/components/schemas/cn-individual-trade'
+        cnCfxps:
+          $ref: '#/components/schemas/cn-cfxps'
       type: object
     ripple-financial-instrument:
       allOf:
@@ -5225,7 +6335,8 @@ components:
       - $ref: '#/components/schemas/ripple-financial-instrument'
       - properties:
           country:
-            description: The country of the financial instrument.
+            description: |
+              The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, TRON_WALLET, SOL_WALLET), this field returns `ZZ`, the ISO 3166-1 user-assigned code used when no country jurisdiction applies.
             example: MX
             maxLength: 2
             minLength: 2
@@ -5248,13 +6359,14 @@ components:
         type: object
       example:
         country: MX
-        euSepa:
-          iban: iban
+        hkBankPayout:
+          swiftCode: swiftCode
           bankName: bankName
-        label: mexico bank account
-        usAch:
-          bankRoutingNumber: bankRoutingNumber
-          accountType: accountType
+          currency: currency
+          accountNumber: accountNumber
+          accountHolderName: accountHolderName
+        ghBankPayout:
+          bankCode: bankCode
           bankName: bankName
           accountNumber: accountNumber
         mxSpei:
@@ -5266,12 +6378,15 @@ components:
           bankName: bankName
           accountNumber: accountNumber
         createdAt: 2023-11-02T18:26:00Z
-        brPix:
-          bankCode: bankCode
-          branchNumber: branchNumber
-          pixKeyType: pixKeyType
+        cnCfxps:
+          swiftCode: swiftCode
           bankName: bankName
-          pixKey: pixKey
+          accountNumber: accountNumber
+          accountHolderName: accountHolderName
+        ugBankPayout:
+          bankCode: bankCode
+          bankName: bankName
+          accountNumber: accountNumber
         caEft:
           institutionNumber: institutionNumber
           transitNumber: transitNumber
@@ -5282,17 +6397,6 @@ components:
           bankName: bankName
           accountNumber: accountNumber
           sortCode: sortCode
-        usFedwire:
-          bankRoutingNumber: bankRoutingNumber
-          bankName: bankName
-          accountNumber: accountNumber
-        financialInstrumentId: 3fc74743-e7f3-414a-9fcf-eb8c1d52356a
-        brTed:
-          bankCode: bankCode
-          branchNumber: branchNumber
-          accountType: SAVINGS
-          bankName: bankName
-          accountNumber: accountNumber
         currency: MXN
         ngBankPayout:
           bankCode: bankCode
@@ -5300,6 +6404,81 @@ components:
           accountNumber: accountNumber
         financialInstrumentType: BR_PIX
         updatedAt: 2023-11-03T18:26:00Z
+        zmBankPayout:
+          bankCode: bankCode
+          bankName: bankName
+          accountNumber: accountNumber
+        euSepa:
+          iban: iban
+          bankName: bankName
+        cnIndividual:
+          bankCode: bankCode
+          bankName: bankName
+          accountNumber: accountNumber
+        solWallet:
+          cryptoInstitutionName: Bitso
+          supportedCorridors:
+          - SOLANA_USDC
+          - SOLANA_USDC
+          walletAddress: 7EcDhSYGxXyscszYEp35KHN8vvw3svAuLKTzXwCFLtV
+          network: SOLANA
+        cnTrade:
+          bankCode: bankCode
+          branchCity: branchCity
+          branchProvince: branchProvince
+          branchName: branchName
+          bankName: bankName
+          accountNumber: accountNumber
+          accountHolderName: accountHolderName
+        label: mexico bank account
+        usAch:
+          bankRoutingNumber: bankRoutingNumber
+          accountType: accountType
+          bankName: bankName
+          accountNumber: accountNumber
+        rwBankPayout:
+          bankCode: bankCode
+          bankName: bankName
+          accountNumber: accountNumber
+        cnIndividualTrade:
+          bankName: bankName
+          accountNumber: accountNumber
+          accountHolderName: accountHolderName
+        zaBankPayout:
+          bankCode: bankCode
+          bankName: bankName
+          accountNumber: accountNumber
+        brPix:
+          bankCode: bankCode
+          branchNumber: branchNumber
+          pixKeyType: pixKeyType
+          bankName: bankName
+          pixKey: pixKey
+        usFedwire:
+          bankRoutingNumber: bankRoutingNumber
+          bankName: bankName
+          accountNumber: accountNumber
+        financialInstrumentId: 3fc74743-e7f3-414a-9fcf-eb8c1d52356a
+        tronWallet:
+          cryptoInstitutionName: Bitso
+          supportedCorridors:
+          - TRON_USDT
+          - TRON_USDT
+          walletAddress: T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb
+          network: TRON
+        brTed:
+          bankCode: bankCode
+          branchNumber: branchNumber
+          accountType: SAVINGS
+          bankName: bankName
+          accountNumber: accountNumber
+        ethWallet:
+          cryptoInstitutionName: Bitso
+          supportedCorridors:
+          - ETH_USDT
+          - ETH_USDT
+          walletAddress: 0x742d35Cc6634C0532925a3b844Bc454e4438f44e
+          network: ETHEREUM
     put-ripple-financial-instrument:
       allOf:
       - $ref: '#/components/schemas/payment-rail-objects'
@@ -5407,20 +6586,14 @@ components:
           to send.
         DESTINATION_AMOUNT: Specify this value to get a quote for the amount that
           the beneficiary should receive.
-    QuoteCollectionRequestV2:
+    QuoteCollectionRequest:
       additionalProperties: false
-      description: |
-        Request to create a quote collection (v2).
-
-        **What's new in v3:**
-        - `payoutCategory` and `destinationBlockchainNetwork` are no longer accepted in requests.
-        - `paymentRail` is added as an optional field in the request to allow filtering quotes by a specific payment rail. When paymentRail is not passed, quotes will be returned for all supported payment rails. For a list of supported values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
+      description: Request to create a quote collection
       properties:
         quoteAmount:
           description: The amount for which you wish to receive a collection of quotes.
           example: 123.45
           format: double
-          maximum: 100000000
           minimum: 1
           type: number
         quoteAmountType:
@@ -5448,12 +6621,24 @@ components:
             \ If the beneficiary is an individual, then this value is their country\
             \ of residence. If the beneficiary is an institution, then this value\
             \ is their the country of incorporation."
-          example: MX
+          example: PH
           pattern: "^[a-zA-Z]{2}$"
           type: string
+        payoutCategory:
+          description: The name of the payout category.
+          example: BANK
+          maxLength: 128
+          minLength: 1
+          type: string
+          x-enumDescriptions:
+            BANK: Indicates that the payout will be made in fiat currency to a recipient's
+              bank account through local banking rails.
+            CRYPTO: Indicates that the payout will be made in stablecoin to a recipient's
+              crypto wallet address.
         payinCategory:
           description: The name of the pay in category indicating how this payment
-            will be funded.
+            will be funded. The values FUNDED and T_PLUS_ONE are deprecated and will
+            be removed in a future release.
           example: PRE_FUNDING
           maxLength: 128
           minLength: 1
@@ -5465,30 +6650,26 @@ components:
               outstanding invoice.
             JIT_FUNDING: Indicates that the payment is being made and you will pay
               the outstanding amount before the payment expires.
-        paymentRail:
-          description: |
-            The payment rail on which the beneficiary will receive this payment. This value may be used to filter quotes to a specific subset of supported payout rails. If not provided, quotes will be returned for all supported payout rails. For a list of supported values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
-          example: SPEI
-          maxLength: 50
+            FUNDED: Indicates that the payment is being made from funds you've deposited
+              with Ripple.
+            T_PLUS_ONE: Indicates the payment is being made and you will pay the outstanding
+              invoice.
+        destinationBlockchainNetwork:
+          description: The name of the blockchain network on which the beneficiary
+            will receive this payment.
+          example: Ethereum
+          maxLength: 20
           minLength: 1
           type: string
-          x-enumDescriptions:
-            RTP: Indicates that the payout will be made in fiat currency to a recipient’s
-              bank account through the RTP network.
-            ACH: Indicates that the payout will be made in fiat currency to a recipient’s
-              bank account through the ACH network.
-            WIRE: Indicates that the payout will be made in fiat currency to a recipient’s
-              bank account through the wire transfer network.
-            ETHEREUM: Indicates that the payout will be made in stablecoin to a recipient's
-              Ethereum wallet address.
       required:
       - destinationCurrency
       - payinCategory
+      - payoutCategory
       - quoteAmount
       - quoteAmountType
       - sourceCurrency
       type: object
-    QuoteV2:
+    Quote:
       additionalProperties: false
       example:
         sourceCountry: US
@@ -5497,22 +6678,18 @@ components:
           feeCurrency: USD
           feeBreakdown:
           - feeDescription: The service fee charged for this transaction.
-            paymentRail: SPEI
             calculatedFee: 2.43
             feeName: Service fee
           - feeDescription: The service fee charged for this transaction.
-            paymentRail: SPEI
             calculatedFee: 2.43
             feeName: Service fee
         - totalFee: 12.23
           feeCurrency: USD
           feeBreakdown:
           - feeDescription: The service fee charged for this transaction.
-            paymentRail: SPEI
             calculatedFee: 2.43
             feeName: Service fee
           - feeDescription: The service fee charged for this transaction.
-            paymentRail: SPEI
             calculatedFee: 2.43
             feeName: Service fee
         taxes:
@@ -5541,14 +6718,16 @@ components:
         quoteAmountType: SOURCE_AMOUNT
         sourceCurrency: USD
         destinationCountry: MX
+        destinationBlockchainNetwork: Ethereum
         quoteId: 7ea3399c-1234-5678-8d8f-d320ea406630
         quoteStatus: ACTIVE
         expiresAt: 2023-11-02T18:26:00.000123Z
         createdAt: 2023-11-02T18:26:00.000123Z
         payinCategory: PRE_FUNDING
-        paymentRail: SPEI
+        paymentRail: RTP
         destinationCurrency: MXN
         sourceAmount: 123.45
+        payoutCategory: BANK
         destinationAmount: 2438.19
         adjustedExchangeRate:
           adjustedRate: 2
@@ -5565,17 +6744,21 @@ components:
         quoteAmountType:
           $ref: '#/components/schemas/QuoteAmountType'
         sourceAmount:
-          description: Amount to be sent by the originator.
+          description: |
+            Amount to be sent by the originator. The value is rounded to the number of decimal
+            places defined by the ISO 4217 standard for the source currency (for example, 2 for
+            USD/EUR, 0 for JPY/KRW, 3 for BHD/KWD), using HALF_UP rounding mode.
           example: 123.45
           format: double
-          maximum: 100000000
           minimum: 1
           type: number
         destinationAmount:
-          description: Amount to be received by destination
+          description: |
+            Amount to be received by the beneficiary. The value is rounded to the number of decimal
+            places defined by the ISO 4217 standard for the destination currency (for example, 2 for
+            USD/EUR, 0 for JPY/KRW, 3 for BHD/KWD), using HALF_UP rounding mode.
           example: 2438.19
           format: double
-          maximum: 100000000
           minimum: 1
           type: number
         sourceCurrency:
@@ -5602,6 +6785,12 @@ components:
           example: MX
           pattern: "^[a-zA-Z]{2}$"
           type: string
+        payoutCategory:
+          description: Name of the payout category specified in the quote request.
+          example: BANK
+          maxLength: 128
+          minLength: 1
+          type: string
         payinCategory:
           description: The name of payin category specified in the quote request.
           example: PRE_FUNDING
@@ -5613,7 +6802,7 @@ components:
         fees:
           description: A summary of fees included in this quote.
           items:
-            $ref: '#/components/schemas/FeeSummaryV2'
+            $ref: '#/components/schemas/FeeSummary'
           type: array
         taxes:
           description: A summary of taxes included in this quote.
@@ -5634,20 +6823,28 @@ components:
           maxLength: 128
           minLength: 1
           type: string
+        destinationBlockchainNetwork:
+          description: The name of the blockchain network on which the beneficiary
+            will receive this payment.
+          example: Ethereum
+          maxLength: 20
+          minLength: 1
+          type: string
         paymentRail:
           description: The payment rail used for this quote.
-          example: SPEI
+          example: RTP
           maxLength: 50
           minLength: 1
           type: string
       required:
       - destinationCurrency
       - payinCategory
+      - payoutCategory
       - quoteId
       - quoteStatus
       - sourceCurrency
       type: object
-    QuoteCollectionV2:
+    QuoteCollection:
       additionalProperties: false
       example:
         quoteCollectionId: 11111111-aaaa-2222-bbbb-222222222222
@@ -5658,22 +6855,18 @@ components:
             feeCurrency: USD
             feeBreakdown:
             - feeDescription: The service fee charged for this transaction.
-              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
             - feeDescription: The service fee charged for this transaction.
-              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
           - totalFee: 12.23
             feeCurrency: USD
             feeBreakdown:
             - feeDescription: The service fee charged for this transaction.
-              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
             - feeDescription: The service fee charged for this transaction.
-              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
           taxes:
@@ -5702,14 +6895,16 @@ components:
           quoteAmountType: SOURCE_AMOUNT
           sourceCurrency: USD
           destinationCountry: MX
+          destinationBlockchainNetwork: Ethereum
           quoteId: 7ea3399c-1234-5678-8d8f-d320ea406630
           quoteStatus: ACTIVE
           expiresAt: 2023-11-02T18:26:00.000123Z
           createdAt: 2023-11-02T18:26:00.000123Z
           payinCategory: PRE_FUNDING
-          paymentRail: SPEI
+          paymentRail: RTP
           destinationCurrency: MXN
           sourceAmount: 123.45
+          payoutCategory: BANK
           destinationAmount: 2438.19
           adjustedExchangeRate:
             adjustedRate: 2
@@ -5719,22 +6914,18 @@ components:
             feeCurrency: USD
             feeBreakdown:
             - feeDescription: The service fee charged for this transaction.
-              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
             - feeDescription: The service fee charged for this transaction.
-              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
           - totalFee: 12.23
             feeCurrency: USD
             feeBreakdown:
             - feeDescription: The service fee charged for this transaction.
-              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
             - feeDescription: The service fee charged for this transaction.
-              paymentRail: SPEI
               calculatedFee: 2.43
               feeName: Service fee
           taxes:
@@ -5763,14 +6954,16 @@ components:
           quoteAmountType: SOURCE_AMOUNT
           sourceCurrency: USD
           destinationCountry: MX
+          destinationBlockchainNetwork: Ethereum
           quoteId: 7ea3399c-1234-5678-8d8f-d320ea406630
           quoteStatus: ACTIVE
           expiresAt: 2023-11-02T18:26:00.000123Z
           createdAt: 2023-11-02T18:26:00.000123Z
           payinCategory: PRE_FUNDING
-          paymentRail: SPEI
+          paymentRail: RTP
           destinationCurrency: MXN
           sourceAmount: 123.45
+          payoutCategory: BANK
           destinationAmount: 2438.19
           adjustedExchangeRate:
             adjustedRate: 2
@@ -5785,78 +6978,12 @@ components:
         quotes:
           description: List of quotes
           items:
-            $ref: '#/components/schemas/QuoteV2'
+            $ref: '#/components/schemas/Quote'
           minItems: 0
           type: array
       required:
       - quoteCollectionId
       - quotes
-      type: object
-    TotalFeeBreakdownV2:
-      additionalProperties: false
-      description: A breakdown of the total fees included in this quote.
-      example:
-        feeDescription: The service fee charged for this transaction.
-        paymentRail: SPEI
-        calculatedFee: 2.43
-        feeName: Service fee
-      properties:
-        calculatedFee:
-          description: Value of the fee when the configured fee unit is applied against
-            the `value`.
-          example: 2.43
-          format: double
-          type: number
-        feeName:
-          description: The name of the fee.
-          example: Service fee
-          maxLength: 128
-          minLength: 1
-          type: string
-        feeDescription:
-          description: Description of the fee.
-          example: The service fee charged for this transaction.
-          maxLength: 256
-          minLength: 1
-          type: string
-        paymentRail:
-          description: The payment rail associated with this fee line item.
-          example: SPEI
-          maxLength: 30
-          minLength: 1
-          type: string
-      type: object
-    FeeSummaryV2:
-      description: A summary of fees included in this quote.
-      example:
-        totalFee: 12.23
-        feeCurrency: USD
-        feeBreakdown:
-        - feeDescription: The service fee charged for this transaction.
-          paymentRail: SPEI
-          calculatedFee: 2.43
-          feeName: Service fee
-        - feeDescription: The service fee charged for this transaction.
-          paymentRail: SPEI
-          calculatedFee: 2.43
-          feeName: Service fee
-      properties:
-        totalFee:
-          description: The value of the total fee included in this quote.
-          example: 12.23
-          format: double
-          type: number
-        feeCurrency:
-          description: The currency in which fees are charged.
-          example: USD
-          pattern: "^[a-zA-Z]{3,5}$"
-          type: string
-        feeBreakdown:
-          description: An array of fees that provides a breakdown of how the total
-            fees is calculated for this quote.
-          items:
-            $ref: '#/components/schemas/TotalFeeBreakdownV2'
-          type: array
       type: object
     getBalances_200_response_balances_inner:
       description: Customer available prefund balance for specific currency
@@ -5991,66 +7118,6 @@ components:
       - errors
       - status
       type: object
-    getBalances_401_response:
-      example:
-        errors:
-        - code: SYS_003
-          description: "The payout category value must be one of BANK, EWALLET, CASH_PICKUP,\
-            \ or ATM."
-          type: SYSTEM_ERROR
-          title: Internal Server Error
-          timestamp: 2024-01-02T14:16:00Z
-        - code: SYS_003
-          description: "The payout category value must be one of BANK, EWALLET, CASH_PICKUP,\
-            \ or ATM."
-          type: SYSTEM_ERROR
-          title: Internal Server Error
-          timestamp: 2024-01-02T14:16:00Z
-        status: 401
-      properties:
-        status:
-          description: The HTTP status code representing the error response
-          example: 401
-          type: integer
-        errors:
-          description: An array containing details about the errors encountered
-          items:
-            $ref: '#/components/schemas/getBalances_400_response_errors_inner'
-          type: array
-      required:
-      - errors
-      - status
-      type: object
-    getBalances_500_response:
-      example:
-        errors:
-        - code: SYS_003
-          description: "The payout category value must be one of BANK, EWALLET, CASH_PICKUP,\
-            \ or ATM."
-          type: SYSTEM_ERROR
-          title: Internal Server Error
-          timestamp: 2024-01-02T14:16:00Z
-        - code: SYS_003
-          description: "The payout category value must be one of BANK, EWALLET, CASH_PICKUP,\
-            \ or ATM."
-          type: SYSTEM_ERROR
-          title: Internal Server Error
-          timestamp: 2024-01-02T14:16:00Z
-        status: 500
-      properties:
-        status:
-          description: The HTTP status code representing the error response
-          example: 500
-          type: integer
-        errors:
-          description: An array containing details about the errors encountered
-          items:
-            $ref: '#/components/schemas/getBalances_400_response_errors_inner'
-          type: array
-      required:
-      - errors
-      - status
-      type: object
     getStatementsTransactionsForCustomer_200_response_statementTransactions_inner:
       example:
         availableBalanceAfter: 90
@@ -6088,7 +7155,7 @@ components:
           nullable: true
           type: string
         operation:
-          description: Operation performed on the customer's  prefunded ledger account.
+          description: Operation performed on the customer's prefunded ledger account.
           type: string
           x-enumDescriptions:
             CREDIT: Credit to the ledger account.
@@ -6351,6 +7418,15 @@ components:
             PASSPORT: Passport Number
             SSN: Social Security Number
             TAX_ID: Tax Identification Number
+        expiryDate:
+          description: Expiration date of the identification document.
+          example: 2030-01-15
+          format: date
+          type: string
+          x-requiredByOriginatorFor:
+          - IN_NEFT
+          - ID_BIFAST
+          - SG_GIRO
       required:
       - idNumber
       - idType

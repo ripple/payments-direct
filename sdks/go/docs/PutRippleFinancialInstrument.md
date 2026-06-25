@@ -11,10 +11,23 @@ Name | Type | Description | Notes
 **EuSepa** | Pointer to [**EuSepa**](EuSepa.md) |  | [optional] 
 **GbFps** | Pointer to [**GbFps**](GbFps.md) |  | [optional] 
 **NgBankPayout** | Pointer to [**NgBankPayout**](NgBankPayout.md) |  | [optional] 
+**GhBankPayout** | Pointer to [**GhBankPayout**](GhBankPayout.md) |  | [optional] 
+**RwBankPayout** | Pointer to [**RwBankPayout**](RwBankPayout.md) |  | [optional] 
+**ZaBankPayout** | Pointer to [**ZaBankPayout**](ZaBankPayout.md) |  | [optional] 
+**UgBankPayout** | Pointer to [**UgBankPayout**](UgBankPayout.md) |  | [optional] 
+**ZmBankPayout** | Pointer to [**ZmBankPayout**](ZmBankPayout.md) |  | [optional] 
+**EthWallet** | Pointer to [**EthWallet**](EthWallet.md) |  | [optional] 
+**TronWallet** | Pointer to [**TronWallet**](TronWallet.md) |  | [optional] 
+**SolWallet** | Pointer to [**SolWallet**](SolWallet.md) |  | [optional] 
 **BrPix** | Pointer to [**BrPix**](BrPix.md) |  | [optional] 
 **CoPse** | Pointer to [**CoPse**](CoPse.md) |  | [optional] 
 **BrTed** | Pointer to [**BrTed**](BrTed.md) |  | [optional] 
 **CaEft** | Pointer to [**CaEft**](CaEft.md) |  | [optional] 
+**HkBankPayout** | Pointer to [**HkBankPayout**](HkBankPayout.md) |  | [optional] 
+**CnTrade** | Pointer to [**CnTrade**](CnTrade.md) |  | [optional] 
+**CnIndividual** | Pointer to [**CnIndividual**](CnIndividual.md) |  | [optional] 
+**CnIndividualTrade** | Pointer to [**CnIndividualTrade**](CnIndividualTrade.md) |  | [optional] 
+**CnCfxps** | Pointer to [**CnCfxps**](CnCfxps.md) |  | [optional] 
 
 ## Methods
 
@@ -210,6 +223,206 @@ SetNgBankPayout sets NgBankPayout field to given value.
 
 HasNgBankPayout returns a boolean if a field has been set.
 
+### GetGhBankPayout
+
+`func (o *PutRippleFinancialInstrument) GetGhBankPayout() GhBankPayout`
+
+GetGhBankPayout returns the GhBankPayout field if non-nil, zero value otherwise.
+
+### GetGhBankPayoutOk
+
+`func (o *PutRippleFinancialInstrument) GetGhBankPayoutOk() (*GhBankPayout, bool)`
+
+GetGhBankPayoutOk returns a tuple with the GhBankPayout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGhBankPayout
+
+`func (o *PutRippleFinancialInstrument) SetGhBankPayout(v GhBankPayout)`
+
+SetGhBankPayout sets GhBankPayout field to given value.
+
+### HasGhBankPayout
+
+`func (o *PutRippleFinancialInstrument) HasGhBankPayout() bool`
+
+HasGhBankPayout returns a boolean if a field has been set.
+
+### GetRwBankPayout
+
+`func (o *PutRippleFinancialInstrument) GetRwBankPayout() RwBankPayout`
+
+GetRwBankPayout returns the RwBankPayout field if non-nil, zero value otherwise.
+
+### GetRwBankPayoutOk
+
+`func (o *PutRippleFinancialInstrument) GetRwBankPayoutOk() (*RwBankPayout, bool)`
+
+GetRwBankPayoutOk returns a tuple with the RwBankPayout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRwBankPayout
+
+`func (o *PutRippleFinancialInstrument) SetRwBankPayout(v RwBankPayout)`
+
+SetRwBankPayout sets RwBankPayout field to given value.
+
+### HasRwBankPayout
+
+`func (o *PutRippleFinancialInstrument) HasRwBankPayout() bool`
+
+HasRwBankPayout returns a boolean if a field has been set.
+
+### GetZaBankPayout
+
+`func (o *PutRippleFinancialInstrument) GetZaBankPayout() ZaBankPayout`
+
+GetZaBankPayout returns the ZaBankPayout field if non-nil, zero value otherwise.
+
+### GetZaBankPayoutOk
+
+`func (o *PutRippleFinancialInstrument) GetZaBankPayoutOk() (*ZaBankPayout, bool)`
+
+GetZaBankPayoutOk returns a tuple with the ZaBankPayout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetZaBankPayout
+
+`func (o *PutRippleFinancialInstrument) SetZaBankPayout(v ZaBankPayout)`
+
+SetZaBankPayout sets ZaBankPayout field to given value.
+
+### HasZaBankPayout
+
+`func (o *PutRippleFinancialInstrument) HasZaBankPayout() bool`
+
+HasZaBankPayout returns a boolean if a field has been set.
+
+### GetUgBankPayout
+
+`func (o *PutRippleFinancialInstrument) GetUgBankPayout() UgBankPayout`
+
+GetUgBankPayout returns the UgBankPayout field if non-nil, zero value otherwise.
+
+### GetUgBankPayoutOk
+
+`func (o *PutRippleFinancialInstrument) GetUgBankPayoutOk() (*UgBankPayout, bool)`
+
+GetUgBankPayoutOk returns a tuple with the UgBankPayout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUgBankPayout
+
+`func (o *PutRippleFinancialInstrument) SetUgBankPayout(v UgBankPayout)`
+
+SetUgBankPayout sets UgBankPayout field to given value.
+
+### HasUgBankPayout
+
+`func (o *PutRippleFinancialInstrument) HasUgBankPayout() bool`
+
+HasUgBankPayout returns a boolean if a field has been set.
+
+### GetZmBankPayout
+
+`func (o *PutRippleFinancialInstrument) GetZmBankPayout() ZmBankPayout`
+
+GetZmBankPayout returns the ZmBankPayout field if non-nil, zero value otherwise.
+
+### GetZmBankPayoutOk
+
+`func (o *PutRippleFinancialInstrument) GetZmBankPayoutOk() (*ZmBankPayout, bool)`
+
+GetZmBankPayoutOk returns a tuple with the ZmBankPayout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetZmBankPayout
+
+`func (o *PutRippleFinancialInstrument) SetZmBankPayout(v ZmBankPayout)`
+
+SetZmBankPayout sets ZmBankPayout field to given value.
+
+### HasZmBankPayout
+
+`func (o *PutRippleFinancialInstrument) HasZmBankPayout() bool`
+
+HasZmBankPayout returns a boolean if a field has been set.
+
+### GetEthWallet
+
+`func (o *PutRippleFinancialInstrument) GetEthWallet() EthWallet`
+
+GetEthWallet returns the EthWallet field if non-nil, zero value otherwise.
+
+### GetEthWalletOk
+
+`func (o *PutRippleFinancialInstrument) GetEthWalletOk() (*EthWallet, bool)`
+
+GetEthWalletOk returns a tuple with the EthWallet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEthWallet
+
+`func (o *PutRippleFinancialInstrument) SetEthWallet(v EthWallet)`
+
+SetEthWallet sets EthWallet field to given value.
+
+### HasEthWallet
+
+`func (o *PutRippleFinancialInstrument) HasEthWallet() bool`
+
+HasEthWallet returns a boolean if a field has been set.
+
+### GetTronWallet
+
+`func (o *PutRippleFinancialInstrument) GetTronWallet() TronWallet`
+
+GetTronWallet returns the TronWallet field if non-nil, zero value otherwise.
+
+### GetTronWalletOk
+
+`func (o *PutRippleFinancialInstrument) GetTronWalletOk() (*TronWallet, bool)`
+
+GetTronWalletOk returns a tuple with the TronWallet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTronWallet
+
+`func (o *PutRippleFinancialInstrument) SetTronWallet(v TronWallet)`
+
+SetTronWallet sets TronWallet field to given value.
+
+### HasTronWallet
+
+`func (o *PutRippleFinancialInstrument) HasTronWallet() bool`
+
+HasTronWallet returns a boolean if a field has been set.
+
+### GetSolWallet
+
+`func (o *PutRippleFinancialInstrument) GetSolWallet() SolWallet`
+
+GetSolWallet returns the SolWallet field if non-nil, zero value otherwise.
+
+### GetSolWalletOk
+
+`func (o *PutRippleFinancialInstrument) GetSolWalletOk() (*SolWallet, bool)`
+
+GetSolWalletOk returns a tuple with the SolWallet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSolWallet
+
+`func (o *PutRippleFinancialInstrument) SetSolWallet(v SolWallet)`
+
+SetSolWallet sets SolWallet field to given value.
+
+### HasSolWallet
+
+`func (o *PutRippleFinancialInstrument) HasSolWallet() bool`
+
+HasSolWallet returns a boolean if a field has been set.
+
 ### GetBrPix
 
 `func (o *PutRippleFinancialInstrument) GetBrPix() BrPix`
@@ -309,6 +522,131 @@ SetCaEft sets CaEft field to given value.
 `func (o *PutRippleFinancialInstrument) HasCaEft() bool`
 
 HasCaEft returns a boolean if a field has been set.
+
+### GetHkBankPayout
+
+`func (o *PutRippleFinancialInstrument) GetHkBankPayout() HkBankPayout`
+
+GetHkBankPayout returns the HkBankPayout field if non-nil, zero value otherwise.
+
+### GetHkBankPayoutOk
+
+`func (o *PutRippleFinancialInstrument) GetHkBankPayoutOk() (*HkBankPayout, bool)`
+
+GetHkBankPayoutOk returns a tuple with the HkBankPayout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHkBankPayout
+
+`func (o *PutRippleFinancialInstrument) SetHkBankPayout(v HkBankPayout)`
+
+SetHkBankPayout sets HkBankPayout field to given value.
+
+### HasHkBankPayout
+
+`func (o *PutRippleFinancialInstrument) HasHkBankPayout() bool`
+
+HasHkBankPayout returns a boolean if a field has been set.
+
+### GetCnTrade
+
+`func (o *PutRippleFinancialInstrument) GetCnTrade() CnTrade`
+
+GetCnTrade returns the CnTrade field if non-nil, zero value otherwise.
+
+### GetCnTradeOk
+
+`func (o *PutRippleFinancialInstrument) GetCnTradeOk() (*CnTrade, bool)`
+
+GetCnTradeOk returns a tuple with the CnTrade field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCnTrade
+
+`func (o *PutRippleFinancialInstrument) SetCnTrade(v CnTrade)`
+
+SetCnTrade sets CnTrade field to given value.
+
+### HasCnTrade
+
+`func (o *PutRippleFinancialInstrument) HasCnTrade() bool`
+
+HasCnTrade returns a boolean if a field has been set.
+
+### GetCnIndividual
+
+`func (o *PutRippleFinancialInstrument) GetCnIndividual() CnIndividual`
+
+GetCnIndividual returns the CnIndividual field if non-nil, zero value otherwise.
+
+### GetCnIndividualOk
+
+`func (o *PutRippleFinancialInstrument) GetCnIndividualOk() (*CnIndividual, bool)`
+
+GetCnIndividualOk returns a tuple with the CnIndividual field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCnIndividual
+
+`func (o *PutRippleFinancialInstrument) SetCnIndividual(v CnIndividual)`
+
+SetCnIndividual sets CnIndividual field to given value.
+
+### HasCnIndividual
+
+`func (o *PutRippleFinancialInstrument) HasCnIndividual() bool`
+
+HasCnIndividual returns a boolean if a field has been set.
+
+### GetCnIndividualTrade
+
+`func (o *PutRippleFinancialInstrument) GetCnIndividualTrade() CnIndividualTrade`
+
+GetCnIndividualTrade returns the CnIndividualTrade field if non-nil, zero value otherwise.
+
+### GetCnIndividualTradeOk
+
+`func (o *PutRippleFinancialInstrument) GetCnIndividualTradeOk() (*CnIndividualTrade, bool)`
+
+GetCnIndividualTradeOk returns a tuple with the CnIndividualTrade field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCnIndividualTrade
+
+`func (o *PutRippleFinancialInstrument) SetCnIndividualTrade(v CnIndividualTrade)`
+
+SetCnIndividualTrade sets CnIndividualTrade field to given value.
+
+### HasCnIndividualTrade
+
+`func (o *PutRippleFinancialInstrument) HasCnIndividualTrade() bool`
+
+HasCnIndividualTrade returns a boolean if a field has been set.
+
+### GetCnCfxps
+
+`func (o *PutRippleFinancialInstrument) GetCnCfxps() CnCfxps`
+
+GetCnCfxps returns the CnCfxps field if non-nil, zero value otherwise.
+
+### GetCnCfxpsOk
+
+`func (o *PutRippleFinancialInstrument) GetCnCfxpsOk() (*CnCfxps, bool)`
+
+GetCnCfxpsOk returns a tuple with the CnCfxps field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCnCfxps
+
+`func (o *PutRippleFinancialInstrument) SetCnCfxps(v CnCfxps)`
+
+SetCnCfxps sets CnCfxps field to given value.
+
+### HasCnCfxps
+
+`func (o *PutRippleFinancialInstrument) HasCnCfxps() bool`
+
+HasCnCfxps returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

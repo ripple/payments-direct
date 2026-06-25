@@ -1,9 +1,9 @@
 /*
 Payments Direct API
 
-Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
 
-API version: 2026.04
+API version: 2026.03
 */
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
@@ -28,17 +28,30 @@ type RippleFinancialInstrumentEntry struct {
 	EuSepa *EuSepa `json:"euSepa,omitempty"`
 	GbFps *GbFps `json:"gbFps,omitempty"`
 	NgBankPayout *NgBankPayout `json:"ngBankPayout,omitempty"`
+	GhBankPayout *GhBankPayout `json:"ghBankPayout,omitempty"`
+	RwBankPayout *RwBankPayout `json:"rwBankPayout,omitempty"`
+	ZaBankPayout *ZaBankPayout `json:"zaBankPayout,omitempty"`
+	UgBankPayout *UgBankPayout `json:"ugBankPayout,omitempty"`
+	ZmBankPayout *ZmBankPayout `json:"zmBankPayout,omitempty"`
+	EthWallet *EthWallet `json:"ethWallet,omitempty"`
+	TronWallet *TronWallet `json:"tronWallet,omitempty"`
+	SolWallet *SolWallet `json:"solWallet,omitempty"`
 	BrPix *BrPix `json:"brPix,omitempty"`
 	CoPse *CoPse `json:"coPse,omitempty"`
 	BrTed *BrTed `json:"brTed,omitempty"`
 	CaEft *CaEft `json:"caEft,omitempty"`
+	HkBankPayout *HkBankPayout `json:"hkBankPayout,omitempty"`
+	CnTrade *CnTrade `json:"cnTrade,omitempty"`
+	CnIndividual *CnIndividual `json:"cnIndividual,omitempty"`
+	CnIndividualTrade *CnIndividualTrade `json:"cnIndividualTrade,omitempty"`
+	CnCfxps *CnCfxps `json:"cnCfxps,omitempty"`
 	// The 3-letter ISO currency code of the financial instrument.
 	Currency string `json:"currency"`
 	// A user-defined label for the financial instrument.
 	Label *string `json:"label,omitempty"`
 	// The type of financial instrument or payment rail used for executing the transaction. This determines the structure and validation of account details required for the payout. 
 	FinancialInstrumentType string `json:"financialInstrumentType"`
-	// The country of the financial instrument.
+	// The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, TRON_WALLET, SOL_WALLET), this field returns `ZZ`, the ISO 3166-1 user-assigned code used when no country jurisdiction applies. 
 	Country *string `json:"country,omitempty" validate:"regexp=^[A-Z]+$"`
 	// The unique identifier of the financial instrument.
 	FinancialInstrumentId *string `json:"financialInstrumentId,omitempty"`
@@ -261,6 +274,262 @@ func (o *RippleFinancialInstrumentEntry) SetNgBankPayout(v NgBankPayout) {
 	o.NgBankPayout = &v
 }
 
+// GetGhBankPayout returns the GhBankPayout field value if set, zero value otherwise.
+func (o *RippleFinancialInstrumentEntry) GetGhBankPayout() GhBankPayout {
+	if o == nil || IsNil(o.GhBankPayout) {
+		var ret GhBankPayout
+		return ret
+	}
+	return *o.GhBankPayout
+}
+
+// GetGhBankPayoutOk returns a tuple with the GhBankPayout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RippleFinancialInstrumentEntry) GetGhBankPayoutOk() (*GhBankPayout, bool) {
+	if o == nil || IsNil(o.GhBankPayout) {
+		return nil, false
+	}
+	return o.GhBankPayout, true
+}
+
+// HasGhBankPayout returns a boolean if a field has been set.
+func (o *RippleFinancialInstrumentEntry) HasGhBankPayout() bool {
+	if o != nil && !IsNil(o.GhBankPayout) {
+		return true
+	}
+
+	return false
+}
+
+// SetGhBankPayout gets a reference to the given GhBankPayout and assigns it to the GhBankPayout field.
+func (o *RippleFinancialInstrumentEntry) SetGhBankPayout(v GhBankPayout) {
+	o.GhBankPayout = &v
+}
+
+// GetRwBankPayout returns the RwBankPayout field value if set, zero value otherwise.
+func (o *RippleFinancialInstrumentEntry) GetRwBankPayout() RwBankPayout {
+	if o == nil || IsNil(o.RwBankPayout) {
+		var ret RwBankPayout
+		return ret
+	}
+	return *o.RwBankPayout
+}
+
+// GetRwBankPayoutOk returns a tuple with the RwBankPayout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RippleFinancialInstrumentEntry) GetRwBankPayoutOk() (*RwBankPayout, bool) {
+	if o == nil || IsNil(o.RwBankPayout) {
+		return nil, false
+	}
+	return o.RwBankPayout, true
+}
+
+// HasRwBankPayout returns a boolean if a field has been set.
+func (o *RippleFinancialInstrumentEntry) HasRwBankPayout() bool {
+	if o != nil && !IsNil(o.RwBankPayout) {
+		return true
+	}
+
+	return false
+}
+
+// SetRwBankPayout gets a reference to the given RwBankPayout and assigns it to the RwBankPayout field.
+func (o *RippleFinancialInstrumentEntry) SetRwBankPayout(v RwBankPayout) {
+	o.RwBankPayout = &v
+}
+
+// GetZaBankPayout returns the ZaBankPayout field value if set, zero value otherwise.
+func (o *RippleFinancialInstrumentEntry) GetZaBankPayout() ZaBankPayout {
+	if o == nil || IsNil(o.ZaBankPayout) {
+		var ret ZaBankPayout
+		return ret
+	}
+	return *o.ZaBankPayout
+}
+
+// GetZaBankPayoutOk returns a tuple with the ZaBankPayout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RippleFinancialInstrumentEntry) GetZaBankPayoutOk() (*ZaBankPayout, bool) {
+	if o == nil || IsNil(o.ZaBankPayout) {
+		return nil, false
+	}
+	return o.ZaBankPayout, true
+}
+
+// HasZaBankPayout returns a boolean if a field has been set.
+func (o *RippleFinancialInstrumentEntry) HasZaBankPayout() bool {
+	if o != nil && !IsNil(o.ZaBankPayout) {
+		return true
+	}
+
+	return false
+}
+
+// SetZaBankPayout gets a reference to the given ZaBankPayout and assigns it to the ZaBankPayout field.
+func (o *RippleFinancialInstrumentEntry) SetZaBankPayout(v ZaBankPayout) {
+	o.ZaBankPayout = &v
+}
+
+// GetUgBankPayout returns the UgBankPayout field value if set, zero value otherwise.
+func (o *RippleFinancialInstrumentEntry) GetUgBankPayout() UgBankPayout {
+	if o == nil || IsNil(o.UgBankPayout) {
+		var ret UgBankPayout
+		return ret
+	}
+	return *o.UgBankPayout
+}
+
+// GetUgBankPayoutOk returns a tuple with the UgBankPayout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RippleFinancialInstrumentEntry) GetUgBankPayoutOk() (*UgBankPayout, bool) {
+	if o == nil || IsNil(o.UgBankPayout) {
+		return nil, false
+	}
+	return o.UgBankPayout, true
+}
+
+// HasUgBankPayout returns a boolean if a field has been set.
+func (o *RippleFinancialInstrumentEntry) HasUgBankPayout() bool {
+	if o != nil && !IsNil(o.UgBankPayout) {
+		return true
+	}
+
+	return false
+}
+
+// SetUgBankPayout gets a reference to the given UgBankPayout and assigns it to the UgBankPayout field.
+func (o *RippleFinancialInstrumentEntry) SetUgBankPayout(v UgBankPayout) {
+	o.UgBankPayout = &v
+}
+
+// GetZmBankPayout returns the ZmBankPayout field value if set, zero value otherwise.
+func (o *RippleFinancialInstrumentEntry) GetZmBankPayout() ZmBankPayout {
+	if o == nil || IsNil(o.ZmBankPayout) {
+		var ret ZmBankPayout
+		return ret
+	}
+	return *o.ZmBankPayout
+}
+
+// GetZmBankPayoutOk returns a tuple with the ZmBankPayout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RippleFinancialInstrumentEntry) GetZmBankPayoutOk() (*ZmBankPayout, bool) {
+	if o == nil || IsNil(o.ZmBankPayout) {
+		return nil, false
+	}
+	return o.ZmBankPayout, true
+}
+
+// HasZmBankPayout returns a boolean if a field has been set.
+func (o *RippleFinancialInstrumentEntry) HasZmBankPayout() bool {
+	if o != nil && !IsNil(o.ZmBankPayout) {
+		return true
+	}
+
+	return false
+}
+
+// SetZmBankPayout gets a reference to the given ZmBankPayout and assigns it to the ZmBankPayout field.
+func (o *RippleFinancialInstrumentEntry) SetZmBankPayout(v ZmBankPayout) {
+	o.ZmBankPayout = &v
+}
+
+// GetEthWallet returns the EthWallet field value if set, zero value otherwise.
+func (o *RippleFinancialInstrumentEntry) GetEthWallet() EthWallet {
+	if o == nil || IsNil(o.EthWallet) {
+		var ret EthWallet
+		return ret
+	}
+	return *o.EthWallet
+}
+
+// GetEthWalletOk returns a tuple with the EthWallet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RippleFinancialInstrumentEntry) GetEthWalletOk() (*EthWallet, bool) {
+	if o == nil || IsNil(o.EthWallet) {
+		return nil, false
+	}
+	return o.EthWallet, true
+}
+
+// HasEthWallet returns a boolean if a field has been set.
+func (o *RippleFinancialInstrumentEntry) HasEthWallet() bool {
+	if o != nil && !IsNil(o.EthWallet) {
+		return true
+	}
+
+	return false
+}
+
+// SetEthWallet gets a reference to the given EthWallet and assigns it to the EthWallet field.
+func (o *RippleFinancialInstrumentEntry) SetEthWallet(v EthWallet) {
+	o.EthWallet = &v
+}
+
+// GetTronWallet returns the TronWallet field value if set, zero value otherwise.
+func (o *RippleFinancialInstrumentEntry) GetTronWallet() TronWallet {
+	if o == nil || IsNil(o.TronWallet) {
+		var ret TronWallet
+		return ret
+	}
+	return *o.TronWallet
+}
+
+// GetTronWalletOk returns a tuple with the TronWallet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RippleFinancialInstrumentEntry) GetTronWalletOk() (*TronWallet, bool) {
+	if o == nil || IsNil(o.TronWallet) {
+		return nil, false
+	}
+	return o.TronWallet, true
+}
+
+// HasTronWallet returns a boolean if a field has been set.
+func (o *RippleFinancialInstrumentEntry) HasTronWallet() bool {
+	if o != nil && !IsNil(o.TronWallet) {
+		return true
+	}
+
+	return false
+}
+
+// SetTronWallet gets a reference to the given TronWallet and assigns it to the TronWallet field.
+func (o *RippleFinancialInstrumentEntry) SetTronWallet(v TronWallet) {
+	o.TronWallet = &v
+}
+
+// GetSolWallet returns the SolWallet field value if set, zero value otherwise.
+func (o *RippleFinancialInstrumentEntry) GetSolWallet() SolWallet {
+	if o == nil || IsNil(o.SolWallet) {
+		var ret SolWallet
+		return ret
+	}
+	return *o.SolWallet
+}
+
+// GetSolWalletOk returns a tuple with the SolWallet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RippleFinancialInstrumentEntry) GetSolWalletOk() (*SolWallet, bool) {
+	if o == nil || IsNil(o.SolWallet) {
+		return nil, false
+	}
+	return o.SolWallet, true
+}
+
+// HasSolWallet returns a boolean if a field has been set.
+func (o *RippleFinancialInstrumentEntry) HasSolWallet() bool {
+	if o != nil && !IsNil(o.SolWallet) {
+		return true
+	}
+
+	return false
+}
+
+// SetSolWallet gets a reference to the given SolWallet and assigns it to the SolWallet field.
+func (o *RippleFinancialInstrumentEntry) SetSolWallet(v SolWallet) {
+	o.SolWallet = &v
+}
+
 // GetBrPix returns the BrPix field value if set, zero value otherwise.
 func (o *RippleFinancialInstrumentEntry) GetBrPix() BrPix {
 	if o == nil || IsNil(o.BrPix) {
@@ -387,6 +656,166 @@ func (o *RippleFinancialInstrumentEntry) HasCaEft() bool {
 // SetCaEft gets a reference to the given CaEft and assigns it to the CaEft field.
 func (o *RippleFinancialInstrumentEntry) SetCaEft(v CaEft) {
 	o.CaEft = &v
+}
+
+// GetHkBankPayout returns the HkBankPayout field value if set, zero value otherwise.
+func (o *RippleFinancialInstrumentEntry) GetHkBankPayout() HkBankPayout {
+	if o == nil || IsNil(o.HkBankPayout) {
+		var ret HkBankPayout
+		return ret
+	}
+	return *o.HkBankPayout
+}
+
+// GetHkBankPayoutOk returns a tuple with the HkBankPayout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RippleFinancialInstrumentEntry) GetHkBankPayoutOk() (*HkBankPayout, bool) {
+	if o == nil || IsNil(o.HkBankPayout) {
+		return nil, false
+	}
+	return o.HkBankPayout, true
+}
+
+// HasHkBankPayout returns a boolean if a field has been set.
+func (o *RippleFinancialInstrumentEntry) HasHkBankPayout() bool {
+	if o != nil && !IsNil(o.HkBankPayout) {
+		return true
+	}
+
+	return false
+}
+
+// SetHkBankPayout gets a reference to the given HkBankPayout and assigns it to the HkBankPayout field.
+func (o *RippleFinancialInstrumentEntry) SetHkBankPayout(v HkBankPayout) {
+	o.HkBankPayout = &v
+}
+
+// GetCnTrade returns the CnTrade field value if set, zero value otherwise.
+func (o *RippleFinancialInstrumentEntry) GetCnTrade() CnTrade {
+	if o == nil || IsNil(o.CnTrade) {
+		var ret CnTrade
+		return ret
+	}
+	return *o.CnTrade
+}
+
+// GetCnTradeOk returns a tuple with the CnTrade field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RippleFinancialInstrumentEntry) GetCnTradeOk() (*CnTrade, bool) {
+	if o == nil || IsNil(o.CnTrade) {
+		return nil, false
+	}
+	return o.CnTrade, true
+}
+
+// HasCnTrade returns a boolean if a field has been set.
+func (o *RippleFinancialInstrumentEntry) HasCnTrade() bool {
+	if o != nil && !IsNil(o.CnTrade) {
+		return true
+	}
+
+	return false
+}
+
+// SetCnTrade gets a reference to the given CnTrade and assigns it to the CnTrade field.
+func (o *RippleFinancialInstrumentEntry) SetCnTrade(v CnTrade) {
+	o.CnTrade = &v
+}
+
+// GetCnIndividual returns the CnIndividual field value if set, zero value otherwise.
+func (o *RippleFinancialInstrumentEntry) GetCnIndividual() CnIndividual {
+	if o == nil || IsNil(o.CnIndividual) {
+		var ret CnIndividual
+		return ret
+	}
+	return *o.CnIndividual
+}
+
+// GetCnIndividualOk returns a tuple with the CnIndividual field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RippleFinancialInstrumentEntry) GetCnIndividualOk() (*CnIndividual, bool) {
+	if o == nil || IsNil(o.CnIndividual) {
+		return nil, false
+	}
+	return o.CnIndividual, true
+}
+
+// HasCnIndividual returns a boolean if a field has been set.
+func (o *RippleFinancialInstrumentEntry) HasCnIndividual() bool {
+	if o != nil && !IsNil(o.CnIndividual) {
+		return true
+	}
+
+	return false
+}
+
+// SetCnIndividual gets a reference to the given CnIndividual and assigns it to the CnIndividual field.
+func (o *RippleFinancialInstrumentEntry) SetCnIndividual(v CnIndividual) {
+	o.CnIndividual = &v
+}
+
+// GetCnIndividualTrade returns the CnIndividualTrade field value if set, zero value otherwise.
+func (o *RippleFinancialInstrumentEntry) GetCnIndividualTrade() CnIndividualTrade {
+	if o == nil || IsNil(o.CnIndividualTrade) {
+		var ret CnIndividualTrade
+		return ret
+	}
+	return *o.CnIndividualTrade
+}
+
+// GetCnIndividualTradeOk returns a tuple with the CnIndividualTrade field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RippleFinancialInstrumentEntry) GetCnIndividualTradeOk() (*CnIndividualTrade, bool) {
+	if o == nil || IsNil(o.CnIndividualTrade) {
+		return nil, false
+	}
+	return o.CnIndividualTrade, true
+}
+
+// HasCnIndividualTrade returns a boolean if a field has been set.
+func (o *RippleFinancialInstrumentEntry) HasCnIndividualTrade() bool {
+	if o != nil && !IsNil(o.CnIndividualTrade) {
+		return true
+	}
+
+	return false
+}
+
+// SetCnIndividualTrade gets a reference to the given CnIndividualTrade and assigns it to the CnIndividualTrade field.
+func (o *RippleFinancialInstrumentEntry) SetCnIndividualTrade(v CnIndividualTrade) {
+	o.CnIndividualTrade = &v
+}
+
+// GetCnCfxps returns the CnCfxps field value if set, zero value otherwise.
+func (o *RippleFinancialInstrumentEntry) GetCnCfxps() CnCfxps {
+	if o == nil || IsNil(o.CnCfxps) {
+		var ret CnCfxps
+		return ret
+	}
+	return *o.CnCfxps
+}
+
+// GetCnCfxpsOk returns a tuple with the CnCfxps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RippleFinancialInstrumentEntry) GetCnCfxpsOk() (*CnCfxps, bool) {
+	if o == nil || IsNil(o.CnCfxps) {
+		return nil, false
+	}
+	return o.CnCfxps, true
+}
+
+// HasCnCfxps returns a boolean if a field has been set.
+func (o *RippleFinancialInstrumentEntry) HasCnCfxps() bool {
+	if o != nil && !IsNil(o.CnCfxps) {
+		return true
+	}
+
+	return false
+}
+
+// SetCnCfxps gets a reference to the given CnCfxps and assigns it to the CnCfxps field.
+func (o *RippleFinancialInstrumentEntry) SetCnCfxps(v CnCfxps) {
+	o.CnCfxps = &v
 }
 
 // GetCurrency returns the Currency field value
@@ -625,6 +1054,30 @@ func (o RippleFinancialInstrumentEntry) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.NgBankPayout) {
 		toSerialize["ngBankPayout"] = o.NgBankPayout
 	}
+	if !IsNil(o.GhBankPayout) {
+		toSerialize["ghBankPayout"] = o.GhBankPayout
+	}
+	if !IsNil(o.RwBankPayout) {
+		toSerialize["rwBankPayout"] = o.RwBankPayout
+	}
+	if !IsNil(o.ZaBankPayout) {
+		toSerialize["zaBankPayout"] = o.ZaBankPayout
+	}
+	if !IsNil(o.UgBankPayout) {
+		toSerialize["ugBankPayout"] = o.UgBankPayout
+	}
+	if !IsNil(o.ZmBankPayout) {
+		toSerialize["zmBankPayout"] = o.ZmBankPayout
+	}
+	if !IsNil(o.EthWallet) {
+		toSerialize["ethWallet"] = o.EthWallet
+	}
+	if !IsNil(o.TronWallet) {
+		toSerialize["tronWallet"] = o.TronWallet
+	}
+	if !IsNil(o.SolWallet) {
+		toSerialize["solWallet"] = o.SolWallet
+	}
 	if !IsNil(o.BrPix) {
 		toSerialize["brPix"] = o.BrPix
 	}
@@ -636,6 +1089,21 @@ func (o RippleFinancialInstrumentEntry) ToMap() (map[string]interface{}, error) 
 	}
 	if !IsNil(o.CaEft) {
 		toSerialize["caEft"] = o.CaEft
+	}
+	if !IsNil(o.HkBankPayout) {
+		toSerialize["hkBankPayout"] = o.HkBankPayout
+	}
+	if !IsNil(o.CnTrade) {
+		toSerialize["cnTrade"] = o.CnTrade
+	}
+	if !IsNil(o.CnIndividual) {
+		toSerialize["cnIndividual"] = o.CnIndividual
+	}
+	if !IsNil(o.CnIndividualTrade) {
+		toSerialize["cnIndividualTrade"] = o.CnIndividualTrade
+	}
+	if !IsNil(o.CnCfxps) {
+		toSerialize["cnCfxps"] = o.CnCfxps
 	}
 	toSerialize["currency"] = o.Currency
 	if !IsNil(o.Label) {

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **idNumber** | **string** | Identification Number. | [default to undefined]
 **idType** | **string** | The type of identification document used to identify the identity. | [default to undefined]
+**expiryDate** | **string** | Expiration date of the identification document. | [optional] [default to undefined]
 
 ## Example
 
@@ -16,6 +17,7 @@ import { IndividualIdentityIdentityDocumentsInner } from '@ripple/payments-direc
 const instance: IndividualIdentityIdentityDocumentsInner = {
     idNumber,
     idType,
+    expiryDate,
 };
 ```
 

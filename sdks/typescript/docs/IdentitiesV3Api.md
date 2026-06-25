@@ -4,22 +4,22 @@ All URIs are relative to *https://api.test.ripple.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createFinancialInstrument**](#createfinancialinstrument) | **POST** /v3/identities/{identity-id}/financial-instruments | Add a financial instrument (v3)|
-|[**createIdentity**](#createidentity) | **POST** /v3/identities | Create an identity (v3)|
-|[**deactivateFinancialInstrumentV3**](#deactivatefinancialinstrumentv3) | **DELETE** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Deactivate a Financial Instrument (v3)|
-|[**deactivateIdentityV3**](#deactivateidentityv3) | **DELETE** /v3/identities/{identity-id} | Deactivate an identity (v3)|
-|[**getFinancialInstrumentById**](#getfinancialinstrumentbyid) | **GET** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Get a financial instrument by ID (v3)|
-|[**getFinancialInstruments**](#getfinancialinstruments) | **GET** /v3/identities/{identity-id}/financial-instruments | Get a list of financial instruments of the identity (v3)|
-|[**getIdentities**](#getidentities) | **GET** /v3/identities | Get a list of identities (v3)|
-|[**getIdentityById**](#getidentitybyid) | **GET** /v3/identities/{identity-id} | Get an identity by ID (v3)|
-|[**getIdentityByInternalId**](#getidentitybyinternalid) | **GET** /v3/identities/by-internal-id/{internal-id} | Get an identity by Internal ID (v3)|
-|[**putFinancialInstrument**](#putfinancialinstrument) | **PUT** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Update a financial instrument (v3)|
-|[**putIdentity**](#putidentity) | **PUT** /v3/identities/{identity-id} | Update an identity (v3)|
+|[**createFinancialInstrument**](#createfinancialinstrument) | **POST** /v3/identities/{identity-id}/financial-instruments | Add a financial instrument|
+|[**createIdentity**](#createidentity) | **POST** /v3/identities | Create an identity|
+|[**deactivateFinancialInstrumentV3**](#deactivatefinancialinstrumentv3) | **DELETE** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Deactivate a Financial Instrument|
+|[**deactivateIdentityV3**](#deactivateidentityv3) | **DELETE** /v3/identities/{identity-id} | Deactivate an identity|
+|[**getFinancialInstrumentById**](#getfinancialinstrumentbyid) | **GET** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Get a financial instrument by ID|
+|[**getFinancialInstruments**](#getfinancialinstruments) | **GET** /v3/identities/{identity-id}/financial-instruments | Get a list of financial instruments of the identity|
+|[**getIdentities**](#getidentities) | **GET** /v3/identities | Get a list of identities|
+|[**getIdentityById**](#getidentitybyid) | **GET** /v3/identities/{identity-id} | Get an identity by ID|
+|[**getIdentityByInternalId**](#getidentitybyinternalid) | **GET** /v3/identities/by-internal-id/{internal-id} | Get an identity by Internal ID|
+|[**putFinancialInstrument**](#putfinancialinstrument) | **PUT** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Update a financial instrument|
+|[**putIdentity**](#putidentity) | **PUT** /v3/identities/{identity-id} | Update an identity|
 
 # **createFinancialInstrument**
 > CreateFinancialInstrumentResponse createFinancialInstrument(rippleFinancialInstrument)
 
-Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address). In the current release, each identity can have **one** financial instrument. Future releases will support multiple instruments per identity. 
+Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address).  In the current release, each identity can have **one** financial instrument.  Future releases will support multiple instruments per identity. 
 
 ### Example
 
@@ -77,7 +77,7 @@ const { status, data } = await apiInstance.createFinancialInstrument(
 # **createIdentity**
 > CreateIdentityResponseV3 createIdentity(createIdentityRequestV3)
 
-Create a new payment identity as an ORIGINATOR or BENEFICIARY for either an INDIVIDUAL or BUSINESS. The request body must follow the v3 identity schema and will be validated against corridor rules where applicable. On success, the API returns the new identityId and its initial version. 
+Create a new payment identity as an `ORIGINATOR` or `BENEFICIARY` for either an `INDIVIDUAL` or `BUSINESS`.  The request body must follow the v3 identity schema and will be validated against corridor rules where applicable.  On success, the API returns the new `identityId` and its initial version. 
 
 ### Example
 
@@ -132,7 +132,7 @@ const { status, data } = await apiInstance.createIdentity(
 # **deactivateFinancialInstrumentV3**
 > deactivateFinancialInstrumentV3()
 
-Deactivate a financial instrument of an Identity. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
+Deactivate a financial instrument of an Identity.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
 
 ### Example
 
@@ -191,7 +191,7 @@ void (empty response body)
 # **deactivateIdentityV3**
 > deactivateIdentityV3()
 
-Deactivate an identity and its financial instruments. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
+Deactivate an identity and its financial instruments.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
 
 ### Example
 
@@ -246,7 +246,7 @@ void (empty response body)
 # **getFinancialInstrumentById**
 > GetFinancialInstrumentResponse getFinancialInstrumentById()
 
-Retrieves one financial instrument associated with the specified identity. In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
+Retrieves one financial instrument associated with the specified identity.  In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
 
 ### Example
 
@@ -299,7 +299,7 @@ const { status, data } = await apiInstance.getFinancialInstrumentById(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of financial instruments for the identity. |  -  |
+|**200** | Financial instrument for the identity. |  -  |
 |**400** | Identity ID or financial instrument ID is not valid |  -  |
 |**404** | The specified identity-id does not exist. |  -  |
 |**500** | Internal processing error |  -  |
@@ -372,7 +372,7 @@ const { status, data } = await apiInstance.getFinancialInstruments(
 # **getIdentities**
 > ListIdentitiesResponseV3 getIdentities()
 
-Retrieve identities for your tenant with optional filters. Use `limit` and `next-token` for pagination. The response includes a `data` array and an optional `nextToken`. 
+Retrieve identities for your tenant with optional filters.  Use `limit` and `next-token` for pagination. The response includes a `data` array and an optional `nextToken`. 
 
 ### Example
 
@@ -435,7 +435,7 @@ const { status, data } = await apiInstance.getIdentities(
 # **getIdentityById**
 > GetIdentityResponseV3 getIdentityById()
 
-Retrieve a specific identity by ID. If `version` is not provided, the latest version is returned. 
+Retrieve a specific identity by ID.  If `version` is not provided, the latest version is returned. 
 
 ### Example
 
@@ -546,7 +546,7 @@ const { status, data } = await apiInstance.getIdentityByInternalId(
 # **putFinancialInstrument**
 > UpdateFinancialInstrumentResponse putFinancialInstrument(putRippleFinancialInstrument)
 
-Update editable fields of a financial instrument including rail-specific details and labels. The financialInstrumentType is immutable after creation. 
+Update editable fields of a financial instrument including rail-specific details and labels.  The financialInstrumentType is immutable after creation. 
 
 ### Example
 
@@ -608,7 +608,7 @@ const { status, data } = await apiInstance.putFinancialInstrument(
 # **putIdentity**
 > GetIdentityResponseV3 putIdentity(putIdentityRequestV3)
 
-Update all fields of an existing identity. Supports updates to PII fields and metadata. Each successful PUT creates a new version and preserves prior versions for audit. 
+Update all fields of an existing identity. Supports updates to PII fields and metadata.  Each successful PUT creates a new version and preserves prior versions for audit. 
 
 ### Example
 

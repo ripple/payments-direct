@@ -4,16 +4,16 @@ All URIs are relative to *https://api.test.ripple.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createPaymentV2**](#createpaymentv2) | **POST** /v3/payments | Create payment V2|
-|[**getPaymentByIdV2**](#getpaymentbyidv2) | **GET** /v3/payments/{paymentId} | Get a payment by ID V2|
+|[**createPaymentV2**](#createpaymentv2) | **POST** /v3/payments | Create payment|
+|[**getPaymentByIdV2**](#getpaymentbyidv2) | **GET** /v3/payments/{paymentId} | Get a payment by ID|
 |[**getPaymentStateTransitionsByIdV2**](#getpaymentstatetransitionsbyidv2) | **GET** /v3/payments/{paymentId}/states | Get state transitions by payment ID|
-|[**searchPaymentsV2**](#searchpaymentsv2) | **POST** /v3/payments/filter | Search payments V2|
+|[**searchPaymentsV2**](#searchpaymentsv2) | **POST** /v3/payments/filter | Search payments|
 |[**updatePaymentLabelsV2**](#updatepaymentlabelsv2) | **PATCH** /v3/payments/{paymentId}/labels | Update payment labels|
 
 # **createPaymentV2**
 > PaymentV2 createPaymentV2(paymentRequestV2)
 
-Create a payment  **Tutorial**  * Learn how to [Create a payment](/products/payments-direct-2/api-docs/tutorials/create-a-payment/). 
+Initiates a new cross-border payment. Payments are processed asynchronously. Use **Get a payment by ID** to poll for status updates, or **Get state transitions** to view the full status history. 
 
 ### Example
 
@@ -68,7 +68,7 @@ const { status, data } = await apiInstance.createPaymentV2(
 # **getPaymentByIdV2**
 > PaymentWithDetailsV2 getPaymentByIdV2()
 
-Gets a payment by ID.
+Returns the current status and full details of a payment, including amounts, beneficiary information, and the associated quote.
 
 ### Example
 
@@ -122,7 +122,7 @@ const { status, data } = await apiInstance.getPaymentByIdV2(
 # **getPaymentStateTransitionsByIdV2**
 > StateTransitionsResponseV2 getPaymentStateTransitionsByIdV2()
 
-Gets the state transitions for a payment by ID.
+Returns the complete state transition history for a payment, including each status change and its timestamp. Use this to audit payment progress or debug processing issues.
 
 ### Example
 
@@ -176,7 +176,7 @@ const { status, data } = await apiInstance.getPaymentStateTransitionsByIdV2(
 # **searchPaymentsV2**
 > PaymentsResponseV2 searchPaymentsV2(searchPaymentsRequestV2)
 
-Search for payments based on filtering criteria.
+Returns a paginated list of payments matching the specified filters. You can filter by status, date range, destination country, currency, or custom labels.
 
 ### Example
 
@@ -230,7 +230,7 @@ const { status, data } = await apiInstance.searchPaymentsV2(
 # **updatePaymentLabelsV2**
 > UpdatePaymentLabelsResponse updatePaymentLabelsV2(updatePaymentLabelsRequest)
 
-Add or remove labels for a payment.
+Add or remove labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment\'s lifetime.
 
 ### Example
 

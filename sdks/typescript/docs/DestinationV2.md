@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **beneficiaryIdentityVersion** | **number** | The current version of the beneficiary\&#39;s identity record. | [optional] [default to undefined]
 **beneficiaryIdentityNickName** | **string** | Nickname associated with the beneficiary\&#39;s identity record. | [optional] [default to undefined]
 **payout** | **string** | The payout category for this payment. | [optional] [default to undefined]
+**selectedPaymentRail** | **string** | The payment rail the customer selected when accepting the quote for this payment. Reflects the intended routing at the time of quote acceptance. For the rail confirmed by the payout partner at execution time, see &#x60;payoutExecutionDetails.paymentRailUsed&#x60;. These values may differ if the payout partner executed on an alternate rail.  | [optional] [default to undefined]
 
 ## Example
 
@@ -30,6 +31,7 @@ const instance: DestinationV2 = {
     beneficiaryIdentityVersion,
     beneficiaryIdentityNickName,
     payout,
+    selectedPaymentRail,
 };
 ```
 

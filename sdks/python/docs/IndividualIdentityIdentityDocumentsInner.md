@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id_number** | **str** | Identification Number. | 
 **id_type** | **str** | The type of identification document used to identify the identity. | 
+**expiry_date** | **date** | Expiration date of the identification document. | [optional] 
 
 ## Example
 

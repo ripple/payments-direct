@@ -1,9 +1,9 @@
 /*
 Payments Direct API
 
-Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
 
-API version: 2026.04
+API version: 2026.03
 */
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
@@ -37,6 +37,8 @@ type DestinationV2 struct {
 	BeneficiaryIdentityNickName *string `json:"beneficiaryIdentityNickName,omitempty"`
 	// The payout category for this payment.
 	Payout *string `json:"payout,omitempty"`
+	// The payment rail the customer selected when accepting the quote for this payment. Reflects the intended routing at the time of quote acceptance. For the rail confirmed by the payout partner at execution time, see `payoutExecutionDetails.paymentRailUsed`. These values may differ if the payout partner executed on an alternate rail. 
+	SelectedPaymentRail *string `json:"selectedPaymentRail,omitempty"`
 }
 
 // NewDestinationV2 instantiates a new DestinationV2 object
@@ -344,6 +346,38 @@ func (o *DestinationV2) SetPayout(v string) {
 	o.Payout = &v
 }
 
+// GetSelectedPaymentRail returns the SelectedPaymentRail field value if set, zero value otherwise.
+func (o *DestinationV2) GetSelectedPaymentRail() string {
+	if o == nil || IsNil(o.SelectedPaymentRail) {
+		var ret string
+		return ret
+	}
+	return *o.SelectedPaymentRail
+}
+
+// GetSelectedPaymentRailOk returns a tuple with the SelectedPaymentRail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DestinationV2) GetSelectedPaymentRailOk() (*string, bool) {
+	if o == nil || IsNil(o.SelectedPaymentRail) {
+		return nil, false
+	}
+	return o.SelectedPaymentRail, true
+}
+
+// HasSelectedPaymentRail returns a boolean if a field has been set.
+func (o *DestinationV2) HasSelectedPaymentRail() bool {
+	if o != nil && !IsNil(o.SelectedPaymentRail) {
+		return true
+	}
+
+	return false
+}
+
+// SetSelectedPaymentRail gets a reference to the given string and assigns it to the SelectedPaymentRail field.
+func (o *DestinationV2) SetSelectedPaymentRail(v string) {
+	o.SelectedPaymentRail = &v
+}
+
 func (o DestinationV2) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -380,6 +414,9 @@ func (o DestinationV2) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Payout) {
 		toSerialize["payout"] = o.Payout
+	}
+	if !IsNil(o.SelectedPaymentRail) {
+		toSerialize["selectedPaymentRail"] = o.SelectedPaymentRail
 	}
 	return toSerialize, nil
 }

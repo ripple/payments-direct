@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **beneficiary_identity_version** | **int** | The current version of the beneficiary&#39;s identity record. | [optional] 
 **beneficiary_identity_nick_name** | **str** | Nickname associated with the beneficiary&#39;s identity record. | [optional] 
 **payout** | **str** | The payout category for this payment. | [optional] 
+**selected_payment_rail** | **str** | The payment rail the customer selected when accepting the quote for this payment. Reflects the intended routing at the time of quote acceptance. For the rail confirmed by the payout partner at execution time, see &#x60;payoutExecutionDetails.paymentRailUsed&#x60;. These values may differ if the payout partner executed on an alternate rail.  | [optional] 
 
 ## Example
 

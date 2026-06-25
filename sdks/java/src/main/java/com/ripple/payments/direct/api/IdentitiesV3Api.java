@@ -1,8 +1,8 @@
 /*
  * Payments Direct API
- * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+ * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
  *
- * The version of the OpenAPI document: 2026.04
+ * The version of the OpenAPI document: 2026.03
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -53,8 +53,8 @@ public class IdentitiesV3Api extends BaseApi {
   }
 
   /**
-   * Add a financial instrument (v3)
-   * Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address). In the current release, each identity can have **one** financial instrument. Future releases will support multiple instruments per identity. 
+   * Add a financial instrument
+   * Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address).  In the current release, each identity can have **one** financial instrument.  Future releases will support multiple instruments per identity. 
    * @param identityId Unique identifier of the identity that will own the financial instrument. (required)
    * @param rippleFinancialInstrumentDTO  (required)
    * @return CreateFinancialInstrumentResponseDTO
@@ -66,8 +66,8 @@ public class IdentitiesV3Api extends BaseApi {
 
 
   /**
-   * Add a financial instrument (v3)
-   * Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address). In the current release, each identity can have **one** financial instrument. Future releases will support multiple instruments per identity. 
+   * Add a financial instrument
+   * Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address).  In the current release, each identity can have **one** financial instrument.  Future releases will support multiple instruments per identity. 
    * @param identityId Unique identifier of the identity that will own the financial instrument. (required)
    * @param rippleFinancialInstrumentDTO  (required)
    * @param additionalHeaders additionalHeaders for this call
@@ -135,8 +135,8 @@ public class IdentitiesV3Api extends BaseApi {
   }
 
   /**
-   * Create an identity (v3)
-   * Create a new payment identity as an ORIGINATOR or BENEFICIARY for either an INDIVIDUAL or BUSINESS. The request body must follow the v3 identity schema and will be validated against corridor rules where applicable. On success, the API returns the new identityId and its initial version. 
+   * Create an identity
+   * Create a new payment identity as an &#x60;ORIGINATOR&#x60; or &#x60;BENEFICIARY&#x60; for either an &#x60;INDIVIDUAL&#x60; or &#x60;BUSINESS&#x60;.  The request body must follow the v3 identity schema and will be validated against corridor rules where applicable.  On success, the API returns the new &#x60;identityId&#x60; and its initial version. 
    * @param createIdentityRequestV3DTO  (required)
    * @return CreateIdentityResponseV3DTO
    * @throws ApiException if fails to make API call
@@ -147,8 +147,8 @@ public class IdentitiesV3Api extends BaseApi {
 
 
   /**
-   * Create an identity (v3)
-   * Create a new payment identity as an ORIGINATOR or BENEFICIARY for either an INDIVIDUAL or BUSINESS. The request body must follow the v3 identity schema and will be validated against corridor rules where applicable. On success, the API returns the new identityId and its initial version. 
+   * Create an identity
+   * Create a new payment identity as an &#x60;ORIGINATOR&#x60; or &#x60;BENEFICIARY&#x60; for either an &#x60;INDIVIDUAL&#x60; or &#x60;BUSINESS&#x60;.  The request body must follow the v3 identity schema and will be validated against corridor rules where applicable.  On success, the API returns the new &#x60;identityId&#x60; and its initial version. 
    * @param createIdentityRequestV3DTO  (required)
    * @param additionalHeaders additionalHeaders for this call
    * @return CreateIdentityResponseV3DTO
@@ -209,8 +209,8 @@ public class IdentitiesV3Api extends BaseApi {
   }
 
   /**
-   * Deactivate a Financial Instrument (v3)
-   * Deactivate a financial instrument of an Identity. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
+   * Deactivate a Financial Instrument
+   * Deactivate a financial instrument of an Identity.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
    * @param identityId The unique ID of the identity. (required)
    * @param financialInstrumentId The ID of the financial instrument to deactivate. (required)
    * @throws ApiException if fails to make API call
@@ -221,8 +221,8 @@ public class IdentitiesV3Api extends BaseApi {
 
 
   /**
-   * Deactivate a Financial Instrument (v3)
-   * Deactivate a financial instrument of an Identity. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
+   * Deactivate a Financial Instrument
+   * Deactivate a financial instrument of an Identity.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
    * @param identityId The unique ID of the identity. (required)
    * @param financialInstrumentId The ID of the financial instrument to deactivate. (required)
    * @param additionalHeaders additionalHeaders for this call
@@ -289,8 +289,8 @@ public class IdentitiesV3Api extends BaseApi {
   }
 
   /**
-   * Deactivate an identity (v3)
-   * Deactivate an identity and its financial instruments. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
+   * Deactivate an identity
+   * Deactivate an identity and its financial instruments.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
    * @param identityId ID of the identity to deactivate. (required)
    * @throws ApiException if fails to make API call
    */
@@ -300,8 +300,8 @@ public class IdentitiesV3Api extends BaseApi {
 
 
   /**
-   * Deactivate an identity (v3)
-   * Deactivate an identity and its financial instruments. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
+   * Deactivate an identity
+   * Deactivate an identity and its financial instruments.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
    * @param identityId ID of the identity to deactivate. (required)
    * @param additionalHeaders additionalHeaders for this call
    * @throws ApiException if fails to make API call
@@ -361,8 +361,8 @@ public class IdentitiesV3Api extends BaseApi {
   }
 
   /**
-   * Get a financial instrument by ID (v3)
-   * Retrieves one financial instrument associated with the specified identity. In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
+   * Get a financial instrument by ID
+   * Retrieves one financial instrument associated with the specified identity.  In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
    * @param identityId Unique identifier of the identity whose instruments you want to list. (required)
    * @param financialInstrumentId The ID of the financial instrument of the identity. (required)
    * @param version Version of the identity (optional)
@@ -376,8 +376,8 @@ public class IdentitiesV3Api extends BaseApi {
 
 
   /**
-   * Get a financial instrument by ID (v3)
-   * Retrieves one financial instrument associated with the specified identity. In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
+   * Get a financial instrument by ID
+   * Retrieves one financial instrument associated with the specified identity.  In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
    * @param identityId Unique identifier of the identity whose instruments you want to list. (required)
    * @param financialInstrumentId The ID of the financial instrument of the identity. (required)
    * @param version Version of the identity (optional)
@@ -450,7 +450,7 @@ public class IdentitiesV3Api extends BaseApi {
   }
 
   /**
-   * Get a list of financial instruments of the identity (v3)
+   * Get a list of financial instruments of the identity
    * List financial instruments for an identity.
    * @param identityId Unique UUID string that maps to an identity (required)
    * @param version Version of the identity (optional)
@@ -465,7 +465,7 @@ public class IdentitiesV3Api extends BaseApi {
 
 
   /**
-   * Get a list of financial instruments of the identity (v3)
+   * Get a list of financial instruments of the identity
    * List financial instruments for an identity.
    * @param identityId Unique UUID string that maps to an identity (required)
    * @param version Version of the identity (optional)
@@ -534,8 +534,8 @@ public class IdentitiesV3Api extends BaseApi {
   }
 
   /**
-   * Get a list of identities (v3)
-   * Retrieve identities for your tenant with optional filters. Use &#x60;limit&#x60; and &#x60;next-token&#x60; for pagination. The response includes a &#x60;data&#x60; array and an optional &#x60;nextToken&#x60;. 
+   * Get a list of identities
+   * Retrieve identities for your tenant with optional filters.  Use &#x60;limit&#x60; and &#x60;next-token&#x60; for pagination. The response includes a &#x60;data&#x60; array and an optional &#x60;nextToken&#x60;. 
    * @param paymentRole Filter by payment role. (optional)
    * @param nickName Filter by nickname. (optional)
    * @param limit Maximum number of identities to return. Default value is 10, maximum is 100. (optional, default to 10)
@@ -549,8 +549,8 @@ public class IdentitiesV3Api extends BaseApi {
 
 
   /**
-   * Get a list of identities (v3)
-   * Retrieve identities for your tenant with optional filters. Use &#x60;limit&#x60; and &#x60;next-token&#x60; for pagination. The response includes a &#x60;data&#x60; array and an optional &#x60;nextToken&#x60;. 
+   * Get a list of identities
+   * Retrieve identities for your tenant with optional filters.  Use &#x60;limit&#x60; and &#x60;next-token&#x60; for pagination. The response includes a &#x60;data&#x60; array and an optional &#x60;nextToken&#x60;. 
    * @param paymentRole Filter by payment role. (optional)
    * @param nickName Filter by nickname. (optional)
    * @param limit Maximum number of identities to return. Default value is 10, maximum is 100. (optional, default to 10)
@@ -613,8 +613,8 @@ public class IdentitiesV3Api extends BaseApi {
   }
 
   /**
-   * Get an identity by ID (v3)
-   * Retrieve a specific identity by ID. If &#x60;version&#x60; is not provided, the latest version is returned. 
+   * Get an identity by ID
+   * Retrieve a specific identity by ID.  If &#x60;version&#x60; is not provided, the latest version is returned. 
    * @param identityId The ID of the identity to retrieve. (required)
    * @param version Specific version to retrieve. If omitted, returns the latest version. (optional)
    * @return GetIdentityResponseV3DTO
@@ -626,8 +626,8 @@ public class IdentitiesV3Api extends BaseApi {
 
 
   /**
-   * Get an identity by ID (v3)
-   * Retrieve a specific identity by ID. If &#x60;version&#x60; is not provided, the latest version is returned. 
+   * Get an identity by ID
+   * Retrieve a specific identity by ID.  If &#x60;version&#x60; is not provided, the latest version is returned. 
    * @param identityId The ID of the identity to retrieve. (required)
    * @param version Specific version to retrieve. If omitted, returns the latest version. (optional)
    * @param additionalHeaders additionalHeaders for this call
@@ -691,7 +691,7 @@ public class IdentitiesV3Api extends BaseApi {
   }
 
   /**
-   * Get an identity by Internal ID (v3)
+   * Get an identity by Internal ID
    * Retrieve a specific identity by its internal ID.  **Behavior:** - Only returns identities in the &#x60;ACTIVE&#x60; state. Deactivated identities will result in an error. - Always returns the latest version of the identity. Historical versions are not accessible through this endpoint. - If no active identity exists for the given &#x60;internal-id&#x60;, a 404 is returned. 
    * @param internalId The Internal ID of the identity to retrieve. (required)
    * @return GetIdentityResponseV3DTO
@@ -703,7 +703,7 @@ public class IdentitiesV3Api extends BaseApi {
 
 
   /**
-   * Get an identity by Internal ID (v3)
+   * Get an identity by Internal ID
    * Retrieve a specific identity by its internal ID.  **Behavior:** - Only returns identities in the &#x60;ACTIVE&#x60; state. Deactivated identities will result in an error. - Always returns the latest version of the identity. Historical versions are not accessible through this endpoint. - If no active identity exists for the given &#x60;internal-id&#x60;, a 404 is returned. 
    * @param internalId The Internal ID of the identity to retrieve. (required)
    * @param additionalHeaders additionalHeaders for this call
@@ -766,8 +766,8 @@ public class IdentitiesV3Api extends BaseApi {
   }
 
   /**
-   * Update a financial instrument (v3)
-   * Update editable fields of a financial instrument including rail-specific details and labels. The financialInstrumentType is immutable after creation. 
+   * Update a financial instrument
+   * Update editable fields of a financial instrument including rail-specific details and labels.  The financialInstrumentType is immutable after creation. 
    * @param identityId The unique ID of the identity. (required)
    * @param financialInstrumentId The ID of the financial instrument to update. (required)
    * @param putRippleFinancialInstrumentDTO  (required)
@@ -780,8 +780,8 @@ public class IdentitiesV3Api extends BaseApi {
 
 
   /**
-   * Update a financial instrument (v3)
-   * Update editable fields of a financial instrument including rail-specific details and labels. The financialInstrumentType is immutable after creation. 
+   * Update a financial instrument
+   * Update editable fields of a financial instrument including rail-specific details and labels.  The financialInstrumentType is immutable after creation. 
    * @param identityId The unique ID of the identity. (required)
    * @param financialInstrumentId The ID of the financial instrument to update. (required)
    * @param putRippleFinancialInstrumentDTO  (required)
@@ -856,8 +856,8 @@ public class IdentitiesV3Api extends BaseApi {
   }
 
   /**
-   * Update an identity (v3)
-   * Update all fields of an existing identity. Supports updates to PII fields and metadata. Each successful PUT creates a new version and preserves prior versions for audit. 
+   * Update an identity
+   * Update all fields of an existing identity. Supports updates to PII fields and metadata.  Each successful PUT creates a new version and preserves prior versions for audit. 
    * @param identityId The ID of the identity to update. (required)
    * @param putIdentityRequestV3DTO  (required)
    * @return GetIdentityResponseV3DTO
@@ -869,8 +869,8 @@ public class IdentitiesV3Api extends BaseApi {
 
 
   /**
-   * Update an identity (v3)
-   * Update all fields of an existing identity. Supports updates to PII fields and metadata. Each successful PUT creates a new version and preserves prior versions for audit. 
+   * Update an identity
+   * Update all fields of an existing identity. Supports updates to PII fields and metadata.  Each successful PUT creates a new version and preserves prior versions for audit. 
    * @param identityId The ID of the identity to update. (required)
    * @param putIdentityRequestV3DTO  (required)
    * @param additionalHeaders additionalHeaders for this call

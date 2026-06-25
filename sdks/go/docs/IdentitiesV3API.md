@@ -4,17 +4,17 @@ All URIs are relative to *https://api.test.ripple.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateFinancialInstrument**](IdentitiesV3API.md#CreateFinancialInstrument) | **Post** /v3/identities/{identity-id}/financial-instruments | Add a financial instrument (v3)
-[**CreateIdentity**](IdentitiesV3API.md#CreateIdentity) | **Post** /v3/identities | Create an identity (v3)
-[**DeactivateFinancialInstrumentV3**](IdentitiesV3API.md#DeactivateFinancialInstrumentV3) | **Delete** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Deactivate a Financial Instrument (v3)
-[**DeactivateIdentityV3**](IdentitiesV3API.md#DeactivateIdentityV3) | **Delete** /v3/identities/{identity-id} | Deactivate an identity (v3)
-[**GetFinancialInstrumentById**](IdentitiesV3API.md#GetFinancialInstrumentById) | **Get** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Get a financial instrument by ID (v3)
-[**GetFinancialInstruments**](IdentitiesV3API.md#GetFinancialInstruments) | **Get** /v3/identities/{identity-id}/financial-instruments | Get a list of financial instruments of the identity (v3)
-[**GetIdentities**](IdentitiesV3API.md#GetIdentities) | **Get** /v3/identities | Get a list of identities (v3)
-[**GetIdentityById**](IdentitiesV3API.md#GetIdentityById) | **Get** /v3/identities/{identity-id} | Get an identity by ID (v3)
-[**GetIdentityByInternalId**](IdentitiesV3API.md#GetIdentityByInternalId) | **Get** /v3/identities/by-internal-id/{internal-id} | Get an identity by Internal ID (v3)
-[**PutFinancialInstrument**](IdentitiesV3API.md#PutFinancialInstrument) | **Put** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Update a financial instrument (v3)
-[**PutIdentity**](IdentitiesV3API.md#PutIdentity) | **Put** /v3/identities/{identity-id} | Update an identity (v3)
+[**CreateFinancialInstrument**](IdentitiesV3API.md#CreateFinancialInstrument) | **Post** /v3/identities/{identity-id}/financial-instruments | Add a financial instrument
+[**CreateIdentity**](IdentitiesV3API.md#CreateIdentity) | **Post** /v3/identities | Create an identity
+[**DeactivateFinancialInstrumentV3**](IdentitiesV3API.md#DeactivateFinancialInstrumentV3) | **Delete** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Deactivate a Financial Instrument
+[**DeactivateIdentityV3**](IdentitiesV3API.md#DeactivateIdentityV3) | **Delete** /v3/identities/{identity-id} | Deactivate an identity
+[**GetFinancialInstrumentById**](IdentitiesV3API.md#GetFinancialInstrumentById) | **Get** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Get a financial instrument by ID
+[**GetFinancialInstruments**](IdentitiesV3API.md#GetFinancialInstruments) | **Get** /v3/identities/{identity-id}/financial-instruments | Get a list of financial instruments of the identity
+[**GetIdentities**](IdentitiesV3API.md#GetIdentities) | **Get** /v3/identities | Get a list of identities
+[**GetIdentityById**](IdentitiesV3API.md#GetIdentityById) | **Get** /v3/identities/{identity-id} | Get an identity by ID
+[**GetIdentityByInternalId**](IdentitiesV3API.md#GetIdentityByInternalId) | **Get** /v3/identities/by-internal-id/{internal-id} | Get an identity by Internal ID
+[**PutFinancialInstrument**](IdentitiesV3API.md#PutFinancialInstrument) | **Put** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Update a financial instrument
+[**PutIdentity**](IdentitiesV3API.md#PutIdentity) | **Put** /v3/identities/{identity-id} | Update an identity
 
 
 
@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 > CreateFinancialInstrumentResponse CreateFinancialInstrument(ctx, identityId).RippleFinancialInstrument(rippleFinancialInstrument).Execute()
 
-Add a financial instrument (v3)
+Add a financial instrument
 
 
 
@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 
 > CreateIdentityResponseV3 CreateIdentity(ctx).CreateIdentityRequestV3(createIdentityRequestV3).Execute()
 
-Create an identity (v3)
+Create an identity
 
 
 
@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
 
 > DeactivateFinancialInstrumentV3(ctx, identityId, financialInstrumentId).Execute()
 
-Deactivate a Financial Instrument (v3)
+Deactivate a Financial Instrument
 
 
 
@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
 
 > DeactivateIdentityV3(ctx, identityId).Execute()
 
-Deactivate an identity (v3)
+Deactivate an identity
 
 
 
@@ -299,7 +299,7 @@ Name | Type | Description  | Notes
 
 > GetFinancialInstrumentResponse GetFinancialInstrumentById(ctx, identityId, financialInstrumentId).Version(version).ExpandIdentity(expandIdentity).Execute()
 
-Get a financial instrument by ID (v3)
+Get a financial instrument by ID
 
 
 
@@ -376,7 +376,7 @@ Name | Type | Description  | Notes
 
 > ListFinancialInstrumentsResponse GetFinancialInstruments(ctx, identityId).Version(version).NextToken(nextToken).Limit(limit).Execute()
 
-Get a list of financial instruments of the identity (v3)
+Get a list of financial instruments of the identity
 
 
 
@@ -452,7 +452,7 @@ Name | Type | Description  | Notes
 
 > ListIdentitiesResponseV3 GetIdentities(ctx).PaymentRole(paymentRole).NickName(nickName).Limit(limit).NextToken(nextToken).Execute()
 
-Get a list of identities (v3)
+Get a list of identities
 
 
 
@@ -524,7 +524,7 @@ Name | Type | Description  | Notes
 
 > GetIdentityResponseV3 GetIdentityById(ctx, identityId).Version(version).Execute()
 
-Get an identity by ID (v3)
+Get an identity by ID
 
 
 
@@ -596,7 +596,7 @@ Name | Type | Description  | Notes
 
 > GetIdentityResponseV3 GetIdentityByInternalId(ctx, internalId).Execute()
 
-Get an identity by Internal ID (v3)
+Get an identity by Internal ID
 
 
 
@@ -666,7 +666,7 @@ Name | Type | Description  | Notes
 
 > UpdateFinancialInstrumentResponse PutFinancialInstrument(ctx, identityId, financialInstrumentId).PutRippleFinancialInstrument(putRippleFinancialInstrument).Execute()
 
-Update a financial instrument (v3)
+Update a financial instrument
 
 
 
@@ -741,7 +741,7 @@ Name | Type | Description  | Notes
 
 > GetIdentityResponseV3 PutIdentity(ctx, identityId).PutIdentityRequestV3(putIdentityRequestV3).Execute()
 
-Update an identity (v3)
+Update an identity
 
 
 

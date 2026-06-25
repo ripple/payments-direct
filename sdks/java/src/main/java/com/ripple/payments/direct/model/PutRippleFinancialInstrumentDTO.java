@@ -1,8 +1,8 @@
 /*
  * Payments Direct API
- * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+ * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
  *
- * The version of the OpenAPI document: 2026.04
+ * The version of the OpenAPI document: 2026.03
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -23,13 +23,26 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.ripple.payments.direct.model.BrPixDTO;
 import com.ripple.payments.direct.model.BrTedDTO;
 import com.ripple.payments.direct.model.CaEftDTO;
+import com.ripple.payments.direct.model.CnCfxpsDTO;
+import com.ripple.payments.direct.model.CnIndividualDTO;
+import com.ripple.payments.direct.model.CnIndividualTradeDTO;
+import com.ripple.payments.direct.model.CnTradeDTO;
 import com.ripple.payments.direct.model.CoPseDTO;
+import com.ripple.payments.direct.model.EthWalletDTO;
 import com.ripple.payments.direct.model.EuSepaDTO;
 import com.ripple.payments.direct.model.GbFpsDTO;
+import com.ripple.payments.direct.model.GhBankPayoutDTO;
+import com.ripple.payments.direct.model.HkBankPayoutDTO;
 import com.ripple.payments.direct.model.MxSpeiDTO;
 import com.ripple.payments.direct.model.NgBankPayoutDTO;
+import com.ripple.payments.direct.model.RwBankPayoutDTO;
+import com.ripple.payments.direct.model.SolWalletDTO;
+import com.ripple.payments.direct.model.TronWalletDTO;
+import com.ripple.payments.direct.model.UgBankPayoutDTO;
 import com.ripple.payments.direct.model.UsAchDTO;
 import com.ripple.payments.direct.model.UsFedwireDTO;
+import com.ripple.payments.direct.model.ZaBankPayoutDTO;
+import com.ripple.payments.direct.model.ZmBankPayoutDTO;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.io.UnsupportedEncodingException;
@@ -47,10 +60,23 @@ import java.util.StringJoiner;
   PutRippleFinancialInstrumentDTO.JSON_PROPERTY_EU_SEPA,
   PutRippleFinancialInstrumentDTO.JSON_PROPERTY_GB_FPS,
   PutRippleFinancialInstrumentDTO.JSON_PROPERTY_NG_BANK_PAYOUT,
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_GH_BANK_PAYOUT,
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_RW_BANK_PAYOUT,
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_ZA_BANK_PAYOUT,
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_UG_BANK_PAYOUT,
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_ZM_BANK_PAYOUT,
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_ETH_WALLET,
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_TRON_WALLET,
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_SOL_WALLET,
   PutRippleFinancialInstrumentDTO.JSON_PROPERTY_BR_PIX,
   PutRippleFinancialInstrumentDTO.JSON_PROPERTY_CO_PSE,
   PutRippleFinancialInstrumentDTO.JSON_PROPERTY_BR_TED,
-  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_CA_EFT
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_CA_EFT,
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_HK_BANK_PAYOUT,
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_CN_TRADE,
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_CN_INDIVIDUAL,
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_CN_INDIVIDUAL_TRADE,
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_CN_CFXPS
 })
 @JsonTypeName("put-ripple-financial-instrument")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.13.0")
@@ -83,6 +109,38 @@ public class PutRippleFinancialInstrumentDTO {
   @javax.annotation.Nullable
   private NgBankPayoutDTO ngBankPayout;
 
+  public static final String JSON_PROPERTY_GH_BANK_PAYOUT = "ghBankPayout";
+  @javax.annotation.Nullable
+  private GhBankPayoutDTO ghBankPayout;
+
+  public static final String JSON_PROPERTY_RW_BANK_PAYOUT = "rwBankPayout";
+  @javax.annotation.Nullable
+  private RwBankPayoutDTO rwBankPayout;
+
+  public static final String JSON_PROPERTY_ZA_BANK_PAYOUT = "zaBankPayout";
+  @javax.annotation.Nullable
+  private ZaBankPayoutDTO zaBankPayout;
+
+  public static final String JSON_PROPERTY_UG_BANK_PAYOUT = "ugBankPayout";
+  @javax.annotation.Nullable
+  private UgBankPayoutDTO ugBankPayout;
+
+  public static final String JSON_PROPERTY_ZM_BANK_PAYOUT = "zmBankPayout";
+  @javax.annotation.Nullable
+  private ZmBankPayoutDTO zmBankPayout;
+
+  public static final String JSON_PROPERTY_ETH_WALLET = "ethWallet";
+  @javax.annotation.Nullable
+  private EthWalletDTO ethWallet;
+
+  public static final String JSON_PROPERTY_TRON_WALLET = "tronWallet";
+  @javax.annotation.Nullable
+  private TronWalletDTO tronWallet;
+
+  public static final String JSON_PROPERTY_SOL_WALLET = "solWallet";
+  @javax.annotation.Nullable
+  private SolWalletDTO solWallet;
+
   public static final String JSON_PROPERTY_BR_PIX = "brPix";
   @javax.annotation.Nullable
   private BrPixDTO brPix;
@@ -98,6 +156,26 @@ public class PutRippleFinancialInstrumentDTO {
   public static final String JSON_PROPERTY_CA_EFT = "caEft";
   @javax.annotation.Nullable
   private CaEftDTO caEft;
+
+  public static final String JSON_PROPERTY_HK_BANK_PAYOUT = "hkBankPayout";
+  @javax.annotation.Nullable
+  private HkBankPayoutDTO hkBankPayout;
+
+  public static final String JSON_PROPERTY_CN_TRADE = "cnTrade";
+  @javax.annotation.Nullable
+  private CnTradeDTO cnTrade;
+
+  public static final String JSON_PROPERTY_CN_INDIVIDUAL = "cnIndividual";
+  @javax.annotation.Nullable
+  private CnIndividualDTO cnIndividual;
+
+  public static final String JSON_PROPERTY_CN_INDIVIDUAL_TRADE = "cnIndividualTrade";
+  @javax.annotation.Nullable
+  private CnIndividualTradeDTO cnIndividualTrade;
+
+  public static final String JSON_PROPERTY_CN_CFXPS = "cnCfxps";
+  @javax.annotation.Nullable
+  private CnCfxpsDTO cnCfxps;
 
   public PutRippleFinancialInstrumentDTO() {
   }
@@ -277,6 +355,206 @@ public class PutRippleFinancialInstrumentDTO {
     this.ngBankPayout = ngBankPayout;
   }
 
+  public PutRippleFinancialInstrumentDTO ghBankPayout(@javax.annotation.Nullable GhBankPayoutDTO ghBankPayout) {
+    
+    this.ghBankPayout = ghBankPayout;
+    return this;
+  }
+
+  /**
+   * Get ghBankPayout
+   * @return ghBankPayout
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_GH_BANK_PAYOUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public GhBankPayoutDTO getGhBankPayout() {
+    return ghBankPayout;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_GH_BANK_PAYOUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setGhBankPayout(@javax.annotation.Nullable GhBankPayoutDTO ghBankPayout) {
+    this.ghBankPayout = ghBankPayout;
+  }
+
+  public PutRippleFinancialInstrumentDTO rwBankPayout(@javax.annotation.Nullable RwBankPayoutDTO rwBankPayout) {
+    
+    this.rwBankPayout = rwBankPayout;
+    return this;
+  }
+
+  /**
+   * Get rwBankPayout
+   * @return rwBankPayout
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_RW_BANK_PAYOUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public RwBankPayoutDTO getRwBankPayout() {
+    return rwBankPayout;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_RW_BANK_PAYOUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setRwBankPayout(@javax.annotation.Nullable RwBankPayoutDTO rwBankPayout) {
+    this.rwBankPayout = rwBankPayout;
+  }
+
+  public PutRippleFinancialInstrumentDTO zaBankPayout(@javax.annotation.Nullable ZaBankPayoutDTO zaBankPayout) {
+    
+    this.zaBankPayout = zaBankPayout;
+    return this;
+  }
+
+  /**
+   * Get zaBankPayout
+   * @return zaBankPayout
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_ZA_BANK_PAYOUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public ZaBankPayoutDTO getZaBankPayout() {
+    return zaBankPayout;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_ZA_BANK_PAYOUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setZaBankPayout(@javax.annotation.Nullable ZaBankPayoutDTO zaBankPayout) {
+    this.zaBankPayout = zaBankPayout;
+  }
+
+  public PutRippleFinancialInstrumentDTO ugBankPayout(@javax.annotation.Nullable UgBankPayoutDTO ugBankPayout) {
+    
+    this.ugBankPayout = ugBankPayout;
+    return this;
+  }
+
+  /**
+   * Get ugBankPayout
+   * @return ugBankPayout
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_UG_BANK_PAYOUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public UgBankPayoutDTO getUgBankPayout() {
+    return ugBankPayout;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_UG_BANK_PAYOUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setUgBankPayout(@javax.annotation.Nullable UgBankPayoutDTO ugBankPayout) {
+    this.ugBankPayout = ugBankPayout;
+  }
+
+  public PutRippleFinancialInstrumentDTO zmBankPayout(@javax.annotation.Nullable ZmBankPayoutDTO zmBankPayout) {
+    
+    this.zmBankPayout = zmBankPayout;
+    return this;
+  }
+
+  /**
+   * Get zmBankPayout
+   * @return zmBankPayout
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_ZM_BANK_PAYOUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public ZmBankPayoutDTO getZmBankPayout() {
+    return zmBankPayout;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_ZM_BANK_PAYOUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setZmBankPayout(@javax.annotation.Nullable ZmBankPayoutDTO zmBankPayout) {
+    this.zmBankPayout = zmBankPayout;
+  }
+
+  public PutRippleFinancialInstrumentDTO ethWallet(@javax.annotation.Nullable EthWalletDTO ethWallet) {
+    
+    this.ethWallet = ethWallet;
+    return this;
+  }
+
+  /**
+   * Get ethWallet
+   * @return ethWallet
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_ETH_WALLET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public EthWalletDTO getEthWallet() {
+    return ethWallet;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_ETH_WALLET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setEthWallet(@javax.annotation.Nullable EthWalletDTO ethWallet) {
+    this.ethWallet = ethWallet;
+  }
+
+  public PutRippleFinancialInstrumentDTO tronWallet(@javax.annotation.Nullable TronWalletDTO tronWallet) {
+    
+    this.tronWallet = tronWallet;
+    return this;
+  }
+
+  /**
+   * Get tronWallet
+   * @return tronWallet
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TRON_WALLET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public TronWalletDTO getTronWallet() {
+    return tronWallet;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_TRON_WALLET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTronWallet(@javax.annotation.Nullable TronWalletDTO tronWallet) {
+    this.tronWallet = tronWallet;
+  }
+
+  public PutRippleFinancialInstrumentDTO solWallet(@javax.annotation.Nullable SolWalletDTO solWallet) {
+    
+    this.solWallet = solWallet;
+    return this;
+  }
+
+  /**
+   * Get solWallet
+   * @return solWallet
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_SOL_WALLET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public SolWalletDTO getSolWallet() {
+    return solWallet;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_SOL_WALLET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setSolWallet(@javax.annotation.Nullable SolWalletDTO solWallet) {
+    this.solWallet = solWallet;
+  }
+
   public PutRippleFinancialInstrumentDTO brPix(@javax.annotation.Nullable BrPixDTO brPix) {
     
     this.brPix = brPix;
@@ -377,6 +655,131 @@ public class PutRippleFinancialInstrumentDTO {
     this.caEft = caEft;
   }
 
+  public PutRippleFinancialInstrumentDTO hkBankPayout(@javax.annotation.Nullable HkBankPayoutDTO hkBankPayout) {
+    
+    this.hkBankPayout = hkBankPayout;
+    return this;
+  }
+
+  /**
+   * Get hkBankPayout
+   * @return hkBankPayout
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_HK_BANK_PAYOUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public HkBankPayoutDTO getHkBankPayout() {
+    return hkBankPayout;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_HK_BANK_PAYOUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setHkBankPayout(@javax.annotation.Nullable HkBankPayoutDTO hkBankPayout) {
+    this.hkBankPayout = hkBankPayout;
+  }
+
+  public PutRippleFinancialInstrumentDTO cnTrade(@javax.annotation.Nullable CnTradeDTO cnTrade) {
+    
+    this.cnTrade = cnTrade;
+    return this;
+  }
+
+  /**
+   * Get cnTrade
+   * @return cnTrade
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CN_TRADE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public CnTradeDTO getCnTrade() {
+    return cnTrade;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_CN_TRADE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCnTrade(@javax.annotation.Nullable CnTradeDTO cnTrade) {
+    this.cnTrade = cnTrade;
+  }
+
+  public PutRippleFinancialInstrumentDTO cnIndividual(@javax.annotation.Nullable CnIndividualDTO cnIndividual) {
+    
+    this.cnIndividual = cnIndividual;
+    return this;
+  }
+
+  /**
+   * Get cnIndividual
+   * @return cnIndividual
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CN_INDIVIDUAL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public CnIndividualDTO getCnIndividual() {
+    return cnIndividual;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_CN_INDIVIDUAL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCnIndividual(@javax.annotation.Nullable CnIndividualDTO cnIndividual) {
+    this.cnIndividual = cnIndividual;
+  }
+
+  public PutRippleFinancialInstrumentDTO cnIndividualTrade(@javax.annotation.Nullable CnIndividualTradeDTO cnIndividualTrade) {
+    
+    this.cnIndividualTrade = cnIndividualTrade;
+    return this;
+  }
+
+  /**
+   * Get cnIndividualTrade
+   * @return cnIndividualTrade
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CN_INDIVIDUAL_TRADE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public CnIndividualTradeDTO getCnIndividualTrade() {
+    return cnIndividualTrade;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_CN_INDIVIDUAL_TRADE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCnIndividualTrade(@javax.annotation.Nullable CnIndividualTradeDTO cnIndividualTrade) {
+    this.cnIndividualTrade = cnIndividualTrade;
+  }
+
+  public PutRippleFinancialInstrumentDTO cnCfxps(@javax.annotation.Nullable CnCfxpsDTO cnCfxps) {
+    
+    this.cnCfxps = cnCfxps;
+    return this;
+  }
+
+  /**
+   * Get cnCfxps
+   * @return cnCfxps
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CN_CFXPS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public CnCfxpsDTO getCnCfxps() {
+    return cnCfxps;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_CN_CFXPS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCnCfxps(@javax.annotation.Nullable CnCfxpsDTO cnCfxps) {
+    this.cnCfxps = cnCfxps;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -393,15 +796,28 @@ public class PutRippleFinancialInstrumentDTO {
         Objects.equals(this.euSepa, putRippleFinancialInstrument.euSepa) &&
         Objects.equals(this.gbFps, putRippleFinancialInstrument.gbFps) &&
         Objects.equals(this.ngBankPayout, putRippleFinancialInstrument.ngBankPayout) &&
+        Objects.equals(this.ghBankPayout, putRippleFinancialInstrument.ghBankPayout) &&
+        Objects.equals(this.rwBankPayout, putRippleFinancialInstrument.rwBankPayout) &&
+        Objects.equals(this.zaBankPayout, putRippleFinancialInstrument.zaBankPayout) &&
+        Objects.equals(this.ugBankPayout, putRippleFinancialInstrument.ugBankPayout) &&
+        Objects.equals(this.zmBankPayout, putRippleFinancialInstrument.zmBankPayout) &&
+        Objects.equals(this.ethWallet, putRippleFinancialInstrument.ethWallet) &&
+        Objects.equals(this.tronWallet, putRippleFinancialInstrument.tronWallet) &&
+        Objects.equals(this.solWallet, putRippleFinancialInstrument.solWallet) &&
         Objects.equals(this.brPix, putRippleFinancialInstrument.brPix) &&
         Objects.equals(this.coPse, putRippleFinancialInstrument.coPse) &&
         Objects.equals(this.brTed, putRippleFinancialInstrument.brTed) &&
-        Objects.equals(this.caEft, putRippleFinancialInstrument.caEft);
+        Objects.equals(this.caEft, putRippleFinancialInstrument.caEft) &&
+        Objects.equals(this.hkBankPayout, putRippleFinancialInstrument.hkBankPayout) &&
+        Objects.equals(this.cnTrade, putRippleFinancialInstrument.cnTrade) &&
+        Objects.equals(this.cnIndividual, putRippleFinancialInstrument.cnIndividual) &&
+        Objects.equals(this.cnIndividualTrade, putRippleFinancialInstrument.cnIndividualTrade) &&
+        Objects.equals(this.cnCfxps, putRippleFinancialInstrument.cnCfxps);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(label, usAch, usFedwire, mxSpei, euSepa, gbFps, ngBankPayout, brPix, coPse, brTed, caEft);
+    return Objects.hash(label, usAch, usFedwire, mxSpei, euSepa, gbFps, ngBankPayout, ghBankPayout, rwBankPayout, zaBankPayout, ugBankPayout, zmBankPayout, ethWallet, tronWallet, solWallet, brPix, coPse, brTed, caEft, hkBankPayout, cnTrade, cnIndividual, cnIndividualTrade, cnCfxps);
   }
 
   @Override
@@ -415,10 +831,23 @@ public class PutRippleFinancialInstrumentDTO {
     sb.append("    euSepa: ").append(toIndentedString(euSepa)).append("\n");
     sb.append("    gbFps: ").append(toIndentedString(gbFps)).append("\n");
     sb.append("    ngBankPayout: ").append(toIndentedString(ngBankPayout)).append("\n");
+    sb.append("    ghBankPayout: ").append(toIndentedString(ghBankPayout)).append("\n");
+    sb.append("    rwBankPayout: ").append(toIndentedString(rwBankPayout)).append("\n");
+    sb.append("    zaBankPayout: ").append(toIndentedString(zaBankPayout)).append("\n");
+    sb.append("    ugBankPayout: ").append(toIndentedString(ugBankPayout)).append("\n");
+    sb.append("    zmBankPayout: ").append(toIndentedString(zmBankPayout)).append("\n");
+    sb.append("    ethWallet: ").append(toIndentedString(ethWallet)).append("\n");
+    sb.append("    tronWallet: ").append(toIndentedString(tronWallet)).append("\n");
+    sb.append("    solWallet: ").append(toIndentedString(solWallet)).append("\n");
     sb.append("    brPix: ").append(toIndentedString(brPix)).append("\n");
     sb.append("    coPse: ").append(toIndentedString(coPse)).append("\n");
     sb.append("    brTed: ").append(toIndentedString(brTed)).append("\n");
     sb.append("    caEft: ").append(toIndentedString(caEft)).append("\n");
+    sb.append("    hkBankPayout: ").append(toIndentedString(hkBankPayout)).append("\n");
+    sb.append("    cnTrade: ").append(toIndentedString(cnTrade)).append("\n");
+    sb.append("    cnIndividual: ").append(toIndentedString(cnIndividual)).append("\n");
+    sb.append("    cnIndividualTrade: ").append(toIndentedString(cnIndividualTrade)).append("\n");
+    sb.append("    cnCfxps: ").append(toIndentedString(cnCfxps)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -496,6 +925,46 @@ public class PutRippleFinancialInstrumentDTO {
       joiner.add(getNgBankPayout().toUrlQueryString(prefix + "ngBankPayout" + suffix));
     }
 
+    // add `ghBankPayout` to the URL query string
+    if (getGhBankPayout() != null) {
+      joiner.add(getGhBankPayout().toUrlQueryString(prefix + "ghBankPayout" + suffix));
+    }
+
+    // add `rwBankPayout` to the URL query string
+    if (getRwBankPayout() != null) {
+      joiner.add(getRwBankPayout().toUrlQueryString(prefix + "rwBankPayout" + suffix));
+    }
+
+    // add `zaBankPayout` to the URL query string
+    if (getZaBankPayout() != null) {
+      joiner.add(getZaBankPayout().toUrlQueryString(prefix + "zaBankPayout" + suffix));
+    }
+
+    // add `ugBankPayout` to the URL query string
+    if (getUgBankPayout() != null) {
+      joiner.add(getUgBankPayout().toUrlQueryString(prefix + "ugBankPayout" + suffix));
+    }
+
+    // add `zmBankPayout` to the URL query string
+    if (getZmBankPayout() != null) {
+      joiner.add(getZmBankPayout().toUrlQueryString(prefix + "zmBankPayout" + suffix));
+    }
+
+    // add `ethWallet` to the URL query string
+    if (getEthWallet() != null) {
+      joiner.add(getEthWallet().toUrlQueryString(prefix + "ethWallet" + suffix));
+    }
+
+    // add `tronWallet` to the URL query string
+    if (getTronWallet() != null) {
+      joiner.add(getTronWallet().toUrlQueryString(prefix + "tronWallet" + suffix));
+    }
+
+    // add `solWallet` to the URL query string
+    if (getSolWallet() != null) {
+      joiner.add(getSolWallet().toUrlQueryString(prefix + "solWallet" + suffix));
+    }
+
     // add `brPix` to the URL query string
     if (getBrPix() != null) {
       joiner.add(getBrPix().toUrlQueryString(prefix + "brPix" + suffix));
@@ -514,6 +983,31 @@ public class PutRippleFinancialInstrumentDTO {
     // add `caEft` to the URL query string
     if (getCaEft() != null) {
       joiner.add(getCaEft().toUrlQueryString(prefix + "caEft" + suffix));
+    }
+
+    // add `hkBankPayout` to the URL query string
+    if (getHkBankPayout() != null) {
+      joiner.add(getHkBankPayout().toUrlQueryString(prefix + "hkBankPayout" + suffix));
+    }
+
+    // add `cnTrade` to the URL query string
+    if (getCnTrade() != null) {
+      joiner.add(getCnTrade().toUrlQueryString(prefix + "cnTrade" + suffix));
+    }
+
+    // add `cnIndividual` to the URL query string
+    if (getCnIndividual() != null) {
+      joiner.add(getCnIndividual().toUrlQueryString(prefix + "cnIndividual" + suffix));
+    }
+
+    // add `cnIndividualTrade` to the URL query string
+    if (getCnIndividualTrade() != null) {
+      joiner.add(getCnIndividualTrade().toUrlQueryString(prefix + "cnIndividualTrade" + suffix));
+    }
+
+    // add `cnCfxps` to the URL query string
+    if (getCnCfxps() != null) {
+      joiner.add(getCnCfxps().toUrlQueryString(prefix + "cnCfxps" + suffix));
     }
 
     return joiner.toString();

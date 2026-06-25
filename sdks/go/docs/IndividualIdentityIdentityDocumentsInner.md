@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **IdNumber** | **string** | Identification Number. | 
 **IdType** | **string** | The type of identification document used to identify the identity. | 
+**ExpiryDate** | Pointer to **string** | Expiration date of the identification document. | [optional] 
 
 ## Methods
 
@@ -65,6 +66,31 @@ and a boolean to check if the value has been set.
 
 SetIdType sets IdType field to given value.
 
+
+### GetExpiryDate
+
+`func (o *IndividualIdentityIdentityDocumentsInner) GetExpiryDate() string`
+
+GetExpiryDate returns the ExpiryDate field if non-nil, zero value otherwise.
+
+### GetExpiryDateOk
+
+`func (o *IndividualIdentityIdentityDocumentsInner) GetExpiryDateOk() (*string, bool)`
+
+GetExpiryDateOk returns a tuple with the ExpiryDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiryDate
+
+`func (o *IndividualIdentityIdentityDocumentsInner) SetExpiryDate(v string)`
+
+SetExpiryDate sets ExpiryDate field to given value.
+
+### HasExpiryDate
+
+`func (o *IndividualIdentityIdentityDocumentsInner) HasExpiryDate() bool`
+
+HasExpiryDate returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

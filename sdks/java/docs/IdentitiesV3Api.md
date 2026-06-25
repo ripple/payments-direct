@@ -4,17 +4,17 @@ All URIs are relative to *https://api.test.ripple.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createFinancialInstrument**](IdentitiesV3Api.md#createFinancialInstrument) | **POST** /v3/identities/{identity-id}/financial-instruments | Add a financial instrument (v3) |
-| [**createIdentity**](IdentitiesV3Api.md#createIdentity) | **POST** /v3/identities | Create an identity (v3) |
-| [**deactivateFinancialInstrumentV3**](IdentitiesV3Api.md#deactivateFinancialInstrumentV3) | **DELETE** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Deactivate a Financial Instrument (v3) |
-| [**deactivateIdentityV3**](IdentitiesV3Api.md#deactivateIdentityV3) | **DELETE** /v3/identities/{identity-id} | Deactivate an identity (v3) |
-| [**getFinancialInstrumentById**](IdentitiesV3Api.md#getFinancialInstrumentById) | **GET** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Get a financial instrument by ID (v3) |
-| [**getFinancialInstruments**](IdentitiesV3Api.md#getFinancialInstruments) | **GET** /v3/identities/{identity-id}/financial-instruments | Get a list of financial instruments of the identity (v3) |
-| [**getIdentities**](IdentitiesV3Api.md#getIdentities) | **GET** /v3/identities | Get a list of identities (v3) |
-| [**getIdentityById**](IdentitiesV3Api.md#getIdentityById) | **GET** /v3/identities/{identity-id} | Get an identity by ID (v3) |
-| [**getIdentityByInternalId**](IdentitiesV3Api.md#getIdentityByInternalId) | **GET** /v3/identities/by-internal-id/{internal-id} | Get an identity by Internal ID (v3) |
-| [**putFinancialInstrument**](IdentitiesV3Api.md#putFinancialInstrument) | **PUT** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Update a financial instrument (v3) |
-| [**putIdentity**](IdentitiesV3Api.md#putIdentity) | **PUT** /v3/identities/{identity-id} | Update an identity (v3) |
+| [**createFinancialInstrument**](IdentitiesV3Api.md#createFinancialInstrument) | **POST** /v3/identities/{identity-id}/financial-instruments | Add a financial instrument |
+| [**createIdentity**](IdentitiesV3Api.md#createIdentity) | **POST** /v3/identities | Create an identity |
+| [**deactivateFinancialInstrumentV3**](IdentitiesV3Api.md#deactivateFinancialInstrumentV3) | **DELETE** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Deactivate a Financial Instrument |
+| [**deactivateIdentityV3**](IdentitiesV3Api.md#deactivateIdentityV3) | **DELETE** /v3/identities/{identity-id} | Deactivate an identity |
+| [**getFinancialInstrumentById**](IdentitiesV3Api.md#getFinancialInstrumentById) | **GET** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Get a financial instrument by ID |
+| [**getFinancialInstruments**](IdentitiesV3Api.md#getFinancialInstruments) | **GET** /v3/identities/{identity-id}/financial-instruments | Get a list of financial instruments of the identity |
+| [**getIdentities**](IdentitiesV3Api.md#getIdentities) | **GET** /v3/identities | Get a list of identities |
+| [**getIdentityById**](IdentitiesV3Api.md#getIdentityById) | **GET** /v3/identities/{identity-id} | Get an identity by ID |
+| [**getIdentityByInternalId**](IdentitiesV3Api.md#getIdentityByInternalId) | **GET** /v3/identities/by-internal-id/{internal-id} | Get an identity by Internal ID |
+| [**putFinancialInstrument**](IdentitiesV3Api.md#putFinancialInstrument) | **PUT** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Update a financial instrument |
+| [**putIdentity**](IdentitiesV3Api.md#putIdentity) | **PUT** /v3/identities/{identity-id} | Update an identity |
 
 
 
@@ -22,9 +22,9 @@ All URIs are relative to *https://api.test.ripple.com*
 
 > CreateFinancialInstrumentResponseDTO createFinancialInstrument(identityId, rippleFinancialInstrumentDTO)
 
-Add a financial instrument (v3)
+Add a financial instrument
 
-Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address). In the current release, each identity can have **one** financial instrument. Future releases will support multiple instruments per identity. 
+Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address).  In the current release, each identity can have **one** financial instrument.  Future releases will support multiple instruments per identity. 
 
 ### Example
 
@@ -98,9 +98,9 @@ public class Example {
 
 > CreateIdentityResponseV3DTO createIdentity(createIdentityRequestV3DTO)
 
-Create an identity (v3)
+Create an identity
 
-Create a new payment identity as an ORIGINATOR or BENEFICIARY for either an INDIVIDUAL or BUSINESS. The request body must follow the v3 identity schema and will be validated against corridor rules where applicable. On success, the API returns the new identityId and its initial version. 
+Create a new payment identity as an &#x60;ORIGINATOR&#x60; or &#x60;BENEFICIARY&#x60; for either an &#x60;INDIVIDUAL&#x60; or &#x60;BUSINESS&#x60;.  The request body must follow the v3 identity schema and will be validated against corridor rules where applicable.  On success, the API returns the new &#x60;identityId&#x60; and its initial version. 
 
 ### Example
 
@@ -172,9 +172,9 @@ public class Example {
 
 > deactivateFinancialInstrumentV3(identityId, financialInstrumentId)
 
-Deactivate a Financial Instrument (v3)
+Deactivate a Financial Instrument
 
-Deactivate a financial instrument of an Identity. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
+Deactivate a financial instrument of an Identity.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
 
 ### Example
 
@@ -249,9 +249,9 @@ null (empty response body)
 
 > deactivateIdentityV3(identityId)
 
-Deactivate an identity (v3)
+Deactivate an identity
 
-Deactivate an identity and its financial instruments. Deactivation is permanent and prevents further use in payments. Historical versions remain available for audit. 
+Deactivate an identity and its financial instruments.  Deactivation is permanent and prevents further use in payments.  Historical versions remain available for audit. 
 
 ### Example
 
@@ -323,9 +323,9 @@ null (empty response body)
 
 > GetFinancialInstrumentResponseDTO getFinancialInstrumentById(identityId, financialInstrumentId, version, expandIdentity)
 
-Get a financial instrument by ID (v3)
+Get a financial instrument by ID
 
-Retrieves one financial instrument associated with the specified identity. In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
+Retrieves one financial instrument associated with the specified identity.  In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity. 
 
 ### Example
 
@@ -393,7 +393,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of financial instruments for the identity. |  -  |
+| **200** | Financial instrument for the identity. |  -  |
 | **400** | Identity ID or financial instrument ID is not valid |  -  |
 | **404** | The specified identity-id does not exist. |  -  |
 | **500** | Internal processing error |  -  |
@@ -403,7 +403,7 @@ public class Example {
 
 > ListFinancialInstrumentsResponseDTO getFinancialInstruments(identityId, version, nextToken, limit)
 
-Get a list of financial instruments of the identity (v3)
+Get a list of financial instruments of the identity
 
 List financial instruments for an identity.
 
@@ -483,9 +483,9 @@ public class Example {
 
 > ListIdentitiesResponseV3DTO getIdentities(paymentRole, nickName, limit, nextToken)
 
-Get a list of identities (v3)
+Get a list of identities
 
-Retrieve identities for your tenant with optional filters. Use &#x60;limit&#x60; and &#x60;next-token&#x60; for pagination. The response includes a &#x60;data&#x60; array and an optional &#x60;nextToken&#x60;. 
+Retrieve identities for your tenant with optional filters.  Use &#x60;limit&#x60; and &#x60;next-token&#x60; for pagination. The response includes a &#x60;data&#x60; array and an optional &#x60;nextToken&#x60;. 
 
 ### Example
 
@@ -563,9 +563,9 @@ public class Example {
 
 > GetIdentityResponseV3DTO getIdentityById(identityId, version)
 
-Get an identity by ID (v3)
+Get an identity by ID
 
-Retrieve a specific identity by ID. If &#x60;version&#x60; is not provided, the latest version is returned. 
+Retrieve a specific identity by ID.  If &#x60;version&#x60; is not provided, the latest version is returned. 
 
 ### Example
 
@@ -639,7 +639,7 @@ public class Example {
 
 > GetIdentityResponseV3DTO getIdentityByInternalId(internalId)
 
-Get an identity by Internal ID (v3)
+Get an identity by Internal ID
 
 Retrieve a specific identity by its internal ID.  **Behavior:** - Only returns identities in the &#x60;ACTIVE&#x60; state. Deactivated identities will result in an error. - Always returns the latest version of the identity. Historical versions are not accessible through this endpoint. - If no active identity exists for the given &#x60;internal-id&#x60;, a 404 is returned. 
 
@@ -713,9 +713,9 @@ public class Example {
 
 > UpdateFinancialInstrumentResponseDTO putFinancialInstrument(identityId, financialInstrumentId, putRippleFinancialInstrumentDTO)
 
-Update a financial instrument (v3)
+Update a financial instrument
 
-Update editable fields of a financial instrument including rail-specific details and labels. The financialInstrumentType is immutable after creation. 
+Update editable fields of a financial instrument including rail-specific details and labels.  The financialInstrumentType is immutable after creation. 
 
 ### Example
 
@@ -792,9 +792,9 @@ public class Example {
 
 > GetIdentityResponseV3DTO putIdentity(identityId, putIdentityRequestV3DTO)
 
-Update an identity (v3)
+Update an identity
 
-Update all fields of an existing identity. Supports updates to PII fields and metadata. Each successful PUT creates a new version and preserves prior versions for audit. 
+Update all fields of an existing identity. Supports updates to PII fields and metadata.  Each successful PUT creates a new version and preserves prior versions for audit. 
 
 ### Example
 

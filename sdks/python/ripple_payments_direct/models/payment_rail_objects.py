@@ -3,9 +3,9 @@
 """
     Payments Direct API
 
-    Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+    Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
 
-    The version of the OpenAPI document: 2026.04
+    The version of the OpenAPI document: 2026.03
     Generated by OpenAPI Generator (https://openapi-generator.tech)
 
     Do not edit the class manually.
@@ -22,13 +22,26 @@ from typing import Any, ClassVar, Dict, List, Optional
 from ripple_payments_direct.models.br_pix import BrPix
 from ripple_payments_direct.models.br_ted import BrTed
 from ripple_payments_direct.models.ca_eft import CaEft
+from ripple_payments_direct.models.cn_cfxps import CnCfxps
+from ripple_payments_direct.models.cn_individual import CnIndividual
+from ripple_payments_direct.models.cn_individual_trade import CnIndividualTrade
+from ripple_payments_direct.models.cn_trade import CnTrade
 from ripple_payments_direct.models.co_pse import CoPse
+from ripple_payments_direct.models.eth_wallet import EthWallet
 from ripple_payments_direct.models.eu_sepa import EuSepa
 from ripple_payments_direct.models.gb_fps import GbFps
+from ripple_payments_direct.models.gh_bank_payout import GhBankPayout
+from ripple_payments_direct.models.hk_bank_payout import HkBankPayout
 from ripple_payments_direct.models.mx_spei import MxSpei
 from ripple_payments_direct.models.ng_bank_payout import NgBankPayout
+from ripple_payments_direct.models.rw_bank_payout import RwBankPayout
+from ripple_payments_direct.models.sol_wallet import SolWallet
+from ripple_payments_direct.models.tron_wallet import TronWallet
+from ripple_payments_direct.models.ug_bank_payout import UgBankPayout
 from ripple_payments_direct.models.us_ach import UsAch
 from ripple_payments_direct.models.us_fedwire import UsFedwire
+from ripple_payments_direct.models.za_bank_payout import ZaBankPayout
+from ripple_payments_direct.models.zm_bank_payout import ZmBankPayout
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -42,11 +55,24 @@ class PaymentRailObjects(BaseModel):
     eu_sepa: Optional[EuSepa] = Field(default=None, alias="euSepa")
     gb_fps: Optional[GbFps] = Field(default=None, alias="gbFps")
     ng_bank_payout: Optional[NgBankPayout] = Field(default=None, alias="ngBankPayout")
+    gh_bank_payout: Optional[GhBankPayout] = Field(default=None, alias="ghBankPayout")
+    rw_bank_payout: Optional[RwBankPayout] = Field(default=None, alias="rwBankPayout")
+    za_bank_payout: Optional[ZaBankPayout] = Field(default=None, alias="zaBankPayout")
+    ug_bank_payout: Optional[UgBankPayout] = Field(default=None, alias="ugBankPayout")
+    zm_bank_payout: Optional[ZmBankPayout] = Field(default=None, alias="zmBankPayout")
+    eth_wallet: Optional[EthWallet] = Field(default=None, alias="ethWallet")
+    tron_wallet: Optional[TronWallet] = Field(default=None, alias="tronWallet")
+    sol_wallet: Optional[SolWallet] = Field(default=None, alias="solWallet")
     br_pix: Optional[BrPix] = Field(default=None, alias="brPix")
     co_pse: Optional[CoPse] = Field(default=None, alias="coPse")
     br_ted: Optional[BrTed] = Field(default=None, alias="brTed")
     ca_eft: Optional[CaEft] = Field(default=None, alias="caEft")
-    __properties: ClassVar[List[str]] = ["usAch", "usFedwire", "mxSpei", "euSepa", "gbFps", "ngBankPayout", "brPix", "coPse", "brTed", "caEft"]
+    hk_bank_payout: Optional[HkBankPayout] = Field(default=None, alias="hkBankPayout")
+    cn_trade: Optional[CnTrade] = Field(default=None, alias="cnTrade")
+    cn_individual: Optional[CnIndividual] = Field(default=None, alias="cnIndividual")
+    cn_individual_trade: Optional[CnIndividualTrade] = Field(default=None, alias="cnIndividualTrade")
+    cn_cfxps: Optional[CnCfxps] = Field(default=None, alias="cnCfxps")
+    __properties: ClassVar[List[str]] = ["usAch", "usFedwire", "mxSpei", "euSepa", "gbFps", "ngBankPayout", "ghBankPayout", "rwBankPayout", "zaBankPayout", "ugBankPayout", "zmBankPayout", "ethWallet", "tronWallet", "solWallet", "brPix", "coPse", "brTed", "caEft", "hkBankPayout", "cnTrade", "cnIndividual", "cnIndividualTrade", "cnCfxps"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -105,6 +131,30 @@ class PaymentRailObjects(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of ng_bank_payout
         if self.ng_bank_payout:
             _dict['ngBankPayout'] = self.ng_bank_payout.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of gh_bank_payout
+        if self.gh_bank_payout:
+            _dict['ghBankPayout'] = self.gh_bank_payout.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of rw_bank_payout
+        if self.rw_bank_payout:
+            _dict['rwBankPayout'] = self.rw_bank_payout.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of za_bank_payout
+        if self.za_bank_payout:
+            _dict['zaBankPayout'] = self.za_bank_payout.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of ug_bank_payout
+        if self.ug_bank_payout:
+            _dict['ugBankPayout'] = self.ug_bank_payout.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of zm_bank_payout
+        if self.zm_bank_payout:
+            _dict['zmBankPayout'] = self.zm_bank_payout.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of eth_wallet
+        if self.eth_wallet:
+            _dict['ethWallet'] = self.eth_wallet.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of tron_wallet
+        if self.tron_wallet:
+            _dict['tronWallet'] = self.tron_wallet.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of sol_wallet
+        if self.sol_wallet:
+            _dict['solWallet'] = self.sol_wallet.to_dict()
         # override the default output from pydantic by calling `to_dict()` of br_pix
         if self.br_pix:
             _dict['brPix'] = self.br_pix.to_dict()
@@ -117,6 +167,21 @@ class PaymentRailObjects(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of ca_eft
         if self.ca_eft:
             _dict['caEft'] = self.ca_eft.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of hk_bank_payout
+        if self.hk_bank_payout:
+            _dict['hkBankPayout'] = self.hk_bank_payout.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of cn_trade
+        if self.cn_trade:
+            _dict['cnTrade'] = self.cn_trade.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of cn_individual
+        if self.cn_individual:
+            _dict['cnIndividual'] = self.cn_individual.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of cn_individual_trade
+        if self.cn_individual_trade:
+            _dict['cnIndividualTrade'] = self.cn_individual_trade.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of cn_cfxps
+        if self.cn_cfxps:
+            _dict['cnCfxps'] = self.cn_cfxps.to_dict()
         return _dict
 
     @classmethod
@@ -135,10 +200,23 @@ class PaymentRailObjects(BaseModel):
             "euSepa": EuSepa.from_dict(obj["euSepa"]) if obj.get("euSepa") is not None else None,
             "gbFps": GbFps.from_dict(obj["gbFps"]) if obj.get("gbFps") is not None else None,
             "ngBankPayout": NgBankPayout.from_dict(obj["ngBankPayout"]) if obj.get("ngBankPayout") is not None else None,
+            "ghBankPayout": GhBankPayout.from_dict(obj["ghBankPayout"]) if obj.get("ghBankPayout") is not None else None,
+            "rwBankPayout": RwBankPayout.from_dict(obj["rwBankPayout"]) if obj.get("rwBankPayout") is not None else None,
+            "zaBankPayout": ZaBankPayout.from_dict(obj["zaBankPayout"]) if obj.get("zaBankPayout") is not None else None,
+            "ugBankPayout": UgBankPayout.from_dict(obj["ugBankPayout"]) if obj.get("ugBankPayout") is not None else None,
+            "zmBankPayout": ZmBankPayout.from_dict(obj["zmBankPayout"]) if obj.get("zmBankPayout") is not None else None,
+            "ethWallet": EthWallet.from_dict(obj["ethWallet"]) if obj.get("ethWallet") is not None else None,
+            "tronWallet": TronWallet.from_dict(obj["tronWallet"]) if obj.get("tronWallet") is not None else None,
+            "solWallet": SolWallet.from_dict(obj["solWallet"]) if obj.get("solWallet") is not None else None,
             "brPix": BrPix.from_dict(obj["brPix"]) if obj.get("brPix") is not None else None,
             "coPse": CoPse.from_dict(obj["coPse"]) if obj.get("coPse") is not None else None,
             "brTed": BrTed.from_dict(obj["brTed"]) if obj.get("brTed") is not None else None,
-            "caEft": CaEft.from_dict(obj["caEft"]) if obj.get("caEft") is not None else None
+            "caEft": CaEft.from_dict(obj["caEft"]) if obj.get("caEft") is not None else None,
+            "hkBankPayout": HkBankPayout.from_dict(obj["hkBankPayout"]) if obj.get("hkBankPayout") is not None else None,
+            "cnTrade": CnTrade.from_dict(obj["cnTrade"]) if obj.get("cnTrade") is not None else None,
+            "cnIndividual": CnIndividual.from_dict(obj["cnIndividual"]) if obj.get("cnIndividual") is not None else None,
+            "cnIndividualTrade": CnIndividualTrade.from_dict(obj["cnIndividualTrade"]) if obj.get("cnIndividualTrade") is not None else None,
+            "cnCfxps": CnCfxps.from_dict(obj["cnCfxps"]) if obj.get("cnCfxps") is not None else None
         })
         return _obj
 

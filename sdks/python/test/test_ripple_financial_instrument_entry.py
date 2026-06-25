@@ -3,9 +3,9 @@
 """
     Payments Direct API
 
-    Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+    Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
 
-    The version of the OpenAPI document: 2026.04
+    The version of the OpenAPI document: 2026.03
     Generated by OpenAPI Generator (https://openapi-generator.tech)
 
     Do not edit the class manually.
@@ -41,10 +41,41 @@ class TestRippleFinancialInstrumentEntry(unittest.TestCase):
                 eu_sepa = ERROR_TO_EXAMPLE_VALUE,
                 gb_fps = ERROR_TO_EXAMPLE_VALUE,
                 ng_bank_payout = ERROR_TO_EXAMPLE_VALUE,
+                gh_bank_payout = ERROR_TO_EXAMPLE_VALUE,
+                rw_bank_payout = ERROR_TO_EXAMPLE_VALUE,
+                za_bank_payout = ERROR_TO_EXAMPLE_VALUE,
+                ug_bank_payout = ERROR_TO_EXAMPLE_VALUE,
+                zm_bank_payout = ERROR_TO_EXAMPLE_VALUE,
+                eth_wallet = ripple_payments_direct.models.eth_wallet.eth-wallet(
+                    wallet_address = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', 
+                    crypto_institution_name = 'Bitso', 
+                    network = 'ETHEREUM', 
+                    supported_corridors = [
+                        'ETH_USDT'
+                        ], ),
+                tron_wallet = ripple_payments_direct.models.tron_wallet.tron-wallet(
+                    wallet_address = 'T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb', 
+                    crypto_institution_name = 'Bitso', 
+                    network = 'TRON', 
+                    supported_corridors = [
+                        'TRON_USDT'
+                        ], ),
+                sol_wallet = ripple_payments_direct.models.sol_wallet.sol-wallet(
+                    wallet_address = '7EcDhSYGxXyscszYEp35KHN8vvw3svAuLKTzXwCFLtV', 
+                    crypto_institution_name = 'Bitso', 
+                    network = 'SOLANA', 
+                    supported_corridors = [
+                        'SOLANA_USDC'
+                        ], ),
                 br_pix = ERROR_TO_EXAMPLE_VALUE,
                 co_pse = ERROR_TO_EXAMPLE_VALUE,
                 br_ted = ERROR_TO_EXAMPLE_VALUE,
                 ca_eft = ERROR_TO_EXAMPLE_VALUE,
+                hk_bank_payout = ERROR_TO_EXAMPLE_VALUE,
+                cn_trade = ERROR_TO_EXAMPLE_VALUE,
+                cn_individual = ERROR_TO_EXAMPLE_VALUE,
+                cn_individual_trade = ERROR_TO_EXAMPLE_VALUE,
+                cn_cfxps = ERROR_TO_EXAMPLE_VALUE,
                 currency = 'MXN',
                 label = 'mexico bank account',
                 financial_instrument_type = 'BR_PIX',

@@ -1,8 +1,8 @@
 /*
  * Payments Direct API
- * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](/products/payments-direct-2/api-docs/payments-direct-api/payments-direct-2-api/authentication/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+ * Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
  *
- * The version of the OpenAPI document: 2026.04
+ * The version of the OpenAPI document: 2026.03
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -21,13 +21,26 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.ripple.payments.direct.model.BrPixDTO;
 import com.ripple.payments.direct.model.BrTedDTO;
 import com.ripple.payments.direct.model.CaEftDTO;
+import com.ripple.payments.direct.model.CnCfxpsDTO;
+import com.ripple.payments.direct.model.CnIndividualDTO;
+import com.ripple.payments.direct.model.CnIndividualTradeDTO;
+import com.ripple.payments.direct.model.CnTradeDTO;
 import com.ripple.payments.direct.model.CoPseDTO;
+import com.ripple.payments.direct.model.EthWalletDTO;
 import com.ripple.payments.direct.model.EuSepaDTO;
 import com.ripple.payments.direct.model.GbFpsDTO;
+import com.ripple.payments.direct.model.GhBankPayoutDTO;
+import com.ripple.payments.direct.model.HkBankPayoutDTO;
 import com.ripple.payments.direct.model.MxSpeiDTO;
 import com.ripple.payments.direct.model.NgBankPayoutDTO;
+import com.ripple.payments.direct.model.RwBankPayoutDTO;
+import com.ripple.payments.direct.model.SolWalletDTO;
+import com.ripple.payments.direct.model.TronWalletDTO;
+import com.ripple.payments.direct.model.UgBankPayoutDTO;
 import com.ripple.payments.direct.model.UsAchDTO;
 import com.ripple.payments.direct.model.UsFedwireDTO;
+import com.ripple.payments.direct.model.ZaBankPayoutDTO;
+import com.ripple.payments.direct.model.ZmBankPayoutDTO;
 import java.time.OffsetDateTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
@@ -96,6 +109,70 @@ class UpdateFinancialInstrumentResponseDTOTest {
     }
 
     /**
+     * Test the property 'ghBankPayout'
+     */
+    @Test
+    void ghBankPayoutTest() {
+        // TODO: test ghBankPayout
+    }
+
+    /**
+     * Test the property 'rwBankPayout'
+     */
+    @Test
+    void rwBankPayoutTest() {
+        // TODO: test rwBankPayout
+    }
+
+    /**
+     * Test the property 'zaBankPayout'
+     */
+    @Test
+    void zaBankPayoutTest() {
+        // TODO: test zaBankPayout
+    }
+
+    /**
+     * Test the property 'ugBankPayout'
+     */
+    @Test
+    void ugBankPayoutTest() {
+        // TODO: test ugBankPayout
+    }
+
+    /**
+     * Test the property 'zmBankPayout'
+     */
+    @Test
+    void zmBankPayoutTest() {
+        // TODO: test zmBankPayout
+    }
+
+    /**
+     * Test the property 'ethWallet'
+     */
+    @Test
+    void ethWalletTest() {
+        // TODO: test ethWallet
+    }
+
+    /**
+     * Test the property 'tronWallet'
+     */
+    @Test
+    void tronWalletTest() {
+        // TODO: test tronWallet
+    }
+
+    /**
+     * Test the property 'solWallet'
+     */
+    @Test
+    void solWalletTest() {
+        // TODO: test solWallet
+    }
+
+    /**
      * Test the property 'brPix'
      */
     @Test
@@ -125,6 +202,46 @@ class UpdateFinancialInstrumentResponseDTOTest {
     @Test
     void caEftTest() {
         // TODO: test caEft
+    }
+
+    /**
+     * Test the property 'hkBankPayout'
+     */
+    @Test
+    void hkBankPayoutTest() {
+        // TODO: test hkBankPayout
+    }
+
+    /**
+     * Test the property 'cnTrade'
+     */
+    @Test
+    void cnTradeTest() {
+        // TODO: test cnTrade
+    }
+
+    /**
+     * Test the property 'cnIndividual'
+     */
+    @Test
+    void cnIndividualTest() {
+        // TODO: test cnIndividual
+    }
+
+    /**
+     * Test the property 'cnIndividualTrade'
+     */
+    @Test
+    void cnIndividualTradeTest() {
+        // TODO: test cnIndividualTrade
+    }
+
+    /**
+     * Test the property 'cnCfxps'
+     */
+    @Test
+    void cnCfxpsTest() {
+        // TODO: test cnCfxps
     }
 
     /**

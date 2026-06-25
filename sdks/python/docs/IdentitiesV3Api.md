@@ -4,26 +4,30 @@ All URIs are relative to *https://api.test.ripple.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_financial_instrument**](IdentitiesV3Api.md#create_financial_instrument) | **POST** /v3/identities/{identity-id}/financial-instruments | Add a financial instrument (v3)
-[**create_identity**](IdentitiesV3Api.md#create_identity) | **POST** /v3/identities | Create an identity (v3)
-[**deactivate_financial_instrument_v3**](IdentitiesV3Api.md#deactivate_financial_instrument_v3) | **DELETE** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Deactivate a Financial Instrument (v3)
-[**deactivate_identity_v3**](IdentitiesV3Api.md#deactivate_identity_v3) | **DELETE** /v3/identities/{identity-id} | Deactivate an identity (v3)
-[**get_financial_instrument_by_id**](IdentitiesV3Api.md#get_financial_instrument_by_id) | **GET** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Get a financial instrument by ID (v3)
-[**get_financial_instruments**](IdentitiesV3Api.md#get_financial_instruments) | **GET** /v3/identities/{identity-id}/financial-instruments | Get a list of financial instruments of the identity (v3)
-[**get_identities**](IdentitiesV3Api.md#get_identities) | **GET** /v3/identities | Get a list of identities (v3)
-[**get_identity_by_id**](IdentitiesV3Api.md#get_identity_by_id) | **GET** /v3/identities/{identity-id} | Get an identity by ID (v3)
-[**get_identity_by_internal_id**](IdentitiesV3Api.md#get_identity_by_internal_id) | **GET** /v3/identities/by-internal-id/{internal-id} | Get an identity by Internal ID (v3)
-[**put_financial_instrument**](IdentitiesV3Api.md#put_financial_instrument) | **PUT** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Update a financial instrument (v3)
-[**put_identity**](IdentitiesV3Api.md#put_identity) | **PUT** /v3/identities/{identity-id} | Update an identity (v3)
+[**create_financial_instrument**](IdentitiesV3Api.md#create_financial_instrument) | **POST** /v3/identities/{identity-id}/financial-instruments | Add a financial instrument
+[**create_identity**](IdentitiesV3Api.md#create_identity) | **POST** /v3/identities | Create an identity
+[**deactivate_financial_instrument_v3**](IdentitiesV3Api.md#deactivate_financial_instrument_v3) | **DELETE** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Deactivate a Financial Instrument
+[**deactivate_identity_v3**](IdentitiesV3Api.md#deactivate_identity_v3) | **DELETE** /v3/identities/{identity-id} | Deactivate an identity
+[**get_financial_instrument_by_id**](IdentitiesV3Api.md#get_financial_instrument_by_id) | **GET** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Get a financial instrument by ID
+[**get_financial_instruments**](IdentitiesV3Api.md#get_financial_instruments) | **GET** /v3/identities/{identity-id}/financial-instruments | Get a list of financial instruments of the identity
+[**get_identities**](IdentitiesV3Api.md#get_identities) | **GET** /v3/identities | Get a list of identities
+[**get_identity_by_id**](IdentitiesV3Api.md#get_identity_by_id) | **GET** /v3/identities/{identity-id} | Get an identity by ID
+[**get_identity_by_internal_id**](IdentitiesV3Api.md#get_identity_by_internal_id) | **GET** /v3/identities/by-internal-id/{internal-id} | Get an identity by Internal ID
+[**put_financial_instrument**](IdentitiesV3Api.md#put_financial_instrument) | **PUT** /v3/identities/{identity-id}/financial-instruments/{financial-instrument-id} | Update a financial instrument
+[**put_identity**](IdentitiesV3Api.md#put_identity) | **PUT** /v3/identities/{identity-id} | Update an identity
 
 
 # **create_financial_instrument**
 > CreateFinancialInstrumentResponse create_financial_instrument(identity_id, ripple_financial_instrument)
 
-Add a financial instrument (v3)
+Add a financial instrument
 
-Create a financial instrument for the specified identity. The request body must include the payment rail (financialInstrumentType), currency or asset code, and the rail-specific details (for example, US ACH account numbers or a wallet address).
+Create a financial instrument for the specified identity. The request body must include
+the payment rail (financialInstrumentType), currency or asset code, and the rail-specific
+details (for example, US ACH account numbers or a wallet address).
+
 In the current release, each identity can have **one** financial instrument.
+
 Future releases will support multiple instruments per identity.
 
 
@@ -62,7 +66,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     ripple_financial_instrument = {"financialInstrumentType":"US_ACH","currency":"USD","label":"US bank account","usAch":{"bankName":"Bank of Example","bankRoutingNumber":"266231608","accountNumber":"60480","accountType":"CHECKING"}} # RippleFinancialInstrument | 
 
     try:
-        # Add a financial instrument (v3)
+        # Add a financial instrument
         api_response = api_instance.create_financial_instrument(identity_id, ripple_financial_instrument)
         print("The response of IdentitiesV3Api->create_financial_instrument:\n")
         pprint(api_response)
@@ -107,11 +111,13 @@ Name | Type | Description  | Notes
 # **create_identity**
 > CreateIdentityResponseV3 create_identity(create_identity_request_v3)
 
-Create an identity (v3)
+Create an identity
 
-Create a new payment identity as an ORIGINATOR or BENEFICIARY for either an INDIVIDUAL or BUSINESS.
+Create a new payment identity as an `ORIGINATOR` or `BENEFICIARY` for either an `INDIVIDUAL` or `BUSINESS`.
+
 The request body must follow the v3 identity schema and will be validated against corridor rules where applicable.
-On success, the API returns the new identityId and its initial version.
+
+On success, the API returns the new `identityId` and its initial version.
 
 
 ### Example
@@ -148,7 +154,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     create_identity_request_v3 = {"identityType":"INDIVIDUAL","paymentRole":"ORIGINATOR","internalId":"customer-12345-uuid","nickName":"Alice Sender USD","tags":["sender","priority"],"validatePayoutRails":["CO_PSE"],"individual":{"firstName":"Alice","lastName":"Chen","dateOfBirth":"1990-05-14","citizenship":"US","address":{"streetAddress":["123 Main Street"],"city":"San Francisco","stateOrProvince":"CA","postalCode":"94105","country":"US"}}} # CreateIdentityRequestV3 | 
 
     try:
-        # Create an identity (v3)
+        # Create an identity
         api_response = api_instance.create_identity(create_identity_request_v3)
         print("The response of IdentitiesV3Api->create_identity:\n")
         pprint(api_response)
@@ -192,10 +198,12 @@ Name | Type | Description  | Notes
 # **deactivate_financial_instrument_v3**
 > deactivate_financial_instrument_v3(identity_id, financial_instrument_id)
 
-Deactivate a Financial Instrument (v3)
+Deactivate a Financial Instrument
 
 Deactivate a financial instrument of an Identity.
+
 Deactivation is permanent and prevents further use in payments.
+
 Historical versions remain available for audit.
 
 
@@ -232,7 +240,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     financial_instrument_id = 'c7e2f5b4-d1a2-4c3a-9e1b-4d5c6f7e8a9d' # str | The ID of the financial instrument to deactivate.
 
     try:
-        # Deactivate a Financial Instrument (v3)
+        # Deactivate a Financial Instrument
         api_instance.deactivate_financial_instrument_v3(identity_id, financial_instrument_id)
     except Exception as e:
         print("Exception when calling IdentitiesV3Api->deactivate_financial_instrument_v3: %s\n" % e)
@@ -277,10 +285,12 @@ void (empty response body)
 # **deactivate_identity_v3**
 > deactivate_identity_v3(identity_id)
 
-Deactivate an identity (v3)
+Deactivate an identity
 
 Deactivate an identity and its financial instruments.
+
 Deactivation is permanent and prevents further use in payments.
+
 Historical versions remain available for audit.
 
 
@@ -316,7 +326,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     identity_id = '146f3c51-c313-47ce-b6f2-691c5a238b3e' # str | ID of the identity to deactivate.
 
     try:
-        # Deactivate an identity (v3)
+        # Deactivate an identity
         api_instance.deactivate_identity_v3(identity_id)
     except Exception as e:
         print("Exception when calling IdentitiesV3Api->deactivate_identity_v3: %s\n" % e)
@@ -359,9 +369,10 @@ void (empty response body)
 # **get_financial_instrument_by_id**
 > GetFinancialInstrumentResponse get_financial_instrument_by_id(identity_id, financial_instrument_id, version=version, expand_identity=expand_identity)
 
-Get a financial instrument by ID (v3)
+Get a financial instrument by ID
 
 Retrieves one financial instrument associated with the specified identity.
+
 In the current release, one instrument is retrieved at most because only a single instrument is allowed per identity.
 
 
@@ -401,7 +412,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     expand_identity = true # bool | Optional parameter to expand the financial instrument details. If set to true, the details about the identity will be included in the response.  (optional)
 
     try:
-        # Get a financial instrument by ID (v3)
+        # Get a financial instrument by ID
         api_response = api_instance.get_financial_instrument_by_id(identity_id, financial_instrument_id, version=version, expand_identity=expand_identity)
         print("The response of IdentitiesV3Api->get_financial_instrument_by_id:\n")
         pprint(api_response)
@@ -438,7 +449,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of financial instruments for the identity. |  -  |
+**200** | Financial instrument for the identity. |  -  |
 **400** | Identity ID or financial instrument ID is not valid |  -  |
 **404** | The specified identity-id does not exist. |  -  |
 **500** | Internal processing error |  -  |
@@ -448,7 +459,7 @@ Name | Type | Description  | Notes
 # **get_financial_instruments**
 > ListFinancialInstrumentsResponse get_financial_instruments(identity_id, version=version, next_token=next_token, limit=limit)
 
-Get a list of financial instruments of the identity (v3)
+Get a list of financial instruments of the identity
 
 List financial instruments for an identity.
 
@@ -488,7 +499,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     limit = 10 # int | The maximum number of financial instruments to return. Default is 10, maximum is 100. (optional) (default to 10)
 
     try:
-        # Get a list of financial instruments of the identity (v3)
+        # Get a list of financial instruments of the identity
         api_response = api_instance.get_financial_instruments(identity_id, version=version, next_token=next_token, limit=limit)
         print("The response of IdentitiesV3Api->get_financial_instruments:\n")
         pprint(api_response)
@@ -535,9 +546,10 @@ Name | Type | Description  | Notes
 # **get_identities**
 > ListIdentitiesResponseV3 get_identities(payment_role=payment_role, nick_name=nick_name, limit=limit, next_token=next_token)
 
-Get a list of identities (v3)
+Get a list of identities
 
 Retrieve identities for your tenant with optional filters.
+
 Use `limit` and `next-token` for pagination. The response includes a `data` array and an optional `nextToken`.
 
 
@@ -577,7 +589,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     next_token = 'eyJrZXkxIjoidmFsdWVfMSIsImtleTIiOiJ2YWx1ZTIifQ==' # str | Opaque token to fetch the next page of results. (optional)
 
     try:
-        # Get a list of identities (v3)
+        # Get a list of identities
         api_response = api_instance.get_identities(payment_role=payment_role, nick_name=nick_name, limit=limit, next_token=next_token)
         print("The response of IdentitiesV3Api->get_identities:\n")
         pprint(api_response)
@@ -624,9 +636,10 @@ Name | Type | Description  | Notes
 # **get_identity_by_id**
 > GetIdentityResponseV3 get_identity_by_id(identity_id, version=version)
 
-Get an identity by ID (v3)
+Get an identity by ID
 
 Retrieve a specific identity by ID.
+
 If `version` is not provided, the latest version is returned.
 
 
@@ -664,7 +677,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     version = '2' # str | Specific version to retrieve. If omitted, returns the latest version. (optional)
 
     try:
-        # Get an identity by ID (v3)
+        # Get an identity by ID
         api_response = api_instance.get_identity_by_id(identity_id, version=version)
         print("The response of IdentitiesV3Api->get_identity_by_id:\n")
         pprint(api_response)
@@ -709,7 +722,7 @@ Name | Type | Description  | Notes
 # **get_identity_by_internal_id**
 > GetIdentityResponseV3 get_identity_by_internal_id(internal_id)
 
-Get an identity by Internal ID (v3)
+Get an identity by Internal ID
 
 Retrieve a specific identity by its internal ID.
 
@@ -752,7 +765,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     internal_id = 'customer-12345-uuid' # str | The Internal ID of the identity to retrieve.
 
     try:
-        # Get an identity by Internal ID (v3)
+        # Get an identity by Internal ID
         api_response = api_instance.get_identity_by_internal_id(internal_id)
         print("The response of IdentitiesV3Api->get_identity_by_internal_id:\n")
         pprint(api_response)
@@ -796,9 +809,10 @@ Name | Type | Description  | Notes
 # **put_financial_instrument**
 > UpdateFinancialInstrumentResponse put_financial_instrument(identity_id, financial_instrument_id, put_ripple_financial_instrument)
 
-Update a financial instrument (v3)
+Update a financial instrument
 
 Update editable fields of a financial instrument including rail-specific details and labels.
+
 The financialInstrumentType is immutable after creation.
 
 
@@ -838,7 +852,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     put_ripple_financial_instrument = {"label":"Operating account"} # PutRippleFinancialInstrument | 
 
     try:
-        # Update a financial instrument (v3)
+        # Update a financial instrument
         api_response = api_instance.put_financial_instrument(identity_id, financial_instrument_id, put_ripple_financial_instrument)
         print("The response of IdentitiesV3Api->put_financial_instrument:\n")
         pprint(api_response)
@@ -885,9 +899,10 @@ Name | Type | Description  | Notes
 # **put_identity**
 > GetIdentityResponseV3 put_identity(identity_id, put_identity_request_v3)
 
-Update an identity (v3)
+Update an identity
 
 Update all fields of an existing identity. Supports updates to PII fields and metadata.
+
 Each successful PUT creates a new version and preserves prior versions for audit.
 
 
@@ -926,7 +941,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     put_identity_request_v3 = {"nickName":"Alice Sender USD - Updated","tags":["usd","high-value"]} # PutIdentityRequestV3 | 
 
     try:
-        # Update an identity (v3)
+        # Update an identity
         api_response = api_instance.put_identity(identity_id, put_identity_request_v3)
         print("The response of IdentitiesV3Api->put_identity:\n")
         pprint(api_response)
