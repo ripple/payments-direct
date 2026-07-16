@@ -31,7 +31,7 @@ class CreateIdentityRequestV3(BaseModel):
     """ # noqa: E501
     nick_name: Optional[Annotated[str, Field(strict=True, max_length=256)]] = Field(default=None, description="The nickname for the identity", alias="nickName")
     validate_payout_rails: Optional[List[StrictStr]] = Field(default=None, description="The payout rails to validate the identity against", alias="validatePayoutRails")
-    tags: Optional[List[StrictStr]] = Field(default=None, description="Tags are used to categorize the identity. ")
+    tags: Optional[Annotated[List[Annotated[str, Field(strict=True, max_length=256)]], Field(max_length=25)]] = Field(default=None, description="Tags are used to categorize the identity. ")
     identity_type: StrictStr = Field(description="The type of the identity", alias="identityType")
     payment_role: StrictStr = Field(description="The payment role of the identity", alias="paymentRole")
     internal_id: Optional[StrictStr] = Field(default=None, description="Optional client-provided unique identifier for idempotency and deduplication.  Must be unique across all active identities within your tenant. Duplicate values will result in a 409 Conflict error. ", alias="internalId")

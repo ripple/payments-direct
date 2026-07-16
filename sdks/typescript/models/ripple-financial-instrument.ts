@@ -15,6 +15,12 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { AeIpi } from './ae-ipi';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ArInterbanking } from './ar-interbanking';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { BrPix } from './br-pix';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -22,6 +28,9 @@ import type { BrTed } from './br-ted';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { CaEft } from './ca-eft';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ClTef } from './cl-tef';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { CnCfxps } from './cn-cfxps';
@@ -54,6 +63,15 @@ import type { GhBankPayout } from './gh-bank-payout';
 import type { HkBankPayout } from './hk-bank-payout';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { IdBifast } from './id-bifast';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { InNeft } from './in-neft';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { KrKftc } from './kr-kftc';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { MxSpei } from './mx-spei';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -63,10 +81,22 @@ import type { NgBankPayout } from './ng-bank-payout';
 import type { PaymentRailObjects } from './payment-rail-objects';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { PeLbtr } from './pe-lbtr';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { PhNrps } from './ph-nrps';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { RwBankPayout } from './rw-bank-payout';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { SolWallet } from './sol-wallet';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ThPromptpay } from './th-promptpay';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TrFast } from './tr-fast';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TronWallet } from './tron-wallet';

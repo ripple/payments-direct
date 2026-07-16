@@ -22,9 +22,9 @@ var _ MappedNullable = &StateTransitionV2{}
 
 // StateTransitionV2 struct for StateTransitionV2
 type StateTransitionV2 struct {
-	// Current state of a payment.  The payment lifecycle currently uses the following values:  - `QUOTED`  - `INITIATED`  - `VALIDATING`  - `TRANSFERRING`  - `COMPLETED`  - `FAILED`  - `RETURNED`  - `DECLINED`  - `AWAITING_FUNDING`  Additional states may be introduced in the future without breaking existing integrations. 
+	// Current state of a payment.  The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`  Additional states may be introduced in the future without breaking existing integrations. 
 	UpdatedFrom string `json:"updatedFrom"`
-	// Current state of a payment.  The payment lifecycle currently uses the following values:  - `QUOTED`  - `INITIATED`  - `VALIDATING`  - `TRANSFERRING`  - `COMPLETED`  - `FAILED`  - `RETURNED`  - `DECLINED`  - `AWAITING_FUNDING`  Additional states may be introduced in the future without breaking existing integrations. 
+	// Current state of a payment.  The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`  Additional states may be introduced in the future without breaking existing integrations. 
 	UpdatedTo string `json:"updatedTo"`
 	// The timestamp when the payment state was updated.
 	UpdatedAt time.Time `json:"updatedAt"`

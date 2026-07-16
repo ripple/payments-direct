@@ -15,6 +15,8 @@
 
 # import models into model package
 from ripple_payments_direct.models.adjusted_exchange_rate import AdjustedExchangeRate
+from ripple_payments_direct.models.ae_ipi import AeIpi
+from ripple_payments_direct.models.ar_interbanking import ArInterbanking
 from ripple_payments_direct.models.authentication_request import AuthenticationRequest
 from ripple_payments_direct.models.authentication_response import AuthenticationResponse
 from ripple_payments_direct.models.br_pix import BrPix
@@ -23,6 +25,7 @@ from ripple_payments_direct.models.business_identity import BusinessIdentity
 from ripple_payments_direct.models.business_identity_address import BusinessIdentityAddress
 from ripple_payments_direct.models.business_identity_registration_inner import BusinessIdentityRegistrationInner
 from ripple_payments_direct.models.ca_eft import CaEft
+from ripple_payments_direct.models.cl_tef import ClTef
 from ripple_payments_direct.models.cn_cfxps import CnCfxps
 from ripple_payments_direct.models.cn_individual import CnIndividual
 from ripple_payments_direct.models.cn_individual_trade import CnIndividualTrade
@@ -49,10 +52,13 @@ from ripple_payments_direct.models.get_statements_transactions_for_customer200_r
 from ripple_payments_direct.models.get_statements_transactions_for_customer200_response_statement_transactions_inner import GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner
 from ripple_payments_direct.models.gh_bank_payout import GhBankPayout
 from ripple_payments_direct.models.hk_bank_payout import HkBankPayout
+from ripple_payments_direct.models.id_bifast import IdBifast
 from ripple_payments_direct.models.identity_response_v3 import IdentityResponseV3
+from ripple_payments_direct.models.in_neft import InNeft
 from ripple_payments_direct.models.individual_identity import IndividualIdentity
 from ripple_payments_direct.models.individual_identity_address import IndividualIdentityAddress
 from ripple_payments_direct.models.individual_identity_identity_documents_inner import IndividualIdentityIdentityDocumentsInner
+from ripple_payments_direct.models.kr_kftc import KrKftc
 from ripple_payments_direct.models.list_financial_instruments_response import ListFinancialInstrumentsResponse
 from ripple_payments_direct.models.list_identities_response_v3 import ListIdentitiesResponseV3
 from ripple_payments_direct.models.mx_spei import MxSpei
@@ -68,6 +74,8 @@ from ripple_payments_direct.models.payment_v2 import PaymentV2
 from ripple_payments_direct.models.payment_with_details_v2 import PaymentWithDetailsV2
 from ripple_payments_direct.models.payments_response_v2 import PaymentsResponseV2
 from ripple_payments_direct.models.payout_execution_details import PayoutExecutionDetails
+from ripple_payments_direct.models.pe_lbtr import PeLbtr
+from ripple_payments_direct.models.ph_nrps import PhNrps
 from ripple_payments_direct.models.put_identity_request_v3 import PutIdentityRequestV3
 from ripple_payments_direct.models.put_ripple_financial_instrument import PutRippleFinancialInstrument
 from ripple_payments_direct.models.put_ripple_identity import PutRippleIdentity
@@ -89,7 +97,9 @@ from ripple_payments_direct.models.state_transition_v2 import StateTransitionV2
 from ripple_payments_direct.models.state_transitions_response_v2 import StateTransitionsResponseV2
 from ripple_payments_direct.models.tax_breakdown import TaxBreakdown
 from ripple_payments_direct.models.tax_summary import TaxSummary
+from ripple_payments_direct.models.th_promptpay import ThPromptpay
 from ripple_payments_direct.models.total_fee_breakdown import TotalFeeBreakdown
+from ripple_payments_direct.models.tr_fast import TrFast
 from ripple_payments_direct.models.tracking_reference import TrackingReference
 from ripple_payments_direct.models.transaction_details_v2 import TransactionDetailsV2
 from ripple_payments_direct.models.tron_wallet import TronWallet

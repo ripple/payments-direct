@@ -40,10 +40,20 @@ type PutRippleFinancialInstrument struct {
 	BrTed *BrTed `json:"brTed,omitempty"`
 	CaEft *CaEft `json:"caEft,omitempty"`
 	HkBankPayout *HkBankPayout `json:"hkBankPayout,omitempty"`
+	IdBifast *IdBifast `json:"idBifast,omitempty"`
+	KrKftc *KrKftc `json:"krKftc,omitempty"`
+	InNeft *InNeft `json:"inNeft,omitempty"`
+	PeLbtr *PeLbtr `json:"peLbtr,omitempty"`
 	CnTrade *CnTrade `json:"cnTrade,omitempty"`
 	CnIndividual *CnIndividual `json:"cnIndividual,omitempty"`
 	CnIndividualTrade *CnIndividualTrade `json:"cnIndividualTrade,omitempty"`
 	CnCfxps *CnCfxps `json:"cnCfxps,omitempty"`
+	ClTef *ClTef `json:"clTef,omitempty"`
+	AeIpi *AeIpi `json:"aeIpi,omitempty"`
+	TrFast *TrFast `json:"trFast,omitempty"`
+	PhNrps *PhNrps `json:"phNrps,omitempty"`
+	ThPromptpay *ThPromptpay `json:"thPromptpay,omitempty"`
+	ArInterbanking *ArInterbanking `json:"arInterbanking,omitempty"`
 }
 
 // NewPutRippleFinancialInstrument instantiates a new PutRippleFinancialInstrument object
@@ -703,6 +713,134 @@ func (o *PutRippleFinancialInstrument) SetHkBankPayout(v HkBankPayout) {
 	o.HkBankPayout = &v
 }
 
+// GetIdBifast returns the IdBifast field value if set, zero value otherwise.
+func (o *PutRippleFinancialInstrument) GetIdBifast() IdBifast {
+	if o == nil || IsNil(o.IdBifast) {
+		var ret IdBifast
+		return ret
+	}
+	return *o.IdBifast
+}
+
+// GetIdBifastOk returns a tuple with the IdBifast field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutRippleFinancialInstrument) GetIdBifastOk() (*IdBifast, bool) {
+	if o == nil || IsNil(o.IdBifast) {
+		return nil, false
+	}
+	return o.IdBifast, true
+}
+
+// HasIdBifast returns a boolean if a field has been set.
+func (o *PutRippleFinancialInstrument) HasIdBifast() bool {
+	if o != nil && !IsNil(o.IdBifast) {
+		return true
+	}
+
+	return false
+}
+
+// SetIdBifast gets a reference to the given IdBifast and assigns it to the IdBifast field.
+func (o *PutRippleFinancialInstrument) SetIdBifast(v IdBifast) {
+	o.IdBifast = &v
+}
+
+// GetKrKftc returns the KrKftc field value if set, zero value otherwise.
+func (o *PutRippleFinancialInstrument) GetKrKftc() KrKftc {
+	if o == nil || IsNil(o.KrKftc) {
+		var ret KrKftc
+		return ret
+	}
+	return *o.KrKftc
+}
+
+// GetKrKftcOk returns a tuple with the KrKftc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutRippleFinancialInstrument) GetKrKftcOk() (*KrKftc, bool) {
+	if o == nil || IsNil(o.KrKftc) {
+		return nil, false
+	}
+	return o.KrKftc, true
+}
+
+// HasKrKftc returns a boolean if a field has been set.
+func (o *PutRippleFinancialInstrument) HasKrKftc() bool {
+	if o != nil && !IsNil(o.KrKftc) {
+		return true
+	}
+
+	return false
+}
+
+// SetKrKftc gets a reference to the given KrKftc and assigns it to the KrKftc field.
+func (o *PutRippleFinancialInstrument) SetKrKftc(v KrKftc) {
+	o.KrKftc = &v
+}
+
+// GetInNeft returns the InNeft field value if set, zero value otherwise.
+func (o *PutRippleFinancialInstrument) GetInNeft() InNeft {
+	if o == nil || IsNil(o.InNeft) {
+		var ret InNeft
+		return ret
+	}
+	return *o.InNeft
+}
+
+// GetInNeftOk returns a tuple with the InNeft field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutRippleFinancialInstrument) GetInNeftOk() (*InNeft, bool) {
+	if o == nil || IsNil(o.InNeft) {
+		return nil, false
+	}
+	return o.InNeft, true
+}
+
+// HasInNeft returns a boolean if a field has been set.
+func (o *PutRippleFinancialInstrument) HasInNeft() bool {
+	if o != nil && !IsNil(o.InNeft) {
+		return true
+	}
+
+	return false
+}
+
+// SetInNeft gets a reference to the given InNeft and assigns it to the InNeft field.
+func (o *PutRippleFinancialInstrument) SetInNeft(v InNeft) {
+	o.InNeft = &v
+}
+
+// GetPeLbtr returns the PeLbtr field value if set, zero value otherwise.
+func (o *PutRippleFinancialInstrument) GetPeLbtr() PeLbtr {
+	if o == nil || IsNil(o.PeLbtr) {
+		var ret PeLbtr
+		return ret
+	}
+	return *o.PeLbtr
+}
+
+// GetPeLbtrOk returns a tuple with the PeLbtr field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutRippleFinancialInstrument) GetPeLbtrOk() (*PeLbtr, bool) {
+	if o == nil || IsNil(o.PeLbtr) {
+		return nil, false
+	}
+	return o.PeLbtr, true
+}
+
+// HasPeLbtr returns a boolean if a field has been set.
+func (o *PutRippleFinancialInstrument) HasPeLbtr() bool {
+	if o != nil && !IsNil(o.PeLbtr) {
+		return true
+	}
+
+	return false
+}
+
+// SetPeLbtr gets a reference to the given PeLbtr and assigns it to the PeLbtr field.
+func (o *PutRippleFinancialInstrument) SetPeLbtr(v PeLbtr) {
+	o.PeLbtr = &v
+}
+
 // GetCnTrade returns the CnTrade field value if set, zero value otherwise.
 func (o *PutRippleFinancialInstrument) GetCnTrade() CnTrade {
 	if o == nil || IsNil(o.CnTrade) {
@@ -831,6 +969,198 @@ func (o *PutRippleFinancialInstrument) SetCnCfxps(v CnCfxps) {
 	o.CnCfxps = &v
 }
 
+// GetClTef returns the ClTef field value if set, zero value otherwise.
+func (o *PutRippleFinancialInstrument) GetClTef() ClTef {
+	if o == nil || IsNil(o.ClTef) {
+		var ret ClTef
+		return ret
+	}
+	return *o.ClTef
+}
+
+// GetClTefOk returns a tuple with the ClTef field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutRippleFinancialInstrument) GetClTefOk() (*ClTef, bool) {
+	if o == nil || IsNil(o.ClTef) {
+		return nil, false
+	}
+	return o.ClTef, true
+}
+
+// HasClTef returns a boolean if a field has been set.
+func (o *PutRippleFinancialInstrument) HasClTef() bool {
+	if o != nil && !IsNil(o.ClTef) {
+		return true
+	}
+
+	return false
+}
+
+// SetClTef gets a reference to the given ClTef and assigns it to the ClTef field.
+func (o *PutRippleFinancialInstrument) SetClTef(v ClTef) {
+	o.ClTef = &v
+}
+
+// GetAeIpi returns the AeIpi field value if set, zero value otherwise.
+func (o *PutRippleFinancialInstrument) GetAeIpi() AeIpi {
+	if o == nil || IsNil(o.AeIpi) {
+		var ret AeIpi
+		return ret
+	}
+	return *o.AeIpi
+}
+
+// GetAeIpiOk returns a tuple with the AeIpi field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutRippleFinancialInstrument) GetAeIpiOk() (*AeIpi, bool) {
+	if o == nil || IsNil(o.AeIpi) {
+		return nil, false
+	}
+	return o.AeIpi, true
+}
+
+// HasAeIpi returns a boolean if a field has been set.
+func (o *PutRippleFinancialInstrument) HasAeIpi() bool {
+	if o != nil && !IsNil(o.AeIpi) {
+		return true
+	}
+
+	return false
+}
+
+// SetAeIpi gets a reference to the given AeIpi and assigns it to the AeIpi field.
+func (o *PutRippleFinancialInstrument) SetAeIpi(v AeIpi) {
+	o.AeIpi = &v
+}
+
+// GetTrFast returns the TrFast field value if set, zero value otherwise.
+func (o *PutRippleFinancialInstrument) GetTrFast() TrFast {
+	if o == nil || IsNil(o.TrFast) {
+		var ret TrFast
+		return ret
+	}
+	return *o.TrFast
+}
+
+// GetTrFastOk returns a tuple with the TrFast field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutRippleFinancialInstrument) GetTrFastOk() (*TrFast, bool) {
+	if o == nil || IsNil(o.TrFast) {
+		return nil, false
+	}
+	return o.TrFast, true
+}
+
+// HasTrFast returns a boolean if a field has been set.
+func (o *PutRippleFinancialInstrument) HasTrFast() bool {
+	if o != nil && !IsNil(o.TrFast) {
+		return true
+	}
+
+	return false
+}
+
+// SetTrFast gets a reference to the given TrFast and assigns it to the TrFast field.
+func (o *PutRippleFinancialInstrument) SetTrFast(v TrFast) {
+	o.TrFast = &v
+}
+
+// GetPhNrps returns the PhNrps field value if set, zero value otherwise.
+func (o *PutRippleFinancialInstrument) GetPhNrps() PhNrps {
+	if o == nil || IsNil(o.PhNrps) {
+		var ret PhNrps
+		return ret
+	}
+	return *o.PhNrps
+}
+
+// GetPhNrpsOk returns a tuple with the PhNrps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutRippleFinancialInstrument) GetPhNrpsOk() (*PhNrps, bool) {
+	if o == nil || IsNil(o.PhNrps) {
+		return nil, false
+	}
+	return o.PhNrps, true
+}
+
+// HasPhNrps returns a boolean if a field has been set.
+func (o *PutRippleFinancialInstrument) HasPhNrps() bool {
+	if o != nil && !IsNil(o.PhNrps) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhNrps gets a reference to the given PhNrps and assigns it to the PhNrps field.
+func (o *PutRippleFinancialInstrument) SetPhNrps(v PhNrps) {
+	o.PhNrps = &v
+}
+
+// GetThPromptpay returns the ThPromptpay field value if set, zero value otherwise.
+func (o *PutRippleFinancialInstrument) GetThPromptpay() ThPromptpay {
+	if o == nil || IsNil(o.ThPromptpay) {
+		var ret ThPromptpay
+		return ret
+	}
+	return *o.ThPromptpay
+}
+
+// GetThPromptpayOk returns a tuple with the ThPromptpay field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutRippleFinancialInstrument) GetThPromptpayOk() (*ThPromptpay, bool) {
+	if o == nil || IsNil(o.ThPromptpay) {
+		return nil, false
+	}
+	return o.ThPromptpay, true
+}
+
+// HasThPromptpay returns a boolean if a field has been set.
+func (o *PutRippleFinancialInstrument) HasThPromptpay() bool {
+	if o != nil && !IsNil(o.ThPromptpay) {
+		return true
+	}
+
+	return false
+}
+
+// SetThPromptpay gets a reference to the given ThPromptpay and assigns it to the ThPromptpay field.
+func (o *PutRippleFinancialInstrument) SetThPromptpay(v ThPromptpay) {
+	o.ThPromptpay = &v
+}
+
+// GetArInterbanking returns the ArInterbanking field value if set, zero value otherwise.
+func (o *PutRippleFinancialInstrument) GetArInterbanking() ArInterbanking {
+	if o == nil || IsNil(o.ArInterbanking) {
+		var ret ArInterbanking
+		return ret
+	}
+	return *o.ArInterbanking
+}
+
+// GetArInterbankingOk returns a tuple with the ArInterbanking field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutRippleFinancialInstrument) GetArInterbankingOk() (*ArInterbanking, bool) {
+	if o == nil || IsNil(o.ArInterbanking) {
+		return nil, false
+	}
+	return o.ArInterbanking, true
+}
+
+// HasArInterbanking returns a boolean if a field has been set.
+func (o *PutRippleFinancialInstrument) HasArInterbanking() bool {
+	if o != nil && !IsNil(o.ArInterbanking) {
+		return true
+	}
+
+	return false
+}
+
+// SetArInterbanking gets a reference to the given ArInterbanking and assigns it to the ArInterbanking field.
+func (o *PutRippleFinancialInstrument) SetArInterbanking(v ArInterbanking) {
+	o.ArInterbanking = &v
+}
+
 func (o PutRippleFinancialInstrument) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -901,6 +1231,18 @@ func (o PutRippleFinancialInstrument) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HkBankPayout) {
 		toSerialize["hkBankPayout"] = o.HkBankPayout
 	}
+	if !IsNil(o.IdBifast) {
+		toSerialize["idBifast"] = o.IdBifast
+	}
+	if !IsNil(o.KrKftc) {
+		toSerialize["krKftc"] = o.KrKftc
+	}
+	if !IsNil(o.InNeft) {
+		toSerialize["inNeft"] = o.InNeft
+	}
+	if !IsNil(o.PeLbtr) {
+		toSerialize["peLbtr"] = o.PeLbtr
+	}
 	if !IsNil(o.CnTrade) {
 		toSerialize["cnTrade"] = o.CnTrade
 	}
@@ -912,6 +1254,24 @@ func (o PutRippleFinancialInstrument) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CnCfxps) {
 		toSerialize["cnCfxps"] = o.CnCfxps
+	}
+	if !IsNil(o.ClTef) {
+		toSerialize["clTef"] = o.ClTef
+	}
+	if !IsNil(o.AeIpi) {
+		toSerialize["aeIpi"] = o.AeIpi
+	}
+	if !IsNil(o.TrFast) {
+		toSerialize["trFast"] = o.TrFast
+	}
+	if !IsNil(o.PhNrps) {
+		toSerialize["phNrps"] = o.PhNrps
+	}
+	if !IsNil(o.ThPromptpay) {
+		toSerialize["thPromptpay"] = o.ThPromptpay
+	}
+	if !IsNil(o.ArInterbanking) {
+		toSerialize["arInterbanking"] = o.ArInterbanking
 	}
 	return toSerialize, nil
 }

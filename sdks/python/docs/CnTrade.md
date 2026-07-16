@@ -7,7 +7,7 @@ Rails: CNAPS, SIB (IBPS), CUP, NUCC  Rail Definitions:  CNAPS: - Availability: B
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bank_name** | **str** | Beneficiary Bank Name. Looked up from bankCode. | 
-**bank_code** | **str** | Ripple Bank Code for the destination bank. Use the Ripple Bank Codes lookup at docs.ripple.com to find the correct code. | 
+**bank_code** | **str** | Beneficiary Bank Code (CNAPS). List provided in the Ripple Docs Bank Codes utility. | 
 **branch_name** | **str** | Beneficiary Branch Name (Hanzi). Branch name in Chinese Hanzi characters. | 
 **branch_province** | **str** | Beneficiary Bank Branch Province. Province/region codes — 34 values published on Docs (e.g., 110000&#x3D;北京, 310000&#x3D;上海). | 
 **branch_city** | **str** | Beneficiary Bank Branch City. City codes — 700+ values published on Docs (e.g., 110000&#x3D;北京, 130100&#x3D;石家庄). | 

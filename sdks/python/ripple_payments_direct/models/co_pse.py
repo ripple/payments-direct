@@ -28,7 +28,7 @@ class CoPse(BaseModel):
     Rails: PSE  Rail Definitions:  PSE: - Availability: Business days and banking hours only - Limit: None - Settlement:   - Major banks (Bancolombia, Davivienda, Banco de Bogotá, BBVA, Grupo Aval, Nequi): 35–100 min  - Other banks (via ACH): Same-day or T+1 depending on cutoff - Cut-off time: 3PM COT - Banking holidays: Colombia banking holidays apply  Routing Evaluation Order: Not applicable 
     """ # noqa: E501
     bank_name: Annotated[str, Field(min_length=2, strict=True, max_length=140)] = Field(description="The name of the identity's bank", alias="bankName")
-    bank_code: Annotated[str, Field(min_length=2, strict=True, max_length=4)] = Field(description="The identity's bank identifier code", alias="bankCode")
+    bank_code: Annotated[str, Field(min_length=1, strict=True, max_length=4)] = Field(description="The identity's bank identifier code", alias="bankCode")
     account_number: Annotated[str, Field(min_length=1, strict=True, max_length=20)] = Field(description="The identity's account number associated with the Account Identification Scheme", alias="accountNumber")
     account_type: StrictStr = Field(description="The type of account associated with the identity.", alias="accountType")
     __properties: ClassVar[List[str]] = ["bankName", "bankCode", "accountNumber", "accountType"]

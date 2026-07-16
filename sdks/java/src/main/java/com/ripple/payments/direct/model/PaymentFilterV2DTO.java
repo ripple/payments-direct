@@ -165,7 +165,7 @@ public class PaymentFilterV2DTO {
   }
 
   /**
-   * The type of timestamp to use when filtering payments by a date and time range.  Supported values include:  - &#x60;PAYMENT_CREATION&#x60;  - &#x60;PAYMENT_EXPIRY&#x60;  - &#x60;PAYMENT_STATUS_LAST_UPDATED&#x60;  If another value is provided, the filter is rejected with a validation error. 
+   * The type of timestamp to use when filtering payments by a date and time range.  Supported values include: - &#x60;PAYMENT_CREATION&#x60; - &#x60;PAYMENT_EXPIRY&#x60; - &#x60;PAYMENT_STATUS_LAST_UPDATED&#x60;  If another value is provided, the filter is rejected with a validation error. 
    * @return filterRangeType
    */
   @javax.annotation.Nullable

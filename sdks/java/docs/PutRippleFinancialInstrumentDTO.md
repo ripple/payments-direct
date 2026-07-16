@@ -28,10 +28,20 @@ Request to update an existing financial instrument of an identity.
 |**brTed** | [**BrTedDTO**](BrTedDTO.md) |  |  [optional] |
 |**caEft** | [**CaEftDTO**](CaEftDTO.md) |  |  [optional] |
 |**hkBankPayout** | [**HkBankPayoutDTO**](HkBankPayoutDTO.md) |  |  [optional] |
+|**idBifast** | [**IdBifastDTO**](IdBifastDTO.md) |  |  [optional] |
+|**krKftc** | [**KrKftcDTO**](KrKftcDTO.md) |  |  [optional] |
+|**inNeft** | [**InNeftDTO**](InNeftDTO.md) |  |  [optional] |
+|**peLbtr** | [**PeLbtrDTO**](PeLbtrDTO.md) |  |  [optional] |
 |**cnTrade** | [**CnTradeDTO**](CnTradeDTO.md) |  |  [optional] |
 |**cnIndividual** | [**CnIndividualDTO**](CnIndividualDTO.md) |  |  [optional] |
 |**cnIndividualTrade** | [**CnIndividualTradeDTO**](CnIndividualTradeDTO.md) |  |  [optional] |
 |**cnCfxps** | [**CnCfxpsDTO**](CnCfxpsDTO.md) |  |  [optional] |
+|**clTef** | [**ClTefDTO**](ClTefDTO.md) |  |  [optional] |
+|**aeIpi** | [**AeIpiDTO**](AeIpiDTO.md) |  |  [optional] |
+|**trFast** | [**TrFastDTO**](TrFastDTO.md) |  |  [optional] |
+|**phNrps** | [**PhNrpsDTO**](PhNrpsDTO.md) |  |  [optional] |
+|**thPromptpay** | [**ThPromptpayDTO**](ThPromptpayDTO.md) |  |  [optional] |
+|**arInterbanking** | [**ArInterbankingDTO**](ArInterbankingDTO.md) |  |  [optional] |
 
 
 

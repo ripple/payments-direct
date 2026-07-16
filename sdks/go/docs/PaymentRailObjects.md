@@ -23,10 +23,20 @@ Name | Type | Description | Notes
 **BrTed** | Pointer to [**BrTed**](BrTed.md) |  | [optional] 
 **CaEft** | Pointer to [**CaEft**](CaEft.md) |  | [optional] 
 **HkBankPayout** | Pointer to [**HkBankPayout**](HkBankPayout.md) |  | [optional] 
+**IdBifast** | Pointer to [**IdBifast**](IdBifast.md) |  | [optional] 
+**KrKftc** | Pointer to [**KrKftc**](KrKftc.md) |  | [optional] 
+**InNeft** | Pointer to [**InNeft**](InNeft.md) |  | [optional] 
+**PeLbtr** | Pointer to [**PeLbtr**](PeLbtr.md) |  | [optional] 
 **CnTrade** | Pointer to [**CnTrade**](CnTrade.md) |  | [optional] 
 **CnIndividual** | Pointer to [**CnIndividual**](CnIndividual.md) |  | [optional] 
 **CnIndividualTrade** | Pointer to [**CnIndividualTrade**](CnIndividualTrade.md) |  | [optional] 
 **CnCfxps** | Pointer to [**CnCfxps**](CnCfxps.md) |  | [optional] 
+**ClTef** | Pointer to [**ClTef**](ClTef.md) |  | [optional] 
+**AeIpi** | Pointer to [**AeIpi**](AeIpi.md) |  | [optional] 
+**TrFast** | Pointer to [**TrFast**](TrFast.md) |  | [optional] 
+**PhNrps** | Pointer to [**PhNrps**](PhNrps.md) |  | [optional] 
+**ThPromptpay** | Pointer to [**ThPromptpay**](ThPromptpay.md) |  | [optional] 
+**ArInterbanking** | Pointer to [**ArInterbanking**](ArInterbanking.md) |  | [optional] 
 
 ## Methods
 
@@ -522,6 +532,106 @@ SetHkBankPayout sets HkBankPayout field to given value.
 
 HasHkBankPayout returns a boolean if a field has been set.
 
+### GetIdBifast
+
+`func (o *PaymentRailObjects) GetIdBifast() IdBifast`
+
+GetIdBifast returns the IdBifast field if non-nil, zero value otherwise.
+
+### GetIdBifastOk
+
+`func (o *PaymentRailObjects) GetIdBifastOk() (*IdBifast, bool)`
+
+GetIdBifastOk returns a tuple with the IdBifast field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIdBifast
+
+`func (o *PaymentRailObjects) SetIdBifast(v IdBifast)`
+
+SetIdBifast sets IdBifast field to given value.
+
+### HasIdBifast
+
+`func (o *PaymentRailObjects) HasIdBifast() bool`
+
+HasIdBifast returns a boolean if a field has been set.
+
+### GetKrKftc
+
+`func (o *PaymentRailObjects) GetKrKftc() KrKftc`
+
+GetKrKftc returns the KrKftc field if non-nil, zero value otherwise.
+
+### GetKrKftcOk
+
+`func (o *PaymentRailObjects) GetKrKftcOk() (*KrKftc, bool)`
+
+GetKrKftcOk returns a tuple with the KrKftc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKrKftc
+
+`func (o *PaymentRailObjects) SetKrKftc(v KrKftc)`
+
+SetKrKftc sets KrKftc field to given value.
+
+### HasKrKftc
+
+`func (o *PaymentRailObjects) HasKrKftc() bool`
+
+HasKrKftc returns a boolean if a field has been set.
+
+### GetInNeft
+
+`func (o *PaymentRailObjects) GetInNeft() InNeft`
+
+GetInNeft returns the InNeft field if non-nil, zero value otherwise.
+
+### GetInNeftOk
+
+`func (o *PaymentRailObjects) GetInNeftOk() (*InNeft, bool)`
+
+GetInNeftOk returns a tuple with the InNeft field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInNeft
+
+`func (o *PaymentRailObjects) SetInNeft(v InNeft)`
+
+SetInNeft sets InNeft field to given value.
+
+### HasInNeft
+
+`func (o *PaymentRailObjects) HasInNeft() bool`
+
+HasInNeft returns a boolean if a field has been set.
+
+### GetPeLbtr
+
+`func (o *PaymentRailObjects) GetPeLbtr() PeLbtr`
+
+GetPeLbtr returns the PeLbtr field if non-nil, zero value otherwise.
+
+### GetPeLbtrOk
+
+`func (o *PaymentRailObjects) GetPeLbtrOk() (*PeLbtr, bool)`
+
+GetPeLbtrOk returns a tuple with the PeLbtr field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPeLbtr
+
+`func (o *PaymentRailObjects) SetPeLbtr(v PeLbtr)`
+
+SetPeLbtr sets PeLbtr field to given value.
+
+### HasPeLbtr
+
+`func (o *PaymentRailObjects) HasPeLbtr() bool`
+
+HasPeLbtr returns a boolean if a field has been set.
+
 ### GetCnTrade
 
 `func (o *PaymentRailObjects) GetCnTrade() CnTrade`
@@ -621,6 +731,156 @@ SetCnCfxps sets CnCfxps field to given value.
 `func (o *PaymentRailObjects) HasCnCfxps() bool`
 
 HasCnCfxps returns a boolean if a field has been set.
+
+### GetClTef
+
+`func (o *PaymentRailObjects) GetClTef() ClTef`
+
+GetClTef returns the ClTef field if non-nil, zero value otherwise.
+
+### GetClTefOk
+
+`func (o *PaymentRailObjects) GetClTefOk() (*ClTef, bool)`
+
+GetClTefOk returns a tuple with the ClTef field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClTef
+
+`func (o *PaymentRailObjects) SetClTef(v ClTef)`
+
+SetClTef sets ClTef field to given value.
+
+### HasClTef
+
+`func (o *PaymentRailObjects) HasClTef() bool`
+
+HasClTef returns a boolean if a field has been set.
+
+### GetAeIpi
+
+`func (o *PaymentRailObjects) GetAeIpi() AeIpi`
+
+GetAeIpi returns the AeIpi field if non-nil, zero value otherwise.
+
+### GetAeIpiOk
+
+`func (o *PaymentRailObjects) GetAeIpiOk() (*AeIpi, bool)`
+
+GetAeIpiOk returns a tuple with the AeIpi field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAeIpi
+
+`func (o *PaymentRailObjects) SetAeIpi(v AeIpi)`
+
+SetAeIpi sets AeIpi field to given value.
+
+### HasAeIpi
+
+`func (o *PaymentRailObjects) HasAeIpi() bool`
+
+HasAeIpi returns a boolean if a field has been set.
+
+### GetTrFast
+
+`func (o *PaymentRailObjects) GetTrFast() TrFast`
+
+GetTrFast returns the TrFast field if non-nil, zero value otherwise.
+
+### GetTrFastOk
+
+`func (o *PaymentRailObjects) GetTrFastOk() (*TrFast, bool)`
+
+GetTrFastOk returns a tuple with the TrFast field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrFast
+
+`func (o *PaymentRailObjects) SetTrFast(v TrFast)`
+
+SetTrFast sets TrFast field to given value.
+
+### HasTrFast
+
+`func (o *PaymentRailObjects) HasTrFast() bool`
+
+HasTrFast returns a boolean if a field has been set.
+
+### GetPhNrps
+
+`func (o *PaymentRailObjects) GetPhNrps() PhNrps`
+
+GetPhNrps returns the PhNrps field if non-nil, zero value otherwise.
+
+### GetPhNrpsOk
+
+`func (o *PaymentRailObjects) GetPhNrpsOk() (*PhNrps, bool)`
+
+GetPhNrpsOk returns a tuple with the PhNrps field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPhNrps
+
+`func (o *PaymentRailObjects) SetPhNrps(v PhNrps)`
+
+SetPhNrps sets PhNrps field to given value.
+
+### HasPhNrps
+
+`func (o *PaymentRailObjects) HasPhNrps() bool`
+
+HasPhNrps returns a boolean if a field has been set.
+
+### GetThPromptpay
+
+`func (o *PaymentRailObjects) GetThPromptpay() ThPromptpay`
+
+GetThPromptpay returns the ThPromptpay field if non-nil, zero value otherwise.
+
+### GetThPromptpayOk
+
+`func (o *PaymentRailObjects) GetThPromptpayOk() (*ThPromptpay, bool)`
+
+GetThPromptpayOk returns a tuple with the ThPromptpay field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetThPromptpay
+
+`func (o *PaymentRailObjects) SetThPromptpay(v ThPromptpay)`
+
+SetThPromptpay sets ThPromptpay field to given value.
+
+### HasThPromptpay
+
+`func (o *PaymentRailObjects) HasThPromptpay() bool`
+
+HasThPromptpay returns a boolean if a field has been set.
+
+### GetArInterbanking
+
+`func (o *PaymentRailObjects) GetArInterbanking() ArInterbanking`
+
+GetArInterbanking returns the ArInterbanking field if non-nil, zero value otherwise.
+
+### GetArInterbankingOk
+
+`func (o *PaymentRailObjects) GetArInterbankingOk() (*ArInterbanking, bool)`
+
+GetArInterbankingOk returns a tuple with the ArInterbanking field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArInterbanking
+
+`func (o *PaymentRailObjects) SetArInterbanking(v ArInterbanking)`
+
+SetArInterbanking sets ArInterbanking field to given value.
+
+### HasArInterbanking
+
+`func (o *PaymentRailObjects) HasArInterbanking() bool`
+
+HasArInterbanking returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -84,7 +84,7 @@ public class NgBankPayoutDTO {
   }
 
   /**
-   * The bank code of the identity&#39;s bank
+   * The bank code of the identity&#39;s bank. See the Bank Codes resource in Ripple Docs for the authoritative list of supported values.
    * @return bankCode
    */
   @javax.annotation.Nonnull

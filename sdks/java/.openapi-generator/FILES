@@ -7,6 +7,8 @@ api/openapi.yaml
 build.gradle
 build.sbt
 docs/AdjustedExchangeRateDTO.md
+docs/AeIpiDTO.md
+docs/ArInterbankingDTO.md
 docs/AuthenticationApi.md
 docs/AuthenticationRequestDTO.md
 docs/AuthenticationResponseDTO.md
@@ -16,6 +18,7 @@ docs/BusinessIdentityAddressDTO.md
 docs/BusinessIdentityDTO.md
 docs/BusinessIdentityRegistrationInnerDTO.md
 docs/CaEftDTO.md
+docs/ClTefDTO.md
 docs/CnCfxpsDTO.md
 docs/CnIndividualDTO.md
 docs/CnIndividualTradeDTO.md
@@ -42,11 +45,14 @@ docs/GetStatementsTransactionsForCustomer200ResponseDTO.md
 docs/GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInnerDTO.md
 docs/GhBankPayoutDTO.md
 docs/HkBankPayoutDTO.md
+docs/IdBifastDTO.md
 docs/IdentitiesV3Api.md
 docs/IdentityResponseV3DTO.md
+docs/InNeftDTO.md
 docs/IndividualIdentityAddressDTO.md
 docs/IndividualIdentityDTO.md
 docs/IndividualIdentityIdentityDocumentsInnerDTO.md
+docs/KrKftcDTO.md
 docs/LedgerPublicApi.md
 docs/ListFinancialInstrumentsResponseDTO.md
 docs/ListIdentitiesResponseV3DTO.md
@@ -64,6 +70,8 @@ docs/PaymentWithDetailsV2DTO.md
 docs/PaymentsResponseV2DTO.md
 docs/PaymentsV2Api.md
 docs/PayoutExecutionDetailsDTO.md
+docs/PeLbtrDTO.md
+docs/PhNrpsDTO.md
 docs/PutIdentityRequestV3DTO.md
 docs/PutRippleFinancialInstrumentDTO.md
 docs/PutRippleIdentityDTO.md
@@ -86,7 +94,9 @@ docs/StateTransitionV2DTO.md
 docs/StateTransitionsResponseV2DTO.md
 docs/TaxBreakdownDTO.md
 docs/TaxSummaryDTO.md
+docs/ThPromptpayDTO.md
 docs/TotalFeeBreakdownDTO.md
+docs/TrFastDTO.md
 docs/TrackingReferenceDTO.md
 docs/TransactionDetailsV2DTO.md
 docs/TronWalletDTO.md
@@ -130,6 +140,8 @@ src/main/java/com/ripple/payments/direct/auth/Authentication.java
 src/main/java/com/ripple/payments/direct/auth/HttpBasicAuth.java
 src/main/java/com/ripple/payments/direct/auth/HttpBearerAuth.java
 src/main/java/com/ripple/payments/direct/model/AdjustedExchangeRateDTO.java
+src/main/java/com/ripple/payments/direct/model/AeIpiDTO.java
+src/main/java/com/ripple/payments/direct/model/ArInterbankingDTO.java
 src/main/java/com/ripple/payments/direct/model/AuthenticationRequestDTO.java
 src/main/java/com/ripple/payments/direct/model/AuthenticationResponseDTO.java
 src/main/java/com/ripple/payments/direct/model/BrPixDTO.java
@@ -138,6 +150,7 @@ src/main/java/com/ripple/payments/direct/model/BusinessIdentityAddressDTO.java
 src/main/java/com/ripple/payments/direct/model/BusinessIdentityDTO.java
 src/main/java/com/ripple/payments/direct/model/BusinessIdentityRegistrationInnerDTO.java
 src/main/java/com/ripple/payments/direct/model/CaEftDTO.java
+src/main/java/com/ripple/payments/direct/model/ClTefDTO.java
 src/main/java/com/ripple/payments/direct/model/CnCfxpsDTO.java
 src/main/java/com/ripple/payments/direct/model/CnIndividualDTO.java
 src/main/java/com/ripple/payments/direct/model/CnIndividualTradeDTO.java
@@ -164,10 +177,13 @@ src/main/java/com/ripple/payments/direct/model/GetStatementsTransactionsForCusto
 src/main/java/com/ripple/payments/direct/model/GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInnerDTO.java
 src/main/java/com/ripple/payments/direct/model/GhBankPayoutDTO.java
 src/main/java/com/ripple/payments/direct/model/HkBankPayoutDTO.java
+src/main/java/com/ripple/payments/direct/model/IdBifastDTO.java
 src/main/java/com/ripple/payments/direct/model/IdentityResponseV3DTO.java
+src/main/java/com/ripple/payments/direct/model/InNeftDTO.java
 src/main/java/com/ripple/payments/direct/model/IndividualIdentityAddressDTO.java
 src/main/java/com/ripple/payments/direct/model/IndividualIdentityDTO.java
 src/main/java/com/ripple/payments/direct/model/IndividualIdentityIdentityDocumentsInnerDTO.java
+src/main/java/com/ripple/payments/direct/model/KrKftcDTO.java
 src/main/java/com/ripple/payments/direct/model/ListFinancialInstrumentsResponseDTO.java
 src/main/java/com/ripple/payments/direct/model/ListIdentitiesResponseV3DTO.java
 src/main/java/com/ripple/payments/direct/model/MxSpeiDTO.java
@@ -183,6 +199,8 @@ src/main/java/com/ripple/payments/direct/model/PaymentV2DTO.java
 src/main/java/com/ripple/payments/direct/model/PaymentWithDetailsV2DTO.java
 src/main/java/com/ripple/payments/direct/model/PaymentsResponseV2DTO.java
 src/main/java/com/ripple/payments/direct/model/PayoutExecutionDetailsDTO.java
+src/main/java/com/ripple/payments/direct/model/PeLbtrDTO.java
+src/main/java/com/ripple/payments/direct/model/PhNrpsDTO.java
 src/main/java/com/ripple/payments/direct/model/PutIdentityRequestV3DTO.java
 src/main/java/com/ripple/payments/direct/model/PutRippleFinancialInstrumentDTO.java
 src/main/java/com/ripple/payments/direct/model/PutRippleIdentityDTO.java
@@ -204,7 +222,9 @@ src/main/java/com/ripple/payments/direct/model/StateTransitionV2DTO.java
 src/main/java/com/ripple/payments/direct/model/StateTransitionsResponseV2DTO.java
 src/main/java/com/ripple/payments/direct/model/TaxBreakdownDTO.java
 src/main/java/com/ripple/payments/direct/model/TaxSummaryDTO.java
+src/main/java/com/ripple/payments/direct/model/ThPromptpayDTO.java
 src/main/java/com/ripple/payments/direct/model/TotalFeeBreakdownDTO.java
+src/main/java/com/ripple/payments/direct/model/TrFastDTO.java
 src/main/java/com/ripple/payments/direct/model/TrackingReferenceDTO.java
 src/main/java/com/ripple/payments/direct/model/TransactionDetailsV2DTO.java
 src/main/java/com/ripple/payments/direct/model/TronWalletDTO.java
@@ -223,6 +243,8 @@ src/test/java/com/ripple/payments/direct/api/LedgerPublicApiTest.java
 src/test/java/com/ripple/payments/direct/api/PaymentsV2ApiTest.java
 src/test/java/com/ripple/payments/direct/api/QuoteApiTest.java
 src/test/java/com/ripple/payments/direct/model/AdjustedExchangeRateDTOTest.java
+src/test/java/com/ripple/payments/direct/model/AeIpiDTOTest.java
+src/test/java/com/ripple/payments/direct/model/ArInterbankingDTOTest.java
 src/test/java/com/ripple/payments/direct/model/AuthenticationRequestDTOTest.java
 src/test/java/com/ripple/payments/direct/model/AuthenticationResponseDTOTest.java
 src/test/java/com/ripple/payments/direct/model/BrPixDTOTest.java
@@ -231,6 +253,7 @@ src/test/java/com/ripple/payments/direct/model/BusinessIdentityAddressDTOTest.ja
 src/test/java/com/ripple/payments/direct/model/BusinessIdentityDTOTest.java
 src/test/java/com/ripple/payments/direct/model/BusinessIdentityRegistrationInnerDTOTest.java
 src/test/java/com/ripple/payments/direct/model/CaEftDTOTest.java
+src/test/java/com/ripple/payments/direct/model/ClTefDTOTest.java
 src/test/java/com/ripple/payments/direct/model/CnCfxpsDTOTest.java
 src/test/java/com/ripple/payments/direct/model/CnIndividualDTOTest.java
 src/test/java/com/ripple/payments/direct/model/CnIndividualTradeDTOTest.java
@@ -257,10 +280,13 @@ src/test/java/com/ripple/payments/direct/model/GetStatementsTransactionsForCusto
 src/test/java/com/ripple/payments/direct/model/GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInnerDTOTest.java
 src/test/java/com/ripple/payments/direct/model/GhBankPayoutDTOTest.java
 src/test/java/com/ripple/payments/direct/model/HkBankPayoutDTOTest.java
+src/test/java/com/ripple/payments/direct/model/IdBifastDTOTest.java
 src/test/java/com/ripple/payments/direct/model/IdentityResponseV3DTOTest.java
+src/test/java/com/ripple/payments/direct/model/InNeftDTOTest.java
 src/test/java/com/ripple/payments/direct/model/IndividualIdentityAddressDTOTest.java
 src/test/java/com/ripple/payments/direct/model/IndividualIdentityDTOTest.java
 src/test/java/com/ripple/payments/direct/model/IndividualIdentityIdentityDocumentsInnerDTOTest.java
+src/test/java/com/ripple/payments/direct/model/KrKftcDTOTest.java
 src/test/java/com/ripple/payments/direct/model/ListFinancialInstrumentsResponseDTOTest.java
 src/test/java/com/ripple/payments/direct/model/ListIdentitiesResponseV3DTOTest.java
 src/test/java/com/ripple/payments/direct/model/MxSpeiDTOTest.java
@@ -276,6 +302,8 @@ src/test/java/com/ripple/payments/direct/model/PaymentV2DTOTest.java
 src/test/java/com/ripple/payments/direct/model/PaymentWithDetailsV2DTOTest.java
 src/test/java/com/ripple/payments/direct/model/PaymentsResponseV2DTOTest.java
 src/test/java/com/ripple/payments/direct/model/PayoutExecutionDetailsDTOTest.java
+src/test/java/com/ripple/payments/direct/model/PeLbtrDTOTest.java
+src/test/java/com/ripple/payments/direct/model/PhNrpsDTOTest.java
 src/test/java/com/ripple/payments/direct/model/PutIdentityRequestV3DTOTest.java
 src/test/java/com/ripple/payments/direct/model/PutRippleFinancialInstrumentDTOTest.java
 src/test/java/com/ripple/payments/direct/model/PutRippleIdentityDTOTest.java
@@ -297,7 +325,9 @@ src/test/java/com/ripple/payments/direct/model/StateTransitionV2DTOTest.java
 src/test/java/com/ripple/payments/direct/model/StateTransitionsResponseV2DTOTest.java
 src/test/java/com/ripple/payments/direct/model/TaxBreakdownDTOTest.java
 src/test/java/com/ripple/payments/direct/model/TaxSummaryDTOTest.java
+src/test/java/com/ripple/payments/direct/model/ThPromptpayDTOTest.java
 src/test/java/com/ripple/payments/direct/model/TotalFeeBreakdownDTOTest.java
+src/test/java/com/ripple/payments/direct/model/TrFastDTOTest.java
 src/test/java/com/ripple/payments/direct/model/TrackingReferenceDTOTest.java
 src/test/java/com/ripple/payments/direct/model/TransactionDetailsV2DTOTest.java
 src/test/java/com/ripple/payments/direct/model/TronWalletDTOTest.java

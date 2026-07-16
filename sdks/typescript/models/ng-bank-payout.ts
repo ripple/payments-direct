@@ -27,7 +27,7 @@ export interface NgBankPayout {
      */
     'bankName': string;
     /**
-     * The bank code of the identity\'s bank
+     * The bank code of the identity\'s bank. See the Bank Codes resource in Ripple Docs for the authoritative list of supported values.
      * @type {string}
      * @memberof NgBankPayout
      */

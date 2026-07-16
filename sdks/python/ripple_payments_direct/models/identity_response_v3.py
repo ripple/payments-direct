@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -35,7 +36,7 @@ class IdentityResponseV3(BaseModel):
     identity_state: StrictStr = Field(description="The state of the identity   * ACTIVE   * DEACTIVATED ", alias="identityState")
     nick_name: Optional[StrictStr] = Field(default=None, description="The nickname for the identity provided at the time of identity creation", alias="nickName")
     internal_id: Optional[StrictStr] = Field(default=None, description="The internal ID of the identity used for internal processing", alias="internalId")
-    tags: Optional[List[StrictStr]] = Field(default=None, description="Tags are used to categorize the identity. ")
+    tags: Optional[Annotated[List[Annotated[str, Field(strict=True, max_length=256)]], Field(max_length=25)]] = Field(default=None, description="Tags are used to categorize the identity. ")
     version: StrictInt = Field(description="The version number of the identity")
     schema_version: StrictStr = Field(description="The version of the schema", alias="schemaVersion")
     __properties: ClassVar[List[str]] = ["identityId", "identityType", "paymentRole", "createdAt", "updatedAt", "identityState", "nickName", "internalId", "tags", "version", "schemaVersion"]

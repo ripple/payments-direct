@@ -31,8 +31,8 @@ class FinancialInstrumentMetadata(BaseModel):
     financial_instrument_id: StrictStr = Field(description="The unique identifier of the financial instrument.", alias="financialInstrumentId")
     financial_instrument_type: StrictStr = Field(description="The type of financial instrument or payment rail used for executing the transaction. This determines the structure and validation of account details required for the payout. ", alias="financialInstrumentType")
     currency: StrictStr = Field(description="The 3-letter ISO currency code of the financial instrument.")
-    label: Optional[StrictStr] = Field(default=None, description="A user-defined label for the financial instrument.")
-    country: Optional[Annotated[str, Field(min_length=2, strict=True, max_length=2)]] = Field(default=None, description="The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, TRON_WALLET, SOL_WALLET), this field returns `ZZ`, the ISO 3166-1 user-assigned code used when no country jurisdiction applies. ")
+    label: Optional[Annotated[str, Field(strict=True, max_length=256)]] = Field(default=None, description="A user-defined label for the financial instrument.")
+    country: Optional[Annotated[str, Field(min_length=2, strict=True, max_length=2)]] = Field(default=None, description="The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. This field is omitted when no country jurisdiction applies (for example, crypto wallet instruments such as ETH_WALLET, TRON_WALLET, and SOL_WALLET). An absent `country` should be interpreted as \"no applicable jurisdiction\". ")
     created_at: Optional[datetime] = Field(default=None, description="The time at which the financial instrument was created", alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, description="The time at which the financial instrument was last updated", alias="updatedAt")
     __properties: ClassVar[List[str]] = ["financialInstrumentId", "financialInstrumentType", "currency", "label", "country", "createdAt", "updatedAt"]

@@ -36,14 +36,14 @@ class TestCoPse(unittest.TestCase):
         if include_optional:
             return CoPse(
                 bank_name = ERROR_TO_EXAMPLE_VALUE,
-                bank_code = '401',
+                bank_code = '40',
                 account_number = '40',
                 account_type = ''
             )
         else:
             return CoPse(
                 bank_name = ERROR_TO_EXAMPLE_VALUE,
-                bank_code = '401',
+                bank_code = '40',
                 account_number = '40',
                 account_type = '',
         )

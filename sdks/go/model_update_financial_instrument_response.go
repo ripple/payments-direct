@@ -41,17 +41,27 @@ type UpdateFinancialInstrumentResponse struct {
 	BrTed *BrTed `json:"brTed,omitempty"`
 	CaEft *CaEft `json:"caEft,omitempty"`
 	HkBankPayout *HkBankPayout `json:"hkBankPayout,omitempty"`
+	IdBifast *IdBifast `json:"idBifast,omitempty"`
+	KrKftc *KrKftc `json:"krKftc,omitempty"`
+	InNeft *InNeft `json:"inNeft,omitempty"`
+	PeLbtr *PeLbtr `json:"peLbtr,omitempty"`
 	CnTrade *CnTrade `json:"cnTrade,omitempty"`
 	CnIndividual *CnIndividual `json:"cnIndividual,omitempty"`
 	CnIndividualTrade *CnIndividualTrade `json:"cnIndividualTrade,omitempty"`
 	CnCfxps *CnCfxps `json:"cnCfxps,omitempty"`
+	ClTef *ClTef `json:"clTef,omitempty"`
+	AeIpi *AeIpi `json:"aeIpi,omitempty"`
+	TrFast *TrFast `json:"trFast,omitempty"`
+	PhNrps *PhNrps `json:"phNrps,omitempty"`
+	ThPromptpay *ThPromptpay `json:"thPromptpay,omitempty"`
+	ArInterbanking *ArInterbanking `json:"arInterbanking,omitempty"`
 	// The 3-letter ISO currency code of the financial instrument.
 	Currency string `json:"currency"`
 	// A user-defined label for the financial instrument.
 	Label *string `json:"label,omitempty"`
 	// The type of financial instrument or payment rail used for executing the transaction. This determines the structure and validation of account details required for the payout. 
 	FinancialInstrumentType string `json:"financialInstrumentType"`
-	// The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, TRON_WALLET, SOL_WALLET), this field returns `ZZ`, the ISO 3166-1 user-assigned code used when no country jurisdiction applies. 
+	// The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. This field is omitted when no country jurisdiction applies (for example, crypto wallet instruments such as ETH_WALLET, TRON_WALLET, and SOL_WALLET). An absent `country` should be interpreted as \"no applicable jurisdiction\". 
 	Country *string `json:"country,omitempty" validate:"regexp=^[A-Z]+$"`
 	// The unique identifier of the financial instrument.
 	FinancialInstrumentId string `json:"financialInstrumentId"`
@@ -691,6 +701,134 @@ func (o *UpdateFinancialInstrumentResponse) SetHkBankPayout(v HkBankPayout) {
 	o.HkBankPayout = &v
 }
 
+// GetIdBifast returns the IdBifast field value if set, zero value otherwise.
+func (o *UpdateFinancialInstrumentResponse) GetIdBifast() IdBifast {
+	if o == nil || IsNil(o.IdBifast) {
+		var ret IdBifast
+		return ret
+	}
+	return *o.IdBifast
+}
+
+// GetIdBifastOk returns a tuple with the IdBifast field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateFinancialInstrumentResponse) GetIdBifastOk() (*IdBifast, bool) {
+	if o == nil || IsNil(o.IdBifast) {
+		return nil, false
+	}
+	return o.IdBifast, true
+}
+
+// HasIdBifast returns a boolean if a field has been set.
+func (o *UpdateFinancialInstrumentResponse) HasIdBifast() bool {
+	if o != nil && !IsNil(o.IdBifast) {
+		return true
+	}
+
+	return false
+}
+
+// SetIdBifast gets a reference to the given IdBifast and assigns it to the IdBifast field.
+func (o *UpdateFinancialInstrumentResponse) SetIdBifast(v IdBifast) {
+	o.IdBifast = &v
+}
+
+// GetKrKftc returns the KrKftc field value if set, zero value otherwise.
+func (o *UpdateFinancialInstrumentResponse) GetKrKftc() KrKftc {
+	if o == nil || IsNil(o.KrKftc) {
+		var ret KrKftc
+		return ret
+	}
+	return *o.KrKftc
+}
+
+// GetKrKftcOk returns a tuple with the KrKftc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateFinancialInstrumentResponse) GetKrKftcOk() (*KrKftc, bool) {
+	if o == nil || IsNil(o.KrKftc) {
+		return nil, false
+	}
+	return o.KrKftc, true
+}
+
+// HasKrKftc returns a boolean if a field has been set.
+func (o *UpdateFinancialInstrumentResponse) HasKrKftc() bool {
+	if o != nil && !IsNil(o.KrKftc) {
+		return true
+	}
+
+	return false
+}
+
+// SetKrKftc gets a reference to the given KrKftc and assigns it to the KrKftc field.
+func (o *UpdateFinancialInstrumentResponse) SetKrKftc(v KrKftc) {
+	o.KrKftc = &v
+}
+
+// GetInNeft returns the InNeft field value if set, zero value otherwise.
+func (o *UpdateFinancialInstrumentResponse) GetInNeft() InNeft {
+	if o == nil || IsNil(o.InNeft) {
+		var ret InNeft
+		return ret
+	}
+	return *o.InNeft
+}
+
+// GetInNeftOk returns a tuple with the InNeft field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateFinancialInstrumentResponse) GetInNeftOk() (*InNeft, bool) {
+	if o == nil || IsNil(o.InNeft) {
+		return nil, false
+	}
+	return o.InNeft, true
+}
+
+// HasInNeft returns a boolean if a field has been set.
+func (o *UpdateFinancialInstrumentResponse) HasInNeft() bool {
+	if o != nil && !IsNil(o.InNeft) {
+		return true
+	}
+
+	return false
+}
+
+// SetInNeft gets a reference to the given InNeft and assigns it to the InNeft field.
+func (o *UpdateFinancialInstrumentResponse) SetInNeft(v InNeft) {
+	o.InNeft = &v
+}
+
+// GetPeLbtr returns the PeLbtr field value if set, zero value otherwise.
+func (o *UpdateFinancialInstrumentResponse) GetPeLbtr() PeLbtr {
+	if o == nil || IsNil(o.PeLbtr) {
+		var ret PeLbtr
+		return ret
+	}
+	return *o.PeLbtr
+}
+
+// GetPeLbtrOk returns a tuple with the PeLbtr field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateFinancialInstrumentResponse) GetPeLbtrOk() (*PeLbtr, bool) {
+	if o == nil || IsNil(o.PeLbtr) {
+		return nil, false
+	}
+	return o.PeLbtr, true
+}
+
+// HasPeLbtr returns a boolean if a field has been set.
+func (o *UpdateFinancialInstrumentResponse) HasPeLbtr() bool {
+	if o != nil && !IsNil(o.PeLbtr) {
+		return true
+	}
+
+	return false
+}
+
+// SetPeLbtr gets a reference to the given PeLbtr and assigns it to the PeLbtr field.
+func (o *UpdateFinancialInstrumentResponse) SetPeLbtr(v PeLbtr) {
+	o.PeLbtr = &v
+}
+
 // GetCnTrade returns the CnTrade field value if set, zero value otherwise.
 func (o *UpdateFinancialInstrumentResponse) GetCnTrade() CnTrade {
 	if o == nil || IsNil(o.CnTrade) {
@@ -817,6 +955,198 @@ func (o *UpdateFinancialInstrumentResponse) HasCnCfxps() bool {
 // SetCnCfxps gets a reference to the given CnCfxps and assigns it to the CnCfxps field.
 func (o *UpdateFinancialInstrumentResponse) SetCnCfxps(v CnCfxps) {
 	o.CnCfxps = &v
+}
+
+// GetClTef returns the ClTef field value if set, zero value otherwise.
+func (o *UpdateFinancialInstrumentResponse) GetClTef() ClTef {
+	if o == nil || IsNil(o.ClTef) {
+		var ret ClTef
+		return ret
+	}
+	return *o.ClTef
+}
+
+// GetClTefOk returns a tuple with the ClTef field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateFinancialInstrumentResponse) GetClTefOk() (*ClTef, bool) {
+	if o == nil || IsNil(o.ClTef) {
+		return nil, false
+	}
+	return o.ClTef, true
+}
+
+// HasClTef returns a boolean if a field has been set.
+func (o *UpdateFinancialInstrumentResponse) HasClTef() bool {
+	if o != nil && !IsNil(o.ClTef) {
+		return true
+	}
+
+	return false
+}
+
+// SetClTef gets a reference to the given ClTef and assigns it to the ClTef field.
+func (o *UpdateFinancialInstrumentResponse) SetClTef(v ClTef) {
+	o.ClTef = &v
+}
+
+// GetAeIpi returns the AeIpi field value if set, zero value otherwise.
+func (o *UpdateFinancialInstrumentResponse) GetAeIpi() AeIpi {
+	if o == nil || IsNil(o.AeIpi) {
+		var ret AeIpi
+		return ret
+	}
+	return *o.AeIpi
+}
+
+// GetAeIpiOk returns a tuple with the AeIpi field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateFinancialInstrumentResponse) GetAeIpiOk() (*AeIpi, bool) {
+	if o == nil || IsNil(o.AeIpi) {
+		return nil, false
+	}
+	return o.AeIpi, true
+}
+
+// HasAeIpi returns a boolean if a field has been set.
+func (o *UpdateFinancialInstrumentResponse) HasAeIpi() bool {
+	if o != nil && !IsNil(o.AeIpi) {
+		return true
+	}
+
+	return false
+}
+
+// SetAeIpi gets a reference to the given AeIpi and assigns it to the AeIpi field.
+func (o *UpdateFinancialInstrumentResponse) SetAeIpi(v AeIpi) {
+	o.AeIpi = &v
+}
+
+// GetTrFast returns the TrFast field value if set, zero value otherwise.
+func (o *UpdateFinancialInstrumentResponse) GetTrFast() TrFast {
+	if o == nil || IsNil(o.TrFast) {
+		var ret TrFast
+		return ret
+	}
+	return *o.TrFast
+}
+
+// GetTrFastOk returns a tuple with the TrFast field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateFinancialInstrumentResponse) GetTrFastOk() (*TrFast, bool) {
+	if o == nil || IsNil(o.TrFast) {
+		return nil, false
+	}
+	return o.TrFast, true
+}
+
+// HasTrFast returns a boolean if a field has been set.
+func (o *UpdateFinancialInstrumentResponse) HasTrFast() bool {
+	if o != nil && !IsNil(o.TrFast) {
+		return true
+	}
+
+	return false
+}
+
+// SetTrFast gets a reference to the given TrFast and assigns it to the TrFast field.
+func (o *UpdateFinancialInstrumentResponse) SetTrFast(v TrFast) {
+	o.TrFast = &v
+}
+
+// GetPhNrps returns the PhNrps field value if set, zero value otherwise.
+func (o *UpdateFinancialInstrumentResponse) GetPhNrps() PhNrps {
+	if o == nil || IsNil(o.PhNrps) {
+		var ret PhNrps
+		return ret
+	}
+	return *o.PhNrps
+}
+
+// GetPhNrpsOk returns a tuple with the PhNrps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateFinancialInstrumentResponse) GetPhNrpsOk() (*PhNrps, bool) {
+	if o == nil || IsNil(o.PhNrps) {
+		return nil, false
+	}
+	return o.PhNrps, true
+}
+
+// HasPhNrps returns a boolean if a field has been set.
+func (o *UpdateFinancialInstrumentResponse) HasPhNrps() bool {
+	if o != nil && !IsNil(o.PhNrps) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhNrps gets a reference to the given PhNrps and assigns it to the PhNrps field.
+func (o *UpdateFinancialInstrumentResponse) SetPhNrps(v PhNrps) {
+	o.PhNrps = &v
+}
+
+// GetThPromptpay returns the ThPromptpay field value if set, zero value otherwise.
+func (o *UpdateFinancialInstrumentResponse) GetThPromptpay() ThPromptpay {
+	if o == nil || IsNil(o.ThPromptpay) {
+		var ret ThPromptpay
+		return ret
+	}
+	return *o.ThPromptpay
+}
+
+// GetThPromptpayOk returns a tuple with the ThPromptpay field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateFinancialInstrumentResponse) GetThPromptpayOk() (*ThPromptpay, bool) {
+	if o == nil || IsNil(o.ThPromptpay) {
+		return nil, false
+	}
+	return o.ThPromptpay, true
+}
+
+// HasThPromptpay returns a boolean if a field has been set.
+func (o *UpdateFinancialInstrumentResponse) HasThPromptpay() bool {
+	if o != nil && !IsNil(o.ThPromptpay) {
+		return true
+	}
+
+	return false
+}
+
+// SetThPromptpay gets a reference to the given ThPromptpay and assigns it to the ThPromptpay field.
+func (o *UpdateFinancialInstrumentResponse) SetThPromptpay(v ThPromptpay) {
+	o.ThPromptpay = &v
+}
+
+// GetArInterbanking returns the ArInterbanking field value if set, zero value otherwise.
+func (o *UpdateFinancialInstrumentResponse) GetArInterbanking() ArInterbanking {
+	if o == nil || IsNil(o.ArInterbanking) {
+		var ret ArInterbanking
+		return ret
+	}
+	return *o.ArInterbanking
+}
+
+// GetArInterbankingOk returns a tuple with the ArInterbanking field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateFinancialInstrumentResponse) GetArInterbankingOk() (*ArInterbanking, bool) {
+	if o == nil || IsNil(o.ArInterbanking) {
+		return nil, false
+	}
+	return o.ArInterbanking, true
+}
+
+// HasArInterbanking returns a boolean if a field has been set.
+func (o *UpdateFinancialInstrumentResponse) HasArInterbanking() bool {
+	if o != nil && !IsNil(o.ArInterbanking) {
+		return true
+	}
+
+	return false
+}
+
+// SetArInterbanking gets a reference to the given ArInterbanking and assigns it to the ArInterbanking field.
+func (o *UpdateFinancialInstrumentResponse) SetArInterbanking(v ArInterbanking) {
+	o.ArInterbanking = &v
 }
 
 // GetCurrency returns the Currency field value
@@ -1086,6 +1416,18 @@ func (o UpdateFinancialInstrumentResponse) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.HkBankPayout) {
 		toSerialize["hkBankPayout"] = o.HkBankPayout
 	}
+	if !IsNil(o.IdBifast) {
+		toSerialize["idBifast"] = o.IdBifast
+	}
+	if !IsNil(o.KrKftc) {
+		toSerialize["krKftc"] = o.KrKftc
+	}
+	if !IsNil(o.InNeft) {
+		toSerialize["inNeft"] = o.InNeft
+	}
+	if !IsNil(o.PeLbtr) {
+		toSerialize["peLbtr"] = o.PeLbtr
+	}
 	if !IsNil(o.CnTrade) {
 		toSerialize["cnTrade"] = o.CnTrade
 	}
@@ -1097,6 +1439,24 @@ func (o UpdateFinancialInstrumentResponse) ToMap() (map[string]interface{}, erro
 	}
 	if !IsNil(o.CnCfxps) {
 		toSerialize["cnCfxps"] = o.CnCfxps
+	}
+	if !IsNil(o.ClTef) {
+		toSerialize["clTef"] = o.ClTef
+	}
+	if !IsNil(o.AeIpi) {
+		toSerialize["aeIpi"] = o.AeIpi
+	}
+	if !IsNil(o.TrFast) {
+		toSerialize["trFast"] = o.TrFast
+	}
+	if !IsNil(o.PhNrps) {
+		toSerialize["phNrps"] = o.PhNrps
+	}
+	if !IsNil(o.ThPromptpay) {
+		toSerialize["thPromptpay"] = o.ThPromptpay
+	}
+	if !IsNil(o.ArInterbanking) {
+		toSerialize["arInterbanking"] = o.ArInterbanking
 	}
 	toSerialize["currency"] = o.Currency
 	if !IsNil(o.Label) {

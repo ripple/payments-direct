@@ -26,10 +26,20 @@ Name | Type | Description | Notes
 **br_ted** | [**BrTed**](BrTed.md) |  | [optional] 
 **ca_eft** | [**CaEft**](CaEft.md) |  | [optional] 
 **hk_bank_payout** | [**HkBankPayout**](HkBankPayout.md) |  | [optional] 
+**id_bifast** | [**IdBifast**](IdBifast.md) |  | [optional] 
+**kr_kftc** | [**KrKftc**](KrKftc.md) |  | [optional] 
+**in_neft** | [**InNeft**](InNeft.md) |  | [optional] 
+**pe_lbtr** | [**PeLbtr**](PeLbtr.md) |  | [optional] 
 **cn_trade** | [**CnTrade**](CnTrade.md) |  | [optional] 
 **cn_individual** | [**CnIndividual**](CnIndividual.md) |  | [optional] 
 **cn_individual_trade** | [**CnIndividualTrade**](CnIndividualTrade.md) |  | [optional] 
 **cn_cfxps** | [**CnCfxps**](CnCfxps.md) |  | [optional] 
+**cl_tef** | [**ClTef**](ClTef.md) |  | [optional] 
+**ae_ipi** | [**AeIpi**](AeIpi.md) |  | [optional] 
+**tr_fast** | [**TrFast**](TrFast.md) |  | [optional] 
+**ph_nrps** | [**PhNrps**](PhNrps.md) |  | [optional] 
+**th_promptpay** | [**ThPromptpay**](ThPromptpay.md) |  | [optional] 
+**ar_interbanking** | [**ArInterbanking**](ArInterbanking.md) |  | [optional] 
 
 ## Example
 

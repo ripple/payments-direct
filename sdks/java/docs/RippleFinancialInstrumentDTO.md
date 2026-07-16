@@ -27,10 +27,20 @@ Request to create a new financial instrument for an identity.
 |**brTed** | [**BrTedDTO**](BrTedDTO.md) |  |  [optional] |
 |**caEft** | [**CaEftDTO**](CaEftDTO.md) |  |  [optional] |
 |**hkBankPayout** | [**HkBankPayoutDTO**](HkBankPayoutDTO.md) |  |  [optional] |
+|**idBifast** | [**IdBifastDTO**](IdBifastDTO.md) |  |  [optional] |
+|**krKftc** | [**KrKftcDTO**](KrKftcDTO.md) |  |  [optional] |
+|**inNeft** | [**InNeftDTO**](InNeftDTO.md) |  |  [optional] |
+|**peLbtr** | [**PeLbtrDTO**](PeLbtrDTO.md) |  |  [optional] |
 |**cnTrade** | [**CnTradeDTO**](CnTradeDTO.md) |  |  [optional] |
 |**cnIndividual** | [**CnIndividualDTO**](CnIndividualDTO.md) |  |  [optional] |
 |**cnIndividualTrade** | [**CnIndividualTradeDTO**](CnIndividualTradeDTO.md) |  |  [optional] |
 |**cnCfxps** | [**CnCfxpsDTO**](CnCfxpsDTO.md) |  |  [optional] |
+|**clTef** | [**ClTefDTO**](ClTefDTO.md) |  |  [optional] |
+|**aeIpi** | [**AeIpiDTO**](AeIpiDTO.md) |  |  [optional] |
+|**trFast** | [**TrFastDTO**](TrFastDTO.md) |  |  [optional] |
+|**phNrps** | [**PhNrpsDTO**](PhNrpsDTO.md) |  |  [optional] |
+|**thPromptpay** | [**ThPromptpayDTO**](ThPromptpayDTO.md) |  |  [optional] |
+|**arInterbanking** | [**ArInterbankingDTO**](ArInterbankingDTO.md) |  |  [optional] |
 |**currency** | **String** | The 3-letter ISO currency code of the financial instrument. |  |
 |**label** | **String** | A user-defined label for the financial instrument. |  [optional] |
 |**financialInstrumentType** | **String** | The type of financial instrument or payment rail used for executing the transaction. This determines the structure and validation of account details required for the payout.  |  |

@@ -89,7 +89,7 @@ public class SortV2DTO {
   }
 
   /**
-   * The field to use when sorting payments in the requested sort order.  Currently supported values include:  - &#x60;internalId&#x60;  - &#x60;paymentState&#x60;  - &#x60;sourceCurrency&#x60;  - &#x60;sourceAmount&#x60;  - &#x60;destinationCurrency&#x60;  - &#x60;destinationCountry&#x60;  - &#x60;destinationAmount&#x60;  - &#x60;initiatedAt&#x60;  - &#x60;expiresAt&#x60;  - &#x60;lastStateUpdatedAt&#x60;  - &#x60;paymentLabel&#x60;  If an unsupported value is provided, the request fails with a validation error. 
+   * The field to use when sorting payments in the requested sort order.  Currently supported values include: - &#x60;internalId&#x60; - &#x60;paymentState&#x60; - &#x60;sourceCurrency&#x60; - &#x60;sourceAmount&#x60; - &#x60;destinationCurrency&#x60; - &#x60;destinationCountry&#x60; - &#x60;destinationAmount&#x60; - &#x60;initiatedAt&#x60; - &#x60;expiresAt&#x60; - &#x60;lastStateUpdatedAt&#x60; - &#x60;paymentLabel&#x60;  If an unsupported value is provided, the request fails with a validation error. 
    * @return sortField
    */
   @javax.annotation.Nullable

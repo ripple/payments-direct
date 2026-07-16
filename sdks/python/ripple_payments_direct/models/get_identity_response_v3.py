@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from ripple_payments_direct.models.business_identity import BusinessIdentity
 from ripple_payments_direct.models.individual_identity import IndividualIdentity
 from typing import Optional, Set
@@ -32,7 +33,7 @@ class GetIdentityResponseV3(BaseModel):
     identity_id: Optional[StrictStr] = Field(default=None, description="Server-generated unique identifier of the identity.", alias="identityId")
     identity_state: Optional[StrictStr] = Field(default=None, description="The state of the identity   * ACTIVE   * DEACTIVATED ", alias="identityState")
     nick_name: Optional[StrictStr] = Field(default=None, description="Optional human-readable alias set by the client.", alias="nickName")
-    tags: Optional[List[StrictStr]] = Field(default=None, description="Optional labels used to categorize or filter identities.")
+    tags: Optional[Annotated[List[Annotated[str, Field(strict=True, max_length=256)]], Field(max_length=25)]] = Field(default=None, description="Optional labels used to categorize or filter identities.")
     validate_payout_rails: Optional[List[StrictStr]] = Field(default=None, description="List of payout methods where this identity is considered valid. Use this to indicate which payout methods (for example, US_ACH, EU_SEPA) the identity can be used with in payments.", alias="validatePayoutRails")
     version: Optional[StrictStr] = Field(default=None, description="Sequential version number. Each successful PUT creates a higher version.")
     schema_version: Optional[StrictStr] = Field(default=None, description="Schema version used to validate this identity, for example 1.0.0.", alias="schemaVersion")

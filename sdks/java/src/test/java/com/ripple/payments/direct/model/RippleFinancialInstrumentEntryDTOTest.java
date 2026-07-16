@@ -18,9 +18,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.ripple.payments.direct.model.AeIpiDTO;
+import com.ripple.payments.direct.model.ArInterbankingDTO;
 import com.ripple.payments.direct.model.BrPixDTO;
 import com.ripple.payments.direct.model.BrTedDTO;
 import com.ripple.payments.direct.model.CaEftDTO;
+import com.ripple.payments.direct.model.ClTefDTO;
 import com.ripple.payments.direct.model.CnCfxpsDTO;
 import com.ripple.payments.direct.model.CnIndividualDTO;
 import com.ripple.payments.direct.model.CnIndividualTradeDTO;
@@ -31,10 +34,17 @@ import com.ripple.payments.direct.model.EuSepaDTO;
 import com.ripple.payments.direct.model.GbFpsDTO;
 import com.ripple.payments.direct.model.GhBankPayoutDTO;
 import com.ripple.payments.direct.model.HkBankPayoutDTO;
+import com.ripple.payments.direct.model.IdBifastDTO;
+import com.ripple.payments.direct.model.InNeftDTO;
+import com.ripple.payments.direct.model.KrKftcDTO;
 import com.ripple.payments.direct.model.MxSpeiDTO;
 import com.ripple.payments.direct.model.NgBankPayoutDTO;
+import com.ripple.payments.direct.model.PeLbtrDTO;
+import com.ripple.payments.direct.model.PhNrpsDTO;
 import com.ripple.payments.direct.model.RwBankPayoutDTO;
 import com.ripple.payments.direct.model.SolWalletDTO;
+import com.ripple.payments.direct.model.ThPromptpayDTO;
+import com.ripple.payments.direct.model.TrFastDTO;
 import com.ripple.payments.direct.model.TronWalletDTO;
 import com.ripple.payments.direct.model.UgBankPayoutDTO;
 import com.ripple.payments.direct.model.UsAchDTO;
@@ -213,6 +223,38 @@ class RippleFinancialInstrumentEntryDTOTest {
     }
 
     /**
+     * Test the property 'idBifast'
+     */
+    @Test
+    void idBifastTest() {
+        // TODO: test idBifast
+    }
+
+    /**
+     * Test the property 'krKftc'
+     */
+    @Test
+    void krKftcTest() {
+        // TODO: test krKftc
+    }
+
+    /**
+     * Test the property 'inNeft'
+     */
+    @Test
+    void inNeftTest() {
+        // TODO: test inNeft
+    }
+
+    /**
+     * Test the property 'peLbtr'
+     */
+    @Test
+    void peLbtrTest() {
+        // TODO: test peLbtr
+    }
+
+    /**
      * Test the property 'cnTrade'
      */
     @Test
@@ -242,6 +284,54 @@ class RippleFinancialInstrumentEntryDTOTest {
     @Test
     void cnCfxpsTest() {
         // TODO: test cnCfxps
+    }
+
+    /**
+     * Test the property 'clTef'
+     */
+    @Test
+    void clTefTest() {
+        // TODO: test clTef
+    }
+
+    /**
+     * Test the property 'aeIpi'
+     */
+    @Test
+    void aeIpiTest() {
+        // TODO: test aeIpi
+    }
+
+    /**
+     * Test the property 'trFast'
+     */
+    @Test
+    void trFastTest() {
+        // TODO: test trFast
+    }
+
+    /**
+     * Test the property 'phNrps'
+     */
+    @Test
+    void phNrpsTest() {
+        // TODO: test phNrps
+    }
+
+    /**
+     * Test the property 'thPromptpay'
+     */
+    @Test
+    void thPromptpayTest() {
+        // TODO: test thPromptpay
+    }
+
+    /**
+     * Test the property 'arInterbanking'
+     */
+    @Test
+    void arInterbankingTest() {
+        // TODO: test arInterbanking
     }
 
     /**

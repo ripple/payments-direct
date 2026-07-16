@@ -26,7 +26,7 @@ class SortV2(BaseModel):
     """
     Defines the sorting parameters for listing payments, including the field and sort direction.
     """ # noqa: E501
-    sort_field: Optional[StrictStr] = Field(default='initiatedAt', description="The field to use when sorting payments in the requested sort order.  Currently supported values include:  - `internalId`  - `paymentState`  - `sourceCurrency`  - `sourceAmount`  - `destinationCurrency`  - `destinationCountry`  - `destinationAmount`  - `initiatedAt`  - `expiresAt`  - `lastStateUpdatedAt`  - `paymentLabel`  If an unsupported value is provided, the request fails with a validation error. ", alias="sortField")
+    sort_field: Optional[StrictStr] = Field(default='initiatedAt', description="The field to use when sorting payments in the requested sort order.  Currently supported values include: - `internalId` - `paymentState` - `sourceCurrency` - `sourceAmount` - `destinationCurrency` - `destinationCountry` - `destinationAmount` - `initiatedAt` - `expiresAt` - `lastStateUpdatedAt` - `paymentLabel`  If an unsupported value is provided, the request fails with a validation error. ", alias="sortField")
     sort_direction: Optional[StrictStr] = Field(default='DESC', description="Indicates whether results are sorted in ascending (`ASC`) or descending (`DESC`) order.", alias="sortDirection")
     __properties: ClassVar[List[str]] = ["sortField", "sortDirection"]
 

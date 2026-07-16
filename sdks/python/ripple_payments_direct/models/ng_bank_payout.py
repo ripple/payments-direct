@@ -28,7 +28,7 @@ class NgBankPayout(BaseModel):
     Rails: Bank Payout  Rail Definitions:  Bank Payout: - Availability: Country-dependant - Limit: - Nigeria: ₦5,000,000 - Settlement: Real time to 48 hours - Cut-off time: Real time - Banking holidays: Nigeria banking holidays apply  Routing Evaluation Order: Not applicable 
     """ # noqa: E501
     bank_name: Annotated[str, Field(min_length=2, strict=True, max_length=140)] = Field(description="The name of the identity's bank", alias="bankName")
-    bank_code: Annotated[str, Field(min_length=1, strict=True, max_length=50)] = Field(description="The bank code of the identity's bank", alias="bankCode")
+    bank_code: Annotated[str, Field(min_length=1, strict=True, max_length=50)] = Field(description="The bank code of the identity's bank. See the Bank Codes resource in Ripple Docs for the authoritative list of supported values.", alias="bankCode")
     account_number: Annotated[str, Field(min_length=4, strict=True, max_length=21)] = Field(description="The identity's account number associated with the Account Identification Scheme", alias="accountNumber")
     __properties: ClassVar[List[str]] = ["bankName", "bankCode", "accountNumber"]
 

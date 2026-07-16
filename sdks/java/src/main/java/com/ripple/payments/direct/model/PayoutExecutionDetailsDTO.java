@@ -69,7 +69,7 @@ public class PayoutExecutionDetailsDTO {
   }
 
   /**
-   * The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP, SEPA). 
+   * The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP, SEPA, SWIFT). 
    * @return paymentRailUsed
    */
   @javax.annotation.Nullable

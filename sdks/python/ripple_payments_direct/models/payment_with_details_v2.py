@@ -42,7 +42,7 @@ class PaymentWithDetailsV2(BaseModel):
     expires_at: Optional[datetime] = Field(default=None, description="The time at which this payment expires, specified in UTC.", alias="expiresAt")
     jit_funding_expires_at: Optional[datetime] = Field(default=None, description="The time at which JIT funding for this payment expires, specified in UTC.", alias="jitFundingExpiresAt")
     last_state_updated_at: Optional[datetime] = Field(default=None, description="The time at which the payment state was last updated for this payment, specified in UTC.", alias="lastStateUpdatedAt")
-    payment_state: StrictStr = Field(description="Current state of a payment.  The payment lifecycle currently uses the following values:  - `QUOTED`  - `INITIATED`  - `VALIDATING`  - `TRANSFERRING`  - `COMPLETED`  - `FAILED`  - `RETURNED`  - `DECLINED`  - `AWAITING_FUNDING`  Additional states may be introduced in the future without breaking existing integrations. ", alias="paymentState")
+    payment_state: StrictStr = Field(description="Current state of a payment.  The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`  Additional states may be introduced in the future without breaking existing integrations. ", alias="paymentState")
     originator: Optional[OriginatorV2] = None
     destination: Optional[DestinationV2] = None
     adjusted_exchange_rate: Optional[AdjustedExchangeRate] = Field(default=None, alias="adjustedExchangeRate")

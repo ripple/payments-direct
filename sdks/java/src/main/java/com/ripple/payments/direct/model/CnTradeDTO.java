@@ -104,7 +104,7 @@ public class CnTradeDTO {
   }
 
   /**
-   * Ripple Bank Code for the destination bank. Use the Ripple Bank Codes lookup at docs.ripple.com to find the correct code.
+   * Beneficiary Bank Code (CNAPS). List provided in the Ripple Docs Bank Codes utility.
    * @return bankCode
    */
   @javax.annotation.Nonnull

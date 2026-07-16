@@ -33,7 +33,7 @@ export interface PaymentFilterV2 {
      */
     'paymentStates'?: Array<string>;
     /**
-     * The type of timestamp to use when filtering payments by a date and time range.  Supported values include:  - `PAYMENT_CREATION`  - `PAYMENT_EXPIRY`  - `PAYMENT_STATUS_LAST_UPDATED`  If another value is provided, the filter is rejected with a validation error. 
+     * The type of timestamp to use when filtering payments by a date and time range.  Supported values include: - `PAYMENT_CREATION` - `PAYMENT_EXPIRY` - `PAYMENT_STATUS_LAST_UPDATED`  If another value is provided, the filter is rejected with a validation error. 
      * @type {string}
      * @memberof PaymentFilterV2
      */

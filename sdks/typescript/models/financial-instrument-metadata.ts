@@ -45,7 +45,7 @@ export interface FinancialInstrumentMetadata {
      */
     'label'?: string;
     /**
-     * The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, TRON_WALLET, SOL_WALLET), this field returns `ZZ`, the ISO 3166-1 user-assigned code used when no country jurisdiction applies. 
+     * The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. This field is omitted when no country jurisdiction applies (for example, crypto wallet instruments such as ETH_WALLET, TRON_WALLET, and SOL_WALLET). An absent `country` should be interpreted as \"no applicable jurisdiction\". 
      * @type {string}
      * @memberof FinancialInstrumentMetadata
      */

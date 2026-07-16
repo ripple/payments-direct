@@ -13,7 +13,7 @@
 |**expiresAt** | **OffsetDateTime** | The time at which this payment expires, specified in UTC. |  [optional] |
 |**jitFundingExpiresAt** | **OffsetDateTime** | The time at which JIT funding for this payment expires, specified in UTC. |  [optional] |
 |**lastStateUpdatedAt** | **OffsetDateTime** | The time at which the payment state was last updated for this payment, specified in UTC. |  [optional] |
-|**paymentState** | **String** | Current state of a payment.  The payment lifecycle currently uses the following values:  - &#x60;QUOTED&#x60;  - &#x60;INITIATED&#x60;  - &#x60;VALIDATING&#x60;  - &#x60;TRANSFERRING&#x60;  - &#x60;COMPLETED&#x60;  - &#x60;FAILED&#x60;  - &#x60;RETURNED&#x60;  - &#x60;DECLINED&#x60;  - &#x60;AWAITING_FUNDING&#x60;  Additional states may be introduced in the future without breaking existing integrations.  |  |
+|**paymentState** | **String** | Current state of a payment.  The payment lifecycle currently uses the following values: - &#x60;QUOTED&#x60; - &#x60;INITIATED&#x60; - &#x60;VALIDATING&#x60; - &#x60;TRANSFERRING&#x60; - &#x60;COMPLETED&#x60; - &#x60;FAILED&#x60; - &#x60;RETURNED&#x60; - &#x60;DECLINED&#x60; - &#x60;AWAITING_FUNDING&#x60;  Additional states may be introduced in the future without breaking existing integrations.  |  |
 |**originator** | [**OriginatorV2DTO**](OriginatorV2DTO.md) |  |  [optional] |
 |**destination** | [**DestinationV2DTO**](DestinationV2DTO.md) |  |  [optional] |
 |**adjustedExchangeRate** | [**AdjustedExchangeRateDTO**](AdjustedExchangeRateDTO.md) |  |  [optional] |

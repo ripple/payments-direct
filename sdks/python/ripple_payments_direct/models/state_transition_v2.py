@@ -27,8 +27,8 @@ class StateTransitionV2(BaseModel):
     """
     StateTransitionV2
     """ # noqa: E501
-    updated_from: StrictStr = Field(description="Current state of a payment.  The payment lifecycle currently uses the following values:  - `QUOTED`  - `INITIATED`  - `VALIDATING`  - `TRANSFERRING`  - `COMPLETED`  - `FAILED`  - `RETURNED`  - `DECLINED`  - `AWAITING_FUNDING`  Additional states may be introduced in the future without breaking existing integrations. ", alias="updatedFrom")
-    updated_to: StrictStr = Field(description="Current state of a payment.  The payment lifecycle currently uses the following values:  - `QUOTED`  - `INITIATED`  - `VALIDATING`  - `TRANSFERRING`  - `COMPLETED`  - `FAILED`  - `RETURNED`  - `DECLINED`  - `AWAITING_FUNDING`  Additional states may be introduced in the future without breaking existing integrations. ", alias="updatedTo")
+    updated_from: StrictStr = Field(description="Current state of a payment.  The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`  Additional states may be introduced in the future without breaking existing integrations. ", alias="updatedFrom")
+    updated_to: StrictStr = Field(description="Current state of a payment.  The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`  Additional states may be introduced in the future without breaking existing integrations. ", alias="updatedTo")
     updated_at: datetime = Field(description="The timestamp when the payment state was updated.", alias="updatedAt")
     __properties: ClassVar[List[str]] = ["updatedFrom", "updatedTo", "updatedAt"]
 

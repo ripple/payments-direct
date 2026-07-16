@@ -34,7 +34,7 @@ type PaymentV2 struct {
 	JitFundingExpiresAt *time.Time `json:"jitFundingExpiresAt,omitempty"`
 	// The time at which the payment state was last updated for this payment, specified in UTC.
 	LastStateUpdatedAt *time.Time `json:"lastStateUpdatedAt,omitempty"`
-	// Current state of a payment.  The payment lifecycle currently uses the following values:  - `QUOTED`  - `INITIATED`  - `VALIDATING`  - `TRANSFERRING`  - `COMPLETED`  - `FAILED`  - `RETURNED`  - `DECLINED`  - `AWAITING_FUNDING`  Additional states may be introduced in the future without breaking existing integrations. 
+	// Current state of a payment.  The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`  Additional states may be introduced in the future without breaking existing integrations. 
 	PaymentState string `json:"paymentState"`
 	Originator *OriginatorV2 `json:"originator,omitempty"`
 	Destination *DestinationV2 `json:"destination,omitempty"`

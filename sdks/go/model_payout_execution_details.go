@@ -20,7 +20,7 @@ var _ MappedNullable = &PayoutExecutionDetails{}
 
 // PayoutExecutionDetails Metadata about the payout execution, including the payment rail used, timing, and tracking references.  `payoutExecutionDetails` is an optional field that should be treated as informational only. Do not build required workflows that depend on its presence, as availability varies by corridor and partner.  When present, `trackingReferences` provides network-specific identifiers useful for audit, reconciliation, or customer inquiry resolution. Use the `referenceType` field on each tracking reference to identify what a value represents rather than relying on its position in the array.  Coverage will expand as additional corridors and partners are onboarded. 
 type PayoutExecutionDetails struct {
-	// The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP, SEPA). 
+	// The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP, SEPA, SWIFT). 
 	PaymentRailUsed *string `json:"paymentRailUsed,omitempty"`
 	// The time at which the payout execution started, specified in UTC. 
 	PayoutStartTime *time.Time `json:"payoutStartTime,omitempty"`

@@ -41,7 +41,7 @@ info:
     ### Request an access token
 
     To get an access token, use the [Request an access token](#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.
-    
+
     We recommend rotating your API credentials at regular intervals according to your organization's security policy.
 
     **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length.
@@ -2708,18 +2708,18 @@ components:
       example: INITIATED
       description: |
         Current state of a payment.
-        
-        The payment lifecycle currently uses the following values: 
-        - `QUOTED` 
-        - `INITIATED` 
-        - `VALIDATING` 
-        - `TRANSFERRING` 
-        - `COMPLETED` 
-        - `FAILED` 
-        - `RETURNED` 
-        - `DECLINED` 
+
+        The payment lifecycle currently uses the following values:
+        - `QUOTED`
+        - `INITIATED`
+        - `VALIDATING`
+        - `TRANSFERRING`
+        - `COMPLETED`
+        - `FAILED`
+        - `RETURNED`
+        - `DECLINED`
         - `AWAITING_FUNDING`
-        
+
         Additional states may be introduced in the future without breaking existing integrations.
       x-enumDescriptions:
         QUOTED: A quote has been created, but the payment has not yet been 
@@ -2750,20 +2750,20 @@ components:
       type: string
       description: |
         The field to use when sorting payments in the requested sort order.
-        
-        Currently supported values include: 
-        - `internalId` 
-        - `paymentState` 
-        - `sourceCurrency` 
-        - `sourceAmount` 
-        - `destinationCurrency` 
-        - `destinationCountry` 
-        - `destinationAmount` 
-        - `initiatedAt` 
-        - `expiresAt` 
-        - `lastStateUpdatedAt` 
+
+        Currently supported values include:
+        - `internalId`
+        - `paymentState`
+        - `sourceCurrency`
+        - `sourceAmount`
+        - `destinationCurrency`
+        - `destinationCountry`
+        - `destinationAmount`
+        - `initiatedAt`
+        - `expiresAt`
+        - `lastStateUpdatedAt`
         - `paymentLabel`
-        
+
         If an unsupported value is provided, the request fails with a validation error.
       default: initiatedAt
       example: initiatedAt
@@ -2937,7 +2937,7 @@ components:
         paymentRailUsed:
           type: string
           description: |
-            The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP, SEPA).
+            The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP, SEPA, SWIFT).
           example: FEDWIRE
         payoutStartTime:
           type: string
@@ -3099,12 +3099,12 @@ components:
     PaymentFilterRangeTypeV2:
       description: |
         The type of timestamp to use when filtering payments by a date and time range.
-        
-        Supported values include: 
-        - `PAYMENT_CREATION` 
-        - `PAYMENT_EXPIRY` 
+
+        Supported values include:
+        - `PAYMENT_CREATION`
+        - `PAYMENT_EXPIRY`
         - `PAYMENT_STATUS_LAST_UPDATED`
-        
+
         If another value is provided, the filter is rejected with a validation error.
       type: string
       example: PAYMENT_CREATION
@@ -3268,8 +3268,10 @@ components:
         tags:
           type: array
           description: Optional labels used to categorize or filter identities.
+          maxItems: 25
           items:
             type: string
+            maxLength: 256
             example: tag1
         validatePayoutRails:
           type: array
@@ -3316,8 +3318,10 @@ components:
           type: array
           description: |
             Tags are used to categorize the identity.
+          maxItems: 25
           items:
             type: string
+            maxLength: 256
             example: tag1
     create-identity-request-v3:
       allOf:
@@ -3338,8 +3342,10 @@ components:
           type: array
           description: |
             Tags are used to categorize the identity.
+          maxItems: 25
           items:
             type: string
+            maxLength: 256
             example: tag1
     identity-state:
       type: string
@@ -3491,8 +3497,10 @@ components:
           type: array
           description: |
             Tags are used to categorize the identity.
+          maxItems: 25
           items:
             type: string
+            maxLength: 256
             example: tag1
         version:
           type: integer
@@ -3629,10 +3637,14 @@ components:
           - BR_TED
           - CO_PSE
           - CL_TEF
+          - PE_LBTR
+          - AR_INTERBANKING
           x-requiredByOriginatorFor:
           - BR_PIX
           - BR_TED
           - CL_TEF
+          - PE_LBTR
+          - AR_INTERBANKING
           type: string
           description: Address for electronic mail (e-mail).
           format: email
@@ -3653,14 +3665,19 @@ components:
           - ZM_BANK_PAYOUT
           - CO_PSE
           - ID_BIFAST
+          - KR_KFTC
           - CL_TEF
           - IN_NEFT
           - SG_GIRO
+          - TH_PROMPTPAY
+          - PE_LBTR
+          - AR_INTERBANKING
           x-requiredByOriginatorFor:
           - BR_PIX
           - BR_TED
           - NG_BANK_PAYOUT
           - ID_BIFAST
+          - KR_KFTC
           - CL_TEF
           - IN_NEFT
           - GH_BANK_PAYOUT
@@ -3669,6 +3686,9 @@ components:
           - UG_BANK_PAYOUT
           - ZM_BANK_PAYOUT
           - SG_GIRO
+          - TH_PROMPTPAY
+          - PE_LBTR
+          - AR_INTERBANKING
           type: string
           description: Phone Number
           minLength: 8
@@ -3681,12 +3701,6 @@ components:
           - BR_TED
           - CO_PSE
           - CA_EFT
-          - NG_BANK_PAYOUT
-          - GH_BANK_PAYOUT
-          - RW_BANK_PAYOUT
-          - ZA_BANK_PAYOUT
-          - UG_BANK_PAYOUT
-          - ZM_BANK_PAYOUT
           - CN_TRADE
           - CN_CFXPS
           - ETH_WALLET
@@ -3695,8 +3709,12 @@ components:
           - SOL_WALLET
           - CL_TEF
           - ID_BIFAST
+          - KR_KFTC
           - IN_NEFT
           - SG_GIRO
+          - TH_PROMPTPAY
+          - PE_LBTR
+          - AR_INTERBANKING
           x-requiredByOriginatorFor:
           - CA_EFT
           - BR_PIX
@@ -3708,20 +3726,20 @@ components:
           - CN_INDIVIDUAL
           - CN_INDIVIDUAL_TRADE
           - CN_CFXPS
-          - NG_BANK_PAYOUT
-          - GH_BANK_PAYOUT
-          - RW_BANK_PAYOUT
-          - ZA_BANK_PAYOUT
-          - UG_BANK_PAYOUT
-          - ZM_BANK_PAYOUT
           - GB_FPS
           - CL_TEF
           - ID_BIFAST
+          - KR_KFTC
           - IN_NEFT
           - SG_GIRO
           - TR_FAST
           - AE_IPI
+          - PE_LBTR
           - SG_MEPS
+          - TH_PROMPTPAY
+          - VN_BANK_PAYOUT
+          - AR_INTERBANKING
+          - PH_NRPS
           type: array
           description: Unique and unambiguous way to identify a business or 
             organization. An array of objects, each containing unique 
@@ -3757,6 +3775,7 @@ components:
           - BR_TED
           - NG_BANK_PAYOUT
           - ID_BIFAST
+          - KR_KFTC
           - CL_TEF
           - IN_NEFT
           - GH_BANK_PAYOUT
@@ -3765,6 +3784,9 @@ components:
           - UG_BANK_PAYOUT
           - ZM_BANK_PAYOUT
           - SG_GIRO
+          - TH_PROMPTPAY
+          - PE_LBTR
+          - AR_INTERBANKING
           x-requiredByOriginatorFor:
           - BR_PIX
           - BR_TED
@@ -3772,9 +3794,13 @@ components:
           - HK_BANK_PAYOUT
           - CL_TEF
           - ID_BIFAST
+          - KR_KFTC
           - IN_NEFT
           - SG_GIRO
+          - PE_LBTR
           - SG_MEPS
+          - TH_PROMPTPAY
+          - AR_INTERBANKING
           type: string
           description: Information that locates and identifies the country, as 
             defined by postal services where the organization was incorporated. 
@@ -3792,9 +3818,11 @@ components:
           - SWIFT
           - HK_BANK_PAYOUT
           - ID_BIFAST
+          - KR_KFTC
           - IN_NEFT
           - SG_GIRO
           - SG_MEPS
+          - TH_PROMPTPAY
           type: string
           format: date
           description: The date when the business was incorporated.
@@ -3912,9 +3940,13 @@ components:
           - BR_TED
           - CO_PSE
           - CL_TEF
+          - PE_LBTR
+          - AR_INTERBANKING
           x-requiredByOriginatorFor:
           - BR_PIX
           - CL_TEF
+          - PE_LBTR
+          - AR_INTERBANKING
           type: string
           description: Address for electronic mail (e-mail).
           format: email
@@ -3937,20 +3969,28 @@ components:
           - CO_PSE
           - CL_TEF
           - ID_BIFAST
+          - KR_KFTC
           - IN_NEFT
+          - PE_LBTR
           - SG_GIRO
+          - TH_PROMPTPAY
+          - AR_INTERBANKING
           x-requiredByOriginatorFor:
           - BR_PIX
           - NG_BANK_PAYOUT
           - ID_BIFAST
+          - KR_KFTC
           - CL_TEF
           - IN_NEFT
+          - PE_LBTR
           - GH_BANK_PAYOUT
           - RW_BANK_PAYOUT
           - ZA_BANK_PAYOUT
           - UG_BANK_PAYOUT
           - ZM_BANK_PAYOUT
           - SG_GIRO
+          - TH_PROMPTPAY
+          - AR_INTERBANKING
           type: string
           description: Phone Number
           minLength: 8
@@ -3962,18 +4002,16 @@ components:
           - BR_PIX
           - BR_TED
           - CO_PSE
-          - NG_BANK_PAYOUT
-          - GH_BANK_PAYOUT
-          - RW_BANK_PAYOUT
-          - ZA_BANK_PAYOUT
-          - UG_BANK_PAYOUT
-          - ZM_BANK_PAYOUT
           - CN_INDIVIDUAL
           - CN_INDIVIDUAL_TRADE
           - ID_BIFAST
+          - KR_KFTC
           - CL_TEF
           - IN_NEFT
+          - PE_LBTR
           - SG_GIRO
+          - TH_PROMPTPAY
+          - AR_INTERBANKING
           x-requiredByOriginatorFor:
           - BR_PIX
           - BR_TED
@@ -3982,9 +4020,14 @@ components:
           - CN_INDIVIDUAL
           - CL_TEF
           - ID_BIFAST
+          - KR_KFTC
           - IN_NEFT
+          - PE_LBTR
           - SG_GIRO
           - SG_MEPS
+          - TH_PROMPTPAY
+          - AR_INTERBANKING
+          - PH_NRPS
           description: Gathers identifying documentation
           type: array
           items:
@@ -4027,14 +4070,15 @@ components:
                 x-requiredByOriginatorFor:
                 - IN_NEFT
                 - ID_BIFAST
+                - KR_KFTC
                 - SG_GIRO
+                - TH_PROMPTPAY
                 type: string
                 format: date
                 description: Expiration date of the identification document.
                 example: '2030-01-15'
         dateOfBirth:
           x-requiredByBeneficiaryFor:
-          - US_ACH
           - EU_SEPA
           - GB_FPS
           - BR_PIX
@@ -4043,7 +4087,9 @@ components:
           - SWIFT
           - HK_BANK_PAYOUT
           - CL_TEF
+          - PE_LBTR
           - SG_MEPS
+          - AR_INTERBANKING
           x-requiredByOriginatorFor:
           - EU_SEPA
           - GB_FPS
@@ -4052,12 +4098,18 @@ components:
           - SWIFT
           - HK_BANK_PAYOUT
           - ID_BIFAST
+          - KR_KFTC
           - CL_TEF
           - IN_NEFT
+          - PE_LBTR
           - SG_GIRO
           - TR_FAST
+          - VN_BANK_PAYOUT
           - AE_IPI
           - SG_MEPS
+          - TH_PROMPTPAY
+          - AR_INTERBANKING
+          - PH_NRPS
           type: string
           format: date
           description: Date of Birth.
@@ -4073,6 +4125,8 @@ components:
           - BR_PIX
           - BR_TED
           - CL_TEF
+          - PE_LBTR
+          - AR_INTERBANKING
           type: string
           description: Country of Birth. Use Alpha-2 Code as defined in the [ISO
             CountryCode ISO 3166-1](https://www.iso.org/obp/ui/#search) list.
@@ -4095,8 +4149,12 @@ components:
           - CL_TEF
           - IN_NEFT
           - ID_BIFAST
+          - KR_KFTC
           - SG_GIRO
+          - PE_LBTR
           - SG_MEPS
+          - TH_PROMPTPAY
+          - AR_INTERBANKING
           x-requiredByOriginatorFor:
           - BR_PIX
           - BR_TED
@@ -4105,9 +4163,13 @@ components:
           - CN_INDIVIDUAL
           - CL_TEF
           - ID_BIFAST
+          - KR_KFTC
           - IN_NEFT
+          - PE_LBTR
           - SG_GIRO
           - SG_MEPS
+          - TH_PROMPTPAY
+          - AR_INTERBANKING
           type: string
           description: Alpha-2 country code for the nationality of the 
             individual in ISO 3166-1 format.
@@ -4181,10 +4243,20 @@ components:
       - BR_TED
       - CA_EFT
       - HK_BANK_PAYOUT
+      - ID_BIFAST
+      - KR_KFTC
+      - IN_NEFT
+      - TH_PROMPTPAY
       - CN_TRADE
       - CN_INDIVIDUAL
       - CN_INDIVIDUAL_TRADE
       - CN_CFXPS
+      - CL_TEF
+      - PE_LBTR
+      - PH_NRPS
+      - AE_IPI
+      - TR_FAST
+      - AR_INTERBANKING
       x-enumDescriptions:
         US_ACH: Automated Clearing House - U.S. batch processing network used 
           for domestic payments.
@@ -4220,6 +4292,10 @@ components:
         CA_EFT: Canada's Electronic Funds Transfer system for batch processing.
         HK_BANK_PAYOUT: Hong Kong Bank Payout - Payment rail for bank account 
           transfers in Hong Kong using BBAN account numbers.
+        IN_NEFT: India National Electronic Funds Transfer - bank payout for INR 
+          denominated transfers using IFSC routing codes.
+        TH_PROMPTPAY: Thailand PromptPay - Thailand's national real-time retail 
+          payment system for THB domestic bank transfers.
         CN_TRADE: China domestic CNY trade payments (B2B/B2B2B) with full bank 
           routing. Settlement rail is automatically selected from CNAPS, 
           SIB/IBPS, CUP, or NUCC.
@@ -4232,6 +4308,23 @@ components:
           name.
         CN_CFXPS: Cross-border Foreign Exchange Payment System, enabling USD 
           business-to-business transfers to China via SWIFT/BIC routing.
+        CL_TEF: Chile TEF (Transferencia Electrónica de Fondos) - business-day 
+          domestic transfer system for CLP-denominated payments.
+        PE_LBTR: Peru LBTR (Liquidación Bruta en Tiempo Real) - real-time 
+          settlement system for PEN-denominated payments.
+        PH_NRPS: Philippines National Retail Payment System (InstaPay/PESONet) 
+          for PHP-denominated bank payouts.
+        ID_BIFAST: Indonesia BI-FAST - Bank Indonesia's 24/7 real-time payment 
+          rail for IDR-denominated domestic transfers.
+        KR_KFTC: South Korea KFTC - 24/7 real-time payment rail via Korea 
+          Financial Telecommunications and Clearings for KRW-denominated 
+          payments.
+        AE_IPI: United Arab Emirates' Instant Payment Interface for real-time 
+          transactions.
+        TR_FAST: Turkey FAST - 24/7 real-time payment rail for TRY-denominated 
+          domestic transfers, with EFT (business-day) fallback.
+        AR_INTERBANKING: Argentina Interbanking - CBU/CVU-based domestic 
+          transfer system for ARS-denominated payments.
       example: BR_PIX
     put-ripple-identity:
       type: object
@@ -4256,17 +4349,26 @@ components:
       example: MXN
       x-extensible-enum:
       - AED
+      - ARS
       - BRL
       - CAD
+      - CLP
       - CNY
       - COP
       - EUR
       - GBP
       - GHS
       - HKD
+      - IDR
+      - INR
+      - KRW
       - MXN
       - NGN
+      - PEN
+      - PHP
       - RWF
+      - THB
+      - TRY
       - UGX
       - USD
       - ZAR
@@ -4294,12 +4396,13 @@ components:
           $ref: '#/components/schemas/financial-instrument-currency'
         label:
           type: string
+          maxLength: 256
           description: A user-defined label for the financial instrument.
           example: mexico bank account
         country:
           type: string
           description: |
-            The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, TRON_WALLET, SOL_WALLET), this field returns `ZZ`, the ISO 3166-1 user-assigned code used when no country jurisdiction applies.
+            The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. This field is omitted when no country jurisdiction applies (for example, crypto wallet instruments such as ETH_WALLET, TRON_WALLET, and SOL_WALLET). An absent `country` should be interpreted as "no applicable jurisdiction".
           example: MX
           minLength: 2
           maxLength: 2
@@ -4572,7 +4675,9 @@ components:
             .,'&\/()-]+(?<![ .,'&\/-])?$
         bankCode:
           type: string
-          description: The bank code of the identity's bank
+          description: The bank code of the identity's bank. See the Bank Codes 
+            resource in Ripple Docs for the authoritative list of supported 
+            values.
           minLength: 1
           maxLength: 50
           pattern: ^[A-Za-z0-9 ._-]+$
@@ -5008,7 +5113,7 @@ components:
         bankCode:
           type: string
           description: The identity's bank identifier code
-          minLength: 2
+          minLength: 1
           maxLength: 4
           pattern: ^\d+$
         accountNumber:
@@ -5195,6 +5300,176 @@ components:
           minLength: 3
           maxLength: 5
           pattern: ^[A-Z]+$
+    id-bifast:
+      type: object
+      description: |
+        Rails: BI-FAST
+
+        Rail Definitions:
+
+        BI-FAST:
+        - Availability: 24/7/365
+        - Limit: IDR 50,000,000
+        - Settlement: Real-time
+        - Cut-off time: None
+        - Banking holidays: Not applicable
+
+        Routing Evaluation Order: Not applicable
+      required:
+      - bankName
+      - bankCode
+      - accountNumber
+      properties:
+        bankName:
+          type: string
+          description: The name of the identity's bank
+          minLength: 2
+          maxLength: 140
+          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
+            .,'&\/()-]+(?<![ .,'&\/-])?$
+        bankCode:
+          type: string
+          description: Bank Indonesia-assigned domestic clearing code. See the 
+            Bank Codes resource in Ripple Docs for the authoritative list of 
+            supported values.
+          minLength: 1
+          maxLength: 16
+          pattern: ^[A-Za-z0-9]+$
+        accountNumber:
+          type: string
+          description: The identity's bank account number
+          minLength: 1
+          maxLength: 45
+          pattern: ^[A-Za-z0-9]+$
+    kr-kftc:
+      type: object
+      description: |
+        Rails: KFTC (Korea Financial Telecommunications and Clearings)
+
+        Rail Definitions:
+
+        KFTC:
+        - Availability: 24/7/365
+        - Limit: KRW 10,000,000 per transaction (varies)
+        - Settlement: Real-time
+        - Cut-off time: None
+        - Banking holidays: Not applicable
+
+        Routing Evaluation Order: Not applicable
+      required:
+      - bankName
+      - bankCode
+      - accountNumber
+      properties:
+        bankName:
+          type: string
+          description: The name of the identity's bank
+          minLength: 2
+          maxLength: 140
+          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
+            .,'&\/()-]+(?<![ .,'&\/-])?$
+        bankCode:
+          type: string
+          description: KFTC-assigned Korean domestic clearing code. See the Bank
+            Codes resource in Ripple Docs for the authoritative list of 
+            supported values.
+          minLength: 1
+          maxLength: 10
+          pattern: ^[0-9]+$
+        accountNumber:
+          type: string
+          description: The identity's bank account number
+          minLength: 1
+          maxLength: 45
+          pattern: ^[A-Za-z0-9]+$
+    in-neft:
+      type: object
+      description: |
+        Rails: NEFT (National Electronic Funds Transfer)
+
+        Rail Definitions:
+
+        NEFT:
+        - Availability: Business days and banking hours only
+        - Limit: No limit
+        - Settlement: Same-day (by end of business day)
+        - Cut-off time: 7:00 PM IST (varies by bank)
+        - Banking holidays: India banking holidays apply
+
+        Routing Evaluation Order: Not applicable
+      required:
+      - bankName
+      - ifscCode
+      - accountNumber
+      properties:
+        bankName:
+          type: string
+          description: The name of the identity's bank
+          minLength: 2
+          maxLength: 140
+          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
+            .,'&\/()-]+(?<![ .,'&\/-])?$
+        ifscCode:
+          type: string
+          description: The 11-character IFSC code of the identity's bank branch
+          minLength: 11
+          maxLength: 11
+          pattern: ^[A-Z]{4}0[A-Z0-9]{6}$
+        accountNumber:
+          type: string
+          description: The identity's bank account number
+          minLength: 4
+          maxLength: 45
+          pattern: ^[A-Za-z0-9]+$
+    pe-lbtr:
+      type: object
+      description: |
+        Rails: LBTR (Sistema de Liquidación Bruta en Tiempo Real)
+
+        Rail Definitions:
+
+        LBTR:
+        - Availability: Business days and banking hours only
+        - Limit: Minimum Transaction amount is 5 USD
+        - Settlement: Same-day
+        - Cut-off time: 3:00 PM PET
+        - Banking holidays: Peru banking holidays apply
+
+        Routing Evaluation Order: Not applicable
+      required:
+      - bankName
+      - swiftCode
+      - accountNumber
+      - accountType
+      properties:
+        bankName:
+          type: string
+          description: The name of the identity's bank
+          minLength: 2
+          maxLength: 140
+          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
+            .,'&\/()-]+(?<![ .,'&\/-])?$
+        swiftCode:
+          type: string
+          description: SWIFT/BIC code of the identity's bank
+          minLength: 8
+          maxLength: 11
+          pattern: ^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$
+        accountNumber:
+          type: string
+          description: The identity's bank account number
+          minLength: 10
+          maxLength: 20
+          pattern: ^[A-Za-z0-9]+$
+        accountType:
+          type: string
+          x-extensible-enum:
+          - CHECKING
+          - SAVINGS
+          x-enumDescriptions:
+            CHECKING: Checking account
+            SAVINGS: Savings account
+          description: The identity's account type
     cn-trade:
       type: object
       description: |
@@ -5251,8 +5526,7 @@ components:
             .,'&\/()-]+(?<![ .,'&\/-])?$
         bankCode:
           type: string
-          description: Ripple Bank Code for the destination bank. Use the
-            Ripple Bank Codes lookup at docs.ripple.com to find the correct code.
+          description: Beneficiary Bank Code (CNAPS). List provided in the Ripple Docs Bank Codes utility.
           minLength: 1
           maxLength: 32
           pattern: ^[A-Za-z0-9]+$
@@ -5424,6 +5698,297 @@ components:
           minLength: 1
           maxLength: 140
           pattern: ^[A-Za-z0-9 .,'&\/()-]+$
+    cl-tef:
+      type: object
+      description: |
+        Rails: TEF (Transferencia Electrónica de Fondos)
+
+        Rail Definitions:
+
+        TEF:
+        - Availability: Business days only
+        - Limit: No limit
+        - Settlement: Same-day or next business day
+        - Cut-off time: 3:00 PM CLT
+        - Banking holidays: Chile banking holidays apply
+
+        Routing Evaluation Order: Not applicable
+      required:
+      - bankName
+      - swiftCode
+      - accountNumber
+      - accountType
+      properties:
+        bankName:
+          type: string
+          description: The name of the identity's bank
+          minLength: 2
+          maxLength: 140
+          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
+            .,'&\/()-]+(?<![ .,'&\/-])?$
+        swiftCode:
+          type: string
+          description: SWIFT/BIC code of the identity's bank
+          minLength: 8
+          maxLength: 11
+          pattern: ^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$
+        accountNumber:
+          type: string
+          description: The identity's bank account number
+          minLength: 6
+          maxLength: 34
+          pattern: ^[A-Za-z0-9]+$
+        accountType:
+          type: string
+          x-extensible-enum:
+          - CHECKING
+          - SAVINGS
+          x-enumDescriptions:
+            CHECKING: Checking account
+            SAVINGS: Savings account
+          description: The identity's account type
+    ae-ipi:
+      type: object
+      description: |
+        Rails: IPI, FTS
+
+        Rail Definitions:
+
+        IPI:
+        - Availability: 24/7/365
+        - Limit: AED 25,000
+        - Settlement: Instant
+        - Cut-off time: None
+        - Banking holidays: Not applicable
+
+        FTS:
+        - Availability: Business days only
+        - Limit: No limit
+        - Settlement: Same-day
+        - Cut-off time: ~2:00 PM GST
+        - Banking holidays: UAE Central Bank holidays apply
+
+        Routing Evaluation Order:
+          1. IPI  
+             - Conditions: beneficiary account is IPI-addressable AND amount ≤ AED 25,000
+          2. FTS  
+             - Conditions: otherwise applicable
+      required:
+      - bankName
+      - iban
+      properties:
+        bankName:
+          type: string
+          description: The name of the identity's bank
+          minLength: 2
+          maxLength: 140
+          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
+            .,'&\/()-]+(?<![ .,'&\/-])?$
+        iban:
+          type: string
+          description: The International Bank Account Number (IBAN) of the 
+            identity's account
+          minLength: 23
+          maxLength: 23
+          pattern: ^AE[0-9]{21}$
+    tr-fast:
+      type: object
+      description: |
+        Rails: FAST (Fast Electronic Fund Transfer), EFT (Elektronik Fon Transferi)
+
+        Rail Definitions:
+
+        FAST:
+        - Availability: 24/7/365
+        - Limit: No limit
+        - Settlement: Real-time (within minutes)
+        - Cut-off time: None
+        - Banking holidays: Not applicable
+
+        EFT:
+        - Availability: Business days and banking hours only
+        - Limit: No limit
+        - Settlement: Same-day or next business day
+        - Cut-off time: 5:30 PM TRT
+        - Banking holidays: Turkey banking holidays apply
+
+        Routing Evaluation Order:
+          1. FAST
+             - Conditions: beneficiary account is FAST-addressable
+          2. EFT
+             - Conditions: otherwise applicable
+      required:
+      - bankName
+      - iban
+      - bankCode
+      properties:
+        bankName:
+          type: string
+          description: The name of the identity's bank
+          minLength: 2
+          maxLength: 140
+          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
+            .,'&\/()-]+(?<![ .,'&\/-])?$
+        iban:
+          type: string
+          description: Turkey IBAN (26 characters, starting with TR)
+          minLength: 26
+          maxLength: 26
+          pattern: ^TR[0-9]{24}$
+        bankCode:
+          type: string
+          description: SWIFT/BIC code of the identity's bank. Named bankCode for
+            v2 ADR compatibility; maps to BICFI in ISO 20022.
+          minLength: 1
+          maxLength: 15
+          pattern: ^[A-Za-z0-9]+$
+    ph-nrps:
+      type: object
+      description: |
+        Rails: InstaPay, PESONet
+
+        Rail Definitions:
+
+        InstaPay:
+          - Availability: 24/7/365
+          - Limit: PHP 1,000,000
+          - Settlement: Real-time (within 15 minutes)
+          - Cut-off time: None
+          - Banking holidays: Applicable
+
+        PESONet:
+          - Availability: Business days only
+          - Limit: No limit
+          - Settlement: Same-day or next business day
+          - Cut-off time: 2:00 PM PHT
+          - Banking holidays: Philippines banking holidays apply
+
+        Routing Evaluation Order: InstaPay > PESONet
+      required:
+      - bankName
+      - swiftCode
+      - accountNumber
+      properties:
+        bankName:
+          type: string
+          description: The name of the identity's bank
+          minLength: 2
+          maxLength: 140
+          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
+            .,'&\/()-]+(?<![ .,'&\/-])?$
+          example: BDO Unibank
+        swiftCode:
+          type: string
+          description: The SWIFT/BIC code of the beneficiary bank. Constrained 
+            to the SWIFT/BIC code list published on Ripple Docs.
+          minLength: 8
+          maxLength: 11
+          pattern: ^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$
+          example: BNORPHMMXXX
+        accountNumber:
+          type: string
+          description: The identity's bank account number
+          minLength: 1
+          maxLength: 30
+          pattern: ^[A-Za-z0-9]+$
+          example: '123456789012'
+    th-promptpay:
+      type: object
+      description: |
+        Rails: PromptPay
+
+        Rail Definitions:
+
+        PromptPay (National ITMX):
+          - Availability: 24/7/365
+          - Limit: THB 500,000 per transaction
+          - Settlement: Real-time (within seconds)
+          - Cut-off time: None
+          - Banking holidays: Not applicable
+
+        Routing Evaluation Order: Not applicable
+      required:
+      - bankName
+      - bankCode
+      - accountNumber
+      properties:
+        bankName:
+          type: string
+          description: The name of the identity's bank
+          minLength: 2
+          maxLength: 140
+          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
+            .,'&\/()-]+(?<![ .,'&\/-])?$
+          example: Bangkok Bank
+        bankCode:
+          type: string
+          description: Domestic bank code for the identity's bank in Thailand. 
+            See the Bank Codes resource in Ripple Docs for the authoritative 
+            list of supported values.
+          minLength: 1
+          maxLength: 16
+          pattern: ^[A-Za-z0-9]+$
+          example: '002'
+        accountNumber:
+          type: string
+          description: The identity's bank account number
+          minLength: 1
+          maxLength: 45
+          pattern: ^[A-Za-z0-9]+$
+          example: '1234567890'
+    ar-interbanking:
+      type: object
+      description: |
+        Rails: Interbanking
+
+        Rail Definitions:
+
+        Interbanking:
+        - Availability: Business days only
+        - Limit: ARS 10,000,000
+        - Settlement: Same-day or next business day
+        - Cut-off time: 3:00 PM ART
+        - Banking holidays: Argentina banking holidays apply
+
+        Routing Evaluation Order: AR_INTERBANKING has a single payment rail; no routing evaluation order applies.
+      required:
+      - bankName
+      - bankCode
+      - accountNumber
+      - accountType
+      properties:
+        bankName:
+          type: string
+          description: The name of the identity's bank. Must begin and end with 
+            a letter or digit, and consecutive identical punctuation characters 
+            are not permitted.
+          minLength: 2
+          maxLength: 140
+          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
+            .,'&\/()-]+(?<![ .,'&\/-])?$
+        bankCode:
+          type: string
+          description: BCRA-assigned 3-digit Argentine bank code. See the Bank 
+            Codes resource in Ripple Docs for the authoritative list of 
+            supported values.
+          minLength: 3
+          maxLength: 3
+          pattern: ^\d{3}$
+        accountNumber:
+          type: string
+          description: The identity's account number (CBU or CVU)
+          minLength: 22
+          maxLength: 22
+          pattern: ^\d{22}$
+        accountType:
+          type: string
+          x-extensible-enum:
+          - CHECKING
+          - SAVINGS
+          x-enumDescriptions:
+            CHECKING: Checking account (Cuenta Corriente)
+            SAVINGS: Savings account (Caja de Ahorro)
+          description: The identity's account type
     payment-rail-objects:
       type: object
       properties:
@@ -5465,6 +6030,14 @@ components:
           $ref: '#/components/schemas/ca-eft'
         hkBankPayout:
           $ref: '#/components/schemas/hk-bank-payout'
+        idBifast:
+          $ref: '#/components/schemas/id-bifast'
+        krKftc:
+          $ref: '#/components/schemas/kr-kftc'
+        inNeft:
+          $ref: '#/components/schemas/in-neft'
+        peLbtr:
+          $ref: '#/components/schemas/pe-lbtr'
         cnTrade:
           $ref: '#/components/schemas/cn-trade'
         cnIndividual:
@@ -5473,6 +6046,18 @@ components:
           $ref: '#/components/schemas/cn-individual-trade'
         cnCfxps:
           $ref: '#/components/schemas/cn-cfxps'
+        clTef:
+          $ref: '#/components/schemas/cl-tef'
+        aeIpi:
+          $ref: '#/components/schemas/ae-ipi'
+        trFast:
+          $ref: '#/components/schemas/tr-fast'
+        phNrps:
+          $ref: '#/components/schemas/ph-nrps'
+        thPromptpay:
+          $ref: '#/components/schemas/th-promptpay'
+        arInterbanking:
+          $ref: '#/components/schemas/ar-interbanking'
     ripple-financial-instrument:
       type: object
       description: |
@@ -5485,6 +6070,7 @@ components:
             $ref: '#/components/schemas/financial-instrument-currency'
           label:
             type: string
+            maxLength: 256
             description: A user-defined label for the financial instrument.
             example: mexico bank account
           financialInstrumentType:
@@ -5500,7 +6086,7 @@ components:
           country:
             type: string
             description: |
-              The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, TRON_WALLET, SOL_WALLET), this field returns `ZZ`, the ISO 3166-1 user-assigned code used when no country jurisdiction applies.
+              The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. This field is omitted when no country jurisdiction applies (for example, crypto wallet instruments such as ETH_WALLET, TRON_WALLET, and SOL_WALLET). An absent `country` should be interpreted as "no applicable jurisdiction".
             example: MX
             minLength: 2
             maxLength: 2
@@ -5529,6 +6115,7 @@ components:
       properties:
         label:
           type: string
+          maxLength: 256
           description: A user-defined label for the financial instrument.
           example: mexico bank account
     QuoteErrorResponse:

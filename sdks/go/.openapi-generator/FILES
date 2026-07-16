@@ -11,6 +11,8 @@ api_quote.go
 client.go
 configuration.go
 docs/AdjustedExchangeRate.md
+docs/AeIpi.md
+docs/ArInterbanking.md
 docs/AuthenticationAPI.md
 docs/AuthenticationRequest.md
 docs/AuthenticationResponse.md
@@ -20,6 +22,7 @@ docs/BusinessIdentity.md
 docs/BusinessIdentityAddress.md
 docs/BusinessIdentityRegistrationInner.md
 docs/CaEft.md
+docs/ClTef.md
 docs/CnCfxps.md
 docs/CnIndividual.md
 docs/CnIndividualTrade.md
@@ -45,11 +48,14 @@ docs/GetStatementsTransactionsForCustomer200Response.md
 docs/GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner.md
 docs/GhBankPayout.md
 docs/HkBankPayout.md
+docs/IdBifast.md
 docs/IdentitiesV3API.md
 docs/IdentityResponseV3.md
+docs/InNeft.md
 docs/IndividualIdentity.md
 docs/IndividualIdentityAddress.md
 docs/IndividualIdentityIdentityDocumentsInner.md
+docs/KrKftc.md
 docs/LedgerPublicAPI.md
 docs/ListFinancialInstrumentsResponse.md
 docs/ListIdentitiesResponseV3.md
@@ -68,6 +74,8 @@ docs/PaymentWithDetailsV2.md
 docs/PaymentsResponseV2.md
 docs/PaymentsV2API.md
 docs/PayoutExecutionDetails.md
+docs/PeLbtr.md
+docs/PhNrps.md
 docs/PutIdentityRequestV3.md
 docs/PutRippleFinancialInstrument.md
 docs/PutRippleIdentity.md
@@ -90,7 +98,9 @@ docs/StateTransitionV2.md
 docs/StateTransitionsResponseV2.md
 docs/TaxBreakdown.md
 docs/TaxSummary.md
+docs/ThPromptpay.md
 docs/TotalFeeBreakdown.md
+docs/TrFast.md
 docs/TrackingReference.md
 docs/TransactionDetailsV2.md
 docs/TronWallet.md
@@ -107,6 +117,8 @@ git_push.sh
 go.mod
 go.sum
 model_adjusted_exchange_rate.go
+model_ae_ipi.go
+model_ar_interbanking.go
 model_authentication_request.go
 model_authentication_response.go
 model_br_pix.go
@@ -115,6 +127,7 @@ model_business_identity.go
 model_business_identity_address.go
 model_business_identity_registration_inner.go
 model_ca_eft.go
+model_cl_tef.go
 model_cn_cfxps.go
 model_cn_individual.go
 model_cn_individual_trade.go
@@ -141,10 +154,13 @@ model_get_statements_transactions_for_customer_200_response.go
 model_get_statements_transactions_for_customer_200_response_statement_transactions_inner.go
 model_gh_bank_payout.go
 model_hk_bank_payout.go
+model_id_bifast.go
 model_identity_response_v3.go
+model_in_neft.go
 model_individual_identity.go
 model_individual_identity_address.go
 model_individual_identity_identity_documents_inner.go
+model_kr_kftc.go
 model_list_financial_instruments_response.go
 model_list_identities_response_v3.go
 model_mx_spei.go
@@ -160,6 +176,8 @@ model_payment_v2.go
 model_payment_with_details_v2.go
 model_payments_response_v2.go
 model_payout_execution_details.go
+model_pe_lbtr.go
+model_ph_nrps.go
 model_put_identity_request_v3.go
 model_put_ripple_financial_instrument.go
 model_put_ripple_identity.go
@@ -181,7 +199,9 @@ model_state_transition_v2.go
 model_state_transitions_response_v2.go
 model_tax_breakdown.go
 model_tax_summary.go
+model_th_promptpay.go
 model_total_fee_breakdown.go
+model_tr_fast.go
 model_tracking_reference.go
 model_transaction_details_v2.go
 model_tron_wallet.go

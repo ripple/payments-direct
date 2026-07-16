@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from ripple_payments_direct.models.business_identity import BusinessIdentity
 from ripple_payments_direct.models.individual_identity import IndividualIdentity
 from typing import Optional, Set
@@ -30,7 +31,7 @@ class PutIdentityRequestV3(BaseModel):
     """ # noqa: E501
     nick_name: Optional[StrictStr] = Field(default=None, description="The new nickname for the identity", alias="nickName")
     validate_payout_rails: Optional[List[StrictStr]] = Field(default=None, description="The payout rails to validate the identity against", alias="validatePayoutRails")
-    tags: Optional[List[StrictStr]] = Field(default=None, description="Tags are used to categorize the identity. ")
+    tags: Optional[Annotated[List[Annotated[str, Field(strict=True, max_length=256)]], Field(max_length=25)]] = Field(default=None, description="Tags are used to categorize the identity. ")
     internal_id: Optional[StrictStr] = Field(default=None, description="Optional client-provided unique identifier for idempotency and deduplication.  Must be unique across all active identities within your tenant. Duplicate values will result in a 409 Conflict error. ", alias="internalId")
     business: Optional[BusinessIdentity] = None
     individual: Optional[IndividualIdentity] = None

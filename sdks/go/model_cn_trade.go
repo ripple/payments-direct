@@ -23,7 +23,7 @@ var _ MappedNullable = &CnTrade{}
 type CnTrade struct {
 	// Beneficiary Bank Name. Looked up from bankCode.
 	BankName string `json:"bankName" validate:"regexp=^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\\\1)[\\\\p{L}\\\\p{N} .,'&\\/()-]+(?<![ .,'&\\/-])?$"`
-	// Ripple Bank Code for the destination bank. Use the Ripple Bank Codes lookup at docs.ripple.com to find the correct code.
+	// Beneficiary Bank Code (CNAPS). List provided in the Ripple Docs Bank Codes utility.
 	BankCode string `json:"bankCode" validate:"regexp=^[A-Za-z0-9]+$"`
 	// Beneficiary Branch Name (Hanzi). Branch name in Chinese Hanzi characters.
 	BranchName string `json:"branchName" validate:"regexp=^[\\\\p{L}\\\\p{N} .,'&\\/()-]+$"`

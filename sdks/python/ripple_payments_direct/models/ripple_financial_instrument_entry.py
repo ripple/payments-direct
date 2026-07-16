@@ -21,9 +21,12 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from ripple_payments_direct.models.ae_ipi import AeIpi
+from ripple_payments_direct.models.ar_interbanking import ArInterbanking
 from ripple_payments_direct.models.br_pix import BrPix
 from ripple_payments_direct.models.br_ted import BrTed
 from ripple_payments_direct.models.ca_eft import CaEft
+from ripple_payments_direct.models.cl_tef import ClTef
 from ripple_payments_direct.models.cn_cfxps import CnCfxps
 from ripple_payments_direct.models.cn_individual import CnIndividual
 from ripple_payments_direct.models.cn_individual_trade import CnIndividualTrade
@@ -34,10 +37,17 @@ from ripple_payments_direct.models.eu_sepa import EuSepa
 from ripple_payments_direct.models.gb_fps import GbFps
 from ripple_payments_direct.models.gh_bank_payout import GhBankPayout
 from ripple_payments_direct.models.hk_bank_payout import HkBankPayout
+from ripple_payments_direct.models.id_bifast import IdBifast
+from ripple_payments_direct.models.in_neft import InNeft
+from ripple_payments_direct.models.kr_kftc import KrKftc
 from ripple_payments_direct.models.mx_spei import MxSpei
 from ripple_payments_direct.models.ng_bank_payout import NgBankPayout
+from ripple_payments_direct.models.pe_lbtr import PeLbtr
+from ripple_payments_direct.models.ph_nrps import PhNrps
 from ripple_payments_direct.models.rw_bank_payout import RwBankPayout
 from ripple_payments_direct.models.sol_wallet import SolWallet
+from ripple_payments_direct.models.th_promptpay import ThPromptpay
+from ripple_payments_direct.models.tr_fast import TrFast
 from ripple_payments_direct.models.tron_wallet import TronWallet
 from ripple_payments_direct.models.ug_bank_payout import UgBankPayout
 from ripple_payments_direct.models.us_ach import UsAch
@@ -70,18 +80,28 @@ class RippleFinancialInstrumentEntry(BaseModel):
     br_ted: Optional[BrTed] = Field(default=None, alias="brTed")
     ca_eft: Optional[CaEft] = Field(default=None, alias="caEft")
     hk_bank_payout: Optional[HkBankPayout] = Field(default=None, alias="hkBankPayout")
+    id_bifast: Optional[IdBifast] = Field(default=None, alias="idBifast")
+    kr_kftc: Optional[KrKftc] = Field(default=None, alias="krKftc")
+    in_neft: Optional[InNeft] = Field(default=None, alias="inNeft")
+    pe_lbtr: Optional[PeLbtr] = Field(default=None, alias="peLbtr")
     cn_trade: Optional[CnTrade] = Field(default=None, alias="cnTrade")
     cn_individual: Optional[CnIndividual] = Field(default=None, alias="cnIndividual")
     cn_individual_trade: Optional[CnIndividualTrade] = Field(default=None, alias="cnIndividualTrade")
     cn_cfxps: Optional[CnCfxps] = Field(default=None, alias="cnCfxps")
+    cl_tef: Optional[ClTef] = Field(default=None, alias="clTef")
+    ae_ipi: Optional[AeIpi] = Field(default=None, alias="aeIpi")
+    tr_fast: Optional[TrFast] = Field(default=None, alias="trFast")
+    ph_nrps: Optional[PhNrps] = Field(default=None, alias="phNrps")
+    th_promptpay: Optional[ThPromptpay] = Field(default=None, alias="thPromptpay")
+    ar_interbanking: Optional[ArInterbanking] = Field(default=None, alias="arInterbanking")
     currency: StrictStr = Field(description="The 3-letter ISO currency code of the financial instrument.")
-    label: Optional[StrictStr] = Field(default=None, description="A user-defined label for the financial instrument.")
+    label: Optional[Annotated[str, Field(strict=True, max_length=256)]] = Field(default=None, description="A user-defined label for the financial instrument.")
     financial_instrument_type: StrictStr = Field(description="The type of financial instrument or payment rail used for executing the transaction. This determines the structure and validation of account details required for the payout. ", alias="financialInstrumentType")
-    country: Optional[Annotated[str, Field(min_length=2, strict=True, max_length=2)]] = Field(default=None, description="The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, TRON_WALLET, SOL_WALLET), this field returns `ZZ`, the ISO 3166-1 user-assigned code used when no country jurisdiction applies. ")
+    country: Optional[Annotated[str, Field(min_length=2, strict=True, max_length=2)]] = Field(default=None, description="The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. This field is omitted when no country jurisdiction applies (for example, crypto wallet instruments such as ETH_WALLET, TRON_WALLET, and SOL_WALLET). An absent `country` should be interpreted as \"no applicable jurisdiction\". ")
     financial_instrument_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the financial instrument.", alias="financialInstrumentId")
     created_at: Optional[datetime] = Field(default=None, description="The time at which the financial instrument was created", alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, description="The time at which the financial instrument was last updated", alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["usAch", "usFedwire", "mxSpei", "euSepa", "gbFps", "ngBankPayout", "ghBankPayout", "rwBankPayout", "zaBankPayout", "ugBankPayout", "zmBankPayout", "ethWallet", "tronWallet", "solWallet", "brPix", "coPse", "brTed", "caEft", "hkBankPayout", "cnTrade", "cnIndividual", "cnIndividualTrade", "cnCfxps", "currency", "label", "financialInstrumentType", "country", "financialInstrumentId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["usAch", "usFedwire", "mxSpei", "euSepa", "gbFps", "ngBankPayout", "ghBankPayout", "rwBankPayout", "zaBankPayout", "ugBankPayout", "zmBankPayout", "ethWallet", "tronWallet", "solWallet", "brPix", "coPse", "brTed", "caEft", "hkBankPayout", "idBifast", "krKftc", "inNeft", "peLbtr", "cnTrade", "cnIndividual", "cnIndividualTrade", "cnCfxps", "clTef", "aeIpi", "trFast", "phNrps", "thPromptpay", "arInterbanking", "currency", "label", "financialInstrumentType", "country", "financialInstrumentId", "createdAt", "updatedAt"]
 
     @field_validator('country')
     def country_validate_regular_expression(cls, value):
@@ -189,6 +209,18 @@ class RippleFinancialInstrumentEntry(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of hk_bank_payout
         if self.hk_bank_payout:
             _dict['hkBankPayout'] = self.hk_bank_payout.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of id_bifast
+        if self.id_bifast:
+            _dict['idBifast'] = self.id_bifast.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of kr_kftc
+        if self.kr_kftc:
+            _dict['krKftc'] = self.kr_kftc.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of in_neft
+        if self.in_neft:
+            _dict['inNeft'] = self.in_neft.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of pe_lbtr
+        if self.pe_lbtr:
+            _dict['peLbtr'] = self.pe_lbtr.to_dict()
         # override the default output from pydantic by calling `to_dict()` of cn_trade
         if self.cn_trade:
             _dict['cnTrade'] = self.cn_trade.to_dict()
@@ -201,6 +233,24 @@ class RippleFinancialInstrumentEntry(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of cn_cfxps
         if self.cn_cfxps:
             _dict['cnCfxps'] = self.cn_cfxps.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of cl_tef
+        if self.cl_tef:
+            _dict['clTef'] = self.cl_tef.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of ae_ipi
+        if self.ae_ipi:
+            _dict['aeIpi'] = self.ae_ipi.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of tr_fast
+        if self.tr_fast:
+            _dict['trFast'] = self.tr_fast.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of ph_nrps
+        if self.ph_nrps:
+            _dict['phNrps'] = self.ph_nrps.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of th_promptpay
+        if self.th_promptpay:
+            _dict['thPromptpay'] = self.th_promptpay.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of ar_interbanking
+        if self.ar_interbanking:
+            _dict['arInterbanking'] = self.ar_interbanking.to_dict()
         return _dict
 
     @classmethod
@@ -232,10 +282,20 @@ class RippleFinancialInstrumentEntry(BaseModel):
             "brTed": BrTed.from_dict(obj["brTed"]) if obj.get("brTed") is not None else None,
             "caEft": CaEft.from_dict(obj["caEft"]) if obj.get("caEft") is not None else None,
             "hkBankPayout": HkBankPayout.from_dict(obj["hkBankPayout"]) if obj.get("hkBankPayout") is not None else None,
+            "idBifast": IdBifast.from_dict(obj["idBifast"]) if obj.get("idBifast") is not None else None,
+            "krKftc": KrKftc.from_dict(obj["krKftc"]) if obj.get("krKftc") is not None else None,
+            "inNeft": InNeft.from_dict(obj["inNeft"]) if obj.get("inNeft") is not None else None,
+            "peLbtr": PeLbtr.from_dict(obj["peLbtr"]) if obj.get("peLbtr") is not None else None,
             "cnTrade": CnTrade.from_dict(obj["cnTrade"]) if obj.get("cnTrade") is not None else None,
             "cnIndividual": CnIndividual.from_dict(obj["cnIndividual"]) if obj.get("cnIndividual") is not None else None,
             "cnIndividualTrade": CnIndividualTrade.from_dict(obj["cnIndividualTrade"]) if obj.get("cnIndividualTrade") is not None else None,
             "cnCfxps": CnCfxps.from_dict(obj["cnCfxps"]) if obj.get("cnCfxps") is not None else None,
+            "clTef": ClTef.from_dict(obj["clTef"]) if obj.get("clTef") is not None else None,
+            "aeIpi": AeIpi.from_dict(obj["aeIpi"]) if obj.get("aeIpi") is not None else None,
+            "trFast": TrFast.from_dict(obj["trFast"]) if obj.get("trFast") is not None else None,
+            "phNrps": PhNrps.from_dict(obj["phNrps"]) if obj.get("phNrps") is not None else None,
+            "thPromptpay": ThPromptpay.from_dict(obj["thPromptpay"]) if obj.get("thPromptpay") is not None else None,
+            "arInterbanking": ArInterbanking.from_dict(obj["arInterbanking"]) if obj.get("arInterbanking") is not None else None,
             "currency": obj.get("currency"),
             "label": obj.get("label"),
             "financialInstrumentType": obj.get("financialInstrumentType"),

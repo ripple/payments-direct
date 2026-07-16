@@ -5,6 +5,8 @@
 .travis.yml
 README.md
 docs/AdjustedExchangeRate.md
+docs/AeIpi.md
+docs/ArInterbanking.md
 docs/AuthenticationApi.md
 docs/AuthenticationRequest.md
 docs/AuthenticationResponse.md
@@ -14,6 +16,7 @@ docs/BusinessIdentity.md
 docs/BusinessIdentityAddress.md
 docs/BusinessIdentityRegistrationInner.md
 docs/CaEft.md
+docs/ClTef.md
 docs/CnCfxps.md
 docs/CnIndividual.md
 docs/CnIndividualTrade.md
@@ -40,11 +43,14 @@ docs/GetStatementsTransactionsForCustomer200Response.md
 docs/GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner.md
 docs/GhBankPayout.md
 docs/HkBankPayout.md
+docs/IdBifast.md
 docs/IdentitiesV3Api.md
 docs/IdentityResponseV3.md
+docs/InNeft.md
 docs/IndividualIdentity.md
 docs/IndividualIdentityAddress.md
 docs/IndividualIdentityIdentityDocumentsInner.md
+docs/KrKftc.md
 docs/LedgerPublicApi.md
 docs/ListFinancialInstrumentsResponse.md
 docs/ListIdentitiesResponseV3.md
@@ -62,6 +68,8 @@ docs/PaymentWithDetailsV2.md
 docs/PaymentsResponseV2.md
 docs/PaymentsV2Api.md
 docs/PayoutExecutionDetails.md
+docs/PeLbtr.md
+docs/PhNrps.md
 docs/PutIdentityRequestV3.md
 docs/PutRippleFinancialInstrument.md
 docs/PutRippleIdentity.md
@@ -84,7 +92,9 @@ docs/StateTransitionV2.md
 docs/StateTransitionsResponseV2.md
 docs/TaxBreakdown.md
 docs/TaxSummary.md
+docs/ThPromptpay.md
 docs/TotalFeeBreakdown.md
+docs/TrFast.md
 docs/TrackingReference.md
 docs/TransactionDetailsV2.md
 docs/TronWallet.md
@@ -113,6 +123,8 @@ ripple_payments_direct/configuration.py
 ripple_payments_direct/exceptions.py
 ripple_payments_direct/models/__init__.py
 ripple_payments_direct/models/adjusted_exchange_rate.py
+ripple_payments_direct/models/ae_ipi.py
+ripple_payments_direct/models/ar_interbanking.py
 ripple_payments_direct/models/authentication_request.py
 ripple_payments_direct/models/authentication_response.py
 ripple_payments_direct/models/br_pix.py
@@ -121,6 +133,7 @@ ripple_payments_direct/models/business_identity.py
 ripple_payments_direct/models/business_identity_address.py
 ripple_payments_direct/models/business_identity_registration_inner.py
 ripple_payments_direct/models/ca_eft.py
+ripple_payments_direct/models/cl_tef.py
 ripple_payments_direct/models/cn_cfxps.py
 ripple_payments_direct/models/cn_individual.py
 ripple_payments_direct/models/cn_individual_trade.py
@@ -147,10 +160,13 @@ ripple_payments_direct/models/get_statements_transactions_for_customer200_respon
 ripple_payments_direct/models/get_statements_transactions_for_customer200_response_statement_transactions_inner.py
 ripple_payments_direct/models/gh_bank_payout.py
 ripple_payments_direct/models/hk_bank_payout.py
+ripple_payments_direct/models/id_bifast.py
 ripple_payments_direct/models/identity_response_v3.py
+ripple_payments_direct/models/in_neft.py
 ripple_payments_direct/models/individual_identity.py
 ripple_payments_direct/models/individual_identity_address.py
 ripple_payments_direct/models/individual_identity_identity_documents_inner.py
+ripple_payments_direct/models/kr_kftc.py
 ripple_payments_direct/models/list_financial_instruments_response.py
 ripple_payments_direct/models/list_identities_response_v3.py
 ripple_payments_direct/models/mx_spei.py
@@ -166,6 +182,8 @@ ripple_payments_direct/models/payment_v2.py
 ripple_payments_direct/models/payment_with_details_v2.py
 ripple_payments_direct/models/payments_response_v2.py
 ripple_payments_direct/models/payout_execution_details.py
+ripple_payments_direct/models/pe_lbtr.py
+ripple_payments_direct/models/ph_nrps.py
 ripple_payments_direct/models/put_identity_request_v3.py
 ripple_payments_direct/models/put_ripple_financial_instrument.py
 ripple_payments_direct/models/put_ripple_identity.py
@@ -187,7 +205,9 @@ ripple_payments_direct/models/state_transition_v2.py
 ripple_payments_direct/models/state_transitions_response_v2.py
 ripple_payments_direct/models/tax_breakdown.py
 ripple_payments_direct/models/tax_summary.py
+ripple_payments_direct/models/th_promptpay.py
 ripple_payments_direct/models/total_fee_breakdown.py
+ripple_payments_direct/models/tr_fast.py
 ripple_payments_direct/models/tracking_reference.py
 ripple_payments_direct/models/transaction_details_v2.py
 ripple_payments_direct/models/tron_wallet.py
@@ -207,6 +227,8 @@ setup.py
 test-requirements.txt
 test/__init__.py
 test/test_adjusted_exchange_rate.py
+test/test_ae_ipi.py
+test/test_ar_interbanking.py
 test/test_authentication_api.py
 test/test_authentication_request.py
 test/test_authentication_response.py
@@ -216,6 +238,7 @@ test/test_business_identity.py
 test/test_business_identity_address.py
 test/test_business_identity_registration_inner.py
 test/test_ca_eft.py
+test/test_cl_tef.py
 test/test_cn_cfxps.py
 test/test_cn_individual.py
 test/test_cn_individual_trade.py
@@ -242,11 +265,14 @@ test/test_get_statements_transactions_for_customer200_response.py
 test/test_get_statements_transactions_for_customer200_response_statement_transactions_inner.py
 test/test_gh_bank_payout.py
 test/test_hk_bank_payout.py
+test/test_id_bifast.py
 test/test_identities_v3_api.py
 test/test_identity_response_v3.py
+test/test_in_neft.py
 test/test_individual_identity.py
 test/test_individual_identity_address.py
 test/test_individual_identity_identity_documents_inner.py
+test/test_kr_kftc.py
 test/test_ledger_public_api.py
 test/test_list_financial_instruments_response.py
 test/test_list_identities_response_v3.py
@@ -264,6 +290,8 @@ test/test_payment_with_details_v2.py
 test/test_payments_response_v2.py
 test/test_payments_v2_api.py
 test/test_payout_execution_details.py
+test/test_pe_lbtr.py
+test/test_ph_nrps.py
 test/test_put_identity_request_v3.py
 test/test_put_ripple_financial_instrument.py
 test/test_put_ripple_identity.py
@@ -286,7 +314,9 @@ test/test_state_transition_v2.py
 test/test_state_transitions_response_v2.py
 test/test_tax_breakdown.py
 test/test_tax_summary.py
+test/test_th_promptpay.py
 test/test_total_fee_breakdown.py
+test/test_tr_fast.py
 test/test_tracking_reference.py
 test/test_transaction_details_v2.py
 test/test_tron_wallet.py

@@ -7,7 +7,7 @@ Rails: Bank Payout  Rail Definitions:  Bank Payout: - Availability: Country-depe
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bank_name** | **str** | The name of the identity&#39;s bank | 
-**bank_code** | **str** | The bank code of the identity&#39;s bank | 
+**bank_code** | **str** | The bank code of the identity&#39;s bank. See the Bank Codes resource in Ripple Docs for the authoritative list of supported values. | 
 **account_number** | **str** | The identity&#39;s account number associated with the Account Identification Scheme | 
 
 ## Example

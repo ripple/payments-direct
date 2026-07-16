@@ -21,7 +21,7 @@
  */
 export interface SortV2 {
     /**
-     * The field to use when sorting payments in the requested sort order.  Currently supported values include:  - `internalId`  - `paymentState`  - `sourceCurrency`  - `sourceAmount`  - `destinationCurrency`  - `destinationCountry`  - `destinationAmount`  - `initiatedAt`  - `expiresAt`  - `lastStateUpdatedAt`  - `paymentLabel`  If an unsupported value is provided, the request fails with a validation error. 
+     * The field to use when sorting payments in the requested sort order.  Currently supported values include: - `internalId` - `paymentState` - `sourceCurrency` - `sourceAmount` - `destinationCurrency` - `destinationCountry` - `destinationAmount` - `initiatedAt` - `expiresAt` - `lastStateUpdatedAt` - `paymentLabel`  If an unsupported value is provided, the request fails with a validation error. 
      * @type {string}
      * @memberof SortV2
      */

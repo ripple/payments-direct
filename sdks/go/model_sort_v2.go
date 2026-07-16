@@ -19,7 +19,7 @@ var _ MappedNullable = &SortV2{}
 
 // SortV2 Defines the sorting parameters for listing payments, including the field and sort direction.
 type SortV2 struct {
-	// The field to use when sorting payments in the requested sort order.  Currently supported values include:  - `internalId`  - `paymentState`  - `sourceCurrency`  - `sourceAmount`  - `destinationCurrency`  - `destinationCountry`  - `destinationAmount`  - `initiatedAt`  - `expiresAt`  - `lastStateUpdatedAt`  - `paymentLabel`  If an unsupported value is provided, the request fails with a validation error. 
+	// The field to use when sorting payments in the requested sort order.  Currently supported values include: - `internalId` - `paymentState` - `sourceCurrency` - `sourceAmount` - `destinationCurrency` - `destinationCountry` - `destinationAmount` - `initiatedAt` - `expiresAt` - `lastStateUpdatedAt` - `paymentLabel`  If an unsupported value is provided, the request fails with a validation error. 
 	SortField *string `json:"sortField,omitempty"`
 	// Indicates whether results are sorted in ascending (`ASC`) or descending (`DESC`) order.
 	SortDirection *string `json:"sortDirection,omitempty"`

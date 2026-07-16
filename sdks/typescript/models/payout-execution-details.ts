@@ -24,7 +24,7 @@ import type { TrackingReference } from './tracking-reference';
  */
 export interface PayoutExecutionDetails {
     /**
-     * The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP, SEPA). 
+     * The payment rail or network used to execute the payout (e.g., FEDWIRE, ACH, RTP, SEPA, SWIFT). 
      * @type {string}
      * @memberof PayoutExecutionDetails
      */

@@ -20,9 +20,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.ripple.payments.direct.model.AeIpiDTO;
+import com.ripple.payments.direct.model.ArInterbankingDTO;
 import com.ripple.payments.direct.model.BrPixDTO;
 import com.ripple.payments.direct.model.BrTedDTO;
 import com.ripple.payments.direct.model.CaEftDTO;
+import com.ripple.payments.direct.model.ClTefDTO;
 import com.ripple.payments.direct.model.CnCfxpsDTO;
 import com.ripple.payments.direct.model.CnIndividualDTO;
 import com.ripple.payments.direct.model.CnIndividualTradeDTO;
@@ -33,10 +36,17 @@ import com.ripple.payments.direct.model.EuSepaDTO;
 import com.ripple.payments.direct.model.GbFpsDTO;
 import com.ripple.payments.direct.model.GhBankPayoutDTO;
 import com.ripple.payments.direct.model.HkBankPayoutDTO;
+import com.ripple.payments.direct.model.IdBifastDTO;
+import com.ripple.payments.direct.model.InNeftDTO;
+import com.ripple.payments.direct.model.KrKftcDTO;
 import com.ripple.payments.direct.model.MxSpeiDTO;
 import com.ripple.payments.direct.model.NgBankPayoutDTO;
+import com.ripple.payments.direct.model.PeLbtrDTO;
+import com.ripple.payments.direct.model.PhNrpsDTO;
 import com.ripple.payments.direct.model.RwBankPayoutDTO;
 import com.ripple.payments.direct.model.SolWalletDTO;
+import com.ripple.payments.direct.model.ThPromptpayDTO;
+import com.ripple.payments.direct.model.TrFastDTO;
 import com.ripple.payments.direct.model.TronWalletDTO;
 import com.ripple.payments.direct.model.UgBankPayoutDTO;
 import com.ripple.payments.direct.model.UsAchDTO;
@@ -73,10 +83,20 @@ import java.util.StringJoiner;
   RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_BR_TED,
   RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_CA_EFT,
   RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_HK_BANK_PAYOUT,
+  RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_ID_BIFAST,
+  RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_KR_KFTC,
+  RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_IN_NEFT,
+  RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_PE_LBTR,
   RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_CN_TRADE,
   RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_CN_INDIVIDUAL,
   RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_CN_INDIVIDUAL_TRADE,
   RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_CN_CFXPS,
+  RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_CL_TEF,
+  RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_AE_IPI,
+  RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_TR_FAST,
+  RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_PH_NRPS,
+  RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_TH_PROMPTPAY,
+  RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_AR_INTERBANKING,
   RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_CURRENCY,
   RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_LABEL,
   RippleFinancialInstrumentEntryDTO.JSON_PROPERTY_FINANCIAL_INSTRUMENT_TYPE,
@@ -164,6 +184,22 @@ public class RippleFinancialInstrumentEntryDTO {
   @javax.annotation.Nullable
   private HkBankPayoutDTO hkBankPayout;
 
+  public static final String JSON_PROPERTY_ID_BIFAST = "idBifast";
+  @javax.annotation.Nullable
+  private IdBifastDTO idBifast;
+
+  public static final String JSON_PROPERTY_KR_KFTC = "krKftc";
+  @javax.annotation.Nullable
+  private KrKftcDTO krKftc;
+
+  public static final String JSON_PROPERTY_IN_NEFT = "inNeft";
+  @javax.annotation.Nullable
+  private InNeftDTO inNeft;
+
+  public static final String JSON_PROPERTY_PE_LBTR = "peLbtr";
+  @javax.annotation.Nullable
+  private PeLbtrDTO peLbtr;
+
   public static final String JSON_PROPERTY_CN_TRADE = "cnTrade";
   @javax.annotation.Nullable
   private CnTradeDTO cnTrade;
@@ -179,6 +215,30 @@ public class RippleFinancialInstrumentEntryDTO {
   public static final String JSON_PROPERTY_CN_CFXPS = "cnCfxps";
   @javax.annotation.Nullable
   private CnCfxpsDTO cnCfxps;
+
+  public static final String JSON_PROPERTY_CL_TEF = "clTef";
+  @javax.annotation.Nullable
+  private ClTefDTO clTef;
+
+  public static final String JSON_PROPERTY_AE_IPI = "aeIpi";
+  @javax.annotation.Nullable
+  private AeIpiDTO aeIpi;
+
+  public static final String JSON_PROPERTY_TR_FAST = "trFast";
+  @javax.annotation.Nullable
+  private TrFastDTO trFast;
+
+  public static final String JSON_PROPERTY_PH_NRPS = "phNrps";
+  @javax.annotation.Nullable
+  private PhNrpsDTO phNrps;
+
+  public static final String JSON_PROPERTY_TH_PROMPTPAY = "thPromptpay";
+  @javax.annotation.Nullable
+  private ThPromptpayDTO thPromptpay;
+
+  public static final String JSON_PROPERTY_AR_INTERBANKING = "arInterbanking";
+  @javax.annotation.Nullable
+  private ArInterbankingDTO arInterbanking;
 
   public static final String JSON_PROPERTY_CURRENCY = "currency";
   @javax.annotation.Nonnull
@@ -686,6 +746,106 @@ public class RippleFinancialInstrumentEntryDTO {
     this.hkBankPayout = hkBankPayout;
   }
 
+  public RippleFinancialInstrumentEntryDTO idBifast(@javax.annotation.Nullable IdBifastDTO idBifast) {
+    
+    this.idBifast = idBifast;
+    return this;
+  }
+
+  /**
+   * Get idBifast
+   * @return idBifast
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_ID_BIFAST)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public IdBifastDTO getIdBifast() {
+    return idBifast;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_ID_BIFAST)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setIdBifast(@javax.annotation.Nullable IdBifastDTO idBifast) {
+    this.idBifast = idBifast;
+  }
+
+  public RippleFinancialInstrumentEntryDTO krKftc(@javax.annotation.Nullable KrKftcDTO krKftc) {
+    
+    this.krKftc = krKftc;
+    return this;
+  }
+
+  /**
+   * Get krKftc
+   * @return krKftc
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_KR_KFTC)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public KrKftcDTO getKrKftc() {
+    return krKftc;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_KR_KFTC)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setKrKftc(@javax.annotation.Nullable KrKftcDTO krKftc) {
+    this.krKftc = krKftc;
+  }
+
+  public RippleFinancialInstrumentEntryDTO inNeft(@javax.annotation.Nullable InNeftDTO inNeft) {
+    
+    this.inNeft = inNeft;
+    return this;
+  }
+
+  /**
+   * Get inNeft
+   * @return inNeft
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_IN_NEFT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public InNeftDTO getInNeft() {
+    return inNeft;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_IN_NEFT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setInNeft(@javax.annotation.Nullable InNeftDTO inNeft) {
+    this.inNeft = inNeft;
+  }
+
+  public RippleFinancialInstrumentEntryDTO peLbtr(@javax.annotation.Nullable PeLbtrDTO peLbtr) {
+    
+    this.peLbtr = peLbtr;
+    return this;
+  }
+
+  /**
+   * Get peLbtr
+   * @return peLbtr
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_PE_LBTR)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public PeLbtrDTO getPeLbtr() {
+    return peLbtr;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_PE_LBTR)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setPeLbtr(@javax.annotation.Nullable PeLbtrDTO peLbtr) {
+    this.peLbtr = peLbtr;
+  }
+
   public RippleFinancialInstrumentEntryDTO cnTrade(@javax.annotation.Nullable CnTradeDTO cnTrade) {
     
     this.cnTrade = cnTrade;
@@ -786,6 +946,156 @@ public class RippleFinancialInstrumentEntryDTO {
     this.cnCfxps = cnCfxps;
   }
 
+  public RippleFinancialInstrumentEntryDTO clTef(@javax.annotation.Nullable ClTefDTO clTef) {
+    
+    this.clTef = clTef;
+    return this;
+  }
+
+  /**
+   * Get clTef
+   * @return clTef
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CL_TEF)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public ClTefDTO getClTef() {
+    return clTef;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_CL_TEF)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setClTef(@javax.annotation.Nullable ClTefDTO clTef) {
+    this.clTef = clTef;
+  }
+
+  public RippleFinancialInstrumentEntryDTO aeIpi(@javax.annotation.Nullable AeIpiDTO aeIpi) {
+    
+    this.aeIpi = aeIpi;
+    return this;
+  }
+
+  /**
+   * Get aeIpi
+   * @return aeIpi
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_AE_IPI)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public AeIpiDTO getAeIpi() {
+    return aeIpi;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_AE_IPI)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setAeIpi(@javax.annotation.Nullable AeIpiDTO aeIpi) {
+    this.aeIpi = aeIpi;
+  }
+
+  public RippleFinancialInstrumentEntryDTO trFast(@javax.annotation.Nullable TrFastDTO trFast) {
+    
+    this.trFast = trFast;
+    return this;
+  }
+
+  /**
+   * Get trFast
+   * @return trFast
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TR_FAST)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public TrFastDTO getTrFast() {
+    return trFast;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_TR_FAST)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTrFast(@javax.annotation.Nullable TrFastDTO trFast) {
+    this.trFast = trFast;
+  }
+
+  public RippleFinancialInstrumentEntryDTO phNrps(@javax.annotation.Nullable PhNrpsDTO phNrps) {
+    
+    this.phNrps = phNrps;
+    return this;
+  }
+
+  /**
+   * Get phNrps
+   * @return phNrps
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_PH_NRPS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public PhNrpsDTO getPhNrps() {
+    return phNrps;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_PH_NRPS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setPhNrps(@javax.annotation.Nullable PhNrpsDTO phNrps) {
+    this.phNrps = phNrps;
+  }
+
+  public RippleFinancialInstrumentEntryDTO thPromptpay(@javax.annotation.Nullable ThPromptpayDTO thPromptpay) {
+    
+    this.thPromptpay = thPromptpay;
+    return this;
+  }
+
+  /**
+   * Get thPromptpay
+   * @return thPromptpay
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TH_PROMPTPAY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public ThPromptpayDTO getThPromptpay() {
+    return thPromptpay;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_TH_PROMPTPAY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setThPromptpay(@javax.annotation.Nullable ThPromptpayDTO thPromptpay) {
+    this.thPromptpay = thPromptpay;
+  }
+
+  public RippleFinancialInstrumentEntryDTO arInterbanking(@javax.annotation.Nullable ArInterbankingDTO arInterbanking) {
+    
+    this.arInterbanking = arInterbanking;
+    return this;
+  }
+
+  /**
+   * Get arInterbanking
+   * @return arInterbanking
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_AR_INTERBANKING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public ArInterbankingDTO getArInterbanking() {
+    return arInterbanking;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_AR_INTERBANKING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setArInterbanking(@javax.annotation.Nullable ArInterbankingDTO arInterbanking) {
+    this.arInterbanking = arInterbanking;
+  }
+
   public RippleFinancialInstrumentEntryDTO currency(@javax.annotation.Nonnull String currency) {
     
     this.currency = currency;
@@ -868,7 +1178,7 @@ public class RippleFinancialInstrumentEntryDTO {
   }
 
   /**
-   * The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. For crypto wallet instruments (ETH_WALLET, TRON_WALLET, SOL_WALLET), this field returns &#x60;ZZ&#x60;, the ISO 3166-1 user-assigned code used when no country jurisdiction applies. 
+   * The 2-letter ISO 3166-1 alpha-2 country code of the financial instrument. This field is omitted when no country jurisdiction applies (for example, crypto wallet instruments such as ETH_WALLET, TRON_WALLET, and SOL_WALLET). An absent &#x60;country&#x60; should be interpreted as \&quot;no applicable jurisdiction\&quot;. 
    * @return country
    */
   @javax.annotation.Nullable
@@ -989,10 +1299,20 @@ public class RippleFinancialInstrumentEntryDTO {
         Objects.equals(this.brTed, rippleFinancialInstrumentEntry.brTed) &&
         Objects.equals(this.caEft, rippleFinancialInstrumentEntry.caEft) &&
         Objects.equals(this.hkBankPayout, rippleFinancialInstrumentEntry.hkBankPayout) &&
+        Objects.equals(this.idBifast, rippleFinancialInstrumentEntry.idBifast) &&
+        Objects.equals(this.krKftc, rippleFinancialInstrumentEntry.krKftc) &&
+        Objects.equals(this.inNeft, rippleFinancialInstrumentEntry.inNeft) &&
+        Objects.equals(this.peLbtr, rippleFinancialInstrumentEntry.peLbtr) &&
         Objects.equals(this.cnTrade, rippleFinancialInstrumentEntry.cnTrade) &&
         Objects.equals(this.cnIndividual, rippleFinancialInstrumentEntry.cnIndividual) &&
         Objects.equals(this.cnIndividualTrade, rippleFinancialInstrumentEntry.cnIndividualTrade) &&
         Objects.equals(this.cnCfxps, rippleFinancialInstrumentEntry.cnCfxps) &&
+        Objects.equals(this.clTef, rippleFinancialInstrumentEntry.clTef) &&
+        Objects.equals(this.aeIpi, rippleFinancialInstrumentEntry.aeIpi) &&
+        Objects.equals(this.trFast, rippleFinancialInstrumentEntry.trFast) &&
+        Objects.equals(this.phNrps, rippleFinancialInstrumentEntry.phNrps) &&
+        Objects.equals(this.thPromptpay, rippleFinancialInstrumentEntry.thPromptpay) &&
+        Objects.equals(this.arInterbanking, rippleFinancialInstrumentEntry.arInterbanking) &&
         Objects.equals(this.currency, rippleFinancialInstrumentEntry.currency) &&
         Objects.equals(this.label, rippleFinancialInstrumentEntry.label) &&
         Objects.equals(this.financialInstrumentType, rippleFinancialInstrumentEntry.financialInstrumentType) &&
@@ -1004,7 +1324,7 @@ public class RippleFinancialInstrumentEntryDTO {
 
   @Override
   public int hashCode() {
-    return Objects.hash(usAch, usFedwire, mxSpei, euSepa, gbFps, ngBankPayout, ghBankPayout, rwBankPayout, zaBankPayout, ugBankPayout, zmBankPayout, ethWallet, tronWallet, solWallet, brPix, coPse, brTed, caEft, hkBankPayout, cnTrade, cnIndividual, cnIndividualTrade, cnCfxps, currency, label, financialInstrumentType, country, financialInstrumentId, createdAt, updatedAt);
+    return Objects.hash(usAch, usFedwire, mxSpei, euSepa, gbFps, ngBankPayout, ghBankPayout, rwBankPayout, zaBankPayout, ugBankPayout, zmBankPayout, ethWallet, tronWallet, solWallet, brPix, coPse, brTed, caEft, hkBankPayout, idBifast, krKftc, inNeft, peLbtr, cnTrade, cnIndividual, cnIndividualTrade, cnCfxps, clTef, aeIpi, trFast, phNrps, thPromptpay, arInterbanking, currency, label, financialInstrumentType, country, financialInstrumentId, createdAt, updatedAt);
   }
 
   @Override
@@ -1030,10 +1350,20 @@ public class RippleFinancialInstrumentEntryDTO {
     sb.append("    brTed: ").append(toIndentedString(brTed)).append("\n");
     sb.append("    caEft: ").append(toIndentedString(caEft)).append("\n");
     sb.append("    hkBankPayout: ").append(toIndentedString(hkBankPayout)).append("\n");
+    sb.append("    idBifast: ").append(toIndentedString(idBifast)).append("\n");
+    sb.append("    krKftc: ").append(toIndentedString(krKftc)).append("\n");
+    sb.append("    inNeft: ").append(toIndentedString(inNeft)).append("\n");
+    sb.append("    peLbtr: ").append(toIndentedString(peLbtr)).append("\n");
     sb.append("    cnTrade: ").append(toIndentedString(cnTrade)).append("\n");
     sb.append("    cnIndividual: ").append(toIndentedString(cnIndividual)).append("\n");
     sb.append("    cnIndividualTrade: ").append(toIndentedString(cnIndividualTrade)).append("\n");
     sb.append("    cnCfxps: ").append(toIndentedString(cnCfxps)).append("\n");
+    sb.append("    clTef: ").append(toIndentedString(clTef)).append("\n");
+    sb.append("    aeIpi: ").append(toIndentedString(aeIpi)).append("\n");
+    sb.append("    trFast: ").append(toIndentedString(trFast)).append("\n");
+    sb.append("    phNrps: ").append(toIndentedString(phNrps)).append("\n");
+    sb.append("    thPromptpay: ").append(toIndentedString(thPromptpay)).append("\n");
+    sb.append("    arInterbanking: ").append(toIndentedString(arInterbanking)).append("\n");
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    label: ").append(toIndentedString(label)).append("\n");
     sb.append("    financialInstrumentType: ").append(toIndentedString(financialInstrumentType)).append("\n");
@@ -1183,6 +1513,26 @@ public class RippleFinancialInstrumentEntryDTO {
       joiner.add(getHkBankPayout().toUrlQueryString(prefix + "hkBankPayout" + suffix));
     }
 
+    // add `idBifast` to the URL query string
+    if (getIdBifast() != null) {
+      joiner.add(getIdBifast().toUrlQueryString(prefix + "idBifast" + suffix));
+    }
+
+    // add `krKftc` to the URL query string
+    if (getKrKftc() != null) {
+      joiner.add(getKrKftc().toUrlQueryString(prefix + "krKftc" + suffix));
+    }
+
+    // add `inNeft` to the URL query string
+    if (getInNeft() != null) {
+      joiner.add(getInNeft().toUrlQueryString(prefix + "inNeft" + suffix));
+    }
+
+    // add `peLbtr` to the URL query string
+    if (getPeLbtr() != null) {
+      joiner.add(getPeLbtr().toUrlQueryString(prefix + "peLbtr" + suffix));
+    }
+
     // add `cnTrade` to the URL query string
     if (getCnTrade() != null) {
       joiner.add(getCnTrade().toUrlQueryString(prefix + "cnTrade" + suffix));
@@ -1201,6 +1551,36 @@ public class RippleFinancialInstrumentEntryDTO {
     // add `cnCfxps` to the URL query string
     if (getCnCfxps() != null) {
       joiner.add(getCnCfxps().toUrlQueryString(prefix + "cnCfxps" + suffix));
+    }
+
+    // add `clTef` to the URL query string
+    if (getClTef() != null) {
+      joiner.add(getClTef().toUrlQueryString(prefix + "clTef" + suffix));
+    }
+
+    // add `aeIpi` to the URL query string
+    if (getAeIpi() != null) {
+      joiner.add(getAeIpi().toUrlQueryString(prefix + "aeIpi" + suffix));
+    }
+
+    // add `trFast` to the URL query string
+    if (getTrFast() != null) {
+      joiner.add(getTrFast().toUrlQueryString(prefix + "trFast" + suffix));
+    }
+
+    // add `phNrps` to the URL query string
+    if (getPhNrps() != null) {
+      joiner.add(getPhNrps().toUrlQueryString(prefix + "phNrps" + suffix));
+    }
+
+    // add `thPromptpay` to the URL query string
+    if (getThPromptpay() != null) {
+      joiner.add(getThPromptpay().toUrlQueryString(prefix + "thPromptpay" + suffix));
+    }
+
+    // add `arInterbanking` to the URL query string
+    if (getArInterbanking() != null) {
+      joiner.add(getArInterbanking().toUrlQueryString(prefix + "arInterbanking" + suffix));
     }
 
     // add `currency` to the URL query string

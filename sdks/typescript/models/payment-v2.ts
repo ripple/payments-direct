@@ -75,7 +75,7 @@ export interface PaymentV2 {
      */
     'lastStateUpdatedAt'?: string;
     /**
-     * Current state of a payment.  The payment lifecycle currently uses the following values:  - `QUOTED`  - `INITIATED`  - `VALIDATING`  - `TRANSFERRING`  - `COMPLETED`  - `FAILED`  - `RETURNED`  - `DECLINED`  - `AWAITING_FUNDING`  Additional states may be introduced in the future without breaking existing integrations. 
+     * Current state of a payment.  The payment lifecycle currently uses the following values: - `QUOTED` - `INITIATED` - `VALIDATING` - `TRANSFERRING` - `COMPLETED` - `FAILED` - `RETURNED` - `DECLINED` - `AWAITING_FUNDING`  Additional states may be introduced in the future without breaking existing integrations. 
      * @type {string}
      * @memberof PaymentV2
      */

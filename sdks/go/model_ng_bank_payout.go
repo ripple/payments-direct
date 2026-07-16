@@ -23,7 +23,7 @@ var _ MappedNullable = &NgBankPayout{}
 type NgBankPayout struct {
 	// The name of the identity's bank
 	BankName string `json:"bankName" validate:"regexp=^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\\\1)[\\\\p{L}\\\\p{N} .,'&\\/()-]+(?<![ .,'&\\/-])?$"`
-	// The bank code of the identity's bank
+	// The bank code of the identity's bank. See the Bank Codes resource in Ripple Docs for the authoritative list of supported values.
 	BankCode string `json:"bankCode" validate:"regexp=^[A-Za-z0-9 ._-]+$"`
 	// The identity's account number associated with the Account Identification Scheme
 	AccountNumber string `json:"accountNumber" validate:"regexp=^[a-zA-Z0-9]+$"`
