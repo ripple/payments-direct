@@ -9,6 +9,7 @@ build.sbt
 docs/AdjustedExchangeRateDTO.md
 docs/AeIpiDTO.md
 docs/ArInterbankingDTO.md
+docs/AuNppDTO.md
 docs/AuthenticationApi.md
 docs/AuthenticationRequestDTO.md
 docs/AuthenticationResponseDTO.md
@@ -52,6 +53,7 @@ docs/InNeftDTO.md
 docs/IndividualIdentityAddressDTO.md
 docs/IndividualIdentityDTO.md
 docs/IndividualIdentityIdentityDocumentsInnerDTO.md
+docs/JpZenginDTO.md
 docs/KrKftcDTO.md
 docs/LedgerPublicApi.md
 docs/ListFinancialInstrumentsResponseDTO.md
@@ -142,6 +144,7 @@ src/main/java/com/ripple/payments/direct/auth/HttpBearerAuth.java
 src/main/java/com/ripple/payments/direct/model/AdjustedExchangeRateDTO.java
 src/main/java/com/ripple/payments/direct/model/AeIpiDTO.java
 src/main/java/com/ripple/payments/direct/model/ArInterbankingDTO.java
+src/main/java/com/ripple/payments/direct/model/AuNppDTO.java
 src/main/java/com/ripple/payments/direct/model/AuthenticationRequestDTO.java
 src/main/java/com/ripple/payments/direct/model/AuthenticationResponseDTO.java
 src/main/java/com/ripple/payments/direct/model/BrPixDTO.java
@@ -183,6 +186,7 @@ src/main/java/com/ripple/payments/direct/model/InNeftDTO.java
 src/main/java/com/ripple/payments/direct/model/IndividualIdentityAddressDTO.java
 src/main/java/com/ripple/payments/direct/model/IndividualIdentityDTO.java
 src/main/java/com/ripple/payments/direct/model/IndividualIdentityIdentityDocumentsInnerDTO.java
+src/main/java/com/ripple/payments/direct/model/JpZenginDTO.java
 src/main/java/com/ripple/payments/direct/model/KrKftcDTO.java
 src/main/java/com/ripple/payments/direct/model/ListFinancialInstrumentsResponseDTO.java
 src/main/java/com/ripple/payments/direct/model/ListIdentitiesResponseV3DTO.java
@@ -245,6 +249,7 @@ src/test/java/com/ripple/payments/direct/api/QuoteApiTest.java
 src/test/java/com/ripple/payments/direct/model/AdjustedExchangeRateDTOTest.java
 src/test/java/com/ripple/payments/direct/model/AeIpiDTOTest.java
 src/test/java/com/ripple/payments/direct/model/ArInterbankingDTOTest.java
+src/test/java/com/ripple/payments/direct/model/AuNppDTOTest.java
 src/test/java/com/ripple/payments/direct/model/AuthenticationRequestDTOTest.java
 src/test/java/com/ripple/payments/direct/model/AuthenticationResponseDTOTest.java
 src/test/java/com/ripple/payments/direct/model/BrPixDTOTest.java
@@ -286,6 +291,7 @@ src/test/java/com/ripple/payments/direct/model/InNeftDTOTest.java
 src/test/java/com/ripple/payments/direct/model/IndividualIdentityAddressDTOTest.java
 src/test/java/com/ripple/payments/direct/model/IndividualIdentityDTOTest.java
 src/test/java/com/ripple/payments/direct/model/IndividualIdentityIdentityDocumentsInnerDTOTest.java
+src/test/java/com/ripple/payments/direct/model/JpZenginDTOTest.java
 src/test/java/com/ripple/payments/direct/model/KrKftcDTOTest.java
 src/test/java/com/ripple/payments/direct/model/ListFinancialInstrumentsResponseDTOTest.java
 src/test/java/com/ripple/payments/direct/model/ListIdentitiesResponseV3DTOTest.java

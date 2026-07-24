@@ -23,7 +23,7 @@ var _ MappedNullable = &IndividualIdentityIdentityDocumentsInner{}
 type IndividualIdentityIdentityDocumentsInner struct {
 	// Identification Number.
 	IdNumber string `json:"idNumber" validate:"regexp=^(?![ .'-\\/])(?!.*[ .'-\\/]{2})([A-Za-z0-9 .'-\\/]+)(?<![ .'-\\/])\\/?$"`
-	// The type of identification document used to identify the identity.
+	// The type of identification document used to identify the identity. Accepted values may vary by corridor and payment role. Some corridors accept only a subset of this list. See Ripple Docs for corridor-specific requirements.
 	IdType string `json:"idType"`
 	// Expiration date of the identification document.
 	ExpiryDate *string `json:"expiryDate,omitempty"`

@@ -21,6 +21,9 @@ import type { AeIpi } from './ae-ipi';
 import type { ArInterbanking } from './ar-interbanking';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { AuNpp } from './au-npp';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { BrPix } from './br-pix';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -67,6 +70,9 @@ import type { IdBifast } from './id-bifast';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { InNeft } from './in-neft';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { JpZengin } from './jp-zengin';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { KrKftc } from './kr-kftc';
@@ -257,6 +263,18 @@ export interface PaymentRailObjects {
      * @memberof PaymentRailObjects
      */
     'peLbtr'?: PeLbtr;
+    /**
+     * 
+     * @type {AuNpp}
+     * @memberof PaymentRailObjects
+     */
+    'auNpp'?: AuNpp;
+    /**
+     * 
+     * @type {JpZengin}
+     * @memberof PaymentRailObjects
+     */
+    'jpZengin'?: JpZengin;
     /**
      * 
      * @type {CnTrade}

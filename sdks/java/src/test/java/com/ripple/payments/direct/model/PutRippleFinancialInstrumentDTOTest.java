@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.ripple.payments.direct.model.AeIpiDTO;
 import com.ripple.payments.direct.model.ArInterbankingDTO;
+import com.ripple.payments.direct.model.AuNppDTO;
 import com.ripple.payments.direct.model.BrPixDTO;
 import com.ripple.payments.direct.model.BrTedDTO;
 import com.ripple.payments.direct.model.CaEftDTO;
@@ -36,6 +37,7 @@ import com.ripple.payments.direct.model.GhBankPayoutDTO;
 import com.ripple.payments.direct.model.HkBankPayoutDTO;
 import com.ripple.payments.direct.model.IdBifastDTO;
 import com.ripple.payments.direct.model.InNeftDTO;
+import com.ripple.payments.direct.model.JpZenginDTO;
 import com.ripple.payments.direct.model.KrKftcDTO;
 import com.ripple.payments.direct.model.MxSpeiDTO;
 import com.ripple.payments.direct.model.NgBankPayoutDTO;
@@ -251,6 +253,22 @@ class PutRippleFinancialInstrumentDTOTest {
     @Test
     void peLbtrTest() {
         // TODO: test peLbtr
+    }
+
+    /**
+     * Test the property 'auNpp'
+     */
+    @Test
+    void auNppTest() {
+        // TODO: test auNpp
+    }
+
+    /**
+     * Test the property 'jpZengin'
+     */
+    @Test
+    void jpZenginTest() {
+        // TODO: test jpZengin
     }
 
     /**

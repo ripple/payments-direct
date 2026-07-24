@@ -7,6 +7,7 @@ README.md
 docs/AdjustedExchangeRate.md
 docs/AeIpi.md
 docs/ArInterbanking.md
+docs/AuNpp.md
 docs/AuthenticationApi.md
 docs/AuthenticationRequest.md
 docs/AuthenticationResponse.md
@@ -50,6 +51,7 @@ docs/InNeft.md
 docs/IndividualIdentity.md
 docs/IndividualIdentityAddress.md
 docs/IndividualIdentityIdentityDocumentsInner.md
+docs/JpZengin.md
 docs/KrKftc.md
 docs/LedgerPublicApi.md
 docs/ListFinancialInstrumentsResponse.md
@@ -125,6 +127,7 @@ ripple_payments_direct/models/__init__.py
 ripple_payments_direct/models/adjusted_exchange_rate.py
 ripple_payments_direct/models/ae_ipi.py
 ripple_payments_direct/models/ar_interbanking.py
+ripple_payments_direct/models/au_npp.py
 ripple_payments_direct/models/authentication_request.py
 ripple_payments_direct/models/authentication_response.py
 ripple_payments_direct/models/br_pix.py
@@ -166,6 +169,7 @@ ripple_payments_direct/models/in_neft.py
 ripple_payments_direct/models/individual_identity.py
 ripple_payments_direct/models/individual_identity_address.py
 ripple_payments_direct/models/individual_identity_identity_documents_inner.py
+ripple_payments_direct/models/jp_zengin.py
 ripple_payments_direct/models/kr_kftc.py
 ripple_payments_direct/models/list_financial_instruments_response.py
 ripple_payments_direct/models/list_identities_response_v3.py
@@ -229,6 +233,7 @@ test/__init__.py
 test/test_adjusted_exchange_rate.py
 test/test_ae_ipi.py
 test/test_ar_interbanking.py
+test/test_au_npp.py
 test/test_authentication_api.py
 test/test_authentication_request.py
 test/test_authentication_response.py
@@ -272,6 +277,7 @@ test/test_in_neft.py
 test/test_individual_identity.py
 test/test_individual_identity_address.py
 test/test_individual_identity_identity_documents_inner.py
+test/test_jp_zengin.py
 test/test_kr_kftc.py
 test/test_ledger_public_api.py
 test/test_list_financial_instruments_response.py

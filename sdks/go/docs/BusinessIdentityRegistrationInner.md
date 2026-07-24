@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Number** | **string** | The unique identifier of the organization | 
-**Type** | **string** | Type of business identification document. | 
+**Type** | **string** | Type of business identification document. Accepted values may vary by corridor and payment role. Some corridors accept only a subset of this list. See Ripple Docs for corridor-specific requirements. | 
 
 ## Methods
 

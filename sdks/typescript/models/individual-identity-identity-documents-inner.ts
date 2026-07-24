@@ -27,7 +27,7 @@ export interface IndividualIdentityIdentityDocumentsInner {
      */
     'idNumber': string;
     /**
-     * The type of identification document used to identify the identity.
+     * The type of identification document used to identify the identity. Accepted values may vary by corridor and payment role. Some corridors accept only a subset of this list. See Ripple Docs for corridor-specific requirements.
      * @type {string}
      * @memberof IndividualIdentityIdentityDocumentsInner
      */

@@ -30,6 +30,8 @@
 |**krKftc** | [**KrKftcDTO**](KrKftcDTO.md) |  |  [optional] |
 |**inNeft** | [**InNeftDTO**](InNeftDTO.md) |  |  [optional] |
 |**peLbtr** | [**PeLbtrDTO**](PeLbtrDTO.md) |  |  [optional] |
+|**auNpp** | [**AuNppDTO**](AuNppDTO.md) |  |  [optional] |
+|**jpZengin** | [**JpZenginDTO**](JpZenginDTO.md) |  |  [optional] |
 |**cnTrade** | [**CnTradeDTO**](CnTradeDTO.md) |  |  [optional] |
 |**cnIndividual** | [**CnIndividualDTO**](CnIndividualDTO.md) |  |  [optional] |
 |**cnIndividualTrade** | [**CnIndividualTradeDTO**](CnIndividualTradeDTO.md) |  |  [optional] |

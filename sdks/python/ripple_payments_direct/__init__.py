@@ -38,6 +38,7 @@ from ripple_payments_direct.exceptions import ApiException
 from ripple_payments_direct.models.adjusted_exchange_rate import AdjustedExchangeRate
 from ripple_payments_direct.models.ae_ipi import AeIpi
 from ripple_payments_direct.models.ar_interbanking import ArInterbanking
+from ripple_payments_direct.models.au_npp import AuNpp
 from ripple_payments_direct.models.authentication_request import AuthenticationRequest
 from ripple_payments_direct.models.authentication_response import AuthenticationResponse
 from ripple_payments_direct.models.br_pix import BrPix
@@ -79,6 +80,7 @@ from ripple_payments_direct.models.in_neft import InNeft
 from ripple_payments_direct.models.individual_identity import IndividualIdentity
 from ripple_payments_direct.models.individual_identity_address import IndividualIdentityAddress
 from ripple_payments_direct.models.individual_identity_identity_documents_inner import IndividualIdentityIdentityDocumentsInner
+from ripple_payments_direct.models.jp_zengin import JpZengin
 from ripple_payments_direct.models.kr_kftc import KrKftc
 from ripple_payments_direct.models.list_financial_instruments_response import ListFinancialInstrumentsResponse
 from ripple_payments_direct.models.list_identities_response_v3 import ListIdentitiesResponseV3

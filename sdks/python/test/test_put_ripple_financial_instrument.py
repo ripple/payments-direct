@@ -77,6 +77,8 @@ class TestPutRippleFinancialInstrument(unittest.TestCase):
                 kr_kftc = ERROR_TO_EXAMPLE_VALUE,
                 in_neft = ERROR_TO_EXAMPLE_VALUE,
                 pe_lbtr = ERROR_TO_EXAMPLE_VALUE,
+                au_npp = ERROR_TO_EXAMPLE_VALUE,
+                jp_zengin = ERROR_TO_EXAMPLE_VALUE,
                 cn_trade = ERROR_TO_EXAMPLE_VALUE,
                 cn_individual = ERROR_TO_EXAMPLE_VALUE,
                 cn_individual_trade = ERROR_TO_EXAMPLE_VALUE,

@@ -3767,7 +3767,54 @@ components:
                 x-enumDescriptions:
                   INCORPORATION_CERTIFICATE: Certificate of Incorporation Number
                   TAX_ID: Tax Identification Number
-                description: Type of business identification document.
+                x-allowedEnumValuesByOriginatorFor:
+                - corridor: AR_INTERBANKING
+                  values:
+                  - TAX_ID
+                - corridor: BR_PIX
+                  values:
+                  - TAX_ID
+                - corridor: BR_TED
+                  values:
+                  - TAX_ID
+                - corridor: CL_TEF
+                  values:
+                  - TAX_ID
+                - corridor: PE_LBTR
+                  values:
+                  - TAX_ID
+                x-allowedEnumValuesByBeneficiaryFor:
+                - corridor: AR_INTERBANKING
+                  values:
+                  - TAX_ID
+                - corridor: BR_PIX
+                  values:
+                  - TAX_ID
+                - corridor: BR_TED
+                  values:
+                  - TAX_ID
+                - corridor: CL_TEF
+                  values:
+                  - TAX_ID
+                - corridor: CO_PSE
+                  values:
+                  - TAX_ID
+                - corridor: ETH_WALLET
+                  values:
+                  - INCORPORATION_CERTIFICATE
+                - corridor: PE_LBTR
+                  values:
+                  - TAX_ID
+                - corridor: SOL_WALLET
+                  values:
+                  - INCORPORATION_CERTIFICATE
+                - corridor: TRON_WALLET
+                  values:
+                  - INCORPORATION_CERTIFICATE
+                description: Type of business identification document. Accepted
+                  values may vary by corridor and payment role. Some corridors 
+                  accept only a subset of this list. See Ripple Docs for 
+                  corridor-specific requirements.
                 example: INCORPORATION_CERTIFICATE
         incorporationCountry:
           x-requiredByBeneficiaryFor:
@@ -4064,8 +4111,78 @@ components:
                   PASSPORT: Passport Number
                   SSN: Social Security Number
                   TAX_ID: Tax Identification Number
+                x-allowedEnumValuesByOriginatorFor:
+                - corridor: AR_INTERBANKING
+                  values:
+                  - TAX_ID
+                - corridor: AU_NPP
+                  values:
+                  - PASSPORT
+                - corridor: BR_PIX
+                  values:
+                  - PASSPORT
+                  - TAX_ID
+                - corridor: BR_TED
+                  values:
+                  - PASSPORT
+                  - TAX_ID
+                - corridor: CL_TEF
+                  values:
+                  - PASSPORT
+                  - TAX_ID
+                - corridor: HK_BANK_PAYOUT
+                  values:
+                  - PASSPORT
+                - corridor: IN_NEFT
+                  values:
+                  - PASSPORT
+                - corridor: KR_KFTC
+                  values:
+                  - PASSPORT
+                - corridor: PE_LBTR
+                  values:
+                  - PASSPORT
+                  - TAX_ID
+                - corridor: TH_PROMPTPAY
+                  values:
+                  - PASSPORT
+                x-allowedEnumValuesByBeneficiaryFor:
+                - corridor: AR_INTERBANKING
+                  values:
+                  - NATIONAL_ID_NUMBER
+                  - SSN
+                - corridor: BR_PIX
+                  values:
+                  - TAX_ID
+                - corridor: BR_TED
+                  values:
+                  - TAX_ID
+                - corridor: CL_TEF
+                  values:
+                  - NATIONAL_ID_NUMBER
+                  - TAX_ID
+                - corridor: CO_PSE
+                  values:
+                  - ALIEN_REGISTRATION
+                  - NATIONAL_ID_NUMBER
+                  - TAX_ID
+                - corridor: PE_LBTR
+                  values:
+                  - NATIONAL_ID_NUMBER
+                  - TAX_ID
+                - corridor: TH_PROMPTPAY
+                  values:
+                  - ALIEN_REGISTRATION
+                  - DRIVERS_LICENSE
+                  - EMPLOYEE_ID
+                  - NATIONAL_ID_NUMBER
+                  - PASSPORT
+                  - SSN
+                  - TAX_ID
                 description: The type of identification document used to 
-                  identify the identity.
+                  identify the identity. Accepted values may vary by corridor 
+                  and payment role. Some corridors accept only a subset of this 
+                  list. See Ripple Docs for corridor-specific requirements.
               expiryDate:
                 x-requiredByOriginatorFor:
                 - IN_NEFT
@@ -4246,6 +4363,8 @@ components:
       - ID_BIFAST
       - KR_KFTC
       - IN_NEFT
+      - AU_NPP
+      - JP_ZENGIN
       - TH_PROMPTPAY
       - CN_TRADE
       - CN_INDIVIDUAL
@@ -4292,9 +4411,14 @@ components:
         CA_EFT: Canada's Electronic Funds Transfer system for batch processing.
         HK_BANK_PAYOUT: Hong Kong Bank Payout - Payment rail for bank account 
           transfers in Hong Kong using BBAN account numbers.
-        IN_NEFT: India National Electronic Funds Transfer - bank payout for INR 
+        IN_NEFT: India National Electronic Funds Transfer - bank payout for INR
           denominated transfers using IFSC routing codes.
-        TH_PROMPTPAY: Thailand PromptPay - Thailand's national real-time retail 
+        AU_NPP: Australia New Payments Platform - real-time payment rail for
+          AUD-denominated domestic transfers, with Direct Entry (BECS) fallback
+          for high-value and batch.
+        JP_ZENGIN: Japan Zengin - multi-rail (Zengin + Zengin Prompt Service)
+          domestic clearing system for JPY-denominated payments.
+        TH_PROMPTPAY: Thailand PromptPay - Thailand's national real-time retail
           payment system for THB domestic bank transfers.
         CN_TRADE: China domestic CNY trade payments (B2B/B2B2B) with full bank 
           routing. Settlement rail is automatically selected from CNAPS, 
@@ -4350,6 +4474,7 @@ components:
       x-extensible-enum:
       - AED
       - ARS
+      - AUD
       - BRL
       - CAD
       - CLP
@@ -4361,6 +4486,7 @@ components:
       - HKD
       - IDR
       - INR
+      - JPY
       - KRW
       - MXN
       - NGN
@@ -5470,6 +5596,130 @@ components:
             CHECKING: Checking account
             SAVINGS: Savings account
           description: The identity's account type
+    au-npp:
+      type: object
+      description: |
+        Rails: NPP (New Payments Platform), Direct Entry (DE/BECS)
+
+        Rail Definitions:
+
+        NPP:
+        - Availability: 24/7/365
+        - Limit: AUD 20,000 per transaction (higher with arrangement)
+        - Settlement: Real-time (within 15 minutes)
+        - Cut-off time: None
+        - Banking holidays: Not applicable
+
+        Direct Entry (BECS):
+        - Availability: Business days only
+        - Limit: No limit
+        - Settlement: Same-day or next business day
+        - Cut-off time: Bank-dependent
+        - Banking holidays: Australian banking holidays apply
+
+        Routing Evaluation Order:
+          1. NPP
+             - Conditions: beneficiary account is NPP-addressable AND amount ≤ AUD 20,000
+          2. Direct Entry
+             - Conditions: otherwise applicable
+      required:
+      - bankName
+      - bsbCode
+      - accountNumber
+      properties:
+        bankName:
+          type: string
+          description: The name of the identity's bank
+          minLength: 2
+          maxLength: 140
+          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} .,'&\/()-]+(?<![ .,'&\/-])?$
+        bsbCode:
+          type: string
+          description: The 6-digit Bank-State-Branch (BSB) routing code
+          minLength: 6
+          maxLength: 6
+          pattern: ^[0-9]{6}$
+        accountNumber:
+          type: string
+          description: The identity's bank account number
+          minLength: 1
+          maxLength: 11
+          pattern: ^\d+$
+    jp-zengin:
+      type: object
+      description: |
+        Rails: Zengin, Zengin Prompt Service
+
+        Rail Definitions:
+
+        Zengin:
+        - Availability: Business days and banking hours only
+        - Limit: No limit
+        - Settlement: Same-day or next business day
+        - Cut-off time: 9:00 PM JST (varies by bank)
+        - Banking holidays: Japan banking holidays apply
+
+        Zengin Prompt Service:
+        - Availability: 24/7/365
+        - Limit: JPY 1,000,000 (typically)
+        - Settlement: Real-time
+        - Cut-off time: None
+        - Banking holidays: Not applicable
+
+        Routing Evaluation Order:
+          1. Zengin Prompt Service
+             - Conditions: beneficiary account is ZPS-addressable AND amount ≤ JPY 1,000,000
+          2. Zengin
+             - Conditions: otherwise applicable
+      required:
+      - bankName
+      - bankCode
+      - branchCode
+      - accountNumber
+      - accountType
+      - accountHolderName
+      properties:
+        bankName:
+          type: string
+          description: The name of the identity's bank
+          minLength: 2
+          maxLength: 140
+          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} .,'&\/()-]+(?<![ .,'&\/-])?$
+        accountHolderName:
+          type: string
+          description: Name of the account holder in Japanese Katakana characters
+          minLength: 1
+          maxLength: 100
+          pattern: ^[\p{L}\p{N} .,'&\/()-]+$
+        bankCode:
+          type: string
+          description: Zengin-Net/BOJ-assigned 4-digit Japanese bank code (e.g. 0001 Mizuho Bank, 0005 MUFG Bank). See the Bank Codes resource in Ripple Docs for the authoritative list of supported values.
+          minLength: 1
+          maxLength: 16
+          pattern: ^[A-Za-z0-9]+$
+        branchCode:
+          type: string
+          description: Bank-assigned branch code identifying the specific branch
+          minLength: 1
+          maxLength: 50
+          pattern: ^[A-Za-z0-9]+$
+        accountNumber:
+          type: string
+          description: The identity's bank account number
+          minLength: 1
+          maxLength: 45
+          pattern: ^[A-Za-z0-9]+$
+        accountType:
+          type: string
+          x-extensible-enum:
+          - CHECKING
+          - ORDINARY
+          - SAVINGS
+          x-enumDescriptions:
+            CHECKING: Checking account (当座預金)
+            ORDINARY: Ordinary deposit account (普通預金)
+            SAVINGS: Savings account (貯蓄預金)
+          description: The identity's account type
     cn-trade:
       type: object
       description: |
@@ -6038,6 +6288,10 @@ components:
           $ref: '#/components/schemas/in-neft'
         peLbtr:
           $ref: '#/components/schemas/pe-lbtr'
+        auNpp:
+          $ref: '#/components/schemas/au-npp'
+        jpZengin:
+          $ref: '#/components/schemas/jp-zengin'
         cnTrade:
           $ref: '#/components/schemas/cn-trade'
         cnIndividual:

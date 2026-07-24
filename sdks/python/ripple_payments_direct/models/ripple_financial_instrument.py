@@ -22,6 +22,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from ripple_payments_direct.models.ae_ipi import AeIpi
 from ripple_payments_direct.models.ar_interbanking import ArInterbanking
+from ripple_payments_direct.models.au_npp import AuNpp
 from ripple_payments_direct.models.br_pix import BrPix
 from ripple_payments_direct.models.br_ted import BrTed
 from ripple_payments_direct.models.ca_eft import CaEft
@@ -38,6 +39,7 @@ from ripple_payments_direct.models.gh_bank_payout import GhBankPayout
 from ripple_payments_direct.models.hk_bank_payout import HkBankPayout
 from ripple_payments_direct.models.id_bifast import IdBifast
 from ripple_payments_direct.models.in_neft import InNeft
+from ripple_payments_direct.models.jp_zengin import JpZengin
 from ripple_payments_direct.models.kr_kftc import KrKftc
 from ripple_payments_direct.models.mx_spei import MxSpei
 from ripple_payments_direct.models.ng_bank_payout import NgBankPayout
@@ -83,6 +85,8 @@ class RippleFinancialInstrument(BaseModel):
     kr_kftc: Optional[KrKftc] = Field(default=None, alias="krKftc")
     in_neft: Optional[InNeft] = Field(default=None, alias="inNeft")
     pe_lbtr: Optional[PeLbtr] = Field(default=None, alias="peLbtr")
+    au_npp: Optional[AuNpp] = Field(default=None, alias="auNpp")
+    jp_zengin: Optional[JpZengin] = Field(default=None, alias="jpZengin")
     cn_trade: Optional[CnTrade] = Field(default=None, alias="cnTrade")
     cn_individual: Optional[CnIndividual] = Field(default=None, alias="cnIndividual")
     cn_individual_trade: Optional[CnIndividualTrade] = Field(default=None, alias="cnIndividualTrade")
@@ -96,7 +100,7 @@ class RippleFinancialInstrument(BaseModel):
     currency: StrictStr = Field(description="The 3-letter ISO currency code of the financial instrument.")
     label: Optional[Annotated[str, Field(strict=True, max_length=256)]] = Field(default=None, description="A user-defined label for the financial instrument.")
     financial_instrument_type: StrictStr = Field(description="The type of financial instrument or payment rail used for executing the transaction. This determines the structure and validation of account details required for the payout. ", alias="financialInstrumentType")
-    __properties: ClassVar[List[str]] = ["usAch", "usFedwire", "mxSpei", "euSepa", "gbFps", "ngBankPayout", "ghBankPayout", "rwBankPayout", "zaBankPayout", "ugBankPayout", "zmBankPayout", "ethWallet", "tronWallet", "solWallet", "brPix", "coPse", "brTed", "caEft", "hkBankPayout", "idBifast", "krKftc", "inNeft", "peLbtr", "cnTrade", "cnIndividual", "cnIndividualTrade", "cnCfxps", "clTef", "aeIpi", "trFast", "phNrps", "thPromptpay", "arInterbanking", "currency", "label", "financialInstrumentType"]
+    __properties: ClassVar[List[str]] = ["usAch", "usFedwire", "mxSpei", "euSepa", "gbFps", "ngBankPayout", "ghBankPayout", "rwBankPayout", "zaBankPayout", "ugBankPayout", "zmBankPayout", "ethWallet", "tronWallet", "solWallet", "brPix", "coPse", "brTed", "caEft", "hkBankPayout", "idBifast", "krKftc", "inNeft", "peLbtr", "auNpp", "jpZengin", "cnTrade", "cnIndividual", "cnIndividualTrade", "cnCfxps", "clTef", "aeIpi", "trFast", "phNrps", "thPromptpay", "arInterbanking", "currency", "label", "financialInstrumentType"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -206,6 +210,12 @@ class RippleFinancialInstrument(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of pe_lbtr
         if self.pe_lbtr:
             _dict['peLbtr'] = self.pe_lbtr.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of au_npp
+        if self.au_npp:
+            _dict['auNpp'] = self.au_npp.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of jp_zengin
+        if self.jp_zengin:
+            _dict['jpZengin'] = self.jp_zengin.to_dict()
         # override the default output from pydantic by calling `to_dict()` of cn_trade
         if self.cn_trade:
             _dict['cnTrade'] = self.cn_trade.to_dict()
@@ -271,6 +281,8 @@ class RippleFinancialInstrument(BaseModel):
             "krKftc": KrKftc.from_dict(obj["krKftc"]) if obj.get("krKftc") is not None else None,
             "inNeft": InNeft.from_dict(obj["inNeft"]) if obj.get("inNeft") is not None else None,
             "peLbtr": PeLbtr.from_dict(obj["peLbtr"]) if obj.get("peLbtr") is not None else None,
+            "auNpp": AuNpp.from_dict(obj["auNpp"]) if obj.get("auNpp") is not None else None,
+            "jpZengin": JpZengin.from_dict(obj["jpZengin"]) if obj.get("jpZengin") is not None else None,
             "cnTrade": CnTrade.from_dict(obj["cnTrade"]) if obj.get("cnTrade") is not None else None,
             "cnIndividual": CnIndividual.from_dict(obj["cnIndividual"]) if obj.get("cnIndividual") is not None else None,
             "cnIndividualTrade": CnIndividualTrade.from_dict(obj["cnIndividualTrade"]) if obj.get("cnIndividualTrade") is not None else None,

@@ -30,6 +30,8 @@ Name | Type | Description | Notes
 **kr_kftc** | [**KrKftc**](KrKftc.md) |  | [optional] 
 **in_neft** | [**InNeft**](InNeft.md) |  | [optional] 
 **pe_lbtr** | [**PeLbtr**](PeLbtr.md) |  | [optional] 
+**au_npp** | [**AuNpp**](AuNpp.md) |  | [optional] 
+**jp_zengin** | [**JpZengin**](JpZengin.md) |  | [optional] 
 **cn_trade** | [**CnTrade**](CnTrade.md) |  | [optional] 
 **cn_individual** | [**CnIndividual**](CnIndividual.md) |  | [optional] 
 **cn_individual_trade** | [**CnIndividualTrade**](CnIndividualTrade.md) |  | [optional] 

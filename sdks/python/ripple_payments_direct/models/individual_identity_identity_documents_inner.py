@@ -29,7 +29,7 @@ class IndividualIdentityIdentityDocumentsInner(BaseModel):
     IndividualIdentityIdentityDocumentsInner
     """ # noqa: E501
     id_number: Annotated[str, Field(min_length=3, strict=True, max_length=35)] = Field(description="Identification Number.", alias="idNumber")
-    id_type: StrictStr = Field(description="The type of identification document used to identify the identity.", alias="idType")
+    id_type: StrictStr = Field(description="The type of identification document used to identify the identity. Accepted values may vary by corridor and payment role. Some corridors accept only a subset of this list. See Ripple Docs for corridor-specific requirements.", alias="idType")
     expiry_date: Optional[date] = Field(default=None, description="Expiration date of the identification document.", alias="expiryDate")
     __properties: ClassVar[List[str]] = ["idNumber", "idType", "expiryDate"]
 

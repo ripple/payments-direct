@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.ripple.payments.direct.model.AeIpiDTO;
 import com.ripple.payments.direct.model.ArInterbankingDTO;
+import com.ripple.payments.direct.model.AuNppDTO;
 import com.ripple.payments.direct.model.BrPixDTO;
 import com.ripple.payments.direct.model.BrTedDTO;
 import com.ripple.payments.direct.model.CaEftDTO;
@@ -38,6 +39,7 @@ import com.ripple.payments.direct.model.GhBankPayoutDTO;
 import com.ripple.payments.direct.model.HkBankPayoutDTO;
 import com.ripple.payments.direct.model.IdBifastDTO;
 import com.ripple.payments.direct.model.InNeftDTO;
+import com.ripple.payments.direct.model.JpZenginDTO;
 import com.ripple.payments.direct.model.KrKftcDTO;
 import com.ripple.payments.direct.model.MxSpeiDTO;
 import com.ripple.payments.direct.model.NgBankPayoutDTO;
@@ -87,6 +89,8 @@ import java.util.StringJoiner;
   PutRippleFinancialInstrumentDTO.JSON_PROPERTY_KR_KFTC,
   PutRippleFinancialInstrumentDTO.JSON_PROPERTY_IN_NEFT,
   PutRippleFinancialInstrumentDTO.JSON_PROPERTY_PE_LBTR,
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_AU_NPP,
+  PutRippleFinancialInstrumentDTO.JSON_PROPERTY_JP_ZENGIN,
   PutRippleFinancialInstrumentDTO.JSON_PROPERTY_CN_TRADE,
   PutRippleFinancialInstrumentDTO.JSON_PROPERTY_CN_INDIVIDUAL,
   PutRippleFinancialInstrumentDTO.JSON_PROPERTY_CN_INDIVIDUAL_TRADE,
@@ -196,6 +200,14 @@ public class PutRippleFinancialInstrumentDTO {
   public static final String JSON_PROPERTY_PE_LBTR = "peLbtr";
   @javax.annotation.Nullable
   private PeLbtrDTO peLbtr;
+
+  public static final String JSON_PROPERTY_AU_NPP = "auNpp";
+  @javax.annotation.Nullable
+  private AuNppDTO auNpp;
+
+  public static final String JSON_PROPERTY_JP_ZENGIN = "jpZengin";
+  @javax.annotation.Nullable
+  private JpZenginDTO jpZengin;
 
   public static final String JSON_PROPERTY_CN_TRADE = "cnTrade";
   @javax.annotation.Nullable
@@ -840,6 +852,56 @@ public class PutRippleFinancialInstrumentDTO {
     this.peLbtr = peLbtr;
   }
 
+  public PutRippleFinancialInstrumentDTO auNpp(@javax.annotation.Nullable AuNppDTO auNpp) {
+    
+    this.auNpp = auNpp;
+    return this;
+  }
+
+  /**
+   * Get auNpp
+   * @return auNpp
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_AU_NPP)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public AuNppDTO getAuNpp() {
+    return auNpp;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_AU_NPP)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setAuNpp(@javax.annotation.Nullable AuNppDTO auNpp) {
+    this.auNpp = auNpp;
+  }
+
+  public PutRippleFinancialInstrumentDTO jpZengin(@javax.annotation.Nullable JpZenginDTO jpZengin) {
+    
+    this.jpZengin = jpZengin;
+    return this;
+  }
+
+  /**
+   * Get jpZengin
+   * @return jpZengin
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_JP_ZENGIN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JpZenginDTO getJpZengin() {
+    return jpZengin;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_JP_ZENGIN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setJpZengin(@javax.annotation.Nullable JpZenginDTO jpZengin) {
+    this.jpZengin = jpZengin;
+  }
+
   public PutRippleFinancialInstrumentDTO cnTrade(@javax.annotation.Nullable CnTradeDTO cnTrade) {
     
     this.cnTrade = cnTrade;
@@ -1123,6 +1185,8 @@ public class PutRippleFinancialInstrumentDTO {
         Objects.equals(this.krKftc, putRippleFinancialInstrument.krKftc) &&
         Objects.equals(this.inNeft, putRippleFinancialInstrument.inNeft) &&
         Objects.equals(this.peLbtr, putRippleFinancialInstrument.peLbtr) &&
+        Objects.equals(this.auNpp, putRippleFinancialInstrument.auNpp) &&
+        Objects.equals(this.jpZengin, putRippleFinancialInstrument.jpZengin) &&
         Objects.equals(this.cnTrade, putRippleFinancialInstrument.cnTrade) &&
         Objects.equals(this.cnIndividual, putRippleFinancialInstrument.cnIndividual) &&
         Objects.equals(this.cnIndividualTrade, putRippleFinancialInstrument.cnIndividualTrade) &&
@@ -1137,7 +1201,7 @@ public class PutRippleFinancialInstrumentDTO {
 
   @Override
   public int hashCode() {
-    return Objects.hash(label, usAch, usFedwire, mxSpei, euSepa, gbFps, ngBankPayout, ghBankPayout, rwBankPayout, zaBankPayout, ugBankPayout, zmBankPayout, ethWallet, tronWallet, solWallet, brPix, coPse, brTed, caEft, hkBankPayout, idBifast, krKftc, inNeft, peLbtr, cnTrade, cnIndividual, cnIndividualTrade, cnCfxps, clTef, aeIpi, trFast, phNrps, thPromptpay, arInterbanking);
+    return Objects.hash(label, usAch, usFedwire, mxSpei, euSepa, gbFps, ngBankPayout, ghBankPayout, rwBankPayout, zaBankPayout, ugBankPayout, zmBankPayout, ethWallet, tronWallet, solWallet, brPix, coPse, brTed, caEft, hkBankPayout, idBifast, krKftc, inNeft, peLbtr, auNpp, jpZengin, cnTrade, cnIndividual, cnIndividualTrade, cnCfxps, clTef, aeIpi, trFast, phNrps, thPromptpay, arInterbanking);
   }
 
   @Override
@@ -1168,6 +1232,8 @@ public class PutRippleFinancialInstrumentDTO {
     sb.append("    krKftc: ").append(toIndentedString(krKftc)).append("\n");
     sb.append("    inNeft: ").append(toIndentedString(inNeft)).append("\n");
     sb.append("    peLbtr: ").append(toIndentedString(peLbtr)).append("\n");
+    sb.append("    auNpp: ").append(toIndentedString(auNpp)).append("\n");
+    sb.append("    jpZengin: ").append(toIndentedString(jpZengin)).append("\n");
     sb.append("    cnTrade: ").append(toIndentedString(cnTrade)).append("\n");
     sb.append("    cnIndividual: ").append(toIndentedString(cnIndividual)).append("\n");
     sb.append("    cnIndividualTrade: ").append(toIndentedString(cnIndividualTrade)).append("\n");
@@ -1338,6 +1404,16 @@ public class PutRippleFinancialInstrumentDTO {
     // add `peLbtr` to the URL query string
     if (getPeLbtr() != null) {
       joiner.add(getPeLbtr().toUrlQueryString(prefix + "peLbtr" + suffix));
+    }
+
+    // add `auNpp` to the URL query string
+    if (getAuNpp() != null) {
+      joiner.add(getAuNpp().toUrlQueryString(prefix + "auNpp" + suffix));
+    }
+
+    // add `jpZengin` to the URL query string
+    if (getJpZengin() != null) {
+      joiner.add(getJpZengin().toUrlQueryString(prefix + "jpZengin" + suffix));
     }
 
     // add `cnTrade` to the URL query string

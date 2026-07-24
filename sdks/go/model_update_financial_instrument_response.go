@@ -45,6 +45,8 @@ type UpdateFinancialInstrumentResponse struct {
 	KrKftc *KrKftc `json:"krKftc,omitempty"`
 	InNeft *InNeft `json:"inNeft,omitempty"`
 	PeLbtr *PeLbtr `json:"peLbtr,omitempty"`
+	AuNpp *AuNpp `json:"auNpp,omitempty"`
+	JpZengin *JpZengin `json:"jpZengin,omitempty"`
 	CnTrade *CnTrade `json:"cnTrade,omitempty"`
 	CnIndividual *CnIndividual `json:"cnIndividual,omitempty"`
 	CnIndividualTrade *CnIndividualTrade `json:"cnIndividualTrade,omitempty"`
@@ -829,6 +831,70 @@ func (o *UpdateFinancialInstrumentResponse) SetPeLbtr(v PeLbtr) {
 	o.PeLbtr = &v
 }
 
+// GetAuNpp returns the AuNpp field value if set, zero value otherwise.
+func (o *UpdateFinancialInstrumentResponse) GetAuNpp() AuNpp {
+	if o == nil || IsNil(o.AuNpp) {
+		var ret AuNpp
+		return ret
+	}
+	return *o.AuNpp
+}
+
+// GetAuNppOk returns a tuple with the AuNpp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateFinancialInstrumentResponse) GetAuNppOk() (*AuNpp, bool) {
+	if o == nil || IsNil(o.AuNpp) {
+		return nil, false
+	}
+	return o.AuNpp, true
+}
+
+// HasAuNpp returns a boolean if a field has been set.
+func (o *UpdateFinancialInstrumentResponse) HasAuNpp() bool {
+	if o != nil && !IsNil(o.AuNpp) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuNpp gets a reference to the given AuNpp and assigns it to the AuNpp field.
+func (o *UpdateFinancialInstrumentResponse) SetAuNpp(v AuNpp) {
+	o.AuNpp = &v
+}
+
+// GetJpZengin returns the JpZengin field value if set, zero value otherwise.
+func (o *UpdateFinancialInstrumentResponse) GetJpZengin() JpZengin {
+	if o == nil || IsNil(o.JpZengin) {
+		var ret JpZengin
+		return ret
+	}
+	return *o.JpZengin
+}
+
+// GetJpZenginOk returns a tuple with the JpZengin field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateFinancialInstrumentResponse) GetJpZenginOk() (*JpZengin, bool) {
+	if o == nil || IsNil(o.JpZengin) {
+		return nil, false
+	}
+	return o.JpZengin, true
+}
+
+// HasJpZengin returns a boolean if a field has been set.
+func (o *UpdateFinancialInstrumentResponse) HasJpZengin() bool {
+	if o != nil && !IsNil(o.JpZengin) {
+		return true
+	}
+
+	return false
+}
+
+// SetJpZengin gets a reference to the given JpZengin and assigns it to the JpZengin field.
+func (o *UpdateFinancialInstrumentResponse) SetJpZengin(v JpZengin) {
+	o.JpZengin = &v
+}
+
 // GetCnTrade returns the CnTrade field value if set, zero value otherwise.
 func (o *UpdateFinancialInstrumentResponse) GetCnTrade() CnTrade {
 	if o == nil || IsNil(o.CnTrade) {
@@ -1427,6 +1493,12 @@ func (o UpdateFinancialInstrumentResponse) ToMap() (map[string]interface{}, erro
 	}
 	if !IsNil(o.PeLbtr) {
 		toSerialize["peLbtr"] = o.PeLbtr
+	}
+	if !IsNil(o.AuNpp) {
+		toSerialize["auNpp"] = o.AuNpp
+	}
+	if !IsNil(o.JpZengin) {
+		toSerialize["jpZengin"] = o.JpZengin
 	}
 	if !IsNil(o.CnTrade) {
 		toSerialize["cnTrade"] = o.CnTrade

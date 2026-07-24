@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id_number** | **str** | Identification Number. | 
-**id_type** | **str** | The type of identification document used to identify the identity. | 
+**id_type** | **str** | The type of identification document used to identify the identity. Accepted values may vary by corridor and payment role. Some corridors accept only a subset of this list. See Ripple Docs for corridor-specific requirements. | 
 **expiry_date** | **date** | Expiration date of the identification document. | [optional] 
 
 ## Example

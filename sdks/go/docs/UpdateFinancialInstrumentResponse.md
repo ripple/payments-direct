@@ -27,6 +27,8 @@ Name | Type | Description | Notes
 **KrKftc** | Pointer to [**KrKftc**](KrKftc.md) |  | [optional] 
 **InNeft** | Pointer to [**InNeft**](InNeft.md) |  | [optional] 
 **PeLbtr** | Pointer to [**PeLbtr**](PeLbtr.md) |  | [optional] 
+**AuNpp** | Pointer to [**AuNpp**](AuNpp.md) |  | [optional] 
+**JpZengin** | Pointer to [**JpZengin**](JpZengin.md) |  | [optional] 
 **CnTrade** | Pointer to [**CnTrade**](CnTrade.md) |  | [optional] 
 **CnIndividual** | Pointer to [**CnIndividual**](CnIndividual.md) |  | [optional] 
 **CnIndividualTrade** | Pointer to [**CnIndividualTrade**](CnIndividualTrade.md) |  | [optional] 
@@ -638,6 +640,56 @@ SetPeLbtr sets PeLbtr field to given value.
 `func (o *UpdateFinancialInstrumentResponse) HasPeLbtr() bool`
 
 HasPeLbtr returns a boolean if a field has been set.
+
+### GetAuNpp
+
+`func (o *UpdateFinancialInstrumentResponse) GetAuNpp() AuNpp`
+
+GetAuNpp returns the AuNpp field if non-nil, zero value otherwise.
+
+### GetAuNppOk
+
+`func (o *UpdateFinancialInstrumentResponse) GetAuNppOk() (*AuNpp, bool)`
+
+GetAuNppOk returns a tuple with the AuNpp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuNpp
+
+`func (o *UpdateFinancialInstrumentResponse) SetAuNpp(v AuNpp)`
+
+SetAuNpp sets AuNpp field to given value.
+
+### HasAuNpp
+
+`func (o *UpdateFinancialInstrumentResponse) HasAuNpp() bool`
+
+HasAuNpp returns a boolean if a field has been set.
+
+### GetJpZengin
+
+`func (o *UpdateFinancialInstrumentResponse) GetJpZengin() JpZengin`
+
+GetJpZengin returns the JpZengin field if non-nil, zero value otherwise.
+
+### GetJpZenginOk
+
+`func (o *UpdateFinancialInstrumentResponse) GetJpZenginOk() (*JpZengin, bool)`
+
+GetJpZenginOk returns a tuple with the JpZengin field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetJpZengin
+
+`func (o *UpdateFinancialInstrumentResponse) SetJpZengin(v JpZengin)`
+
+SetJpZengin sets JpZengin field to given value.
+
+### HasJpZengin
+
+`func (o *UpdateFinancialInstrumentResponse) HasJpZengin() bool`
+
+HasJpZengin returns a boolean if a field has been set.
 
 ### GetCnTrade
 

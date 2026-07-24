@@ -4243,6 +4243,10 @@ components:
             bankName: bankName
             accountNumber: accountNumber
             sortCode: sortCode
+          auNpp:
+            bankName: bankName
+            bsbCode: bsbCode
+            accountNumber: accountNumber
           currency: MXN
           peLbtr:
             accountType: accountType
@@ -4270,6 +4274,13 @@ components:
           euSepa:
             iban: iban
             bankName: bankName
+          jpZengin:
+            branchCode: branchCode
+            bankCode: bankCode
+            accountType: accountType
+            bankName: bankName
+            accountNumber: accountNumber
+            accountHolderName: accountHolderName
           phNrps:
             swiftCode: BNORPHMMXXX
             bankName: BDO Unibank
@@ -4419,6 +4430,10 @@ components:
           bankName: bankName
           accountNumber: accountNumber
           sortCode: sortCode
+        auNpp:
+          bankName: bankName
+          bsbCode: bsbCode
+          accountNumber: accountNumber
         currency: MXN
         peLbtr:
           accountType: accountType
@@ -4446,6 +4461,13 @@ components:
         euSepa:
           iban: iban
           bankName: bankName
+        jpZengin:
+          branchCode: branchCode
+          bankCode: bankCode
+          accountType: accountType
+          bankName: bankName
+          accountNumber: accountNumber
+          accountHolderName: accountHolderName
         phNrps:
           swiftCode: BNORPHMMXXX
           bankName: BDO Unibank
@@ -5112,6 +5134,8 @@ components:
       - ID_BIFAST
       - KR_KFTC
       - IN_NEFT
+      - AU_NPP
+      - JP_ZENGIN
       - TH_PROMPTPAY
       - CN_TRADE
       - CN_INDIVIDUAL
@@ -5156,6 +5180,11 @@ components:
           in Hong Kong using BBAN account numbers.
         IN_NEFT: India National Electronic Funds Transfer - bank payout for INR denominated
           transfers using IFSC routing codes.
+        AU_NPP: "Australia New Payments Platform - real-time payment rail for AUD-denominated\
+          \ domestic transfers, with Direct Entry (BECS) fallback for high-value and\
+          \ batch."
+        JP_ZENGIN: Japan Zengin - multi-rail (Zengin + Zengin Prompt Service) domestic
+          clearing system for JPY-denominated payments.
         TH_PROMPTPAY: Thailand PromptPay - Thailand's national real-time retail payment
           system for THB domestic bank transfers.
         CN_TRADE: "China domestic CNY trade payments (B2B/B2B2B) with full bank routing.\
@@ -5207,6 +5236,7 @@ components:
       x-extensible-enum:
       - AED
       - ARS
+      - AUD
       - BRL
       - CAD
       - CLP
@@ -5218,6 +5248,7 @@ components:
       - HKD
       - IDR
       - INR
+      - JPY
       - KRW
       - MXN
       - NGN
@@ -5279,6 +5310,8 @@ components:
           - ID_BIFAST
           - KR_KFTC
           - IN_NEFT
+          - AU_NPP
+          - JP_ZENGIN
           - TH_PROMPTPAY
           - CN_TRADE
           - CN_INDIVIDUAL
@@ -5324,6 +5357,11 @@ components:
               transfers in Hong Kong using BBAN account numbers.
             IN_NEFT: India National Electronic Funds Transfer - bank payout for INR
               denominated transfers using IFSC routing codes.
+            AU_NPP: "Australia New Payments Platform - real-time payment rail for\
+              \ AUD-denominated domestic transfers, with Direct Entry (BECS) fallback\
+              \ for high-value and batch."
+            JP_ZENGIN: Japan Zengin - multi-rail (Zengin + Zengin Prompt Service)
+              domestic clearing system for JPY-denominated payments.
             TH_PROMPTPAY: Thailand PromptPay - Thailand's national real-time retail
               payment system for THB domestic bank transfers.
             CN_TRADE: "China domestic CNY trade payments (B2B/B2B2B) with full bank\
@@ -5360,6 +5398,7 @@ components:
           x-extensible-enum:
           - AED
           - ARS
+          - AUD
           - BRL
           - CAD
           - CLP
@@ -5371,6 +5410,7 @@ components:
           - HKD
           - IDR
           - INR
+          - JPY
           - KRW
           - MXN
           - NGN
@@ -6527,6 +6567,145 @@ components:
       - bankName
       - swiftCode
       type: object
+    au-npp:
+      description: |
+        Rails: NPP (New Payments Platform), Direct Entry (DE/BECS)
+
+        Rail Definitions:
+
+        NPP:
+        - Availability: 24/7/365
+        - Limit: AUD 20,000 per transaction (higher with arrangement)
+        - Settlement: Real-time (within 15 minutes)
+        - Cut-off time: None
+        - Banking holidays: Not applicable
+
+        Direct Entry (BECS):
+        - Availability: Business days only
+        - Limit: No limit
+        - Settlement: Same-day or next business day
+        - Cut-off time: Bank-dependent
+        - Banking holidays: Australian banking holidays apply
+
+        Routing Evaluation Order:
+          1. NPP
+             - Conditions: beneficiary account is NPP-addressable AND amount ≤ AUD 20,000
+          2. Direct Entry
+             - Conditions: otherwise applicable
+      example:
+        bankName: bankName
+        bsbCode: bsbCode
+        accountNumber: accountNumber
+      properties:
+        bankName:
+          description: The name of the identity's bank
+          maxLength: 140
+          minLength: 2
+          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
+            /()-]+(?<![ .,'&\\/-])?$"
+          type: string
+        bsbCode:
+          description: The 6-digit Bank-State-Branch (BSB) routing code
+          maxLength: 6
+          minLength: 6
+          pattern: "^[0-9]{6}$"
+          type: string
+        accountNumber:
+          description: The identity's bank account number
+          maxLength: 11
+          minLength: 1
+          pattern: ^\d+$
+          type: string
+      required:
+      - accountNumber
+      - bankName
+      - bsbCode
+      type: object
+    jp-zengin:
+      description: |
+        Rails: Zengin, Zengin Prompt Service
+
+        Rail Definitions:
+
+        Zengin:
+        - Availability: Business days and banking hours only
+        - Limit: No limit
+        - Settlement: Same-day or next business day
+        - Cut-off time: 9:00 PM JST (varies by bank)
+        - Banking holidays: Japan banking holidays apply
+
+        Zengin Prompt Service:
+        - Availability: 24/7/365
+        - Limit: JPY 1,000,000 (typically)
+        - Settlement: Real-time
+        - Cut-off time: None
+        - Banking holidays: Not applicable
+
+        Routing Evaluation Order:
+          1. Zengin Prompt Service
+             - Conditions: beneficiary account is ZPS-addressable AND amount ≤ JPY 1,000,000
+          2. Zengin
+             - Conditions: otherwise applicable
+      example:
+        branchCode: branchCode
+        bankCode: bankCode
+        accountType: accountType
+        bankName: bankName
+        accountNumber: accountNumber
+        accountHolderName: accountHolderName
+      properties:
+        bankName:
+          description: The name of the identity's bank
+          maxLength: 140
+          minLength: 2
+          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
+            /()-]+(?<![ .,'&\\/-])?$"
+          type: string
+        accountHolderName:
+          description: Name of the account holder in Japanese Katakana characters
+          maxLength: 100
+          minLength: 1
+          pattern: "^[\\p{L}\\p{N} .,'&\\/()-]+$"
+          type: string
+        bankCode:
+          description: "Zengin-Net/BOJ-assigned 4-digit Japanese bank code (e.g. 0001\
+            \ Mizuho Bank, 0005 MUFG Bank). See the Bank Codes resource in Ripple\
+            \ Docs for the authoritative list of supported values."
+          maxLength: 16
+          minLength: 1
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+        branchCode:
+          description: Bank-assigned branch code identifying the specific branch
+          maxLength: 50
+          minLength: 1
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+        accountNumber:
+          description: The identity's bank account number
+          maxLength: 45
+          minLength: 1
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+        accountType:
+          description: The identity's account type
+          type: string
+          x-extensible-enum:
+          - CHECKING
+          - ORDINARY
+          - SAVINGS
+          x-enumDescriptions:
+            CHECKING: Checking account (当座預金)
+            ORDINARY: Ordinary deposit account (普通預金)
+            SAVINGS: Savings account (貯蓄預金)
+      required:
+      - accountHolderName
+      - accountNumber
+      - accountType
+      - bankCode
+      - bankName
+      - branchCode
+      type: object
     cn-trade:
       description: |
         Rails: CNAPS, SIB (IBPS), CUP, NUCC
@@ -7122,6 +7301,10 @@ components:
           $ref: '#/components/schemas/in-neft'
         peLbtr:
           $ref: '#/components/schemas/pe-lbtr'
+        auNpp:
+          $ref: '#/components/schemas/au-npp'
+        jpZengin:
+          $ref: '#/components/schemas/jp-zengin'
         cnTrade:
           $ref: '#/components/schemas/cn-trade'
         cnIndividual:
@@ -7243,6 +7426,10 @@ components:
           bankName: bankName
           accountNumber: accountNumber
           sortCode: sortCode
+        auNpp:
+          bankName: bankName
+          bsbCode: bsbCode
+          accountNumber: accountNumber
         currency: MXN
         peLbtr:
           accountType: accountType
@@ -7270,6 +7457,13 @@ components:
         euSepa:
           iban: iban
           bankName: bankName
+        jpZengin:
+          branchCode: branchCode
+          bankCode: bankCode
+          accountType: accountType
+          bankName: bankName
+          accountNumber: accountNumber
+          accountHolderName: accountHolderName
         phNrps:
           swiftCode: BNORPHMMXXX
           bankName: BDO Unibank
@@ -8208,7 +8402,9 @@ components:
             /])\\/?$"
           type: string
         type:
-          description: Type of business identification document.
+          description: Type of business identification document. Accepted values may
+            vary by corridor and payment role. Some corridors accept only a subset
+            of this list. See Ripple Docs for corridor-specific requirements.
           example: INCORPORATION_CERTIFICATE
           type: string
           x-extensible-enum:
@@ -8217,6 +8413,50 @@ components:
           x-enumDescriptions:
             INCORPORATION_CERTIFICATE: Certificate of Incorporation Number
             TAX_ID: Tax Identification Number
+          x-allowedEnumValuesByOriginatorFor:
+          - corridor: AR_INTERBANKING
+            values:
+            - TAX_ID
+          - corridor: BR_PIX
+            values:
+            - TAX_ID
+          - corridor: BR_TED
+            values:
+            - TAX_ID
+          - corridor: CL_TEF
+            values:
+            - TAX_ID
+          - corridor: PE_LBTR
+            values:
+            - TAX_ID
+          x-allowedEnumValuesByBeneficiaryFor:
+          - corridor: AR_INTERBANKING
+            values:
+            - TAX_ID
+          - corridor: BR_PIX
+            values:
+            - TAX_ID
+          - corridor: BR_TED
+            values:
+            - TAX_ID
+          - corridor: CL_TEF
+            values:
+            - TAX_ID
+          - corridor: CO_PSE
+            values:
+            - TAX_ID
+          - corridor: ETH_WALLET
+            values:
+            - INCORPORATION_CERTIFICATE
+          - corridor: PE_LBTR
+            values:
+            - TAX_ID
+          - corridor: SOL_WALLET
+            values:
+            - INCORPORATION_CERTIFICATE
+          - corridor: TRON_WALLET
+            values:
+            - INCORPORATION_CERTIFICATE
       required:
       - number
       - type
@@ -8285,6 +8525,9 @@ components:
           type: string
         idType:
           description: The type of identification document used to identify the identity.
+            Accepted values may vary by corridor and payment role. Some corridors
+            accept only a subset of this list. See Ripple Docs for corridor-specific
+            requirements.
           type: string
           x-extensible-enum:
           - ALIEN_REGISTRATION
@@ -8304,6 +8547,74 @@ components:
             PASSPORT: Passport Number
             SSN: Social Security Number
             TAX_ID: Tax Identification Number
+          x-allowedEnumValuesByOriginatorFor:
+          - corridor: AR_INTERBANKING
+            values:
+            - TAX_ID
+          - corridor: AU_NPP
+            values:
+            - PASSPORT
+          - corridor: BR_PIX
+            values:
+            - PASSPORT
+            - TAX_ID
+          - corridor: BR_TED
+            values:
+            - PASSPORT
+            - TAX_ID
+          - corridor: CL_TEF
+            values:
+            - PASSPORT
+            - TAX_ID
+          - corridor: HK_BANK_PAYOUT
+            values:
+            - PASSPORT
+          - corridor: IN_NEFT
+            values:
+            - PASSPORT
+          - corridor: KR_KFTC
+            values:
+            - PASSPORT
+          - corridor: PE_LBTR
+            values:
+            - PASSPORT
+            - TAX_ID
+          - corridor: TH_PROMPTPAY
+            values:
+            - PASSPORT
+          x-allowedEnumValuesByBeneficiaryFor:
+          - corridor: AR_INTERBANKING
+            values:
+            - NATIONAL_ID_NUMBER
+            - SSN
+          - corridor: BR_PIX
+            values:
+            - TAX_ID
+          - corridor: BR_TED
+            values:
+            - TAX_ID
+          - corridor: CL_TEF
+            values:
+            - NATIONAL_ID_NUMBER
+            - TAX_ID
+          - corridor: CO_PSE
+            values:
+            - ALIEN_REGISTRATION
+            - NATIONAL_ID_NUMBER
+            - TAX_ID
+          - corridor: PE_LBTR
+            values:
+            - NATIONAL_ID_NUMBER
+            - TAX_ID
+          - corridor: TH_PROMPTPAY
+            values:
+            - ALIEN_REGISTRATION
+            - DRIVERS_LICENSE
+            - EMPLOYEE_ID
+            - NATIONAL_ID_NUMBER
+            - PASSPORT
+            - SSN
+            - TAX_ID
         expiryDate:
           description: Expiration date of the identification document.
           example: 2030-01-15

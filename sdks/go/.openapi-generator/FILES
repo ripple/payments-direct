@@ -13,6 +13,7 @@ configuration.go
 docs/AdjustedExchangeRate.md
 docs/AeIpi.md
 docs/ArInterbanking.md
+docs/AuNpp.md
 docs/AuthenticationAPI.md
 docs/AuthenticationRequest.md
 docs/AuthenticationResponse.md
@@ -55,6 +56,7 @@ docs/InNeft.md
 docs/IndividualIdentity.md
 docs/IndividualIdentityAddress.md
 docs/IndividualIdentityIdentityDocumentsInner.md
+docs/JpZengin.md
 docs/KrKftc.md
 docs/LedgerPublicAPI.md
 docs/ListFinancialInstrumentsResponse.md
@@ -119,6 +121,7 @@ go.sum
 model_adjusted_exchange_rate.go
 model_ae_ipi.go
 model_ar_interbanking.go
+model_au_npp.go
 model_authentication_request.go
 model_authentication_response.go
 model_br_pix.go
@@ -160,6 +163,7 @@ model_in_neft.go
 model_individual_identity.go
 model_individual_identity_address.go
 model_individual_identity_identity_documents_inner.go
+model_jp_zengin.go
 model_kr_kftc.go
 model_list_financial_instruments_response.go
 model_list_identities_response_v3.go

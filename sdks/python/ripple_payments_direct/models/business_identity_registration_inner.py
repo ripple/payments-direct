@@ -28,7 +28,7 @@ class BusinessIdentityRegistrationInner(BaseModel):
     BusinessIdentityRegistrationInner
     """ # noqa: E501
     number: Annotated[str, Field(min_length=3, strict=True, max_length=35)] = Field(description="The unique identifier of the organization")
-    type: StrictStr = Field(description="Type of business identification document.")
+    type: StrictStr = Field(description="Type of business identification document. Accepted values may vary by corridor and payment role. Some corridors accept only a subset of this list. See Ripple Docs for corridor-specific requirements.")
     __properties: ClassVar[List[str]] = ["number", "type"]
 
     @field_validator('number')

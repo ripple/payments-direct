@@ -27,6 +27,8 @@ Name | Type | Description | Notes
 **KrKftc** | Pointer to [**KrKftc**](KrKftc.md) |  | [optional] 
 **InNeft** | Pointer to [**InNeft**](InNeft.md) |  | [optional] 
 **PeLbtr** | Pointer to [**PeLbtr**](PeLbtr.md) |  | [optional] 
+**AuNpp** | Pointer to [**AuNpp**](AuNpp.md) |  | [optional] 
+**JpZengin** | Pointer to [**JpZengin**](JpZengin.md) |  | [optional] 
 **CnTrade** | Pointer to [**CnTrade**](CnTrade.md) |  | [optional] 
 **CnIndividual** | Pointer to [**CnIndividual**](CnIndividual.md) |  | [optional] 
 **CnIndividualTrade** | Pointer to [**CnIndividualTrade**](CnIndividualTrade.md) |  | [optional] 
@@ -638,6 +640,56 @@ SetPeLbtr sets PeLbtr field to given value.
 `func (o *RippleFinancialInstrumentEntry) HasPeLbtr() bool`
 
 HasPeLbtr returns a boolean if a field has been set.
+
+### GetAuNpp
+
+`func (o *RippleFinancialInstrumentEntry) GetAuNpp() AuNpp`
+
+GetAuNpp returns the AuNpp field if non-nil, zero value otherwise.
+
+### GetAuNppOk
+
+`func (o *RippleFinancialInstrumentEntry) GetAuNppOk() (*AuNpp, bool)`
+
+GetAuNppOk returns a tuple with the AuNpp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuNpp
+
+`func (o *RippleFinancialInstrumentEntry) SetAuNpp(v AuNpp)`
+
+SetAuNpp sets AuNpp field to given value.
+
+### HasAuNpp
+
+`func (o *RippleFinancialInstrumentEntry) HasAuNpp() bool`
+
+HasAuNpp returns a boolean if a field has been set.
+
+### GetJpZengin
+
+`func (o *RippleFinancialInstrumentEntry) GetJpZengin() JpZengin`
+
+GetJpZengin returns the JpZengin field if non-nil, zero value otherwise.
+
+### GetJpZenginOk
+
+`func (o *RippleFinancialInstrumentEntry) GetJpZenginOk() (*JpZengin, bool)`
+
+GetJpZenginOk returns a tuple with the JpZengin field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetJpZengin
+
+`func (o *RippleFinancialInstrumentEntry) SetJpZengin(v JpZengin)`
+
+SetJpZengin sets JpZengin field to given value.
+
+### HasJpZengin
+
+`func (o *RippleFinancialInstrumentEntry) HasJpZengin() bool`
+
+HasJpZengin returns a boolean if a field has been set.
 
 ### GetCnTrade
 

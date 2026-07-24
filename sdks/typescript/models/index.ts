@@ -1,6 +1,7 @@
 export * from './adjusted-exchange-rate';
 export * from './ae-ipi';
 export * from './ar-interbanking';
+export * from './au-npp';
 export * from './authentication-request';
 export * from './authentication-response';
 export * from './br-pix';
@@ -41,6 +42,7 @@ export * from './in-neft';
 export * from './individual-identity';
 export * from './individual-identity-address';
 export * from './individual-identity-identity-documents-inner';
+export * from './jp-zengin';
 export * from './kr-kftc';
 export * from './list-financial-instruments-response';
 export * from './list-identities-response-v3';

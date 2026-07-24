@@ -30,6 +30,8 @@ Name | Type | Description | Notes
 **krKftc** | [**KrKftc**](KrKftc.md) |  | [optional] [default to undefined]
 **inNeft** | [**InNeft**](InNeft.md) |  | [optional] [default to undefined]
 **peLbtr** | [**PeLbtr**](PeLbtr.md) |  | [optional] [default to undefined]
+**auNpp** | [**AuNpp**](AuNpp.md) |  | [optional] [default to undefined]
+**jpZengin** | [**JpZengin**](JpZengin.md) |  | [optional] [default to undefined]
 **cnTrade** | [**CnTrade**](CnTrade.md) |  | [optional] [default to undefined]
 **cnIndividual** | [**CnIndividual**](CnIndividual.md) |  | [optional] [default to undefined]
 **cnIndividualTrade** | [**CnIndividualTrade**](CnIndividualTrade.md) |  | [optional] [default to undefined]
@@ -71,6 +73,8 @@ const instance: PutRippleFinancialInstrument = {
     krKftc,
     inNeft,
     peLbtr,
+    auNpp,
+    jpZengin,
     cnTrade,
     cnIndividual,
     cnIndividualTrade,
