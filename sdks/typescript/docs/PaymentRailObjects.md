@@ -30,9 +30,6 @@ Name | Type | Description | Notes
 **peLbtr** | [**PeLbtr**](PeLbtr.md) |  | [optional] [default to undefined]
 **auNpp** | [**AuNpp**](AuNpp.md) |  | [optional] [default to undefined]
 **jpZengin** | [**JpZengin**](JpZengin.md) |  | [optional] [default to undefined]
-**cnTrade** | [**CnTrade**](CnTrade.md) |  | [optional] [default to undefined]
-**cnIndividual** | [**CnIndividual**](CnIndividual.md) |  | [optional] [default to undefined]
-**cnIndividualTrade** | [**CnIndividualTrade**](CnIndividualTrade.md) |  | [optional] [default to undefined]
 **cnCfxps** | [**CnCfxps**](CnCfxps.md) |  | [optional] [default to undefined]
 **clTef** | [**ClTef**](ClTef.md) |  | [optional] [default to undefined]
 **aeIpi** | [**AeIpi**](AeIpi.md) |  | [optional] [default to undefined]
@@ -72,9 +69,6 @@ const instance: PaymentRailObjects = {
     peLbtr,
     auNpp,
     jpZengin,
-    cnTrade,
-    cnIndividual,
-    cnIndividualTrade,
     cnCfxps,
     clTef,
     aeIpi,

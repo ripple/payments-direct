@@ -33,9 +33,6 @@ This object contains the details of the updated financial instrument.
 |**peLbtr** | [**PeLbtrDTO**](PeLbtrDTO.md) |  |  [optional] |
 |**auNpp** | [**AuNppDTO**](AuNppDTO.md) |  |  [optional] |
 |**jpZengin** | [**JpZenginDTO**](JpZenginDTO.md) |  |  [optional] |
-|**cnTrade** | [**CnTradeDTO**](CnTradeDTO.md) |  |  [optional] |
-|**cnIndividual** | [**CnIndividualDTO**](CnIndividualDTO.md) |  |  [optional] |
-|**cnIndividualTrade** | [**CnIndividualTradeDTO**](CnIndividualTradeDTO.md) |  |  [optional] |
 |**cnCfxps** | [**CnCfxpsDTO**](CnCfxpsDTO.md) |  |  [optional] |
 |**clTef** | [**ClTefDTO**](ClTefDTO.md) |  |  [optional] |
 |**aeIpi** | [**AeIpiDTO**](AeIpiDTO.md) |  |  [optional] |

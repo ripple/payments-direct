@@ -47,9 +47,6 @@ type RippleFinancialInstrumentEntry struct {
 	PeLbtr *PeLbtr `json:"peLbtr,omitempty"`
 	AuNpp *AuNpp `json:"auNpp,omitempty"`
 	JpZengin *JpZengin `json:"jpZengin,omitempty"`
-	CnTrade *CnTrade `json:"cnTrade,omitempty"`
-	CnIndividual *CnIndividual `json:"cnIndividual,omitempty"`
-	CnIndividualTrade *CnIndividualTrade `json:"cnIndividualTrade,omitempty"`
 	CnCfxps *CnCfxps `json:"cnCfxps,omitempty"`
 	ClTef *ClTef `json:"clTef,omitempty"`
 	AeIpi *AeIpi `json:"aeIpi,omitempty"`
@@ -894,102 +891,6 @@ func (o *RippleFinancialInstrumentEntry) SetJpZengin(v JpZengin) {
 	o.JpZengin = &v
 }
 
-// GetCnTrade returns the CnTrade field value if set, zero value otherwise.
-func (o *RippleFinancialInstrumentEntry) GetCnTrade() CnTrade {
-	if o == nil || IsNil(o.CnTrade) {
-		var ret CnTrade
-		return ret
-	}
-	return *o.CnTrade
-}
-
-// GetCnTradeOk returns a tuple with the CnTrade field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RippleFinancialInstrumentEntry) GetCnTradeOk() (*CnTrade, bool) {
-	if o == nil || IsNil(o.CnTrade) {
-		return nil, false
-	}
-	return o.CnTrade, true
-}
-
-// HasCnTrade returns a boolean if a field has been set.
-func (o *RippleFinancialInstrumentEntry) HasCnTrade() bool {
-	if o != nil && !IsNil(o.CnTrade) {
-		return true
-	}
-
-	return false
-}
-
-// SetCnTrade gets a reference to the given CnTrade and assigns it to the CnTrade field.
-func (o *RippleFinancialInstrumentEntry) SetCnTrade(v CnTrade) {
-	o.CnTrade = &v
-}
-
-// GetCnIndividual returns the CnIndividual field value if set, zero value otherwise.
-func (o *RippleFinancialInstrumentEntry) GetCnIndividual() CnIndividual {
-	if o == nil || IsNil(o.CnIndividual) {
-		var ret CnIndividual
-		return ret
-	}
-	return *o.CnIndividual
-}
-
-// GetCnIndividualOk returns a tuple with the CnIndividual field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RippleFinancialInstrumentEntry) GetCnIndividualOk() (*CnIndividual, bool) {
-	if o == nil || IsNil(o.CnIndividual) {
-		return nil, false
-	}
-	return o.CnIndividual, true
-}
-
-// HasCnIndividual returns a boolean if a field has been set.
-func (o *RippleFinancialInstrumentEntry) HasCnIndividual() bool {
-	if o != nil && !IsNil(o.CnIndividual) {
-		return true
-	}
-
-	return false
-}
-
-// SetCnIndividual gets a reference to the given CnIndividual and assigns it to the CnIndividual field.
-func (o *RippleFinancialInstrumentEntry) SetCnIndividual(v CnIndividual) {
-	o.CnIndividual = &v
-}
-
-// GetCnIndividualTrade returns the CnIndividualTrade field value if set, zero value otherwise.
-func (o *RippleFinancialInstrumentEntry) GetCnIndividualTrade() CnIndividualTrade {
-	if o == nil || IsNil(o.CnIndividualTrade) {
-		var ret CnIndividualTrade
-		return ret
-	}
-	return *o.CnIndividualTrade
-}
-
-// GetCnIndividualTradeOk returns a tuple with the CnIndividualTrade field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RippleFinancialInstrumentEntry) GetCnIndividualTradeOk() (*CnIndividualTrade, bool) {
-	if o == nil || IsNil(o.CnIndividualTrade) {
-		return nil, false
-	}
-	return o.CnIndividualTrade, true
-}
-
-// HasCnIndividualTrade returns a boolean if a field has been set.
-func (o *RippleFinancialInstrumentEntry) HasCnIndividualTrade() bool {
-	if o != nil && !IsNil(o.CnIndividualTrade) {
-		return true
-	}
-
-	return false
-}
-
-// SetCnIndividualTrade gets a reference to the given CnIndividualTrade and assigns it to the CnIndividualTrade field.
-func (o *RippleFinancialInstrumentEntry) SetCnIndividualTrade(v CnIndividualTrade) {
-	o.CnIndividualTrade = &v
-}
-
 // GetCnCfxps returns the CnCfxps field value if set, zero value otherwise.
 func (o *RippleFinancialInstrumentEntry) GetCnCfxps() CnCfxps {
 	if o == nil || IsNil(o.CnCfxps) {
@@ -1506,15 +1407,6 @@ func (o RippleFinancialInstrumentEntry) ToMap() (map[string]interface{}, error) 
 	}
 	if !IsNil(o.JpZengin) {
 		toSerialize["jpZengin"] = o.JpZengin
-	}
-	if !IsNil(o.CnTrade) {
-		toSerialize["cnTrade"] = o.CnTrade
-	}
-	if !IsNil(o.CnIndividual) {
-		toSerialize["cnIndividual"] = o.CnIndividual
-	}
-	if !IsNil(o.CnIndividualTrade) {
-		toSerialize["cnIndividualTrade"] = o.CnIndividualTrade
 	}
 	if !IsNil(o.CnCfxps) {
 		toSerialize["cnCfxps"] = o.CnCfxps

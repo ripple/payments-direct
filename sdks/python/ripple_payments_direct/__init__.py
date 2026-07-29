@@ -49,9 +49,6 @@ from ripple_payments_direct.models.business_identity_registration_inner import B
 from ripple_payments_direct.models.ca_eft import CaEft
 from ripple_payments_direct.models.cl_tef import ClTef
 from ripple_payments_direct.models.cn_cfxps import CnCfxps
-from ripple_payments_direct.models.cn_individual import CnIndividual
-from ripple_payments_direct.models.cn_individual_trade import CnIndividualTrade
-from ripple_payments_direct.models.cn_trade import CnTrade
 from ripple_payments_direct.models.co_pse import CoPse
 from ripple_payments_direct.models.create_financial_instrument_response import CreateFinancialInstrumentResponse
 from ripple_payments_direct.models.create_identity_request_v3 import CreateIdentityRequestV3

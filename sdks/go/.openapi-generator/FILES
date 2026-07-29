@@ -25,9 +25,6 @@ docs/BusinessIdentityRegistrationInner.md
 docs/CaEft.md
 docs/ClTef.md
 docs/CnCfxps.md
-docs/CnIndividual.md
-docs/CnIndividualTrade.md
-docs/CnTrade.md
 docs/CoPse.md
 docs/CreateFinancialInstrumentResponse.md
 docs/CreateIdentityRequestV3.md
@@ -132,9 +129,6 @@ model_business_identity_registration_inner.go
 model_ca_eft.go
 model_cl_tef.go
 model_cn_cfxps.go
-model_cn_individual.go
-model_cn_individual_trade.go
-model_cn_trade.go
 model_co_pse.go
 model_create_financial_instrument_response.go
 model_create_identity_request_v3.go

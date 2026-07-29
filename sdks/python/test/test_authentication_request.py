@@ -37,14 +37,14 @@ class TestAuthenticationRequest(unittest.TestCase):
             return AuthenticationRequest(
                 client_id = '{YOUR_CLIENT_ID}',
                 client_secret = '{YOUR_CLIENT_SECRET}',
-                audience = 'urn:ripplexcurrent-test:{YOUR_TENANT_ID}',
+                audience = 'urn:ripplexcurrent-uat:{YOUR_TENANT_ID}',
                 grant_type = 'client_credentials'
             )
         else:
             return AuthenticationRequest(
                 client_id = '{YOUR_CLIENT_ID}',
                 client_secret = '{YOUR_CLIENT_SECRET}',
-                audience = 'urn:ripplexcurrent-test:{YOUR_TENANT_ID}',
+                audience = 'urn:ripplexcurrent-uat:{YOUR_TENANT_ID}',
                 grant_type = 'client_credentials',
         )
         """

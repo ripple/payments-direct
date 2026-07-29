@@ -30,7 +30,7 @@ import (
 )
 
 func main() {
-	authenticationRequest := *openapiclient.NewAuthenticationRequest("{YOUR_CLIENT_ID}", "{YOUR_CLIENT_SECRET}", "urn:ripplexcurrent-test:{YOUR_TENANT_ID}", "client_credentials") // AuthenticationRequest | 
+	authenticationRequest := *openapiclient.NewAuthenticationRequest("{YOUR_CLIENT_ID}", "{YOUR_CLIENT_SECRET}", "urn:ripplexcurrent-uat:{YOUR_TENANT_ID}", "client_credentials") // AuthenticationRequest | 
 	authorization := "Basic ZGVtbzpwQDU1dzByZA==" // string |  (optional)
 
 	configuration := openapiclient.NewConfiguration()

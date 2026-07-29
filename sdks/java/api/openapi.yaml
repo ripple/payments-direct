@@ -2026,11 +2026,11 @@ components:
 
             | Environment | Environment string | Description |
             | --- | --- | --- |
-            | Test | `test` | Test environment with simulated partners and simulated currency. |
+            | UAT | `uat` | UAT environment with simulated partners and simulated currency. |
             | Production | `prod` | Production environment for Ripple's internal services. |
 
-            **Example**: `urn:ripplexcurrent-test:{YOUR_TENANT_ID}`
-          example: "urn:ripplexcurrent-test:{YOUR_TENANT_ID}"
+            **Example**: `urn:ripplexcurrent-uat:{YOUR_TENANT_ID}`
+          example: "urn:ripplexcurrent-uat:{YOUR_TENANT_ID}"
           type: string
         grant_type:
           description: Set the grant-type for this client credentials request. This
@@ -4277,10 +4277,6 @@ components:
             swiftCode: BNORPHMMXXX
             bankName: BDO Unibank
             accountNumber: "123456789012"
-          cnIndividual:
-            bankCode: bankCode
-            bankName: bankName
-            accountNumber: accountNumber
           trFast:
             bankCode: bankCode
             iban: iban
@@ -4296,14 +4292,6 @@ components:
             - SOLANA_USDC
             walletAddress: 7EcDhSYGxXyscszYEp35KHN8vvw3svAuLKTzXwCFLtV
             network: SOLANA
-          cnTrade:
-            bankCode: bankCode
-            branchCity: branchCity
-            branchProvince: branchProvince
-            branchName: branchName
-            bankName: bankName
-            accountNumber: accountNumber
-            accountHolderName: accountHolderName
           label: mexico bank account
           usAch:
             bankRoutingNumber: bankRoutingNumber
@@ -4314,10 +4302,6 @@ components:
             bankCode: bankCode
             bankName: bankName
             accountNumber: accountNumber
-          cnIndividualTrade:
-            bankName: bankName
-            accountNumber: accountNumber
-            accountHolderName: accountHolderName
           zaBankPayout:
             bankCode: bankCode
             bankName: bankName
@@ -4464,10 +4448,6 @@ components:
           swiftCode: BNORPHMMXXX
           bankName: BDO Unibank
           accountNumber: "123456789012"
-        cnIndividual:
-          bankCode: bankCode
-          bankName: bankName
-          accountNumber: accountNumber
         trFast:
           bankCode: bankCode
           iban: iban
@@ -4483,14 +4463,6 @@ components:
           - SOLANA_USDC
           walletAddress: 7EcDhSYGxXyscszYEp35KHN8vvw3svAuLKTzXwCFLtV
           network: SOLANA
-        cnTrade:
-          bankCode: bankCode
-          branchCity: branchCity
-          branchProvince: branchProvince
-          branchName: branchName
-          bankName: bankName
-          accountNumber: accountNumber
-          accountHolderName: accountHolderName
         label: mexico bank account
         usAch:
           bankRoutingNumber: bankRoutingNumber
@@ -4501,10 +4473,6 @@ components:
           bankCode: bankCode
           bankName: bankName
           accountNumber: accountNumber
-        cnIndividualTrade:
-          bankName: bankName
-          accountNumber: accountNumber
-          accountHolderName: accountHolderName
         zaBankPayout:
           bankCode: bankCode
           bankName: bankName
@@ -4687,7 +4655,6 @@ components:
           - BR_TED
           - CO_PSE
           - CA_EFT
-          - CN_TRADE
           - CN_CFXPS
           - ETH_WALLET
           - XRPL_WALLET
@@ -4708,9 +4675,6 @@ components:
           - EU_SEPA
           - SWIFT
           - HK_BANK_PAYOUT
-          - CN_TRADE
-          - CN_INDIVIDUAL
-          - CN_INDIVIDUAL_TRADE
           - CN_CFXPS
           - GB_FPS
           - CL_TEF
@@ -4873,7 +4837,6 @@ components:
           - ZA_BANK_PAYOUT
           - UG_BANK_PAYOUT
           - ZM_BANK_PAYOUT
-          - CN_INDIVIDUAL
           - CO_PSE
           - CL_TEF
           - ID_BIFAST
@@ -4908,8 +4871,6 @@ components:
           - BR_PIX
           - BR_TED
           - CO_PSE
-          - CN_INDIVIDUAL
-          - CN_INDIVIDUAL_TRADE
           - ID_BIFAST
           - KR_KFTC
           - CL_TEF
@@ -4923,7 +4884,6 @@ components:
           - BR_TED
           - SWIFT
           - HK_BANK_PAYOUT
-          - CN_INDIVIDUAL
           - CL_TEF
           - ID_BIFAST
           - KR_KFTC
@@ -5024,7 +4984,6 @@ components:
           - BR_TED
           - SWIFT
           - HK_BANK_PAYOUT
-          - CN_INDIVIDUAL
           - CL_TEF
           - ID_BIFAST
           - KR_KFTC
@@ -5129,9 +5088,6 @@ components:
       - AU_NPP
       - JP_ZENGIN
       - TH_PROMPTPAY
-      - CN_TRADE
-      - CN_INDIVIDUAL
-      - CN_INDIVIDUAL_TRADE
       - CN_CFXPS
       - CL_TEF
       - PE_LBTR
@@ -5179,14 +5135,6 @@ components:
           clearing system for JPY-denominated payments.
         TH_PROMPTPAY: Thailand PromptPay - Thailand's national real-time retail payment
           system for THB domestic bank transfers.
-        CN_TRADE: "China domestic CNY trade payments (B2B/B2B2B) with full bank routing.\
-          \ Settlement rail is automatically selected from CNAPS, SIB/IBPS, CUP, or\
-          \ NUCC."
-        CN_INDIVIDUAL: "China domestic CNY payments to individuals (B2C/B2B2C/C2B2C)\
-          \ for payroll, remittances, and family support. Multi-rail (CUP, CNAPS).\
-          \ Lightweight FI schema with bankName, bankCode, and accountNumber."
-        CN_INDIVIDUAL_TRADE: China domestic CNY trade/goods & services payments to
-          individuals (B2C/B2B2C) requiring business name and account holder name.
         CN_CFXPS: "Cross-border Foreign Exchange Payment System, enabling USD business-to-business\
           \ transfers to China via SWIFT/BIC routing."
         CL_TEF: Chile TEF (Transferencia Electrónica de Fondos) - business-day domestic
@@ -5305,9 +5253,6 @@ components:
           - AU_NPP
           - JP_ZENGIN
           - TH_PROMPTPAY
-          - CN_TRADE
-          - CN_INDIVIDUAL
-          - CN_INDIVIDUAL_TRADE
           - CN_CFXPS
           - CL_TEF
           - PE_LBTR
@@ -5356,15 +5301,6 @@ components:
               domestic clearing system for JPY-denominated payments.
             TH_PROMPTPAY: Thailand PromptPay - Thailand's national real-time retail
               payment system for THB domestic bank transfers.
-            CN_TRADE: "China domestic CNY trade payments (B2B/B2B2B) with full bank\
-              \ routing. Settlement rail is automatically selected from CNAPS, SIB/IBPS,\
-              \ CUP, or NUCC."
-            CN_INDIVIDUAL: "China domestic CNY payments to individuals (B2C/B2B2C/C2B2C)\
-              \ for payroll, remittances, and family support. Multi-rail (CUP, CNAPS).\
-              \ Lightweight FI schema with bankName, bankCode, and accountNumber."
-            CN_INDIVIDUAL_TRADE: China domestic CNY trade/goods & services payments
-              to individuals (B2C/B2B2C) requiring business name and account holder
-              name.
             CN_CFXPS: "Cross-border Foreign Exchange Payment System, enabling USD\
               \ business-to-business transfers to China via SWIFT/BIC routing."
             CL_TEF: Chile TEF (Transferencia Electrónica de Fondos) - business-day
@@ -6698,205 +6634,6 @@ components:
       - bankName
       - branchCode
       type: object
-    cn-trade:
-      description: |
-        Rails: CNAPS, SIB (IBPS), CUP, NUCC
-
-        Rail Definitions:
-
-        CNAPS:
-        - Availability: Business days and banking hours only (HVPS); batch throughout day (BEPS)
-        - Limit: No limit (HVPS); CNY 50,000 (BEPS)
-        - Settlement: Same-day (HVPS real-time gross; BEPS batched)
-        - Cut-off time: 5:00 PM CST (varies by bank)
-        - Banking holidays: China banking holidays apply
-
-        SIB / IBPS (Super Internet Banking / Internet Banking Payment System):
-        - Availability: 24/7/365
-        - Limit: Varies by bank
-        - Settlement: Real-time or near real-time
-        - Cut-off time: None
-        - Banking holidays: Not applicable
-
-        CUP (China UnionPay):
-        - Availability: 24/7/365
-        - Limit: Varies by bank and account type
-        - Settlement: Real-time or near real-time
-        - Cut-off time: None
-        - Banking holidays: Not applicable
-
-        NUCC (NetsUnion Clearing Corporation):
-        - Availability: 24/7/365
-        - Limit: Varies
-        - Settlement: Real-time or near real-time
-        - Cut-off time: None
-        - Banking holidays: Not applicable
-
-        Routing Evaluation Order: Determined at runtime based on transaction type, amount, and operational conditions. All rails use the same CNAPS bank codes for routing.
-
-        Purpose codes: GDDS (Goods), SCVE (Services) — trade-only.
-      example:
-        bankCode: bankCode
-        branchCity: branchCity
-        branchProvince: branchProvince
-        branchName: branchName
-        bankName: bankName
-        accountNumber: accountNumber
-        accountHolderName: accountHolderName
-      properties:
-        bankName:
-          description: Beneficiary Bank Name. Looked up from bankCode.
-          maxLength: 140
-          minLength: 2
-          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
-            /()-]+(?<![ .,'&\\/-])?$"
-          type: string
-        bankCode:
-          description: Beneficiary Bank Code (CNAPS). List provided in the Ripple
-            Docs Bank Codes utility.
-          maxLength: 32
-          minLength: 1
-          pattern: "^[A-Za-z0-9]+$"
-          type: string
-        branchName:
-          description: Beneficiary Branch Name (Hanzi). Branch name in Chinese Hanzi
-            characters.
-          maxLength: 200
-          minLength: 1
-          pattern: "^[\\p{L}\\p{N} .,'&\\/()-]+$"
-          type: string
-        branchProvince:
-          description: "Beneficiary Bank Branch Province. Province/region codes —\
-            \ 34 values published on Docs (e.g., 110000=北京, 310000=上海)."
-          maxLength: 6
-          minLength: 2
-          pattern: "^[0-9]+$"
-          type: string
-        branchCity:
-          description: "Beneficiary Bank Branch City. City codes — 700+ values published\
-            \ on Docs (e.g., 110000=北京, 130100=石家庄)."
-          maxLength: 6
-          minLength: 2
-          pattern: "^[0-9]+$"
-          type: string
-        accountNumber:
-          description: Beneficiary Account Number.
-          maxLength: 45
-          minLength: 1
-          pattern: "^[A-Za-z0-9]+$"
-          type: string
-        accountHolderName:
-          description: Beneficiary Account Holder Name (Hanzi). Account name in Chinese
-            Hanzi characters.
-          maxLength: 140
-          minLength: 1
-          pattern: "^[\\p{L}\\p{N} .,'&\\/()-]+$"
-          type: string
-      required:
-      - accountHolderName
-      - accountNumber
-      - bankCode
-      - bankName
-      - branchCity
-      - branchName
-      - branchProvince
-      type: object
-    cn-individual:
-      description: |
-        Rails: CUP (China UnionPay), CNAPS
-
-        Rail Definitions:
-
-        CUP (China UnionPay):
-        - Availability: 24/7/365
-        - Limit: Varies by bank and account type
-        - Settlement: Real-time or near real-time
-        - Cut-off time: None
-        - Banking holidays: Not applicable
-
-        CNAPS:
-        - Availability: Business days and banking hours only (HVPS); batch throughout day (BEPS)
-        - Limit: No limit (HVPS); CNY 30,000 limit to individuals;
-        - Settlement: Same-day (HVPS real-time gross; BEPS batched)
-        - Cut-off time: 5:00 PM CST (varies by bank)
-        - Banking holidays: China banking holidays apply
-
-        Routing Evaluation Order: Determined at runtime. CUP is the primary rail for card-based account routing. CNAPS may be used for bank account routing depending on account type.
-      example:
-        bankCode: bankCode
-        bankName: bankName
-        accountNumber: accountNumber
-      properties:
-        bankName:
-          description: Beneficiary Bank Name in English. Published list available
-            at docs.ripple.com.
-          maxLength: 140
-          minLength: 2
-          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
-            /()-]+(?<![ .,'&\\/-])?$"
-          type: string
-        bankCode:
-          description: Beneficiary Bank Code. Published bank code list at docs.ripple.com.
-          maxLength: 16
-          minLength: 1
-          pattern: "^[A-Za-z0-9]+$"
-          type: string
-        accountNumber:
-          description: Beneficiary Account Number.
-          maxLength: 45
-          minLength: 1
-          pattern: "^[A-Za-z0-9]+$"
-          type: string
-      required:
-      - accountNumber
-      - bankCode
-      - bankName
-      type: object
-    cn-individual-trade:
-      description: |
-        Rails: CUP (China UnionPay)
-
-        Rail Definitions:
-
-        CUP (China UnionPay):
-        - Availability: 24/7/365
-        - Limit: Varies by bank and account type
-        - Settlement: Real-time or near real-time
-        - Cut-off time: None
-        - Banking holidays: Not applicable (24/7 service)
-
-        Routing: CUP routes using the card/account number directly.
-      example:
-        bankName: bankName
-        accountNumber: accountNumber
-        accountHolderName: accountHolderName
-      properties:
-        bankName:
-          description: Beneficiary Bank Name.
-          maxLength: 140
-          minLength: 2
-          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
-            /()-]+(?<![ .,'&\\/-])?$"
-          type: string
-        accountNumber:
-          description: Beneficiary Account Number.
-          maxLength: 45
-          minLength: 1
-          pattern: "^[A-Za-z0-9]+$"
-          type: string
-        accountHolderName:
-          description: "Beneficiary Account Holder Name (Hanzi). Account name in Chinese\
-            \ Hanzi characters. For sole proprietors, bank account may be registered\
-            \ under business name."
-          maxLength: 140
-          minLength: 1
-          pattern: "^[\\p{L}\\p{N} .,'&\\/()-]+$"
-          type: string
-      required:
-      - accountHolderName
-      - accountNumber
-      - bankName
-      type: object
     cn-cfxps:
       description: |
         Rails: CFXPS (Cross-border Foreign Exchange Payment System)
@@ -7297,12 +7034,6 @@ components:
           $ref: '#/components/schemas/au-npp'
         jpZengin:
           $ref: '#/components/schemas/jp-zengin'
-        cnTrade:
-          $ref: '#/components/schemas/cn-trade'
-        cnIndividual:
-          $ref: '#/components/schemas/cn-individual'
-        cnIndividualTrade:
-          $ref: '#/components/schemas/cn-individual-trade'
         cnCfxps:
           $ref: '#/components/schemas/cn-cfxps'
         clTef:
@@ -7460,10 +7191,6 @@ components:
           swiftCode: BNORPHMMXXX
           bankName: BDO Unibank
           accountNumber: "123456789012"
-        cnIndividual:
-          bankCode: bankCode
-          bankName: bankName
-          accountNumber: accountNumber
         trFast:
           bankCode: bankCode
           iban: iban
@@ -7479,14 +7206,6 @@ components:
           - SOLANA_USDC
           walletAddress: 7EcDhSYGxXyscszYEp35KHN8vvw3svAuLKTzXwCFLtV
           network: SOLANA
-        cnTrade:
-          bankCode: bankCode
-          branchCity: branchCity
-          branchProvince: branchProvince
-          branchName: branchName
-          bankName: bankName
-          accountNumber: accountNumber
-          accountHolderName: accountHolderName
         label: mexico bank account
         usAch:
           bankRoutingNumber: bankRoutingNumber
@@ -7497,10 +7216,6 @@ components:
           bankCode: bankCode
           bankName: bankName
           accountNumber: accountNumber
-        cnIndividualTrade:
-          bankName: bankName
-          accountNumber: accountNumber
-          accountHolderName: accountHolderName
         zaBankPayout:
           bankCode: bankCode
           bankName: bankName

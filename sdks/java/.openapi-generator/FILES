@@ -21,9 +21,6 @@ docs/BusinessIdentityRegistrationInnerDTO.md
 docs/CaEftDTO.md
 docs/ClTefDTO.md
 docs/CnCfxpsDTO.md
-docs/CnIndividualDTO.md
-docs/CnIndividualTradeDTO.md
-docs/CnTradeDTO.md
 docs/CoPseDTO.md
 docs/CreateFinancialInstrumentResponseDTO.md
 docs/CreateIdentityRequestV3DTO.md
@@ -155,9 +152,6 @@ src/main/java/com/ripple/payments/direct/model/BusinessIdentityRegistrationInner
 src/main/java/com/ripple/payments/direct/model/CaEftDTO.java
 src/main/java/com/ripple/payments/direct/model/ClTefDTO.java
 src/main/java/com/ripple/payments/direct/model/CnCfxpsDTO.java
-src/main/java/com/ripple/payments/direct/model/CnIndividualDTO.java
-src/main/java/com/ripple/payments/direct/model/CnIndividualTradeDTO.java
-src/main/java/com/ripple/payments/direct/model/CnTradeDTO.java
 src/main/java/com/ripple/payments/direct/model/CoPseDTO.java
 src/main/java/com/ripple/payments/direct/model/CreateFinancialInstrumentResponseDTO.java
 src/main/java/com/ripple/payments/direct/model/CreateIdentityRequestV3DTO.java
@@ -260,9 +254,6 @@ src/test/java/com/ripple/payments/direct/model/BusinessIdentityRegistrationInner
 src/test/java/com/ripple/payments/direct/model/CaEftDTOTest.java
 src/test/java/com/ripple/payments/direct/model/ClTefDTOTest.java
 src/test/java/com/ripple/payments/direct/model/CnCfxpsDTOTest.java
-src/test/java/com/ripple/payments/direct/model/CnIndividualDTOTest.java
-src/test/java/com/ripple/payments/direct/model/CnIndividualTradeDTOTest.java
-src/test/java/com/ripple/payments/direct/model/CnTradeDTOTest.java
 src/test/java/com/ripple/payments/direct/model/CoPseDTOTest.java
 src/test/java/com/ripple/payments/direct/model/CreateFinancialInstrumentResponseDTOTest.java
 src/test/java/com/ripple/payments/direct/model/CreateIdentityRequestV3DTOTest.java

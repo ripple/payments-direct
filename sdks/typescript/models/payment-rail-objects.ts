@@ -39,15 +39,6 @@ import type { ClTef } from './cl-tef';
 import type { CnCfxps } from './cn-cfxps';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CnIndividual } from './cn-individual';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { CnIndividualTrade } from './cn-individual-trade';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { CnTrade } from './cn-trade';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { CoPse } from './co-pse';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -275,24 +266,6 @@ export interface PaymentRailObjects {
      * @memberof PaymentRailObjects
      */
     'jpZengin'?: JpZengin;
-    /**
-     * 
-     * @type {CnTrade}
-     * @memberof PaymentRailObjects
-     */
-    'cnTrade'?: CnTrade;
-    /**
-     * 
-     * @type {CnIndividual}
-     * @memberof PaymentRailObjects
-     */
-    'cnIndividual'?: CnIndividual;
-    /**
-     * 
-     * @type {CnIndividualTrade}
-     * @memberof PaymentRailObjects
-     */
-    'cnIndividualTrade'?: CnIndividualTrade;
     /**
      * 
      * @type {CnCfxps}

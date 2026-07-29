@@ -26,9 +26,6 @@ import com.ripple.payments.direct.model.BrTedDTO;
 import com.ripple.payments.direct.model.CaEftDTO;
 import com.ripple.payments.direct.model.ClTefDTO;
 import com.ripple.payments.direct.model.CnCfxpsDTO;
-import com.ripple.payments.direct.model.CnIndividualDTO;
-import com.ripple.payments.direct.model.CnIndividualTradeDTO;
-import com.ripple.payments.direct.model.CnTradeDTO;
 import com.ripple.payments.direct.model.CoPseDTO;
 import com.ripple.payments.direct.model.EthWalletDTO;
 import com.ripple.payments.direct.model.EuSepaDTO;
@@ -269,30 +266,6 @@ class RippleFinancialInstrumentDTOTest {
     @Test
     void jpZenginTest() {
         // TODO: test jpZengin
-    }
-
-    /**
-     * Test the property 'cnTrade'
-     */
-    @Test
-    void cnTradeTest() {
-        // TODO: test cnTrade
-    }
-
-    /**
-     * Test the property 'cnIndividual'
-     */
-    @Test
-    void cnIndividualTest() {
-        // TODO: test cnIndividual
-    }
-
-    /**
-     * Test the property 'cnIndividualTrade'
-     */
-    @Test
-    void cnIndividualTradeTest() {
-        // TODO: test cnIndividualTrade
     }
 
     /**

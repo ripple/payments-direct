@@ -29,9 +29,6 @@ Name | Type | Description | Notes
 **PeLbtr** | Pointer to [**PeLbtr**](PeLbtr.md) |  | [optional] 
 **AuNpp** | Pointer to [**AuNpp**](AuNpp.md) |  | [optional] 
 **JpZengin** | Pointer to [**JpZengin**](JpZengin.md) |  | [optional] 
-**CnTrade** | Pointer to [**CnTrade**](CnTrade.md) |  | [optional] 
-**CnIndividual** | Pointer to [**CnIndividual**](CnIndividual.md) |  | [optional] 
-**CnIndividualTrade** | Pointer to [**CnIndividualTrade**](CnIndividualTrade.md) |  | [optional] 
 **CnCfxps** | Pointer to [**CnCfxps**](CnCfxps.md) |  | [optional] 
 **ClTef** | Pointer to [**ClTef**](ClTef.md) |  | [optional] 
 **AeIpi** | Pointer to [**AeIpi**](AeIpi.md) |  | [optional] 
@@ -690,81 +687,6 @@ SetJpZengin sets JpZengin field to given value.
 `func (o *RippleFinancialInstrumentEntry) HasJpZengin() bool`
 
 HasJpZengin returns a boolean if a field has been set.
-
-### GetCnTrade
-
-`func (o *RippleFinancialInstrumentEntry) GetCnTrade() CnTrade`
-
-GetCnTrade returns the CnTrade field if non-nil, zero value otherwise.
-
-### GetCnTradeOk
-
-`func (o *RippleFinancialInstrumentEntry) GetCnTradeOk() (*CnTrade, bool)`
-
-GetCnTradeOk returns a tuple with the CnTrade field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCnTrade
-
-`func (o *RippleFinancialInstrumentEntry) SetCnTrade(v CnTrade)`
-
-SetCnTrade sets CnTrade field to given value.
-
-### HasCnTrade
-
-`func (o *RippleFinancialInstrumentEntry) HasCnTrade() bool`
-
-HasCnTrade returns a boolean if a field has been set.
-
-### GetCnIndividual
-
-`func (o *RippleFinancialInstrumentEntry) GetCnIndividual() CnIndividual`
-
-GetCnIndividual returns the CnIndividual field if non-nil, zero value otherwise.
-
-### GetCnIndividualOk
-
-`func (o *RippleFinancialInstrumentEntry) GetCnIndividualOk() (*CnIndividual, bool)`
-
-GetCnIndividualOk returns a tuple with the CnIndividual field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCnIndividual
-
-`func (o *RippleFinancialInstrumentEntry) SetCnIndividual(v CnIndividual)`
-
-SetCnIndividual sets CnIndividual field to given value.
-
-### HasCnIndividual
-
-`func (o *RippleFinancialInstrumentEntry) HasCnIndividual() bool`
-
-HasCnIndividual returns a boolean if a field has been set.
-
-### GetCnIndividualTrade
-
-`func (o *RippleFinancialInstrumentEntry) GetCnIndividualTrade() CnIndividualTrade`
-
-GetCnIndividualTrade returns the CnIndividualTrade field if non-nil, zero value otherwise.
-
-### GetCnIndividualTradeOk
-
-`func (o *RippleFinancialInstrumentEntry) GetCnIndividualTradeOk() (*CnIndividualTrade, bool)`
-
-GetCnIndividualTradeOk returns a tuple with the CnIndividualTrade field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCnIndividualTrade
-
-`func (o *RippleFinancialInstrumentEntry) SetCnIndividualTrade(v CnIndividualTrade)`
-
-SetCnIndividualTrade sets CnIndividualTrade field to given value.
-
-### HasCnIndividualTrade
-
-`func (o *RippleFinancialInstrumentEntry) HasCnIndividualTrade() bool`
-
-HasCnIndividualTrade returns a boolean if a field has been set.
 
 ### GetCnCfxps
 

@@ -33,7 +33,7 @@ export interface AuthenticationRequest {
      */
     'client_secret': string;
     /**
-     * The value of the `audience` field is based on [URN](https://en.wikipedia.org/wiki/Uniform_Resource_Name) syntax.  **Format**: `urn:ripplexcurrent-{ENVIRONMENT_STRING}:{YOUR_TENANT_ID}`  * The first component is `urn:ripplexcurrent-`. * The second component refers to the environment you want to access. * The third component is your tenant ID. Ripple integration engineers provide this component during training.  | Environment | Environment string | Description | | --- | --- | --- | | Test | `test` | Test environment with simulated partners and simulated currency. | | Production | `prod` | Production environment for Ripple\'s internal services. |  **Example**: `urn:ripplexcurrent-test:{YOUR_TENANT_ID}` 
+     * The value of the `audience` field is based on [URN](https://en.wikipedia.org/wiki/Uniform_Resource_Name) syntax.  **Format**: `urn:ripplexcurrent-{ENVIRONMENT_STRING}:{YOUR_TENANT_ID}`  * The first component is `urn:ripplexcurrent-`. * The second component refers to the environment you want to access. * The third component is your tenant ID. Ripple integration engineers provide this component during training.  | Environment | Environment string | Description | | --- | --- | --- | | UAT | `uat` | UAT environment with simulated partners and simulated currency. | | Production | `prod` | Production environment for Ripple\'s internal services. |  **Example**: `urn:ripplexcurrent-uat:{YOUR_TENANT_ID}` 
      * @type {string}
      * @memberof AuthenticationRequest
      */

@@ -28,9 +28,6 @@ from ripple_payments_direct.models.br_ted import BrTed
 from ripple_payments_direct.models.ca_eft import CaEft
 from ripple_payments_direct.models.cl_tef import ClTef
 from ripple_payments_direct.models.cn_cfxps import CnCfxps
-from ripple_payments_direct.models.cn_individual import CnIndividual
-from ripple_payments_direct.models.cn_individual_trade import CnIndividualTrade
-from ripple_payments_direct.models.cn_trade import CnTrade
 from ripple_payments_direct.models.co_pse import CoPse
 from ripple_payments_direct.models.eth_wallet import EthWallet
 from ripple_payments_direct.models.eu_sepa import EuSepa
@@ -87,9 +84,6 @@ class RippleFinancialInstrument(BaseModel):
     pe_lbtr: Optional[PeLbtr] = Field(default=None, alias="peLbtr")
     au_npp: Optional[AuNpp] = Field(default=None, alias="auNpp")
     jp_zengin: Optional[JpZengin] = Field(default=None, alias="jpZengin")
-    cn_trade: Optional[CnTrade] = Field(default=None, alias="cnTrade")
-    cn_individual: Optional[CnIndividual] = Field(default=None, alias="cnIndividual")
-    cn_individual_trade: Optional[CnIndividualTrade] = Field(default=None, alias="cnIndividualTrade")
     cn_cfxps: Optional[CnCfxps] = Field(default=None, alias="cnCfxps")
     cl_tef: Optional[ClTef] = Field(default=None, alias="clTef")
     ae_ipi: Optional[AeIpi] = Field(default=None, alias="aeIpi")
@@ -100,7 +94,7 @@ class RippleFinancialInstrument(BaseModel):
     currency: StrictStr = Field(description="The 3-letter ISO currency code of the financial instrument.")
     label: Optional[Annotated[str, Field(strict=True, max_length=256)]] = Field(default=None, description="A user-defined label for the financial instrument.")
     financial_instrument_type: StrictStr = Field(description="The type of financial instrument or payment rail used for executing the transaction. This determines the structure and validation of account details required for the payout. ", alias="financialInstrumentType")
-    __properties: ClassVar[List[str]] = ["usAch", "usFedwire", "mxSpei", "euSepa", "gbFps", "ngBankPayout", "ghBankPayout", "rwBankPayout", "zaBankPayout", "ugBankPayout", "zmBankPayout", "ethWallet", "tronWallet", "solWallet", "brPix", "coPse", "brTed", "caEft", "hkBankPayout", "idBifast", "krKftc", "inNeft", "peLbtr", "auNpp", "jpZengin", "cnTrade", "cnIndividual", "cnIndividualTrade", "cnCfxps", "clTef", "aeIpi", "trFast", "phNrps", "thPromptpay", "arInterbanking", "currency", "label", "financialInstrumentType"]
+    __properties: ClassVar[List[str]] = ["usAch", "usFedwire", "mxSpei", "euSepa", "gbFps", "ngBankPayout", "ghBankPayout", "rwBankPayout", "zaBankPayout", "ugBankPayout", "zmBankPayout", "ethWallet", "tronWallet", "solWallet", "brPix", "coPse", "brTed", "caEft", "hkBankPayout", "idBifast", "krKftc", "inNeft", "peLbtr", "auNpp", "jpZengin", "cnCfxps", "clTef", "aeIpi", "trFast", "phNrps", "thPromptpay", "arInterbanking", "currency", "label", "financialInstrumentType"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -216,15 +210,6 @@ class RippleFinancialInstrument(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of jp_zengin
         if self.jp_zengin:
             _dict['jpZengin'] = self.jp_zengin.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of cn_trade
-        if self.cn_trade:
-            _dict['cnTrade'] = self.cn_trade.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of cn_individual
-        if self.cn_individual:
-            _dict['cnIndividual'] = self.cn_individual.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of cn_individual_trade
-        if self.cn_individual_trade:
-            _dict['cnIndividualTrade'] = self.cn_individual_trade.to_dict()
         # override the default output from pydantic by calling `to_dict()` of cn_cfxps
         if self.cn_cfxps:
             _dict['cnCfxps'] = self.cn_cfxps.to_dict()
@@ -283,9 +268,6 @@ class RippleFinancialInstrument(BaseModel):
             "peLbtr": PeLbtr.from_dict(obj["peLbtr"]) if obj.get("peLbtr") is not None else None,
             "auNpp": AuNpp.from_dict(obj["auNpp"]) if obj.get("auNpp") is not None else None,
             "jpZengin": JpZengin.from_dict(obj["jpZengin"]) if obj.get("jpZengin") is not None else None,
-            "cnTrade": CnTrade.from_dict(obj["cnTrade"]) if obj.get("cnTrade") is not None else None,
-            "cnIndividual": CnIndividual.from_dict(obj["cnIndividual"]) if obj.get("cnIndividual") is not None else None,
-            "cnIndividualTrade": CnIndividualTrade.from_dict(obj["cnIndividualTrade"]) if obj.get("cnIndividualTrade") is not None else None,
             "cnCfxps": CnCfxps.from_dict(obj["cnCfxps"]) if obj.get("cnCfxps") is not None else None,
             "clTef": ClTef.from_dict(obj["clTef"]) if obj.get("clTef") is not None else None,
             "aeIpi": AeIpi.from_dict(obj["aeIpi"]) if obj.get("aeIpi") is not None else None,

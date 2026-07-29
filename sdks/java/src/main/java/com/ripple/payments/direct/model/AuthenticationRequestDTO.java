@@ -147,7 +147,7 @@ public class AuthenticationRequestDTO {
   }
 
   /**
-   * The value of the &#x60;audience&#x60; field is based on [URN](https://en.wikipedia.org/wiki/Uniform_Resource_Name) syntax.  **Format**: &#x60;urn:ripplexcurrent-{ENVIRONMENT_STRING}:{YOUR_TENANT_ID}&#x60;  * The first component is &#x60;urn:ripplexcurrent-&#x60;. * The second component refers to the environment you want to access. * The third component is your tenant ID. Ripple integration engineers provide this component during training.  | Environment | Environment string | Description | | --- | --- | --- | | Test | &#x60;test&#x60; | Test environment with simulated partners and simulated currency. | | Production | &#x60;prod&#x60; | Production environment for Ripple&#39;s internal services. |  **Example**: &#x60;urn:ripplexcurrent-test:{YOUR_TENANT_ID}&#x60; 
+   * The value of the &#x60;audience&#x60; field is based on [URN](https://en.wikipedia.org/wiki/Uniform_Resource_Name) syntax.  **Format**: &#x60;urn:ripplexcurrent-{ENVIRONMENT_STRING}:{YOUR_TENANT_ID}&#x60;  * The first component is &#x60;urn:ripplexcurrent-&#x60;. * The second component refers to the environment you want to access. * The third component is your tenant ID. Ripple integration engineers provide this component during training.  | Environment | Environment string | Description | | --- | --- | --- | | UAT | &#x60;uat&#x60; | UAT environment with simulated partners and simulated currency. | | Production | &#x60;prod&#x60; | Production environment for Ripple&#39;s internal services. |  **Example**: &#x60;urn:ripplexcurrent-uat:{YOUR_TENANT_ID}&#x60; 
    * @return audience
    */
   @javax.annotation.Nonnull
