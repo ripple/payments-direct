@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**errors** | [**PaymentError**](PaymentError.md) |  | 
-**status** | **str** | Error Response Status | 
+**errors** | [**List[PaymentError]**](PaymentError.md) | List of payment errors | 
+**status** | **int** | Error Response Status | 
 
 ## Example
 

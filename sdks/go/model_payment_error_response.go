@@ -21,9 +21,10 @@ var _ MappedNullable = &PaymentErrorResponse{}
 
 // PaymentErrorResponse struct for PaymentErrorResponse
 type PaymentErrorResponse struct {
-	Errors PaymentError `json:"errors"`
+	// List of payment errors
+	Errors []PaymentError `json:"errors"`
 	// Error Response Status
-	Status string `json:"status"`
+	Status int32 `json:"status"`
 }
 
 type _PaymentErrorResponse PaymentErrorResponse
@@ -32,7 +33,7 @@ type _PaymentErrorResponse PaymentErrorResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentErrorResponse(errors PaymentError, status string) *PaymentErrorResponse {
+func NewPaymentErrorResponse(errors []PaymentError, status int32) *PaymentErrorResponse {
 	this := PaymentErrorResponse{}
 	this.Errors = errors
 	this.Status = status
@@ -48,9 +49,9 @@ func NewPaymentErrorResponseWithDefaults() *PaymentErrorResponse {
 }
 
 // GetErrors returns the Errors field value
-func (o *PaymentErrorResponse) GetErrors() PaymentError {
+func (o *PaymentErrorResponse) GetErrors() []PaymentError {
 	if o == nil {
-		var ret PaymentError
+		var ret []PaymentError
 		return ret
 	}
 
@@ -59,22 +60,22 @@ func (o *PaymentErrorResponse) GetErrors() PaymentError {
 
 // GetErrorsOk returns a tuple with the Errors field value
 // and a boolean to check if the value has been set.
-func (o *PaymentErrorResponse) GetErrorsOk() (*PaymentError, bool) {
+func (o *PaymentErrorResponse) GetErrorsOk() ([]PaymentError, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Errors, true
+	return o.Errors, true
 }
 
 // SetErrors sets field value
-func (o *PaymentErrorResponse) SetErrors(v PaymentError) {
+func (o *PaymentErrorResponse) SetErrors(v []PaymentError) {
 	o.Errors = v
 }
 
 // GetStatus returns the Status field value
-func (o *PaymentErrorResponse) GetStatus() string {
+func (o *PaymentErrorResponse) GetStatus() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
@@ -83,7 +84,7 @@ func (o *PaymentErrorResponse) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *PaymentErrorResponse) GetStatusOk() (*string, bool) {
+func (o *PaymentErrorResponse) GetStatusOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,7 +92,7 @@ func (o *PaymentErrorResponse) GetStatusOk() (*string, bool) {
 }
 
 // SetStatus sets field value
-func (o *PaymentErrorResponse) SetStatus(v string) {
+func (o *PaymentErrorResponse) SetStatus(v int32) {
 	o.Status = v
 }
 

@@ -7,8 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**errors** | [**PaymentErrorDTO**](PaymentErrorDTO.md) |  |  |
-|**status** | **String** | Error Response Status |  |
+|**errors** | [**List&lt;PaymentErrorDTO&gt;**](PaymentErrorDTO.md) | List of payment errors |  |
+|**status** | **Integer** | Error Response Status |  |
 
 
 

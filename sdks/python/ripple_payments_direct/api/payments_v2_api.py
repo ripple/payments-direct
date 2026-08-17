@@ -102,6 +102,8 @@ class PaymentsV2Api:
             '201': "PaymentV2",
             '400': "PaymentErrorResponse",
             '402': "PaymentErrorResponse",
+            '403': "PaymentErrorResponse",
+            '415': "PaymentErrorResponse",
             '500': "PaymentErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -172,6 +174,8 @@ class PaymentsV2Api:
             '201': "PaymentV2",
             '400': "PaymentErrorResponse",
             '402': "PaymentErrorResponse",
+            '403': "PaymentErrorResponse",
+            '415': "PaymentErrorResponse",
             '500': "PaymentErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -242,6 +246,8 @@ class PaymentsV2Api:
             '201': "PaymentV2",
             '400': "PaymentErrorResponse",
             '402': "PaymentErrorResponse",
+            '403': "PaymentErrorResponse",
+            '415': "PaymentErrorResponse",
             '500': "PaymentErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -924,6 +930,7 @@ class PaymentsV2Api:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentsResponseV2",
             '400': "PaymentErrorResponse",
+            '415': "PaymentErrorResponse",
             '500': "PaymentErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -993,6 +1000,7 @@ class PaymentsV2Api:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentsResponseV2",
             '400': "PaymentErrorResponse",
+            '415': "PaymentErrorResponse",
             '500': "PaymentErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -1062,6 +1070,7 @@ class PaymentsV2Api:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentsResponseV2",
             '400': "PaymentErrorResponse",
+            '415': "PaymentErrorResponse",
             '500': "PaymentErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -1209,6 +1218,7 @@ class PaymentsV2Api:
             '200': "UpdatePaymentLabelsResponse",
             '400': "PaymentErrorResponse",
             '404': "PaymentErrorResponse",
+            '415': "PaymentErrorResponse",
             '500': "PaymentErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -1283,6 +1293,7 @@ class PaymentsV2Api:
             '200': "UpdatePaymentLabelsResponse",
             '400': "PaymentErrorResponse",
             '404': "PaymentErrorResponse",
+            '415': "PaymentErrorResponse",
             '500': "PaymentErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -1357,6 +1368,7 @@ class PaymentsV2Api:
             '200': "UpdatePaymentLabelsResponse",
             '400': "PaymentErrorResponse",
             '404': "PaymentErrorResponse",
+            '415': "PaymentErrorResponse",
             '500': "PaymentErrorResponse",
         }
         response_data = self.api_client.call_api(

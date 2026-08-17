@@ -36,7 +36,7 @@ import type { ValidateTokenResponse } from '../models';
 export const AuthenticationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn\'t fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../../developer-guides/request-an-access-token/).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
+         * Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn\'t fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../developer-guides/request-an-access-token.md).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
          * @summary Request an access token
          * @param {AuthenticationRequest} authenticationRequest 
          * @param {string} [authorization] 
@@ -124,7 +124,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AuthenticationApiAxiosParamCreator(configuration)
     return {
         /**
-         * Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn\'t fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../../developer-guides/request-an-access-token/).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
+         * Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn\'t fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../developer-guides/request-an-access-token.md).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
          * @summary Request an access token
          * @param {AuthenticationRequest} authenticationRequest 
          * @param {string} [authorization] 
@@ -160,7 +160,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
     const localVarFp = AuthenticationApiFp(configuration)
     return {
         /**
-         * Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn\'t fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../../developer-guides/request-an-access-token/).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
+         * Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn\'t fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../developer-guides/request-an-access-token.md).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
          * @summary Request an access token
          * @param {AuthenticationRequest} authenticationRequest 
          * @param {string} [authorization] 
@@ -190,7 +190,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
  */
 export class AuthenticationApi extends BaseAPI {
     /**
-     * Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn\'t fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../../developer-guides/request-an-access-token/).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
+     * Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn\'t fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../developer-guides/request-an-access-token.md).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
      * @summary Request an access token
      * @param {AuthenticationRequest} authenticationRequest 
      * @param {string} [authorization] 

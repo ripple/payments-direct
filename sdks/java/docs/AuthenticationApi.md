@@ -15,7 +15,7 @@ All URIs are relative to *https://api.test.ripple.com*
 
 Request an access token
 
-Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn&#39;t fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../../developer-guides/request-an-access-token/).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | &#x60;api.test.ripple.com&#x60; | Test environment with simulated currency. | | Production | &#x60;api.ripple.com&#x60; | Production environment for Ripple Payments Direct | 
+Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn&#39;t fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../developer-guides/request-an-access-token.md).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | &#x60;api.test.ripple.com&#x60; | Test environment with simulated currency. | | Production | &#x60;api.ripple.com&#x60; | Production environment for Ripple Payments Direct | 
 
 ### Example
 
@@ -83,7 +83,7 @@ public class Example {
 | **200** | Returns the authentication response object that includes the token, type, scopes, and expiry. |  -  |
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
+| **403** | Forbidden. Returns &#x60;access_denied&#x60; when the domain is not enabled, or &#x60;unauthorized_client&#x60; when the caller (client ID or audience) is not authorized to request a token. |  -  |
 
 
 ## testAuthToken

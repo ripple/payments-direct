@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Errors** | [**PaymentError**](PaymentError.md) |  | 
-**Status** | **string** | Error Response Status | 
+**Errors** | [**[]PaymentError**](PaymentError.md) | List of payment errors | 
+**Status** | **int32** | Error Response Status | 
 
 ## Methods
 
 ### NewPaymentErrorResponse
 
-`func NewPaymentErrorResponse(errors PaymentError, status string, ) *PaymentErrorResponse`
+`func NewPaymentErrorResponse(errors []PaymentError, status int32, ) *PaymentErrorResponse`
 
 NewPaymentErrorResponse instantiates a new PaymentErrorResponse object
 This constructor will assign default values to properties that have it defined,
@@ -28,40 +28,40 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetErrors
 
-`func (o *PaymentErrorResponse) GetErrors() PaymentError`
+`func (o *PaymentErrorResponse) GetErrors() []PaymentError`
 
 GetErrors returns the Errors field if non-nil, zero value otherwise.
 
 ### GetErrorsOk
 
-`func (o *PaymentErrorResponse) GetErrorsOk() (*PaymentError, bool)`
+`func (o *PaymentErrorResponse) GetErrorsOk() (*[]PaymentError, bool)`
 
 GetErrorsOk returns a tuple with the Errors field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetErrors
 
-`func (o *PaymentErrorResponse) SetErrors(v PaymentError)`
+`func (o *PaymentErrorResponse) SetErrors(v []PaymentError)`
 
 SetErrors sets Errors field to given value.
 
 
 ### GetStatus
 
-`func (o *PaymentErrorResponse) GetStatus() string`
+`func (o *PaymentErrorResponse) GetStatus() int32`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *PaymentErrorResponse) GetStatusOk() (*string, bool)`
+`func (o *PaymentErrorResponse) GetStatusOk() (*int32, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *PaymentErrorResponse) SetStatus(v string)`
+`func (o *PaymentErrorResponse) SetStatus(v int32)`
 
 SetStatus sets Status field to given value.
 

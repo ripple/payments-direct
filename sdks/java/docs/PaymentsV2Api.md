@@ -83,6 +83,8 @@ public class Example {
 | **201** | Valid payment |  -  |
 | **400** | Invalid input variables for the payment. |  -  |
 | **402** | Problems related to payment limits. |  -  |
+| **403** | The payment already exists and belongs to a different tenant. |  -  |
+| **415** | Missing or unsupported Content-Type header. |  -  |
 | **500** | Internal processing error |  -  |
 
 
@@ -304,6 +306,7 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | Payments matching the specified filtering criteria. |  -  |
 | **400** | Invalid input variables for the request. |  -  |
+| **415** | Missing or unsupported Content-Type header. |  -  |
 | **500** | Internal processing error |  -  |
 
 
@@ -380,5 +383,6 @@ public class Example {
 | **200** | Successfully updated the payment labels. |  -  |
 | **400** | Invalid input variables for the request. |  -  |
 | **404** | Payment not found. |  -  |
+| **415** | Missing or unsupported Content-Type header. |  -  |
 | **500** | Internal processing error |  -  |
 

@@ -35,18 +35,18 @@ class TestPaymentError(unittest.TestCase):
         model = PaymentError()
         if include_optional:
             return PaymentError(
-                code = 'SYS_003',
+                code = 'SYS_090',
                 type = 'SYSTEM_ERROR',
-                title = 'Internal Server Error',
-                description = 'The payout category value must be one of BANK, EWALLET, CASH_PICKUP, or ATM.',
+                title = 'Internal server error',
+                description = 'Unable to process the request due to an internal server error.',
                 timestamp = '2024-11-21T14:15:22Z'
             )
         else:
             return PaymentError(
-                code = 'SYS_003',
+                code = 'SYS_090',
                 type = 'SYSTEM_ERROR',
-                title = 'Internal Server Error',
-                description = 'The payout category value must be one of BANK, EWALLET, CASH_PICKUP, or ATM.',
+                title = 'Internal server error',
+                description = 'Unable to process the request due to an internal server error.',
                 timestamp = '2024-11-21T14:15:22Z',
         )
         """

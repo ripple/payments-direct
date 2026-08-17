@@ -54,7 +54,7 @@ You need to request a token for the environment you want to authenticate with.
 
 **Developer guide**
 
-* Learn how to [Request an access token](../../developer-guides/request-an-access-token/).
+* Learn how to [Request an access token](../developer-guides/request-an-access-token.md).
 
 #### Environments
 

@@ -24,16 +24,16 @@ import type { PaymentError } from './payment-error';
  */
 export interface PaymentErrorResponse {
     /**
-     * 
-     * @type {PaymentError}
+     * List of payment errors
+     * @type {Array<PaymentError>}
      * @memberof PaymentErrorResponse
      */
-    'errors': PaymentError;
+    'errors': Array<PaymentError>;
     /**
      * Error Response Status
-     * @type {string}
+     * @type {number}
      * @memberof PaymentErrorResponse
      */
-    'status': string;
+    'status': number;
 }
 

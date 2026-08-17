@@ -21,7 +21,7 @@ You need to request a token for the environment you want to authenticate with.
 
 **Developer guide**
 
-* Learn how to [Request an access token](../../developer-guides/request-an-access-token/).
+* Learn how to [Request an access token](../developer-guides/request-an-access-token.md).
 
 #### Environments
 
@@ -105,7 +105,7 @@ Name | Type | Description  | Notes
 **200** | Returns the authentication response object that includes the token, type, scopes, and expiry. |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
+**403** | Forbidden. Returns &#x60;access_denied&#x60; when the domain is not enabled, or &#x60;unauthorized_client&#x60; when the caller (client ID or audience) is not authorized to request a token. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -120,7 +120,7 @@ paths:
 
         **Developer guide**
 
-        * Learn how to [Request an access token](../../developer-guides/request-an-access-token/).
+        * Learn how to [Request an access token](../developer-guides/request-an-access-token.md).
 
         #### Environments
 
@@ -184,7 +184,9 @@ paths:
                 error: access_denied
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden
+          description: "Forbidden. Returns `access_denied` when the domain is not\
+            \ enabled, or `unauthorized_client` when the caller (client ID or audience)\
+            \ is not authorized to request a token."
       security:
       - BasicAuth: []
       summary: Request an access token
@@ -249,30 +251,29 @@ paths:
         "400":
           content:
             application/json:
-              example:
-                status: 400
-                errors:
-                  code: USR_001
-                  type: USER_VALIDATION_ERROR
-                  title: Bad Request
-                  description: Invalid request. Check your request parameters and
-                    try again.
-                  timestamp: 2024-12-01T12:00:00Z
+              examples:
+                badRequest:
+                  $ref: '#/components/examples/error-bad-request'
+                invalidRequestBody:
+                  $ref: '#/components/examples/error-invalid-request-body'
               schema:
                 $ref: '#/components/schemas/PaymentErrorResponse'
           description: Invalid input variables for the request.
+        "415":
+          content:
+            application/json:
+              examples:
+                unsupportedMediaType:
+                  $ref: '#/components/examples/error-unsupported-media-type'
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+          description: Missing or unsupported Content-Type header.
         "500":
           content:
             application/json:
-              example:
-                status: 500
-                errors:
-                  code: SYS_001
-                  type: SYSTEM_ERROR
-                  title: Internal Server Error
-                  description: Unable to process the request due to an internal server
-                    error.
-                  timestamp: 2024-12-01T12:00:00Z
+              examples:
+                internalServerError:
+                  $ref: '#/components/examples/error-internal-server'
               schema:
                 $ref: '#/components/schemas/PaymentErrorResponse'
           description: Internal processing error
@@ -306,45 +307,47 @@ paths:
         "400":
           content:
             application/json:
-              example:
-                status: 400
-                errors:
-                  code: USR_001
-                  type: USER_VALIDATION_ERROR
-                  title: Bad Request
-                  description: Invalid request. Check your request parameters and
-                    try again.
-                  timestamp: 2024-12-01T12:00:00Z
+              examples:
+                badRequest:
+                  $ref: '#/components/examples/error-bad-request'
+                invalidRequestBody:
+                  $ref: '#/components/examples/error-invalid-request-body'
               schema:
                 $ref: '#/components/schemas/PaymentErrorResponse'
           description: Invalid input variables for the payment.
         "402":
           content:
             application/json:
-              example:
-                status: 402
-                errors:
-                  code: USR_067
-                  type: USER_ERROR
-                  title: Insufficient balance
-                  description: Payment failed due to insufficient balance. Add funds
-                    to your account and try again.
-                  timestamp: 2024-12-01T12:00:00Z
+              examples:
+                insufficientBalance:
+                  $ref: '#/components/examples/error-insufficient-balance'
               schema:
                 $ref: '#/components/schemas/PaymentErrorResponse'
           description: Problems related to payment limits.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden:
+                  $ref: '#/components/examples/error-forbidden'
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+          description: The payment already exists and belongs to a different tenant.
+        "415":
+          content:
+            application/json:
+              examples:
+                unsupportedMediaType:
+                  $ref: '#/components/examples/error-unsupported-media-type'
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+          description: Missing or unsupported Content-Type header.
         "500":
           content:
             application/json:
-              example:
-                status: 500
-                errors:
-                  code: SYS_001
-                  type: SYSTEM_ERROR
-                  title: Internal Server Error
-                  description: Unable to process the request due to an internal server
-                    error.
-                  timestamp: 2024-12-01T12:00:00Z
+              examples:
+                internalServerError:
+                  $ref: '#/components/examples/error-internal-server'
               schema:
                 $ref: '#/components/schemas/PaymentErrorResponse'
           description: Internal processing error
@@ -382,44 +385,29 @@ paths:
         "400":
           content:
             application/json:
-              example:
-                status: 400
-                errors:
-                  code: USR_001
-                  type: USER_VALIDATION_ERROR
-                  title: Bad Request
-                  description: Invalid request. Check your request parameters and
-                    try again.
-                  timestamp: 2024-12-01T12:00:00Z
+              examples:
+                badRequest:
+                  $ref: '#/components/examples/error-bad-request'
+                invalidRequestBody:
+                  $ref: '#/components/examples/error-invalid-request-body'
               schema:
                 $ref: '#/components/schemas/PaymentErrorResponse'
           description: Invalid input variables for the payment.
         "404":
           content:
             application/json:
-              example:
-                status: 404
-                errors:
-                  code: USR_002
-                  type: NOT_FOUND
-                  title: Resource Not Found
-                  description: The requested resource could not be found.
-                  timestamp: 2024-12-01T12:00:00Z
+              examples:
+                resourceNotFound:
+                  $ref: '#/components/examples/error-resource-not-found'
               schema:
                 $ref: '#/components/schemas/PaymentErrorResponse'
           description: Payment not found.
         "500":
           content:
             application/json:
-              example:
-                status: 500
-                errors:
-                  code: SYS_001
-                  type: SYSTEM_ERROR
-                  title: Internal Server Error
-                  description: Unable to process the request due to an internal server
-                    error.
-                  timestamp: 2024-12-01T12:00:00Z
+              examples:
+                internalServerError:
+                  $ref: '#/components/examples/error-internal-server'
               schema:
                 $ref: '#/components/schemas/PaymentErrorResponse'
           description: Internal processing error
@@ -458,44 +446,29 @@ paths:
         "400":
           content:
             application/json:
-              example:
-                status: 400
-                errors:
-                  code: USR_001
-                  type: USER_VALIDATION_ERROR
-                  title: Bad Request
-                  description: Invalid request. Check your request parameters and
-                    try again.
-                  timestamp: 2024-12-01T12:00:00Z
+              examples:
+                badRequest:
+                  $ref: '#/components/examples/error-bad-request'
+                invalidRequestBody:
+                  $ref: '#/components/examples/error-invalid-request-body'
               schema:
                 $ref: '#/components/schemas/PaymentErrorResponse'
           description: Invalid input variables for the payment.
         "404":
           content:
             application/json:
-              example:
-                status: 404
-                errors:
-                  code: USR_002
-                  type: NOT_FOUND
-                  title: Resource Not Found
-                  description: The requested resource could not be found.
-                  timestamp: 2024-12-01T12:00:00Z
+              examples:
+                resourceNotFound:
+                  $ref: '#/components/examples/error-resource-not-found'
               schema:
                 $ref: '#/components/schemas/PaymentErrorResponse'
           description: Payment not found.
         "500":
           content:
             application/json:
-              example:
-                status: 500
-                errors:
-                  code: SYS_001
-                  type: SYSTEM_ERROR
-                  title: Internal Server Error
-                  description: Unable to process the request due to an internal server
-                    error.
-                  timestamp: 2024-12-01T12:00:00Z
+              examples:
+                internalServerError:
+                  $ref: '#/components/examples/error-internal-server'
               schema:
                 $ref: '#/components/schemas/PaymentErrorResponse'
           description: Internal processing error
@@ -541,44 +514,38 @@ paths:
         "400":
           content:
             application/json:
-              example:
-                status: 400
-                errors:
-                  code: USR_001
-                  type: USER_VALIDATION_ERROR
-                  title: Bad Request
-                  description: Invalid request. Check your request parameters and
-                    try again.
-                  timestamp: 2024-12-01T12:00:00Z
+              examples:
+                badRequest:
+                  $ref: '#/components/examples/error-bad-request'
+                invalidRequestBody:
+                  $ref: '#/components/examples/error-invalid-request-body'
               schema:
                 $ref: '#/components/schemas/PaymentErrorResponse'
           description: Invalid input variables for the request.
         "404":
           content:
             application/json:
-              example:
-                status: 404
-                errors:
-                  code: USR_002
-                  type: NOT_FOUND
-                  title: Resource Not Found
-                  description: The requested resource could not be found.
-                  timestamp: 2024-12-01T12:00:00Z
+              examples:
+                resourceNotFound:
+                  $ref: '#/components/examples/error-resource-not-found'
               schema:
                 $ref: '#/components/schemas/PaymentErrorResponse'
           description: Payment not found.
+        "415":
+          content:
+            application/json:
+              examples:
+                unsupportedMediaType:
+                  $ref: '#/components/examples/error-unsupported-media-type'
+              schema:
+                $ref: '#/components/schemas/PaymentErrorResponse'
+          description: Missing or unsupported Content-Type header.
         "500":
           content:
             application/json:
-              example:
-                status: 500
-                errors:
-                  code: SYS_001
-                  type: SYSTEM_ERROR
-                  title: Internal Server Error
-                  description: Unable to process the request due to an internal server
-                    error.
-                  timestamp: 2024-12-01T12:00:00Z
+              examples:
+                internalServerError:
+                  $ref: '#/components/examples/error-internal-server'
               schema:
                 $ref: '#/components/schemas/PaymentErrorResponse'
           description: Internal processing error
@@ -2002,6 +1969,83 @@ components:
         detail: A conflict occurred. The resource already exists or cannot be processed
           due to a conflict.
         retryable: false
+    error-bad-request:
+      description: Default response when the request is malformed or a parameter fails
+        validation.
+      value:
+        status: 400
+        errors:
+        - code: USR_001
+          type: USER_ERROR
+          title: Bad request
+          description: Invalid request. Check your request parameters and try again.
+          timestamp: 2024-12-01T12:00:00Z
+    error-invalid-request-body:
+      description: Returned when a field in the request body has an unexpected type
+        or value.
+      value:
+        status: 400
+        errors:
+        - code: USR_055
+          type: USER_ERROR
+          title: Invalid request body
+          description: Unable to create payment because the request body is empty
+            or contains unexpected characters. Try again with all valid request body.
+          timestamp: 2024-12-01T12:00:00Z
+    error-forbidden:
+      description: Returned when the payment exists but is owned by another tenant.
+      value:
+        status: 403
+        errors:
+        - code: AUTH_051
+          type: AUTH_ERROR
+          title: Unauthorized
+          description: Invalid request. Check your request parameters and try again.
+          timestamp: 2024-12-01T12:00:00Z
+    error-resource-not-found:
+      description: Returned when no resource matches the supplied identifier.
+      value:
+        status: 404
+        errors:
+        - code: USR_002
+          type: NOT_FOUND
+          title: Resource not found
+          description: The requested resource could not be found.
+          timestamp: 2024-12-01T12:00:00Z
+    error-unsupported-media-type:
+      description: Returned when the Content-Type header is missing or not supported.
+      value:
+        status: 415
+        errors:
+        - code: USR_075
+          type: USER_ERROR
+          title: Missing or unsupported content type
+          description: The request is either missing the 'Content-Type' header or
+            the header contains an unsupported value. Set the 'Content-Type' header
+            value to 'application/json' and try again.
+          timestamp: 2024-12-01T12:00:00Z
+    error-insufficient-balance:
+      description: Returned when the account does not hold enough balance to fund
+        the payment.
+      value:
+        status: 402
+        errors:
+        - code: USR_067
+          type: USER_ERROR
+          title: Insufficient balance
+          description: Payment failed due to insufficient balance. Add funds to your
+            account and try again.
+          timestamp: 2024-12-01T12:00:00Z
+    error-internal-server:
+      description: Default response for an unhandled server-side failure.
+      value:
+        status: 500
+        errors:
+        - code: SYS_001
+          type: SYSTEM_ERROR
+          title: Internal server error
+          description: Unable to process the request due to an internal server error.
+          timestamp: 2024-12-01T12:00:00Z
   schemas:
     AuthenticationRequest:
       description: The authentication request.
@@ -2111,36 +2155,42 @@ components:
     PaymentErrorResponse:
       example:
         errors:
-          code: SYS_003
-          description: "The payout category value must be one of BANK, EWALLET, CASH_PICKUP,\
-            \ or ATM."
+        - code: SYS_090
+          description: Unable to process the request due to an internal server error.
           type: SYSTEM_ERROR
-          title: Internal Server Error
+          title: Internal server error
           timestamp: 2024-11-21T14:15:22Z
-        status: "400"
+        - code: SYS_090
+          description: Unable to process the request due to an internal server error.
+          type: SYSTEM_ERROR
+          title: Internal server error
+          timestamp: 2024-11-21T14:15:22Z
+        status: 400
       properties:
         errors:
-          $ref: '#/components/schemas/PaymentError'
+          description: List of payment errors
+          items:
+            $ref: '#/components/schemas/PaymentError'
+          type: array
         status:
           description: Error Response Status
-          example: "400"
-          type: string
+          example: 400
+          type: integer
       required:
       - errors
       - status
       type: object
     PaymentError:
       example:
-        code: SYS_003
-        description: "The payout category value must be one of BANK, EWALLET, CASH_PICKUP,\
-          \ or ATM."
+        code: SYS_090
+        description: Unable to process the request due to an internal server error.
         type: SYSTEM_ERROR
-        title: Internal Server Error
+        title: Internal server error
         timestamp: 2024-11-21T14:15:22Z
       properties:
         code:
           description: A unique identifier for  the error
-          example: SYS_003
+          example: SYS_090
           type: string
         type:
           description: "A high-level categorization of the error, indicating the type\
@@ -2149,13 +2199,12 @@ components:
           type: string
         title:
           description: "A brief, user-friendly description of the error"
-          example: Internal Server Error
+          example: Internal server error
           type: string
         description:
           description: "A more detailed explanation of the error, potentially including\
             \ information about what caused the error and the next steps"
-          example: "The payout category value must be one of BANK, EWALLET, CASH_PICKUP,\
-            \ or ATM."
+          example: Unable to process the request due to an internal server error.
           type: string
         timestamp:
           example: 2024-11-21T14:15:22Z
@@ -2489,17 +2538,15 @@ components:
         purposeCode: PAYR
         paymentState: INITIATED
         errors:
-        - code: SYS_003
-          description: "The payout category value must be one of BANK, EWALLET, CASH_PICKUP,\
-            \ or ATM."
+        - code: SYS_090
+          description: Unable to process the request due to an internal server error.
           type: SYSTEM_ERROR
-          title: Internal Server Error
+          title: Internal server error
           timestamp: 2024-11-21T14:15:22Z
-        - code: SYS_003
-          description: "The payout category value must be one of BANK, EWALLET, CASH_PICKUP,\
-            \ or ATM."
+        - code: SYS_090
+          description: Unable to process the request due to an internal server error.
           type: SYSTEM_ERROR
-          title: Internal Server Error
+          title: Internal server error
           timestamp: 2024-11-21T14:15:22Z
         receiverRelationship: SUBS
         adjustedExchangeRate:

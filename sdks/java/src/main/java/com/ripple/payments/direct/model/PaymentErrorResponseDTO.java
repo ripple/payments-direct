@@ -21,6 +21,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.ripple.payments.direct.model.PaymentErrorDTO;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.io.UnsupportedEncodingException;
@@ -39,41 +42,49 @@ import java.util.StringJoiner;
 public class PaymentErrorResponseDTO {
   public static final String JSON_PROPERTY_ERRORS = "errors";
   @javax.annotation.Nonnull
-  private PaymentErrorDTO errors;
+  private List<PaymentErrorDTO> errors = new ArrayList<>();
 
   public static final String JSON_PROPERTY_STATUS = "status";
   @javax.annotation.Nonnull
-  private String status;
+  private Integer status;
 
   public PaymentErrorResponseDTO() {
   }
 
-  public PaymentErrorResponseDTO errors(@javax.annotation.Nonnull PaymentErrorDTO errors) {
+  public PaymentErrorResponseDTO errors(@javax.annotation.Nonnull List<PaymentErrorDTO> errors) {
     
     this.errors = errors;
     return this;
   }
 
+  public PaymentErrorResponseDTO addErrorsItem(PaymentErrorDTO errorsItem) {
+    if (this.errors == null) {
+      this.errors = new ArrayList<>();
+    }
+    this.errors.add(errorsItem);
+    return this;
+  }
+
   /**
-   * Get errors
+   * List of payment errors
    * @return errors
    */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ERRORS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public PaymentErrorDTO getErrors() {
+  public List<PaymentErrorDTO> getErrors() {
     return errors;
   }
 
 
   @JsonProperty(JSON_PROPERTY_ERRORS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setErrors(@javax.annotation.Nonnull PaymentErrorDTO errors) {
+  public void setErrors(@javax.annotation.Nonnull List<PaymentErrorDTO> errors) {
     this.errors = errors;
   }
 
-  public PaymentErrorResponseDTO status(@javax.annotation.Nonnull String status) {
+  public PaymentErrorResponseDTO status(@javax.annotation.Nonnull Integer status) {
     
     this.status = status;
     return this;
@@ -87,14 +98,14 @@ public class PaymentErrorResponseDTO {
   @JsonProperty(JSON_PROPERTY_STATUS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public String getStatus() {
+  public Integer getStatus() {
     return status;
   }
 
 
   @JsonProperty(JSON_PROPERTY_STATUS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setStatus(@javax.annotation.Nonnull String status) {
+  public void setStatus(@javax.annotation.Nonnull Integer status) {
     this.status = status;
   }
 
@@ -171,7 +182,12 @@ public class PaymentErrorResponseDTO {
 
     // add `errors` to the URL query string
     if (getErrors() != null) {
-      joiner.add(getErrors().toUrlQueryString(prefix + "errors" + suffix));
+      for (int i = 0; i < getErrors().size(); i++) {
+        if (getErrors().get(i) != null) {
+          joiner.add(getErrors().get(i).toUrlQueryString(String.format("%serrors%s%s", prefix, suffix,
+              "".equals(suffix) ? "" : String.format("%s%d%s", containerPrefix, i, containerSuffix))));
+        }
+      }
     }
 
     // add `status` to the URL query string

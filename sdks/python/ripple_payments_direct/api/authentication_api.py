@@ -60,7 +60,7 @@ class AuthenticationApi:
     ) -> AuthenticationResponse:
         """Request an access token
 
-        Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn't fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../../developer-guides/request-an-access-token/).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
+        Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn't fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../developer-guides/request-an-access-token.md).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
 
         :param authentication_request: (required)
         :type authentication_request: AuthenticationRequest
@@ -134,7 +134,7 @@ class AuthenticationApi:
     ) -> ApiResponse[AuthenticationResponse]:
         """Request an access token
 
-        Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn't fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../../developer-guides/request-an-access-token/).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
+        Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn't fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../developer-guides/request-an-access-token.md).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
 
         :param authentication_request: (required)
         :type authentication_request: AuthenticationRequest
@@ -208,7 +208,7 @@ class AuthenticationApi:
     ) -> RESTResponseType:
         """Request an access token
 
-        Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn't fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../../developer-guides/request-an-access-token/).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
+        Request an access token for authentication with Ripple APIs.  You need to request a token for the environment you want to authenticate with.  **Note**: The length of the access token isn't fixed, hence it can vary. Avoid validating tokens based on character length.  **Developer guide**  * Learn how to [Request an access token](../developer-guides/request-an-access-token.md).  #### Environments  | Environment | Domain | Description | | --- | --- | --- | | Test | `api.test.ripple.com` | Test environment with simulated currency. | | Production | `api.ripple.com` | Production environment for Ripple Payments Direct | 
 
         :param authentication_request: (required)
         :type authentication_request: AuthenticationRequest

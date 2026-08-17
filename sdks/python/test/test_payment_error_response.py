@@ -35,23 +35,27 @@ class TestPaymentErrorResponse(unittest.TestCase):
         model = PaymentErrorResponse()
         if include_optional:
             return PaymentErrorResponse(
-                errors = ripple_payments_direct.models.payment_error.PaymentError(
-                    code = 'SYS_003', 
-                    type = 'SYSTEM_ERROR', 
-                    title = 'Internal Server Error', 
-                    description = 'The payout category value must be one of BANK, EWALLET, CASH_PICKUP, or ATM.', 
-                    timestamp = '2024-11-21T14:15:22Z', ),
-                status = '400'
+                errors = [
+                    ripple_payments_direct.models.payment_error.PaymentError(
+                        code = 'SYS_090', 
+                        type = 'SYSTEM_ERROR', 
+                        title = 'Internal server error', 
+                        description = 'Unable to process the request due to an internal server error.', 
+                        timestamp = '2024-11-21T14:15:22Z', )
+                    ],
+                status = 400
             )
         else:
             return PaymentErrorResponse(
-                errors = ripple_payments_direct.models.payment_error.PaymentError(
-                    code = 'SYS_003', 
-                    type = 'SYSTEM_ERROR', 
-                    title = 'Internal Server Error', 
-                    description = 'The payout category value must be one of BANK, EWALLET, CASH_PICKUP, or ATM.', 
-                    timestamp = '2024-11-21T14:15:22Z', ),
-                status = '400',
+                errors = [
+                    ripple_payments_direct.models.payment_error.PaymentError(
+                        code = 'SYS_090', 
+                        type = 'SYSTEM_ERROR', 
+                        title = 'Internal server error', 
+                        description = 'Unable to process the request due to an internal server error.', 
+                        timestamp = '2024-11-21T14:15:22Z', )
+                    ],
+                status = 400,
         )
         """
 

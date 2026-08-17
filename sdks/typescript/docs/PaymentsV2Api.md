@@ -61,6 +61,8 @@ const { status, data } = await apiInstance.createPaymentV2(
 |**201** | Valid payment |  -  |
 |**400** | Invalid input variables for the payment. |  -  |
 |**402** | Problems related to payment limits. |  -  |
+|**403** | The payment already exists and belongs to a different tenant. |  -  |
+|**415** | Missing or unsupported Content-Type header. |  -  |
 |**500** | Internal processing error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -223,6 +225,7 @@ const { status, data } = await apiInstance.searchPaymentsV2(
 |-------------|-------------|------------------|
 |**200** | Payments matching the specified filtering criteria. |  -  |
 |**400** | Invalid input variables for the request. |  -  |
+|**415** | Missing or unsupported Content-Type header. |  -  |
 |**500** | Internal processing error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -281,6 +284,7 @@ const { status, data } = await apiInstance.updatePaymentLabelsV2(
 |**200** | Successfully updated the payment labels. |  -  |
 |**400** | Invalid input variables for the request. |  -  |
 |**404** | Payment not found. |  -  |
+|**415** | Missing or unsupported Content-Type header. |  -  |
 |**500** | Internal processing error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

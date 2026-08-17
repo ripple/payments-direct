@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**errors** | [**PaymentError**](PaymentError.md) |  | [default to undefined]
-**status** | **string** | Error Response Status | [default to undefined]
+**errors** | [**Array&lt;PaymentError&gt;**](PaymentError.md) | List of payment errors | [default to undefined]
+**status** | **number** | Error Response Status | [default to undefined]
 
 ## Example
 
