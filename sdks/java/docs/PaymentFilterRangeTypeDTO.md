@@ -1,0 +1,15 @@
+
+
+# PaymentFilterRangeTypeDTO
+
+## Enum
+
+
+* `PAYMENT_CREATION` (value: `"PAYMENT_CREATION"`)
+
+* `PAYMENT_EXPIRY` (value: `"PAYMENT_EXPIRY"`)
+
+* `PAYMENT_STATUS_LAST_UPDATED` (value: `"PAYMENT_STATUS_LAST_UPDATED"`)
+
+
+

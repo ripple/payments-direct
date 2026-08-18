@@ -11,7 +11,7 @@ All URIs are relative to *https://api.test.ripple.com*
 # **createQuoteCollection**
 > QuoteCollection createQuoteCollection(quoteCollectionRequest)
 
-Creates a collection of quotes for a proposed payment.
+Creates a collection of quotes for a proposed payment.  **Tutorials**  * Learn how to [Create a quote](../tutorials/create-a-v2-payment.md#create-a-quote-collection). 
 
 ### Example
 
