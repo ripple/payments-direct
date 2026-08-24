@@ -79,7 +79,7 @@ const apiInstance = new LedgerPublicApi(configuration);
 let currency: string; //Three-letter ISO 4217 currency code for the transactions to return (for example, USD).  (default to undefined)
 let startDttm: string; //Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions.  (default to undefined)
 let endDttm: string; //End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions.  (default to undefined)
-let pageSize: number; //Number of records to return in the response page. Use page-size together with offset for offset-based pagination  (default to 25)
+let pageSize: number; //Number of records to return in the response page. Use page-size together with offset for offset-based pagination  (default to undefined)
 let status: string; //Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  (optional) (default to undefined)
 let txnReference: string; //Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  (optional) (default to undefined)
 let offset: number; //Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, `offset=25&page-size=25` returns the second page of results.  (optional) (default to undefined)
@@ -106,7 +106,7 @@ const { status, data } = await apiInstance.getStatementsTransactionsForCustomer(
 | **currency** | [**string**] | Three-letter ISO 4217 currency code for the transactions to return (for example, USD).  | defaults to undefined|
 | **startDttm** | [**string**] | Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions.  | defaults to undefined|
 | **endDttm** | [**string**] | End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions.  | defaults to undefined|
-| **pageSize** | [**number**] | Number of records to return in the response page. Use page-size together with offset for offset-based pagination  | defaults to 25|
+| **pageSize** | [**number**] | Number of records to return in the response page. Use page-size together with offset for offset-based pagination  | defaults to undefined|
 | **status** | [**string**] | Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  | (optional) defaults to undefined|
 | **txnReference** | [**string**] | Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  | (optional) defaults to undefined|
 | **offset** | [**number**] | Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, &#x60;offset&#x3D;25&amp;page-size&#x3D;25&#x60; returns the second page of results.  | (optional) defaults to undefined|

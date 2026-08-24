@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Union
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,8 +28,8 @@ class GetBalances200ResponseBalancesInner(BaseModel):
     """ # noqa: E501
     funding_type: StrictStr = Field(description="The funding method associated with your account.", alias="fundingType")
     currency: StrictStr = Field(description="Currency code.")
-    available_balance: Union[StrictFloat, StrictInt] = Field(description="Available funded balance that you can use to initiate payments.", alias="availableBalance")
-    reserved_balance: Union[StrictFloat, StrictInt] = Field(description="Amount reserved to complete in-progress transactions. You can't use this amount to initiate new payments.", alias="reservedBalance")
+    available_balance: StrictStr = Field(description="Available funded balance that you can use to initiate payments, represented as a decimal string.", alias="availableBalance")
+    reserved_balance: StrictStr = Field(description="Amount reserved to complete in-progress transactions. You can't use this amount to initiate new payments, represented as a decimal string.", alias="reservedBalance")
     __properties: ClassVar[List[str]] = ["fundingType", "currency", "availableBalance", "reservedBalance"]
 
     @field_validator('funding_type')

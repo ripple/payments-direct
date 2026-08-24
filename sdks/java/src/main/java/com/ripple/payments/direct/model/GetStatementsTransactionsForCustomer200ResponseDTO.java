@@ -45,19 +45,19 @@ import java.util.StringJoiner;
 public class GetStatementsTransactionsForCustomer200ResponseDTO {
   public static final String JSON_PROPERTY_OFFSET = "offset";
   @javax.annotation.Nullable
-  private Integer offset;
+  private String offset;
 
   public static final String JSON_PROPERTY_PAGE_SIZE = "pageSize";
   @javax.annotation.Nullable
-  private Integer pageSize;
+  private String pageSize;
 
   public static final String JSON_PROPERTY_PAGE_ELEMENTS = "pageElements";
   @javax.annotation.Nullable
-  private Integer pageElements;
+  private String pageElements;
 
   public static final String JSON_PROPERTY_TOTAL = "total";
   @javax.annotation.Nullable
-  private Long total;
+  private String total;
 
   public static final String JSON_PROPERTY_STATEMENT_TRANSACTIONS = "statementTransactions";
   @javax.annotation.Nullable
@@ -66,7 +66,7 @@ public class GetStatementsTransactionsForCustomer200ResponseDTO {
   public GetStatementsTransactionsForCustomer200ResponseDTO() {
   }
 
-  public GetStatementsTransactionsForCustomer200ResponseDTO offset(@javax.annotation.Nullable Integer offset) {
+  public GetStatementsTransactionsForCustomer200ResponseDTO offset(@javax.annotation.Nullable String offset) {
     
     this.offset = offset;
     return this;
@@ -80,18 +80,18 @@ public class GetStatementsTransactionsForCustomer200ResponseDTO {
   @JsonProperty(JSON_PROPERTY_OFFSET)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public Integer getOffset() {
+  public String getOffset() {
     return offset;
   }
 
 
   @JsonProperty(JSON_PROPERTY_OFFSET)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setOffset(@javax.annotation.Nullable Integer offset) {
+  public void setOffset(@javax.annotation.Nullable String offset) {
     this.offset = offset;
   }
 
-  public GetStatementsTransactionsForCustomer200ResponseDTO pageSize(@javax.annotation.Nullable Integer pageSize) {
+  public GetStatementsTransactionsForCustomer200ResponseDTO pageSize(@javax.annotation.Nullable String pageSize) {
     
     this.pageSize = pageSize;
     return this;
@@ -105,18 +105,18 @@ public class GetStatementsTransactionsForCustomer200ResponseDTO {
   @JsonProperty(JSON_PROPERTY_PAGE_SIZE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public Integer getPageSize() {
+  public String getPageSize() {
     return pageSize;
   }
 
 
   @JsonProperty(JSON_PROPERTY_PAGE_SIZE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPageSize(@javax.annotation.Nullable Integer pageSize) {
+  public void setPageSize(@javax.annotation.Nullable String pageSize) {
     this.pageSize = pageSize;
   }
 
-  public GetStatementsTransactionsForCustomer200ResponseDTO pageElements(@javax.annotation.Nullable Integer pageElements) {
+  public GetStatementsTransactionsForCustomer200ResponseDTO pageElements(@javax.annotation.Nullable String pageElements) {
     
     this.pageElements = pageElements;
     return this;
@@ -130,18 +130,18 @@ public class GetStatementsTransactionsForCustomer200ResponseDTO {
   @JsonProperty(JSON_PROPERTY_PAGE_ELEMENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public Integer getPageElements() {
+  public String getPageElements() {
     return pageElements;
   }
 
 
   @JsonProperty(JSON_PROPERTY_PAGE_ELEMENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPageElements(@javax.annotation.Nullable Integer pageElements) {
+  public void setPageElements(@javax.annotation.Nullable String pageElements) {
     this.pageElements = pageElements;
   }
 
-  public GetStatementsTransactionsForCustomer200ResponseDTO total(@javax.annotation.Nullable Long total) {
+  public GetStatementsTransactionsForCustomer200ResponseDTO total(@javax.annotation.Nullable String total) {
     
     this.total = total;
     return this;
@@ -155,14 +155,14 @@ public class GetStatementsTransactionsForCustomer200ResponseDTO {
   @JsonProperty(JSON_PROPERTY_TOTAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public Long getTotal() {
+  public String getTotal() {
     return total;
   }
 
 
   @JsonProperty(JSON_PROPERTY_TOTAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setTotal(@javax.annotation.Nullable Long total) {
+  public void setTotal(@javax.annotation.Nullable String total) {
     this.total = total;
   }
 

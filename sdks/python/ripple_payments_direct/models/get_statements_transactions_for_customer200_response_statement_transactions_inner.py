@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,16 +28,16 @@ class GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner(
     GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner
     """ # noqa: E501
     tenant: Optional[StrictStr] = Field(default=None, description="Identifier of the customer that owns this ledger transaction.")
-    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount of the transaction applied to the customer’s ledger account. ")
+    amount: Optional[StrictStr] = Field(default=None, description="Amount of the transaction applied to the customer’s ledger account, represented as a decimal string. ")
     currency: Optional[StrictStr] = Field(default=None, description="Three-letter ISO 4217 currency code of the transaction.")
-    txn_reference: Optional[StrictStr] = Field(default=None, description="External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types. ", alias="txnReference")
+    txn_reference: Optional[StrictStr] = Field(default=None, description="External reference that links this ledger transaction to a payment or other upstream operation. ", alias="txnReference")
     operation: Optional[StrictStr] = Field(default=None, description="Operation performed on the customer’s prefunded ledger account. ")
     txn_source: Optional[StrictStr] = Field(default=None, description="Source of the ledger transaction (for example, which system or flow created it). ", alias="txnSource")
     status: Optional[StrictStr] = Field(default=None, description="State of the ledger transaction.")
     created_dttm: Optional[datetime] = Field(default=None, description="Timestamp (UTC) when the ledger transaction was created.", alias="createdDttm")
     updated_dttm: Optional[datetime] = Field(default=None, description="Timestamp (UTC) when the ledger transaction was last updated.", alias="updatedDttm")
-    available_balance_before: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Available ledger account balance (in the transaction currency) immediately before this transaction was applied. ", alias="availableBalanceBefore")
-    available_balance_after: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Available ledger account balance (in the transaction currency) immediately after this transaction was applied. ", alias="availableBalanceAfter")
+    available_balance_before: Optional[StrictStr] = Field(default=None, description="Available ledger account balance (in the transaction currency) immediately before this transaction was applied, represented as a decimal string. ", alias="availableBalanceBefore")
+    available_balance_after: Optional[StrictStr] = Field(default=None, description="Available ledger account balance (in the transaction currency) immediately after this transaction was applied, represented as a decimal string. ", alias="availableBalanceAfter")
     __properties: ClassVar[List[str]] = ["tenant", "amount", "currency", "txnReference", "operation", "txnSource", "status", "createdDttm", "updatedDttm", "availableBalanceBefore", "availableBalanceAfter"]
 
     model_config = ConfigDict(

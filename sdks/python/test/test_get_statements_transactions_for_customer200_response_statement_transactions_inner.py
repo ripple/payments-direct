@@ -36,7 +36,7 @@ class TestGetStatementsTransactionsForCustomer200ResponseStatementTransactionsIn
         if include_optional:
             return GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner(
                 tenant = 'rocketfuel',
-                amount = 100,
+                amount = '100.00',
                 currency = 'USD',
                 txn_reference = '',
                 operation = '',
@@ -44,8 +44,8 @@ class TestGetStatementsTransactionsForCustomer200ResponseStatementTransactionsIn
                 status = '',
                 created_dttm = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 updated_dttm = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                available_balance_before = 100,
-                available_balance_after = 90
+                available_balance_before = '100.00',
+                available_balance_after = '90.00'
             )
         else:
             return GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner(

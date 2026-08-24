@@ -1009,16 +1009,17 @@ paths:
                           example: USD
                           description: Currency code.
                         availableBalance:
-                          type: number
-                          example: 1000
+                          type: string
+                          example: '1000.00'
                           description: Available funded balance that you can use
-                            to initiate payments.
+                            to initiate payments, represented as a decimal
+                            string.
                         reservedBalance:
-                          type: number
-                          example: 100
+                          type: string
+                          example: '100.00'
                           description: Amount reserved to complete in-progress
                             transactions. You can't use this amount to initiate
-                            new payments.
+                            new payments, represented as a decimal string.
                       required:
                       - fundingType
                       - currency
@@ -1248,7 +1249,6 @@ paths:
         required: true
         schema:
           type: integer
-          default: 25
           minimum: 1
           maximum: 50
         description: |
@@ -1293,23 +1293,22 @@ paths:
                 description: A page of ledger statement transactions and pagination metadata.
                 properties:
                   offset:
-                    type: integer
+                    type: string
                     description: |
                       Offset used in the request to skip a specific number of records.
-                    example: 0
+                    example: '0'
                   pageSize:
-                    type: integer
+                    type: string
                     description: Number of records requested per page
-                    example: 25
+                    example: '25'
                   pageElements:
-                    type: integer
+                    type: string
                     description: Number of records returned in requested page
-                    example: 25
+                    example: '25'
                   total:
-                    type: integer
-                    format: int64
+                    type: string
                     description: Total number of records available for the given filters.
-                    example: 1000
+                    example: '1000'
                   statementTransactions:
                     type: array
                     description: Statement transaction details for the customer.
@@ -1321,10 +1320,10 @@ paths:
                           description: Identifier of the customer that owns this ledger transaction.
                           example: rocketfuel
                         amount:
-                          type: number
+                          type: string
                           description: |
-                            Amount of the transaction applied to the customer’s ledger account.
-                          example: 100
+                            Amount of the transaction applied to the customer’s ledger account, represented as a decimal string.
+                          example: '100.00'
                         currency:
                           type: string
                           description: Three-letter ISO 4217 currency code of the transaction.
@@ -1333,7 +1332,7 @@ paths:
                           type: string
                           nullable: true
                           description: |
-                            External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types.
+                            External reference that links this ledger transaction to a payment or other upstream operation.
                         operation:
                           type: string
                           description: |
@@ -1376,15 +1375,15 @@ paths:
                           description: Timestamp (UTC) when the ledger transaction was last updated.
                           example: ‘2024-06-01T00:00:00.000000Z’
                         availableBalanceBefore:
-                          type: number
+                          type: string
                           description: |
-                            Available ledger account balance (in the transaction currency) immediately before this transaction was applied.
-                          example: 100
+                            Available ledger account balance (in the transaction currency) immediately before this transaction was applied, represented as a decimal string.
+                          example: '100.00'
                         availableBalanceAfter:
-                          type: number
+                          type: string
                           description: |
-                            Available ledger account balance (in the transaction currency) immediately after this transaction was applied.
-                          example: 90
+                            Available ledger account balance (in the transaction currency) immediately after this transaction was applied, represented as a decimal string.
+                          example: '90.00'
             text/csv:
               schema:
                 type: string

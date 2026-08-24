@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **funding_type** | **str** | The funding method associated with your account. | 
 **currency** | **str** | Currency code. | 
-**available_balance** | **float** | Available funded balance that you can use to initiate payments. | 
-**reserved_balance** | **float** | Amount reserved to complete in-progress transactions. You can&#39;t use this amount to initiate new payments. | 
+**available_balance** | **str** | Available funded balance that you can use to initiate payments, represented as a decimal string. | 
+**reserved_balance** | **str** | Amount reserved to complete in-progress transactions. You can&#39;t use this amount to initiate new payments, represented as a decimal string. | 
 
 ## Example
 

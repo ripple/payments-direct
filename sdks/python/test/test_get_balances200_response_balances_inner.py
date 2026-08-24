@@ -37,15 +37,15 @@ class TestGetBalances200ResponseBalancesInner(unittest.TestCase):
             return GetBalances200ResponseBalancesInner(
                 funding_type = 'FUNDED',
                 currency = 'USD',
-                available_balance = 1000,
-                reserved_balance = 100
+                available_balance = '1000.00',
+                reserved_balance = '100.00'
             )
         else:
             return GetBalances200ResponseBalancesInner(
                 funding_type = 'FUNDED',
                 currency = 'USD',
-                available_balance = 1000,
-                reserved_balance = 100,
+                available_balance = '1000.00',
+                reserved_balance = '100.00',
         )
         """
 

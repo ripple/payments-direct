@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FundingType** | **string** | The funding method associated with your account. | 
 **Currency** | **string** | Currency code. | 
-**AvailableBalance** | **float32** | Available funded balance that you can use to initiate payments. | 
-**ReservedBalance** | **float32** | Amount reserved to complete in-progress transactions. You can&#39;t use this amount to initiate new payments. | 
+**AvailableBalance** | **string** | Available funded balance that you can use to initiate payments, represented as a decimal string. | 
+**ReservedBalance** | **string** | Amount reserved to complete in-progress transactions. You can&#39;t use this amount to initiate new payments, represented as a decimal string. | 
 
 ## Methods
 
 ### NewGetBalances200ResponseBalancesInner
 
-`func NewGetBalances200ResponseBalancesInner(fundingType string, currency string, availableBalance float32, reservedBalance float32, ) *GetBalances200ResponseBalancesInner`
+`func NewGetBalances200ResponseBalancesInner(fundingType string, currency string, availableBalance string, reservedBalance string, ) *GetBalances200ResponseBalancesInner`
 
 NewGetBalances200ResponseBalancesInner instantiates a new GetBalances200ResponseBalancesInner object
 This constructor will assign default values to properties that have it defined,
@@ -70,40 +70,40 @@ SetCurrency sets Currency field to given value.
 
 ### GetAvailableBalance
 
-`func (o *GetBalances200ResponseBalancesInner) GetAvailableBalance() float32`
+`func (o *GetBalances200ResponseBalancesInner) GetAvailableBalance() string`
 
 GetAvailableBalance returns the AvailableBalance field if non-nil, zero value otherwise.
 
 ### GetAvailableBalanceOk
 
-`func (o *GetBalances200ResponseBalancesInner) GetAvailableBalanceOk() (*float32, bool)`
+`func (o *GetBalances200ResponseBalancesInner) GetAvailableBalanceOk() (*string, bool)`
 
 GetAvailableBalanceOk returns a tuple with the AvailableBalance field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvailableBalance
 
-`func (o *GetBalances200ResponseBalancesInner) SetAvailableBalance(v float32)`
+`func (o *GetBalances200ResponseBalancesInner) SetAvailableBalance(v string)`
 
 SetAvailableBalance sets AvailableBalance field to given value.
 
 
 ### GetReservedBalance
 
-`func (o *GetBalances200ResponseBalancesInner) GetReservedBalance() float32`
+`func (o *GetBalances200ResponseBalancesInner) GetReservedBalance() string`
 
 GetReservedBalance returns the ReservedBalance field if non-nil, zero value otherwise.
 
 ### GetReservedBalanceOk
 
-`func (o *GetBalances200ResponseBalancesInner) GetReservedBalanceOk() (*float32, bool)`
+`func (o *GetBalances200ResponseBalancesInner) GetReservedBalanceOk() (*string, bool)`
 
 GetReservedBalanceOk returns a tuple with the ReservedBalance field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetReservedBalance
 
-`func (o *GetBalances200ResponseBalancesInner) SetReservedBalance(v float32)`
+`func (o *GetBalances200ResponseBalancesInner) SetReservedBalance(v string)`
 
 SetReservedBalance sets ReservedBalance field to given value.
 

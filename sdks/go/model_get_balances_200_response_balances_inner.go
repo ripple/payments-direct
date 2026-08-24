@@ -25,10 +25,10 @@ type GetBalances200ResponseBalancesInner struct {
 	FundingType string `json:"fundingType"`
 	// Currency code.
 	Currency string `json:"currency"`
-	// Available funded balance that you can use to initiate payments.
-	AvailableBalance float32 `json:"availableBalance"`
-	// Amount reserved to complete in-progress transactions. You can't use this amount to initiate new payments.
-	ReservedBalance float32 `json:"reservedBalance"`
+	// Available funded balance that you can use to initiate payments, represented as a decimal string.
+	AvailableBalance string `json:"availableBalance"`
+	// Amount reserved to complete in-progress transactions. You can't use this amount to initiate new payments, represented as a decimal string.
+	ReservedBalance string `json:"reservedBalance"`
 }
 
 type _GetBalances200ResponseBalancesInner GetBalances200ResponseBalancesInner
@@ -37,7 +37,7 @@ type _GetBalances200ResponseBalancesInner GetBalances200ResponseBalancesInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetBalances200ResponseBalancesInner(fundingType string, currency string, availableBalance float32, reservedBalance float32) *GetBalances200ResponseBalancesInner {
+func NewGetBalances200ResponseBalancesInner(fundingType string, currency string, availableBalance string, reservedBalance string) *GetBalances200ResponseBalancesInner {
 	this := GetBalances200ResponseBalancesInner{}
 	this.FundingType = fundingType
 	this.Currency = currency
@@ -103,9 +103,9 @@ func (o *GetBalances200ResponseBalancesInner) SetCurrency(v string) {
 }
 
 // GetAvailableBalance returns the AvailableBalance field value
-func (o *GetBalances200ResponseBalancesInner) GetAvailableBalance() float32 {
+func (o *GetBalances200ResponseBalancesInner) GetAvailableBalance() string {
 	if o == nil {
-		var ret float32
+		var ret string
 		return ret
 	}
 
@@ -114,7 +114,7 @@ func (o *GetBalances200ResponseBalancesInner) GetAvailableBalance() float32 {
 
 // GetAvailableBalanceOk returns a tuple with the AvailableBalance field value
 // and a boolean to check if the value has been set.
-func (o *GetBalances200ResponseBalancesInner) GetAvailableBalanceOk() (*float32, bool) {
+func (o *GetBalances200ResponseBalancesInner) GetAvailableBalanceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -122,14 +122,14 @@ func (o *GetBalances200ResponseBalancesInner) GetAvailableBalanceOk() (*float32,
 }
 
 // SetAvailableBalance sets field value
-func (o *GetBalances200ResponseBalancesInner) SetAvailableBalance(v float32) {
+func (o *GetBalances200ResponseBalancesInner) SetAvailableBalance(v string) {
 	o.AvailableBalance = v
 }
 
 // GetReservedBalance returns the ReservedBalance field value
-func (o *GetBalances200ResponseBalancesInner) GetReservedBalance() float32 {
+func (o *GetBalances200ResponseBalancesInner) GetReservedBalance() string {
 	if o == nil {
-		var ret float32
+		var ret string
 		return ret
 	}
 
@@ -138,7 +138,7 @@ func (o *GetBalances200ResponseBalancesInner) GetReservedBalance() float32 {
 
 // GetReservedBalanceOk returns a tuple with the ReservedBalance field value
 // and a boolean to check if the value has been set.
-func (o *GetBalances200ResponseBalancesInner) GetReservedBalanceOk() (*float32, bool) {
+func (o *GetBalances200ResponseBalancesInner) GetReservedBalanceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -146,7 +146,7 @@ func (o *GetBalances200ResponseBalancesInner) GetReservedBalanceOk() (*float32, 
 }
 
 // SetReservedBalance sets field value
-func (o *GetBalances200ResponseBalancesInner) SetReservedBalance(v float32) {
+func (o *GetBalances200ResponseBalancesInner) SetReservedBalance(v string) {
 	o.ReservedBalance = v
 }
 

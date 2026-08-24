@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import org.openapitools.jackson.nullable.JsonNullable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -57,7 +56,7 @@ public class GetStatementsTransactionsForCustomer200ResponseStatementTransaction
 
   public static final String JSON_PROPERTY_AMOUNT = "amount";
   @javax.annotation.Nullable
-  private BigDecimal amount;
+  private String amount;
 
   public static final String JSON_PROPERTY_CURRENCY = "currency";
   @javax.annotation.Nullable
@@ -89,11 +88,11 @@ public class GetStatementsTransactionsForCustomer200ResponseStatementTransaction
 
   public static final String JSON_PROPERTY_AVAILABLE_BALANCE_BEFORE = "availableBalanceBefore";
   @javax.annotation.Nullable
-  private BigDecimal availableBalanceBefore;
+  private String availableBalanceBefore;
 
   public static final String JSON_PROPERTY_AVAILABLE_BALANCE_AFTER = "availableBalanceAfter";
   @javax.annotation.Nullable
-  private BigDecimal availableBalanceAfter;
+  private String availableBalanceAfter;
 
   public GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInnerDTO() {
   }
@@ -123,28 +122,28 @@ public class GetStatementsTransactionsForCustomer200ResponseStatementTransaction
     this.tenant = tenant;
   }
 
-  public GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInnerDTO amount(@javax.annotation.Nullable BigDecimal amount) {
+  public GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInnerDTO amount(@javax.annotation.Nullable String amount) {
     
     this.amount = amount;
     return this;
   }
 
   /**
-   * Amount of the transaction applied to the customer’s ledger account. 
+   * Amount of the transaction applied to the customer’s ledger account, represented as a decimal string. 
    * @return amount
    */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public BigDecimal getAmount() {
+  public String getAmount() {
     return amount;
   }
 
 
   @JsonProperty(JSON_PROPERTY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAmount(@javax.annotation.Nullable BigDecimal amount) {
+  public void setAmount(@javax.annotation.Nullable String amount) {
     this.amount = amount;
   }
 
@@ -180,7 +179,7 @@ public class GetStatementsTransactionsForCustomer200ResponseStatementTransaction
   }
 
   /**
-   * External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types. 
+   * External reference that links this ledger transaction to a payment or other upstream operation. 
    * @return txnReference
    */
   @javax.annotation.Nullable
@@ -331,53 +330,53 @@ public class GetStatementsTransactionsForCustomer200ResponseStatementTransaction
     this.updatedDttm = updatedDttm;
   }
 
-  public GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInnerDTO availableBalanceBefore(@javax.annotation.Nullable BigDecimal availableBalanceBefore) {
+  public GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInnerDTO availableBalanceBefore(@javax.annotation.Nullable String availableBalanceBefore) {
     
     this.availableBalanceBefore = availableBalanceBefore;
     return this;
   }
 
   /**
-   * Available ledger account balance (in the transaction currency) immediately before this transaction was applied. 
+   * Available ledger account balance (in the transaction currency) immediately before this transaction was applied, represented as a decimal string. 
    * @return availableBalanceBefore
    */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_AVAILABLE_BALANCE_BEFORE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public BigDecimal getAvailableBalanceBefore() {
+  public String getAvailableBalanceBefore() {
     return availableBalanceBefore;
   }
 
 
   @JsonProperty(JSON_PROPERTY_AVAILABLE_BALANCE_BEFORE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAvailableBalanceBefore(@javax.annotation.Nullable BigDecimal availableBalanceBefore) {
+  public void setAvailableBalanceBefore(@javax.annotation.Nullable String availableBalanceBefore) {
     this.availableBalanceBefore = availableBalanceBefore;
   }
 
-  public GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInnerDTO availableBalanceAfter(@javax.annotation.Nullable BigDecimal availableBalanceAfter) {
+  public GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInnerDTO availableBalanceAfter(@javax.annotation.Nullable String availableBalanceAfter) {
     
     this.availableBalanceAfter = availableBalanceAfter;
     return this;
   }
 
   /**
-   * Available ledger account balance (in the transaction currency) immediately after this transaction was applied. 
+   * Available ledger account balance (in the transaction currency) immediately after this transaction was applied, represented as a decimal string. 
    * @return availableBalanceAfter
    */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_AVAILABLE_BALANCE_AFTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public BigDecimal getAvailableBalanceAfter() {
+  public String getAvailableBalanceAfter() {
     return availableBalanceAfter;
   }
 
 
   @JsonProperty(JSON_PROPERTY_AVAILABLE_BALANCE_AFTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAvailableBalanceAfter(@javax.annotation.Nullable BigDecimal availableBalanceAfter) {
+  public void setAvailableBalanceAfter(@javax.annotation.Nullable String availableBalanceAfter) {
     this.availableBalanceAfter = availableBalanceAfter;
   }
 

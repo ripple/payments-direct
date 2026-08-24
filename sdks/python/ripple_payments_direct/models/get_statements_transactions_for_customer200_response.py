@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from ripple_payments_direct.models.get_statements_transactions_for_customer200_response_statement_transactions_inner import GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner
 from typing import Optional, Set
@@ -27,10 +27,10 @@ class GetStatementsTransactionsForCustomer200Response(BaseModel):
     """
     A page of ledger statement transactions and pagination metadata.
     """ # noqa: E501
-    offset: Optional[StrictInt] = Field(default=None, description="Offset used in the request to skip a specific number of records. ")
-    page_size: Optional[StrictInt] = Field(default=None, description="Number of records requested per page", alias="pageSize")
-    page_elements: Optional[StrictInt] = Field(default=None, description="Number of records returned in requested page", alias="pageElements")
-    total: Optional[StrictInt] = Field(default=None, description="Total number of records available for the given filters.")
+    offset: Optional[StrictStr] = Field(default=None, description="Offset used in the request to skip a specific number of records. ")
+    page_size: Optional[StrictStr] = Field(default=None, description="Number of records requested per page", alias="pageSize")
+    page_elements: Optional[StrictStr] = Field(default=None, description="Number of records returned in requested page", alias="pageElements")
+    total: Optional[StrictStr] = Field(default=None, description="Total number of records available for the given filters.")
     statement_transactions: Optional[List[GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner]] = Field(default=None, description="Statement transaction details for the customer.", alias="statementTransactions")
     __properties: ClassVar[List[str]] = ["offset", "pageSize", "pageElements", "total", "statementTransactions"]
 

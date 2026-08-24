@@ -6,16 +6,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **tenant** | **str** | Identifier of the customer that owns this ledger transaction. | [optional] 
-**amount** | **float** | Amount of the transaction applied to the customer’s ledger account.  | [optional] 
+**amount** | **str** | Amount of the transaction applied to the customer’s ledger account, represented as a decimal string.  | [optional] 
 **currency** | **str** | Three-letter ISO 4217 currency code of the transaction. | [optional] 
-**txn_reference** | **str** | External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types.  | [optional] 
+**txn_reference** | **str** | External reference that links this ledger transaction to a payment or other upstream operation.  | [optional] 
 **operation** | **str** | Operation performed on the customer’s prefunded ledger account.  | [optional] 
 **txn_source** | **str** | Source of the ledger transaction (for example, which system or flow created it).  | [optional] 
 **status** | **str** | State of the ledger transaction. | [optional] 
 **created_dttm** | **datetime** | Timestamp (UTC) when the ledger transaction was created. | [optional] 
 **updated_dttm** | **datetime** | Timestamp (UTC) when the ledger transaction was last updated. | [optional] 
-**available_balance_before** | **float** | Available ledger account balance (in the transaction currency) immediately before this transaction was applied.  | [optional] 
-**available_balance_after** | **float** | Available ledger account balance (in the transaction currency) immediately after this transaction was applied.  | [optional] 
+**available_balance_before** | **str** | Available ledger account balance (in the transaction currency) immediately before this transaction was applied, represented as a decimal string.  | [optional] 
+**available_balance_after** | **str** | Available ledger account balance (in the transaction currency) immediately after this transaction was applied, represented as a decimal string.  | [optional] 
 
 ## Example
 

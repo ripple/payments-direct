@@ -33,17 +33,17 @@ export interface GetBalances200ResponseBalancesInner {
      */
     'currency': string;
     /**
-     * Available funded balance that you can use to initiate payments.
-     * @type {number}
+     * Available funded balance that you can use to initiate payments, represented as a decimal string.
+     * @type {string}
      * @memberof GetBalances200ResponseBalancesInner
      */
-    'availableBalance': number;
+    'availableBalance': string;
     /**
-     * Amount reserved to complete in-progress transactions. You can\'t use this amount to initiate new payments.
-     * @type {number}
+     * Amount reserved to complete in-progress transactions. You can\'t use this amount to initiate new payments, represented as a decimal string.
+     * @type {string}
      * @memberof GetBalances200ResponseBalancesInner
      */
-    'reservedBalance': number;
+    'reservedBalance': string;
 }
 
 export const GetBalances200ResponseBalancesInnerFundingTypeEnum = {

@@ -113,7 +113,7 @@ public class Example {
         String currency = "USD"; // String | Three-letter ISO 4217 currency code for the transactions to return (for example, USD). 
         OffsetDateTime startDttm = OffsetDateTime.parse("2022-02-27T08:30:00Z"); // OffsetDateTime | Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions. 
         OffsetDateTime endDttm = OffsetDateTime.parse("2022-02-27T08:30:00Z"); // OffsetDateTime | End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions. 
-        Integer pageSize = 25; // Integer | Number of records to return in the response page. Use page-size together with offset for offset-based pagination 
+        Integer pageSize = 56; // Integer | Number of records to return in the response page. Use page-size together with offset for offset-based pagination 
         String status = "status_example"; // String | Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction. 
         String txnReference = "txnReference_example"; // String | Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference. 
         Integer offset = 56; // Integer | Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, `offset=25&page-size=25` returns the second page of results. 
@@ -141,7 +141,7 @@ public class Example {
 | **currency** | **String**| Three-letter ISO 4217 currency code for the transactions to return (for example, USD).  | |
 | **startDttm** | **OffsetDateTime**| Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions.  | |
 | **endDttm** | **OffsetDateTime**| End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions.  | |
-| **pageSize** | **Integer**| Number of records to return in the response page. Use page-size together with offset for offset-based pagination  | [default to 25] |
+| **pageSize** | **Integer**| Number of records to return in the response page. Use page-size together with offset for offset-based pagination  | |
 | **status** | **String**| Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  | [optional] |
 | **txnReference** | **String**| Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  | [optional] |
 | **offset** | **Integer**| Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, &#x60;offset&#x3D;25&amp;page-size&#x3D;25&#x60; returns the second page of results.  | [optional] |

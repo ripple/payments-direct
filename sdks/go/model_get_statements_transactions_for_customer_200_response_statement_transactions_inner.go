@@ -22,11 +22,11 @@ var _ MappedNullable = &GetStatementsTransactionsForCustomer200ResponseStatement
 type GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner struct {
 	// Identifier of the customer that owns this ledger transaction.
 	Tenant *string `json:"tenant,omitempty"`
-	// Amount of the transaction applied to the customer’s ledger account. 
-	Amount *float32 `json:"amount,omitempty"`
+	// Amount of the transaction applied to the customer’s ledger account, represented as a decimal string. 
+	Amount *string `json:"amount,omitempty"`
 	// Three-letter ISO 4217 currency code of the transaction.
 	Currency *string `json:"currency,omitempty"`
-	// External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types. 
+	// External reference that links this ledger transaction to a payment or other upstream operation. 
 	TxnReference NullableString `json:"txnReference,omitempty"`
 	// Operation performed on the customer’s prefunded ledger account. 
 	Operation *string `json:"operation,omitempty"`
@@ -38,10 +38,10 @@ type GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner s
 	CreatedDttm *time.Time `json:"createdDttm,omitempty"`
 	// Timestamp (UTC) when the ledger transaction was last updated.
 	UpdatedDttm *time.Time `json:"updatedDttm,omitempty"`
-	// Available ledger account balance (in the transaction currency) immediately before this transaction was applied. 
-	AvailableBalanceBefore *float32 `json:"availableBalanceBefore,omitempty"`
-	// Available ledger account balance (in the transaction currency) immediately after this transaction was applied. 
-	AvailableBalanceAfter *float32 `json:"availableBalanceAfter,omitempty"`
+	// Available ledger account balance (in the transaction currency) immediately before this transaction was applied, represented as a decimal string. 
+	AvailableBalanceBefore *string `json:"availableBalanceBefore,omitempty"`
+	// Available ledger account balance (in the transaction currency) immediately after this transaction was applied, represented as a decimal string. 
+	AvailableBalanceAfter *string `json:"availableBalanceAfter,omitempty"`
 }
 
 // NewGetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner instantiates a new GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner object
@@ -94,9 +94,9 @@ func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInn
 }
 
 // GetAmount returns the Amount field value if set, zero value otherwise.
-func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAmount() float32 {
+func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAmount() string {
 	if o == nil || IsNil(o.Amount) {
-		var ret float32
+		var ret string
 		return ret
 	}
 	return *o.Amount
@@ -104,7 +104,7 @@ func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInn
 
 // GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAmountOk() (*float32, bool) {
+func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAmountOk() (*string, bool) {
 	if o == nil || IsNil(o.Amount) {
 		return nil, false
 	}
@@ -120,8 +120,8 @@ func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInn
 	return false
 }
 
-// SetAmount gets a reference to the given float32 and assigns it to the Amount field.
-func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) SetAmount(v float32) {
+// SetAmount gets a reference to the given string and assigns it to the Amount field.
+func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) SetAmount(v string) {
 	o.Amount = &v
 }
 
@@ -360,9 +360,9 @@ func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInn
 }
 
 // GetAvailableBalanceBefore returns the AvailableBalanceBefore field value if set, zero value otherwise.
-func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceBefore() float32 {
+func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceBefore() string {
 	if o == nil || IsNil(o.AvailableBalanceBefore) {
-		var ret float32
+		var ret string
 		return ret
 	}
 	return *o.AvailableBalanceBefore
@@ -370,7 +370,7 @@ func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInn
 
 // GetAvailableBalanceBeforeOk returns a tuple with the AvailableBalanceBefore field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceBeforeOk() (*float32, bool) {
+func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceBeforeOk() (*string, bool) {
 	if o == nil || IsNil(o.AvailableBalanceBefore) {
 		return nil, false
 	}
@@ -386,15 +386,15 @@ func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInn
 	return false
 }
 
-// SetAvailableBalanceBefore gets a reference to the given float32 and assigns it to the AvailableBalanceBefore field.
-func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) SetAvailableBalanceBefore(v float32) {
+// SetAvailableBalanceBefore gets a reference to the given string and assigns it to the AvailableBalanceBefore field.
+func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) SetAvailableBalanceBefore(v string) {
 	o.AvailableBalanceBefore = &v
 }
 
 // GetAvailableBalanceAfter returns the AvailableBalanceAfter field value if set, zero value otherwise.
-func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceAfter() float32 {
+func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceAfter() string {
 	if o == nil || IsNil(o.AvailableBalanceAfter) {
-		var ret float32
+		var ret string
 		return ret
 	}
 	return *o.AvailableBalanceAfter
@@ -402,7 +402,7 @@ func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInn
 
 // GetAvailableBalanceAfterOk returns a tuple with the AvailableBalanceAfter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceAfterOk() (*float32, bool) {
+func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceAfterOk() (*string, bool) {
 	if o == nil || IsNil(o.AvailableBalanceAfter) {
 		return nil, false
 	}
@@ -418,8 +418,8 @@ func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInn
 	return false
 }
 
-// SetAvailableBalanceAfter gets a reference to the given float32 and assigns it to the AvailableBalanceAfter field.
-func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) SetAvailableBalanceAfter(v float32) {
+// SetAvailableBalanceAfter gets a reference to the given string and assigns it to the AvailableBalanceAfter field.
+func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) SetAvailableBalanceAfter(v string) {
 	o.AvailableBalanceAfter = &v
 }
 

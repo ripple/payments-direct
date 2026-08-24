@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **fundingType** | **string** | The funding method associated with your account. | [default to undefined]
 **currency** | **string** | Currency code. | [default to undefined]
-**availableBalance** | **number** | Available funded balance that you can use to initiate payments. | [default to undefined]
-**reservedBalance** | **number** | Amount reserved to complete in-progress transactions. You can\&#39;t use this amount to initiate new payments. | [default to undefined]
+**availableBalance** | **string** | Available funded balance that you can use to initiate payments, represented as a decimal string. | [default to undefined]
+**reservedBalance** | **string** | Amount reserved to complete in-progress transactions. You can\&#39;t use this amount to initiate new payments, represented as a decimal string. | [default to undefined]
 
 ## Example
 

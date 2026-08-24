@@ -1090,7 +1090,6 @@ paths:
         name: page-size
         required: true
         schema:
-          default: 25
           maximum: 50
           minimum: 1
           type: integer
@@ -3647,9 +3646,9 @@ components:
       description: Customer available prefund balance for specific currency
       example:
         fundingType: FUNDED
-        reservedBalance: 100
+        reservedBalance: "100.00"
         currency: USD
-        availableBalance: 1000
+        availableBalance: "1000.00"
       properties:
         fundingType:
           description: The funding method associated with your account.
@@ -3664,14 +3663,16 @@ components:
           example: USD
           type: string
         availableBalance:
-          description: Available funded balance that you can use to initiate payments.
-          example: 1000
-          type: number
+          description: "Available funded balance that you can use to initiate payments,\
+            \ represented as a decimal string."
+          example: "1000.00"
+          type: string
         reservedBalance:
-          description: Amount reserved to complete in-progress transactions. You can't
-            use this amount to initiate new payments.
-          example: 100
-          type: number
+          description: "Amount reserved to complete in-progress transactions. You\
+            \ can't use this amount to initiate new payments, represented as a decimal\
+            \ string."
+          example: "100.00"
+          type: string
       required:
       - availableBalance
       - currency
@@ -3683,13 +3684,13 @@ components:
       example:
         balances:
         - fundingType: FUNDED
-          reservedBalance: 100
+          reservedBalance: "100.00"
           currency: USD
-          availableBalance: 1000
+          availableBalance: "1000.00"
         - fundingType: FUNDED
-          reservedBalance: 100
+          reservedBalance: "100.00"
           currency: USD
-          availableBalance: 1000
+          availableBalance: "1000.00"
         timestamp: 2025-01-10T00:00:00Z
       properties:
         timestamp:
@@ -3778,13 +3779,13 @@ components:
       type: object
     getStatementsTransactionsForCustomer_200_response_statementTransactions_inner:
       example:
-        availableBalanceAfter: 90
-        amount: 100
+        availableBalanceAfter: "90.00"
+        amount: "100.00"
         createdDttm: 2000-01-23T04:56:07.000+00:00
         updatedDttm: 2000-01-23T04:56:07.000+00:00
         txnSource: txnSource
         currency: USD
-        availableBalanceBefore: 100
+        availableBalanceBefore: "100.00"
         operation: operation
         tenant: rocketfuel
         txnReference: txnReference
@@ -3796,16 +3797,16 @@ components:
           type: string
         amount:
           description: |
-            Amount of the transaction applied to the customer’s ledger account.
-          example: 100
-          type: number
+            Amount of the transaction applied to the customer’s ledger account, represented as a decimal string.
+          example: "100.00"
+          type: string
         currency:
           description: Three-letter ISO 4217 currency code of the transaction.
           example: USD
           type: string
         txnReference:
           description: |
-            External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types.
+            External reference that links this ledger transaction to a payment or other upstream operation.
           nullable: true
           type: string
         operation:
@@ -3849,64 +3850,63 @@ components:
           type: string
         availableBalanceBefore:
           description: |
-            Available ledger account balance (in the transaction currency) immediately before this transaction was applied.
-          example: 100
-          type: number
+            Available ledger account balance (in the transaction currency) immediately before this transaction was applied, represented as a decimal string.
+          example: "100.00"
+          type: string
         availableBalanceAfter:
           description: |
-            Available ledger account balance (in the transaction currency) immediately after this transaction was applied.
-          example: 90
-          type: number
+            Available ledger account balance (in the transaction currency) immediately after this transaction was applied, represented as a decimal string.
+          example: "90.00"
+          type: string
       type: object
     getStatementsTransactionsForCustomer_200_response:
       description: A page of ledger statement transactions and pagination metadata.
       example:
-        pageElements: 25
-        total: 1000
+        pageElements: "25"
+        total: "1000"
         statementTransactions:
-        - availableBalanceAfter: 90
-          amount: 100
+        - availableBalanceAfter: "90.00"
+          amount: "100.00"
           createdDttm: 2000-01-23T04:56:07.000+00:00
           updatedDttm: 2000-01-23T04:56:07.000+00:00
           txnSource: txnSource
           currency: USD
-          availableBalanceBefore: 100
+          availableBalanceBefore: "100.00"
           operation: operation
           tenant: rocketfuel
           txnReference: txnReference
           status: status
-        - availableBalanceAfter: 90
-          amount: 100
+        - availableBalanceAfter: "90.00"
+          amount: "100.00"
           createdDttm: 2000-01-23T04:56:07.000+00:00
           updatedDttm: 2000-01-23T04:56:07.000+00:00
           txnSource: txnSource
           currency: USD
-          availableBalanceBefore: 100
+          availableBalanceBefore: "100.00"
           operation: operation
           tenant: rocketfuel
           txnReference: txnReference
           status: status
-        offset: 0
-        pageSize: 25
+        offset: "0"
+        pageSize: "25"
       properties:
         offset:
           description: |
             Offset used in the request to skip a specific number of records.
-          example: 0
-          type: integer
+          example: "0"
+          type: string
         pageSize:
           description: Number of records requested per page
-          example: 25
-          type: integer
+          example: "25"
+          type: string
         pageElements:
           description: Number of records returned in requested page
-          example: 25
-          type: integer
+          example: "25"
+          type: string
         total:
           description: Total number of records available for the given filters.
-          example: 1000
-          format: int64
-          type: integer
+          example: "1000"
+          type: string
         statementTransactions:
           description: Statement transaction details for the customer.
           items:

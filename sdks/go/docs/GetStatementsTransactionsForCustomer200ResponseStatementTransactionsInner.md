@@ -5,16 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Tenant** | Pointer to **string** | Identifier of the customer that owns this ledger transaction. | [optional] 
-**Amount** | Pointer to **float32** | Amount of the transaction applied to the customer’s ledger account.  | [optional] 
+**Amount** | Pointer to **string** | Amount of the transaction applied to the customer’s ledger account, represented as a decimal string.  | [optional] 
 **Currency** | Pointer to **string** | Three-letter ISO 4217 currency code of the transaction. | [optional] 
-**TxnReference** | Pointer to **NullableString** | External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types.  | [optional] 
+**TxnReference** | Pointer to **NullableString** | External reference that links this ledger transaction to a payment or other upstream operation.  | [optional] 
 **Operation** | Pointer to **string** | Operation performed on the customer’s prefunded ledger account.  | [optional] 
 **TxnSource** | Pointer to **string** | Source of the ledger transaction (for example, which system or flow created it).  | [optional] 
 **Status** | Pointer to **string** | State of the ledger transaction. | [optional] 
 **CreatedDttm** | Pointer to **time.Time** | Timestamp (UTC) when the ledger transaction was created. | [optional] 
 **UpdatedDttm** | Pointer to **time.Time** | Timestamp (UTC) when the ledger transaction was last updated. | [optional] 
-**AvailableBalanceBefore** | Pointer to **float32** | Available ledger account balance (in the transaction currency) immediately before this transaction was applied.  | [optional] 
-**AvailableBalanceAfter** | Pointer to **float32** | Available ledger account balance (in the transaction currency) immediately after this transaction was applied.  | [optional] 
+**AvailableBalanceBefore** | Pointer to **string** | Available ledger account balance (in the transaction currency) immediately before this transaction was applied, represented as a decimal string.  | [optional] 
+**AvailableBalanceAfter** | Pointer to **string** | Available ledger account balance (in the transaction currency) immediately after this transaction was applied, represented as a decimal string.  | [optional] 
 
 ## Methods
 
@@ -62,20 +62,20 @@ HasTenant returns a boolean if a field has been set.
 
 ### GetAmount
 
-`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAmount() float32`
+`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAmount() string`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAmountOk() (*float32, bool)`
+`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAmountOk() (*string, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) SetAmount(v float32)`
+`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) SetAmount(v string)`
 
 SetAmount sets Amount field to given value.
 
@@ -272,20 +272,20 @@ HasUpdatedDttm returns a boolean if a field has been set.
 
 ### GetAvailableBalanceBefore
 
-`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceBefore() float32`
+`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceBefore() string`
 
 GetAvailableBalanceBefore returns the AvailableBalanceBefore field if non-nil, zero value otherwise.
 
 ### GetAvailableBalanceBeforeOk
 
-`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceBeforeOk() (*float32, bool)`
+`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceBeforeOk() (*string, bool)`
 
 GetAvailableBalanceBeforeOk returns a tuple with the AvailableBalanceBefore field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvailableBalanceBefore
 
-`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) SetAvailableBalanceBefore(v float32)`
+`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) SetAvailableBalanceBefore(v string)`
 
 SetAvailableBalanceBefore sets AvailableBalanceBefore field to given value.
 
@@ -297,20 +297,20 @@ HasAvailableBalanceBefore returns a boolean if a field has been set.
 
 ### GetAvailableBalanceAfter
 
-`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceAfter() float32`
+`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceAfter() string`
 
 GetAvailableBalanceAfter returns the AvailableBalanceAfter field if non-nil, zero value otherwise.
 
 ### GetAvailableBalanceAfterOk
 
-`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceAfterOk() (*float32, bool)`
+`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) GetAvailableBalanceAfterOk() (*string, bool)`
 
 GetAvailableBalanceAfterOk returns a tuple with the AvailableBalanceAfter field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvailableBalanceAfter
 
-`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) SetAvailableBalanceAfter(v float32)`
+`func (o *GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner) SetAvailableBalanceAfter(v string)`
 
 SetAvailableBalanceAfter sets AvailableBalanceAfter field to given value.
 

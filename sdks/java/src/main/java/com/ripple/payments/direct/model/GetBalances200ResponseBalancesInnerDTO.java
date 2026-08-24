@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.math.BigDecimal;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.io.UnsupportedEncodingException;
@@ -82,11 +81,11 @@ public class GetBalances200ResponseBalancesInnerDTO {
 
   public static final String JSON_PROPERTY_AVAILABLE_BALANCE = "availableBalance";
   @javax.annotation.Nonnull
-  private BigDecimal availableBalance;
+  private String availableBalance;
 
   public static final String JSON_PROPERTY_RESERVED_BALANCE = "reservedBalance";
   @javax.annotation.Nonnull
-  private BigDecimal reservedBalance;
+  private String reservedBalance;
 
   public GetBalances200ResponseBalancesInnerDTO() {
   }
@@ -141,53 +140,53 @@ public class GetBalances200ResponseBalancesInnerDTO {
     this.currency = currency;
   }
 
-  public GetBalances200ResponseBalancesInnerDTO availableBalance(@javax.annotation.Nonnull BigDecimal availableBalance) {
+  public GetBalances200ResponseBalancesInnerDTO availableBalance(@javax.annotation.Nonnull String availableBalance) {
     
     this.availableBalance = availableBalance;
     return this;
   }
 
   /**
-   * Available funded balance that you can use to initiate payments.
+   * Available funded balance that you can use to initiate payments, represented as a decimal string.
    * @return availableBalance
    */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_AVAILABLE_BALANCE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public BigDecimal getAvailableBalance() {
+  public String getAvailableBalance() {
     return availableBalance;
   }
 
 
   @JsonProperty(JSON_PROPERTY_AVAILABLE_BALANCE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setAvailableBalance(@javax.annotation.Nonnull BigDecimal availableBalance) {
+  public void setAvailableBalance(@javax.annotation.Nonnull String availableBalance) {
     this.availableBalance = availableBalance;
   }
 
-  public GetBalances200ResponseBalancesInnerDTO reservedBalance(@javax.annotation.Nonnull BigDecimal reservedBalance) {
+  public GetBalances200ResponseBalancesInnerDTO reservedBalance(@javax.annotation.Nonnull String reservedBalance) {
     
     this.reservedBalance = reservedBalance;
     return this;
   }
 
   /**
-   * Amount reserved to complete in-progress transactions. You can&#39;t use this amount to initiate new payments.
+   * Amount reserved to complete in-progress transactions. You can&#39;t use this amount to initiate new payments, represented as a decimal string.
    * @return reservedBalance
    */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_RESERVED_BALANCE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public BigDecimal getReservedBalance() {
+  public String getReservedBalance() {
     return reservedBalance;
   }
 
 
   @JsonProperty(JSON_PROPERTY_RESERVED_BALANCE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setReservedBalance(@javax.annotation.Nonnull BigDecimal reservedBalance) {
+  public void setReservedBalance(@javax.annotation.Nonnull String reservedBalance) {
     this.reservedBalance = reservedBalance;
   }
 

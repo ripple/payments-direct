@@ -25,28 +25,28 @@ import type { GetStatementsTransactionsForCustomer200ResponseStatementTransactio
 export interface GetStatementsTransactionsForCustomer200Response {
     /**
      * Offset used in the request to skip a specific number of records. 
-     * @type {number}
+     * @type {string}
      * @memberof GetStatementsTransactionsForCustomer200Response
      */
-    'offset'?: number;
+    'offset'?: string;
     /**
      * Number of records requested per page
-     * @type {number}
+     * @type {string}
      * @memberof GetStatementsTransactionsForCustomer200Response
      */
-    'pageSize'?: number;
+    'pageSize'?: string;
     /**
      * Number of records returned in requested page
-     * @type {number}
+     * @type {string}
      * @memberof GetStatementsTransactionsForCustomer200Response
      */
-    'pageElements'?: number;
+    'pageElements'?: string;
     /**
      * Total number of records available for the given filters.
-     * @type {number}
+     * @type {string}
      * @memberof GetStatementsTransactionsForCustomer200Response
      */
-    'total'?: number;
+    'total'?: string;
     /**
      * Statement transaction details for the customer.
      * @type {Array<GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner>}

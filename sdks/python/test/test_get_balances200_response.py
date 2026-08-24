@@ -40,8 +40,8 @@ class TestGetBalances200Response(unittest.TestCase):
                     ripple_payments_direct.models.get_balances_200_response_balances_inner.getBalances_200_response_balances_inner(
                         funding_type = 'FUNDED', 
                         currency = 'USD', 
-                        available_balance = 1000, 
-                        reserved_balance = 100, )
+                        available_balance = '1000.00', 
+                        reserved_balance = '100.00', )
                     ]
             )
         else:
@@ -51,8 +51,8 @@ class TestGetBalances200Response(unittest.TestCase):
                     ripple_payments_direct.models.get_balances_200_response_balances_inner.getBalances_200_response_balances_inner(
                         funding_type = 'FUNDED', 
                         currency = 'USD', 
-                        available_balance = 1000, 
-                        reserved_balance = 100, )
+                        available_balance = '1000.00', 
+                        reserved_balance = '100.00', )
                     ],
         )
         """

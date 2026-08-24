@@ -128,7 +128,7 @@ with ripple_payments_direct.ApiClient(configuration) as api_client:
     currency = 'USD' # str | Three-letter ISO 4217 currency code for the transactions to return (for example, USD). 
     start_dttm = '2022-02-27T08:30:00Z' # datetime | Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions. 
     end_dttm = '2022-02-27T08:30:00Z' # datetime | End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions. 
-    page_size = 25 # int | Number of records to return in the response page. Use page-size together with offset for offset-based pagination  (default to 25)
+    page_size = 56 # int | Number of records to return in the response page. Use page-size together with offset for offset-based pagination 
     status = 'status_example' # str | Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  (optional)
     txn_reference = 'txn_reference_example' # str | Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  (optional)
     offset = 56 # int | Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, `offset=25&page-size=25` returns the second page of results.  (optional)
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
  **currency** | **str**| Three-letter ISO 4217 currency code for the transactions to return (for example, USD).  | 
  **start_dttm** | **datetime**| Start of the date and time range (inclusive), in UTC, for which you want to retrieve ledger transactions.  | 
  **end_dttm** | **datetime**| End of the date and time range (exclusive), in UTC, for which you want to retrieve ledger transactions.  | 
- **page_size** | **int**| Number of records to return in the response page. Use page-size together with offset for offset-based pagination  | [default to 25]
+ **page_size** | **int**| Number of records to return in the response page. Use page-size together with offset for offset-based pagination  | 
  **status** | **str**| Filter results by transaction status. Allowed values: - SUCCESS: the ledger transaction completed successfully. - PENDING: reserved for future use to represent an in-flight ledger transaction.  | [optional] 
  **txn_reference** | **str**| Filter results by an exact transaction reference. Use this to locate all ledger transactions associated with a specific external reference.  | [optional] 
  **offset** | **int**| Number of records to skip before starting to return results. Use this with page-size to implement offset-based pagination. For example, &#x60;offset&#x3D;25&amp;page-size&#x3D;25&#x60; returns the second page of results.  | [optional] 

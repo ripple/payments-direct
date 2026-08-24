@@ -27,11 +27,11 @@ export interface GetStatementsTransactionsForCustomer200ResponseStatementTransac
      */
     'tenant'?: string;
     /**
-     * Amount of the transaction applied to the customer’s ledger account. 
-     * @type {number}
+     * Amount of the transaction applied to the customer’s ledger account, represented as a decimal string. 
+     * @type {string}
      * @memberof GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner
      */
-    'amount'?: number;
+    'amount'?: string;
     /**
      * Three-letter ISO 4217 currency code of the transaction.
      * @type {string}
@@ -39,7 +39,7 @@ export interface GetStatementsTransactionsForCustomer200ResponseStatementTransac
      */
     'currency'?: string;
     /**
-     * External reference that links this ledger transaction to a payment or other upstream operation. Present for RESERVE and DEBIT operations, where it matches the Payments Direct payment ID. Null for all other operation types. 
+     * External reference that links this ledger transaction to a payment or other upstream operation. 
      * @type {string}
      * @memberof GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner
      */
@@ -75,16 +75,16 @@ export interface GetStatementsTransactionsForCustomer200ResponseStatementTransac
      */
     'updatedDttm'?: string;
     /**
-     * Available ledger account balance (in the transaction currency) immediately before this transaction was applied. 
-     * @type {number}
+     * Available ledger account balance (in the transaction currency) immediately before this transaction was applied, represented as a decimal string. 
+     * @type {string}
      * @memberof GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner
      */
-    'availableBalanceBefore'?: number;
+    'availableBalanceBefore'?: string;
     /**
-     * Available ledger account balance (in the transaction currency) immediately after this transaction was applied. 
-     * @type {number}
+     * Available ledger account balance (in the transaction currency) immediately after this transaction was applied, represented as a decimal string. 
+     * @type {string}
      * @memberof GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner
      */
-    'availableBalanceAfter'?: number;
+    'availableBalanceAfter'?: string;
 }
 

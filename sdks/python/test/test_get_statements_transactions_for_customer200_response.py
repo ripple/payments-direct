@@ -35,14 +35,14 @@ class TestGetStatementsTransactionsForCustomer200Response(unittest.TestCase):
         model = GetStatementsTransactionsForCustomer200Response()
         if include_optional:
             return GetStatementsTransactionsForCustomer200Response(
-                offset = 0,
-                page_size = 25,
-                page_elements = 25,
-                total = 1000,
+                offset = '0',
+                page_size = '25',
+                page_elements = '25',
+                total = '1000',
                 statement_transactions = [
                     ripple_payments_direct.models.get_statements_transactions_for_customer_200_response_statement_transactions_inner.getStatementsTransactionsForCustomer_200_response_statementTransactions_inner(
                         tenant = 'rocketfuel', 
-                        amount = 100, 
+                        amount = '100.00', 
                         currency = 'USD', 
                         txn_reference = '', 
                         operation = '', 
@@ -50,8 +50,8 @@ class TestGetStatementsTransactionsForCustomer200Response(unittest.TestCase):
                         status = '', 
                         created_dttm = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         updated_dttm = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        available_balance_before = 100, 
-                        available_balance_after = 90, )
+                        available_balance_before = '100.00', 
+                        available_balance_after = '90.00', )
                     ]
             )
         else:

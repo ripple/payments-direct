@@ -20,13 +20,13 @@ var _ MappedNullable = &GetStatementsTransactionsForCustomer200Response{}
 // GetStatementsTransactionsForCustomer200Response A page of ledger statement transactions and pagination metadata.
 type GetStatementsTransactionsForCustomer200Response struct {
 	// Offset used in the request to skip a specific number of records. 
-	Offset *int32 `json:"offset,omitempty"`
+	Offset *string `json:"offset,omitempty"`
 	// Number of records requested per page
-	PageSize *int32 `json:"pageSize,omitempty"`
+	PageSize *string `json:"pageSize,omitempty"`
 	// Number of records returned in requested page
-	PageElements *int32 `json:"pageElements,omitempty"`
+	PageElements *string `json:"pageElements,omitempty"`
 	// Total number of records available for the given filters.
-	Total *int64 `json:"total,omitempty"`
+	Total *string `json:"total,omitempty"`
 	// Statement transaction details for the customer.
 	StatementTransactions []GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner `json:"statementTransactions,omitempty"`
 }
@@ -49,9 +49,9 @@ func NewGetStatementsTransactionsForCustomer200ResponseWithDefaults() *GetStatem
 }
 
 // GetOffset returns the Offset field value if set, zero value otherwise.
-func (o *GetStatementsTransactionsForCustomer200Response) GetOffset() int32 {
+func (o *GetStatementsTransactionsForCustomer200Response) GetOffset() string {
 	if o == nil || IsNil(o.Offset) {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.Offset
@@ -59,7 +59,7 @@ func (o *GetStatementsTransactionsForCustomer200Response) GetOffset() int32 {
 
 // GetOffsetOk returns a tuple with the Offset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetStatementsTransactionsForCustomer200Response) GetOffsetOk() (*int32, bool) {
+func (o *GetStatementsTransactionsForCustomer200Response) GetOffsetOk() (*string, bool) {
 	if o == nil || IsNil(o.Offset) {
 		return nil, false
 	}
@@ -75,15 +75,15 @@ func (o *GetStatementsTransactionsForCustomer200Response) HasOffset() bool {
 	return false
 }
 
-// SetOffset gets a reference to the given int32 and assigns it to the Offset field.
-func (o *GetStatementsTransactionsForCustomer200Response) SetOffset(v int32) {
+// SetOffset gets a reference to the given string and assigns it to the Offset field.
+func (o *GetStatementsTransactionsForCustomer200Response) SetOffset(v string) {
 	o.Offset = &v
 }
 
 // GetPageSize returns the PageSize field value if set, zero value otherwise.
-func (o *GetStatementsTransactionsForCustomer200Response) GetPageSize() int32 {
+func (o *GetStatementsTransactionsForCustomer200Response) GetPageSize() string {
 	if o == nil || IsNil(o.PageSize) {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.PageSize
@@ -91,7 +91,7 @@ func (o *GetStatementsTransactionsForCustomer200Response) GetPageSize() int32 {
 
 // GetPageSizeOk returns a tuple with the PageSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetStatementsTransactionsForCustomer200Response) GetPageSizeOk() (*int32, bool) {
+func (o *GetStatementsTransactionsForCustomer200Response) GetPageSizeOk() (*string, bool) {
 	if o == nil || IsNil(o.PageSize) {
 		return nil, false
 	}
@@ -107,15 +107,15 @@ func (o *GetStatementsTransactionsForCustomer200Response) HasPageSize() bool {
 	return false
 }
 
-// SetPageSize gets a reference to the given int32 and assigns it to the PageSize field.
-func (o *GetStatementsTransactionsForCustomer200Response) SetPageSize(v int32) {
+// SetPageSize gets a reference to the given string and assigns it to the PageSize field.
+func (o *GetStatementsTransactionsForCustomer200Response) SetPageSize(v string) {
 	o.PageSize = &v
 }
 
 // GetPageElements returns the PageElements field value if set, zero value otherwise.
-func (o *GetStatementsTransactionsForCustomer200Response) GetPageElements() int32 {
+func (o *GetStatementsTransactionsForCustomer200Response) GetPageElements() string {
 	if o == nil || IsNil(o.PageElements) {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.PageElements
@@ -123,7 +123,7 @@ func (o *GetStatementsTransactionsForCustomer200Response) GetPageElements() int3
 
 // GetPageElementsOk returns a tuple with the PageElements field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetStatementsTransactionsForCustomer200Response) GetPageElementsOk() (*int32, bool) {
+func (o *GetStatementsTransactionsForCustomer200Response) GetPageElementsOk() (*string, bool) {
 	if o == nil || IsNil(o.PageElements) {
 		return nil, false
 	}
@@ -139,15 +139,15 @@ func (o *GetStatementsTransactionsForCustomer200Response) HasPageElements() bool
 	return false
 }
 
-// SetPageElements gets a reference to the given int32 and assigns it to the PageElements field.
-func (o *GetStatementsTransactionsForCustomer200Response) SetPageElements(v int32) {
+// SetPageElements gets a reference to the given string and assigns it to the PageElements field.
+func (o *GetStatementsTransactionsForCustomer200Response) SetPageElements(v string) {
 	o.PageElements = &v
 }
 
 // GetTotal returns the Total field value if set, zero value otherwise.
-func (o *GetStatementsTransactionsForCustomer200Response) GetTotal() int64 {
+func (o *GetStatementsTransactionsForCustomer200Response) GetTotal() string {
 	if o == nil || IsNil(o.Total) {
-		var ret int64
+		var ret string
 		return ret
 	}
 	return *o.Total
@@ -155,7 +155,7 @@ func (o *GetStatementsTransactionsForCustomer200Response) GetTotal() int64 {
 
 // GetTotalOk returns a tuple with the Total field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetStatementsTransactionsForCustomer200Response) GetTotalOk() (*int64, bool) {
+func (o *GetStatementsTransactionsForCustomer200Response) GetTotalOk() (*string, bool) {
 	if o == nil || IsNil(o.Total) {
 		return nil, false
 	}
@@ -171,8 +171,8 @@ func (o *GetStatementsTransactionsForCustomer200Response) HasTotal() bool {
 	return false
 }
 
-// SetTotal gets a reference to the given int64 and assigns it to the Total field.
-func (o *GetStatementsTransactionsForCustomer200Response) SetTotal(v int64) {
+// SetTotal gets a reference to the given string and assigns it to the Total field.
+func (o *GetStatementsTransactionsForCustomer200Response) SetTotal(v string) {
 	o.Total = &v
 }
 
