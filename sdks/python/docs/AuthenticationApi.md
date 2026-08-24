@@ -19,16 +19,16 @@ You need to request a token for the environment you want to authenticate with.
 
 **Note**: The length of the access token isn't fixed, hence it can vary. Avoid validating tokens based on character length.
 
-**Tutorials**
+**Developer guide**
 
-* Learn how to [Request an access token](../tutorials/request-an-access-token.md).
+* Learn how to [Request an access token](../developer-guides/request-an-access-token.md).
 
 #### Environments
 
 | Environment | Domain | Description |
 | --- | --- | --- |
 | Test | `api.test.ripple.com` | Test environment with simulated currency. |
-| Production | `api.ripple.com` | Production environment for Payments Direct |
+| Production | `api.ripple.com` | Production environment for Ripple Payments Direct |
 
 
 ### Example

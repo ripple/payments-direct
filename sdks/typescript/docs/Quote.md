@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **createdAt** | **string** | The time when this quote was created, specified in UTC. | [optional] [default to undefined]
 **expiresAt** | **string** | The time when this quote expires, specified in UTC. | [optional] [default to undefined]
 **destinationBlockchainNetwork** | **string** | The name of the blockchain network on which the beneficiary will receive this payment. | [optional] [default to undefined]
+**paymentRail** | **string** | The payment rail used for this quote. | [optional] [default to undefined]
 
 ## Example
 
@@ -46,6 +47,7 @@ const instance: Quote = {
     createdAt,
     expiresAt,
     destinationBlockchainNetwork,
+    paymentRail,
 };
 ```
 

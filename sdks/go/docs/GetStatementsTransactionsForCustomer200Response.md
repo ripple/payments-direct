@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Offset** | Pointer to **string** | Offset used in the request to skip a specific number of records.  | [optional] 
+**Offset** | Pointer to **string** | Offset used in the request to skip a specific number of records. | [optional] 
 **PageSize** | Pointer to **string** | Number of records requested per page | [optional] 
 **PageElements** | Pointer to **string** | Number of records returned in requested page | [optional] 
 **Total** | Pointer to **string** | Total number of records available for the given filters. | [optional] 

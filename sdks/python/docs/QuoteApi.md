@@ -16,11 +16,6 @@ Create quote collection
 
 Creates a collection of quotes for a proposed payment.
 
-**Tutorials**
-
-* Learn how to [Create a quote](../tutorials/create-a-v2-payment.md#create-a-quote-collection).
-
-
 ### Example
 
 * Bearer (JWT) Authentication (Bearer):

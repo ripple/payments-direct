@@ -6,7 +6,7 @@ Response body for modifying payment labels
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**labels** | **Array&lt;string&gt;** | Application-defined labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment’s lifetime. | [default to undefined]
+**labels** | **Array&lt;string&gt;** | Application-defined labels for grouping and categorizing payments (e.g., campaign IDs, workflow tags, or batch identifiers). Labels are optional and mutable; they can be added or removed over the payment\&#39;s lifetime. | [default to undefined]
 
 ## Example
 

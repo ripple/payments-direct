@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **CreatedAt** | Pointer to **time.Time** | The time when this quote was created, specified in UTC. | [optional] 
 **ExpiresAt** | Pointer to **time.Time** | The time when this quote expires, specified in UTC. | [optional] 
 **DestinationBlockchainNetwork** | Pointer to **string** | The name of the blockchain network on which the beneficiary will receive this payment. | [optional] 
+**PaymentRail** | Pointer to **string** | The payment rail used for this quote. | [optional] 
 
 ## Methods
 
@@ -435,6 +436,31 @@ SetDestinationBlockchainNetwork sets DestinationBlockchainNetwork field to given
 `func (o *Quote) HasDestinationBlockchainNetwork() bool`
 
 HasDestinationBlockchainNetwork returns a boolean if a field has been set.
+
+### GetPaymentRail
+
+`func (o *Quote) GetPaymentRail() string`
+
+GetPaymentRail returns the PaymentRail field if non-nil, zero value otherwise.
+
+### GetPaymentRailOk
+
+`func (o *Quote) GetPaymentRailOk() (*string, bool)`
+
+GetPaymentRailOk returns a tuple with the PaymentRail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentRail
+
+`func (o *Quote) SetPaymentRail(v string)`
+
+SetPaymentRail sets PaymentRail field to given value.
+
+### HasPaymentRail
+
+`func (o *Quote) HasPaymentRail() bool`
+
+HasPaymentRail returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
