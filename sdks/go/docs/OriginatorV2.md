@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OriginatorIdentityId** | Pointer to **string** | The unique ID associated with the payment originator&#39;s identity record. | [optional] 
 **OriginatorIdentityIdVersion** | Pointer to **int32** | The current version of the originator&#39;s identity record. | [optional] 
-**OriginatorIdentityNickName** | Pointer to **string** | Nickname associated with the originator&#39;s identity record. | [optional] 
+**OriginatorIdentityNickName** | Pointer to **string** | The originator&#39;s nickname at the identity version this payment references. Editing the nickname later does not change the value returned for this payment. | [optional] 
 **InternalId** | Pointer to **string** | An ID associated with this payment, if provided by the customer during payment initiation. | [optional] 
 **SourceCurrency** | Pointer to **string** | originator&#39;s currency | [optional] 
 **SourceAmount** | Pointer to **float64** | The amount sent by the originator in this payment. This field can hold a value with up to 6 decimal places. | [optional] 

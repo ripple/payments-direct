@@ -7,14 +7,14 @@ Name | Type | Description | Notes
 **StreetAddress** | **[]string** | Allows the street address of the individual to be held | 
 **Country** | **string** | Allows the Country of the individual to be held. Use Alpha-2 Code as defined in the [ISO CountryCode ISO 3166-1](https://www.iso.org/obp/ui/#search) list. | 
 **City** | **string** | City | 
-**StateOrProvince** | **string** | Information that locates and identifies the state / county for the party, as defined by postal services | 
-**PostalCode** | **string** | Postal code for the individual&#39;s address | 
+**StateOrProvince** | Pointer to **string** | Information that locates and identifies the state / county for the party, as defined by postal services | [optional] 
+**PostalCode** | Pointer to **string** | Postal code for the individual&#39;s address | [optional] 
 
 ## Methods
 
 ### NewIndividualIdentityAddress
 
-`func NewIndividualIdentityAddress(streetAddress []string, country string, city string, stateOrProvince string, postalCode string, ) *IndividualIdentityAddress`
+`func NewIndividualIdentityAddress(streetAddress []string, country string, city string, ) *IndividualIdentityAddress`
 
 NewIndividualIdentityAddress instantiates a new IndividualIdentityAddress object
 This constructor will assign default values to properties that have it defined,
@@ -108,6 +108,11 @@ and a boolean to check if the value has been set.
 
 SetStateOrProvince sets StateOrProvince field to given value.
 
+### HasStateOrProvince
+
+`func (o *IndividualIdentityAddress) HasStateOrProvince() bool`
+
+HasStateOrProvince returns a boolean if a field has been set.
 
 ### GetPostalCode
 
@@ -128,6 +133,11 @@ and a boolean to check if the value has been set.
 
 SetPostalCode sets PostalCode field to given value.
 
+### HasPostalCode
+
+`func (o *IndividualIdentityAddress) HasPostalCode() bool`
+
+HasPostalCode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

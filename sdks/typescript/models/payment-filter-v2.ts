@@ -63,7 +63,7 @@ export interface PaymentFilterV2 {
      */
     'internalId'?: string;
     /**
-     * To get all payments made to a beneficiary, specify the nickname of that beneficiary in this field. You can find the nickname using the `GET /identities` operation.
+     * To get all payments made to a beneficiary, specify the nickname of that beneficiary in this field. You can find the nickname using the `GET /identities` operation. The nickname is matched by the identity service, and the payments of every beneficiary it matches are returned.
      * @type {string}
      * @memberof PaymentFilterV2
      */

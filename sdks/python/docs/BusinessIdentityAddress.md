@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **street_address** | **List[str]** | Allows the street address of the business to be held | 
 **country** | **str** | Allows the country of the business to be held. Use Alpha-2 Code as defined in the [ISO CountryCode ISO 3166-1](https://www.iso.org/obp/ui/#search) list. | 
 **city** | **str** | City | 
-**state_or_province** | **str** | Information that locates and identifies the state / county for the individual, as defined by postal services. | 
-**postal_code** | **str** | Postal code for the business | 
+**state_or_province** | **str** | State, province, or county of the business address, as defined by postal services. | [optional] 
+**postal_code** | **str** | Postal code for the business | [optional] 
 
 ## Example
 

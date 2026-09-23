@@ -21,7 +21,7 @@ var _ MappedNullable = &PutRippleIdentity{}
 type PutRippleIdentity struct {
 	// Client-provided unique identifier for idempotency and deduplication. Required for ORIGINATOR identities; optional for BENEFICIARY identities. Must be unique across all active identities in your organization. Duplicate values will result in a 409 Conflict error.  This is your own reference key, not the originator's account number. Use `originatorAccountNumber` for that. 
 	InternalId *string `json:"internalId,omitempty"`
-	// The originator's account number, or your customer identifier for the originator. Required for ORIGINATOR identities on USD payments to China (`CN_CFXPS`); optional elsewhere.  Must be unique across all active identities in your organization, including BENEFICIARY identities. Duplicate values return a 409 Conflict error.  Corridor length and character limits apply to this value but are not enforced on this field. See the corridor's Integration resources page. 
+	// The originator's account number, or your customer identifier for the originator. Optional on every currently available corridor. Only sent to payout partners for ORIGINATOR identities.  Must be unique across all active identities in your organization, including BENEFICIARY identities. Duplicate values return a 409 Conflict error.  Payout partners apply their own length and character limits to this value, but they are not enforced on this field. 
 	OriginatorAccountNumber *string `json:"originatorAccountNumber,omitempty"`
 	Business *BusinessIdentity `json:"business,omitempty"`
 	Individual *IndividualIdentity `json:"individual,omitempty"`

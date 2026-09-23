@@ -46,8 +46,6 @@ class TestBusinessIdentityAddress(unittest.TestCase):
                 street_address = ["123 Example St. Boston, MA"],
                 country = 'US',
                 city = 'Boston',
-                state_or_province = 'Massachusetts',
-                postal_code = '12345',
         )
         """
 

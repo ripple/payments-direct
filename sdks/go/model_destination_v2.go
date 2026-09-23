@@ -33,7 +33,7 @@ type DestinationV2 struct {
 	BeneficiaryIdentityId *string `json:"beneficiaryIdentityId,omitempty"`
 	// The current version of the beneficiary's identity record.
 	BeneficiaryIdentityVersion *int32 `json:"beneficiaryIdentityVersion,omitempty"`
-	// Nickname associated with the beneficiary's identity record.
+	// The beneficiary's nickname at the identity version this payment references. Editing the nickname later does not change the value returned for this payment.
 	BeneficiaryIdentityNickName *string `json:"beneficiaryIdentityNickName,omitempty"`
 	// The payout category for this payment.
 	Payout *string `json:"payout,omitempty"`

@@ -25,19 +25,12 @@ Name | Type | Description | Notes
 **coPse** | [**CoPse**](CoPse.md) |  | [optional] [default to undefined]
 **brTed** | [**BrTed**](BrTed.md) |  | [optional] [default to undefined]
 **caEft** | [**CaEft**](CaEft.md) |  | [optional] [default to undefined]
-**hkBankPayout** | [**HkBankPayout**](HkBankPayout.md) |  | [optional] [default to undefined]
-**idBifast** | [**IdBifast**](IdBifast.md) |  | [optional] [default to undefined]
 **krKftc** | [**KrKftc**](KrKftc.md) |  | [optional] [default to undefined]
 **inNeft** | [**InNeft**](InNeft.md) |  | [optional] [default to undefined]
 **peLbtr** | [**PeLbtr**](PeLbtr.md) |  | [optional] [default to undefined]
 **auNpp** | [**AuNpp**](AuNpp.md) |  | [optional] [default to undefined]
-**jpZengin** | [**JpZengin**](JpZengin.md) |  | [optional] [default to undefined]
-**cnCfxps** | [**CnCfxps**](CnCfxps.md) |  | [optional] [default to undefined]
 **clTef** | [**ClTef**](ClTef.md) |  | [optional] [default to undefined]
 **aeIpi** | [**AeIpi**](AeIpi.md) |  | [optional] [default to undefined]
-**trFast** | [**TrFast**](TrFast.md) |  | [optional] [default to undefined]
-**phNrps** | [**PhNrps**](PhNrps.md) |  | [optional] [default to undefined]
-**thPromptpay** | [**ThPromptpay**](ThPromptpay.md) |  | [optional] [default to undefined]
 **arInterbanking** | [**ArInterbanking**](ArInterbanking.md) |  | [optional] [default to undefined]
 
 ## Example
@@ -65,19 +58,12 @@ const instance: PutRippleFinancialInstrument = {
     coPse,
     brTed,
     caEft,
-    hkBankPayout,
-    idBifast,
     krKftc,
     inNeft,
     peLbtr,
     auNpp,
-    jpZengin,
-    cnCfxps,
     clTef,
     aeIpi,
-    trFast,
-    phNrps,
-    thPromptpay,
     arInterbanking,
 };
 ```

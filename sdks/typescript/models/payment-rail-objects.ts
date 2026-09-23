@@ -36,9 +36,6 @@ import type { CaEft } from './ca-eft';
 import type { ClTef } from './cl-tef';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CnCfxps } from './cn-cfxps';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { CoPse } from './co-pse';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -54,16 +51,7 @@ import type { GbFps } from './gb-fps';
 import type { GhBankPayout } from './gh-bank-payout';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { HkBankPayout } from './hk-bank-payout';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { IdBifast } from './id-bifast';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { InNeft } from './in-neft';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { JpZengin } from './jp-zengin';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { KrKftc } from './kr-kftc';
@@ -78,19 +66,10 @@ import type { NgBankPayout } from './ng-bank-payout';
 import type { PeLbtr } from './pe-lbtr';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PhNrps } from './ph-nrps';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { RwBankPayout } from './rw-bank-payout';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { SolWallet } from './sol-wallet';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ThPromptpay } from './th-promptpay';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { TrFast } from './tr-fast';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TronWallet } from './tron-wallet';
@@ -226,18 +205,6 @@ export interface PaymentRailObjects {
     'caEft'?: CaEft;
     /**
      * 
-     * @type {HkBankPayout}
-     * @memberof PaymentRailObjects
-     */
-    'hkBankPayout'?: HkBankPayout;
-    /**
-     * 
-     * @type {IdBifast}
-     * @memberof PaymentRailObjects
-     */
-    'idBifast'?: IdBifast;
-    /**
-     * 
      * @type {KrKftc}
      * @memberof PaymentRailObjects
      */
@@ -262,18 +229,6 @@ export interface PaymentRailObjects {
     'auNpp'?: AuNpp;
     /**
      * 
-     * @type {JpZengin}
-     * @memberof PaymentRailObjects
-     */
-    'jpZengin'?: JpZengin;
-    /**
-     * 
-     * @type {CnCfxps}
-     * @memberof PaymentRailObjects
-     */
-    'cnCfxps'?: CnCfxps;
-    /**
-     * 
      * @type {ClTef}
      * @memberof PaymentRailObjects
      */
@@ -284,24 +239,6 @@ export interface PaymentRailObjects {
      * @memberof PaymentRailObjects
      */
     'aeIpi'?: AeIpi;
-    /**
-     * 
-     * @type {TrFast}
-     * @memberof PaymentRailObjects
-     */
-    'trFast'?: TrFast;
-    /**
-     * 
-     * @type {PhNrps}
-     * @memberof PaymentRailObjects
-     */
-    'phNrps'?: PhNrps;
-    /**
-     * 
-     * @type {ThPromptpay}
-     * @memberof PaymentRailObjects
-     */
-    'thPromptpay'?: ThPromptpay;
     /**
      * 
      * @type {ArInterbanking}

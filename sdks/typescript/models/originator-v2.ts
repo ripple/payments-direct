@@ -33,7 +33,7 @@ export interface OriginatorV2 {
      */
     'originatorIdentityIdVersion'?: number;
     /**
-     * Nickname associated with the originator\'s identity record.
+     * The originator\'s nickname at the identity version this payment references. Editing the nickname later does not change the value returned for this payment.
      * @type {string}
      * @memberof OriginatorV2
      */

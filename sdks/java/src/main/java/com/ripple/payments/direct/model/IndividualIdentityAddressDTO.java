@@ -55,11 +55,11 @@ public class IndividualIdentityAddressDTO {
   private String city;
 
   public static final String JSON_PROPERTY_STATE_OR_PROVINCE = "stateOrProvince";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private String stateOrProvince;
 
   public static final String JSON_PROPERTY_POSTAL_CODE = "postalCode";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private String postalCode;
 
   public IndividualIdentityAddressDTO() {
@@ -148,7 +148,7 @@ public class IndividualIdentityAddressDTO {
     this.city = city;
   }
 
-  public IndividualIdentityAddressDTO stateOrProvince(@javax.annotation.Nonnull String stateOrProvince) {
+  public IndividualIdentityAddressDTO stateOrProvince(@javax.annotation.Nullable String stateOrProvince) {
     
     this.stateOrProvince = stateOrProvince;
     return this;
@@ -158,9 +158,9 @@ public class IndividualIdentityAddressDTO {
    * Information that locates and identifies the state / county for the party, as defined by postal services
    * @return stateOrProvince
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_STATE_OR_PROVINCE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getStateOrProvince() {
     return stateOrProvince;
@@ -168,12 +168,12 @@ public class IndividualIdentityAddressDTO {
 
 
   @JsonProperty(JSON_PROPERTY_STATE_OR_PROVINCE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setStateOrProvince(@javax.annotation.Nonnull String stateOrProvince) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setStateOrProvince(@javax.annotation.Nullable String stateOrProvince) {
     this.stateOrProvince = stateOrProvince;
   }
 
-  public IndividualIdentityAddressDTO postalCode(@javax.annotation.Nonnull String postalCode) {
+  public IndividualIdentityAddressDTO postalCode(@javax.annotation.Nullable String postalCode) {
     
     this.postalCode = postalCode;
     return this;
@@ -183,9 +183,9 @@ public class IndividualIdentityAddressDTO {
    * Postal code for the individual&#39;s address
    * @return postalCode
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_POSTAL_CODE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getPostalCode() {
     return postalCode;
@@ -193,8 +193,8 @@ public class IndividualIdentityAddressDTO {
 
 
   @JsonProperty(JSON_PROPERTY_POSTAL_CODE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPostalCode(@javax.annotation.Nonnull String postalCode) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setPostalCode(@javax.annotation.Nullable String postalCode) {
     this.postalCode = postalCode;
   }
 

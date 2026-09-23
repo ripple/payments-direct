@@ -10,12 +10,13 @@ Name | Type | Description | Notes
 **lastName** | **string** | Last name of the individual | [default to undefined]
 **address** | [**IndividualIdentityAddress**](IndividualIdentityAddress.md) |  | [default to undefined]
 **email** | **string** | Address for electronic mail (e-mail). | [optional] [default to undefined]
-**phone** | **string** | Phone Number | [optional] [default to undefined]
+**phone** | **string** | Phone Number.  | [optional] [default to undefined]
 **identityDocuments** | [**Array&lt;IndividualIdentityIdentityDocumentsInner&gt;**](IndividualIdentityIdentityDocumentsInner.md) | Gathers identifying documentation | [optional] [default to undefined]
 **dateOfBirth** | **string** | Date of Birth. | [optional] [default to undefined]
 **countryOfBirth** | **string** | Country of Birth. Use Alpha-2 Code as defined in the [ISO CountryCode ISO 3166-1](https://www.iso.org/obp/ui/#search) list. | [optional] [default to undefined]
 **citizenship** | **string** | Alpha-2 country code for the nationality of the individual in ISO 3166-1 format. | [optional] [default to undefined]
 **gender** | **string** | Gender of the identity. | [optional] [default to undefined]
+**localized** | [**IndividualIdentityLocalized**](IndividualIdentityLocalized.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -33,6 +34,7 @@ const instance: IndividualIdentity = {
     countryOfBirth,
     citizenship,
     gender,
+    localized,
 };
 ```
 

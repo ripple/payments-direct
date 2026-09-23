@@ -7,14 +7,14 @@ Name | Type | Description | Notes
 **StreetAddress** | **[]string** | Allows the street address of the business to be held | 
 **Country** | **string** | Allows the country of the business to be held. Use Alpha-2 Code as defined in the [ISO CountryCode ISO 3166-1](https://www.iso.org/obp/ui/#search) list. | 
 **City** | **string** | City | 
-**StateOrProvince** | **string** | Information that locates and identifies the state / county for the individual, as defined by postal services. | 
-**PostalCode** | **string** | Postal code for the business | 
+**StateOrProvince** | Pointer to **string** | State, province, or county of the business address, as defined by postal services. | [optional] 
+**PostalCode** | Pointer to **string** | Postal code for the business | [optional] 
 
 ## Methods
 
 ### NewBusinessIdentityAddress
 
-`func NewBusinessIdentityAddress(streetAddress []string, country string, city string, stateOrProvince string, postalCode string, ) *BusinessIdentityAddress`
+`func NewBusinessIdentityAddress(streetAddress []string, country string, city string, ) *BusinessIdentityAddress`
 
 NewBusinessIdentityAddress instantiates a new BusinessIdentityAddress object
 This constructor will assign default values to properties that have it defined,
@@ -108,6 +108,11 @@ and a boolean to check if the value has been set.
 
 SetStateOrProvince sets StateOrProvince field to given value.
 
+### HasStateOrProvince
+
+`func (o *BusinessIdentityAddress) HasStateOrProvince() bool`
+
+HasStateOrProvince returns a boolean if a field has been set.
 
 ### GetPostalCode
 
@@ -128,6 +133,11 @@ and a boolean to check if the value has been set.
 
 SetPostalCode sets PostalCode field to given value.
 
+### HasPostalCode
+
+`func (o *BusinessIdentityAddress) HasPostalCode() bool`
+
+HasPostalCode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

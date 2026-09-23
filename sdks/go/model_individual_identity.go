@@ -28,7 +28,7 @@ type IndividualIdentity struct {
 	Address IndividualIdentityAddress `json:"address"`
 	// Address for electronic mail (e-mail).
 	Email *string `json:"email,omitempty" validate:"regexp=^(?=.{1,254}$)(?:[\\\\p{L}\\\\p{N}%+_-]+(?:\\\\.[\\\\p{L}\\\\p{N}%+_-]+)*)@(?:(?:[\\\\p{L}\\\\p{N}](?:[\\\\p{L}\\\\p{N}-]{0,61}[\\\\p{L}\\\\p{N}])?)\\\\.)+[\\\\p{L}]{2,63}$"`
-	// Phone Number
+	// Phone Number. 
 	Phone *string `json:"phone,omitempty" validate:"regexp=^\\\\+[1-9]\\\\d+$"`
 	// Gathers identifying documentation
 	IdentityDocuments []IndividualIdentityIdentityDocumentsInner `json:"identityDocuments,omitempty"`
@@ -40,6 +40,7 @@ type IndividualIdentity struct {
 	Citizenship *string `json:"citizenship,omitempty" validate:"regexp=^[A-Z]+$"`
 	// Gender of the identity.
 	Gender *string `json:"gender,omitempty"`
+	Localized *IndividualIdentityLocalized `json:"localized,omitempty"`
 }
 
 type _IndividualIdentity IndividualIdentity
@@ -360,6 +361,38 @@ func (o *IndividualIdentity) SetGender(v string) {
 	o.Gender = &v
 }
 
+// GetLocalized returns the Localized field value if set, zero value otherwise.
+func (o *IndividualIdentity) GetLocalized() IndividualIdentityLocalized {
+	if o == nil || IsNil(o.Localized) {
+		var ret IndividualIdentityLocalized
+		return ret
+	}
+	return *o.Localized
+}
+
+// GetLocalizedOk returns a tuple with the Localized field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IndividualIdentity) GetLocalizedOk() (*IndividualIdentityLocalized, bool) {
+	if o == nil || IsNil(o.Localized) {
+		return nil, false
+	}
+	return o.Localized, true
+}
+
+// HasLocalized returns a boolean if a field has been set.
+func (o *IndividualIdentity) HasLocalized() bool {
+	if o != nil && !IsNil(o.Localized) {
+		return true
+	}
+
+	return false
+}
+
+// SetLocalized gets a reference to the given IndividualIdentityLocalized and assigns it to the Localized field.
+func (o *IndividualIdentity) SetLocalized(v IndividualIdentityLocalized) {
+	o.Localized = &v
+}
+
 func (o IndividualIdentity) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -393,6 +426,9 @@ func (o IndividualIdentity) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Gender) {
 		toSerialize["gender"] = o.Gender
+	}
+	if !IsNil(o.Localized) {
+		toSerialize["localized"] = o.Localized
 	}
 	return toSerialize, nil
 }

@@ -28,7 +28,7 @@ class RwBankPayout(BaseModel):
     Rails: RSwitch  Rail Definitions:   RSwitch:     - Availability: 24/7/365     - Limit: RWF 10,000,000     - Settlement: Real time to 48 hours     - Cut-off time: Real time     - Banking holidays: Applicable  Routing Evaluation Order:   1. RSwitch – Conditions: Account addressability, amount ≤ RWF 10,000,000 
     """ # noqa: E501
     bank_name: Annotated[str, Field(min_length=2, strict=True, max_length=140)] = Field(description="The name of the identity's bank", alias="bankName")
-    bank_code: Annotated[str, Field(min_length=1, strict=True, max_length=50)] = Field(description="The bank code of the identity's bank", alias="bankCode")
+    bank_code: Annotated[str, Field(min_length=1, strict=True, max_length=50)] = Field(description="Ripple Bank Code (RBC) for the destination bank in Rwanda. See the Bank Codes resource in Ripple Docs for the authoritative list of supported values.", alias="bankCode")
     account_number: Annotated[str, Field(min_length=4, strict=True, max_length=21)] = Field(description="The identity's account number associated with the Account Identification Scheme", alias="accountNumber")
     __properties: ClassVar[List[str]] = ["bankName", "bankCode", "accountNumber"]
 
@@ -42,8 +42,8 @@ class RwBankPayout(BaseModel):
     @field_validator('bank_code')
     def bank_code_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if not re.match(r"^[A-Za-z0-9 ._-]+$", value):
-            raise ValueError(r"must validate the regular expression /^[A-Za-z0-9 ._-]+$/")
+        if not re.match(r"^([A-Za-z0-9 ._-]+|RPL:[A-Z]{2}:[A-Z0-9]{7,11}(_\d+)?:(BNK|WAL))$", value):
+            raise ValueError(r"must validate the regular expression /^([A-Za-z0-9 ._-]+|RPL:[A-Z]{2}:[A-Z0-9]{7,11}(_\d+)?:(BNK|WAL))$/")
         return value
 
     @field_validator('account_number')

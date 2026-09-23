@@ -8,12 +8,13 @@ Name | Type | Description | Notes
 **LastName** | **string** | Last name of the individual | 
 **Address** | [**IndividualIdentityAddress**](IndividualIdentityAddress.md) |  | 
 **Email** | Pointer to **string** | Address for electronic mail (e-mail). | [optional] 
-**Phone** | Pointer to **string** | Phone Number | [optional] 
+**Phone** | Pointer to **string** | Phone Number.  | [optional] 
 **IdentityDocuments** | Pointer to [**[]IndividualIdentityIdentityDocumentsInner**](IndividualIdentityIdentityDocumentsInner.md) | Gathers identifying documentation | [optional] 
 **DateOfBirth** | Pointer to **string** | Date of Birth. | [optional] 
 **CountryOfBirth** | Pointer to **string** | Country of Birth. Use Alpha-2 Code as defined in the [ISO CountryCode ISO 3166-1](https://www.iso.org/obp/ui/#search) list. | [optional] 
 **Citizenship** | Pointer to **string** | Alpha-2 country code for the nationality of the individual in ISO 3166-1 format. | [optional] 
 **Gender** | Pointer to **string** | Gender of the identity. | [optional] 
+**Localized** | Pointer to [**IndividualIdentityLocalized**](IndividualIdentityLocalized.md) |  | [optional] 
 
 ## Methods
 
@@ -268,6 +269,31 @@ SetGender sets Gender field to given value.
 `func (o *IndividualIdentity) HasGender() bool`
 
 HasGender returns a boolean if a field has been set.
+
+### GetLocalized
+
+`func (o *IndividualIdentity) GetLocalized() IndividualIdentityLocalized`
+
+GetLocalized returns the Localized field if non-nil, zero value otherwise.
+
+### GetLocalizedOk
+
+`func (o *IndividualIdentity) GetLocalizedOk() (*IndividualIdentityLocalized, bool)`
+
+GetLocalizedOk returns a tuple with the Localized field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocalized
+
+`func (o *IndividualIdentity) SetLocalized(v IndividualIdentityLocalized)`
+
+SetLocalized sets Localized field to given value.
+
+### HasLocalized
+
+`func (o *IndividualIdentity) HasLocalized() bool`
+
+HasLocalized returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

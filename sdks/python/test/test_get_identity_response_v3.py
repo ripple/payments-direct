@@ -69,7 +69,10 @@ class TestGetIdentityResponseV3(unittest.TestCase):
                         ], 
                     incorporation_country = 'US', 
                     incorporation_date = 'Tue Jan 14 16:00:00 PST 2020', 
-                    legal_entity_type = 'BANK_CENTRAL', ),
+                    legal_entity_type = 'BANK_CENTRAL', 
+                    localized = ripple_payments_direct.models.business_identity_localized.business_identity_localized(
+                        hanzi = ripple_payments_direct.models.business_identity_localized_hanzi.business_identity_localized_hanzi(
+                            business_name = '上海示例贸易有限公司', ), ), ),
                 individual = ripple_payments_direct.models.individual_identity.Individual identity(
                     first_name = 'John', 
                     last_name = 'Smith', 
@@ -90,7 +93,12 @@ class TestGetIdentityResponseV3(unittest.TestCase):
                     date_of_birth = 'Tue Jan 23 16:00:00 PST 2001', 
                     country_of_birth = 'US', 
                     citizenship = 'US', 
-                    gender = 'FEMALE', )
+                    gender = 'FEMALE', 
+                    localized = ripple_payments_direct.models.individual_identity_localized.individual_identity_localized(
+                        hanzi = ripple_payments_direct.models.individual_identity_localized_hanzi.individual_identity_localized_hanzi(
+                            first_name = '伟', 
+                            last_name = '张', 
+                            business_name = '上海示例贸易有限公司', ), ), )
             )
         else:
             return GetIdentityResponseV3(

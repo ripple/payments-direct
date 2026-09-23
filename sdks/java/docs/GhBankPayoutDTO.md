@@ -9,7 +9,7 @@ Rails: GIP  Rail Definitions:   GIP:     - Availability: 24/7/365     - Limit: â
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**bankName** | **String** | The name of the identity&#39;s bank |  |
-|**bankCode** | **String** | The bank code of the identity&#39;s bank |  |
+|**bankCode** | **String** | Ripple Bank Code (RBC) for the destination bank in Ghana. See the Bank Codes resource in Ripple Docs for the authoritative list of supported values. |  |
 |**accountNumber** | **String** | The identity&#39;s account number associated with the Account Identification Scheme |  |
 
 

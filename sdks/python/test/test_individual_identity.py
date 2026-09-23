@@ -54,7 +54,12 @@ class TestIndividualIdentity(unittest.TestCase):
                 date_of_birth = 'Tue Jan 23 16:00:00 PST 2001',
                 country_of_birth = 'US',
                 citizenship = 'US',
-                gender = 'FEMALE'
+                gender = 'FEMALE',
+                localized = ripple_payments_direct.models.individual_identity_localized.individual_identity_localized(
+                    hanzi = ripple_payments_direct.models.individual_identity_localized_hanzi.individual_identity_localized_hanzi(
+                        first_name = '伟', 
+                        last_name = '张', 
+                        business_name = '上海示例贸易有限公司', ), )
             )
         else:
             return IndividualIdentity(

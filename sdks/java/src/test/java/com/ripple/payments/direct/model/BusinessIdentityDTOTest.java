@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.ripple.payments.direct.model.BusinessIdentityAddressDTO;
+import com.ripple.payments.direct.model.BusinessIdentityLocalizedDTO;
 import com.ripple.payments.direct.model.BusinessIdentityRegistrationInnerDTO;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -104,6 +105,14 @@ class BusinessIdentityDTOTest {
     @Test
     void legalEntityTypeTest() {
         // TODO: test legalEntityType
+    }
+
+    /**
+     * Test the property 'localized'
+     */
+    @Test
+    void localizedTest() {
+        // TODO: test localized
     }
 
 }

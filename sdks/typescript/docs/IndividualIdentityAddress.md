@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **streetAddress** | **Array&lt;string&gt;** | Allows the street address of the individual to be held | [default to undefined]
 **country** | **string** | Allows the Country of the individual to be held. Use Alpha-2 Code as defined in the [ISO CountryCode ISO 3166-1](https://www.iso.org/obp/ui/#search) list. | [default to undefined]
 **city** | **string** | City | [default to undefined]
-**stateOrProvince** | **string** | Information that locates and identifies the state / county for the party, as defined by postal services | [default to undefined]
-**postalCode** | **string** | Postal code for the individual\&#39;s address | [default to undefined]
+**stateOrProvince** | **string** | Information that locates and identifies the state / county for the party, as defined by postal services | [optional] [default to undefined]
+**postalCode** | **string** | Postal code for the individual\&#39;s address | [optional] [default to undefined]
 
 ## Example
 

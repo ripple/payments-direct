@@ -51,7 +51,10 @@ class TestBusinessIdentity(unittest.TestCase):
                     ],
                 incorporation_country = 'US',
                 incorporation_date = 'Tue Jan 14 16:00:00 PST 2020',
-                legal_entity_type = 'BANK_CENTRAL'
+                legal_entity_type = 'BANK_CENTRAL',
+                localized = ripple_payments_direct.models.business_identity_localized.business_identity_localized(
+                    hanzi = ripple_payments_direct.models.business_identity_localized_hanzi.business_identity_localized_hanzi(
+                        business_name = '上海示例贸易有限公司', ), )
             )
         else:
             return BusinessIdentity(

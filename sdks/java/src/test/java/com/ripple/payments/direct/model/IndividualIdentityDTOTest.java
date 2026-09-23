@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.ripple.payments.direct.model.IndividualIdentityAddressDTO;
 import com.ripple.payments.direct.model.IndividualIdentityIdentityDocumentsInnerDTO;
+import com.ripple.payments.direct.model.IndividualIdentityLocalizedDTO;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -120,6 +121,14 @@ class IndividualIdentityDTOTest {
     @Test
     void genderTest() {
         // TODO: test gender
+    }
+
+    /**
+     * Test the property 'localized'
+     */
+    @Test
+    void localizedTest() {
+        // TODO: test localized
     }
 
 }

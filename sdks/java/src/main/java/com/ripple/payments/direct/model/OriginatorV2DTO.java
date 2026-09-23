@@ -129,7 +129,7 @@ public class OriginatorV2DTO {
   }
 
   /**
-   * Nickname associated with the originator&#39;s identity record.
+   * The originator&#39;s nickname at the identity version this payment references. Editing the nickname later does not change the value returned for this payment.
    * @return originatorIdentityNickName
    */
   @javax.annotation.Nullable

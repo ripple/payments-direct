@@ -14,7 +14,7 @@
 |**destinationBlockchainNetwork** | **String** | The name of the blockchain network on which the beneficiary will receive this payment. |  [optional] |
 |**beneficiaryIdentityId** | **String** | The unique ID associated with the payment beneficiary&#39;s identity record. |  [optional] |
 |**beneficiaryIdentityVersion** | **Integer** | The current version of the beneficiary&#39;s identity record. |  [optional] |
-|**beneficiaryIdentityNickName** | **String** | Nickname associated with the beneficiary&#39;s identity record. |  [optional] |
+|**beneficiaryIdentityNickName** | **String** | The beneficiary&#39;s nickname at the identity version this payment references. Editing the nickname later does not change the value returned for this payment. |  [optional] |
 |**payout** | **String** | The payout category for this payment. |  [optional] |
 |**selectedPaymentRail** | **String** | The payment rail the customer selected when accepting the quote for this payment. Reflects the intended routing at the time of quote acceptance. For the rail confirmed by the payout partner at execution time, see &#x60;payoutExecutionDetails.paymentRailUsed&#x60;. These values may differ if the payout partner executed on an alternate rail.  |  [optional] |
 

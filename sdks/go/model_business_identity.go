@@ -36,6 +36,7 @@ type BusinessIdentity struct {
 	IncorporationDate *string `json:"incorporationDate,omitempty"`
 	// Type of legal entity to distinguish between Financial Institutions and Non-Financial Institutions.  This classification is used to determine regulatory treatment and compliance requirements for certain payment corridors. 
 	LegalEntityType *string `json:"legalEntityType,omitempty"`
+	Localized *BusinessIdentityLocalized `json:"localized,omitempty"`
 }
 
 type _BusinessIdentity BusinessIdentity
@@ -299,6 +300,38 @@ func (o *BusinessIdentity) SetLegalEntityType(v string) {
 	o.LegalEntityType = &v
 }
 
+// GetLocalized returns the Localized field value if set, zero value otherwise.
+func (o *BusinessIdentity) GetLocalized() BusinessIdentityLocalized {
+	if o == nil || IsNil(o.Localized) {
+		var ret BusinessIdentityLocalized
+		return ret
+	}
+	return *o.Localized
+}
+
+// GetLocalizedOk returns a tuple with the Localized field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BusinessIdentity) GetLocalizedOk() (*BusinessIdentityLocalized, bool) {
+	if o == nil || IsNil(o.Localized) {
+		return nil, false
+	}
+	return o.Localized, true
+}
+
+// HasLocalized returns a boolean if a field has been set.
+func (o *BusinessIdentity) HasLocalized() bool {
+	if o != nil && !IsNil(o.Localized) {
+		return true
+	}
+
+	return false
+}
+
+// SetLocalized gets a reference to the given BusinessIdentityLocalized and assigns it to the Localized field.
+func (o *BusinessIdentity) SetLocalized(v BusinessIdentityLocalized) {
+	o.Localized = &v
+}
+
 func (o BusinessIdentity) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -328,6 +361,9 @@ func (o BusinessIdentity) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.LegalEntityType) {
 		toSerialize["legalEntityType"] = o.LegalEntityType
+	}
+	if !IsNil(o.Localized) {
+		toSerialize["localized"] = o.Localized
 	}
 	return toSerialize, nil
 }

@@ -269,7 +269,7 @@ public class DestinationV2DTO {
   }
 
   /**
-   * Nickname associated with the beneficiary&#39;s identity record.
+   * The beneficiary&#39;s nickname at the identity version this payment references. Editing the nickname later does not change the value returned for this payment.
    * @return beneficiaryIdentityNickName
    */
   @javax.annotation.Nullable

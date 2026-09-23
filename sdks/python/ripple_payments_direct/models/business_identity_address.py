@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,8 +30,8 @@ class BusinessIdentityAddress(BaseModel):
     street_address: List[Annotated[str, Field(min_length=1, strict=True, max_length=70)]] = Field(description="Allows the street address of the business to be held", alias="streetAddress")
     country: Annotated[str, Field(min_length=2, strict=True, max_length=2)] = Field(description="Allows the country of the business to be held. Use Alpha-2 Code as defined in the [ISO CountryCode ISO 3166-1](https://www.iso.org/obp/ui/#search) list.")
     city: Annotated[str, Field(min_length=1, strict=True, max_length=140)] = Field(description="City")
-    state_or_province: Annotated[str, Field(min_length=1, strict=True, max_length=140)] = Field(description="Information that locates and identifies the state / county for the individual, as defined by postal services.", alias="stateOrProvince")
-    postal_code: Annotated[str, Field(min_length=3, strict=True, max_length=15)] = Field(description="Postal code for the business", alias="postalCode")
+    state_or_province: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=140)]] = Field(default=None, description="State, province, or county of the business address, as defined by postal services.", alias="stateOrProvince")
+    postal_code: Optional[Annotated[str, Field(min_length=3, strict=True, max_length=15)]] = Field(default=None, description="Postal code for the business", alias="postalCode")
     __properties: ClassVar[List[str]] = ["streetAddress", "country", "city", "stateOrProvince", "postalCode"]
 
     @field_validator('country')
@@ -51,6 +51,9 @@ class BusinessIdentityAddress(BaseModel):
     @field_validator('state_or_province')
     def state_or_province_validate_regular_expression(cls, value):
         """Validates the regular expression"""
+        if value is None:
+            return value
+
         if not re.match(r"^(?![ .\'-])(?!.*[ .\'-]{2})[\p{L}\p{N} .\'-]+(?<![ .\'-])$", value):
             raise ValueError(r"must validate the regular expression /^(?![ .'-])(?!.*[ .'-]{2})[\p{L}\p{N} .'-]+(?<![ .'-])$/")
         return value
@@ -58,6 +61,9 @@ class BusinessIdentityAddress(BaseModel):
     @field_validator('postal_code')
     def postal_code_validate_regular_expression(cls, value):
         """Validates the regular expression"""
+        if value is None:
+            return value
+
         if not re.match(r"^[\p{L}\p{N}][\p{L}\p{N} -]{1,15}[\p{L}\p{N}]$", value):
             raise ValueError(r"must validate the regular expression /^[\p{L}\p{N}][\p{L}\p{N} -]{1,15}[\p{L}\p{N}]$/")
         return value

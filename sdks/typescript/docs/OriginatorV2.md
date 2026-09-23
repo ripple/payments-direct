@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **originatorIdentityId** | **string** | The unique ID associated with the payment originator\&#39;s identity record. | [optional] [default to undefined]
 **originatorIdentityIdVersion** | **number** | The current version of the originator\&#39;s identity record. | [optional] [default to undefined]
-**originatorIdentityNickName** | **string** | Nickname associated with the originator\&#39;s identity record. | [optional] [default to undefined]
+**originatorIdentityNickName** | **string** | The originator\&#39;s nickname at the identity version this payment references. Editing the nickname later does not change the value returned for this payment. | [optional] [default to undefined]
 **internalId** | **string** | An ID associated with this payment, if provided by the customer during payment initiation. | [optional] [default to undefined]
 **sourceCurrency** | **string** | originator\&#39;s currency | [optional] [default to undefined]
 **sourceAmount** | **number** | The amount sent by the originator in this payment. This field can hold a value with up to 6 decimal places. | [optional] [default to undefined]

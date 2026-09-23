@@ -19,6 +19,9 @@ import type { IndividualIdentityAddress } from './individual-identity-address';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { IndividualIdentityIdentityDocumentsInner } from './individual-identity-identity-documents-inner';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { IndividualIdentityLocalized } from './individual-identity-localized';
 
 /**
  * Data for an individual 
@@ -51,7 +54,7 @@ export interface IndividualIdentity {
      */
     'email'?: string;
     /**
-     * Phone Number
+     * Phone Number. 
      * @type {string}
      * @memberof IndividualIdentity
      */
@@ -86,5 +89,11 @@ export interface IndividualIdentity {
      * @memberof IndividualIdentity
      */
     'gender'?: string;
+    /**
+     * 
+     * @type {IndividualIdentityLocalized}
+     * @memberof IndividualIdentity
+     */
+    'localized'?: IndividualIdentityLocalized;
 }
 

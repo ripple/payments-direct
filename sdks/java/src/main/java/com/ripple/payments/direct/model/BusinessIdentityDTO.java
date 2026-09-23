@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.ripple.payments.direct.model.BusinessIdentityAddressDTO;
+import com.ripple.payments.direct.model.BusinessIdentityLocalizedDTO;
 import com.ripple.payments.direct.model.BusinessIdentityRegistrationInnerDTO;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -43,7 +44,8 @@ import java.util.StringJoiner;
   BusinessIdentityDTO.JSON_PROPERTY_REGISTRATION,
   BusinessIdentityDTO.JSON_PROPERTY_INCORPORATION_COUNTRY,
   BusinessIdentityDTO.JSON_PROPERTY_INCORPORATION_DATE,
-  BusinessIdentityDTO.JSON_PROPERTY_LEGAL_ENTITY_TYPE
+  BusinessIdentityDTO.JSON_PROPERTY_LEGAL_ENTITY_TYPE,
+  BusinessIdentityDTO.JSON_PROPERTY_LOCALIZED
 })
 @JsonTypeName("business-identity")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.13.0")
@@ -79,6 +81,10 @@ public class BusinessIdentityDTO {
   public static final String JSON_PROPERTY_LEGAL_ENTITY_TYPE = "legalEntityType";
   @javax.annotation.Nullable
   private String legalEntityType;
+
+  public static final String JSON_PROPERTY_LOCALIZED = "localized";
+  @javax.annotation.Nullable
+  private BusinessIdentityLocalizedDTO localized;
 
   public BusinessIdentityDTO() {
   }
@@ -291,6 +297,31 @@ public class BusinessIdentityDTO {
     this.legalEntityType = legalEntityType;
   }
 
+  public BusinessIdentityDTO localized(@javax.annotation.Nullable BusinessIdentityLocalizedDTO localized) {
+    
+    this.localized = localized;
+    return this;
+  }
+
+  /**
+   * Get localized
+   * @return localized
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_LOCALIZED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public BusinessIdentityLocalizedDTO getLocalized() {
+    return localized;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_LOCALIZED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setLocalized(@javax.annotation.Nullable BusinessIdentityLocalizedDTO localized) {
+    this.localized = localized;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -307,12 +338,13 @@ public class BusinessIdentityDTO {
         Objects.equals(this.registration, businessIdentity.registration) &&
         Objects.equals(this.incorporationCountry, businessIdentity.incorporationCountry) &&
         Objects.equals(this.incorporationDate, businessIdentity.incorporationDate) &&
-        Objects.equals(this.legalEntityType, businessIdentity.legalEntityType);
+        Objects.equals(this.legalEntityType, businessIdentity.legalEntityType) &&
+        Objects.equals(this.localized, businessIdentity.localized);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(businessName, address, email, phone, registration, incorporationCountry, incorporationDate, legalEntityType);
+    return Objects.hash(businessName, address, email, phone, registration, incorporationCountry, incorporationDate, legalEntityType, localized);
   }
 
   @Override
@@ -327,6 +359,7 @@ public class BusinessIdentityDTO {
     sb.append("    incorporationCountry: ").append(toIndentedString(incorporationCountry)).append("\n");
     sb.append("    incorporationDate: ").append(toIndentedString(incorporationDate)).append("\n");
     sb.append("    legalEntityType: ").append(toIndentedString(legalEntityType)).append("\n");
+    sb.append("    localized: ").append(toIndentedString(localized)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -447,6 +480,11 @@ public class BusinessIdentityDTO {
         // Should never happen, UTF-8 is always supported
         throw new RuntimeException(e);
       }
+    }
+
+    // add `localized` to the URL query string
+    if (getLocalized() != null) {
+      joiner.add(getLocalized().toUrlQueryString(prefix + "localized" + suffix));
     }
 
     return joiner.toString();

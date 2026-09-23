@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **incorporation_country** | **str** | Information that locates and identifies the country, as defined by postal services where the organization was incorporated. Use Alpha-2 Code as defined in the ISO CountryCode ISO 3166-1 list. | [optional] 
 **incorporation_date** | **date** | The date when the business was incorporated. | [optional] 
 **legal_entity_type** | **str** | Type of legal entity to distinguish between Financial Institutions and Non-Financial Institutions.  This classification is used to determine regulatory treatment and compliance requirements for certain payment corridors.  | [optional] 
+**localized** | [**BusinessIdentityLocalized**](BusinessIdentityLocalized.md) |  | [optional] 
 
 ## Example
 

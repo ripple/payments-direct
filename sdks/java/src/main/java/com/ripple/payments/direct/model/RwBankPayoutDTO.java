@@ -84,7 +84,7 @@ public class RwBankPayoutDTO {
   }
 
   /**
-   * The bank code of the identity&#39;s bank
+   * Ripple Bank Code (RBC) for the destination bank in Rwanda. See the Bank Codes resource in Ripple Docs for the authoritative list of supported values.
    * @return bankCode
    */
   @javax.annotation.Nonnull

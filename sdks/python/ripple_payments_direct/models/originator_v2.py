@@ -29,7 +29,7 @@ class OriginatorV2(BaseModel):
     """ # noqa: E501
     originator_identity_id: Optional[StrictStr] = Field(default=None, description="The unique ID associated with the payment originator's identity record.", alias="originatorIdentityId")
     originator_identity_id_version: Optional[StrictInt] = Field(default=None, description="The current version of the originator's identity record.", alias="originatorIdentityIdVersion")
-    originator_identity_nick_name: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, description="Nickname associated with the originator's identity record.", alias="originatorIdentityNickName")
+    originator_identity_nick_name: Optional[Annotated[str, Field(strict=True, max_length=256)]] = Field(default=None, description="The originator's nickname at the identity version this payment references. Editing the nickname later does not change the value returned for this payment.", alias="originatorIdentityNickName")
     internal_id: Optional[Annotated[str, Field(strict=True, max_length=36)]] = Field(default=None, description="An ID associated with this payment, if provided by the customer during payment initiation.", alias="internalId")
     source_currency: Optional[Annotated[str, Field(strict=True, max_length=5)]] = Field(default=None, description="originator's currency", alias="sourceCurrency")
     source_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount sent by the originator in this payment. This field can hold a value with up to 6 decimal places.", alias="sourceAmount")

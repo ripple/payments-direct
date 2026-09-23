@@ -22,19 +22,12 @@ Name | Type | Description | Notes
 **CoPse** | Pointer to [**CoPse**](CoPse.md) |  | [optional] 
 **BrTed** | Pointer to [**BrTed**](BrTed.md) |  | [optional] 
 **CaEft** | Pointer to [**CaEft**](CaEft.md) |  | [optional] 
-**HkBankPayout** | Pointer to [**HkBankPayout**](HkBankPayout.md) |  | [optional] 
-**IdBifast** | Pointer to [**IdBifast**](IdBifast.md) |  | [optional] 
 **KrKftc** | Pointer to [**KrKftc**](KrKftc.md) |  | [optional] 
 **InNeft** | Pointer to [**InNeft**](InNeft.md) |  | [optional] 
 **PeLbtr** | Pointer to [**PeLbtr**](PeLbtr.md) |  | [optional] 
 **AuNpp** | Pointer to [**AuNpp**](AuNpp.md) |  | [optional] 
-**JpZengin** | Pointer to [**JpZengin**](JpZengin.md) |  | [optional] 
-**CnCfxps** | Pointer to [**CnCfxps**](CnCfxps.md) |  | [optional] 
 **ClTef** | Pointer to [**ClTef**](ClTef.md) |  | [optional] 
 **AeIpi** | Pointer to [**AeIpi**](AeIpi.md) |  | [optional] 
-**TrFast** | Pointer to [**TrFast**](TrFast.md) |  | [optional] 
-**PhNrps** | Pointer to [**PhNrps**](PhNrps.md) |  | [optional] 
-**ThPromptpay** | Pointer to [**ThPromptpay**](ThPromptpay.md) |  | [optional] 
 **ArInterbanking** | Pointer to [**ArInterbanking**](ArInterbanking.md) |  | [optional] 
 **Currency** | **string** | The 3-letter ISO currency code of the financial instrument. | 
 **Label** | Pointer to **string** | A user-defined label for the financial instrument. | [optional] 
@@ -513,56 +506,6 @@ SetCaEft sets CaEft field to given value.
 
 HasCaEft returns a boolean if a field has been set.
 
-### GetHkBankPayout
-
-`func (o *RippleFinancialInstrumentEntry) GetHkBankPayout() HkBankPayout`
-
-GetHkBankPayout returns the HkBankPayout field if non-nil, zero value otherwise.
-
-### GetHkBankPayoutOk
-
-`func (o *RippleFinancialInstrumentEntry) GetHkBankPayoutOk() (*HkBankPayout, bool)`
-
-GetHkBankPayoutOk returns a tuple with the HkBankPayout field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHkBankPayout
-
-`func (o *RippleFinancialInstrumentEntry) SetHkBankPayout(v HkBankPayout)`
-
-SetHkBankPayout sets HkBankPayout field to given value.
-
-### HasHkBankPayout
-
-`func (o *RippleFinancialInstrumentEntry) HasHkBankPayout() bool`
-
-HasHkBankPayout returns a boolean if a field has been set.
-
-### GetIdBifast
-
-`func (o *RippleFinancialInstrumentEntry) GetIdBifast() IdBifast`
-
-GetIdBifast returns the IdBifast field if non-nil, zero value otherwise.
-
-### GetIdBifastOk
-
-`func (o *RippleFinancialInstrumentEntry) GetIdBifastOk() (*IdBifast, bool)`
-
-GetIdBifastOk returns a tuple with the IdBifast field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIdBifast
-
-`func (o *RippleFinancialInstrumentEntry) SetIdBifast(v IdBifast)`
-
-SetIdBifast sets IdBifast field to given value.
-
-### HasIdBifast
-
-`func (o *RippleFinancialInstrumentEntry) HasIdBifast() bool`
-
-HasIdBifast returns a boolean if a field has been set.
-
 ### GetKrKftc
 
 `func (o *RippleFinancialInstrumentEntry) GetKrKftc() KrKftc`
@@ -663,56 +606,6 @@ SetAuNpp sets AuNpp field to given value.
 
 HasAuNpp returns a boolean if a field has been set.
 
-### GetJpZengin
-
-`func (o *RippleFinancialInstrumentEntry) GetJpZengin() JpZengin`
-
-GetJpZengin returns the JpZengin field if non-nil, zero value otherwise.
-
-### GetJpZenginOk
-
-`func (o *RippleFinancialInstrumentEntry) GetJpZenginOk() (*JpZengin, bool)`
-
-GetJpZenginOk returns a tuple with the JpZengin field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetJpZengin
-
-`func (o *RippleFinancialInstrumentEntry) SetJpZengin(v JpZengin)`
-
-SetJpZengin sets JpZengin field to given value.
-
-### HasJpZengin
-
-`func (o *RippleFinancialInstrumentEntry) HasJpZengin() bool`
-
-HasJpZengin returns a boolean if a field has been set.
-
-### GetCnCfxps
-
-`func (o *RippleFinancialInstrumentEntry) GetCnCfxps() CnCfxps`
-
-GetCnCfxps returns the CnCfxps field if non-nil, zero value otherwise.
-
-### GetCnCfxpsOk
-
-`func (o *RippleFinancialInstrumentEntry) GetCnCfxpsOk() (*CnCfxps, bool)`
-
-GetCnCfxpsOk returns a tuple with the CnCfxps field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCnCfxps
-
-`func (o *RippleFinancialInstrumentEntry) SetCnCfxps(v CnCfxps)`
-
-SetCnCfxps sets CnCfxps field to given value.
-
-### HasCnCfxps
-
-`func (o *RippleFinancialInstrumentEntry) HasCnCfxps() bool`
-
-HasCnCfxps returns a boolean if a field has been set.
-
 ### GetClTef
 
 `func (o *RippleFinancialInstrumentEntry) GetClTef() ClTef`
@@ -762,81 +655,6 @@ SetAeIpi sets AeIpi field to given value.
 `func (o *RippleFinancialInstrumentEntry) HasAeIpi() bool`
 
 HasAeIpi returns a boolean if a field has been set.
-
-### GetTrFast
-
-`func (o *RippleFinancialInstrumentEntry) GetTrFast() TrFast`
-
-GetTrFast returns the TrFast field if non-nil, zero value otherwise.
-
-### GetTrFastOk
-
-`func (o *RippleFinancialInstrumentEntry) GetTrFastOk() (*TrFast, bool)`
-
-GetTrFastOk returns a tuple with the TrFast field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTrFast
-
-`func (o *RippleFinancialInstrumentEntry) SetTrFast(v TrFast)`
-
-SetTrFast sets TrFast field to given value.
-
-### HasTrFast
-
-`func (o *RippleFinancialInstrumentEntry) HasTrFast() bool`
-
-HasTrFast returns a boolean if a field has been set.
-
-### GetPhNrps
-
-`func (o *RippleFinancialInstrumentEntry) GetPhNrps() PhNrps`
-
-GetPhNrps returns the PhNrps field if non-nil, zero value otherwise.
-
-### GetPhNrpsOk
-
-`func (o *RippleFinancialInstrumentEntry) GetPhNrpsOk() (*PhNrps, bool)`
-
-GetPhNrpsOk returns a tuple with the PhNrps field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPhNrps
-
-`func (o *RippleFinancialInstrumentEntry) SetPhNrps(v PhNrps)`
-
-SetPhNrps sets PhNrps field to given value.
-
-### HasPhNrps
-
-`func (o *RippleFinancialInstrumentEntry) HasPhNrps() bool`
-
-HasPhNrps returns a boolean if a field has been set.
-
-### GetThPromptpay
-
-`func (o *RippleFinancialInstrumentEntry) GetThPromptpay() ThPromptpay`
-
-GetThPromptpay returns the ThPromptpay field if non-nil, zero value otherwise.
-
-### GetThPromptpayOk
-
-`func (o *RippleFinancialInstrumentEntry) GetThPromptpayOk() (*ThPromptpay, bool)`
-
-GetThPromptpayOk returns a tuple with the ThPromptpay field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetThPromptpay
-
-`func (o *RippleFinancialInstrumentEntry) SetThPromptpay(v ThPromptpay)`
-
-SetThPromptpay sets ThPromptpay field to given value.
-
-### HasThPromptpay
-
-`func (o *RippleFinancialInstrumentEntry) HasThPromptpay() bool`
-
-HasThPromptpay returns a boolean if a field has been set.
 
 ### GetArInterbanking
 

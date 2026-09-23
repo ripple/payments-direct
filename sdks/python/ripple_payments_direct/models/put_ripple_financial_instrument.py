@@ -27,25 +27,18 @@ from ripple_payments_direct.models.br_pix import BrPix
 from ripple_payments_direct.models.br_ted import BrTed
 from ripple_payments_direct.models.ca_eft import CaEft
 from ripple_payments_direct.models.cl_tef import ClTef
-from ripple_payments_direct.models.cn_cfxps import CnCfxps
 from ripple_payments_direct.models.co_pse import CoPse
 from ripple_payments_direct.models.eth_wallet import EthWallet
 from ripple_payments_direct.models.eu_sepa import EuSepa
 from ripple_payments_direct.models.gb_fps import GbFps
 from ripple_payments_direct.models.gh_bank_payout import GhBankPayout
-from ripple_payments_direct.models.hk_bank_payout import HkBankPayout
-from ripple_payments_direct.models.id_bifast import IdBifast
 from ripple_payments_direct.models.in_neft import InNeft
-from ripple_payments_direct.models.jp_zengin import JpZengin
 from ripple_payments_direct.models.kr_kftc import KrKftc
 from ripple_payments_direct.models.mx_spei import MxSpei
 from ripple_payments_direct.models.ng_bank_payout import NgBankPayout
 from ripple_payments_direct.models.pe_lbtr import PeLbtr
-from ripple_payments_direct.models.ph_nrps import PhNrps
 from ripple_payments_direct.models.rw_bank_payout import RwBankPayout
 from ripple_payments_direct.models.sol_wallet import SolWallet
-from ripple_payments_direct.models.th_promptpay import ThPromptpay
-from ripple_payments_direct.models.tr_fast import TrFast
 from ripple_payments_direct.models.tron_wallet import TronWallet
 from ripple_payments_direct.models.ug_bank_payout import UgBankPayout
 from ripple_payments_direct.models.us_ach import UsAch
@@ -78,21 +71,14 @@ class PutRippleFinancialInstrument(BaseModel):
     co_pse: Optional[CoPse] = Field(default=None, alias="coPse")
     br_ted: Optional[BrTed] = Field(default=None, alias="brTed")
     ca_eft: Optional[CaEft] = Field(default=None, alias="caEft")
-    hk_bank_payout: Optional[HkBankPayout] = Field(default=None, alias="hkBankPayout")
-    id_bifast: Optional[IdBifast] = Field(default=None, alias="idBifast")
     kr_kftc: Optional[KrKftc] = Field(default=None, alias="krKftc")
     in_neft: Optional[InNeft] = Field(default=None, alias="inNeft")
     pe_lbtr: Optional[PeLbtr] = Field(default=None, alias="peLbtr")
     au_npp: Optional[AuNpp] = Field(default=None, alias="auNpp")
-    jp_zengin: Optional[JpZengin] = Field(default=None, alias="jpZengin")
-    cn_cfxps: Optional[CnCfxps] = Field(default=None, alias="cnCfxps")
     cl_tef: Optional[ClTef] = Field(default=None, alias="clTef")
     ae_ipi: Optional[AeIpi] = Field(default=None, alias="aeIpi")
-    tr_fast: Optional[TrFast] = Field(default=None, alias="trFast")
-    ph_nrps: Optional[PhNrps] = Field(default=None, alias="phNrps")
-    th_promptpay: Optional[ThPromptpay] = Field(default=None, alias="thPromptpay")
     ar_interbanking: Optional[ArInterbanking] = Field(default=None, alias="arInterbanking")
-    __properties: ClassVar[List[str]] = ["usAch", "usFedwire", "mxSpei", "euSepa", "gbFps", "ngBankPayout", "ghBankPayout", "rwBankPayout", "zaBankPayout", "ugBankPayout", "zmBankPayout", "ethWallet", "tronWallet", "solWallet", "brPix", "coPse", "brTed", "caEft", "hkBankPayout", "idBifast", "krKftc", "inNeft", "peLbtr", "auNpp", "jpZengin", "cnCfxps", "clTef", "aeIpi", "trFast", "phNrps", "thPromptpay", "arInterbanking"]
+    __properties: ClassVar[List[str]] = ["usAch", "usFedwire", "mxSpei", "euSepa", "gbFps", "ngBankPayout", "ghBankPayout", "rwBankPayout", "zaBankPayout", "ugBankPayout", "zmBankPayout", "ethWallet", "tronWallet", "solWallet", "brPix", "coPse", "brTed", "caEft", "krKftc", "inNeft", "peLbtr", "auNpp", "clTef", "aeIpi", "arInterbanking"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -187,12 +173,6 @@ class PutRippleFinancialInstrument(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of ca_eft
         if self.ca_eft:
             _dict['caEft'] = self.ca_eft.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of hk_bank_payout
-        if self.hk_bank_payout:
-            _dict['hkBankPayout'] = self.hk_bank_payout.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of id_bifast
-        if self.id_bifast:
-            _dict['idBifast'] = self.id_bifast.to_dict()
         # override the default output from pydantic by calling `to_dict()` of kr_kftc
         if self.kr_kftc:
             _dict['krKftc'] = self.kr_kftc.to_dict()
@@ -205,27 +185,12 @@ class PutRippleFinancialInstrument(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of au_npp
         if self.au_npp:
             _dict['auNpp'] = self.au_npp.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of jp_zengin
-        if self.jp_zengin:
-            _dict['jpZengin'] = self.jp_zengin.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of cn_cfxps
-        if self.cn_cfxps:
-            _dict['cnCfxps'] = self.cn_cfxps.to_dict()
         # override the default output from pydantic by calling `to_dict()` of cl_tef
         if self.cl_tef:
             _dict['clTef'] = self.cl_tef.to_dict()
         # override the default output from pydantic by calling `to_dict()` of ae_ipi
         if self.ae_ipi:
             _dict['aeIpi'] = self.ae_ipi.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of tr_fast
-        if self.tr_fast:
-            _dict['trFast'] = self.tr_fast.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of ph_nrps
-        if self.ph_nrps:
-            _dict['phNrps'] = self.ph_nrps.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of th_promptpay
-        if self.th_promptpay:
-            _dict['thPromptpay'] = self.th_promptpay.to_dict()
         # override the default output from pydantic by calling `to_dict()` of ar_interbanking
         if self.ar_interbanking:
             _dict['arInterbanking'] = self.ar_interbanking.to_dict()
@@ -259,19 +224,12 @@ class PutRippleFinancialInstrument(BaseModel):
             "coPse": CoPse.from_dict(obj["coPse"]) if obj.get("coPse") is not None else None,
             "brTed": BrTed.from_dict(obj["brTed"]) if obj.get("brTed") is not None else None,
             "caEft": CaEft.from_dict(obj["caEft"]) if obj.get("caEft") is not None else None,
-            "hkBankPayout": HkBankPayout.from_dict(obj["hkBankPayout"]) if obj.get("hkBankPayout") is not None else None,
-            "idBifast": IdBifast.from_dict(obj["idBifast"]) if obj.get("idBifast") is not None else None,
             "krKftc": KrKftc.from_dict(obj["krKftc"]) if obj.get("krKftc") is not None else None,
             "inNeft": InNeft.from_dict(obj["inNeft"]) if obj.get("inNeft") is not None else None,
             "peLbtr": PeLbtr.from_dict(obj["peLbtr"]) if obj.get("peLbtr") is not None else None,
             "auNpp": AuNpp.from_dict(obj["auNpp"]) if obj.get("auNpp") is not None else None,
-            "jpZengin": JpZengin.from_dict(obj["jpZengin"]) if obj.get("jpZengin") is not None else None,
-            "cnCfxps": CnCfxps.from_dict(obj["cnCfxps"]) if obj.get("cnCfxps") is not None else None,
             "clTef": ClTef.from_dict(obj["clTef"]) if obj.get("clTef") is not None else None,
             "aeIpi": AeIpi.from_dict(obj["aeIpi"]) if obj.get("aeIpi") is not None else None,
-            "trFast": TrFast.from_dict(obj["trFast"]) if obj.get("trFast") is not None else None,
-            "phNrps": PhNrps.from_dict(obj["phNrps"]) if obj.get("phNrps") is not None else None,
-            "thPromptpay": ThPromptpay.from_dict(obj["thPromptpay"]) if obj.get("thPromptpay") is not None else None,
             "arInterbanking": ArInterbanking.from_dict(obj["arInterbanking"]) if obj.get("arInterbanking") is not None else None
         })
         return _obj

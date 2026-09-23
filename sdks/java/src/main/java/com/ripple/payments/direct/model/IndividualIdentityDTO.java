@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.ripple.payments.direct.model.IndividualIdentityAddressDTO;
 import com.ripple.payments.direct.model.IndividualIdentityIdentityDocumentsInnerDTO;
+import com.ripple.payments.direct.model.IndividualIdentityLocalizedDTO;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,7 +46,8 @@ import java.util.StringJoiner;
   IndividualIdentityDTO.JSON_PROPERTY_DATE_OF_BIRTH,
   IndividualIdentityDTO.JSON_PROPERTY_COUNTRY_OF_BIRTH,
   IndividualIdentityDTO.JSON_PROPERTY_CITIZENSHIP,
-  IndividualIdentityDTO.JSON_PROPERTY_GENDER
+  IndividualIdentityDTO.JSON_PROPERTY_GENDER,
+  IndividualIdentityDTO.JSON_PROPERTY_LOCALIZED
 })
 @JsonTypeName("individual-identity")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.13.0")
@@ -89,6 +91,10 @@ public class IndividualIdentityDTO {
   public static final String JSON_PROPERTY_GENDER = "gender";
   @javax.annotation.Nullable
   private String gender;
+
+  public static final String JSON_PROPERTY_LOCALIZED = "localized";
+  @javax.annotation.Nullable
+  private IndividualIdentityLocalizedDTO localized;
 
   public IndividualIdentityDTO() {
   }
@@ -200,7 +206,7 @@ public class IndividualIdentityDTO {
   }
 
   /**
-   * Phone Number
+   * Phone Number. 
    * @return phone
    */
   @javax.annotation.Nullable
@@ -351,6 +357,31 @@ public class IndividualIdentityDTO {
     this.gender = gender;
   }
 
+  public IndividualIdentityDTO localized(@javax.annotation.Nullable IndividualIdentityLocalizedDTO localized) {
+    
+    this.localized = localized;
+    return this;
+  }
+
+  /**
+   * Get localized
+   * @return localized
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_LOCALIZED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public IndividualIdentityLocalizedDTO getLocalized() {
+    return localized;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_LOCALIZED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setLocalized(@javax.annotation.Nullable IndividualIdentityLocalizedDTO localized) {
+    this.localized = localized;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -369,12 +400,13 @@ public class IndividualIdentityDTO {
         Objects.equals(this.dateOfBirth, individualIdentity.dateOfBirth) &&
         Objects.equals(this.countryOfBirth, individualIdentity.countryOfBirth) &&
         Objects.equals(this.citizenship, individualIdentity.citizenship) &&
-        Objects.equals(this.gender, individualIdentity.gender);
+        Objects.equals(this.gender, individualIdentity.gender) &&
+        Objects.equals(this.localized, individualIdentity.localized);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstName, lastName, address, email, phone, identityDocuments, dateOfBirth, countryOfBirth, citizenship, gender);
+    return Objects.hash(firstName, lastName, address, email, phone, identityDocuments, dateOfBirth, countryOfBirth, citizenship, gender, localized);
   }
 
   @Override
@@ -391,6 +423,7 @@ public class IndividualIdentityDTO {
     sb.append("    countryOfBirth: ").append(toIndentedString(countryOfBirth)).append("\n");
     sb.append("    citizenship: ").append(toIndentedString(citizenship)).append("\n");
     sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
+    sb.append("    localized: ").append(toIndentedString(localized)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -531,6 +564,11 @@ public class IndividualIdentityDTO {
         // Should never happen, UTF-8 is always supported
         throw new RuntimeException(e);
       }
+    }
+
+    // add `localized` to the URL query string
+    if (getLocalized() != null) {
+      joiner.add(getLocalized().toUrlQueryString(prefix + "localized" + suffix));
     }
 
     return joiner.toString();

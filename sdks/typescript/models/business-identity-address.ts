@@ -39,16 +39,16 @@ export interface BusinessIdentityAddress {
      */
     'city': string;
     /**
-     * Information that locates and identifies the state / county for the individual, as defined by postal services.
+     * State, province, or county of the business address, as defined by postal services.
      * @type {string}
      * @memberof BusinessIdentityAddress
      */
-    'stateOrProvince': string;
+    'stateOrProvince'?: string;
     /**
      * Postal code for the business
      * @type {string}
      * @memberof BusinessIdentityAddress
      */
-    'postalCode': string;
+    'postalCode'?: string;
 }
 

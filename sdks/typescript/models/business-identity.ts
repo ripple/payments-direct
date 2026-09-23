@@ -18,6 +18,9 @@
 import type { BusinessIdentityAddress } from './business-identity-address';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { BusinessIdentityLocalized } from './business-identity-localized';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { BusinessIdentityRegistrationInner } from './business-identity-registration-inner';
 
 /**
@@ -74,5 +77,11 @@ export interface BusinessIdentity {
      * @memberof BusinessIdentity
      */
     'legalEntityType'?: string;
+    /**
+     * 
+     * @type {BusinessIdentityLocalized}
+     * @memberof BusinessIdentity
+     */
+    'localized'?: BusinessIdentityLocalized;
 }
 

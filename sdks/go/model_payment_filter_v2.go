@@ -34,7 +34,7 @@ type PaymentFilterV2 struct {
 	BeneficiaryIdentityIds []string `json:"beneficiaryIdentityIds,omitempty"`
 	// Specify an `internalId` to get payments associated with them. A prefix match will be executed.
 	InternalId *string `json:"internalId,omitempty"`
-	// To get all payments made to a beneficiary, specify the nickname of that beneficiary in this field. You can find the nickname using the `GET /identities` operation.
+	// To get all payments made to a beneficiary, specify the nickname of that beneficiary in this field. You can find the nickname using the `GET /identities` operation. The nickname is matched by the identity service, and the payments of every beneficiary it matches are returned.
 	BeneficiaryIdentityNickname *string `json:"beneficiaryIdentityNickname,omitempty"`
 	// Specify one or more currency codes to get payments where the beneficiary received funds in these currencies.
 	DestinationCurrencies []string `json:"destinationCurrencies,omitempty"`

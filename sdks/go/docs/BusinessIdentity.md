@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **IncorporationCountry** | Pointer to **string** | Information that locates and identifies the country, as defined by postal services where the organization was incorporated. Use Alpha-2 Code as defined in the ISO CountryCode ISO 3166-1 list. | [optional] 
 **IncorporationDate** | Pointer to **string** | The date when the business was incorporated. | [optional] 
 **LegalEntityType** | Pointer to **string** | Type of legal entity to distinguish between Financial Institutions and Non-Financial Institutions.  This classification is used to determine regulatory treatment and compliance requirements for certain payment corridors.  | [optional] 
+**Localized** | Pointer to [**BusinessIdentityLocalized**](BusinessIdentityLocalized.md) |  | [optional] 
 
 ## Methods
 
@@ -221,6 +222,31 @@ SetLegalEntityType sets LegalEntityType field to given value.
 `func (o *BusinessIdentity) HasLegalEntityType() bool`
 
 HasLegalEntityType returns a boolean if a field has been set.
+
+### GetLocalized
+
+`func (o *BusinessIdentity) GetLocalized() BusinessIdentityLocalized`
+
+GetLocalized returns the Localized field if non-nil, zero value otherwise.
+
+### GetLocalizedOk
+
+`func (o *BusinessIdentity) GetLocalizedOk() (*BusinessIdentityLocalized, bool)`
+
+GetLocalizedOk returns a tuple with the Localized field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocalized
+
+`func (o *BusinessIdentity) SetLocalized(v BusinessIdentityLocalized)`
+
+SetLocalized sets Localized field to given value.
+
+### HasLocalized
+
+`func (o *BusinessIdentity) HasLocalized() bool`
+
+HasLocalized returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

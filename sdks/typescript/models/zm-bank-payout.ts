@@ -27,7 +27,7 @@ export interface ZmBankPayout {
      */
     'bankName': string;
     /**
-     * The bank code of the identity\'s bank
+     * Ripple Bank Code (RBC) for the destination bank in Zambia. See the Bank Codes resource in Ripple Docs for the authoritative list of supported values.
      * @type {string}
      * @memberof ZmBankPayout
      */

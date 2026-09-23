@@ -43,12 +43,12 @@ export interface IndividualIdentityAddress {
      * @type {string}
      * @memberof IndividualIdentityAddress
      */
-    'stateOrProvince': string;
+    'stateOrProvince'?: string;
     /**
      * Postal code for the individual\'s address
      * @type {string}
      * @memberof IndividualIdentityAddress
      */
-    'postalCode': string;
+    'postalCode'?: string;
 }
 

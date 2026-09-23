@@ -298,7 +298,7 @@ public class PaymentFilterV2DTO {
   }
 
   /**
-   * To get all payments made to a beneficiary, specify the nickname of that beneficiary in this field. You can find the nickname using the &#x60;GET /identities&#x60; operation.
+   * To get all payments made to a beneficiary, specify the nickname of that beneficiary in this field. You can find the nickname using the &#x60;GET /identities&#x60; operation. The nickname is matched by the identity service, and the payments of every beneficiary it matches are returned.
    * @return beneficiaryIdentityNickname
    */
   @javax.annotation.Nullable

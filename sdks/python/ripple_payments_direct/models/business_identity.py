@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from ripple_payments_direct.models.business_identity_address import BusinessIdentityAddress
+from ripple_payments_direct.models.business_identity_localized import BusinessIdentityLocalized
 from ripple_payments_direct.models.business_identity_registration_inner import BusinessIdentityRegistrationInner
 from typing import Optional, Set
 from typing_extensions import Self
@@ -38,7 +39,8 @@ class BusinessIdentity(BaseModel):
     incorporation_country: Optional[Annotated[str, Field(min_length=2, strict=True, max_length=2)]] = Field(default=None, description="Information that locates and identifies the country, as defined by postal services where the organization was incorporated. Use Alpha-2 Code as defined in the ISO CountryCode ISO 3166-1 list.", alias="incorporationCountry")
     incorporation_date: Optional[date] = Field(default=None, description="The date when the business was incorporated.", alias="incorporationDate")
     legal_entity_type: Optional[StrictStr] = Field(default=None, description="Type of legal entity to distinguish between Financial Institutions and Non-Financial Institutions.  This classification is used to determine regulatory treatment and compliance requirements for certain payment corridors. ", alias="legalEntityType")
-    __properties: ClassVar[List[str]] = ["businessName", "address", "email", "phone", "registration", "incorporationCountry", "incorporationDate", "legalEntityType"]
+    localized: Optional[BusinessIdentityLocalized] = None
+    __properties: ClassVar[List[str]] = ["businessName", "address", "email", "phone", "registration", "incorporationCountry", "incorporationDate", "legalEntityType", "localized"]
 
     @field_validator('business_name')
     def business_name_validate_regular_expression(cls, value):
@@ -126,6 +128,9 @@ class BusinessIdentity(BaseModel):
                 if _item_registration:
                     _items.append(_item_registration.to_dict())
             _dict['registration'] = _items
+        # override the default output from pydantic by calling `to_dict()` of localized
+        if self.localized:
+            _dict['localized'] = self.localized.to_dict()
         return _dict
 
     @classmethod
@@ -145,7 +150,8 @@ class BusinessIdentity(BaseModel):
             "registration": [BusinessIdentityRegistrationInner.from_dict(_item) for _item in obj["registration"]] if obj.get("registration") is not None else None,
             "incorporationCountry": obj.get("incorporationCountry"),
             "incorporationDate": obj.get("incorporationDate"),
-            "legalEntityType": obj.get("legalEntityType")
+            "legalEntityType": obj.get("legalEntityType"),
+            "localized": BusinessIdentityLocalized.from_dict(obj["localized"]) if obj.get("localized") is not None else None
         })
         return _obj
 

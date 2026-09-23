@@ -23,8 +23,8 @@ var _ MappedNullable = &UgBankPayout{}
 type UgBankPayout struct {
 	// The name of the identity's bank
 	BankName string `json:"bankName" validate:"regexp=^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\\\1)[\\\\p{L}\\\\p{N} .,'&\\/()-]+(?<![ .,'&\\/-])?$"`
-	// The bank code of the identity's bank
-	BankCode string `json:"bankCode" validate:"regexp=^[A-Za-z0-9 ._-]+$"`
+	// Ripple Bank Code (RBC) for the destination bank in Uganda. See the Bank Codes resource in Ripple Docs for the authoritative list of supported values.
+	BankCode string `json:"bankCode" validate:"regexp=^([A-Za-z0-9 ._-]+|RPL:[A-Z]{2}:[A-Z0-9]{7,11}(_\\\\d+)?:(BNK|WAL))$"`
 	// The identity's account number associated with the Account Identification Scheme
 	AccountNumber string `json:"accountNumber" validate:"regexp=^[a-zA-Z0-9]+$"`
 }

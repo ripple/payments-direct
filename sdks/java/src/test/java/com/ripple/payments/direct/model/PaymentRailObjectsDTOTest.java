@@ -25,25 +25,18 @@ import com.ripple.payments.direct.model.BrPixDTO;
 import com.ripple.payments.direct.model.BrTedDTO;
 import com.ripple.payments.direct.model.CaEftDTO;
 import com.ripple.payments.direct.model.ClTefDTO;
-import com.ripple.payments.direct.model.CnCfxpsDTO;
 import com.ripple.payments.direct.model.CoPseDTO;
 import com.ripple.payments.direct.model.EthWalletDTO;
 import com.ripple.payments.direct.model.EuSepaDTO;
 import com.ripple.payments.direct.model.GbFpsDTO;
 import com.ripple.payments.direct.model.GhBankPayoutDTO;
-import com.ripple.payments.direct.model.HkBankPayoutDTO;
-import com.ripple.payments.direct.model.IdBifastDTO;
 import com.ripple.payments.direct.model.InNeftDTO;
-import com.ripple.payments.direct.model.JpZenginDTO;
 import com.ripple.payments.direct.model.KrKftcDTO;
 import com.ripple.payments.direct.model.MxSpeiDTO;
 import com.ripple.payments.direct.model.NgBankPayoutDTO;
 import com.ripple.payments.direct.model.PeLbtrDTO;
-import com.ripple.payments.direct.model.PhNrpsDTO;
 import com.ripple.payments.direct.model.RwBankPayoutDTO;
 import com.ripple.payments.direct.model.SolWalletDTO;
-import com.ripple.payments.direct.model.ThPromptpayDTO;
-import com.ripple.payments.direct.model.TrFastDTO;
 import com.ripple.payments.direct.model.TronWalletDTO;
 import com.ripple.payments.direct.model.UgBankPayoutDTO;
 import com.ripple.payments.direct.model.UsAchDTO;
@@ -213,22 +206,6 @@ class PaymentRailObjectsDTOTest {
     }
 
     /**
-     * Test the property 'hkBankPayout'
-     */
-    @Test
-    void hkBankPayoutTest() {
-        // TODO: test hkBankPayout
-    }
-
-    /**
-     * Test the property 'idBifast'
-     */
-    @Test
-    void idBifastTest() {
-        // TODO: test idBifast
-    }
-
-    /**
      * Test the property 'krKftc'
      */
     @Test
@@ -261,22 +238,6 @@ class PaymentRailObjectsDTOTest {
     }
 
     /**
-     * Test the property 'jpZengin'
-     */
-    @Test
-    void jpZenginTest() {
-        // TODO: test jpZengin
-    }
-
-    /**
-     * Test the property 'cnCfxps'
-     */
-    @Test
-    void cnCfxpsTest() {
-        // TODO: test cnCfxps
-    }
-
-    /**
      * Test the property 'clTef'
      */
     @Test
@@ -290,30 +251,6 @@ class PaymentRailObjectsDTOTest {
     @Test
     void aeIpiTest() {
         // TODO: test aeIpi
-    }
-
-    /**
-     * Test the property 'trFast'
-     */
-    @Test
-    void trFastTest() {
-        // TODO: test trFast
-    }
-
-    /**
-     * Test the property 'phNrps'
-     */
-    @Test
-    void phNrpsTest() {
-        // TODO: test phNrps
-    }
-
-    /**
-     * Test the property 'thPromptpay'
-     */
-    @Test
-    void thPromptpayTest() {
-        // TODO: test thPromptpay
     }
 
     /**

@@ -23,7 +23,7 @@ type OriginatorV2 struct {
 	OriginatorIdentityId *string `json:"originatorIdentityId,omitempty"`
 	// The current version of the originator's identity record.
 	OriginatorIdentityIdVersion *int32 `json:"originatorIdentityIdVersion,omitempty"`
-	// Nickname associated with the originator's identity record.
+	// The originator's nickname at the identity version this payment references. Editing the nickname later does not change the value returned for this payment.
 	OriginatorIdentityNickName *string `json:"originatorIdentityNickName,omitempty"`
 	// An ID associated with this payment, if provided by the customer during payment initiation.
 	InternalId *string `json:"internalId,omitempty"`

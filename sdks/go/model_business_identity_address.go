@@ -27,10 +27,10 @@ type BusinessIdentityAddress struct {
 	Country string `json:"country" validate:"regexp=^[A-Z]+$"`
 	// City
 	City string `json:"city" validate:"regexp=^(?![ .'-])(?!.*[ .'-]{2})[\\\\p{L} .'-]+(?<![ .'-])$"`
-	// Information that locates and identifies the state / county for the individual, as defined by postal services.
-	StateOrProvince string `json:"stateOrProvince" validate:"regexp=^(?![ .'-])(?!.*[ .'-]{2})[\\\\p{L}\\\\p{N} .'-]+(?<![ .'-])$"`
+	// State, province, or county of the business address, as defined by postal services.
+	StateOrProvince *string `json:"stateOrProvince,omitempty" validate:"regexp=^(?![ .'-])(?!.*[ .'-]{2})[\\\\p{L}\\\\p{N} .'-]+(?<![ .'-])$"`
 	// Postal code for the business
-	PostalCode string `json:"postalCode" validate:"regexp=^[\\\\p{L}\\\\p{N}][\\\\p{L}\\\\p{N} -]{1,15}[\\\\p{L}\\\\p{N}]$"`
+	PostalCode *string `json:"postalCode,omitempty" validate:"regexp=^[\\\\p{L}\\\\p{N}][\\\\p{L}\\\\p{N} -]{1,15}[\\\\p{L}\\\\p{N}]$"`
 }
 
 type _BusinessIdentityAddress BusinessIdentityAddress
@@ -39,13 +39,11 @@ type _BusinessIdentityAddress BusinessIdentityAddress
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBusinessIdentityAddress(streetAddress []string, country string, city string, stateOrProvince string, postalCode string) *BusinessIdentityAddress {
+func NewBusinessIdentityAddress(streetAddress []string, country string, city string) *BusinessIdentityAddress {
 	this := BusinessIdentityAddress{}
 	this.StreetAddress = streetAddress
 	this.Country = country
 	this.City = city
-	this.StateOrProvince = stateOrProvince
-	this.PostalCode = postalCode
 	return &this
 }
 
@@ -129,52 +127,68 @@ func (o *BusinessIdentityAddress) SetCity(v string) {
 	o.City = v
 }
 
-// GetStateOrProvince returns the StateOrProvince field value
+// GetStateOrProvince returns the StateOrProvince field value if set, zero value otherwise.
 func (o *BusinessIdentityAddress) GetStateOrProvince() string {
-	if o == nil {
+	if o == nil || IsNil(o.StateOrProvince) {
 		var ret string
 		return ret
 	}
-
-	return o.StateOrProvince
+	return *o.StateOrProvince
 }
 
-// GetStateOrProvinceOk returns a tuple with the StateOrProvince field value
+// GetStateOrProvinceOk returns a tuple with the StateOrProvince field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BusinessIdentityAddress) GetStateOrProvinceOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.StateOrProvince) {
 		return nil, false
 	}
-	return &o.StateOrProvince, true
+	return o.StateOrProvince, true
 }
 
-// SetStateOrProvince sets field value
+// HasStateOrProvince returns a boolean if a field has been set.
+func (o *BusinessIdentityAddress) HasStateOrProvince() bool {
+	if o != nil && !IsNil(o.StateOrProvince) {
+		return true
+	}
+
+	return false
+}
+
+// SetStateOrProvince gets a reference to the given string and assigns it to the StateOrProvince field.
 func (o *BusinessIdentityAddress) SetStateOrProvince(v string) {
-	o.StateOrProvince = v
+	o.StateOrProvince = &v
 }
 
-// GetPostalCode returns the PostalCode field value
+// GetPostalCode returns the PostalCode field value if set, zero value otherwise.
 func (o *BusinessIdentityAddress) GetPostalCode() string {
-	if o == nil {
+	if o == nil || IsNil(o.PostalCode) {
 		var ret string
 		return ret
 	}
-
-	return o.PostalCode
+	return *o.PostalCode
 }
 
-// GetPostalCodeOk returns a tuple with the PostalCode field value
+// GetPostalCodeOk returns a tuple with the PostalCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BusinessIdentityAddress) GetPostalCodeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.PostalCode) {
 		return nil, false
 	}
-	return &o.PostalCode, true
+	return o.PostalCode, true
 }
 
-// SetPostalCode sets field value
+// HasPostalCode returns a boolean if a field has been set.
+func (o *BusinessIdentityAddress) HasPostalCode() bool {
+	if o != nil && !IsNil(o.PostalCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetPostalCode gets a reference to the given string and assigns it to the PostalCode field.
 func (o *BusinessIdentityAddress) SetPostalCode(v string) {
-	o.PostalCode = v
+	o.PostalCode = &v
 }
 
 func (o BusinessIdentityAddress) MarshalJSON() ([]byte, error) {
@@ -190,8 +204,12 @@ func (o BusinessIdentityAddress) ToMap() (map[string]interface{}, error) {
 	toSerialize["streetAddress"] = o.StreetAddress
 	toSerialize["country"] = o.Country
 	toSerialize["city"] = o.City
-	toSerialize["stateOrProvince"] = o.StateOrProvince
-	toSerialize["postalCode"] = o.PostalCode
+	if !IsNil(o.StateOrProvince) {
+		toSerialize["stateOrProvince"] = o.StateOrProvince
+	}
+	if !IsNil(o.PostalCode) {
+		toSerialize["postalCode"] = o.PostalCode
+	}
 	return toSerialize, nil
 }
 
@@ -203,8 +221,6 @@ func (o *BusinessIdentityAddress) UnmarshalJSON(data []byte) (err error) {
 		"streetAddress",
 		"country",
 		"city",
-		"stateOrProvince",
-		"postalCode",
 	}
 
 	allProperties := make(map[string]interface{})

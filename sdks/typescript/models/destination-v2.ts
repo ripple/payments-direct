@@ -63,7 +63,7 @@ export interface DestinationV2 {
      */
     'beneficiaryIdentityVersion'?: number;
     /**
-     * Nickname associated with the beneficiary\'s identity record.
+     * The beneficiary\'s nickname at the identity version this payment references. Editing the nickname later does not change the value returned for this payment.
      * @type {string}
      * @memberof DestinationV2
      */

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **incorporationCountry** | **string** | Information that locates and identifies the country, as defined by postal services where the organization was incorporated. Use Alpha-2 Code as defined in the ISO CountryCode ISO 3166-1 list. | [optional] [default to undefined]
 **incorporationDate** | **string** | The date when the business was incorporated. | [optional] [default to undefined]
 **legalEntityType** | **string** | Type of legal entity to distinguish between Financial Institutions and Non-Financial Institutions.  This classification is used to determine regulatory treatment and compliance requirements for certain payment corridors.  | [optional] [default to undefined]
+**localized** | [**BusinessIdentityLocalized**](BusinessIdentityLocalized.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -29,6 +30,7 @@ const instance: BusinessIdentity = {
     incorporationCountry,
     incorporationDate,
     legalEntityType,
+    localized,
 };
 ```
 

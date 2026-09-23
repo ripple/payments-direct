@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from ripple_payments_direct.models.individual_identity_address import IndividualIdentityAddress
 from ripple_payments_direct.models.individual_identity_identity_documents_inner import IndividualIdentityIdentityDocumentsInner
+from ripple_payments_direct.models.individual_identity_localized import IndividualIdentityLocalized
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,13 +35,14 @@ class IndividualIdentity(BaseModel):
     last_name: Annotated[str, Field(min_length=1, strict=True, max_length=140)] = Field(description="Last name of the individual", alias="lastName")
     address: IndividualIdentityAddress
     email: Optional[Annotated[str, Field(min_length=6, strict=True, max_length=255)]] = Field(default=None, description="Address for electronic mail (e-mail).")
-    phone: Optional[Annotated[str, Field(min_length=8, strict=True, max_length=16)]] = Field(default=None, description="Phone Number")
+    phone: Optional[Annotated[str, Field(min_length=8, strict=True, max_length=16)]] = Field(default=None, description="Phone Number. ")
     identity_documents: Optional[List[IndividualIdentityIdentityDocumentsInner]] = Field(default=None, description="Gathers identifying documentation", alias="identityDocuments")
     date_of_birth: Optional[date] = Field(default=None, description="Date of Birth.", alias="dateOfBirth")
     country_of_birth: Optional[Annotated[str, Field(min_length=2, strict=True, max_length=2)]] = Field(default=None, description="Country of Birth. Use Alpha-2 Code as defined in the [ISO CountryCode ISO 3166-1](https://www.iso.org/obp/ui/#search) list.", alias="countryOfBirth")
     citizenship: Optional[Annotated[str, Field(min_length=2, strict=True, max_length=2)]] = Field(default=None, description="Alpha-2 country code for the nationality of the individual in ISO 3166-1 format.")
     gender: Optional[StrictStr] = Field(default=None, description="Gender of the identity.")
-    __properties: ClassVar[List[str]] = ["firstName", "lastName", "address", "email", "phone", "identityDocuments", "dateOfBirth", "countryOfBirth", "citizenship", "gender"]
+    localized: Optional[IndividualIdentityLocalized] = None
+    __properties: ClassVar[List[str]] = ["firstName", "lastName", "address", "email", "phone", "identityDocuments", "dateOfBirth", "countryOfBirth", "citizenship", "gender", "localized"]
 
     @field_validator('first_name')
     def first_name_validate_regular_expression(cls, value):
@@ -145,6 +147,9 @@ class IndividualIdentity(BaseModel):
                 if _item_identity_documents:
                     _items.append(_item_identity_documents.to_dict())
             _dict['identityDocuments'] = _items
+        # override the default output from pydantic by calling `to_dict()` of localized
+        if self.localized:
+            _dict['localized'] = self.localized.to_dict()
         return _dict
 
     @classmethod
@@ -166,7 +171,8 @@ class IndividualIdentity(BaseModel):
             "dateOfBirth": obj.get("dateOfBirth"),
             "countryOfBirth": obj.get("countryOfBirth"),
             "citizenship": obj.get("citizenship"),
-            "gender": obj.get("gender")
+            "gender": obj.get("gender"),
+            "localized": IndividualIdentityLocalized.from_dict(obj["localized"]) if obj.get("localized") is not None else None
         })
         return _obj
 

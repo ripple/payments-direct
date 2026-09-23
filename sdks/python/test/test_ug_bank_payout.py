@@ -36,13 +36,13 @@ class TestUgBankPayout(unittest.TestCase):
         if include_optional:
             return UgBankPayout(
                 bank_name = ERROR_TO_EXAMPLE_VALUE,
-                bank_code = '.0',
+                bank_code = 'RPL:EI:ZGCKEC0:WAL0',
                 account_number = 'C0123'
             )
         else:
             return UgBankPayout(
                 bank_name = ERROR_TO_EXAMPLE_VALUE,
-                bank_code = '.0',
+                bank_code = 'RPL:EI:ZGCKEC0:WAL0',
                 account_number = 'C0123',
         )
         """

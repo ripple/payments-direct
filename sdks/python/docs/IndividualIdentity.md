@@ -10,12 +10,13 @@ Name | Type | Description | Notes
 **last_name** | **str** | Last name of the individual | 
 **address** | [**IndividualIdentityAddress**](IndividualIdentityAddress.md) |  | 
 **email** | **str** | Address for electronic mail (e-mail). | [optional] 
-**phone** | **str** | Phone Number | [optional] 
+**phone** | **str** | Phone Number.  | [optional] 
 **identity_documents** | [**List[IndividualIdentityIdentityDocumentsInner]**](IndividualIdentityIdentityDocumentsInner.md) | Gathers identifying documentation | [optional] 
 **date_of_birth** | **date** | Date of Birth. | [optional] 
 **country_of_birth** | **str** | Country of Birth. Use Alpha-2 Code as defined in the [ISO CountryCode ISO 3166-1](https://www.iso.org/obp/ui/#search) list. | [optional] 
 **citizenship** | **str** | Alpha-2 country code for the nationality of the individual in ISO 3166-1 format. | [optional] 
 **gender** | **str** | Gender of the identity. | [optional] 
+**localized** | [**IndividualIdentityLocalized**](IndividualIdentityLocalized.md) |  | [optional] 
 
 ## Example
 

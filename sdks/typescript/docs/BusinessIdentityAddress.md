@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **streetAddress** | **Array&lt;string&gt;** | Allows the street address of the business to be held | [default to undefined]
 **country** | **string** | Allows the country of the business to be held. Use Alpha-2 Code as defined in the [ISO CountryCode ISO 3166-1](https://www.iso.org/obp/ui/#search) list. | [default to undefined]
 **city** | **string** | City | [default to undefined]
-**stateOrProvince** | **string** | Information that locates and identifies the state / county for the individual, as defined by postal services. | [default to undefined]
-**postalCode** | **string** | Postal code for the business | [default to undefined]
+**stateOrProvince** | **string** | State, province, or county of the business address, as defined by postal services. | [optional] [default to undefined]
+**postalCode** | **string** | Postal code for the business | [optional] [default to undefined]
 
 ## Example
 

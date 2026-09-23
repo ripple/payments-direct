@@ -5,12 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **NickName** | Pointer to **string** | The nickname for the identity | [optional] 
-**ValidatePayoutRails** | Pointer to **[]string** | The payout rails to validate the identity against | [optional] 
+**ValidatePayoutRails** | Pointer to **[]string** | The payment rails to validate the identity against | [optional] 
 **Tags** | Pointer to **[]string** | Tags are used to categorize the identity.  | [optional] 
 **IdentityType** | **string** | The type of the identity | 
 **PaymentRole** | **string** | The payment role of the identity | 
 **InternalId** | Pointer to **string** | Client-provided unique identifier for idempotency and deduplication. Required for ORIGINATOR identities; optional for BENEFICIARY identities. Must be unique across all active identities in your organization. Duplicate values will result in a 409 Conflict error.  This is your own reference key, not the originator&#39;s account number. Use &#x60;originatorAccountNumber&#x60; for that.  | [optional] 
-**OriginatorAccountNumber** | Pointer to **string** | The originator&#39;s account number, or your customer identifier for the originator. Required for ORIGINATOR identities on USD payments to China (&#x60;CN_CFXPS&#x60;); optional elsewhere.  Must be unique across all active identities in your organization, including BENEFICIARY identities. Duplicate values return a 409 Conflict error.  Corridor length and character limits apply to this value but are not enforced on this field. See the corridor&#39;s Integration resources page.  | [optional] 
+**OriginatorAccountNumber** | Pointer to **string** | The originator&#39;s account number, or your customer identifier for the originator. Optional on every currently available corridor. Only sent to payout partners for ORIGINATOR identities.  Must be unique across all active identities in your organization, including BENEFICIARY identities. Duplicate values return a 409 Conflict error.  Payout partners apply their own length and character limits to this value, but they are not enforced on this field.  | [optional] 
 **Business** | Pointer to [**BusinessIdentity**](BusinessIdentity.md) |  | [optional] 
 **Individual** | Pointer to [**IndividualIdentity**](IndividualIdentity.md) |  | [optional] 
 
