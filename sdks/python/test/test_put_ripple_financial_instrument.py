@@ -76,6 +76,7 @@ class TestPutRippleFinancialInstrument(unittest.TestCase):
                 in_neft = ERROR_TO_EXAMPLE_VALUE,
                 pe_lbtr = ERROR_TO_EXAMPLE_VALUE,
                 au_npp = ERROR_TO_EXAMPLE_VALUE,
+                cn_cfxps = ERROR_TO_EXAMPLE_VALUE,
                 cl_tef = ERROR_TO_EXAMPLE_VALUE,
                 ae_ipi = ERROR_TO_EXAMPLE_VALUE,
                 ar_interbanking = ERROR_TO_EXAMPLE_VALUE

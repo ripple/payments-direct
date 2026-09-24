@@ -20,6 +20,7 @@ docs/BusinessIdentityLocalizedHanzi.md
 docs/BusinessIdentityRegistrationInner.md
 docs/CaEft.md
 docs/ClTef.md
+docs/CnCfxps.md
 docs/CoPse.md
 docs/CreateFinancialInstrumentResponse.md
 docs/CreateIdentityRequestV3.md
@@ -133,6 +134,7 @@ ripple_payments_direct/models/business_identity_localized_hanzi.py
 ripple_payments_direct/models/business_identity_registration_inner.py
 ripple_payments_direct/models/ca_eft.py
 ripple_payments_direct/models/cl_tef.py
+ripple_payments_direct/models/cn_cfxps.py
 ripple_payments_direct/models/co_pse.py
 ripple_payments_direct/models/create_financial_instrument_response.py
 ripple_payments_direct/models/create_identity_request_v3.py
@@ -234,6 +236,7 @@ test/test_business_identity_localized_hanzi.py
 test/test_business_identity_registration_inner.py
 test/test_ca_eft.py
 test/test_cl_tef.py
+test/test_cn_cfxps.py
 test/test_co_pse.py
 test/test_create_financial_instrument_response.py
 test/test_create_identity_request_v3.py

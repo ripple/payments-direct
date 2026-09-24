@@ -27,6 +27,7 @@ docs/BusinessIdentityLocalizedHanzi.md
 docs/BusinessIdentityRegistrationInner.md
 docs/CaEft.md
 docs/ClTef.md
+docs/CnCfxps.md
 docs/CoPse.md
 docs/CreateFinancialInstrumentResponse.md
 docs/CreateIdentityRequestV3.md
@@ -127,6 +128,7 @@ models/business-identity-registration-inner.ts
 models/business-identity.ts
 models/ca-eft.ts
 models/cl-tef.ts
+models/cn-cfxps.ts
 models/co-pse.ts
 models/create-financial-instrument-response.ts
 models/create-identity-request-v3.ts

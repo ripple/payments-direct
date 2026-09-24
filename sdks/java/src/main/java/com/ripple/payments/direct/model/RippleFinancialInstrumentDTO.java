@@ -27,6 +27,7 @@ import com.ripple.payments.direct.model.BrPixDTO;
 import com.ripple.payments.direct.model.BrTedDTO;
 import com.ripple.payments.direct.model.CaEftDTO;
 import com.ripple.payments.direct.model.ClTefDTO;
+import com.ripple.payments.direct.model.CnCfxpsDTO;
 import com.ripple.payments.direct.model.CoPseDTO;
 import com.ripple.payments.direct.model.EthWalletDTO;
 import com.ripple.payments.direct.model.EuSepaDTO;
@@ -77,6 +78,7 @@ import java.util.StringJoiner;
   RippleFinancialInstrumentDTO.JSON_PROPERTY_IN_NEFT,
   RippleFinancialInstrumentDTO.JSON_PROPERTY_PE_LBTR,
   RippleFinancialInstrumentDTO.JSON_PROPERTY_AU_NPP,
+  RippleFinancialInstrumentDTO.JSON_PROPERTY_CN_CFXPS,
   RippleFinancialInstrumentDTO.JSON_PROPERTY_CL_TEF,
   RippleFinancialInstrumentDTO.JSON_PROPERTY_AE_IPI,
   RippleFinancialInstrumentDTO.JSON_PROPERTY_AR_INTERBANKING,
@@ -174,6 +176,10 @@ public class RippleFinancialInstrumentDTO {
   public static final String JSON_PROPERTY_AU_NPP = "auNpp";
   @javax.annotation.Nullable
   private AuNppDTO auNpp;
+
+  public static final String JSON_PROPERTY_CN_CFXPS = "cnCfxps";
+  @javax.annotation.Nullable
+  private CnCfxpsDTO cnCfxps;
 
   public static final String JSON_PROPERTY_CL_TEF = "clTef";
   @javax.annotation.Nullable
@@ -752,6 +758,31 @@ public class RippleFinancialInstrumentDTO {
     this.auNpp = auNpp;
   }
 
+  public RippleFinancialInstrumentDTO cnCfxps(@javax.annotation.Nullable CnCfxpsDTO cnCfxps) {
+    
+    this.cnCfxps = cnCfxps;
+    return this;
+  }
+
+  /**
+   * Get cnCfxps
+   * @return cnCfxps
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CN_CFXPS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public CnCfxpsDTO getCnCfxps() {
+    return cnCfxps;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_CN_CFXPS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCnCfxps(@javax.annotation.Nullable CnCfxpsDTO cnCfxps) {
+    this.cnCfxps = cnCfxps;
+  }
+
   public RippleFinancialInstrumentDTO clTef(@javax.annotation.Nullable ClTefDTO clTef) {
     
     this.clTef = clTef;
@@ -933,6 +964,7 @@ public class RippleFinancialInstrumentDTO {
         Objects.equals(this.inNeft, rippleFinancialInstrument.inNeft) &&
         Objects.equals(this.peLbtr, rippleFinancialInstrument.peLbtr) &&
         Objects.equals(this.auNpp, rippleFinancialInstrument.auNpp) &&
+        Objects.equals(this.cnCfxps, rippleFinancialInstrument.cnCfxps) &&
         Objects.equals(this.clTef, rippleFinancialInstrument.clTef) &&
         Objects.equals(this.aeIpi, rippleFinancialInstrument.aeIpi) &&
         Objects.equals(this.arInterbanking, rippleFinancialInstrument.arInterbanking) &&
@@ -943,7 +975,7 @@ public class RippleFinancialInstrumentDTO {
 
   @Override
   public int hashCode() {
-    return Objects.hash(usAch, usFedwire, mxSpei, euSepa, gbFps, ngBankPayout, ghBankPayout, rwBankPayout, zaBankPayout, ugBankPayout, zmBankPayout, ethWallet, tronWallet, solWallet, brPix, coPse, brTed, caEft, krKftc, inNeft, peLbtr, auNpp, clTef, aeIpi, arInterbanking, currency, label, financialInstrumentType);
+    return Objects.hash(usAch, usFedwire, mxSpei, euSepa, gbFps, ngBankPayout, ghBankPayout, rwBankPayout, zaBankPayout, ugBankPayout, zmBankPayout, ethWallet, tronWallet, solWallet, brPix, coPse, brTed, caEft, krKftc, inNeft, peLbtr, auNpp, cnCfxps, clTef, aeIpi, arInterbanking, currency, label, financialInstrumentType);
   }
 
   @Override
@@ -972,6 +1004,7 @@ public class RippleFinancialInstrumentDTO {
     sb.append("    inNeft: ").append(toIndentedString(inNeft)).append("\n");
     sb.append("    peLbtr: ").append(toIndentedString(peLbtr)).append("\n");
     sb.append("    auNpp: ").append(toIndentedString(auNpp)).append("\n");
+    sb.append("    cnCfxps: ").append(toIndentedString(cnCfxps)).append("\n");
     sb.append("    clTef: ").append(toIndentedString(clTef)).append("\n");
     sb.append("    aeIpi: ").append(toIndentedString(aeIpi)).append("\n");
     sb.append("    arInterbanking: ").append(toIndentedString(arInterbanking)).append("\n");
@@ -1133,6 +1166,11 @@ public class RippleFinancialInstrumentDTO {
     // add `auNpp` to the URL query string
     if (getAuNpp() != null) {
       joiner.add(getAuNpp().toUrlQueryString(prefix + "auNpp" + suffix));
+    }
+
+    // add `cnCfxps` to the URL query string
+    if (getCnCfxps() != null) {
+      joiner.add(getCnCfxps().toUrlQueryString(prefix + "cnCfxps" + suffix));
     }
 
     // add `clTef` to the URL query string

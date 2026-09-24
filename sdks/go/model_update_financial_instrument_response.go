@@ -44,6 +44,7 @@ type UpdateFinancialInstrumentResponse struct {
 	InNeft *InNeft `json:"inNeft,omitempty"`
 	PeLbtr *PeLbtr `json:"peLbtr,omitempty"`
 	AuNpp *AuNpp `json:"auNpp,omitempty"`
+	CnCfxps *CnCfxps `json:"cnCfxps,omitempty"`
 	ClTef *ClTef `json:"clTef,omitempty"`
 	AeIpi *AeIpi `json:"aeIpi,omitempty"`
 	ArInterbanking *ArInterbanking `json:"arInterbanking,omitempty"`
@@ -789,6 +790,38 @@ func (o *UpdateFinancialInstrumentResponse) SetAuNpp(v AuNpp) {
 	o.AuNpp = &v
 }
 
+// GetCnCfxps returns the CnCfxps field value if set, zero value otherwise.
+func (o *UpdateFinancialInstrumentResponse) GetCnCfxps() CnCfxps {
+	if o == nil || IsNil(o.CnCfxps) {
+		var ret CnCfxps
+		return ret
+	}
+	return *o.CnCfxps
+}
+
+// GetCnCfxpsOk returns a tuple with the CnCfxps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateFinancialInstrumentResponse) GetCnCfxpsOk() (*CnCfxps, bool) {
+	if o == nil || IsNil(o.CnCfxps) {
+		return nil, false
+	}
+	return o.CnCfxps, true
+}
+
+// HasCnCfxps returns a boolean if a field has been set.
+func (o *UpdateFinancialInstrumentResponse) HasCnCfxps() bool {
+	if o != nil && !IsNil(o.CnCfxps) {
+		return true
+	}
+
+	return false
+}
+
+// SetCnCfxps gets a reference to the given CnCfxps and assigns it to the CnCfxps field.
+func (o *UpdateFinancialInstrumentResponse) SetCnCfxps(v CnCfxps) {
+	o.CnCfxps = &v
+}
+
 // GetClTef returns the ClTef field value if set, zero value otherwise.
 func (o *UpdateFinancialInstrumentResponse) GetClTef() ClTef {
 	if o == nil || IsNil(o.ClTef) {
@@ -1160,6 +1193,9 @@ func (o UpdateFinancialInstrumentResponse) ToMap() (map[string]interface{}, erro
 	}
 	if !IsNil(o.AuNpp) {
 		toSerialize["auNpp"] = o.AuNpp
+	}
+	if !IsNil(o.CnCfxps) {
+		toSerialize["cnCfxps"] = o.CnCfxps
 	}
 	if !IsNil(o.ClTef) {
 		toSerialize["clTef"] = o.ClTef

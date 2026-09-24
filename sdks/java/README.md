@@ -195,6 +195,7 @@ Class | Method | HTTP request | Description
  - [BusinessIdentityRegistrationInnerDTO](docs/BusinessIdentityRegistrationInnerDTO.md)
  - [CaEftDTO](docs/CaEftDTO.md)
  - [ClTefDTO](docs/ClTefDTO.md)
+ - [CnCfxpsDTO](docs/CnCfxpsDTO.md)
  - [CoPseDTO](docs/CoPseDTO.md)
  - [CreateFinancialInstrumentResponseDTO](docs/CreateFinancialInstrumentResponseDTO.md)
  - [CreateIdentityRequestV3DTO](docs/CreateIdentityRequestV3DTO.md)

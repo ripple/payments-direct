@@ -27,6 +27,7 @@ import com.ripple.payments.direct.model.BrPixDTO;
 import com.ripple.payments.direct.model.BrTedDTO;
 import com.ripple.payments.direct.model.CaEftDTO;
 import com.ripple.payments.direct.model.ClTefDTO;
+import com.ripple.payments.direct.model.CnCfxpsDTO;
 import com.ripple.payments.direct.model.CoPseDTO;
 import com.ripple.payments.direct.model.EthWalletDTO;
 import com.ripple.payments.direct.model.EuSepaDTO;
@@ -78,6 +79,7 @@ import java.util.StringJoiner;
   UpdateFinancialInstrumentResponseDTO.JSON_PROPERTY_IN_NEFT,
   UpdateFinancialInstrumentResponseDTO.JSON_PROPERTY_PE_LBTR,
   UpdateFinancialInstrumentResponseDTO.JSON_PROPERTY_AU_NPP,
+  UpdateFinancialInstrumentResponseDTO.JSON_PROPERTY_CN_CFXPS,
   UpdateFinancialInstrumentResponseDTO.JSON_PROPERTY_CL_TEF,
   UpdateFinancialInstrumentResponseDTO.JSON_PROPERTY_AE_IPI,
   UpdateFinancialInstrumentResponseDTO.JSON_PROPERTY_AR_INTERBANKING,
@@ -179,6 +181,10 @@ public class UpdateFinancialInstrumentResponseDTO {
   public static final String JSON_PROPERTY_AU_NPP = "auNpp";
   @javax.annotation.Nullable
   private AuNppDTO auNpp;
+
+  public static final String JSON_PROPERTY_CN_CFXPS = "cnCfxps";
+  @javax.annotation.Nullable
+  private CnCfxpsDTO cnCfxps;
 
   public static final String JSON_PROPERTY_CL_TEF = "clTef";
   @javax.annotation.Nullable
@@ -773,6 +779,31 @@ public class UpdateFinancialInstrumentResponseDTO {
     this.auNpp = auNpp;
   }
 
+  public UpdateFinancialInstrumentResponseDTO cnCfxps(@javax.annotation.Nullable CnCfxpsDTO cnCfxps) {
+    
+    this.cnCfxps = cnCfxps;
+    return this;
+  }
+
+  /**
+   * Get cnCfxps
+   * @return cnCfxps
+   */
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CN_CFXPS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public CnCfxpsDTO getCnCfxps() {
+    return cnCfxps;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_CN_CFXPS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCnCfxps(@javax.annotation.Nullable CnCfxpsDTO cnCfxps) {
+    this.cnCfxps = cnCfxps;
+  }
+
   public UpdateFinancialInstrumentResponseDTO clTef(@javax.annotation.Nullable ClTefDTO clTef) {
     
     this.clTef = clTef;
@@ -1054,6 +1085,7 @@ public class UpdateFinancialInstrumentResponseDTO {
         Objects.equals(this.inNeft, updateFinancialInstrumentResponse.inNeft) &&
         Objects.equals(this.peLbtr, updateFinancialInstrumentResponse.peLbtr) &&
         Objects.equals(this.auNpp, updateFinancialInstrumentResponse.auNpp) &&
+        Objects.equals(this.cnCfxps, updateFinancialInstrumentResponse.cnCfxps) &&
         Objects.equals(this.clTef, updateFinancialInstrumentResponse.clTef) &&
         Objects.equals(this.aeIpi, updateFinancialInstrumentResponse.aeIpi) &&
         Objects.equals(this.arInterbanking, updateFinancialInstrumentResponse.arInterbanking) &&
@@ -1068,7 +1100,7 @@ public class UpdateFinancialInstrumentResponseDTO {
 
   @Override
   public int hashCode() {
-    return Objects.hash(usAch, usFedwire, mxSpei, euSepa, gbFps, ngBankPayout, ghBankPayout, rwBankPayout, zaBankPayout, ugBankPayout, zmBankPayout, ethWallet, tronWallet, solWallet, brPix, coPse, brTed, caEft, krKftc, inNeft, peLbtr, auNpp, clTef, aeIpi, arInterbanking, currency, label, financialInstrumentType, country, financialInstrumentId, createdAt, updatedAt);
+    return Objects.hash(usAch, usFedwire, mxSpei, euSepa, gbFps, ngBankPayout, ghBankPayout, rwBankPayout, zaBankPayout, ugBankPayout, zmBankPayout, ethWallet, tronWallet, solWallet, brPix, coPse, brTed, caEft, krKftc, inNeft, peLbtr, auNpp, cnCfxps, clTef, aeIpi, arInterbanking, currency, label, financialInstrumentType, country, financialInstrumentId, createdAt, updatedAt);
   }
 
   @Override
@@ -1097,6 +1129,7 @@ public class UpdateFinancialInstrumentResponseDTO {
     sb.append("    inNeft: ").append(toIndentedString(inNeft)).append("\n");
     sb.append("    peLbtr: ").append(toIndentedString(peLbtr)).append("\n");
     sb.append("    auNpp: ").append(toIndentedString(auNpp)).append("\n");
+    sb.append("    cnCfxps: ").append(toIndentedString(cnCfxps)).append("\n");
     sb.append("    clTef: ").append(toIndentedString(clTef)).append("\n");
     sb.append("    aeIpi: ").append(toIndentedString(aeIpi)).append("\n");
     sb.append("    arInterbanking: ").append(toIndentedString(arInterbanking)).append("\n");
@@ -1262,6 +1295,11 @@ public class UpdateFinancialInstrumentResponseDTO {
     // add `auNpp` to the URL query string
     if (getAuNpp() != null) {
       joiner.add(getAuNpp().toUrlQueryString(prefix + "auNpp" + suffix));
+    }
+
+    // add `cnCfxps` to the URL query string
+    if (getCnCfxps() != null) {
+      joiner.add(getCnCfxps().toUrlQueryString(prefix + "cnCfxps" + suffix));
     }
 
     // add `clTef` to the URL query string

@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **inNeft** | [**InNeft**](InNeft.md) |  | [optional] [default to undefined]
 **peLbtr** | [**PeLbtr**](PeLbtr.md) |  | [optional] [default to undefined]
 **auNpp** | [**AuNpp**](AuNpp.md) |  | [optional] [default to undefined]
+**cnCfxps** | [**CnCfxps**](CnCfxps.md) |  | [optional] [default to undefined]
 **clTef** | [**ClTef**](ClTef.md) |  | [optional] [default to undefined]
 **aeIpi** | [**AeIpi**](AeIpi.md) |  | [optional] [default to undefined]
 **arInterbanking** | [**ArInterbanking**](ArInterbanking.md) |  | [optional] [default to undefined]
@@ -63,6 +64,7 @@ const instance: RippleFinancialInstrument = {
     inNeft,
     peLbtr,
     auNpp,
+    cnCfxps,
     clTef,
     aeIpi,
     arInterbanking,

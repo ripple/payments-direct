@@ -27,6 +27,7 @@ from ripple_payments_direct.models.br_pix import BrPix
 from ripple_payments_direct.models.br_ted import BrTed
 from ripple_payments_direct.models.ca_eft import CaEft
 from ripple_payments_direct.models.cl_tef import ClTef
+from ripple_payments_direct.models.cn_cfxps import CnCfxps
 from ripple_payments_direct.models.co_pse import CoPse
 from ripple_payments_direct.models.eth_wallet import EthWallet
 from ripple_payments_direct.models.eu_sepa import EuSepa
@@ -75,10 +76,11 @@ class PutRippleFinancialInstrument(BaseModel):
     in_neft: Optional[InNeft] = Field(default=None, alias="inNeft")
     pe_lbtr: Optional[PeLbtr] = Field(default=None, alias="peLbtr")
     au_npp: Optional[AuNpp] = Field(default=None, alias="auNpp")
+    cn_cfxps: Optional[CnCfxps] = Field(default=None, alias="cnCfxps")
     cl_tef: Optional[ClTef] = Field(default=None, alias="clTef")
     ae_ipi: Optional[AeIpi] = Field(default=None, alias="aeIpi")
     ar_interbanking: Optional[ArInterbanking] = Field(default=None, alias="arInterbanking")
-    __properties: ClassVar[List[str]] = ["usAch", "usFedwire", "mxSpei", "euSepa", "gbFps", "ngBankPayout", "ghBankPayout", "rwBankPayout", "zaBankPayout", "ugBankPayout", "zmBankPayout", "ethWallet", "tronWallet", "solWallet", "brPix", "coPse", "brTed", "caEft", "krKftc", "inNeft", "peLbtr", "auNpp", "clTef", "aeIpi", "arInterbanking"]
+    __properties: ClassVar[List[str]] = ["usAch", "usFedwire", "mxSpei", "euSepa", "gbFps", "ngBankPayout", "ghBankPayout", "rwBankPayout", "zaBankPayout", "ugBankPayout", "zmBankPayout", "ethWallet", "tronWallet", "solWallet", "brPix", "coPse", "brTed", "caEft", "krKftc", "inNeft", "peLbtr", "auNpp", "cnCfxps", "clTef", "aeIpi", "arInterbanking"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -185,6 +187,9 @@ class PutRippleFinancialInstrument(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of au_npp
         if self.au_npp:
             _dict['auNpp'] = self.au_npp.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of cn_cfxps
+        if self.cn_cfxps:
+            _dict['cnCfxps'] = self.cn_cfxps.to_dict()
         # override the default output from pydantic by calling `to_dict()` of cl_tef
         if self.cl_tef:
             _dict['clTef'] = self.cl_tef.to_dict()
@@ -228,6 +233,7 @@ class PutRippleFinancialInstrument(BaseModel):
             "inNeft": InNeft.from_dict(obj["inNeft"]) if obj.get("inNeft") is not None else None,
             "peLbtr": PeLbtr.from_dict(obj["peLbtr"]) if obj.get("peLbtr") is not None else None,
             "auNpp": AuNpp.from_dict(obj["auNpp"]) if obj.get("auNpp") is not None else None,
+            "cnCfxps": CnCfxps.from_dict(obj["cnCfxps"]) if obj.get("cnCfxps") is not None else None,
             "clTef": ClTef.from_dict(obj["clTef"]) if obj.get("clTef") is not None else None,
             "aeIpi": AeIpi.from_dict(obj["aeIpi"]) if obj.get("aeIpi") is not None else None,
             "arInterbanking": ArInterbanking.from_dict(obj["arInterbanking"]) if obj.get("arInterbanking") is not None else None

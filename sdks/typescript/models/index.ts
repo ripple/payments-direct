@@ -13,6 +13,7 @@ export * from './business-identity-localized-hanzi';
 export * from './business-identity-registration-inner';
 export * from './ca-eft';
 export * from './cl-tef';
+export * from './cn-cfxps';
 export * from './co-pse';
 export * from './create-financial-instrument-response';
 export * from './create-identity-request-v3';

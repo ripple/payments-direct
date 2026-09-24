@@ -36,6 +36,9 @@ import type { CaEft } from './ca-eft';
 import type { ClTef } from './cl-tef';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { CnCfxps } from './cn-cfxps';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { CoPse } from './co-pse';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -227,6 +230,12 @@ export interface PaymentRailObjects {
      * @memberof PaymentRailObjects
      */
     'auNpp'?: AuNpp;
+    /**
+     * 
+     * @type {CnCfxps}
+     * @memberof PaymentRailObjects
+     */
+    'cnCfxps'?: CnCfxps;
     /**
      * 
      * @type {ClTef}

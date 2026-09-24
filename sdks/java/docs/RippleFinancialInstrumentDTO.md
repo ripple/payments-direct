@@ -30,6 +30,7 @@ Request to create a new financial instrument for an identity.
 |**inNeft** | [**InNeftDTO**](InNeftDTO.md) |  |  [optional] |
 |**peLbtr** | [**PeLbtrDTO**](PeLbtrDTO.md) |  |  [optional] |
 |**auNpp** | [**AuNppDTO**](AuNppDTO.md) |  |  [optional] |
+|**cnCfxps** | [**CnCfxpsDTO**](CnCfxpsDTO.md) |  |  [optional] |
 |**clTef** | [**ClTefDTO**](ClTefDTO.md) |  |  [optional] |
 |**aeIpi** | [**AeIpiDTO**](AeIpiDTO.md) |  |  [optional] |
 |**arInterbanking** | [**ArInterbankingDTO**](ArInterbankingDTO.md) |  |  [optional] |

@@ -93,6 +93,7 @@ Class | Method | HTTP request | Description
  - [BusinessIdentityRegistrationInner](docs/BusinessIdentityRegistrationInner.md)
  - [CaEft](docs/CaEft.md)
  - [ClTef](docs/ClTef.md)
+ - [CnCfxps](docs/CnCfxps.md)
  - [CoPse](docs/CoPse.md)
  - [CreateFinancialInstrumentResponse](docs/CreateFinancialInstrumentResponse.md)
  - [CreateIdentityRequestV3](docs/CreateIdentityRequestV3.md)

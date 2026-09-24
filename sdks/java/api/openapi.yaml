@@ -4258,6 +4258,11 @@ components:
             bankName: bankName
             accountNumber: accountNumber
           createdAt: 2023-11-02T18:26:00Z
+          cnCfxps:
+            swiftCode: swiftCode
+            bankName: bankName
+            accountNumber: accountNumber
+            accountHolderName: accountHolderName
           ugBankPayout:
             bankCode: bankCode
             bankName: bankName
@@ -4395,6 +4400,11 @@ components:
           bankName: bankName
           accountNumber: accountNumber
         createdAt: 2023-11-02T18:26:00Z
+        cnCfxps:
+          swiftCode: swiftCode
+          bankName: bankName
+          accountNumber: accountNumber
+          accountHolderName: accountHolderName
         ugBankPayout:
           bankCode: bankCode
           bankName: bankName
@@ -4643,6 +4653,7 @@ components:
           - BR_PIX
           - BR_TED
           - EU_SEPA
+          - CN_CFXPS
           - GB_FPS
           - CL_TEF
           - KR_KFTC
@@ -4943,16 +4954,18 @@ components:
         originatorAccountNumber:
           description: |
             The originator's account number, or your customer identifier for the originator.
-            Optional on every currently available corridor. Only sent to payout partners for
-            ORIGINATOR identities.
+            Required for ORIGINATOR identities on USD payments to China (`CN_CFXPS`); optional
+            elsewhere. Only sent to payout partners for ORIGINATOR identities.
 
             Must be unique across all active identities in your organization, including
             BENEFICIARY identities. Duplicate values return a 409 Conflict error.
 
-            Payout partners apply their own length and character limits to this value, but
-            they are not enforced on this field.
+            Corridor length and character limits apply to this value but are not enforced on
+            this field. See the corridor's Integration resources page.
           example: "6222021001125874"
           type: string
+          x-requiredByOriginatorFor:
+          - CN_CFXPS
         business:
           $ref: '#/components/schemas/business-identity'
         individual:
@@ -4989,6 +5002,7 @@ components:
       - KR_KFTC
       - IN_NEFT
       - AU_NPP
+      - CN_CFXPS
       - CL_TEF
       - PE_LBTR
       - AE_IPI
@@ -5027,6 +5041,8 @@ components:
         AU_NPP: "Australia New Payments Platform - real-time payment rail for AUD-denominated\
           \ domestic transfers, with Direct Entry (BECS) fallback for high-value and\
           \ batch."
+        CN_CFXPS: "China Foreign Exchange Payment System, enabling USD business-to-business\
+          \ transfers to China via SWIFT/BIC routing."
         CL_TEF: Chile TEF (Transferencia Electrónica de Fondos) - business-day domestic
           transfer system for CLP-denominated payments.
         PE_LBTR: Peru LBTR (Liquidación Bruta en Tiempo Real) - real-time settlement
@@ -5056,16 +5072,18 @@ components:
         originatorAccountNumber:
           description: |
             The originator's account number, or your customer identifier for the originator.
-            Optional on every currently available corridor. Only sent to payout partners for
-            ORIGINATOR identities.
+            Required for ORIGINATOR identities on USD payments to China (`CN_CFXPS`); optional
+            elsewhere. Only sent to payout partners for ORIGINATOR identities.
 
             Must be unique across all active identities in your organization, including
             BENEFICIARY identities. Duplicate values return a 409 Conflict error.
 
-            Payout partners apply their own length and character limits to this value, but
-            they are not enforced on this field.
+            Corridor length and character limits apply to this value but are not enforced on
+            this field. See the corridor's Integration resources page.
           example: "6222021001125874"
           type: string
+          x-requiredByOriginatorFor:
+          - CN_CFXPS
         business:
           $ref: '#/components/schemas/business-identity'
         individual:
@@ -5144,6 +5162,7 @@ components:
           - KR_KFTC
           - IN_NEFT
           - AU_NPP
+          - CN_CFXPS
           - CL_TEF
           - PE_LBTR
           - AE_IPI
@@ -5183,6 +5202,8 @@ components:
             AU_NPP: "Australia New Payments Platform - real-time payment rail for\
               \ AUD-denominated domestic transfers, with Direct Entry (BECS) fallback\
               \ for high-value and batch."
+            CN_CFXPS: "China Foreign Exchange Payment System, enabling USD business-to-business\
+              \ transfers to China via SWIFT/BIC routing."
             CL_TEF: Chile TEF (Transferencia Electrónica de Fondos) - business-day
               domestic transfer system for CLP-denominated payments.
             PE_LBTR: Peru LBTR (Liquidación Bruta en Tiempo Real) - real-time settlement
@@ -6324,6 +6345,56 @@ components:
       - bankName
       - bsbCode
       type: object
+    cn-cfxps:
+      description: |
+        Rails: CFXPS (China Foreign Exchange Payment System)
+
+        Rail Definitions:
+
+        CFXPS:
+        - Availability: Business days and banking hours only
+        - Limit: No limit (institutional)
+        - Settlement: Same-day or next business day
+        - Cut-off time: 5:00 PM CST (varies by bank)
+        - Banking holidays: China banking holidays apply
+      example:
+        swiftCode: swiftCode
+        bankName: bankName
+        accountNumber: accountNumber
+        accountHolderName: accountHolderName
+      properties:
+        bankName:
+          description: Beneficiary Bank Name. Looked up from swiftCode.
+          maxLength: 140
+          minLength: 2
+          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
+            /()-]+(?<![ .,'&\\/-])?$"
+          type: string
+        swiftCode:
+          description: Beneficiary Bank SWIFT/BIC Code. See the China entry in the
+            bank code lookup in the integration resources for the supported list.
+          maxLength: 11
+          minLength: 8
+          pattern: "^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$"
+          type: string
+        accountNumber:
+          description: Beneficiary Account Number.
+          maxLength: 34
+          minLength: 1
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+        accountHolderName:
+          description: Beneficiary Account Holder Name (English).
+          maxLength: 140
+          minLength: 1
+          pattern: "^[A-Za-z0-9 .,'&\\/()-]+$"
+          type: string
+      required:
+      - accountHolderName
+      - accountNumber
+      - bankName
+      - swiftCode
+      type: object
     cl-tef:
       description: |
         Rails: TEF (Transferencia Electrónica de Fondos)
@@ -6511,6 +6582,8 @@ components:
           $ref: '#/components/schemas/pe-lbtr'
         auNpp:
           $ref: '#/components/schemas/au-npp'
+        cnCfxps:
+          $ref: '#/components/schemas/cn-cfxps'
         clTef:
           $ref: '#/components/schemas/cl-tef'
         aeIpi:
@@ -6589,6 +6662,11 @@ components:
           bankName: bankName
           accountNumber: accountNumber
         createdAt: 2023-11-02T18:26:00Z
+        cnCfxps:
+          swiftCode: swiftCode
+          bankName: bankName
+          accountNumber: accountNumber
+          accountHolderName: accountHolderName
         ugBankPayout:
           bankCode: bankCode
           bankName: bankName
@@ -7526,6 +7604,7 @@ components:
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
+          - CN_CFXPS
           - AU_NPP
           - AR_INTERBANKING
           x-requiredByBeneficiaryFor:
@@ -7546,6 +7625,7 @@ components:
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
+          - CN_CFXPS
           - AU_NPP
           - AR_INTERBANKING
         postalCode:
@@ -7573,6 +7653,7 @@ components:
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
+          - CN_CFXPS
           - AU_NPP
           - AR_INTERBANKING
           x-requiredByBeneficiaryFor:
@@ -7593,6 +7674,7 @@ components:
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
+          - CN_CFXPS
           - AU_NPP
           - AR_INTERBANKING
       required:
@@ -7745,6 +7827,7 @@ components:
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
+          - CN_CFXPS
           - AU_NPP
           - AR_INTERBANKING
           x-requiredByBeneficiaryFor:
@@ -7765,6 +7848,7 @@ components:
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
+          - CN_CFXPS
           - AU_NPP
           - AR_INTERBANKING
         postalCode:
@@ -7792,6 +7876,7 @@ components:
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
+          - CN_CFXPS
           - AU_NPP
           - AR_INTERBANKING
           x-requiredByBeneficiaryFor:
@@ -7812,6 +7897,7 @@ components:
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
+          - CN_CFXPS
           - AU_NPP
           - AR_INTERBANKING
       required:

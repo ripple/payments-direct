@@ -25,6 +25,7 @@ import com.ripple.payments.direct.model.BrPixDTO;
 import com.ripple.payments.direct.model.BrTedDTO;
 import com.ripple.payments.direct.model.CaEftDTO;
 import com.ripple.payments.direct.model.ClTefDTO;
+import com.ripple.payments.direct.model.CnCfxpsDTO;
 import com.ripple.payments.direct.model.CoPseDTO;
 import com.ripple.payments.direct.model.EthWalletDTO;
 import com.ripple.payments.direct.model.EuSepaDTO;
@@ -236,6 +237,14 @@ class RippleFinancialInstrumentEntryDTOTest {
     @Test
     void auNppTest() {
         // TODO: test auNpp
+    }
+
+    /**
+     * Test the property 'cnCfxps'
+     */
+    @Test
+    void cnCfxpsTest() {
+        // TODO: test cnCfxps
     }
 
     /**

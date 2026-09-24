@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **InNeft** | Pointer to [**InNeft**](InNeft.md) |  | [optional] 
 **PeLbtr** | Pointer to [**PeLbtr**](PeLbtr.md) |  | [optional] 
 **AuNpp** | Pointer to [**AuNpp**](AuNpp.md) |  | [optional] 
+**CnCfxps** | Pointer to [**CnCfxps**](CnCfxps.md) |  | [optional] 
 **ClTef** | Pointer to [**ClTef**](ClTef.md) |  | [optional] 
 **AeIpi** | Pointer to [**AeIpi**](AeIpi.md) |  | [optional] 
 **ArInterbanking** | Pointer to [**ArInterbanking**](ArInterbanking.md) |  | [optional] 
@@ -605,6 +606,31 @@ SetAuNpp sets AuNpp field to given value.
 `func (o *UpdateFinancialInstrumentResponse) HasAuNpp() bool`
 
 HasAuNpp returns a boolean if a field has been set.
+
+### GetCnCfxps
+
+`func (o *UpdateFinancialInstrumentResponse) GetCnCfxps() CnCfxps`
+
+GetCnCfxps returns the CnCfxps field if non-nil, zero value otherwise.
+
+### GetCnCfxpsOk
+
+`func (o *UpdateFinancialInstrumentResponse) GetCnCfxpsOk() (*CnCfxps, bool)`
+
+GetCnCfxpsOk returns a tuple with the CnCfxps field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCnCfxps
+
+`func (o *UpdateFinancialInstrumentResponse) SetCnCfxps(v CnCfxps)`
+
+SetCnCfxps sets CnCfxps field to given value.
+
+### HasCnCfxps
+
+`func (o *UpdateFinancialInstrumentResponse) HasCnCfxps() bool`
+
+HasCnCfxps returns a boolean if a field has been set.
 
 ### GetClTef
 
