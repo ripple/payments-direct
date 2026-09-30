@@ -27,9 +27,11 @@ Name | Type | Description | Notes
 **in_neft** | [**InNeft**](InNeft.md) |  | [optional] 
 **pe_lbtr** | [**PeLbtr**](PeLbtr.md) |  | [optional] 
 **au_npp** | [**AuNpp**](AuNpp.md) |  | [optional] 
+**jp_zengin** | [**JpZengin**](JpZengin.md) |  | [optional] 
 **cn_cfxps** | [**CnCfxps**](CnCfxps.md) |  | [optional] 
 **cl_tef** | [**ClTef**](ClTef.md) |  | [optional] 
 **ae_ipi** | [**AeIpi**](AeIpi.md) |  | [optional] 
+**th_promptpay** | [**ThPromptpay**](ThPromptpay.md) |  | [optional] 
 **ar_interbanking** | [**ArInterbanking**](ArInterbanking.md) |  | [optional] 
 **currency** | **str** | The 3-letter ISO currency code of the financial instrument. | 
 **label** | **str** | A user-defined label for the financial instrument. | [optional] 

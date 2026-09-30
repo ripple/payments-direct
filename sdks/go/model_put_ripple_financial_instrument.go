@@ -43,9 +43,11 @@ type PutRippleFinancialInstrument struct {
 	InNeft *InNeft `json:"inNeft,omitempty"`
 	PeLbtr *PeLbtr `json:"peLbtr,omitempty"`
 	AuNpp *AuNpp `json:"auNpp,omitempty"`
+	JpZengin *JpZengin `json:"jpZengin,omitempty"`
 	CnCfxps *CnCfxps `json:"cnCfxps,omitempty"`
 	ClTef *ClTef `json:"clTef,omitempty"`
 	AeIpi *AeIpi `json:"aeIpi,omitempty"`
+	ThPromptpay *ThPromptpay `json:"thPromptpay,omitempty"`
 	ArInterbanking *ArInterbanking `json:"arInterbanking,omitempty"`
 }
 
@@ -802,6 +804,38 @@ func (o *PutRippleFinancialInstrument) SetAuNpp(v AuNpp) {
 	o.AuNpp = &v
 }
 
+// GetJpZengin returns the JpZengin field value if set, zero value otherwise.
+func (o *PutRippleFinancialInstrument) GetJpZengin() JpZengin {
+	if o == nil || IsNil(o.JpZengin) {
+		var ret JpZengin
+		return ret
+	}
+	return *o.JpZengin
+}
+
+// GetJpZenginOk returns a tuple with the JpZengin field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutRippleFinancialInstrument) GetJpZenginOk() (*JpZengin, bool) {
+	if o == nil || IsNil(o.JpZengin) {
+		return nil, false
+	}
+	return o.JpZengin, true
+}
+
+// HasJpZengin returns a boolean if a field has been set.
+func (o *PutRippleFinancialInstrument) HasJpZengin() bool {
+	if o != nil && !IsNil(o.JpZengin) {
+		return true
+	}
+
+	return false
+}
+
+// SetJpZengin gets a reference to the given JpZengin and assigns it to the JpZengin field.
+func (o *PutRippleFinancialInstrument) SetJpZengin(v JpZengin) {
+	o.JpZengin = &v
+}
+
 // GetCnCfxps returns the CnCfxps field value if set, zero value otherwise.
 func (o *PutRippleFinancialInstrument) GetCnCfxps() CnCfxps {
 	if o == nil || IsNil(o.CnCfxps) {
@@ -896,6 +930,38 @@ func (o *PutRippleFinancialInstrument) HasAeIpi() bool {
 // SetAeIpi gets a reference to the given AeIpi and assigns it to the AeIpi field.
 func (o *PutRippleFinancialInstrument) SetAeIpi(v AeIpi) {
 	o.AeIpi = &v
+}
+
+// GetThPromptpay returns the ThPromptpay field value if set, zero value otherwise.
+func (o *PutRippleFinancialInstrument) GetThPromptpay() ThPromptpay {
+	if o == nil || IsNil(o.ThPromptpay) {
+		var ret ThPromptpay
+		return ret
+	}
+	return *o.ThPromptpay
+}
+
+// GetThPromptpayOk returns a tuple with the ThPromptpay field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutRippleFinancialInstrument) GetThPromptpayOk() (*ThPromptpay, bool) {
+	if o == nil || IsNil(o.ThPromptpay) {
+		return nil, false
+	}
+	return o.ThPromptpay, true
+}
+
+// HasThPromptpay returns a boolean if a field has been set.
+func (o *PutRippleFinancialInstrument) HasThPromptpay() bool {
+	if o != nil && !IsNil(o.ThPromptpay) {
+		return true
+	}
+
+	return false
+}
+
+// SetThPromptpay gets a reference to the given ThPromptpay and assigns it to the ThPromptpay field.
+func (o *PutRippleFinancialInstrument) SetThPromptpay(v ThPromptpay) {
+	o.ThPromptpay = &v
 }
 
 // GetArInterbanking returns the ArInterbanking field value if set, zero value otherwise.
@@ -1009,6 +1075,9 @@ func (o PutRippleFinancialInstrument) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AuNpp) {
 		toSerialize["auNpp"] = o.AuNpp
 	}
+	if !IsNil(o.JpZengin) {
+		toSerialize["jpZengin"] = o.JpZengin
+	}
 	if !IsNil(o.CnCfxps) {
 		toSerialize["cnCfxps"] = o.CnCfxps
 	}
@@ -1017,6 +1086,9 @@ func (o PutRippleFinancialInstrument) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AeIpi) {
 		toSerialize["aeIpi"] = o.AeIpi
+	}
+	if !IsNil(o.ThPromptpay) {
+		toSerialize["thPromptpay"] = o.ThPromptpay
 	}
 	if !IsNil(o.ArInterbanking) {
 		toSerialize["arInterbanking"] = o.ArInterbanking

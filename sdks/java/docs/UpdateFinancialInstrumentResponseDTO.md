@@ -30,9 +30,11 @@ This object contains the details of the updated financial instrument.
 |**inNeft** | [**InNeftDTO**](InNeftDTO.md) |  |  [optional] |
 |**peLbtr** | [**PeLbtrDTO**](PeLbtrDTO.md) |  |  [optional] |
 |**auNpp** | [**AuNppDTO**](AuNppDTO.md) |  |  [optional] |
+|**jpZengin** | [**JpZenginDTO**](JpZenginDTO.md) |  |  [optional] |
 |**cnCfxps** | [**CnCfxpsDTO**](CnCfxpsDTO.md) |  |  [optional] |
 |**clTef** | [**ClTefDTO**](ClTefDTO.md) |  |  [optional] |
 |**aeIpi** | [**AeIpiDTO**](AeIpiDTO.md) |  |  [optional] |
+|**thPromptpay** | [**ThPromptpayDTO**](ThPromptpayDTO.md) |  |  [optional] |
 |**arInterbanking** | [**ArInterbankingDTO**](ArInterbankingDTO.md) |  |  [optional] |
 |**currency** | **String** | The 3-letter ISO currency code of the financial instrument. |  |
 |**label** | **String** | A user-defined label for the financial instrument. |  [optional] |

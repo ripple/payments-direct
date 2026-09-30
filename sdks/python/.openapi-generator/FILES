@@ -50,6 +50,7 @@ docs/IndividualIdentityAddress.md
 docs/IndividualIdentityIdentityDocumentsInner.md
 docs/IndividualIdentityLocalized.md
 docs/IndividualIdentityLocalizedHanzi.md
+docs/JpZengin.md
 docs/KrKftc.md
 docs/LedgerPublicApi.md
 docs/ListFinancialInstrumentsResponse.md
@@ -91,6 +92,7 @@ docs/StateTransitionV2.md
 docs/StateTransitionsResponseV2.md
 docs/TaxBreakdown.md
 docs/TaxSummary.md
+docs/ThPromptpay.md
 docs/TotalFeeBreakdown.md
 docs/TrackingReference.md
 docs/TransactionDetailsV2.md
@@ -163,6 +165,7 @@ ripple_payments_direct/models/individual_identity_address.py
 ripple_payments_direct/models/individual_identity_identity_documents_inner.py
 ripple_payments_direct/models/individual_identity_localized.py
 ripple_payments_direct/models/individual_identity_localized_hanzi.py
+ripple_payments_direct/models/jp_zengin.py
 ripple_payments_direct/models/kr_kftc.py
 ripple_payments_direct/models/list_financial_instruments_response.py
 ripple_payments_direct/models/list_identities_response_v3.py
@@ -201,6 +204,7 @@ ripple_payments_direct/models/state_transition_v2.py
 ripple_payments_direct/models/state_transitions_response_v2.py
 ripple_payments_direct/models/tax_breakdown.py
 ripple_payments_direct/models/tax_summary.py
+ripple_payments_direct/models/th_promptpay.py
 ripple_payments_direct/models/total_fee_breakdown.py
 ripple_payments_direct/models/tracking_reference.py
 ripple_payments_direct/models/transaction_details_v2.py
@@ -266,6 +270,7 @@ test/test_individual_identity_address.py
 test/test_individual_identity_identity_documents_inner.py
 test/test_individual_identity_localized.py
 test/test_individual_identity_localized_hanzi.py
+test/test_jp_zengin.py
 test/test_kr_kftc.py
 test/test_ledger_public_api.py
 test/test_list_financial_instruments_response.py
@@ -307,6 +312,7 @@ test/test_state_transition_v2.py
 test/test_state_transitions_response_v2.py
 test/test_tax_breakdown.py
 test/test_tax_summary.py
+test/test_th_promptpay.py
 test/test_total_fee_breakdown.py
 test/test_tracking_reference.py
 test/test_transaction_details_v2.py

@@ -27,9 +27,11 @@ Name | Type | Description | Notes
 **InNeft** | Pointer to [**InNeft**](InNeft.md) |  | [optional] 
 **PeLbtr** | Pointer to [**PeLbtr**](PeLbtr.md) |  | [optional] 
 **AuNpp** | Pointer to [**AuNpp**](AuNpp.md) |  | [optional] 
+**JpZengin** | Pointer to [**JpZengin**](JpZengin.md) |  | [optional] 
 **CnCfxps** | Pointer to [**CnCfxps**](CnCfxps.md) |  | [optional] 
 **ClTef** | Pointer to [**ClTef**](ClTef.md) |  | [optional] 
 **AeIpi** | Pointer to [**AeIpi**](AeIpi.md) |  | [optional] 
+**ThPromptpay** | Pointer to [**ThPromptpay**](ThPromptpay.md) |  | [optional] 
 **ArInterbanking** | Pointer to [**ArInterbanking**](ArInterbanking.md) |  | [optional] 
 
 ## Methods
@@ -626,6 +628,31 @@ SetAuNpp sets AuNpp field to given value.
 
 HasAuNpp returns a boolean if a field has been set.
 
+### GetJpZengin
+
+`func (o *PutRippleFinancialInstrument) GetJpZengin() JpZengin`
+
+GetJpZengin returns the JpZengin field if non-nil, zero value otherwise.
+
+### GetJpZenginOk
+
+`func (o *PutRippleFinancialInstrument) GetJpZenginOk() (*JpZengin, bool)`
+
+GetJpZenginOk returns a tuple with the JpZengin field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetJpZengin
+
+`func (o *PutRippleFinancialInstrument) SetJpZengin(v JpZengin)`
+
+SetJpZengin sets JpZengin field to given value.
+
+### HasJpZengin
+
+`func (o *PutRippleFinancialInstrument) HasJpZengin() bool`
+
+HasJpZengin returns a boolean if a field has been set.
+
 ### GetCnCfxps
 
 `func (o *PutRippleFinancialInstrument) GetCnCfxps() CnCfxps`
@@ -700,6 +727,31 @@ SetAeIpi sets AeIpi field to given value.
 `func (o *PutRippleFinancialInstrument) HasAeIpi() bool`
 
 HasAeIpi returns a boolean if a field has been set.
+
+### GetThPromptpay
+
+`func (o *PutRippleFinancialInstrument) GetThPromptpay() ThPromptpay`
+
+GetThPromptpay returns the ThPromptpay field if non-nil, zero value otherwise.
+
+### GetThPromptpayOk
+
+`func (o *PutRippleFinancialInstrument) GetThPromptpayOk() (*ThPromptpay, bool)`
+
+GetThPromptpayOk returns a tuple with the ThPromptpay field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetThPromptpay
+
+`func (o *PutRippleFinancialInstrument) SetThPromptpay(v ThPromptpay)`
+
+SetThPromptpay sets ThPromptpay field to given value.
+
+### HasThPromptpay
+
+`func (o *PutRippleFinancialInstrument) HasThPromptpay() bool`
+
+HasThPromptpay returns a boolean if a field has been set.
 
 ### GetArInterbanking
 

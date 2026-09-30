@@ -30,7 +30,7 @@ type IndividualIdentity struct {
 	Email *string `json:"email,omitempty" validate:"regexp=^(?=.{1,254}$)(?:[\\\\p{L}\\\\p{N}%+_-]+(?:\\\\.[\\\\p{L}\\\\p{N}%+_-]+)*)@(?:(?:[\\\\p{L}\\\\p{N}](?:[\\\\p{L}\\\\p{N}-]{0,61}[\\\\p{L}\\\\p{N}])?)\\\\.)+[\\\\p{L}]{2,63}$"`
 	// Phone Number. 
 	Phone *string `json:"phone,omitempty" validate:"regexp=^\\\\+[1-9]\\\\d+$"`
-	// Gathers identifying documentation
+	// Identification documents for the identity, such as a passport, national ID, or tax ID. Required for ORIGINATOR and BENEFICIARY identities on some corridors and optional on others; see the Payload schema utility for the corridors that require it. Also required for ORIGINATOR identities when your organization is configured for the Brazil (BR) jurisdiction, on every corridor, including corridors that do not otherwise require it. Jurisdiction comes from your organization's configuration, not from a value in the request. Where the field is required, omitting it fails identity create and update with 400 Bad Request (USR_111). For accepted document types per corridor and role, see Accepted document types by corridor. 
 	IdentityDocuments []IndividualIdentityIdentityDocumentsInner `json:"identityDocuments,omitempty"`
 	// Date of Birth.
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`

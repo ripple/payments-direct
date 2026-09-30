@@ -31,9 +31,11 @@ Request to update an existing financial instrument of an identity.
 |**inNeft** | [**InNeftDTO**](InNeftDTO.md) |  |  [optional] |
 |**peLbtr** | [**PeLbtrDTO**](PeLbtrDTO.md) |  |  [optional] |
 |**auNpp** | [**AuNppDTO**](AuNppDTO.md) |  |  [optional] |
+|**jpZengin** | [**JpZenginDTO**](JpZenginDTO.md) |  |  [optional] |
 |**cnCfxps** | [**CnCfxpsDTO**](CnCfxpsDTO.md) |  |  [optional] |
 |**clTef** | [**ClTefDTO**](ClTefDTO.md) |  |  [optional] |
 |**aeIpi** | [**AeIpiDTO**](AeIpiDTO.md) |  |  [optional] |
+|**thPromptpay** | [**ThPromptpayDTO**](ThPromptpayDTO.md) |  |  [optional] |
 |**arInterbanking** | [**ArInterbankingDTO**](ArInterbankingDTO.md) |  |  [optional] |
 
 
