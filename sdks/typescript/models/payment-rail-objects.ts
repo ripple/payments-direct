@@ -57,6 +57,9 @@ import type { GhBankPayout } from './gh-bank-payout';
 import type { InNeft } from './in-neft';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { JpZengin } from './jp-zengin';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { KrKftc } from './kr-kftc';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -73,6 +76,9 @@ import type { RwBankPayout } from './rw-bank-payout';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { SolWallet } from './sol-wallet';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ThPromptpay } from './th-promptpay';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TronWallet } from './tron-wallet';
@@ -232,6 +238,12 @@ export interface PaymentRailObjects {
     'auNpp'?: AuNpp;
     /**
      * 
+     * @type {JpZengin}
+     * @memberof PaymentRailObjects
+     */
+    'jpZengin'?: JpZengin;
+    /**
+     * 
      * @type {CnCfxps}
      * @memberof PaymentRailObjects
      */
@@ -248,6 +260,12 @@ export interface PaymentRailObjects {
      * @memberof PaymentRailObjects
      */
     'aeIpi'?: AeIpi;
+    /**
+     * 
+     * @type {ThPromptpay}
+     * @memberof PaymentRailObjects
+     */
+    'thPromptpay'?: ThPromptpay;
     /**
      * 
      * @type {ArInterbanking}

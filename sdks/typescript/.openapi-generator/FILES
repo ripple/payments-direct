@@ -57,6 +57,7 @@ docs/IndividualIdentityAddress.md
 docs/IndividualIdentityIdentityDocumentsInner.md
 docs/IndividualIdentityLocalized.md
 docs/IndividualIdentityLocalizedHanzi.md
+docs/JpZengin.md
 docs/KrKftc.md
 docs/LedgerPublicApi.md
 docs/ListFinancialInstrumentsResponse.md
@@ -98,6 +99,7 @@ docs/StateTransitionV2.md
 docs/StateTransitionsResponseV2.md
 docs/TaxBreakdown.md
 docs/TaxSummary.md
+docs/ThPromptpay.md
 docs/TotalFeeBreakdown.md
 docs/TrackingReference.md
 docs/TransactionDetailsV2.md
@@ -157,6 +159,7 @@ models/individual-identity-identity-documents-inner.ts
 models/individual-identity-localized-hanzi.ts
 models/individual-identity-localized.ts
 models/individual-identity.ts
+models/jp-zengin.ts
 models/kr-kftc.ts
 models/list-financial-instruments-response.ts
 models/list-identities-response-v3.ts
@@ -196,6 +199,7 @@ models/state-transition-v2.ts
 models/state-transitions-response-v2.ts
 models/tax-breakdown.ts
 models/tax-summary.ts
+models/th-promptpay.ts
 models/total-fee-breakdown.ts
 models/tracking-reference.ts
 models/transaction-details-v2.ts

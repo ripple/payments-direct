@@ -33,12 +33,14 @@ from ripple_payments_direct.models.eu_sepa import EuSepa
 from ripple_payments_direct.models.gb_fps import GbFps
 from ripple_payments_direct.models.gh_bank_payout import GhBankPayout
 from ripple_payments_direct.models.in_neft import InNeft
+from ripple_payments_direct.models.jp_zengin import JpZengin
 from ripple_payments_direct.models.kr_kftc import KrKftc
 from ripple_payments_direct.models.mx_spei import MxSpei
 from ripple_payments_direct.models.ng_bank_payout import NgBankPayout
 from ripple_payments_direct.models.pe_lbtr import PeLbtr
 from ripple_payments_direct.models.rw_bank_payout import RwBankPayout
 from ripple_payments_direct.models.sol_wallet import SolWallet
+from ripple_payments_direct.models.th_promptpay import ThPromptpay
 from ripple_payments_direct.models.tron_wallet import TronWallet
 from ripple_payments_direct.models.ug_bank_payout import UgBankPayout
 from ripple_payments_direct.models.us_ach import UsAch
@@ -74,11 +76,13 @@ class PaymentRailObjects(BaseModel):
     in_neft: Optional[InNeft] = Field(default=None, alias="inNeft")
     pe_lbtr: Optional[PeLbtr] = Field(default=None, alias="peLbtr")
     au_npp: Optional[AuNpp] = Field(default=None, alias="auNpp")
+    jp_zengin: Optional[JpZengin] = Field(default=None, alias="jpZengin")
     cn_cfxps: Optional[CnCfxps] = Field(default=None, alias="cnCfxps")
     cl_tef: Optional[ClTef] = Field(default=None, alias="clTef")
     ae_ipi: Optional[AeIpi] = Field(default=None, alias="aeIpi")
+    th_promptpay: Optional[ThPromptpay] = Field(default=None, alias="thPromptpay")
     ar_interbanking: Optional[ArInterbanking] = Field(default=None, alias="arInterbanking")
-    __properties: ClassVar[List[str]] = ["usAch", "usFedwire", "mxSpei", "euSepa", "gbFps", "ngBankPayout", "ghBankPayout", "rwBankPayout", "zaBankPayout", "ugBankPayout", "zmBankPayout", "ethWallet", "tronWallet", "solWallet", "brPix", "coPse", "brTed", "caEft", "krKftc", "inNeft", "peLbtr", "auNpp", "cnCfxps", "clTef", "aeIpi", "arInterbanking"]
+    __properties: ClassVar[List[str]] = ["usAch", "usFedwire", "mxSpei", "euSepa", "gbFps", "ngBankPayout", "ghBankPayout", "rwBankPayout", "zaBankPayout", "ugBankPayout", "zmBankPayout", "ethWallet", "tronWallet", "solWallet", "brPix", "coPse", "brTed", "caEft", "krKftc", "inNeft", "peLbtr", "auNpp", "jpZengin", "cnCfxps", "clTef", "aeIpi", "thPromptpay", "arInterbanking"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -185,6 +189,9 @@ class PaymentRailObjects(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of au_npp
         if self.au_npp:
             _dict['auNpp'] = self.au_npp.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of jp_zengin
+        if self.jp_zengin:
+            _dict['jpZengin'] = self.jp_zengin.to_dict()
         # override the default output from pydantic by calling `to_dict()` of cn_cfxps
         if self.cn_cfxps:
             _dict['cnCfxps'] = self.cn_cfxps.to_dict()
@@ -194,6 +201,9 @@ class PaymentRailObjects(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of ae_ipi
         if self.ae_ipi:
             _dict['aeIpi'] = self.ae_ipi.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of th_promptpay
+        if self.th_promptpay:
+            _dict['thPromptpay'] = self.th_promptpay.to_dict()
         # override the default output from pydantic by calling `to_dict()` of ar_interbanking
         if self.ar_interbanking:
             _dict['arInterbanking'] = self.ar_interbanking.to_dict()
@@ -231,9 +241,11 @@ class PaymentRailObjects(BaseModel):
             "inNeft": InNeft.from_dict(obj["inNeft"]) if obj.get("inNeft") is not None else None,
             "peLbtr": PeLbtr.from_dict(obj["peLbtr"]) if obj.get("peLbtr") is not None else None,
             "auNpp": AuNpp.from_dict(obj["auNpp"]) if obj.get("auNpp") is not None else None,
+            "jpZengin": JpZengin.from_dict(obj["jpZengin"]) if obj.get("jpZengin") is not None else None,
             "cnCfxps": CnCfxps.from_dict(obj["cnCfxps"]) if obj.get("cnCfxps") is not None else None,
             "clTef": ClTef.from_dict(obj["clTef"]) if obj.get("clTef") is not None else None,
             "aeIpi": AeIpi.from_dict(obj["aeIpi"]) if obj.get("aeIpi") is not None else None,
+            "thPromptpay": ThPromptpay.from_dict(obj["thPromptpay"]) if obj.get("thPromptpay") is not None else None,
             "arInterbanking": ArInterbanking.from_dict(obj["arInterbanking"]) if obj.get("arInterbanking") is not None else None
         })
         return _obj

@@ -52,6 +52,7 @@ docs/IndividualIdentityDTO.md
 docs/IndividualIdentityIdentityDocumentsInnerDTO.md
 docs/IndividualIdentityLocalizedDTO.md
 docs/IndividualIdentityLocalizedHanziDTO.md
+docs/JpZenginDTO.md
 docs/KrKftcDTO.md
 docs/LedgerPublicApi.md
 docs/ListFinancialInstrumentsResponseDTO.md
@@ -93,6 +94,7 @@ docs/StateTransitionV2DTO.md
 docs/StateTransitionsResponseV2DTO.md
 docs/TaxBreakdownDTO.md
 docs/TaxSummaryDTO.md
+docs/ThPromptpayDTO.md
 docs/TotalFeeBreakdownDTO.md
 docs/TrackingReferenceDTO.md
 docs/TransactionDetailsV2DTO.md
@@ -180,6 +182,7 @@ src/main/java/com/ripple/payments/direct/model/IndividualIdentityDTO.java
 src/main/java/com/ripple/payments/direct/model/IndividualIdentityIdentityDocumentsInnerDTO.java
 src/main/java/com/ripple/payments/direct/model/IndividualIdentityLocalizedDTO.java
 src/main/java/com/ripple/payments/direct/model/IndividualIdentityLocalizedHanziDTO.java
+src/main/java/com/ripple/payments/direct/model/JpZenginDTO.java
 src/main/java/com/ripple/payments/direct/model/KrKftcDTO.java
 src/main/java/com/ripple/payments/direct/model/ListFinancialInstrumentsResponseDTO.java
 src/main/java/com/ripple/payments/direct/model/ListIdentitiesResponseV3DTO.java
@@ -218,6 +221,7 @@ src/main/java/com/ripple/payments/direct/model/StateTransitionV2DTO.java
 src/main/java/com/ripple/payments/direct/model/StateTransitionsResponseV2DTO.java
 src/main/java/com/ripple/payments/direct/model/TaxBreakdownDTO.java
 src/main/java/com/ripple/payments/direct/model/TaxSummaryDTO.java
+src/main/java/com/ripple/payments/direct/model/ThPromptpayDTO.java
 src/main/java/com/ripple/payments/direct/model/TotalFeeBreakdownDTO.java
 src/main/java/com/ripple/payments/direct/model/TrackingReferenceDTO.java
 src/main/java/com/ripple/payments/direct/model/TransactionDetailsV2DTO.java
@@ -280,6 +284,7 @@ src/test/java/com/ripple/payments/direct/model/IndividualIdentityDTOTest.java
 src/test/java/com/ripple/payments/direct/model/IndividualIdentityIdentityDocumentsInnerDTOTest.java
 src/test/java/com/ripple/payments/direct/model/IndividualIdentityLocalizedDTOTest.java
 src/test/java/com/ripple/payments/direct/model/IndividualIdentityLocalizedHanziDTOTest.java
+src/test/java/com/ripple/payments/direct/model/JpZenginDTOTest.java
 src/test/java/com/ripple/payments/direct/model/KrKftcDTOTest.java
 src/test/java/com/ripple/payments/direct/model/ListFinancialInstrumentsResponseDTOTest.java
 src/test/java/com/ripple/payments/direct/model/ListIdentitiesResponseV3DTOTest.java
@@ -318,6 +323,7 @@ src/test/java/com/ripple/payments/direct/model/StateTransitionV2DTOTest.java
 src/test/java/com/ripple/payments/direct/model/StateTransitionsResponseV2DTOTest.java
 src/test/java/com/ripple/payments/direct/model/TaxBreakdownDTOTest.java
 src/test/java/com/ripple/payments/direct/model/TaxSummaryDTOTest.java
+src/test/java/com/ripple/payments/direct/model/ThPromptpayDTOTest.java
 src/test/java/com/ripple/payments/direct/model/TotalFeeBreakdownDTOTest.java
 src/test/java/com/ripple/payments/direct/model/TrackingReferenceDTOTest.java
 src/test/java/com/ripple/payments/direct/model/TransactionDetailsV2DTOTest.java

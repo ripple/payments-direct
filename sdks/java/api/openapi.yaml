@@ -4312,6 +4312,17 @@ components:
           euSepa:
             iban: iban
             bankName: bankName
+          jpZengin:
+            branchCode: branchCode
+            bankCode: bankCode
+            accountType: accountType
+            bankName: bankName
+            accountNumber: accountNumber
+            accountHolderName: accountHolderName
+          thPromptpay:
+            bankCode: "002"
+            bankName: Bangkok Bank
+            accountNumber: "1234567890"
           solWallet:
             cryptoInstitutionName: Bitso
             supportedCorridors:
@@ -4454,6 +4465,17 @@ components:
         euSepa:
           iban: iban
           bankName: bankName
+        jpZengin:
+          branchCode: branchCode
+          bankCode: bankCode
+          accountType: accountType
+          bankName: bankName
+          accountNumber: accountNumber
+          accountHolderName: accountHolderName
+        thPromptpay:
+          bankCode: "002"
+          bankName: Bangkok Bank
+          accountNumber: "1234567890"
         solWallet:
           cryptoInstitutionName: Bitso
           supportedCorridors:
@@ -4615,6 +4637,7 @@ components:
           - KR_KFTC
           - CL_TEF
           - IN_NEFT
+          - TH_PROMPTPAY
           - PE_LBTR
           - AR_INTERBANKING
           x-requiredByOriginatorFor:
@@ -4629,6 +4652,7 @@ components:
           - ZA_BANK_PAYOUT
           - UG_BANK_PAYOUT
           - ZM_BANK_PAYOUT
+          - TH_PROMPTPAY
           - PE_LBTR
           - AR_INTERBANKING
         registration:
@@ -4646,6 +4670,7 @@ components:
           - CL_TEF
           - KR_KFTC
           - IN_NEFT
+          - TH_PROMPTPAY
           - PE_LBTR
           - AR_INTERBANKING
           x-requiredByOriginatorFor:
@@ -4660,6 +4685,7 @@ components:
           - IN_NEFT
           - AE_IPI
           - PE_LBTR
+          - TH_PROMPTPAY
           - AR_INTERBANKING
         incorporationCountry:
           description: "Information that locates and identifies the country, as defined\
@@ -4682,6 +4708,7 @@ components:
           - ZA_BANK_PAYOUT
           - UG_BANK_PAYOUT
           - ZM_BANK_PAYOUT
+          - TH_PROMPTPAY
           - PE_LBTR
           - AR_INTERBANKING
           x-requiredByOriginatorFor:
@@ -4691,6 +4718,7 @@ components:
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
+          - TH_PROMPTPAY
           - AR_INTERBANKING
         incorporationDate:
           description: The date when the business was incorporated.
@@ -4700,6 +4728,7 @@ components:
           x-requiredByOriginatorFor:
           - KR_KFTC
           - IN_NEFT
+          - TH_PROMPTPAY
         legalEntityType:
           description: |
             Type of legal entity to distinguish between Financial Institutions and Non-Financial Institutions.
@@ -4797,6 +4826,7 @@ components:
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
+          - TH_PROMPTPAY
           - AR_INTERBANKING
           x-requiredByOriginatorFor:
           - BR_PIX
@@ -4810,9 +4840,12 @@ components:
           - ZA_BANK_PAYOUT
           - UG_BANK_PAYOUT
           - ZM_BANK_PAYOUT
+          - TH_PROMPTPAY
           - AR_INTERBANKING
         identityDocuments:
-          description: Gathers identifying documentation
+          description: |
+            Identification documents for the identity, such as a passport, national ID, or tax ID. Required for ORIGINATOR and BENEFICIARY identities on some corridors and optional on others; see the Payload schema utility for the corridors that require it. Also required for ORIGINATOR identities when your organization is configured for the Brazil (BR) jurisdiction, on every corridor, including corridors that do not otherwise require it. Jurisdiction comes from your organization's configuration, not from a value in the request. Where the field is required, omitting it fails identity create and update with 400 Bad Request (USR_111).
+            For accepted document types per corridor and role, see Accepted document types by corridor.
           items:
             $ref: '#/components/schemas/individual_identity_identityDocuments_inner'
           type: array
@@ -4824,6 +4857,7 @@ components:
           - CL_TEF
           - IN_NEFT
           - PE_LBTR
+          - TH_PROMPTPAY
           - AR_INTERBANKING
           x-requiredByOriginatorFor:
           - BR_PIX
@@ -4832,7 +4866,10 @@ components:
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
+          - TH_PROMPTPAY
           - AR_INTERBANKING
+          x-requiredByJurisdictionForOriginator:
+          - BR
         dateOfBirth:
           description: Date of Birth.
           example: 2001-01-24
@@ -4857,6 +4894,7 @@ components:
           - IN_NEFT
           - PE_LBTR
           - AE_IPI
+          - TH_PROMPTPAY
           - AR_INTERBANKING
         countryOfBirth:
           description: "Country of Birth. Use Alpha-2 Code as defined in the [ISO\
@@ -4887,6 +4925,7 @@ components:
           - IN_NEFT
           - KR_KFTC
           - PE_LBTR
+          - TH_PROMPTPAY
           - AR_INTERBANKING
           x-requiredByOriginatorFor:
           - BR_PIX
@@ -4895,6 +4934,7 @@ components:
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
+          - TH_PROMPTPAY
           - AR_INTERBANKING
         gender:
           description: Gender of the identity.
@@ -5002,6 +5042,8 @@ components:
       - KR_KFTC
       - IN_NEFT
       - AU_NPP
+      - JP_ZENGIN
+      - TH_PROMPTPAY
       - CN_CFXPS
       - CL_TEF
       - PE_LBTR
@@ -5041,6 +5083,10 @@ components:
         AU_NPP: "Australia New Payments Platform - real-time payment rail for AUD-denominated\
           \ domestic transfers, with Direct Entry (BECS) fallback for high-value and\
           \ batch."
+        JP_ZENGIN: Japan Zengin - multi-rail (Zengin + Zengin Prompt Service) domestic
+          clearing system for JPY-denominated payments.
+        TH_PROMPTPAY: Thailand PromptPay - Thailand's national real-time retail payment
+          system for THB domestic bank transfers.
         CN_CFXPS: "China Foreign Exchange Payment System, enabling USD business-to-business\
           \ transfers to China via SWIFT/BIC routing."
         CL_TEF: Chile TEF (Transferencia Electrónica de Fondos) - business-day domestic
@@ -5162,6 +5208,8 @@ components:
           - KR_KFTC
           - IN_NEFT
           - AU_NPP
+          - JP_ZENGIN
+          - TH_PROMPTPAY
           - CN_CFXPS
           - CL_TEF
           - PE_LBTR
@@ -5202,6 +5250,10 @@ components:
             AU_NPP: "Australia New Payments Platform - real-time payment rail for\
               \ AUD-denominated domestic transfers, with Direct Entry (BECS) fallback\
               \ for high-value and batch."
+            JP_ZENGIN: Japan Zengin - multi-rail (Zengin + Zengin Prompt Service)
+              domestic clearing system for JPY-denominated payments.
+            TH_PROMPTPAY: Thailand PromptPay - Thailand's national real-time retail
+              payment system for THB domestic bank transfers.
             CN_CFXPS: "China Foreign Exchange Payment System, enabling USD business-to-business\
               \ transfers to China via SWIFT/BIC routing."
             CL_TEF: Chile TEF (Transferencia Electrónica de Fondos) - business-day
@@ -6345,6 +6397,91 @@ components:
       - bankName
       - bsbCode
       type: object
+    jp-zengin:
+      description: |
+        Rails: Zengin, Zengin Prompt Service
+
+        Rail Definitions:
+
+        Zengin:
+        - Availability: Business days and banking hours only
+        - Limit: No limit
+        - Settlement: Same-day or next business day
+        - Cut-off time: 9:00 PM JST (varies by bank)
+        - Banking holidays: Japan banking holidays apply
+
+        Zengin Prompt Service:
+        - Availability: 24/7/365
+        - Limit: JPY 1,000,000 (typically)
+        - Settlement: Real-time
+        - Cut-off time: None
+        - Banking holidays: Not applicable
+
+        Routing Evaluation Order:
+          1. Zengin Prompt Service
+             - Conditions: beneficiary account is ZPS-addressable AND amount ≤ JPY 1,000,000
+          2. Zengin
+             - Conditions: otherwise applicable
+      example:
+        branchCode: branchCode
+        bankCode: bankCode
+        accountType: accountType
+        bankName: bankName
+        accountNumber: accountNumber
+        accountHolderName: accountHolderName
+      properties:
+        bankName:
+          description: The name of the identity's bank
+          maxLength: 140
+          minLength: 2
+          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
+            /()-]+(?<![ .,'&\\/-])?$"
+          type: string
+        accountHolderName:
+          description: Name of the account holder in Japanese Katakana characters
+          maxLength: 100
+          minLength: 1
+          pattern: "^[\\p{L}\\p{N} .,'&\\/()-]+$"
+          type: string
+        bankCode:
+          description: "Zengin-Net/BOJ-assigned 4-digit Japanese bank code (e.g. 0001\
+            \ Mizuho Bank, 0005 MUFG Bank). See the Bank Codes resource in Ripple\
+            \ Docs for the authoritative list of supported values."
+          maxLength: 16
+          minLength: 1
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+        branchCode:
+          description: Bank-assigned branch code identifying the specific branch
+          maxLength: 50
+          minLength: 1
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+        accountNumber:
+          description: The identity's bank account number
+          maxLength: 45
+          minLength: 1
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+        accountType:
+          description: The identity's account type
+          type: string
+          x-extensible-enum:
+          - CHECKING
+          - ORDINARY
+          - SAVINGS
+          x-enumDescriptions:
+            CHECKING: Checking account (当座預金)
+            ORDINARY: Ordinary deposit account (普通預金)
+            SAVINGS: Savings account (貯蓄預金)
+      required:
+      - accountHolderName
+      - accountNumber
+      - accountType
+      - bankCode
+      - bankName
+      - branchCode
+      type: object
     cn-cfxps:
       description: |
         Rails: CFXPS (China Foreign Exchange Payment System)
@@ -6479,6 +6616,54 @@ components:
       - bankName
       - iban
       type: object
+    th-promptpay:
+      description: |
+        Rails: PromptPay
+
+        Rail Definitions:
+
+        PromptPay (National ITMX):
+          - Availability: 24/7/365
+          - Limit: THB 500,000 per transaction
+          - Settlement: Real-time (within seconds)
+          - Cut-off time: None
+          - Banking holidays: Not applicable
+
+        Routing Evaluation Order: Not applicable
+      example:
+        bankCode: "002"
+        bankName: Bangkok Bank
+        accountNumber: "1234567890"
+      properties:
+        bankName:
+          description: The name of the identity's bank
+          example: Bangkok Bank
+          maxLength: 140
+          minLength: 2
+          pattern: "^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\1)[\\p{L}\\p{N} .,'&\\\
+            /()-]+(?<![ .,'&\\/-])?$"
+          type: string
+        bankCode:
+          description: Domestic bank code for the identity's bank in Thailand. See
+            the Bank Codes resource in Ripple Docs for the authoritative list of supported
+            values.
+          example: "002"
+          maxLength: 16
+          minLength: 1
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+        accountNumber:
+          description: The identity's bank account number
+          example: "1234567890"
+          maxLength: 45
+          minLength: 1
+          pattern: "^[A-Za-z0-9]+$"
+          type: string
+      required:
+      - accountNumber
+      - bankCode
+      - bankName
+      type: object
     ar-interbanking:
       description: |
         Rails: Interbanking
@@ -6582,12 +6767,16 @@ components:
           $ref: '#/components/schemas/pe-lbtr'
         auNpp:
           $ref: '#/components/schemas/au-npp'
+        jpZengin:
+          $ref: '#/components/schemas/jp-zengin'
         cnCfxps:
           $ref: '#/components/schemas/cn-cfxps'
         clTef:
           $ref: '#/components/schemas/cl-tef'
         aeIpi:
           $ref: '#/components/schemas/ae-ipi'
+        thPromptpay:
+          $ref: '#/components/schemas/th-promptpay'
         arInterbanking:
           $ref: '#/components/schemas/ar-interbanking'
       type: object
@@ -6716,6 +6905,17 @@ components:
         euSepa:
           iban: iban
           bankName: bankName
+        jpZengin:
+          branchCode: branchCode
+          bankCode: bankCode
+          accountType: accountType
+          bankName: bankName
+          accountNumber: accountNumber
+          accountHolderName: accountHolderName
+        thPromptpay:
+          bankCode: "002"
+          bankName: Bangkok Bank
+          accountNumber: "1234567890"
         solWallet:
           cryptoInstitutionName: Bitso
           supportedCorridors:
@@ -7606,6 +7806,8 @@ components:
           - PE_LBTR
           - CN_CFXPS
           - AU_NPP
+          - JP_ZENGIN
+          - TH_PROMPTPAY
           - AR_INTERBANKING
           x-requiredByBeneficiaryFor:
           - US_ACH
@@ -7627,6 +7829,8 @@ components:
           - PE_LBTR
           - CN_CFXPS
           - AU_NPP
+          - JP_ZENGIN
+          - TH_PROMPTPAY
           - AR_INTERBANKING
         postalCode:
           description: Postal code for the business
@@ -7655,6 +7859,8 @@ components:
           - PE_LBTR
           - CN_CFXPS
           - AU_NPP
+          - JP_ZENGIN
+          - TH_PROMPTPAY
           - AR_INTERBANKING
           x-requiredByBeneficiaryFor:
           - US_ACH
@@ -7676,6 +7882,8 @@ components:
           - PE_LBTR
           - CN_CFXPS
           - AU_NPP
+          - JP_ZENGIN
+          - TH_PROMPTPAY
           - AR_INTERBANKING
       required:
       - city
@@ -7829,6 +8037,8 @@ components:
           - PE_LBTR
           - CN_CFXPS
           - AU_NPP
+          - JP_ZENGIN
+          - TH_PROMPTPAY
           - AR_INTERBANKING
           x-requiredByBeneficiaryFor:
           - US_ACH
@@ -7850,6 +8060,8 @@ components:
           - PE_LBTR
           - CN_CFXPS
           - AU_NPP
+          - JP_ZENGIN
+          - TH_PROMPTPAY
           - AR_INTERBANKING
         postalCode:
           description: Postal code for the individual's address
@@ -7878,6 +8090,8 @@ components:
           - PE_LBTR
           - CN_CFXPS
           - AU_NPP
+          - JP_ZENGIN
+          - TH_PROMPTPAY
           - AR_INTERBANKING
           x-requiredByBeneficiaryFor:
           - US_ACH
@@ -7899,6 +8113,8 @@ components:
           - PE_LBTR
           - CN_CFXPS
           - AU_NPP
+          - JP_ZENGIN
+          - TH_PROMPTPAY
           - AR_INTERBANKING
       required:
       - city
@@ -7968,6 +8184,9 @@ components:
             values:
             - PASSPORT
             - TAX_ID
+          - corridor: TH_PROMPTPAY
+            values:
+            - PASSPORT
           x-allowedEnumValuesByBeneficiaryFor:
           - corridor: AR_INTERBANKING
             values:
@@ -7992,6 +8211,15 @@ components:
             values:
             - NATIONAL_ID_NUMBER
             - TAX_ID
+          - corridor: TH_PROMPTPAY
+            values:
+            - ALIEN_REGISTRATION
+            - DRIVERS_LICENSE
+            - EMPLOYEE_ID
+            - NATIONAL_ID_NUMBER
+            - PASSPORT
+            - SSN
+            - TAX_ID
         expiryDate:
           description: Expiration date of the identification document.
           example: 2030-01-15
@@ -8000,6 +8228,7 @@ components:
           x-requiredByOriginatorFor:
           - IN_NEFT
           - KR_KFTC
+          - TH_PROMPTPAY
       required:
       - idNumber
       - idType

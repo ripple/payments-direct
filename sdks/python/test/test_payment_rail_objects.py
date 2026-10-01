@@ -75,9 +75,14 @@ class TestPaymentRailObjects(unittest.TestCase):
                 in_neft = ERROR_TO_EXAMPLE_VALUE,
                 pe_lbtr = ERROR_TO_EXAMPLE_VALUE,
                 au_npp = ERROR_TO_EXAMPLE_VALUE,
+                jp_zengin = ERROR_TO_EXAMPLE_VALUE,
                 cn_cfxps = ERROR_TO_EXAMPLE_VALUE,
                 cl_tef = ERROR_TO_EXAMPLE_VALUE,
                 ae_ipi = ERROR_TO_EXAMPLE_VALUE,
+                th_promptpay = ripple_payments_direct.models.th_promptpay.th-promptpay(
+                    bank_name = 'Bangkok Bank', 
+                    bank_code = '002', 
+                    account_number = '1234567890', ),
                 ar_interbanking = ERROR_TO_EXAMPLE_VALUE
             )
         else:

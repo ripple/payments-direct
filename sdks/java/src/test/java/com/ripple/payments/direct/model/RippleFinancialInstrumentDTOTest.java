@@ -32,12 +32,14 @@ import com.ripple.payments.direct.model.EuSepaDTO;
 import com.ripple.payments.direct.model.GbFpsDTO;
 import com.ripple.payments.direct.model.GhBankPayoutDTO;
 import com.ripple.payments.direct.model.InNeftDTO;
+import com.ripple.payments.direct.model.JpZenginDTO;
 import com.ripple.payments.direct.model.KrKftcDTO;
 import com.ripple.payments.direct.model.MxSpeiDTO;
 import com.ripple.payments.direct.model.NgBankPayoutDTO;
 import com.ripple.payments.direct.model.PeLbtrDTO;
 import com.ripple.payments.direct.model.RwBankPayoutDTO;
 import com.ripple.payments.direct.model.SolWalletDTO;
+import com.ripple.payments.direct.model.ThPromptpayDTO;
 import com.ripple.payments.direct.model.TronWalletDTO;
 import com.ripple.payments.direct.model.UgBankPayoutDTO;
 import com.ripple.payments.direct.model.UsAchDTO;
@@ -239,6 +241,14 @@ class RippleFinancialInstrumentDTOTest {
     }
 
     /**
+     * Test the property 'jpZengin'
+     */
+    @Test
+    void jpZenginTest() {
+        // TODO: test jpZengin
+    }
+
+    /**
      * Test the property 'cnCfxps'
      */
     @Test
@@ -260,6 +270,14 @@ class RippleFinancialInstrumentDTOTest {
     @Test
     void aeIpiTest() {
         // TODO: test aeIpi
+    }
+
+    /**
+     * Test the property 'thPromptpay'
+     */
+    @Test
+    void thPromptpayTest() {
+        // TODO: test thPromptpay
     }
 
     /**
