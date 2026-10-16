@@ -31,6 +31,7 @@ docs/ErrorResponse.md
 docs/EthWallet.md
 docs/EuSepa.md
 docs/FeeSummary.md
+docs/FeeSummaryV2.md
 docs/FinancialInstrumentMetadata.md
 docs/GbFps.md
 docs/GetBalances200Response.md
@@ -78,9 +79,13 @@ docs/QuoteAmountType.md
 docs/QuoteApi.md
 docs/QuoteCollection.md
 docs/QuoteCollectionRequest.md
+docs/QuoteCollectionRequestV2.md
+docs/QuoteCollectionV2.md
 docs/QuoteError.md
 docs/QuoteErrorResponse.md
 docs/QuoteStatus.md
+docs/QuoteV2.md
+docs/QuotesV3Api.md
 docs/RippleFinancialInstrument.md
 docs/RippleFinancialInstrumentEntry.md
 docs/RippleIdentity.md
@@ -94,6 +99,7 @@ docs/TaxBreakdown.md
 docs/TaxSummary.md
 docs/ThPromptpay.md
 docs/TotalFeeBreakdown.md
+docs/TotalFeeBreakdownV2.md
 docs/TrackingReference.md
 docs/TransactionDetailsV2.md
 docs/TronWallet.md
@@ -116,6 +122,7 @@ ripple_payments_direct/api/identities_v3_api.py
 ripple_payments_direct/api/ledger_public_api.py
 ripple_payments_direct/api/payments_v2_api.py
 ripple_payments_direct/api/quote_api.py
+ripple_payments_direct/api/quotes_v3_api.py
 ripple_payments_direct/api_client.py
 ripple_payments_direct/api_response.py
 ripple_payments_direct/configuration.py
@@ -147,6 +154,7 @@ ripple_payments_direct/models/error_response.py
 ripple_payments_direct/models/eth_wallet.py
 ripple_payments_direct/models/eu_sepa.py
 ripple_payments_direct/models/fee_summary.py
+ripple_payments_direct/models/fee_summary_v2.py
 ripple_payments_direct/models/financial_instrument_metadata.py
 ripple_payments_direct/models/gb_fps.py
 ripple_payments_direct/models/get_balances200_response.py
@@ -190,9 +198,12 @@ ripple_payments_direct/models/quote.py
 ripple_payments_direct/models/quote_amount_type.py
 ripple_payments_direct/models/quote_collection.py
 ripple_payments_direct/models/quote_collection_request.py
+ripple_payments_direct/models/quote_collection_request_v2.py
+ripple_payments_direct/models/quote_collection_v2.py
 ripple_payments_direct/models/quote_error.py
 ripple_payments_direct/models/quote_error_response.py
 ripple_payments_direct/models/quote_status.py
+ripple_payments_direct/models/quote_v2.py
 ripple_payments_direct/models/ripple_financial_instrument.py
 ripple_payments_direct/models/ripple_financial_instrument_entry.py
 ripple_payments_direct/models/ripple_identity.py
@@ -206,6 +217,7 @@ ripple_payments_direct/models/tax_breakdown.py
 ripple_payments_direct/models/tax_summary.py
 ripple_payments_direct/models/th_promptpay.py
 ripple_payments_direct/models/total_fee_breakdown.py
+ripple_payments_direct/models/total_fee_breakdown_v2.py
 ripple_payments_direct/models/tracking_reference.py
 ripple_payments_direct/models/transaction_details_v2.py
 ripple_payments_direct/models/tron_wallet.py
@@ -251,6 +263,7 @@ test/test_error_response.py
 test/test_eth_wallet.py
 test/test_eu_sepa.py
 test/test_fee_summary.py
+test/test_fee_summary_v2.py
 test/test_financial_instrument_metadata.py
 test/test_gb_fps.py
 test/test_get_balances200_response.py
@@ -298,9 +311,13 @@ test/test_quote_amount_type.py
 test/test_quote_api.py
 test/test_quote_collection.py
 test/test_quote_collection_request.py
+test/test_quote_collection_request_v2.py
+test/test_quote_collection_v2.py
 test/test_quote_error.py
 test/test_quote_error_response.py
 test/test_quote_status.py
+test/test_quote_v2.py
+test/test_quotes_v3_api.py
 test/test_ripple_financial_instrument.py
 test/test_ripple_financial_instrument_entry.py
 test/test_ripple_identity.py
@@ -314,6 +331,7 @@ test/test_tax_breakdown.py
 test/test_tax_summary.py
 test/test_th_promptpay.py
 test/test_total_fee_breakdown.py
+test/test_total_fee_breakdown_v2.py
 test/test_tracking_reference.py
 test/test_transaction_details_v2.py
 test/test_tron_wallet.py

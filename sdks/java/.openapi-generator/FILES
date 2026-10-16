@@ -33,6 +33,7 @@ docs/ErrorResponseDTO.md
 docs/EthWalletDTO.md
 docs/EuSepaDTO.md
 docs/FeeSummaryDTO.md
+docs/FeeSummaryV2DTO.md
 docs/FinancialInstrumentMetadataDTO.md
 docs/GbFpsDTO.md
 docs/GetBalances200ResponseBalancesInnerDTO.md
@@ -79,10 +80,14 @@ docs/QuoteAmountTypeDTO.md
 docs/QuoteApi.md
 docs/QuoteCollectionDTO.md
 docs/QuoteCollectionRequestDTO.md
+docs/QuoteCollectionRequestV2DTO.md
+docs/QuoteCollectionV2DTO.md
 docs/QuoteDTO.md
 docs/QuoteErrorDTO.md
 docs/QuoteErrorResponseDTO.md
 docs/QuoteStatusDTO.md
+docs/QuoteV2DTO.md
+docs/QuotesV3Api.md
 docs/RippleFinancialInstrumentDTO.md
 docs/RippleFinancialInstrumentEntryDTO.md
 docs/RippleIdentityDTO.md
@@ -96,6 +101,7 @@ docs/TaxBreakdownDTO.md
 docs/TaxSummaryDTO.md
 docs/ThPromptpayDTO.md
 docs/TotalFeeBreakdownDTO.md
+docs/TotalFeeBreakdownV2DTO.md
 docs/TrackingReferenceDTO.md
 docs/TransactionDetailsV2DTO.md
 docs/TronWalletDTO.md
@@ -134,6 +140,7 @@ src/main/java/com/ripple/payments/direct/api/IdentitiesV3Api.java
 src/main/java/com/ripple/payments/direct/api/LedgerPublicApi.java
 src/main/java/com/ripple/payments/direct/api/PaymentsV2Api.java
 src/main/java/com/ripple/payments/direct/api/QuoteApi.java
+src/main/java/com/ripple/payments/direct/api/QuotesV3Api.java
 src/main/java/com/ripple/payments/direct/auth/ApiKeyAuth.java
 src/main/java/com/ripple/payments/direct/auth/Authentication.java
 src/main/java/com/ripple/payments/direct/auth/HttpBasicAuth.java
@@ -164,6 +171,7 @@ src/main/java/com/ripple/payments/direct/model/ErrorResponseDTO.java
 src/main/java/com/ripple/payments/direct/model/EthWalletDTO.java
 src/main/java/com/ripple/payments/direct/model/EuSepaDTO.java
 src/main/java/com/ripple/payments/direct/model/FeeSummaryDTO.java
+src/main/java/com/ripple/payments/direct/model/FeeSummaryV2DTO.java
 src/main/java/com/ripple/payments/direct/model/FinancialInstrumentMetadataDTO.java
 src/main/java/com/ripple/payments/direct/model/GbFpsDTO.java
 src/main/java/com/ripple/payments/direct/model/GetBalances200ResponseBalancesInnerDTO.java
@@ -206,10 +214,13 @@ src/main/java/com/ripple/payments/direct/model/PutRippleIdentityDTO.java
 src/main/java/com/ripple/payments/direct/model/QuoteAmountTypeDTO.java
 src/main/java/com/ripple/payments/direct/model/QuoteCollectionDTO.java
 src/main/java/com/ripple/payments/direct/model/QuoteCollectionRequestDTO.java
+src/main/java/com/ripple/payments/direct/model/QuoteCollectionRequestV2DTO.java
+src/main/java/com/ripple/payments/direct/model/QuoteCollectionV2DTO.java
 src/main/java/com/ripple/payments/direct/model/QuoteDTO.java
 src/main/java/com/ripple/payments/direct/model/QuoteErrorDTO.java
 src/main/java/com/ripple/payments/direct/model/QuoteErrorResponseDTO.java
 src/main/java/com/ripple/payments/direct/model/QuoteStatusDTO.java
+src/main/java/com/ripple/payments/direct/model/QuoteV2DTO.java
 src/main/java/com/ripple/payments/direct/model/RippleFinancialInstrumentDTO.java
 src/main/java/com/ripple/payments/direct/model/RippleFinancialInstrumentEntryDTO.java
 src/main/java/com/ripple/payments/direct/model/RippleIdentityDTO.java
@@ -223,6 +234,7 @@ src/main/java/com/ripple/payments/direct/model/TaxBreakdownDTO.java
 src/main/java/com/ripple/payments/direct/model/TaxSummaryDTO.java
 src/main/java/com/ripple/payments/direct/model/ThPromptpayDTO.java
 src/main/java/com/ripple/payments/direct/model/TotalFeeBreakdownDTO.java
+src/main/java/com/ripple/payments/direct/model/TotalFeeBreakdownV2DTO.java
 src/main/java/com/ripple/payments/direct/model/TrackingReferenceDTO.java
 src/main/java/com/ripple/payments/direct/model/TransactionDetailsV2DTO.java
 src/main/java/com/ripple/payments/direct/model/TronWalletDTO.java
@@ -240,6 +252,7 @@ src/test/java/com/ripple/payments/direct/api/IdentitiesV3ApiTest.java
 src/test/java/com/ripple/payments/direct/api/LedgerPublicApiTest.java
 src/test/java/com/ripple/payments/direct/api/PaymentsV2ApiTest.java
 src/test/java/com/ripple/payments/direct/api/QuoteApiTest.java
+src/test/java/com/ripple/payments/direct/api/QuotesV3ApiTest.java
 src/test/java/com/ripple/payments/direct/model/AdjustedExchangeRateDTOTest.java
 src/test/java/com/ripple/payments/direct/model/AeIpiDTOTest.java
 src/test/java/com/ripple/payments/direct/model/ArInterbankingDTOTest.java
@@ -266,6 +279,7 @@ src/test/java/com/ripple/payments/direct/model/ErrorResponseDTOTest.java
 src/test/java/com/ripple/payments/direct/model/EthWalletDTOTest.java
 src/test/java/com/ripple/payments/direct/model/EuSepaDTOTest.java
 src/test/java/com/ripple/payments/direct/model/FeeSummaryDTOTest.java
+src/test/java/com/ripple/payments/direct/model/FeeSummaryV2DTOTest.java
 src/test/java/com/ripple/payments/direct/model/FinancialInstrumentMetadataDTOTest.java
 src/test/java/com/ripple/payments/direct/model/GbFpsDTOTest.java
 src/test/java/com/ripple/payments/direct/model/GetBalances200ResponseBalancesInnerDTOTest.java
@@ -308,10 +322,13 @@ src/test/java/com/ripple/payments/direct/model/PutRippleIdentityDTOTest.java
 src/test/java/com/ripple/payments/direct/model/QuoteAmountTypeDTOTest.java
 src/test/java/com/ripple/payments/direct/model/QuoteCollectionDTOTest.java
 src/test/java/com/ripple/payments/direct/model/QuoteCollectionRequestDTOTest.java
+src/test/java/com/ripple/payments/direct/model/QuoteCollectionRequestV2DTOTest.java
+src/test/java/com/ripple/payments/direct/model/QuoteCollectionV2DTOTest.java
 src/test/java/com/ripple/payments/direct/model/QuoteDTOTest.java
 src/test/java/com/ripple/payments/direct/model/QuoteErrorDTOTest.java
 src/test/java/com/ripple/payments/direct/model/QuoteErrorResponseDTOTest.java
 src/test/java/com/ripple/payments/direct/model/QuoteStatusDTOTest.java
+src/test/java/com/ripple/payments/direct/model/QuoteV2DTOTest.java
 src/test/java/com/ripple/payments/direct/model/RippleFinancialInstrumentDTOTest.java
 src/test/java/com/ripple/payments/direct/model/RippleFinancialInstrumentEntryDTOTest.java
 src/test/java/com/ripple/payments/direct/model/RippleIdentityDTOTest.java
@@ -325,6 +342,7 @@ src/test/java/com/ripple/payments/direct/model/TaxBreakdownDTOTest.java
 src/test/java/com/ripple/payments/direct/model/TaxSummaryDTOTest.java
 src/test/java/com/ripple/payments/direct/model/ThPromptpayDTOTest.java
 src/test/java/com/ripple/payments/direct/model/TotalFeeBreakdownDTOTest.java
+src/test/java/com/ripple/payments/direct/model/TotalFeeBreakdownV2DTOTest.java
 src/test/java/com/ripple/payments/direct/model/TrackingReferenceDTOTest.java
 src/test/java/com/ripple/payments/direct/model/TransactionDetailsV2DTOTest.java
 src/test/java/com/ripple/payments/direct/model/TronWalletDTOTest.java

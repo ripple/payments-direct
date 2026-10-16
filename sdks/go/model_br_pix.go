@@ -1,7 +1,7 @@
 /*
 Payments Direct API
 
-Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
+Use the Payments Direct API to get quotes, create and manage payments, and manage originator and beneficiary identities.  ## API environments  The Payments Direct API offers the following environments:  | Environment  | Base URL                      | Description                               | | ------------------------------------------ | ----------------------------- | ----------------------------------------- | | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. | | Production                                 | `https://api.ripple.com`      | Production environment                    |  ## API authentication  All Payments Direct API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.  ### Generate client ID and client secret  You will need your _client ID_ and _client secret_ to obtain an access token.  If you do not already have your client ID and client secret, do the following:  1. Log into the Ripple Payments UI. 2. In the left navigation menu, click **Settings**. 3. Under **Administration**, click **API Credentials**. 4. In the dropdown list next to the page title, select the access environment. For example, to provision credentials for the test environment, select **UAT** from the dropdown list. 5. In the upper right corner of the page, click **New Credential**. 6. Click **Save and Generate Key**.  **Caution:** The *client secret* is displayed only once when you are creating new credentials. You cannot retrieve the secret after exiting this page. Copy and store the client secret securely and share it with authorized individuals in accordance with your organization's security policy.  You can now use the client ID and client secret to generate access tokens using the [Request an access token](#operation/authenticate) operation.  ### Request an access token  To get an access token, use the [Request an access token](#operation/authenticate) operation with your `client_id` and `client_secret`. The response contains a token in the `access_token` field.  We recommend rotating your API credentials at regular intervals according to your organization's security policy.  **Note**: Authentication tokens are not a fixed length and can vary, avoid validating tokens based on character length. 
 
 API version: 2026.03
 */
@@ -24,7 +24,7 @@ type BrPix struct {
 	// The name of the identity's bank
 	BankName string `json:"bankName" validate:"regexp=^(?![ .,'&\\/()-])(?!.*([ .,'&\\/()-])\\\\1)[\\\\p{L}\\\\p{N} .,'&\\/()-]+(?<![ .,'&\\/-])?$"`
 	// The code of the identity's bank (BICFI code)
-	BankCode string `json:"bankCode" validate:"regexp=^[A-Za-z0-9]+$"`
+	BankCode *string `json:"bankCode,omitempty" validate:"regexp=^[A-Za-z0-9]+$"`
 	// The identity's bank branch number
 	BranchNumber string `json:"branchNumber" validate:"regexp=^\\\\d{4}(-?[0-9X])?$"`
 	// The identity's PIX key, which can be an email, phone number, or a hash
@@ -39,10 +39,9 @@ type _BrPix BrPix
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBrPix(bankName string, bankCode string, branchNumber string, pixKey string, pixKeyType string) *BrPix {
+func NewBrPix(bankName string, branchNumber string, pixKey string, pixKeyType string) *BrPix {
 	this := BrPix{}
 	this.BankName = bankName
-	this.BankCode = bankCode
 	this.BranchNumber = branchNumber
 	this.PixKey = pixKey
 	this.PixKeyType = pixKeyType
@@ -81,28 +80,36 @@ func (o *BrPix) SetBankName(v string) {
 	o.BankName = v
 }
 
-// GetBankCode returns the BankCode field value
+// GetBankCode returns the BankCode field value if set, zero value otherwise.
 func (o *BrPix) GetBankCode() string {
-	if o == nil {
+	if o == nil || IsNil(o.BankCode) {
 		var ret string
 		return ret
 	}
-
-	return o.BankCode
+	return *o.BankCode
 }
 
-// GetBankCodeOk returns a tuple with the BankCode field value
+// GetBankCodeOk returns a tuple with the BankCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BrPix) GetBankCodeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.BankCode) {
 		return nil, false
 	}
-	return &o.BankCode, true
+	return o.BankCode, true
 }
 
-// SetBankCode sets field value
+// HasBankCode returns a boolean if a field has been set.
+func (o *BrPix) HasBankCode() bool {
+	if o != nil && !IsNil(o.BankCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetBankCode gets a reference to the given string and assigns it to the BankCode field.
 func (o *BrPix) SetBankCode(v string) {
-	o.BankCode = v
+	o.BankCode = &v
 }
 
 // GetBranchNumber returns the BranchNumber field value
@@ -188,7 +195,9 @@ func (o BrPix) MarshalJSON() ([]byte, error) {
 func (o BrPix) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["bankName"] = o.BankName
-	toSerialize["bankCode"] = o.BankCode
+	if !IsNil(o.BankCode) {
+		toSerialize["bankCode"] = o.BankCode
+	}
 	toSerialize["branchNumber"] = o.BranchNumber
 	toSerialize["pixKey"] = o.PixKey
 	toSerialize["pixKeyType"] = o.PixKeyType
@@ -201,7 +210,6 @@ func (o *BrPix) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"bankName",
-		"bankCode",
 		"branchNumber",
 		"pixKey",
 		"pixKeyType",

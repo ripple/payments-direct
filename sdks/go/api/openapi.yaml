@@ -7,14 +7,14 @@ info:
 
     The Payments Direct API offers the following environments:
 
-    | <div style="width:90px">Environment</div>  | Base URL                      | Description                               |
+    | Environment  | Base URL                      | Description                               |
     | ------------------------------------------ | ----------------------------- | ----------------------------------------- |
     | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. |
     | Production                                 | `https://api.ripple.com`      | Production environment                    |
 
     ## API authentication
 
-    All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.
+    All Payments Direct API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.
 
     ### Generate client ID and client secret
 
@@ -78,7 +78,11 @@ tags:
   name: IdentitiesV3
   x-displayName: Identities
 - description: |
-    Use these API operations to manage your quotes.
+    Use these API operations to create and retrieve quotes with `/v2/quotes`. Each quote collection contains one quote.
+
+    `/v2/quotes` is supported until **October 16, 2027**, and is removed after that date. Move your integration to `/v3/quotes` before then.
+
+    Quotes are also available with `/v3/quotes`. To decide which version to use, see [Choose a quote version](/products/payments-direct-2/api-docs/developer-guides/choose-a-quote-version).
 
     | Operation | Method | Description |
     | --- | --- | --- |
@@ -86,7 +90,19 @@ tags:
     | [Get quote collection](#operation/getQuoteCollection) | GET | Get a quote collection by ID. |
     | [Get a quote](#operation/getQuote) | GET | Get a specific quote by ID.  |
   name: Quote
-  x-displayName: Quotes
+  x-displayName: Quotes v2
+- description: |
+    Use these API operations to create and retrieve quotes with `/v3/quotes`. A quote collection contains one quote for each payment rail available for the corridor, and each quote names its payment rail. To request a quote for one payment rail only, include `paymentRail`.
+
+    Quotes are also available with `/v2/quotes`. To decide which version to use, see [Choose a quote version](/products/payments-direct-2/api-docs/developer-guides/choose-a-quote-version).
+
+    | Operation | Method | Description |
+    | --- | --- | --- |
+    | [Create quote collection](#operation/createQuoteCollectionV2) | POST | Create a collection of quotes, one for each available payment rail. |
+    | [Get quote collection](#operation/getQuoteCollectionV2) | GET | Get a quote collection by ID. |
+    | [Get a quote](#operation/getQuoteV2) | GET | Get a specific quote by ID. |
+  name: QuotesV3
+  x-displayName: Quotes v3
 - description: |
     Use these API operations to manage your payments with **Payment Management v3** (recommended for all new integrations).
 
@@ -1584,6 +1600,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/QuoteErrorResponse'
           description: Internal server error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+          description: A maintenance window is in force for this corridor. The error
+            description states when service is expected to resume.
       security:
       - Bearer: []
       summary: Create quote collection
@@ -1691,6 +1714,179 @@ paths:
       summary: Get quote
       tags:
       - Quote
+  /v3/quotes/quote-collection:
+    post:
+      description: |
+        Creates a collection of quotes for a proposed payment, one for each payment rail available for the corridor. A payment rail Ripple can't price is left out. Each quote has its own `quoteId`, `paymentRail`, exchange rate, and fees, and all quotes in the collection have the same expiry time. To create the payment, use the `quoteId` of the quote you choose.
+
+        To request a quote for one payment rail only, include `paymentRail`. For valid values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
+
+        **How v3 differs from v2:**
+        - `payoutCategory` and `destinationBlockchainNetwork` aren't part of the request. For a stablecoin payout, the blockchain network is the payment rail, and you omit `destinationCountry`.
+        - `paymentRail` is an optional request field.
+        - The `payinCategory` values `FUNDED` and `T_PLUS_ONE` are not accepted. Use `PRE_FUNDING` in place of `FUNDED`, and `CREDIT_FUNDING` in place of `T_PLUS_ONE`.
+
+        To decide which version to use, see [Choose a quote version](/products/payments-direct-2/api-docs/developer-guides/choose-a-quote-version).
+      operationId: createQuoteCollectionV2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuoteCollectionRequestV2'
+        description: Create quote collection request
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteCollectionV2'
+          description: Creates a collection of quotes
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+          description: Unauthorized request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+          description: The principal identified by the authorization header doesn't
+            have enough scopes to perform this operation
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+          description: Internal server error
+      security:
+      - Bearer: []
+      summary: Create quote collection
+      tags:
+      - QuotesV3
+  /v3/quotes/quote-collection/{quote-collection-id}:
+    get:
+      description: |
+        Retrieve a previously created quote collection by its unique identifier.
+
+        Use this endpoint to check the status of quotes (ACTIVE or EXPIRED) and retrieve quote details needed for payment creation.
+      operationId: getQuoteCollectionV2
+      parameters:
+      - description: The unique identifier of the quote collection you want to retrieve
+        explode: false
+        in: path
+        name: quote-collection-id
+        required: true
+        schema:
+          example: 11111111-aaaa-2222-bbbb-222222222222
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteCollectionV2'
+          description: Valid quote collection found
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+          description: Unauthorized request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+          description: The principal identified by the authorization header doesn't
+            have enough scopes to perform this operation
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+          description: Quote collection not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+          description: Internal server error
+      security:
+      - Bearer: []
+      summary: Get quote collection
+      tags:
+      - QuotesV3
+  /v3/quotes/{quote-id}:
+    get:
+      description: |
+        Retrieve a specific quote by its unique identifier.
+
+        Use this endpoint to:
+        - Verify quote details before creating a payment
+        - Check if a quote is still active (not expired)
+        - Retrieve the `quoteId` needed for payment creation
+
+        **Note:** Quotes expire after a defined period. Check the `quoteStatus` field to confirm the quote is `ACTIVE` before using it to create a payment.
+      operationId: getQuoteV2
+      parameters:
+      - description: The unique identifier of the quote to retrieve
+        explode: false
+        in: path
+        name: quote-id
+        required: true
+        schema:
+          example: 22222222-aaaa-2222-bbbb-222222222222
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteV2'
+          description: Valid quote found
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+          description: Unauthorized request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+          description: The principal identified by the authorization header doesn't
+            have enough scopes to perform this operation
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+          description: Quote not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+          description: Internal server error
+      security:
+      - Bearer: []
+      summary: Get a quote
+      tags:
+      - QuotesV3
   /v2/balances:
     get:
       operationId: getBalances
@@ -2194,9 +2390,9 @@ components:
         lastStateUpdatedAt: 2019-08-24T14:15:22Z
         destination:
           beneficiaryIdentityNickName: Successful business beneficiary
-          beneficiaryIdentityId: 7ea3399c-1234-5678-8d8f-d320ea406630
+          beneficiaryIdentityId: 99254c4f-f207-4792-a846-06928825018c
           beneficiaryIdentityVersion: 1
-          beneficiaryFinancialInstrumentId: 7ea3399c-1234-5678-8d8f-d320ea406630
+          beneficiaryFinancialInstrumentId: 0e0d7b5a-7f2b-4c75-9bb9-8c4d0ff5f2a1
           payout: BANK
           destinationCurrency: USD
           selectedPaymentRail: XRP_LEDGER
@@ -2231,7 +2427,7 @@ components:
           internalId: Invoice-123
           payin: FUNDED
           originatorIdentityNickName: Successful Business Sender
-          originatorIdentityId: 7ea3399c-1234-5678-8d8f-d320ea406630
+          originatorIdentityId: c1e92b47-4579-4a7e-9c9a-02f3e3e4bb11
           sourceCurrency: USD
           sourceAmount: 100
           originatorIdentityIdVersion: 1
@@ -2415,9 +2611,9 @@ components:
         lastStateUpdatedAt: 2019-08-24T14:15:22Z
         destination:
           beneficiaryIdentityNickName: Successful business beneficiary
-          beneficiaryIdentityId: 7ea3399c-1234-5678-8d8f-d320ea406630
+          beneficiaryIdentityId: 99254c4f-f207-4792-a846-06928825018c
           beneficiaryIdentityVersion: 1
-          beneficiaryFinancialInstrumentId: 7ea3399c-1234-5678-8d8f-d320ea406630
+          beneficiaryFinancialInstrumentId: 0e0d7b5a-7f2b-4c75-9bb9-8c4d0ff5f2a1
           payout: BANK
           destinationCurrency: USD
           selectedPaymentRail: XRP_LEDGER
@@ -2452,7 +2648,7 @@ components:
           internalId: Invoice-123
           payin: FUNDED
           originatorIdentityNickName: Successful Business Sender
-          originatorIdentityId: 7ea3399c-1234-5678-8d8f-d320ea406630
+          originatorIdentityId: c1e92b47-4579-4a7e-9c9a-02f3e3e4bb11
           sourceCurrency: USD
           sourceAmount: 100
           originatorIdentityIdVersion: 1
@@ -2810,9 +3006,9 @@ components:
           lastStateUpdatedAt: 2019-08-24T14:15:22Z
           destination:
             beneficiaryIdentityNickName: Successful business beneficiary
-            beneficiaryIdentityId: 7ea3399c-1234-5678-8d8f-d320ea406630
+            beneficiaryIdentityId: 99254c4f-f207-4792-a846-06928825018c
             beneficiaryIdentityVersion: 1
-            beneficiaryFinancialInstrumentId: 7ea3399c-1234-5678-8d8f-d320ea406630
+            beneficiaryFinancialInstrumentId: 0e0d7b5a-7f2b-4c75-9bb9-8c4d0ff5f2a1
             payout: BANK
             destinationCurrency: USD
             selectedPaymentRail: XRP_LEDGER
@@ -2847,7 +3043,7 @@ components:
             internalId: Invoice-123
             payin: FUNDED
             originatorIdentityNickName: Successful Business Sender
-            originatorIdentityId: 7ea3399c-1234-5678-8d8f-d320ea406630
+            originatorIdentityId: c1e92b47-4579-4a7e-9c9a-02f3e3e4bb11
             sourceCurrency: USD
             sourceAmount: 100
             originatorIdentityIdVersion: 1
@@ -2895,9 +3091,9 @@ components:
           lastStateUpdatedAt: 2019-08-24T14:15:22Z
           destination:
             beneficiaryIdentityNickName: Successful business beneficiary
-            beneficiaryIdentityId: 7ea3399c-1234-5678-8d8f-d320ea406630
+            beneficiaryIdentityId: 99254c4f-f207-4792-a846-06928825018c
             beneficiaryIdentityVersion: 1
-            beneficiaryFinancialInstrumentId: 7ea3399c-1234-5678-8d8f-d320ea406630
+            beneficiaryFinancialInstrumentId: 0e0d7b5a-7f2b-4c75-9bb9-8c4d0ff5f2a1
             payout: BANK
             destinationCurrency: USD
             selectedPaymentRail: XRP_LEDGER
@@ -2932,7 +3128,7 @@ components:
             internalId: Invoice-123
             payin: FUNDED
             originatorIdentityNickName: Successful Business Sender
-            originatorIdentityId: 7ea3399c-1234-5678-8d8f-d320ea406630
+            originatorIdentityId: c1e92b47-4579-4a7e-9c9a-02f3e3e4bb11
             sourceCurrency: USD
             sourceAmount: 100
             originatorIdentityIdVersion: 1
@@ -2975,10 +3171,10 @@ components:
       example:
         internalId: Invoice-123
         sourceOfCash: EMIN
-        beneficiaryIdentityId: 7ea3399c-1234-5678-8d8f-d320ea406630
+        beneficiaryIdentityId: 99254c4f-f207-4792-a846-06928825018c
         purposeCode: PAYR
-        beneficiaryFinancialInstrumentId: 7ea3399c-1234-5678-8d8f-d320ea406630
-        originatorIdentityId: 7ea3399c-1234-5678-8d8f-d320ea406630
+        beneficiaryFinancialInstrumentId: 0e0d7b5a-7f2b-4c75-9bb9-8c4d0ff5f2a1
+        originatorIdentityId: c1e92b47-4579-4a7e-9c9a-02f3e3e4bb11
         paymentLabels:
         - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
         - batchId=aaaaaaaa-1111-bbbb-abab-123412341234
@@ -2998,12 +3194,12 @@ components:
         originatorIdentityId:
           description: The identity ID of the payment originator. You can find the
             identity ID using the `GET /identities` operation.
-          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+          example: c1e92b47-4579-4a7e-9c9a-02f3e3e4bb11
           type: string
         beneficiaryIdentityId:
           description: The identity ID of the payment beneficiary. You can find the
             identity ID using the `GET /identities` operation.
-          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+          example: 99254c4f-f207-4792-a846-06928825018c
           type: string
         internalId:
           description: "Customer defined value, such as an invoice number."
@@ -3035,7 +3231,7 @@ components:
           description: |
             The financial instrument ID associated with a payment beneficiary's identity.
             This value must reference a financial instrument created for the same beneficiary identity using Identity Management v3. Use the `financialInstrumentId` returned when you create or fetch the beneficiary's payout instrument.
-          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+          example: 0e0d7b5a-7f2b-4c75-9bb9-8c4d0ff5f2a1
           type: string
         receiverRelationship:
           description: The relationship to the debtor.
@@ -3135,7 +3331,7 @@ components:
         internalId: Invoice-123
         payin: FUNDED
         originatorIdentityNickName: Successful Business Sender
-        originatorIdentityId: 7ea3399c-1234-5678-8d8f-d320ea406630
+        originatorIdentityId: c1e92b47-4579-4a7e-9c9a-02f3e3e4bb11
         sourceCurrency: USD
         sourceAmount: 100
         originatorIdentityIdVersion: 1
@@ -3143,7 +3339,7 @@ components:
         originatorIdentityId:
           description: The unique ID associated with the payment originator's identity
             record.
-          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+          example: c1e92b47-4579-4a7e-9c9a-02f3e3e4bb11
           type: string
         originatorIdentityIdVersion:
           description: The current version of the originator's identity record.
@@ -3182,9 +3378,9 @@ components:
     DestinationV2:
       example:
         beneficiaryIdentityNickName: Successful business beneficiary
-        beneficiaryIdentityId: 7ea3399c-1234-5678-8d8f-d320ea406630
+        beneficiaryIdentityId: 99254c4f-f207-4792-a846-06928825018c
         beneficiaryIdentityVersion: 1
-        beneficiaryFinancialInstrumentId: 7ea3399c-1234-5678-8d8f-d320ea406630
+        beneficiaryFinancialInstrumentId: 0e0d7b5a-7f2b-4c75-9bb9-8c4d0ff5f2a1
         payout: BANK
         destinationCurrency: USD
         selectedPaymentRail: XRP_LEDGER
@@ -3195,7 +3391,7 @@ components:
         beneficiaryFinancialInstrumentId:
           description: "The financial instrument ID, the identity ID of the payment\
             \ beneficiary is related to."
-          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+          example: 0e0d7b5a-7f2b-4c75-9bb9-8c4d0ff5f2a1
           type: string
         destinationAmount:
           description: The amount received by the payment beneficiary. This field
@@ -3230,7 +3426,7 @@ components:
         beneficiaryIdentityId:
           description: The unique ID associated with the payment beneficiary's identity
             record.
-          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+          example: 99254c4f-f207-4792-a846-06928825018c
           type: string
         beneficiaryIdentityVersion:
           description: The current version of the beneficiary's identity record.
@@ -4705,7 +4901,6 @@ components:
           pattern: "^[A-Z]+$"
           type: string
           x-requiredByBeneficiaryFor:
-          - BR_PIX
           - BR_TED
           - NG_BANK_PAYOUT
           - KR_KFTC
@@ -6038,7 +6233,6 @@ components:
             PHONE: Phone number
             EVP: Bank account
       required:
-      - bankCode
       - bankName
       - branchNumber
       - pixKey
@@ -7124,11 +7318,10 @@ components:
           pattern: "^[a-zA-Z]{2}$"
           type: string
         destinationCountry:
-          description: "The country where the beneficiary is located specified in\
-            \ Alpha-2 Code format as defined in the ISO CountryCode ISO 3166-1 list.\
-            \ If the beneficiary is an individual, then this value is their country\
-            \ of residence. If the beneficiary is an institution, then this value\
-            \ is their the country of incorporation."
+          description: |
+            The country where the beneficiary is located specified in Alpha-2 Code format as defined in the ISO CountryCode ISO 3166-1 list. If the beneficiary is an individual, then this value is their country of residence. If the beneficiary is an institution, then this value is their country of incorporation.
+
+            Required for a fiat payout; omitting it returns `USR_017`. Ignored for a stablecoin payout.
           example: PH
           pattern: "^[a-zA-Z]{2}$"
           type: string
@@ -7163,8 +7356,8 @@ components:
             T_PLUS_ONE: Indicates the payment is being made and you will pay the outstanding
               invoice.
         destinationBlockchainNetwork:
-          description: The name of the blockchain network on which the beneficiary
-            will receive this payment.
+          description: |
+            The name of the blockchain network on which the beneficiary will receive this payment. Required for a stablecoin payout; omitting it returns `USR_017`.
           example: Ethereum
           maxLength: 20
           minLength: 1
@@ -7339,7 +7532,8 @@ components:
           minLength: 1
           type: string
         paymentRail:
-          description: The payment rail used for this quote.
+          description: The payment rail of the quote. Present only for quotes created
+            with `/v3/quotes`.
           example: RTP
           maxLength: 50
           minLength: 1
@@ -7492,6 +7686,448 @@ components:
       required:
       - quoteCollectionId
       - quotes
+      type: object
+    QuoteCollectionRequestV2:
+      additionalProperties: false
+      description: Request to create a quote collection with `POST /v3/quotes/quote-collection`.
+      example:
+        sourceCountry: US
+        payinCategory: PRE_FUNDING
+        paymentRail: SPEI
+        quoteAmount: 123.45
+        destinationCurrency: MXN
+        quoteAmountType: SOURCE_AMOUNT
+        sourceCurrency: USD
+        destinationCountry: MX
+      properties:
+        quoteAmount:
+          description: The amount for which you wish to receive a collection of quotes.
+          example: 123.45
+          format: double
+          minimum: 1
+          type: number
+        quoteAmountType:
+          $ref: '#/components/schemas/QuoteAmountType'
+        sourceCurrency:
+          description: The currency code of the currency that you are sending.
+          example: USD
+          pattern: "^[a-zA-Z]{3,5}$"
+          type: string
+        destinationCurrency:
+          description: The currency code of the currency in which your beneficiary
+            will receive this payment.
+          example: MXN
+          pattern: "^[a-zA-Z]{3,5}$"
+          type: string
+        sourceCountry:
+          description: The country code of the country from where you are sending
+            the funds. This is an ISO 3166-1 alpha-2 code.
+          example: US
+          pattern: "^[a-zA-Z]{2}$"
+          type: string
+        destinationCountry:
+          description: |
+            The country where the beneficiary is located specified in Alpha-2 Code format as defined in the ISO CountryCode ISO 3166-1 list. If the beneficiary is an individual, then this value is their country of residence. If the beneficiary is an institution, then this value is their country of incorporation.
+
+            Required for a fiat payout; omitting it returns `USR_017`. Omit it for a stablecoin payout, or the request fails.
+          example: MX
+          pattern: "^[a-zA-Z]{2}$"
+          type: string
+        payinCategory:
+          description: The name of the pay in category indicating how this payment
+            will be funded.
+          example: PRE_FUNDING
+          maxLength: 128
+          minLength: 1
+          type: string
+          x-enumDescriptions:
+            PRE_FUNDING: Indicates that the payment is being made from funds you've
+              deposited with Ripple.
+            CREDIT_FUNDING: Indicates the payment is being made and you will pay the
+              outstanding invoice.
+            JIT_FUNDING: Indicates that the payment is being made and you will pay
+              the outstanding amount before the payment expires.
+        paymentRail:
+          description: |
+            The payment rail to quote. Include it to request a quote for this payment rail only. If you omit it, the collection contains a quote for each payment rail available for the corridor. For valid values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
+          example: SPEI
+          maxLength: 50
+          minLength: 1
+          type: string
+      required:
+      - destinationCurrency
+      - payinCategory
+      - quoteAmount
+      - quoteAmountType
+      - sourceCurrency
+      type: object
+    QuoteV2:
+      additionalProperties: false
+      example:
+        sourceCountry: US
+        fees:
+        - totalFee: 12.23
+          feeCurrency: USD
+          feeBreakdown:
+          - feeDescription: The service fee charged for this transaction.
+            paymentRail: SPEI
+            calculatedFee: 2.43
+            feeName: Service fee
+          - feeDescription: The service fee charged for this transaction.
+            paymentRail: SPEI
+            calculatedFee: 2.43
+            feeName: Service fee
+        - totalFee: 12.23
+          feeCurrency: USD
+          feeBreakdown:
+          - feeDescription: The service fee charged for this transaction.
+            paymentRail: SPEI
+            calculatedFee: 2.43
+            feeName: Service fee
+          - feeDescription: The service fee charged for this transaction.
+            paymentRail: SPEI
+            calculatedFee: 2.43
+            feeName: Service fee
+        taxes:
+        - taxCurrency: USD
+          totalTaxes: 5.12
+          taxBreakdown:
+          - taxRate: 5
+            taxDescription: The service fee tax charged for this transaction.
+            taxAmount: 2.43
+            taxName: ISS/ VAT/ GST etc
+          - taxRate: 5
+            taxDescription: The service fee tax charged for this transaction.
+            taxAmount: 2.43
+            taxName: ISS/ VAT/ GST etc
+        - taxCurrency: USD
+          totalTaxes: 5.12
+          taxBreakdown:
+          - taxRate: 5
+            taxDescription: The service fee tax charged for this transaction.
+            taxAmount: 2.43
+            taxName: ISS/ VAT/ GST etc
+          - taxRate: 5
+            taxDescription: The service fee tax charged for this transaction.
+            taxAmount: 2.43
+            taxName: ISS/ VAT/ GST etc
+        quoteAmountType: SOURCE_AMOUNT
+        sourceCurrency: USD
+        destinationCountry: MX
+        quoteId: 7ea3399c-1234-5678-8d8f-d320ea406630
+        quoteStatus: ACTIVE
+        expiresAt: 2023-11-02T18:26:00.000123Z
+        createdAt: 2023-11-02T18:26:00.000123Z
+        payinCategory: PRE_FUNDING
+        paymentRail: SPEI
+        destinationCurrency: MXN
+        sourceAmount: 123.45
+        destinationAmount: 2438.19
+        adjustedExchangeRate:
+          adjustedRate: 2
+      properties:
+        quoteId:
+          description: Unique ID that represents this quote.
+          example: 7ea3399c-1234-5678-8d8f-d320ea406630
+          format: uuid
+          maxLength: 36
+          minLength: 1
+          type: string
+        quoteStatus:
+          $ref: '#/components/schemas/QuoteStatus'
+        quoteAmountType:
+          $ref: '#/components/schemas/QuoteAmountType'
+        sourceAmount:
+          description: Amount to be sent by the originator.
+          example: 123.45
+          format: double
+          minimum: 1
+          type: number
+        destinationAmount:
+          description: Amount to be received by destination
+          example: 2438.19
+          format: double
+          minimum: 1
+          type: number
+        sourceCurrency:
+          description: The currency code of the currency that you are sending.
+          example: USD
+          pattern: "^[a-zA-Z]{3,5}$"
+          type: string
+        destinationCurrency:
+          description: The currency code of the currency in which your beneficiary
+            will receive this payment.
+          example: MXN
+          pattern: "^[a-zA-Z]{3,5}$"
+          type: string
+        sourceCountry:
+          description: "The country where the payment originator is located or incorporated,\
+            \ specified in Alpha-2 Code format as defined in the ISO CountryCode ISO\
+            \ 3166-1 list."
+          example: US
+          pattern: "^[a-zA-Z]{2}$"
+          type: string
+        destinationCountry:
+          description: The country code to which you wish to send the funds. It follows
+            ISO 3166-1 alpha-2 code
+          example: MX
+          pattern: "^[a-zA-Z]{2}$"
+          type: string
+        payinCategory:
+          description: The name of payin category specified in the quote request.
+          example: PRE_FUNDING
+          maxLength: 128
+          minLength: 1
+          type: string
+        adjustedExchangeRate:
+          $ref: '#/components/schemas/AdjustedExchangeRate'
+        fees:
+          description: A summary of fees included in this quote.
+          items:
+            $ref: '#/components/schemas/FeeSummaryV2'
+          type: array
+        taxes:
+          description: A summary of taxes included in this quote.
+          items:
+            $ref: '#/components/schemas/TaxSummary'
+          type: array
+        createdAt:
+          description: "The time when this quote was created, specified in UTC."
+          example: 2023-11-02T18:26:00.000123Z
+          format: date-time
+          maxLength: 128
+          minLength: 1
+          type: string
+        expiresAt:
+          description: "The time when this quote expires, specified in UTC."
+          example: 2023-11-02T18:26:00.000123Z
+          format: date-time
+          maxLength: 128
+          minLength: 1
+          type: string
+        paymentRail:
+          description: The payment rail used for this quote.
+          example: SPEI
+          maxLength: 50
+          minLength: 1
+          type: string
+      required:
+      - destinationCurrency
+      - payinCategory
+      - quoteId
+      - quoteStatus
+      - sourceCurrency
+      type: object
+    QuoteCollectionV2:
+      additionalProperties: false
+      example:
+        quoteCollectionId: 11111111-aaaa-2222-bbbb-222222222222
+        quotes:
+        - sourceCountry: US
+          fees:
+          - totalFee: 12.23
+            feeCurrency: USD
+            feeBreakdown:
+            - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
+              calculatedFee: 2.43
+              feeName: Service fee
+            - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
+              calculatedFee: 2.43
+              feeName: Service fee
+          - totalFee: 12.23
+            feeCurrency: USD
+            feeBreakdown:
+            - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
+              calculatedFee: 2.43
+              feeName: Service fee
+            - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
+              calculatedFee: 2.43
+              feeName: Service fee
+          taxes:
+          - taxCurrency: USD
+            totalTaxes: 5.12
+            taxBreakdown:
+            - taxRate: 5
+              taxDescription: The service fee tax charged for this transaction.
+              taxAmount: 2.43
+              taxName: ISS/ VAT/ GST etc
+            - taxRate: 5
+              taxDescription: The service fee tax charged for this transaction.
+              taxAmount: 2.43
+              taxName: ISS/ VAT/ GST etc
+          - taxCurrency: USD
+            totalTaxes: 5.12
+            taxBreakdown:
+            - taxRate: 5
+              taxDescription: The service fee tax charged for this transaction.
+              taxAmount: 2.43
+              taxName: ISS/ VAT/ GST etc
+            - taxRate: 5
+              taxDescription: The service fee tax charged for this transaction.
+              taxAmount: 2.43
+              taxName: ISS/ VAT/ GST etc
+          quoteAmountType: SOURCE_AMOUNT
+          sourceCurrency: USD
+          destinationCountry: MX
+          quoteId: 7ea3399c-1234-5678-8d8f-d320ea406630
+          quoteStatus: ACTIVE
+          expiresAt: 2023-11-02T18:26:00.000123Z
+          createdAt: 2023-11-02T18:26:00.000123Z
+          payinCategory: PRE_FUNDING
+          paymentRail: SPEI
+          destinationCurrency: MXN
+          sourceAmount: 123.45
+          destinationAmount: 2438.19
+          adjustedExchangeRate:
+            adjustedRate: 2
+        - sourceCountry: US
+          fees:
+          - totalFee: 12.23
+            feeCurrency: USD
+            feeBreakdown:
+            - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
+              calculatedFee: 2.43
+              feeName: Service fee
+            - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
+              calculatedFee: 2.43
+              feeName: Service fee
+          - totalFee: 12.23
+            feeCurrency: USD
+            feeBreakdown:
+            - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
+              calculatedFee: 2.43
+              feeName: Service fee
+            - feeDescription: The service fee charged for this transaction.
+              paymentRail: SPEI
+              calculatedFee: 2.43
+              feeName: Service fee
+          taxes:
+          - taxCurrency: USD
+            totalTaxes: 5.12
+            taxBreakdown:
+            - taxRate: 5
+              taxDescription: The service fee tax charged for this transaction.
+              taxAmount: 2.43
+              taxName: ISS/ VAT/ GST etc
+            - taxRate: 5
+              taxDescription: The service fee tax charged for this transaction.
+              taxAmount: 2.43
+              taxName: ISS/ VAT/ GST etc
+          - taxCurrency: USD
+            totalTaxes: 5.12
+            taxBreakdown:
+            - taxRate: 5
+              taxDescription: The service fee tax charged for this transaction.
+              taxAmount: 2.43
+              taxName: ISS/ VAT/ GST etc
+            - taxRate: 5
+              taxDescription: The service fee tax charged for this transaction.
+              taxAmount: 2.43
+              taxName: ISS/ VAT/ GST etc
+          quoteAmountType: SOURCE_AMOUNT
+          sourceCurrency: USD
+          destinationCountry: MX
+          quoteId: 7ea3399c-1234-5678-8d8f-d320ea406630
+          quoteStatus: ACTIVE
+          expiresAt: 2023-11-02T18:26:00.000123Z
+          createdAt: 2023-11-02T18:26:00.000123Z
+          payinCategory: PRE_FUNDING
+          paymentRail: SPEI
+          destinationCurrency: MXN
+          sourceAmount: 123.45
+          destinationAmount: 2438.19
+          adjustedExchangeRate:
+            adjustedRate: 2
+      properties:
+        quoteCollectionId:
+          description: Unique ID that represents this quote collection.
+          example: 11111111-aaaa-2222-bbbb-222222222222
+          format: uuid
+          maxLength: 36
+          minLength: 1
+          type: string
+        quotes:
+          description: List of quotes
+          items:
+            $ref: '#/components/schemas/QuoteV2'
+          minItems: 0
+          type: array
+      required:
+      - quoteCollectionId
+      - quotes
+      type: object
+    TotalFeeBreakdownV2:
+      additionalProperties: false
+      description: A breakdown of the total fees included in this quote.
+      example:
+        feeDescription: The service fee charged for this transaction.
+        paymentRail: SPEI
+        calculatedFee: 2.43
+        feeName: Service fee
+      properties:
+        calculatedFee:
+          description: Value of the fee when the configured fee unit is applied against
+            the `value`.
+          example: 2.43
+          format: double
+          type: number
+        feeName:
+          description: The name of the fee.
+          example: Service fee
+          maxLength: 128
+          minLength: 1
+          type: string
+        feeDescription:
+          description: Description of the fee.
+          example: The service fee charged for this transaction.
+          maxLength: 256
+          minLength: 1
+          type: string
+        paymentRail:
+          description: The payment rail associated with this fee line item.
+          example: SPEI
+          maxLength: 30
+          minLength: 1
+          type: string
+      type: object
+    FeeSummaryV2:
+      description: A summary of fees included in this quote.
+      example:
+        totalFee: 12.23
+        feeCurrency: USD
+        feeBreakdown:
+        - feeDescription: The service fee charged for this transaction.
+          paymentRail: SPEI
+          calculatedFee: 2.43
+          feeName: Service fee
+        - feeDescription: The service fee charged for this transaction.
+          paymentRail: SPEI
+          calculatedFee: 2.43
+          feeName: Service fee
+      properties:
+        totalFee:
+          description: The value of the total fee included in this quote.
+          example: 12.23
+          format: double
+          type: number
+        feeCurrency:
+          description: The currency in which fees are charged.
+          example: USD
+          pattern: "^[a-zA-Z]{3,5}$"
+          type: string
+        feeBreakdown:
+          description: An array of fees that provides a breakdown of how the total
+            fees is calculated for this quote.
+          items:
+            $ref: '#/components/schemas/TotalFeeBreakdownV2'
+          type: array
       type: object
     getBalances_200_response_balances_inner:
       description: Customer available prefund balance for specific currency

@@ -5,14 +5,14 @@ Use the Payments Direct API to get quotes, create and manage payments, and manag
 
 The Payments Direct API offers the following environments:
 
-| <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               |
+| Environment  | Base URL                      | Description                               |
 | ------------------------------------------ | ----------------------------- | ----------------------------------------- |
 | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. |
 | Production                                 | `https://api.ripple.com`      | Production environment                    |
 
 ## API authentication
 
-All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.
+All Payments Direct API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.
 
 ### Generate client ID and client secret
 
@@ -156,6 +156,9 @@ Class | Method | HTTP request | Description
 *QuoteApi* | [**create_quote_collection**](docs/QuoteApi.md#create_quote_collection) | **POST** /v2/quotes/quote-collection | Create quote collection
 *QuoteApi* | [**get_quote**](docs/QuoteApi.md#get_quote) | **GET** /v2/quotes/{quote-id} | Get quote
 *QuoteApi* | [**get_quote_collection**](docs/QuoteApi.md#get_quote_collection) | **GET** /v2/quotes/quote-collection/{quote-collection-id} | Get quote collection
+*QuotesV3Api* | [**create_quote_collection_v2**](docs/QuotesV3Api.md#create_quote_collection_v2) | **POST** /v3/quotes/quote-collection | Create quote collection
+*QuotesV3Api* | [**get_quote_collection_v2**](docs/QuotesV3Api.md#get_quote_collection_v2) | **GET** /v3/quotes/quote-collection/{quote-collection-id} | Get quote collection
+*QuotesV3Api* | [**get_quote_v2**](docs/QuotesV3Api.md#get_quote_v2) | **GET** /v3/quotes/{quote-id} | Get a quote
 *LedgerPublicApi* | [**get_balances**](docs/LedgerPublicApi.md#get_balances) | **GET** /v2/balances | Get available balances
 *LedgerPublicApi* | [**get_statements_transactions_for_customer**](docs/LedgerPublicApi.md#get_statements_transactions_for_customer) | **GET** /v2/ledger-transactions | Get ledger transactions
 
@@ -188,6 +191,7 @@ Class | Method | HTTP request | Description
  - [EthWallet](docs/EthWallet.md)
  - [EuSepa](docs/EuSepa.md)
  - [FeeSummary](docs/FeeSummary.md)
+ - [FeeSummaryV2](docs/FeeSummaryV2.md)
  - [FinancialInstrumentMetadata](docs/FinancialInstrumentMetadata.md)
  - [GbFps](docs/GbFps.md)
  - [GetBalances200Response](docs/GetBalances200Response.md)
@@ -231,9 +235,12 @@ Class | Method | HTTP request | Description
  - [QuoteAmountType](docs/QuoteAmountType.md)
  - [QuoteCollection](docs/QuoteCollection.md)
  - [QuoteCollectionRequest](docs/QuoteCollectionRequest.md)
+ - [QuoteCollectionRequestV2](docs/QuoteCollectionRequestV2.md)
+ - [QuoteCollectionV2](docs/QuoteCollectionV2.md)
  - [QuoteError](docs/QuoteError.md)
  - [QuoteErrorResponse](docs/QuoteErrorResponse.md)
  - [QuoteStatus](docs/QuoteStatus.md)
+ - [QuoteV2](docs/QuoteV2.md)
  - [RippleFinancialInstrument](docs/RippleFinancialInstrument.md)
  - [RippleFinancialInstrumentEntry](docs/RippleFinancialInstrumentEntry.md)
  - [RippleIdentity](docs/RippleIdentity.md)
@@ -247,6 +254,7 @@ Class | Method | HTTP request | Description
  - [TaxSummary](docs/TaxSummary.md)
  - [ThPromptpay](docs/ThPromptpay.md)
  - [TotalFeeBreakdown](docs/TotalFeeBreakdown.md)
+ - [TotalFeeBreakdownV2](docs/TotalFeeBreakdownV2.md)
  - [TrackingReference](docs/TrackingReference.md)
  - [TransactionDetailsV2](docs/TransactionDetailsV2.md)
  - [TronWallet](docs/TronWallet.md)

@@ -8,6 +8,7 @@ api_identities_v3.go
 api_ledger_public.go
 api_payments_v2.go
 api_quote.go
+api_quotes_v3.go
 client.go
 configuration.go
 docs/AdjustedExchangeRate.md
@@ -36,6 +37,7 @@ docs/ErrorResponse.md
 docs/EthWallet.md
 docs/EuSepa.md
 docs/FeeSummary.md
+docs/FeeSummaryV2.md
 docs/FinancialInstrumentMetadata.md
 docs/GbFps.md
 docs/GetBalances200Response.md
@@ -84,9 +86,13 @@ docs/QuoteAPI.md
 docs/QuoteAmountType.md
 docs/QuoteCollection.md
 docs/QuoteCollectionRequest.md
+docs/QuoteCollectionRequestV2.md
+docs/QuoteCollectionV2.md
 docs/QuoteError.md
 docs/QuoteErrorResponse.md
 docs/QuoteStatus.md
+docs/QuoteV2.md
+docs/QuotesV3API.md
 docs/RippleFinancialInstrument.md
 docs/RippleFinancialInstrumentEntry.md
 docs/RippleIdentity.md
@@ -100,6 +106,7 @@ docs/TaxBreakdown.md
 docs/TaxSummary.md
 docs/ThPromptpay.md
 docs/TotalFeeBreakdown.md
+docs/TotalFeeBreakdownV2.md
 docs/TrackingReference.md
 docs/TransactionDetailsV2.md
 docs/TronWallet.md
@@ -141,6 +148,7 @@ model_error_response.go
 model_eth_wallet.go
 model_eu_sepa.go
 model_fee_summary.go
+model_fee_summary_v2.go
 model_financial_instrument_metadata.go
 model_gb_fps.go
 model_get_balances_200_response.go
@@ -184,9 +192,12 @@ model_quote.go
 model_quote_amount_type.go
 model_quote_collection.go
 model_quote_collection_request.go
+model_quote_collection_request_v2.go
+model_quote_collection_v2.go
 model_quote_error.go
 model_quote_error_response.go
 model_quote_status.go
+model_quote_v2.go
 model_ripple_financial_instrument.go
 model_ripple_financial_instrument_entry.go
 model_ripple_identity.go
@@ -200,6 +211,7 @@ model_tax_breakdown.go
 model_tax_summary.go
 model_th_promptpay.go
 model_total_fee_breakdown.go
+model_total_fee_breakdown_v2.go
 model_tracking_reference.go
 model_transaction_details_v2.go
 model_tron_wallet.go
@@ -218,4 +230,5 @@ test/api_identities_v3_test.go
 test/api_ledger_public_test.go
 test/api_payments_v2_test.go
 test/api_quote_test.go
+test/api_quotes_v3_test.go
 utils.go

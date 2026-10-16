@@ -74,6 +74,9 @@ Class | Method | HTTP request | Description
 *QuoteApi* | [**createQuoteCollection**](docs/QuoteApi.md#createquotecollection) | **POST** /v2/quotes/quote-collection | Create quote collection
 *QuoteApi* | [**getQuote**](docs/QuoteApi.md#getquote) | **GET** /v2/quotes/{quote-id} | Get quote
 *QuoteApi* | [**getQuoteCollection**](docs/QuoteApi.md#getquotecollection) | **GET** /v2/quotes/quote-collection/{quote-collection-id} | Get quote collection
+*QuotesV3Api* | [**createQuoteCollectionV2**](docs/QuotesV3Api.md#createquotecollectionv2) | **POST** /v3/quotes/quote-collection | Create quote collection
+*QuotesV3Api* | [**getQuoteCollectionV2**](docs/QuotesV3Api.md#getquotecollectionv2) | **GET** /v3/quotes/quote-collection/{quote-collection-id} | Get quote collection
+*QuotesV3Api* | [**getQuoteV2**](docs/QuotesV3Api.md#getquotev2) | **GET** /v3/quotes/{quote-id} | Get a quote
 
 
 ### Documentation For Models
@@ -103,6 +106,7 @@ Class | Method | HTTP request | Description
  - [EthWallet](docs/EthWallet.md)
  - [EuSepa](docs/EuSepa.md)
  - [FeeSummary](docs/FeeSummary.md)
+ - [FeeSummaryV2](docs/FeeSummaryV2.md)
  - [FinancialInstrumentMetadata](docs/FinancialInstrumentMetadata.md)
  - [GbFps](docs/GbFps.md)
  - [GetBalances200Response](docs/GetBalances200Response.md)
@@ -147,9 +151,12 @@ Class | Method | HTTP request | Description
  - [QuoteAmountType](docs/QuoteAmountType.md)
  - [QuoteCollection](docs/QuoteCollection.md)
  - [QuoteCollectionRequest](docs/QuoteCollectionRequest.md)
+ - [QuoteCollectionRequestV2](docs/QuoteCollectionRequestV2.md)
+ - [QuoteCollectionV2](docs/QuoteCollectionV2.md)
  - [QuoteError](docs/QuoteError.md)
  - [QuoteErrorResponse](docs/QuoteErrorResponse.md)
  - [QuoteStatus](docs/QuoteStatus.md)
+ - [QuoteV2](docs/QuoteV2.md)
  - [RippleFinancialInstrument](docs/RippleFinancialInstrument.md)
  - [RippleFinancialInstrumentEntry](docs/RippleFinancialInstrumentEntry.md)
  - [RippleIdentity](docs/RippleIdentity.md)
@@ -163,6 +170,7 @@ Class | Method | HTTP request | Description
  - [TaxSummary](docs/TaxSummary.md)
  - [ThPromptpay](docs/ThPromptpay.md)
  - [TotalFeeBreakdown](docs/TotalFeeBreakdown.md)
+ - [TotalFeeBreakdownV2](docs/TotalFeeBreakdownV2.md)
  - [TrackingReference](docs/TrackingReference.md)
  - [TransactionDetailsV2](docs/TransactionDetailsV2.md)
  - [TronWallet](docs/TronWallet.md)

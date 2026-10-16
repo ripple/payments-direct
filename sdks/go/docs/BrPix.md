@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BankName** | **string** | The name of the identity&#39;s bank | 
-**BankCode** | **string** | The code of the identity&#39;s bank (BICFI code) | 
+**BankCode** | Pointer to **string** | The code of the identity&#39;s bank (BICFI code) | [optional] 
 **BranchNumber** | **string** | The identity&#39;s bank branch number | 
 **PixKey** | **string** | The identity&#39;s PIX key, which can be an email, phone number, or a hash | 
 **PixKeyType** | **string** | The type of PIX key used by the identity. | 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewBrPix
 
-`func NewBrPix(bankName string, bankCode string, branchNumber string, pixKey string, pixKeyType string, ) *BrPix`
+`func NewBrPix(bankName string, branchNumber string, pixKey string, pixKeyType string, ) *BrPix`
 
 NewBrPix instantiates a new BrPix object
 This constructor will assign default values to properties that have it defined,
@@ -68,6 +68,11 @@ and a boolean to check if the value has been set.
 
 SetBankCode sets BankCode field to given value.
 
+### HasBankCode
+
+`func (o *BrPix) HasBankCode() bool`
+
+HasBankCode returns a boolean if a field has been set.
 
 ### GetBranchNumber
 

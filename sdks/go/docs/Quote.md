@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **CreatedAt** | Pointer to **time.Time** | The time when this quote was created, specified in UTC. | [optional] 
 **ExpiresAt** | Pointer to **time.Time** | The time when this quote expires, specified in UTC. | [optional] 
 **DestinationBlockchainNetwork** | Pointer to **string** | The name of the blockchain network on which the beneficiary will receive this payment. | [optional] 
-**PaymentRail** | Pointer to **string** | The payment rail used for this quote. | [optional] 
+**PaymentRail** | Pointer to **string** | The payment rail of the quote. Present only for quotes created with &#x60;/v3/quotes&#x60;. | [optional] 
 
 ## Methods
 

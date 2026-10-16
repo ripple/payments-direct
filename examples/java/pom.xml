@@ -30,7 +30,7 @@
         <dependency>
             <groupId>com.ripple.payments</groupId>
             <artifactId>payments-direct-client</artifactId>
-            <version>0.0.1</version>
+            <version>2026.03</version>
         </dependency>
         
         <!-- HTTP client -->

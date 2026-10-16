@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** | The time when this quote was created, specified in UTC. | [optional] 
 **expires_at** | **datetime** | The time when this quote expires, specified in UTC. | [optional] 
 **destination_blockchain_network** | **str** | The name of the blockchain network on which the beneficiary will receive this payment. | [optional] 
-**payment_rail** | **str** | The payment rail used for this quote. | [optional] 
+**payment_rail** | **str** | The payment rail of the quote. Present only for quotes created with &#x60;/v3/quotes&#x60;. | [optional] 
 
 ## Example
 

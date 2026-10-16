@@ -24,7 +24,7 @@
 |**createdAt** | **OffsetDateTime** | The time when this quote was created, specified in UTC. |  [optional] |
 |**expiresAt** | **OffsetDateTime** | The time when this quote expires, specified in UTC. |  [optional] |
 |**destinationBlockchainNetwork** | **String** | The name of the blockchain network on which the beneficiary will receive this payment. |  [optional] |
-|**paymentRail** | **String** | The payment rail used for this quote. |  [optional] |
+|**paymentRail** | **String** | The payment rail of the quote. Present only for quotes created with &#x60;/v3/quotes&#x60;. |  [optional] |
 
 
 
