@@ -33,7 +33,7 @@ import (
 )
 
 func main() {
-	paymentRequestV2 := *openapiclient.NewPaymentRequestV2("7ea3399c-1234-5678-8d8f-d320ea406630", "7ea3399c-1234-5678-8d8f-d320ea406630", "7ea3399c-1234-5678-8d8f-d320ea406630") // PaymentRequestV2 | create payment request
+	paymentRequestV2 := *openapiclient.NewPaymentRequestV2("7ea3399c-1234-5678-8d8f-d320ea406630", "99254c4f-f207-4792-a846-06928825018c", "0e0d7b5a-7f2b-4c75-9bb9-8c4d0ff5f2a1") // PaymentRequestV2 | create payment request
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

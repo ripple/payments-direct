@@ -83,6 +83,7 @@ public class Example {
 | **401** | Unauthorized request |  -  |
 | **403** | The principal identified by the authorization header doesn&#39;t have enough scopes to perform this operation |  -  |
 | **500** | Internal server error |  -  |
+| **503** | A maintenance window is in force for this corridor. The error description states when service is expected to resume. |  -  |
 
 
 ## getQuote

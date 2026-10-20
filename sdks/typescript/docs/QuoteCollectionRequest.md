@@ -11,10 +11,10 @@ Name | Type | Description | Notes
 **sourceCurrency** | **string** | The currency code of the currency that you are sending. | [default to undefined]
 **destinationCurrency** | **string** | The currency code of the currency in which your beneficiary will receive this payment. | [default to undefined]
 **sourceCountry** | **string** | The country code of the country from where you are sending the funds. This is an ISO 3166-1 alpha-2 code. | [optional] [default to undefined]
-**destinationCountry** | **string** | The country where the beneficiary is located specified in Alpha-2 Code format as defined in the ISO CountryCode ISO 3166-1 list. If the beneficiary is an individual, then this value is their country of residence. If the beneficiary is an institution, then this value is their the country of incorporation. | [optional] [default to undefined]
+**destinationCountry** | **string** | The country where the beneficiary is located specified in Alpha-2 Code format as defined in the ISO CountryCode ISO 3166-1 list. If the beneficiary is an individual, then this value is their country of residence. If the beneficiary is an institution, then this value is their country of incorporation.  Required for a fiat payout; omitting it returns &#x60;USR_017&#x60;. Ignored for a stablecoin payout.  | [optional] [default to undefined]
 **payoutCategory** | **string** | The name of the payout category. | [default to undefined]
 **payinCategory** | **string** | The name of the pay in category indicating how this payment will be funded. The values FUNDED and T_PLUS_ONE are deprecated and will be removed in a future release. | [default to undefined]
-**destinationBlockchainNetwork** | **string** | The name of the blockchain network on which the beneficiary will receive this payment. | [optional] [default to undefined]
+**destinationBlockchainNetwork** | **string** | The name of the blockchain network on which the beneficiary will receive this payment. Required for a stablecoin payout; omitting it returns &#x60;USR_017&#x60;.  | [optional] [default to undefined]
 
 ## Example
 

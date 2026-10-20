@@ -61,6 +61,7 @@ const { status, data } = await apiInstance.createQuoteCollection(
 |**401** | Unauthorized request |  -  |
 |**403** | The principal identified by the authorization header doesn\&#39;t have enough scopes to perform this operation |  -  |
 |**500** | Internal server error |  -  |
+|**503** | A maintenance window is in force for this corridor. The error description states when service is expected to resume. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
