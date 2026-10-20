@@ -7,7 +7,7 @@ Rails: PIX  Rail Definitions:  PIX: - Availability: 24/7/365 - Limit: No limit -
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bankName** | **string** | The name of the identity\&#39;s bank | [default to undefined]
-**bankCode** | **string** | The code of the identity\&#39;s bank (BICFI code) | [default to undefined]
+**bankCode** | **string** | The code of the identity\&#39;s bank (BICFI code) | [optional] [default to undefined]
 **branchNumber** | **string** | The identity\&#39;s bank branch number | [default to undefined]
 **pixKey** | **string** | The identity\&#39;s PIX key, which can be an email, phone number, or a hash | [default to undefined]
 **pixKeyType** | **string** | The type of PIX key used by the identity. | [default to undefined]

@@ -12,14 +12,14 @@ Use the Payments Direct API to get quotes, create and manage payments, and manag
 
 The Payments Direct API offers the following environments:
 
-| <div style=\"width:90px\">Environment</div>  | Base URL                      | Description                               |
+| Environment  | Base URL                      | Description                               |
 | ------------------------------------------ | ----------------------------- | ----------------------------------------- |
 | UAT                                       | `https://api.test.ripple.com` | UAT environment with simulated currency. |
 | Production                                 | `https://api.ripple.com`      | Production environment                    |
 
 ## API authentication
 
-All {% $env.PUBLIC_VAR_RPD %} API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.
+All Payments Direct API operations require a Bearer access token specific to the environment you're using. Ripple provides a secure model for authentication and authorization by providing access tokens scoped for a set of credentials.
 
 ### Generate client ID and client secret
 
