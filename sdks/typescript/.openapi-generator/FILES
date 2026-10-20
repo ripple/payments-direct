@@ -38,6 +38,7 @@ docs/ErrorResponse.md
 docs/EthWallet.md
 docs/EuSepa.md
 docs/FeeSummary.md
+docs/FeeSummaryV2.md
 docs/FinancialInstrumentMetadata.md
 docs/GbFps.md
 docs/GetBalances200Response.md
@@ -80,14 +81,14 @@ docs/PeLbtr.md
 docs/PutIdentityRequestV3.md
 docs/PutRippleFinancialInstrument.md
 docs/PutRippleIdentity.md
-docs/Quote.md
 docs/QuoteAmountType.md
 docs/QuoteApi.md
-docs/QuoteCollection.md
-docs/QuoteCollectionRequest.md
+docs/QuoteCollectionRequestV2.md
+docs/QuoteCollectionV2.md
 docs/QuoteError.md
 docs/QuoteErrorResponse.md
 docs/QuoteStatus.md
+docs/QuoteV2.md
 docs/RippleFinancialInstrument.md
 docs/RippleFinancialInstrumentEntry.md
 docs/RippleIdentity.md
@@ -101,6 +102,7 @@ docs/TaxBreakdown.md
 docs/TaxSummary.md
 docs/ThPromptpay.md
 docs/TotalFeeBreakdown.md
+docs/TotalFeeBreakdownV2.md
 docs/TrackingReference.md
 docs/TransactionDetailsV2.md
 docs/TronWallet.md
@@ -139,6 +141,7 @@ models/destination-v2.ts
 models/error-response.ts
 models/eth-wallet.ts
 models/eu-sepa.ts
+models/fee-summary-v2.ts
 models/fee-summary.ts
 models/financial-instrument-metadata.ts
 models/gb-fps.ts
@@ -182,12 +185,12 @@ models/put-identity-request-v3.ts
 models/put-ripple-financial-instrument.ts
 models/put-ripple-identity.ts
 models/quote-amount-type.ts
-models/quote-collection-request.ts
-models/quote-collection.ts
+models/quote-collection-request-v2.ts
+models/quote-collection-v2.ts
 models/quote-error-response.ts
 models/quote-error.ts
 models/quote-status.ts
-models/quote.ts
+models/quote-v2.ts
 models/ripple-financial-instrument-entry.ts
 models/ripple-financial-instrument.ts
 models/ripple-identity.ts
@@ -200,6 +203,7 @@ models/state-transitions-response-v2.ts
 models/tax-breakdown.ts
 models/tax-summary.ts
 models/th-promptpay.ts
+models/total-fee-breakdown-v2.ts
 models/total-fee-breakdown.ts
 models/tracking-reference.ts
 models/transaction-details-v2.ts
