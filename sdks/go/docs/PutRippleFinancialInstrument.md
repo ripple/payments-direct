@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **CoPse** | Pointer to [**CoPse**](CoPse.md) |  | [optional] 
 **BrTed** | Pointer to [**BrTed**](BrTed.md) |  | [optional] 
 **CaEft** | Pointer to [**CaEft**](CaEft.md) |  | [optional] 
+**IdBifast** | Pointer to [**IdBifast**](IdBifast.md) |  | [optional] 
 **KrKftc** | Pointer to [**KrKftc**](KrKftc.md) |  | [optional] 
 **InNeft** | Pointer to [**InNeft**](InNeft.md) |  | [optional] 
 **PeLbtr** | Pointer to [**PeLbtr**](PeLbtr.md) |  | [optional] 
@@ -527,6 +528,31 @@ SetCaEft sets CaEft field to given value.
 `func (o *PutRippleFinancialInstrument) HasCaEft() bool`
 
 HasCaEft returns a boolean if a field has been set.
+
+### GetIdBifast
+
+`func (o *PutRippleFinancialInstrument) GetIdBifast() IdBifast`
+
+GetIdBifast returns the IdBifast field if non-nil, zero value otherwise.
+
+### GetIdBifastOk
+
+`func (o *PutRippleFinancialInstrument) GetIdBifastOk() (*IdBifast, bool)`
+
+GetIdBifastOk returns a tuple with the IdBifast field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIdBifast
+
+`func (o *PutRippleFinancialInstrument) SetIdBifast(v IdBifast)`
+
+SetIdBifast sets IdBifast field to given value.
+
+### HasIdBifast
+
+`func (o *PutRippleFinancialInstrument) HasIdBifast() bool`
+
+HasIdBifast returns a boolean if a field has been set.
 
 ### GetKrKftc
 

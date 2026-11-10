@@ -26,6 +26,7 @@ Request to create a new financial instrument for an identity.
 |**coPse** | [**CoPseDTO**](CoPseDTO.md) |  |  [optional] |
 |**brTed** | [**BrTedDTO**](BrTedDTO.md) |  |  [optional] |
 |**caEft** | [**CaEftDTO**](CaEftDTO.md) |  |  [optional] |
+|**idBifast** | [**IdBifastDTO**](IdBifastDTO.md) |  |  [optional] |
 |**krKftc** | [**KrKftcDTO**](KrKftcDTO.md) |  |  [optional] |
 |**inNeft** | [**InNeftDTO**](InNeftDTO.md) |  |  [optional] |
 |**peLbtr** | [**PeLbtrDTO**](PeLbtrDTO.md) |  |  [optional] |

@@ -36,7 +36,6 @@ docs/ErrorResponse.md
 docs/EthWallet.md
 docs/EuSepa.md
 docs/FeeSummary.md
-docs/FeeSummaryV2.md
 docs/FinancialInstrumentMetadata.md
 docs/GbFps.md
 docs/GetBalances200Response.md
@@ -48,6 +47,7 @@ docs/GetIdentityResponseV3.md
 docs/GetStatementsTransactionsForCustomer200Response.md
 docs/GetStatementsTransactionsForCustomer200ResponseStatementTransactionsInner.md
 docs/GhBankPayout.md
+docs/IdBifast.md
 docs/IdentitiesV3API.md
 docs/IdentityResponseV3.md
 docs/InNeft.md
@@ -80,14 +80,14 @@ docs/PeLbtr.md
 docs/PutIdentityRequestV3.md
 docs/PutRippleFinancialInstrument.md
 docs/PutRippleIdentity.md
+docs/Quote.md
 docs/QuoteAPI.md
 docs/QuoteAmountType.md
-docs/QuoteCollectionRequestV2.md
-docs/QuoteCollectionV2.md
+docs/QuoteCollection.md
+docs/QuoteCollectionRequest.md
 docs/QuoteError.md
 docs/QuoteErrorResponse.md
 docs/QuoteStatus.md
-docs/QuoteV2.md
 docs/RippleFinancialInstrument.md
 docs/RippleFinancialInstrumentEntry.md
 docs/RippleIdentity.md
@@ -101,7 +101,6 @@ docs/TaxBreakdown.md
 docs/TaxSummary.md
 docs/ThPromptpay.md
 docs/TotalFeeBreakdown.md
-docs/TotalFeeBreakdownV2.md
 docs/TrackingReference.md
 docs/TransactionDetailsV2.md
 docs/TronWallet.md
@@ -143,7 +142,6 @@ model_error_response.go
 model_eth_wallet.go
 model_eu_sepa.go
 model_fee_summary.go
-model_fee_summary_v2.go
 model_financial_instrument_metadata.go
 model_gb_fps.go
 model_get_balances_200_response.go
@@ -155,6 +153,7 @@ model_get_identity_response_v3.go
 model_get_statements_transactions_for_customer_200_response.go
 model_get_statements_transactions_for_customer_200_response_statement_transactions_inner.go
 model_gh_bank_payout.go
+model_id_bifast.go
 model_identity_response_v3.go
 model_in_neft.go
 model_individual_identity.go
@@ -183,13 +182,13 @@ model_pe_lbtr.go
 model_put_identity_request_v3.go
 model_put_ripple_financial_instrument.go
 model_put_ripple_identity.go
+model_quote.go
 model_quote_amount_type.go
-model_quote_collection_request_v2.go
-model_quote_collection_v2.go
+model_quote_collection.go
+model_quote_collection_request.go
 model_quote_error.go
 model_quote_error_response.go
 model_quote_status.go
-model_quote_v2.go
 model_ripple_financial_instrument.go
 model_ripple_financial_instrument_entry.go
 model_ripple_identity.go
@@ -203,7 +202,6 @@ model_tax_breakdown.go
 model_tax_summary.go
 model_th_promptpay.go
 model_total_fee_breakdown.go
-model_total_fee_breakdown_v2.go
 model_tracking_reference.go
 model_transaction_details_v2.go
 model_tron_wallet.go

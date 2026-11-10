@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **coPse** | [**CoPse**](CoPse.md) |  | [optional] [default to undefined]
 **brTed** | [**BrTed**](BrTed.md) |  | [optional] [default to undefined]
 **caEft** | [**CaEft**](CaEft.md) |  | [optional] [default to undefined]
+**idBifast** | [**IdBifast**](IdBifast.md) |  | [optional] [default to undefined]
 **krKftc** | [**KrKftc**](KrKftc.md) |  | [optional] [default to undefined]
 **inNeft** | [**InNeft**](InNeft.md) |  | [optional] [default to undefined]
 **peLbtr** | [**PeLbtr**](PeLbtr.md) |  | [optional] [default to undefined]
@@ -62,6 +63,7 @@ const instance: RippleFinancialInstrument = {
     coPse,
     brTed,
     caEft,
+    idBifast,
     krKftc,
     inNeft,
     peLbtr,

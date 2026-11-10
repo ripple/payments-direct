@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **co_pse** | [**CoPse**](CoPse.md) |  | [optional] 
 **br_ted** | [**BrTed**](BrTed.md) |  | [optional] 
 **ca_eft** | [**CaEft**](CaEft.md) |  | [optional] 
+**id_bifast** | [**IdBifast**](IdBifast.md) |  | [optional] 
 **kr_kftc** | [**KrKftc**](KrKftc.md) |  | [optional] 
 **in_neft** | [**InNeft**](InNeft.md) |  | [optional] 
 **pe_lbtr** | [**PeLbtr**](PeLbtr.md) |  | [optional] 
