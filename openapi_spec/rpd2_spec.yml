@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Payments Direct API
-  version: 2026.04
+  version: 2026.03
   license:
     name: Apache 2.0
     url: http://apache.org
@@ -80,13 +80,14 @@ tags:
 - name: Quote
   x-displayName: Quotes
   description: |
-    Use these API operations to create and retrieve quotes. A quote collection contains one quote for each payment rail available for the corridor, and each quote names its payment rail, so you can compare the quotes and choose one.
+    Use these API operations to manage your quotes.
+
 
     | Operation | Method | Description |
     | --- | --- | --- |
-    | [Create quote collection](#operation/createQuoteCollectionV2) | POST | Create a collection of quotes, one for each available payment rail. |
-    | [Get quote collection](#operation/getQuoteCollectionV2) | GET | Get a quote collection by ID. |
-    | [Get a quote](#operation/getQuoteV2) | GET | Get a specific quote by ID. |
+    | [Create quote collection](#operation/createQuoteCollection) | POST | Create a collection of quotes.  |
+    | [Get quote collection](#operation/getQuoteCollection) | GET | Get a quote collection by ID. |
+    | [Get a quote](#operation/getQuote) | GET | Get a specific quote by ID.  |
 - name: PaymentsV2
   x-displayName: Payments
   description: |
@@ -1492,37 +1493,29 @@ paths:
               examples:
                 error-response-500:
                   $ref: '#/components/examples/error-500-example'
-  /v3/quotes/quote-collection:
+  /v2/quotes/quote-collection:
     post:
       tags:
       - Quote
       security:
       - Bearer: []
-      operationId: createQuoteCollectionV2
+      operationId: createQuoteCollection
       summary: Create quote collection
-      description: |
-        Creates a collection of quotes for a proposed payment, one for each payment rail available for the corridor. A payment rail Ripple can't price is left out. Each quote has its own `quoteId`, `paymentRail`, exchange rate, and fees, and all quotes in the collection have the same expiry time. To create the payment, use the `quoteId` of the quote you choose.
-
-        To request a quote for one payment rail only, include `paymentRail`. For valid values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
-
-        **Request notes:**
-        - `payoutCategory` and `destinationBlockchainNetwork` aren't part of the request. For a stablecoin payout, the blockchain network is the payment rail, and you omit `destinationCountry`.
-        - `paymentRail` is an optional request field.
-        - The `payinCategory` values `FUNDED` and `T_PLUS_ONE` are not accepted. Use `PRE_FUNDING` in place of `FUNDED`, and `CREDIT_FUNDING` in place of `T_PLUS_ONE`.
+      description: Creates a collection of quotes for a proposed payment.
       requestBody:
         description: Create quote collection request
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/QuoteCollectionRequestV2'
+              $ref: '#/components/schemas/QuoteCollectionRequest'
       responses:
         '201':
           description: Creates a collection of quotes
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteCollectionV2'
+                $ref: '#/components/schemas/QuoteCollection'
         '400':
           description: Bad request
           content:
@@ -1536,7 +1529,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/QuoteErrorResponse'
         '403':
-          description: The principal identified by the authorization header
+          description: The principal identified by the authorization header 
             doesn't have enough scopes to perform this operation
           content:
             application/json:
@@ -1548,22 +1541,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/QuoteErrorResponse'
-  /v3/quotes/quote-collection/{quote-collection-id}:
+        '503':
+          description: A maintenance window is in force for this corridor. The error description states when service is expected to resume.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteErrorResponse'
+  /v2/quotes/quote-collection/{quote-collection-id}:
     get:
       tags:
       - Quote
       security:
       - Bearer: []
-      operationId: getQuoteCollectionV2
+      operationId: getQuoteCollection
       summary: Get quote collection
-      description: |
-        Retrieve a previously created quote collection by its unique identifier.
-
-        Use this endpoint to check the status of quotes (ACTIVE or EXPIRED) and retrieve quote details needed for payment creation.
       parameters:
       - in: path
         name: quote-collection-id
-        description: The unique identifier of the quote collection you want to
+        description: The unique identifier of the quote collection you want to 
           retrieve
         required: true
         schema:
@@ -1576,7 +1571,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteCollectionV2'
+                $ref: '#/components/schemas/QuoteCollection'
         '401':
           description: Unauthorized request
           content:
@@ -1584,7 +1579,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/QuoteErrorResponse'
         '403':
-          description: The principal identified by the authorization header
+          description: The principal identified by the authorization header 
             doesn't have enough scopes to perform this operation
           content:
             application/json:
@@ -1602,23 +1597,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/QuoteErrorResponse'
-  /v3/quotes/{quote-id}:
+  /v2/quotes/{quote-id}:
     get:
       tags:
       - Quote
       security:
       - Bearer: []
-      operationId: getQuoteV2
-      summary: Get a quote
-      description: |
-        Retrieve a specific quote by its unique identifier.
-
-        Use this endpoint to:
-        - Verify quote details before creating a payment
-        - Check if a quote is still active (not expired)
-        - Retrieve the `quoteId` needed for payment creation
-
-        **Note:** Quotes expire after a defined period. Check the `quoteStatus` field to confirm the quote is `ACTIVE` before using it to create a payment.
+      operationId: getQuote
+      summary: Get quote
       parameters:
       - in: path
         name: quote-id
@@ -1634,7 +1620,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteV2'
+                $ref: '#/components/schemas/Quote'
         '401':
           description: Unauthorized request
           content:
@@ -1642,7 +1628,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/QuoteErrorResponse'
         '403':
-          description: The principal identified by the authorization header
+          description: The principal identified by the authorization header 
             doesn't have enough scopes to perform this operation
           content:
             application/json:
@@ -3618,6 +3604,7 @@ components:
               - BR_TED
               - CA_EFT
               - AE_IPI
+              - ID_BIFAST
               - KR_KFTC
               - IN_NEFT
               - PE_LBTR
@@ -3641,6 +3628,7 @@ components:
               - BR_TED
               - CA_EFT
               - AE_IPI
+              - ID_BIFAST
               - KR_KFTC
               - IN_NEFT
               - PE_LBTR
@@ -3672,6 +3660,7 @@ components:
               - BR_TED
               - CA_EFT
               - AE_IPI
+              - ID_BIFAST
               - KR_KFTC
               - IN_NEFT
               - PE_LBTR
@@ -3695,6 +3684,7 @@ components:
               - BR_TED
               - CA_EFT
               - AE_IPI
+              - ID_BIFAST
               - KR_KFTC
               - IN_NEFT
               - PE_LBTR
@@ -3742,6 +3732,7 @@ components:
           - UG_BANK_PAYOUT
           - ZM_BANK_PAYOUT
           - CO_PSE
+          - ID_BIFAST
           - KR_KFTC
           - CL_TEF
           - IN_NEFT
@@ -3752,6 +3743,7 @@ components:
           - BR_PIX
           - BR_TED
           - NG_BANK_PAYOUT
+          - ID_BIFAST
           - KR_KFTC
           - CL_TEF
           - IN_NEFT
@@ -3776,6 +3768,7 @@ components:
           - CO_PSE
           - CA_EFT
           - CL_TEF
+          - ID_BIFAST
           - KR_KFTC
           - IN_NEFT
           - TH_PROMPTPAY
@@ -3789,6 +3782,7 @@ components:
           - CN_CFXPS
           - GB_FPS
           - CL_TEF
+          - ID_BIFAST
           - KR_KFTC
           - IN_NEFT
           - AE_IPI
@@ -3875,6 +3869,7 @@ components:
           x-requiredByBeneficiaryFor:
           - BR_TED
           - NG_BANK_PAYOUT
+          - ID_BIFAST
           - KR_KFTC
           - CL_TEF
           - IN_NEFT
@@ -3890,6 +3885,7 @@ components:
           - BR_PIX
           - BR_TED
           - CL_TEF
+          - ID_BIFAST
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
@@ -3905,6 +3901,7 @@ components:
           example: US
         incorporationDate:
           x-requiredByOriginatorFor:
+          - ID_BIFAST
           - KR_KFTC
           - IN_NEFT
           - TH_PROMPTPAY
@@ -4036,6 +4033,7 @@ components:
               - BR_TED
               - CA_EFT
               - AE_IPI
+              - ID_BIFAST
               - KR_KFTC
               - IN_NEFT
               - PE_LBTR
@@ -4059,6 +4057,7 @@ components:
               - BR_TED
               - CA_EFT
               - AE_IPI
+              - ID_BIFAST
               - KR_KFTC
               - IN_NEFT
               - PE_LBTR
@@ -4090,6 +4089,7 @@ components:
               - BR_TED
               - CA_EFT
               - AE_IPI
+              - ID_BIFAST
               - KR_KFTC
               - IN_NEFT
               - PE_LBTR
@@ -4113,6 +4113,7 @@ components:
               - BR_TED
               - CA_EFT
               - AE_IPI
+              - ID_BIFAST
               - KR_KFTC
               - IN_NEFT
               - PE_LBTR
@@ -4160,6 +4161,7 @@ components:
           - ZM_BANK_PAYOUT
           - CO_PSE
           - CL_TEF
+          - ID_BIFAST
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
@@ -4168,6 +4170,7 @@ components:
           x-requiredByOriginatorFor:
           - BR_PIX
           - NG_BANK_PAYOUT
+          - ID_BIFAST
           - KR_KFTC
           - CL_TEF
           - IN_NEFT
@@ -4191,6 +4194,7 @@ components:
           - BR_PIX
           - BR_TED
           - CO_PSE
+          - ID_BIFAST
           - KR_KFTC
           - CL_TEF
           - IN_NEFT
@@ -4201,6 +4205,7 @@ components:
           - BR_PIX
           - BR_TED
           - CL_TEF
+          - ID_BIFAST
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
@@ -4265,6 +4270,9 @@ components:
                   values:
                   - PASSPORT
                   - TAX_ID
+                - corridor: ID_BIFAST
+                  values:
+                  - PASSPORT
                 - corridor: IN_NEFT
                   values:
                   - PASSPORT
@@ -4318,6 +4326,7 @@ components:
               expiryDate:
                 x-requiredByOriginatorFor:
                 - IN_NEFT
+                - ID_BIFAST
                 - KR_KFTC
                 - TH_PROMPTPAY
                 type: string
@@ -4339,6 +4348,7 @@ components:
           - GB_FPS
           - BR_PIX
           - BR_TED
+          - ID_BIFAST
           - KR_KFTC
           - CL_TEF
           - IN_NEFT
@@ -4370,6 +4380,7 @@ components:
           - BR_TED
           - CL_TEF
           - IN_NEFT
+          - ID_BIFAST
           - KR_KFTC
           - PE_LBTR
           - TH_PROMPTPAY
@@ -4378,6 +4389,7 @@ components:
           - BR_PIX
           - BR_TED
           - CL_TEF
+          - ID_BIFAST
           - KR_KFTC
           - IN_NEFT
           - PE_LBTR
@@ -4499,6 +4511,7 @@ components:
       - CO_PSE
       - BR_TED
       - CA_EFT
+      - ID_BIFAST
       - KR_KFTC
       - IN_NEFT
       - AU_NPP
@@ -4557,6 +4570,8 @@ components:
           domestic transfer system for CLP-denominated payments.
         PE_LBTR: Peru LBTR (Liquidación Bruta en Tiempo Real) - real-time 
           settlement system for PEN-denominated payments.
+        ID_BIFAST: Indonesia BI-FAST - Bank Indonesia's 24/7 real-time payment 
+          rail for IDR-denominated domestic transfers.
         KR_KFTC: South Korea KFTC - 24/7 real-time payment rail via Korea 
           Financial Telecommunications and Clearings for KRW-denominated 
           payments.
@@ -4617,6 +4632,7 @@ components:
       - EUR
       - GBP
       - GHS
+      - IDR
       - INR
       - KRW
       - MXN
@@ -5510,6 +5526,56 @@ components:
             CHECKING: Checking account
             SAVINGS: Savings account
           description: The identity's account type.
+    id-bifast:
+      type: object
+      description: |
+        Rails: BI-FAST
+
+        Rail Definitions:
+
+        BI-FAST:
+        - Availability: 24/7/365
+        - Limit: IDR 100,000,000 per transaction
+        - Settlement: Real-time
+        - Cut-off time: None
+        - Banking holidays: Not applicable
+
+        Routing Evaluation Order: Not applicable
+      required:
+      - bankName
+      - bankCode
+      - accountNumber
+      properties:
+        bankName:
+          type: string
+          description: The name of the identity's bank
+          minLength: 2
+          maxLength: 140
+          pattern: ^(?![ .,'&\/()-])(?!.*([ .,'&\/()-])\1)[\p{L}\p{N} 
+            .,'&\/()-]+(?<![ .,'&\/-])?$
+        bankBranchCity:
+          type: string
+          description: |
+            The city of the identity's bank branch. Optional on every bank payout corridor and not enforced by the API. If your organization works with Ripple's Australian entity, supply it on every financial instrument you create, whatever the destination corridor. Omitting it does not return an error. However, a value that does not match the permitted characters, or exceeds 50 characters, fails financial instrument create and update with 400 Bad Request (USR_109). An update replaces the stored financial instrument, so include this field in every update, not only at creation.
+          minLength: 1
+          maxLength: 50
+          pattern: ^(?![ .'-])(?!.*[ .'-]{2})[\p{L} .'-]+(?<![ .'-])$
+        bankCode:
+          type: string
+          description: Legacy Bank Indonesia-assigned domestic clearing code or
+            Ripple Bank Code (RBC) for the destination bank in Indonesia. See the
+            Bank Codes resource in Ripple Docs for the authoritative list of
+            supported values.
+          minLength: 1
+          maxLength: 256
+          pattern: ^([A-Za-z0-9]+|RPL:ID:[A-Z0-9]{7,11}(_\d+)?:(BNK|WAL))$
+          example: RPL:ID:CENAIDJA:BNK
+        accountNumber:
+          type: string
+          description: The identity's bank account number
+          minLength: 1
+          maxLength: 45
+          pattern: ^[A-Za-z0-9]+$
     kr-kftc:
       type: object
       description: |
@@ -6037,6 +6103,8 @@ components:
           $ref: '#/components/schemas/br-ted'
         caEft:
           $ref: '#/components/schemas/ca-eft'
+        idBifast:
+          $ref: '#/components/schemas/id-bifast'
         krKftc:
           $ref: '#/components/schemas/kr-kftc'
         inNeft:
@@ -6195,18 +6263,19 @@ components:
           want to send.
         DESTINATION_AMOUNT: Specify this value to get a quote for the amount 
           that the beneficiary should receive.
-    QuoteCollectionRequestV2:
+    QuoteCollectionRequest:
       type: object
-      description: Request to create a quote collection with `POST /v3/quotes/quote-collection`.
+      description: Request to create a quote collection
       required:
       - quoteAmountType
       - quoteAmount
       - sourceCurrency
       - destinationCurrency
+      - payoutCategory
       - payinCategory
       properties:
         quoteAmount:
-          description: The amount for which you wish to receive a collection of
+          description: The amount for which you wish to receive a collection of 
             quotes.
           type: number
           format: double
@@ -6220,13 +6289,13 @@ components:
           pattern: ^[a-zA-Z]{3,5}$
           example: USD
         destinationCurrency:
-          description: The currency code of the currency in which your
+          description: The currency code of the currency in which your 
             beneficiary will receive this payment.
           type: string
           pattern: ^[a-zA-Z]{3,5}$
           example: MXN
         sourceCountry:
-          description: The country code of the country from where you are
+          description: The country code of the country from where you are 
             sending the funds. This is an ISO 3166-1 alpha-2 code.
           type: string
           pattern: ^[a-zA-Z]{2}$
@@ -6235,39 +6304,56 @@ components:
           description: |
             The country where the beneficiary is located specified in Alpha-2 Code format as defined in the ISO CountryCode ISO 3166-1 list. If the beneficiary is an individual, then this value is their country of residence. If the beneficiary is an institution, then this value is their country of incorporation.
 
-            Required for a fiat payout; omitting it returns `USR_017`. Omit it for a stablecoin payout, or the request fails.
+            Required for a fiat payout; omitting it returns `USR_017`. Ignored for a stablecoin payout.
           type: string
           pattern: ^[a-zA-Z]{2}$
-          example: MX
-        payinCategory:
-          description: The name of the pay in category indicating how this
-            payment will be funded.
+          example: PH
+        payoutCategory:
+          description: The name of the payout category.
           type: string
           minLength: 1
           maxLength: 128
           x-enumDescriptions:
-            PRE_FUNDING: Indicates that the payment is being made from funds
+            BANK: Indicates that the payout will be made in fiat currency to a 
+              recipient's bank account through local banking rails.
+            CRYPTO: Indicates that the payout will be made in stablecoin to a 
+              recipient's crypto wallet address.
+          example: BANK
+        payinCategory:
+          description: The name of the pay in category indicating how this 
+            payment will be funded. The values FUNDED and T_PLUS_ONE are 
+            deprecated and will be removed in a future release.
+          type: string
+          minLength: 1
+          maxLength: 128
+          x-enumDescriptions:
+            PRE_FUNDING: Indicates that the payment is being made from funds 
               you've deposited with Ripple.
             CREDIT_FUNDING: Indicates the payment is being made and you will pay
               the outstanding invoice.
-            JIT_FUNDING: Indicates that the payment is being made and you will
+            JIT_FUNDING: Indicates that the payment is being made and you will 
               pay the outstanding amount before the payment expires.
+            FUNDED: Indicates that the payment is being made from funds you've 
+              deposited with Ripple.
+            T_PLUS_ONE: Indicates the payment is being made and you will pay the
+              outstanding invoice.
           example: PRE_FUNDING
-        paymentRail:
+        destinationBlockchainNetwork:
           description: |
-            The payment rail to quote. Include it to request a quote for this payment rail only. If you omit it, the collection contains a quote for each payment rail available for the corridor. For valid values, see [Payment rail reference](/products/payments-direct-2/api-docs/integration-resources/payment-rail-reference).
+            The name of the blockchain network on which the beneficiary will receive this payment. Required for a stablecoin payout; omitting it returns `USR_017`.
           type: string
           minLength: 1
-          maxLength: 50
-          example: SPEI
+          maxLength: 20
+          example: Ethereum
       additionalProperties: false
-    QuoteV2:
+    Quote:
       type: object
       required:
       - quoteId
       - quoteStatus
       - sourceCurrency
       - destinationCurrency
+      - payoutCategory
       - payinCategory
       properties:
         quoteId:
@@ -6282,13 +6368,19 @@ components:
         quoteAmountType:
           $ref: '#/components/schemas/QuoteAmountType'
         sourceAmount:
-          description: Amount to be sent by the originator.
+          description: |
+            Amount to be sent by the originator. The value is rounded to the number of decimal
+            places defined by the ISO 4217 standard for the source currency (for example, 2 for
+            USD/EUR, 0 for JPY/KRW, 3 for BHD/KWD), using HALF_UP rounding mode.
           type: number
           format: double
           minimum: 1
           example: 123.45
         destinationAmount:
-          description: Amount to be received by destination
+          description: |
+            Amount to be received by the beneficiary. The value is rounded to the number of decimal
+            places defined by the ISO 4217 standard for the destination currency (for example, 2 for
+            USD/EUR, 0 for JPY/KRW, 3 for BHD/KWD), using HALF_UP rounding mode.
           type: number
           minimum: 1
           format: double
@@ -6299,26 +6391,33 @@ components:
           pattern: ^[a-zA-Z]{3,5}$
           example: USD
         destinationCurrency:
-          description: The currency code of the currency in which your
+          description: The currency code of the currency in which your 
             beneficiary will receive this payment.
           type: string
           pattern: ^[a-zA-Z]{3,5}$
           example: MXN
         sourceCountry:
-          description: The country where the payment originator is located or
+          description: The country where the payment originator is located or 
             incorporated, specified in Alpha-2 Code format as defined in the ISO
             CountryCode ISO 3166-1 list.
           type: string
           pattern: ^[a-zA-Z]{2}$
           example: US
         destinationCountry:
-          description: The country code to which you wish to send the funds. It
+          description: The country code to which you wish to send the funds. It 
             follows ISO 3166-1 alpha-2 code
           type: string
           pattern: ^[a-zA-Z]{2}$
           example: MX
+        payoutCategory:
+          description: Name of the payout category specified in the quote 
+            request.
+          type: string
+          minLength: 1
+          maxLength: 128
+          example: BANK
         payinCategory:
-          description: The name of payin category specified in the quote
+          description: The name of payin category specified in the quote 
             request.
           type: string
           minLength: 1
@@ -6330,7 +6429,7 @@ components:
           type: array
           description: A summary of fees included in this quote.
           items:
-            $ref: '#/components/schemas/FeeSummaryV2'
+            $ref: '#/components/schemas/FeeSummary'
         taxes:
           type: array
           description: A summary of taxes included in this quote.
@@ -6350,14 +6449,21 @@ components:
           format: date-time
           example: '2023-11-02T18:26:00.000123Z'
           description: The time when this quote expires, specified in UTC.
+        destinationBlockchainNetwork:
+          description: The name of the blockchain network on which the 
+            beneficiary will receive this payment.
+          type: string
+          minLength: 1
+          maxLength: 20
+          example: Ethereum
         paymentRail:
           description: The payment rail used for this quote.
           type: string
           minLength: 1
           maxLength: 50
-          example: SPEI
+          example: RTP
       additionalProperties: false
-    QuoteCollectionV2:
+    QuoteCollection:
       type: object
       required:
       - quoteCollectionId
@@ -6375,57 +6481,8 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/QuoteV2'
+            $ref: '#/components/schemas/Quote'
       additionalProperties: false
-    TotalFeeBreakdownV2:
-      description: A breakdown of the total fees included in this quote.
-      type: object
-      properties:
-        calculatedFee:
-          description: Value of the fee when the configured fee unit is applied
-            against the `value`.
-          type: number
-          format: double
-          example: 2.43
-        feeName:
-          description: The name of the fee.
-          type: string
-          minLength: 1
-          maxLength: 128
-          example: Service fee
-        feeDescription:
-          description: Description of the fee.
-          type: string
-          minLength: 1
-          maxLength: 256
-          example: The service fee charged for this transaction.
-        paymentRail:
-          description: The payment rail associated with this fee line item.
-          type: string
-          minLength: 1
-          maxLength: 30
-          example: SPEI
-      additionalProperties: false
-    FeeSummaryV2:
-      type: object
-      description: A summary of fees included in this quote.
-      properties:
-        totalFee:
-          description: The value of the total fee included in this quote.
-          type: number
-          format: double
-          example: 12.23
-        feeCurrency:
-          description: The currency in which fees are charged.
-          type: string
-          pattern: ^[a-zA-Z]{3,5}$
-          example: USD
-        feeBreakdown:
-          description: An array of fees that provides a breakdown of how the
-            total fees is calculated for this quote.
-          type: array
-          items:
-            $ref: '#/components/schemas/TotalFeeBreakdownV2'
   examples:
     error-500-example:
       value:

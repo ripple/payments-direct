@@ -22,11 +22,11 @@ func Test_paymentsdirect_QuoteAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test QuoteAPIService CreateQuoteCollectionV2", func(t *testing.T) {
+	t.Run("Test QuoteAPIService CreateQuoteCollection", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.QuoteAPI.CreateQuoteCollectionV2(context.Background()).Execute()
+		resp, httpRes, err := apiClient.QuoteAPI.CreateQuoteCollection(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -34,27 +34,27 @@ func Test_paymentsdirect_QuoteAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test QuoteAPIService GetQuoteCollectionV2", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var quoteCollectionId string
-
-		resp, httpRes, err := apiClient.QuoteAPI.GetQuoteCollectionV2(context.Background(), quoteCollectionId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test QuoteAPIService GetQuoteV2", func(t *testing.T) {
+	t.Run("Test QuoteAPIService GetQuote", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var quoteId string
 
-		resp, httpRes, err := apiClient.QuoteAPI.GetQuoteV2(context.Background(), quoteId).Execute()
+		resp, httpRes, err := apiClient.QuoteAPI.GetQuote(context.Background(), quoteId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test QuoteAPIService GetQuoteCollection", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var quoteCollectionId string
+
+		resp, httpRes, err := apiClient.QuoteAPI.GetQuoteCollection(context.Background(), quoteCollectionId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
